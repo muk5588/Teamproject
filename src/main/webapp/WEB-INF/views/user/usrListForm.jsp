@@ -138,102 +138,6 @@
 
 <script type="text/javascript" charset="utf-8">
 
-var grid_id = 'grid_UserList';
-
-function fn_GridResize(){
-	var divArea = $(".search_div02").width();
-	$("#" + grid_id).jqGrid('setGridHeight', ($(window).height() - 6) - ($("#" + grid_id).parent().offset().top), true);
-	
-	$("#" + grid_id).setGridWidth($('.search_div02').width());
-	
-	if( (($(window).height() - 6) - ($("#" + grid_id).parent().offset().top))- $("#" + grid_id).height() > 0){
-		$("#gview_"+grid_id+" > .ui-jqgrid-bdiv").css("height",$("#" + grid_id).height()+"px");
-	}
-}
-
-
-function initGrid() {
-	
-	var work = '';
-	if($("#WORK_Y").is(":checked")){
-		work = 'Y';
-	}else if($("#WORK_N").is(":checked")){
-		work = 'N';
-	}else{
-		work = '';
-	}
- 
-	$("#" + grid_id).jqGrid({
-
-	   	url:'<c:url value="/user/getUserList" />',
-	   	postData : {'AUTHCODE' : $("#AUTHCODE_SEARCH").val(), 'SEARCH_TYPE' : $("#SEARCH_TYPE_SELECT").val(), 'SEARCH_VALUE' : $("#SEARCH_VALUE_INPUT").val(), 'WORK': work },
-		datatype: "json",
-		ajaxGridOptions: {cache: false},
-		colNames:['ID','EmployeeNo.','Division', 'Authority','WORK Y/N','Korean Name','Tel.','E-Mail','English Name','position','Department','STT','','',''],
-        colModel: [ //데이터 매핑 및 로우 속성
-    		   		{name:'USERCODE',index:'USERCODE', width:14, align: "center"  , sorttype:"text"},
-    		   		{name:'EMPLOYEENO',index:'EMPLOYEENO', width:14, align: "center"  , sorttype:"text"},
-    		   		{name:'DIVCODE',index:'DIVCODE', width:15, align: "center"  , sorttype:"text"},
-    		   		{name:'AUTHCODE',index:'AUTHCODE', width:15, align: "center"  , sorttype:"text"},
-    		   		{name:'WORKYN',index:'WORKYN', width:12, align: "center"  , sorttype:"text"},
-    		   		{name:'USERNAME',index:'USERNAME', width:15, align: "left" , sorttype:"text" },
-    		   		{name:'HPNO',index:'HPNO', width: 20, align: "left", sorttype:"text",hidden:true},
-    		   		{name:'EMAIL',index:'EMAIL', width: 20, align: "left", sorttype:"text"},
-    		   		{name:'ENGNAME',index:'ENGNAME', width:30, align: "left" , sorttype:"text"},
-    		   		{name:'POSNAME',index:'POSNAME', width:20, align: "left", sorttype:"text" },
-    		   		{name:'TEAMNAME',index:'TEAMNAME', width:30, align: "left", sorttype:"text" },	
-    		   		{name:'STT',index:'STT', width: 12, align: "center"  , sorttype:"text"},
-    		   		{name:'EDIT',index:'EDIT', width:12, align: "center" , sorttype:"text",hidden:true },
-    		   		{name:'USERPSWD',index:'USERPSWD', width: 50, align: "center"  , sorttype:"text",hidden:true},
-    		   		{name:'PSWDDATE',index:'PSWDDATE', width: 50, align: "center"  , sorttype:"text",hidden:true}	    		   		
-		            ],
-	   	rowNum:9999,
-		viewrecords: true,
-		multiselect: true,
-		sortorder: "desc",
-		sortable : true,
-		loadonce : true,
-		autowidth: true, 
-		gridview : false,
-		height:'auto',
-		beforeSelectRow : fn_BeforeSelectRow,
-		loadComplete : function (data) {
-			$('.ui-state-default .ui-th-column-header').css("text-align","center");
-			
-			if(data.rows == undefined){
-      			if(data.error != undefined){
-      				alert("An error occurred. \n"+data.error);
-      			}else{
-      				alert("An error occurred.");
-      				
-      			}
-      			
-      		}else if(data.rows.length == 0){
-      			$('#'+grid_id+' >tbody').append("<tr class=''><td align='center' colspan='31' style='height:26px;'>No search results.</td></tr>");
-      		}
-			$('#'+grid_id).setGridHeight(550,true);
-			fn_GridResize();
-		},
-		afterInsertRow: function (rowid,rowData,rowelem) {
-		},
-		loadError: function (jqXHR, textStatus, errorThrown) {
-	    },
-	    ondblClickRow : function(rowdataid,index){ 
-        },
-        onCellSelect : function(	rowdataid,iCol, cellcontent,e){
-        	if(USERPERM=='W'){
-        	if (iCol == 1 || iCol == 2 || iCol == 3 || iCol == 4 || iCol == 5 || iCol == 6 || iCol == 7 
-        	 || iCol == 8 || iCol == 9 || iCol == 10 || iCol == 11 || iCol == 12) {
-        		var rowData = jQuery(this).getRowData(rowdataid);
-        		fn_showJobDetail(rowData);
-        	}}
-		}
-	});
-	
-	$("#" + grid_id).jqGrid('filterToolbar', {stringResult: true, searchOnEnter: true, defaultSearch: 'cn'});
-	$(".ui-search-toolbar").hide();
-}
-
 function fn_SearchKeyDown(){
 	if(event.keyCode==13){
 		fn_Search();
@@ -241,29 +145,9 @@ function fn_SearchKeyDown(){
 	
 }
 
-function fn_Search(){ 
-	var SEARCH_VALUE = '';
-	var work = '';
-	 
-	if($("#SEARCH_TYPE_SELECT").val() == "DIVCODE"){
-		SEARCH_VALUE = $("#DIVCODE_SEARCH").val();
-	}else{
-		SEARCH_VALUE = $("#SEARCH_VALUE_INPUT").val();
-	}
-	
-	if($("#WORK_Y").is(":checked")){
-		work = 'Y';
-	}else if($("#WORK_N").is(":checked")){
-		work = 'N';
-	}else{
-		work = '';
-	}
-	
-	
-	$("#" + grid_id).clearGridData();  // 이전 데이터 삭제
-	$("#" + grid_id).setGridParam({	url:'<c:url value="/user/getUserList" />'
-			, datatype:"json", mtype: "POST" 
-			, postData:  {'AUTHCODE' : $("#AUTHCODE_SEARCH").val(), 'SEARCH_TYPE' : $("#SEARCH_TYPE_SELECT").val(), 'SEARCH_VALUE' : SEARCH_VALUE, 'WORK' : work } }).trigger("reloadGrid");
+function fn_Search() {
+var username;
+
 }
 
 $(document).ready(function () 

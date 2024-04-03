@@ -1,4 +1,4 @@
-package com.test.www.login;
+package login;
 
 import java.util.HashMap;
 

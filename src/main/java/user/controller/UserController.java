@@ -16,13 +16,12 @@ public class UserController {
 Userservice service;
 @Autowired
 UserDao dao;
-    @RequestMapping("/usr/usr/usrListForm.do")
-    public String usrListForm(HttpServletRequest request, Model model,Map<String, Object> map)throws Exception{
-
+    @RequestMapping("/user/userList")
+    public String userList(HttpServletRequest request, Model model,Map<String, Object> map)throws Exception{
         model.addAttribute("ROLELIST",dao.getUserList(map));
         map.put("SORT", "ROLENAME");
         model.addAttribute("ROLELIST1",dao.getUserRoleList(map));
-        return "/usr/usrListForm.usr-tiles";
+        return "/user/userListForm.user-tiles";
     }
     @RequestMapping("/user/getuserListCount")
     public String getuserListCount(HttpServletRequest request, Model model)throws Exception{

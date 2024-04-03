@@ -65,7 +65,7 @@
 			
 			<input id="CMD_TYPE" name="CMD_TYPE" type="hidden"/>
 			 	<fieldset>    
-					<form id="updateForm" name="updateForm">
+					<form id="updateForm" name="updateForm" action="<%=request.getContextPath()%>/user/userListForm">
 						<div>
 							<ul>
 								<li>
@@ -191,39 +191,7 @@ function fn_toggleFilter() {
 	}
 	grid_filter = !grid_filter;
 }
-function fn_saveExcel() {
-	var SEARCH_VALUE = '';
-	var arrayList = "";
-	 
-	if($("#SEARCH_TYPE_SELECT").val() == "DIVCODE"){
-		SEARCH_VALUE = $("#DIVCODE_SEARCH").val();
-	}else{
-		SEARCH_VALUE = $("#SEARCH_VALUE_INPUT").val();
-	}
-	
-	var idArry = $("#" + grid_id).jqGrid('getDataIDs');
-	
-	var selRowIds = $("#" + grid_id).jqGrid('getGridParam','selarrrow');
-	
-	for (var i = 0; i < idArry.length; i++) {
-		if($("input:checkbox[id='jqg_"+grid_id+"_"+idArry[i]+"']:checked").length>0){
-		var rowdata = $("#" + grid_id).getRowData(idArry[i]); // 해당 id의 row 데이터를 가져옴
-			
-			if(arrayList == ""){
-				arrayList = rowdata.USERCODE;
-			} else {
-				arrayList = arrayList+","+rowdata.USERCODE;
-			}
-		}
-	}
-	$("#selectArray1").val(arrayList);
 
-	$("#AUTHCODE").val($("#AUTHCODE_SEARCH").val());
-	$("#SEARCH_TYPE").val($("#SEARCH_TYPE_SELECT").val());
-	$("#SEARCH_VALUE").val(SEARCH_VALUE);
-	$("#WORK_EXCEL").val($(':radio[name="WORKYN_SR"]:checked').val());
-	
-}
 
 function fn_showJobDetail(rowdata) {
  
@@ -342,7 +310,7 @@ function fn_saveJob() {
 			,'STT':$(':radio[name="STTYN"]:checked').val()
 			
 	};
-	var url = '<c:url value="/user/saveUser"/>';
+	var url = '<c:url value=""/>';
 
 	$.ajax({
 	    type: "POST",

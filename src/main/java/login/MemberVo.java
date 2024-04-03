@@ -1,4 +1,4 @@
-package com.test.www.login;
+package login;
 
 public class MemberVo {
     private String name, id, pw, addr, tel, gender, birth, post, email, admin;

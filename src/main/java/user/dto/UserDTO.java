@@ -8,255 +8,95 @@ import java.util.List;
 
 
 
-public class UserDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class UserDTO {
+	private String name, userid, userpw,  gender,email, address,detailAddress,extraAddress,phone, admin;
+	private int postcode;
 
-	public String getUSERCODE() {
-		return USERCODE;
+	public String getName() {
+		return name;
 	}
 
-	public String getDIVCODE() {
-		return DIVCODE;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getAUTHCODE() {
-		return AUTHCODE;
+	public String getUserid() {
+		return userid;
 	}
 
-	public String getUSERNAME() {
-		return USERNAME;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getUSERPSWD() {
-		return USERPSWD;
+	public String getUserpw() {
+		return userpw;
 	}
 
-	public String getPAWDDATE() {
-		return PAWDDATE;
+	public void setUserpw(String userpw) {
+		this.userpw = userpw;
 	}
 
-	public String getHPNO() {
-		return HPNO;
+	public String getGender() {
+		return gender;
 	}
 
-	public String getENGNAME() {
-		return ENGNAME;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public String getPOSNAME() {
-		return POSNAME;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getTEAMNAME() {
-		return TEAMNAME;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getTEAMCODE() {
-		return TEAMCODE;
+	public String getAddress() {
+		return address;
 	}
 
-	public String getLOGIN() {
-		return LOGIN;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getHEADER() {
-		return HEADER;
+	public String getDetailAddress() {
+		return detailAddress;
 	}
 
-	public String getROLEID() {
-		return ROLEID;
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 
-	public String getMENUID() {
-		return MENUID;
+	public String getExtraAddress() {
+		return extraAddress;
 	}
 
-	public String getMENULEVEL() {
-		return MENULEVEL;
+	public void setExtraAddress(String extraAddress) {
+		this.extraAddress = extraAddress;
 	}
 
-	public String getMENUNAME() {
-		return MENUNAME;
+	public String getPhone() {
+		return phone;
 	}
 
-	public String getPKGCD() {
-		return PKGCD;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public String getMENUURL() {
-		return MENUURL;
+	public String getAdmin() {
+		return admin;
 	}
 
-	public String getMENUTPCD() {
-		return MENUTPCD;
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 
-	public String getPOPUPYN() {
-		return POPUPYN;
+	public int getPostcode() {
+		return postcode;
 	}
 
-	public String getDISPYN() {
-		return DISPYN;
+	public void setPostcode(int postcode) {
+		this.postcode = postcode;
 	}
-
-	public List<?> getMENULIST() {
-		return MENULIST;
-	}
-
-	public String getAUTH_SEQ() {
-		return AUTH_SEQ;
-	}
-
-	public String getEMPLOYEENO() {
-		return EMPLOYEENO;
-	}
-
-	public String getADMINYN() {
-		return ADMINYN;
-	}
-
-	private String USERCODE;
-	private String DIVCODE;
-	private String AUTHCODE;
-	private String USERNAME;
-	private String USERPSWD;
-	private String PAWDDATE;
-	private String HPNO;
-	private String ENGNAME;
-	private String POSNAME;
-	private String TEAMNAME;
-	private String TEAMCODE;
-	private String LOGIN;
-	private String HEADER;
-	private String ROLEID;
-	private String MENUID;
-	private String MENULEVEL;	
-	private String MENUNAME;
-	private String PKGCD;
-	private String MENUURL;
-	private String MENUTPCD;
-	private String POPUPYN;
-	private String DISPYN;
-	private List<?> MENULIST;
-	private String AUTH_SEQ;
-	private String EMPLOYEENO;
-	private String ADMINYN;
-
-
-	public void setADMINYN(String aDMINYN) {
-		ADMINYN = aDMINYN;
-	}
-
-	public void setMENULIST(List<?> mENULIST) {
-		MENULIST = mENULIST;
-	}
-
-	public void setHEADER(String hEADER) {
-		HEADER = hEADER;
-	}
-
-	public void setLOGIN(String lOGIN) {
-		LOGIN = lOGIN;
-	}
-
-	public void setROLEID(String rOLEID) {
-		ROLEID = rOLEID;
-	}
-
-	public void setMENUID(String mENUID) {
-		MENUID = mENUID;
-	}
-
-	public void setMENULEVEL(String mENULEVEL) {
-		MENULEVEL = mENULEVEL;
-	}
-
-	public void setMENUNAME(String mENUNAME) {
-		MENUNAME = mENUNAME;
-	}
-
-	public void setPKGCD(String pKGCD) {
-		PKGCD = pKGCD;
-	}
-
-	public void setMENUURL(String mENUURL) {
-		MENUURL = mENUURL;
-	}
-
-	public void setMENUTPCD(String mENUTPCD) {
-		MENUTPCD = mENUTPCD;
-	}
-
-	public void setPOPUPYN(String pOPUPYN) {
-		POPUPYN = pOPUPYN;
-	}
-
-	public void setDISPYN(String dISPYN) {
-		DISPYN = dISPYN;
-	}
-
-	public void setUSERCODE(String uSERCODE) {
-		USERCODE = uSERCODE;
-	}
-
-	public void setDIVCODE(String dIVCODE) {
-		DIVCODE = dIVCODE;
-	}
-
-	public void setAUTHCODE(String aUTHCODE) {
-		AUTHCODE = aUTHCODE;
-	}
-
-	public void setUSERNAME(String uSERNAME) {
-		USERNAME = uSERNAME;
-	}
-
-	public void setUSERPSWD(String uSERPSWD) {
-		USERPSWD = uSERPSWD;
-	}
-
-	public void setPAWDDATE(String pAWDDATE) {
-		PAWDDATE = pAWDDATE;
-	}
-
-	public void setHPNO(String hPNO) {
-		HPNO = hPNO;
-	}
-
-	public void setENGNAME(String eNGNAME) {
-		ENGNAME = eNGNAME;
-	}
-
-	public void setPOSNAME(String pOSNAME) {
-		POSNAME = pOSNAME;
-	}
-
-	public void setTEAMNAME(String tEAMNAME) {
-		TEAMNAME = tEAMNAME;
-	}
-
-	public void setAUTH_SEQ(String aUTH_SEQ) {
-		AUTH_SEQ = aUTH_SEQ;
-	}
-
-	public void setEMPLOYEENO(String eMPLOYEENO) {
-		EMPLOYEENO = eMPLOYEENO;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setTEAMCODE(String tEAMCODE) {
-		TEAMCODE = tEAMCODE;
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

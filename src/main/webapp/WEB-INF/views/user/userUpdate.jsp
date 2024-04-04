@@ -15,18 +15,18 @@
 <h3>회원정보수정</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/updateuser" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/user/updateUser" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
-                <input type="text" name="name" id="name"/><br>
+                <input type="text" name="name" id="name" value="${dto.name}"/><br>
             </div>
             <div id="useridbox">
                 <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid" readonly><br>
+                <input type="text" name="userid" id="userid"value="${dto.name}" readonly><br>
             </div>
             <div id="userpwbox">
                 <label for="userpw">비밀번호</label>
-                <input type="text" name="userpw" id="userpw"><br>
+                <input type="text" name="userpw" id="userpw"value="${dto.name}"><br>
 
                 <label for="userpwchk">비밀번호 확인</label>
                 <input type="text" name="userpwchk" id="userpwchk"><br>
@@ -38,25 +38,25 @@
             </div>
             <div id=emailbox">
                 <label for="email">이메일</label>
-                <input type="email" name="email" id="email"/><br>
+                <input type="email" name="email" id="email"value="${dto.name}"/><br>
             </div>
             <div id="postcodebox">
                 <label for="postcode">우편번호</label>
-                <input type="text" id="postcode" placeholder="우편번호" readonly>
+                <input type="text" id="postcode" placeholder="우편번호" readonlyvalue="${dto.name}">
                 <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
             </div>
             <div id="addressbox">
                 <label for="detailAddress">주소</label>
-                <input type="text" id="address" placeholder="주소" readonly><br>
-                <input type="text" id="detailAddress" placeholder="상세주소">
-                <input type="text" id="extraAddress" placeholder="참고항목"><br>
+                <input type="text" id="address" placeholder="주소" readonlyvalue="${dto.name}"><br>
+                <input type="text" id="detailAddress" placeholder="상세주소"value="${dto.name}">
+                <input type="text" id="extraAddress" placeholder="참고항목"value="${dto.name}"><br>
             </div>
             <div id="phonebox">
                 <label for="phone">전화번호</label>
-                <input type="text" name="phone" id="phone">
+                <input type="text" name="phone" id="phone"value="${dto.name}">
             </div>
             <br><br>
-            <input type="submit" id="submit" name="submit" value="회원가입"/>
+            <input type="submit" id="submit" name="submit" value="수정"/>
             <input type="reset" id="reset" name="reset" value="초기화"/>
         </form>
     </div>

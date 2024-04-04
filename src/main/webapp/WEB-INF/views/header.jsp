@@ -64,14 +64,8 @@
         <!-- 로그인하지 않은 경우 -->
         <core:if test="${empty login_info }">
             <ul>
-                <li>
-			 		<span style="position: absolute; top: -14px; left: -120px">
-						<input type="text" id="userid" placeholder="아이디" />
-						<input type="password" onkeypress="if(event.keyCode == 13) {go_login()}" id="userpw" placeholder="비밀번호" />
-			 		</span>
-                </li>
-                <li><a class="btn-fill" onclick="go_login()">로그인</a></li>
-                <li><a class="btn-fill" href="member">회원가입</a></li>
+                <li><a class="btn-fill" href="login">로그인</a></li>
+                <li><a class="btn-fill" href="join">회원가입</a></li>
             </ul>
         </core:if>
     </div>

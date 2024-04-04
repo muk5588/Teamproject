@@ -33,10 +33,9 @@
 	<context:component-scan base-package="com.test.www" >
 	</context:component-scan>
 	<!--service 의존성-->
-	<context:component-scan base-package=" *.controller,*.Service">
+	<context:component-scan base-package=" *.controller,*.service">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
-	<mybatis:scan base-package="*.dao"/>
 	<beans:bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="${db.driver}"/>
 		<beans:property name="url" value="${db.url}" />

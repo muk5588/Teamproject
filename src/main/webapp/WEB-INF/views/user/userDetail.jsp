@@ -17,7 +17,19 @@
     <div class="warp">
         <table class='w-pct60'>
             <tr>
-                <th class='w-px160'>성별</th>
+                <th>회원번호</th>
+                <td>${dto.no }</td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td>${dto.name }</td>
+            </tr>
+            <tr>
+                <th>아이디</th>
+                <td>${dto.userid }</td>
+            </tr>
+            <tr>
+                <th>성별</th>
                 <td>${dto.gender }</td>
             </tr>
             <tr>
@@ -25,25 +37,30 @@
                 <td>${dto.email }</td>
             </tr>
             <tr>
-                <th>전화번호</th>
-                <td>${dto.no }</td>
-                <td>${dto.name }</td>
-                <td>${dto.userid }</td>
-                <td>${dto.gender }</td>
-                <td>${dto.email }</td>
+                <th>우편번호</th>
                 <td>${dto.postcode }</td>
-                <td>${dto.address }</td>
-                <td>${dto.detailAddress }</td>
-                <td>${dto.extraAddress }</td>
-                <td>${dto.phone }</td>
             </tr>
+            <tr>
+                <th>주소</th>
+                <td>${dto.address }</td>
+            </tr>
+            <tr>
+                <th>상세주소</th>
+                <td>${dto.detailAddress }</td>
+            </tr>
+            <tr>
+                <th>참고항목</th>
+                <td>${dto.extraAddress }</td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td>${dto.phone }</td>
         </table>
         <div class='btnSet'>
-            <a class='btn-fill' href="user/userList">고객 목록</a>
-            <a class='btn-fill'>수정</a>
-            <a class='btn-fill'>삭제</a>
+            <a class='btn-fill' href="userList">고객 목록</a>
+            <a class='btn-fill' href="userUpdate">수정</a>
+            <a class='btn-fill' onclick="fn_delete()">삭제</a>
         </div>
-        출처: https://upcake.tistory.com/320?category=909772 [오늘이라도:티스토리]
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

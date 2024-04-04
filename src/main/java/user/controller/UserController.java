@@ -24,6 +24,7 @@ public class UserController {
     //수정 페이지
     @RequestMapping("/updateUser")
     public String userUpdate(){
+
         return "user/userUpdate";
     }
     @RequestMapping("/detailUser")

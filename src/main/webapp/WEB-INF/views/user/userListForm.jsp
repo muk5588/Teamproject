@@ -4,8 +4,7 @@
 
 <c:set var="contextPath" scope="application" value="${pageContext.request.contextPath}"/>
 <c:set var="currDate" value="<%=java.util.Calendar.getInstance() %>"/>
-<c:set var="UserCode" value="<%=common.CommonUtils.getUserId(request)%>"/>
-<c:set var="AuthCode" value="<%=common.CommonUtils.getAuthCode(request)%>"/><%--수정예정--%>
+
 
 
 <!-- 0217 designer -->
@@ -336,80 +335,6 @@ function defalutRadioCheck(){
 };
 
 
-function fn_deleteJob() {
-	
-	if(!confirm("Are you sure you want to delete the com.test.www.user?")){
-		return;
-	}
-	
-	var deletedCount = 0;
-	var idArry = $("#" + grid_id).jqGrid('getDataIDs'); 
-	for (var i = 0; i < idArry.length; i++) { 
-    	if($("input:checkbox[id='jqg_"+grid_id+"_"+idArry[i]+"']").is(":checked")){
-    		var rowdata = $("#" + grid_id).getRowData(idArry[i]); // 해당 id의 row 데이터를 가져옴
-    		$.ajax({
-    		    type: "POST",
-    	        url: '<c:url value="/user/deleteUser"/>',
-    	        dataType : 'json',
-    	        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-    	      	data : {USERCODE: rowdata.USERCODE},
-    	      	success: function(data) {
-    	      		//deletedCount += 1;
-    	    	},
-    			error:function(e){  
-    				fn_alert("ERROR", "An error has occurred.", e.responseText);   
-    	  		}
-    		});
-    		deletedCount += 1;
-    	}
-	}
-	
-	console.log(deletedCount);
-	
-	if (deletedCount > 0) {
-		//alert("선택된 [" + deletedCount + "]건이 삭제되었습니다. ");
-		fn_alert("INFO", "" + deletedCount + "selected items have been deleted.");  
-		fn_Search();
-	} else {
-		fn_alert("WARNING", "Please select a row to delete.");
-	}
-}
-
-function fn_duplCheck(DUPLCHECK){
-	
-	if(DUPLCHECK == "" || DUPLCHECK == undefined ){
-		alert("Enter your ID.");
-		return false;
-	} else {
-		$.ajax({
-		    type: "POST",
-		    url:'<c:url value="/user/getUserListCount" />',
-	        dataType : 'json',
-	        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	      	data : {DUPLCHECK: DUPLCHECK},
-	      	success: function(data) {
-	      		var count = data.code;
-	      		if(count == 0){
-	      			alert("This ID is available.");
-	      			$("#DUPLICATION").val("Y");
-	      			$("#DUPLICATION_ID").val(DUPLCHECK);
-	      		} else {
-	      			alert("This ID is already in use.");
-	      			$("#USERCODE").focus();
-	      			$("#DUPLICATION").val("N");	
-	      		}
-	    	},
-			error:function(e){  
-				fn_alert("ERROR", "An error has occurred.", e.responseText);   
-	  		}
-		});
-	}
-}
-
-
-/* function insertDivcode(){
-	$("#DIVCODE").val($("#AUTHCODE option:selected").text());
-} */
 
 
 </script>

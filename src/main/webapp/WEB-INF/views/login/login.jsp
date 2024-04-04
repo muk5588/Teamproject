@@ -37,6 +37,7 @@
         <label for="loginid">아이디: <input type="text" name="loginid" id="loginid"></label><br>
         <label for="loginpw">비밀번호: <input type="text" name="loginpw" id="loginpw"></label><br><br>
         <button>로그인</button>
+        <button><a href="insertUser">회원가입</a> </button>
     </form>
 </c:if>
 <c:if test="${not empty login and login }">

@@ -28,7 +28,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<context:component-scan base-package="com.test.www, login" />
+	<context:component-scan base-package="com.test.www, login.controller, user.controller" />
 
 	<context:property-placeholder location="classpath:db.properties" />
 

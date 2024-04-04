@@ -1,12 +1,12 @@
-package login;
+package login.dto;
 
-public class MemberVo {
+public class MemberDto {
     private String name, userid, userpw,  gender,email, address,detailAddress,extraAddress,phone, admin;
     private int postcode;
-    public MemberVo() {
+    public MemberDto() {
     }
 
-    public MemberVo(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String admin, int postcode) {
+    public MemberDto(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String admin, int postcode) {
         this.name = name;
         this.userid = userid;
         this.userpw = userpw;

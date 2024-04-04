@@ -57,7 +57,7 @@
         <core:if test="${!empty login_info }">
             <ul>
                 <li>${login_info.name } [ ${login_info.id } ]</li>
-                <li><a class="btn-fill" onclick="go_logout()">로그아웃</a></li>
+                <li><a class="btn-fill" href="login/logout">로그아웃</a></li>
             </ul>
         </core:if>
 
@@ -65,7 +65,7 @@
         <core:if test="${empty login_info }">
             <ul>
                 <li><a class="btn-fill" href="login">로그인</a></li>
-                <li><a class="btn-fill" href="join">회원가입</a></li>
+                <li><a class="btn-fill" href="insertUser">회원가입</a></li>
             </ul>
         </core:if>
     </div>

@@ -23,12 +23,6 @@
                     <th class='w-px200'>이름</th>
                     <th>아이디</th>
                     <th>성별</th>
-                    <th>이메일</th>
-                    <th>우편번호</th>
-                    <th>주소</th>
-                    <th>상세주소</th>
-                    <th>참고항목</th>
-                    <th>전화번호</th>
                 </tr>
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
@@ -39,12 +33,6 @@
                         <td>${dto.name }</td>
                         <td>${dto.userid }</td>
                         <td>${dto.gender }</td>
-                        <td>${dto.email }</td>
-                        <td>${dto.postcode }</td>
-                        <td>${dto.address }</td>
-                        <td>${dto.detailAddress }</td>
-                        <td>${dto.extraAddress }</td>
-                        <td>${dto.phone }</td>
                     </a>
                     </tr>
                 </c:forEach>

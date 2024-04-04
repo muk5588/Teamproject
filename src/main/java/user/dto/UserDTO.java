@@ -3,12 +3,12 @@ package user.dto;
 
 public class UserDTO {
 	private String name, userid, userpw, gender,email, address,detailAddress,extraAddress,phone;
-	private int postcode, adminno,reportno;
+	private int userno, postcode, adminno,reportno;
 
 	public UserDTO() {
 	}
 
-	public UserDTO(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int postcode, int adminno, int reportno) {
+	public UserDTO(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int userno, int postcode, int adminno, int reportno) {
 		this.name = name;
 		this.userid = userid;
 		this.userpw = userpw;
@@ -18,6 +18,7 @@ public class UserDTO {
 		this.detailAddress = detailAddress;
 		this.extraAddress = extraAddress;
 		this.phone = phone;
+		this.userno = userno;
 		this.postcode = postcode;
 		this.adminno = adminno;
 		this.reportno = reportno;
@@ -35,6 +36,7 @@ public class UserDTO {
 				", detailAddress='" + detailAddress + '\'' +
 				", extraAddress='" + extraAddress + '\'' +
 				", phone='" + phone + '\'' +
+				", userno=" + userno +
 				", postcode=" + postcode +
 				", adminno=" + adminno +
 				", reportno=" + reportno +
@@ -135,5 +137,13 @@ public class UserDTO {
 
 	public void setReportno(int reportno) {
 		this.reportno = reportno;
+	}
+
+	public int getUserno() {
+		return userno;
+	}
+
+	public void setUserno(int userno) {
+		this.userno = userno;
 	}
 }

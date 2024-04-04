@@ -11,7 +11,7 @@ public interface UserService {
     List<UserDTO> userList();
 
     //상세(1건) 조회
-    UserDTO userDetail(int id);
+    UserDTO userDetail(int userid);
 
     //고객 정보 변경 저장
     void userUpdate(UserDTO vo);

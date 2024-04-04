@@ -1,140 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userInfo">
+	<select id="userDetail" resultType="user.dto.UserDTO">
+		SELECT * FROM usertb_test WHERE userid=#{userid }
+	</select>
 
-	<select id="getUsrListCount" parameterType="hashmap" resultType="int">
-		SELECT /** userInfo.getUsrListCount*/
-				COUNT(*)
-		FROM TBINFFMCUSER
-		WHERE 1 = 1
-		AND UPPER(USERCODE) = UPPER(#{DUPLCHECK})
+	<!-- 애스터리스크(*)를 쓰면 ROWNUM 등의 다른 필드를 쓸 수가 없다. -->
+	<select id="userList" resultType="user.dto.UserDTO">
+		SELECT * FROM usertb_test order by userno
 	</select>
-	
-	<select id="getUserList" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT /** userInfo.getUserList*/
-				USERCODE
-				, DIVCODE
-				, AUTHCODE
-				, USERNAME
-				, USERPSWD
-				, REGUSER
-				, REGDATE
-				, DATE_FORMAT(PSWDDATE, '%Y%m%d%H%i') AS PSWDDATE
-				, HPNO
-				, ENGNAME
-				, POSNAME
-				, TEAMNAME
-				, EMPLOYEENO
-				, BIRDAY
-				, JOINDATE
-				, RETIREDATE
-				, WORKYN
-				, EMAIL
-				, ADDR
-				, PERTYPE
-				, STT
-		FROM TBINFFMCUSER
-		WHERE 1 = 1
-	]]>
-		<if test="AUTHCODE != 'ALL' and AUTHCODE!= null and AUTHCODE!= ''">
-			AND AUTHCODE = #{AUTHCODE}
-		</if>
-		<if test="SEARCH_TYPE == 'USERNAME' and SEARCH_VALUE!= null and SEARCH_VALUE!= ''">
-			AND USERNAME LIKE CONCAT('%',#{SEARCH_VALUE},'%')
-		</if>
-		<if test="SEARCH_TYPE == 'ENGNAME' and SEARCH_VALUE!= null and SEARCH_VALUE!= ''">
-			AND UPPER(ENGNAME) LIKE UPPER(CONCAT('%',#{SEARCH_VALUE},'%'))
-		</if>
-		<if test="SEARCH_TYPE == 'USERCODE' and SEARCH_VALUE!= null and SEARCH_VALUE!= ''">
-			AND UPPER(USERCODE) LIKE UPPER(CONCAT('%',#{SEARCH_VALUE},'%'))
-		</if>
-		<if test="SEARCH_TYPE == 'EMPLOYEENO' and SEARCH_VALUE!= null and SEARCH_VALUEE!= ''">
-			AND EMPLOYEENO LIKE CONCAT('%',#{SEARCH_VALUE},'%')
-		</if>
-		<if test="SEARCH_TYPE == 'DIVCODE' and SEARCH_VALUE!= null and SEARCH_VALUE!= ''">
-			AND DIVCODE = '${SEARCH_VALUE}'
-		</if>
-		<if test="(selectArray1!=null and selectArray1!='')">
-			AND USERCODE IN
-			<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
-				'${array[index]}'
-			</foreach>
-		</if>
-		<if test="WORK != null and WORK != ''">
-			AND WORKYN = '${WORK}'
-		</if>
-		ORDER BY STT ASC, USERCODE
-	</select>
-	
-	<select id="findUserId" parameterType="hashmap" resultType="hashmap">
-		SELECT /** userInfo.findUserId */
-				USERCODE
-		FROM TBINFFMCUSER
-		WHERE  1=1
-		AND USERCODE = #{USERCODE}
-	</select>
-	
-	<update id="updateUserInfo" >
-		UPDATE TBINFFMCUSER
-			SET /** userInfo.updateUserInfo */
-				DIVCODE = #{DIVCODE}
-				, AUTHCODE = #{AUTHCODE}
-				, WORKYN = #{WORKYN}
-				, USERNAME = #{USERNAME}
-				, HPNO = #{HPNO}
-				, ENGNAME= #{ENGNAME}
-				, POSNAME= #{POSNAME}
-				, TEAMNAME = #{TEAMNAME}
-				, EMPLOYEENO = #{EMPLOYEENO}
-				, STT = #{STT}
-				, EMAIL = #{EMAIL}
-				, MODUSER= #{REGUSER}
-				, MODIP = #{REGIP}
-				, MODDATE = NOW()
-				, PSWDDATE = NOW()
-		WHERE USERCODE = #{USERCODE}
-	</update>
-	
-	<insert id="insertUserInfo" >
-		INSERT INTO TBINFFMCUSER ( /** userInfo.insertUserInfo */
-			USERCODE, DIVCODE, AUTHCODE, WORKYN,
-			USERNAME, USERPSWD,
-			REGUSER, REGIP, REGDATE,
-			PSWDDATE, HPNO, ENGNAME, POSNAME,
-			TEAMNAME, EMPLOYEENO, EMAIL, STT,
-			MODUSER, MODIP, MODDATE
-		) VALUES (
-			#{USERCODE}, #{DIVCODE}, #{AUTHCODE}, #{WORKYN},
-			#{USERNAME}, #{USERPSWD},
-			#{REGUSER}, #{REGIP}, NOW(),
-			NULLIF('',''), #{HPNO}, #{ENGNAME}, #{POSNAME},
-			#{TEAMNAME}, #{EMPLOYEENO}, #{EMAIL}, #{STT},
-			#{REGUSER}, #{REGIP}, NOW()
-		)
+
+	<insert id="userInsert">
+		INSERT INTO usertb_test(userno, name, userid, userpw, email, gender, postcode, address, detailAddress, extraAddress, phone)
+		VALUES (user_seq_test.nextval, #{name}, #{userid}, #{userpw}, #{email}, #{gender}, #{postcode},
+		        #{address}, #{detailAddress}, #{extraAddress}, #{phone})
 	</insert>
-	
-	<delete id="deleteUserInfo"  >
-		DELETE FROM TBINFFMCUSER /* userInfo.deleteUserInfo */
-		WHERE USERCODE = #{USERCODE}
-	</delete>
-	
-	<delete id="resetUserPassword"  >
-		UPDATE TBINFFMCUSER
-			SET /** userInfo.resetUserPassword */
-				USERPSWD = ''
-				, PSWDDATE = NOW()
-		WHERE USERCODE = #{USERCODE}
-	</delete>
-	
-	<select id="getUserRole" resultType="String">
-		SELECT /* userInfo.getUserRole */
-				AUTHCODE
-		FROM TBINFFMCUSER
-		WHERE USERCODE = #{userId}
-	</select>
-	
 
+	<update id="update">
+		UPDATE usertb_test SET name = #{name},
+		                  userpw = #{userpw},
+		                  email=#{email},
+		                  gender=#{gender},
+		                  postcode=#{postcode},
+		                  address =#{address},
+		                  detailAddress = #{detailAddress},
+		                  extraAddress = #{extraAddress},
+		                  phone = #{phone}
+		WHERE userid=#{userid }
+	</update>
 
+	<delete id="delete">
+		DELETE FROM usertb_test WHERE userid=#{userid }
+	</delete>
 </mapper>
 

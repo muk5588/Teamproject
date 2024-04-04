@@ -22,7 +22,7 @@
             </div>
             <div id="useridbox">
                 <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid"><br>
+                <input type="text" name="userid" id="userid" readonly><br>
             </div>
             <div id="userpwbox">
                 <label for="userpw">비밀번호</label>

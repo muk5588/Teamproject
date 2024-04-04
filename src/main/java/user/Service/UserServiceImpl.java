@@ -14,9 +14,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired private UserDao userDao ;
-    public void userInsert(UserDTO dto) {
-
-    }
 
     @Override
     public List<UserDTO> userList() {
@@ -24,18 +21,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO userDetail(int id) {
-        return userDao.userDetail(id);
+    public UserDTO userDetail(int userid) {
+        return userDao.userDetail(userid);
+    }
+    public void userInsert(UserDTO dto) {
+        userDao.userInsert(dto);
     }
 
     @Override
-    public void userUpdate(UserDTO vo) {
-
+    public void userUpdate(UserDTO dto) {
+        userDao.userUpdate(dto);
     }
 
     @Override
-    public void userDelete(int id) {
-
+    public void userDelete(int userid) {
+        userDao.userDelete(userid);
     }
 
 }

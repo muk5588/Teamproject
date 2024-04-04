@@ -16,31 +16,29 @@ public class UserDao implements UserService {
     //Autowired : 메모리에 올려둔 주소들이 자동으로 연결 됨
 
     @Override
-    public void userInsert(UserDTO vo) {
-        // TODO Auto-generated method stub
-
+    public void userInsert(UserDTO dto) {
+        session.insert("userInfo.userInsert",dto);
     }
 
     @Override
     public List<UserDTO> userList() {
         //customer.mapper라는 맵퍼에서 id가 list인 곳을 찾는다
-        return session.selectList("customer.mapper.list");
+        return session.selectList("userInfo.userList");
     }
 
     @Override
-    public UserDTO userDetail(int id) {
-        return session.selectOne("customer.mapper.detail", id);
+    public UserDTO userDetail(int userid) {
+        return session.selectOne("userInfo.userDetail", userid);
     }
 
     @Override
-    public void userUpdate(UserDTO vo) {
-        // TODO Auto-generated method stub
-
+    public void userUpdate(UserDTO dto) {
+       session.update("userInfo.userUpdate",dto);
     }
 
     @Override
-    public void userDelete(int id) {
-
+    public void userDelete(int userid) {
+        session.delete("userInfo.userDelete",userid);
     }
 
 }

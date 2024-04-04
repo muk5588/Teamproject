@@ -338,7 +338,7 @@ function defalutRadioCheck(){
 
 function fn_deleteJob() {
 	
-	if(!confirm("Are you sure you want to delete the user?")){
+	if(!confirm("Are you sure you want to delete the com.test.www.user?")){
 		return;
 	}
 	

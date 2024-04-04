@@ -42,7 +42,7 @@
     </form>
 </c:if>
 <c:if test="${not empty login and login }">
-    <button onclick="location.href = '<%=request.getContextPath()%>/login/logout'">로그아웃</button>
+    <button onclick="location.href = '<%=request.getContextPath()%>/com.test.com.test.com.test.com.test.login/logout'">로그아웃</button>
 </c:if>
 
 </body>

@@ -1,16 +1,45 @@
 package user.dto;
 
 
-
-import java.io.Serializable;
-import java.util.List;
-
-
-
-
 public class UserDTO {
-	private String name, userid, userpw,  gender,email, address,detailAddress,extraAddress,phone, admin;
-	private int postcode;
+	private String name, userid, userpw, gender,email, address,detailAddress,extraAddress,phone;
+	private int postcode, adminno,reportno;
+
+	public UserDTO() {
+	}
+
+	public UserDTO(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int postcode, int adminno, int reportno) {
+		this.name = name;
+		this.userid = userid;
+		this.userpw = userpw;
+		this.gender = gender;
+		this.email = email;
+		this.address = address;
+		this.detailAddress = detailAddress;
+		this.extraAddress = extraAddress;
+		this.phone = phone;
+		this.postcode = postcode;
+		this.adminno = adminno;
+		this.reportno = reportno;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDTO{" +
+				"name='" + name + '\'' +
+				", userid='" + userid + '\'' +
+				", userpw='" + userpw + '\'' +
+				", gender='" + gender + '\'' +
+				", email='" + email + '\'' +
+				", address='" + address + '\'' +
+				", detailAddress='" + detailAddress + '\'' +
+				", extraAddress='" + extraAddress + '\'' +
+				", phone='" + phone + '\'' +
+				", postcode=" + postcode +
+				", adminno=" + adminno +
+				", reportno=" + reportno +
+				'}';
+	}
 
 	public String getName() {
 		return name;
@@ -84,19 +113,27 @@ public class UserDTO {
 		this.phone = phone;
 	}
 
-	public String getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(String admin) {
-		this.admin = admin;
-	}
-
 	public int getPostcode() {
 		return postcode;
 	}
 
 	public void setPostcode(int postcode) {
 		this.postcode = postcode;
+	}
+
+	public int getAdminno() {
+		return adminno;
+	}
+
+	public void setAdminno(int adminno) {
+		this.adminno = adminno;
+	}
+
+	public int getReportno() {
+		return reportno;
+	}
+
+	public void setReportno(int reportno) {
+		this.reportno = reportno;
 	}
 }

@@ -24,7 +24,7 @@ public class LoginDao implements LoginService{
 
     @Override
     public MemberVo member_login(HashMap<String, String> map) {
-        return sql.selectOne("member.mapper.login", map);
+        return sql.selectOne("member.mapper.com.test.www.login", map);
     }
 
     @Override

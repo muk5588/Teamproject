@@ -64,7 +64,7 @@
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="joinRequest" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/insertUser" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/><br>

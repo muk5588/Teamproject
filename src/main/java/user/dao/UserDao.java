@@ -2,43 +2,45 @@ package user.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import user.Service.UserService;
+import user.dto.UserDTO;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-@Repository("userDao")
-public class UserDao {
+@Repository
+public class UserDao implements UserService {
     @Autowired
-    @Qualifier(value = "session")
     private SqlSession session;
-    public int getUsrListCount(HashMap<String, Object> reqMap) {
-        return (Integer) session.selectOne("userInfo.getUsrListCount", reqMap);
+    //sessionSession : PreparedStatement와 표현 방법이 다를뿐 같은 기능을 한다.
+    //Autowired : 메모리에 올려둔 주소들이 자동으로 연결 됨
+
+    @Override
+    public void userInsert(UserDTO vo) {
+        // TODO Auto-generated method stub
+
     }
 
-    public List<Map<String, Object>> userList(HashMap<String, Object> reqMap) {
-        return session.selectList("userInfo.getUserList", reqMap);
+    @Override
+    public List<UserDTO> userList() {
+        //customer.mapper라는 맵퍼에서 id가 list인 곳을 찾는다
+        return session.selectList("customer.mapper.list");
     }
 
-    public void insertUser(HashMap<String, Object> reqMap) {
-        session.insert("userInfo.insertUserInfo", reqMap);
+    @Override
+    public UserDTO userDetail(int id) {
+        return session.selectOne("customer.mapper.detail", id);
     }
 
-    public HashMap<String, Object> selectUserId(HashMap<String, Object> reqMap) {
-        return (HashMap<String, Object>) session.selectOne("userInfo.findUserId", reqMap);
+    @Override
+    public void userUpdate(UserDTO vo) {
+        // TODO Auto-generated method stub
+
     }
 
-    public void updateUser(HashMap<String, Object> reqMap) {
-        session.update("userInfo.updateUserInfo", reqMap);
+    @Override
+    public void userDelete(int id) {
+
     }
 
-    public void deleteUser(HashMap<String, Object> reqMap) {
-        session.delete("userInfo.deleteUserInfo", reqMap);
-    }
-
-    public List<Map<String, Object>> userBoardList(HashMap<String, Object> reqMap) {
-        return session.selectList("userInfo.getUserBoardList", reqMap);
-    }
 }

@@ -1,65 +1,41 @@
 package user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import user.Service.UserService;
+import user.Service.UserServiceImpl;
+import user.dto.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {
-    private UserService userService = new UserService();
+    private UserServiceImpl service;
     @RequestMapping("/insertUser")
     //가입페이지
     public String userInsert() {
-        return "user/join";
+        return "user/userInsert";
     }
     @RequestMapping("/userList")
     //유저리스트 페이지
     public String userList(){
-        return  "user/userListForm";
+        return  "user/userList";
     }
     //수정 페이지
     @RequestMapping("/updateUser")
     public String userUpdate(){
-        return "user/update";
+        return "user/userUpdate";
+    }
+    @RequestMapping("/detailUser")
+    public String detail(int id, Model model) {
+        //선택한 고객 정보를 DB에 조회해와서
+        UserDTO dto = service.userDetail(id);
+        //화면에 출력할 수 있도록 Model에 담는다.
+        //원래는 string타입으로 담겨야하지만 스프링에서는 자동으로 형변환이 되서 int타입으로 담긴다.
+
+        model.addAttribute("dto", dto);
+        return "user/userDetail";
     }
     //기능
-    @RequestMapping("/user/getUserListCount.do")
-    public String getUsrListCount(HttpServletRequest request, Model model)throws Exception{
-        //userService.getUsrListCount(request, model);
-        model.addAttribute("code",userService.getUserListCount(request, model));
-        return "jsonView";
-    }
-    @RequestMapping("/user/getUserList")
-    public String getuserList(HttpServletRequest request, Model model)throws Exception{
-        userService.userList(request, model);
-        return "jsonView";
-    }
-    @RequestMapping("/user/getBoardList")
-    public String getBoardList(HttpServletRequest request , Model model)throws Exception{
-        userService.getBoardList(request,model);
-        return "jsonView";
-    }
 
-    /*사용자 등록 */
-    @RequestMapping("/user/insertUser")
-    public String insertUser(HttpServletRequest request, Model model) throws Exception {
-        userService.insertUser(request, model);
-        return "jsonView";
-    }
-    /*사용자 수정*/
-    @RequestMapping("/user/updateUser")
-    public String updateUser(HttpServletRequest request, Model model) throws Exception {
-        userService.updateUser(request, model);
-        return "jsonView";
-    }
-    /*사용자 삭제 */
-    @RequestMapping("/user/deleteUser")
-    public String deleteUser(HttpServletRequest request, Model model)throws Exception{
-        userService.deleteUser(request, model);
-        return "jsonView";
-    }
 }

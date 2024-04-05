@@ -15,21 +15,10 @@
 <h3>회원정보수정</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/updateUser" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/user/userUpdate" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" value="${dto.name}"/><br>
-            </div>
-            <div id="useridbox">
-                <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid"value="${dto.name}" readonly><br>
-            </div>
-            <div id="userpwbox">
-                <label for="userpw">비밀번호</label>
-                <input type="text" name="userpw" id="userpw"value="${dto.name}"><br>
-
-                <label for="userpwchk">비밀번호 확인</label>
-                <input type="text" name="userpwchk" id="userpwchk"><br>
             </div>
             <div id="genderbox">
                 <label>성별</label>

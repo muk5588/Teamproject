@@ -1,19 +1,16 @@
-package user.Service;
+package user.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import user.dao.UserDao;
 import user.dto.UserDTO;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired private UserDao userDao ;
+    private UserDao userDao = new UserDao() ;
 
     @Override
     public List<UserDTO> userList() {
@@ -21,8 +18,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO userDetail(int userid) {
-        return userDao.userDetail(userid);
+    public UserDTO userDetail(UserDTO userno) {
+        return userDao.userDetail(userno);
     }
     public void userInsert(UserDTO dto) {
         userDao.userInsert(dto);

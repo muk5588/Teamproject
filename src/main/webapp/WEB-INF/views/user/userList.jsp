@@ -28,7 +28,7 @@
                 <!-- items : 배열 변수 -->
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
                 <c:forEach items="${list }" var="dto">
-                    <tr><a href='detail?id=${dto.userid}'>
+                    <tr><a href='detail?userid=${dto.userid}'>
                         <td>${dto.no }</td>
                         <td>${dto.name }</td>
                         <td>${dto.userid }</td>

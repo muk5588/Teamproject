@@ -60,7 +60,7 @@
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/insertUser" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="user/userInsert" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/><br>
@@ -75,6 +75,10 @@
 
                 <label for="userpwchk">비밀번호 확인</label>
                 <input type="text" name="userpwchk" id="userpwchk"><br>
+            </div>
+            <div id="nickbox">
+                <label for="nickname">아이디</label>
+                <input type="text" name="userid" id="nickname"><br>
             </div>
             <div id="genderbox">
                 <label>성별</label>

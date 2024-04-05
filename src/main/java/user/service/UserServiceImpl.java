@@ -1,5 +1,6 @@
 package user.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import user.dao.UserDao;
@@ -9,8 +10,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    private UserDao userDao = new UserDao() ;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public List<UserDTO> userList() {
@@ -31,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userDelete(int userid) {
-        userDao.userDelete(userid);
+    public void userDelete(int userno) {
+        userDao.userDelete(userno);
     }
 
 }

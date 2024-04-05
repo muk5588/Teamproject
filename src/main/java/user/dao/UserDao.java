@@ -10,36 +10,23 @@ import user.service.UserService;
 import java.util.List;
 
 @Repository("UserDao")
-public class UserDao {
-    @Autowired
-    @Qualifier("usersession")
-    private SqlSession session;
+public interface UserDao {
     //sessionSession : PreparedStatement와 표현 방법이 다를뿐 같은 기능을 한다.
     //Autowired : 메모리에 올려둔 주소들이 자동으로 연결 됨
 
     
-    public void userInsert(UserDTO dto) {
-    }
+    public void userInsert(UserDTO dto);
 
 
-    public List<UserDTO> userList() {
-        //customer.mapper라는 맵퍼에서 id가 list인 곳을 찾는다
-        return session.selectList("userInfo.userList");
-    }
+    public List<UserDTO> userList();
 
 
-    public UserDTO userDetail(UserDTO userno) {
-        return session.selectOne("userInfo.userDetail", userno);
-    }
+    public UserDTO userDetail(UserDTO userno);
 
     
-    public void userUpdate(UserDTO dto) {
-        session.update("userInfo.userUpdate", dto);
-    }
+    public void userUpdate(UserDTO dto);
 
     
-    public void userDelete(int userid) {
-        session.delete("userInfo.userDelete", userid);
-    }
+    public void userDelete(int userno);
 
 }

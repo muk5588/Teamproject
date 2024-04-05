@@ -31,10 +31,8 @@ public class UserController {
     //유저리스트 페이지
     public String userList(HttpSession session, Model model) {
         session.setAttribute("list", "list");
-        System.out.print("ssss");
         List<UserDTO> list = service.userList();
         model.addAttribute("list", list);
-        System.out.print("sssss");
         return "user/userList";
     }
 
@@ -60,7 +58,7 @@ public class UserController {
     @RequestMapping("user/userInsert")
     public String userInsert(UserDTO dto) {
         service.userInsert(dto);
-        return "userList";
+        return "user/userList";
     }
 
     @RequestMapping("/user/userUpdate")
@@ -70,8 +68,8 @@ public class UserController {
     }
 
     @RequestMapping("/user/deleteUser")
-    public String deleteUser(int userid) {
-        service.userDelete(userid);
+    public String deleteUser(int userno) {
+        service.userDelete(userno);
         return "user/userList";
     }
 }

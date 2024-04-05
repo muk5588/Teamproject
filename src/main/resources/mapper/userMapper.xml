@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userInfo">
-	<select id="userDetail" resultType="user.dto.UserDTO">
+<mapper namespace="user.dao.UserDao">
+	<select id="userDetail" resultType="UserDTO">
 		SELECT * FROM usertb_test WHERE userid=#{userid }
 	</select>
 
-	<!-- 애스터리스크(*)를 쓰면 ROWNUM 등의 다른 필드를 쓸 수가 없다. -->
-	<select id="userList" resultType="user.dto.UserDTO">
+	<select id="userList" resultType="UserDTO">
 		SELECT * FROM usertb_test order by userno
 	</select>
 
-	<insert id="userInsert">
+	<insert id="userInsert" parameterType="UserDTO">
 		INSERT INTO usertb_test(userno, name, userid, userpw, email, gender, postcode, address, detailAddress, extraAddress, phone)
 		VALUES (user_seq_test.nextval, #{name}, #{userid}, #{userpw}, #{email}, #{gender}, #{postcode},
 		        #{address}, #{detailAddress}, #{extraAddress}, #{phone})
 	</insert>
 
-	<update id="update">
+	<update id="userUpdate" parameterType="UserDTO">
 		UPDATE usertb_test SET name = #{name},
 		                  userpw = #{userpw},
 		                  email=#{email},
@@ -29,7 +28,7 @@
 		WHERE userid=#{userid }
 	</update>
 
-	<delete id="delete">
+	<delete id="userDelete" parameterType="int">
 		DELETE FROM usertb_test WHERE userid=#{userid }
 	</delete>
 </mapper>

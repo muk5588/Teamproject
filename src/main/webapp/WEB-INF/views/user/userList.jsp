@@ -27,12 +27,12 @@
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-                <c:forEach items="${list}" var="list">
-                    <tr><a href='detail?userid=${dto.userid}'>
-                        <td>${dto.no }</td>
-                        <td>${dto.name }</td>
-                        <td>${dto.userid }</td>
-                        <td>${dto.gender }</td>
+                <c:forEach var="UserDTO" items="${list}">
+                    <tr>
+                        <td>${UserDTO.userno }</td>
+                        <td><a href='detail?userid=${UserDTO.userid}'>${UserDTO.name }</a></td>
+                        <td>${UserDTO.userid }</td>
+                        <td>${UserDTO.gender }</td>
                     </a>
                     </tr>
                 </c:forEach>

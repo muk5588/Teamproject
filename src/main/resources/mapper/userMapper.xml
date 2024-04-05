@@ -11,8 +11,7 @@
 
 	<insert id="userInsert" parameterType="UserDTO">
 		INSERT INTO usertb_test(userno, name, userid, userpw, email, gender, postcode, address, detailAddress, extraAddress, phone)
-		VALUES (user_seq_test.nextval, #{name}, #{userid}, #{userpw}, #{email}, #{gender}, #{postcode},
-		        #{address}, #{detailAddress}, #{extraAddress}, #{phone})
+		VALUES (user_seq_test.nextval, #{name}, #{userid}, #{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone})
 	</insert>
 
 	<update id="userUpdate" parameterType="UserDTO">

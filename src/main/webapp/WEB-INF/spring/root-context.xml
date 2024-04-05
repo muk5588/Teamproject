@@ -10,8 +10,7 @@
     </context:component-scan>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url"
-                  value="jdbc:oracle:thin:@158.179.171.167:8088(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-chuncheon-1.oraclecloud.com))(connect_data=(service_name=g5175ab50d5150d_project_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"/>
+        <property name="url" value="jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-chuncheon-1.oraclecloud.com))(connect_data=(service_name=g5175ab50d5150d_project2_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"/>
         <property name="username" value="admin"/>
         <property name="password" value="Travelsquare1"/>
     </bean>
@@ -30,12 +29,15 @@
         <!--  mapper XML파일의 위치 설정 -->
         <property name="mapperLocations">
             <array>
-                <value>classpath:/**/mapper/**/*Mapper.xml</value>
+                <value>classpath:/**/mapper/**/*.xml</value>
             </array>
         </property>
         <property name="typeAliasesPackage">
             <value>*.dto</value>
         </property>
+    </bean>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="SqlSessionFactory"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="*.dao"/>

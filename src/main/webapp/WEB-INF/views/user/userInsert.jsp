@@ -77,8 +77,8 @@
                 <input type="text" name="userpwchk" id="userpwchk"><br>
             </div>
             <div id="nickbox">
-                <label for="nickname">아이디</label>
-                <input type="text" name="userid" id="nickname"><br>
+                <label for="nickname">닉네임</label>
+                <input type="text" name="nickname" id="nickname"><br>
             </div>
             <div id="genderbox">
                 <label>성별</label>
@@ -91,14 +91,14 @@
             </div>
             <div id="postcodebox">
                 <label for="postcode">우편번호</label>
-                <input type="text" id="postcode" placeholder="우편번호" readonly>
+                <input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly>
                 <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
             </div>
             <div id="addressbox">
                 <label for="detailAddress">주소</label>
-                <input type="text" id="address" placeholder="주소" readonly><br>
-                <input type="text" id="detailAddress" placeholder="상세주소">
-                <input type="text" id="extraAddress" placeholder="참고항목"><br>
+                <input type="text" name="address" id="address" placeholder="주소" readonly><br>
+                <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
+                <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목"><br>
             </div>
             <div id="phonebox">
                 <label for="phone">전화번호</label>

@@ -20,7 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
-
+    /**
+     * 화면부분
+     * */
     @RequestMapping("/insertUser")
     //가입페이지
     public String userInsert() {
@@ -28,7 +30,7 @@ public class UserController {
     }
 
     @RequestMapping("/userList")
-    //유저리스트 페이지
+    //유저전체리스트 페이지
     public String userList(HttpSession session, Model model) {
         List<UserDTO> list = service.userList();
         model.addAttribute("list", list);
@@ -45,7 +47,7 @@ public class UserController {
         model.addAttribute("dto", dto);
         return "user/userUpdate";
     }
-
+    //상세페이지(마이페이지로 사용가능)
     @RequestMapping("/detailUser")
     public String detail(String userid, Model model) {
         //선택한 고객 정보를 DB에 조회해와서
@@ -60,7 +62,10 @@ public class UserController {
         return "user/userDetail";
     }
 
-    //기능
+    /**
+     * 기능부분
+     * param: UserDTO
+     * */
     @RequestMapping("user/userInsert")
     public String userInsert(UserDTO dto) {
         service.userInsert(dto);

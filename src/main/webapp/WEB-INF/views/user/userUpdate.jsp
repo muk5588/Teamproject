@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         function DaumPostcode() {
             new daum.Postcode({
@@ -80,14 +81,14 @@
             </div>
             <div id="postcodebox">
                 <label for="postcode">우편번호</label>
-                <input type="text" id="postcode" readonly value="${dto.postcode}">
+                <input type="text" name="postcode" id="postcode" readonly value="${dto.postcode}">
                 <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
             </div>
             <div id="addressbox">
                 <label for="detailAddress">주소</label>
-                <input type="text" id="address"  readonly value="${dto.address}" ><br>
-                <input type="text" id="detailAddress" value="${dto.detailAddress}">
-                <input type="text" id="extraAddress" value="${dto.extraAddress}"><br>
+                <input type="text" name="address" id="address"  readonly value="${dto.address}" ><br>
+                <input type="text" name="detailAddress" id="detailAddress" value="${dto.detailAddress}">
+                <input type="text" name="extralAddress" id="extraAddress" value="${dto.extraAddress}"><br>
             </div>
             <div id="phonebox">
                 <label for="phone">전화번호</label>

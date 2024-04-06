@@ -64,18 +64,18 @@ public class UserController {
     @RequestMapping("user/userInsert")
     public String userInsert(UserDTO dto) {
         service.userInsert(dto);
-        return "user/userList";
+        return "redirect: /userList";
     }
 
     @RequestMapping("/user/userUpdate")
     public String userUpdate(UserDTO dto) {
         service.userUpdate(dto);
-        return "user/userList";
+        return "redirect: /userList";
     }
 
     @RequestMapping("/user/deleteUser")
     public String deleteUser(int userno) {
         service.userDelete(userno);
-        return "user/userList";
+        return "redirect: /userList";
     }
 }

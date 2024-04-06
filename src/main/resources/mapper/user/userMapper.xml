@@ -16,7 +16,6 @@
 
 	<update id="userUpdate" parameterType="UserDTO">
 		UPDATE usertb_test SET name = #{name},
-		                  userpw = #{userpw},
 		                  email=#{email},
 		                  gender=#{gender},
 		                  postcode=#{postcode},
@@ -24,7 +23,7 @@
 		                  detailAddress = #{detailAddress},
 		                  extraAddress = #{extraAddress},
 		                  phone = #{phone}
-		WHERE userid=#{userid }
+		WHERE userno=#{userno }
 	</update>
 
 	<delete id="userDelete" parameterType="int">

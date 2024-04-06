@@ -37,15 +37,22 @@ public class UserController {
 
     //수정 페이지
     @RequestMapping("/updateUser")
-    public String userUpdate(UserDTO userid, Model model) {
-        model.addAttribute("dto", service.userDetail(userid));
-        return "user/updateUser";
+    public String userUpdate(String userid, Model model) {
+        UserDTO dto = new UserDTO();
+        dto.setUserid(userid);
+        dto = service.userDetail(dto);
+//        int userno = dto.getUserno();
+        model.addAttribute("dto", dto);
+        return "user/userUpdate";
     }
 
     @RequestMapping("/detailUser")
-    public String detail(UserDTO userid, Model model) {
+    public String detail(String userid, Model model) {
         //선택한 고객 정보를 DB에 조회해와서
-        UserDTO dto = service.userDetail(userid);
+        UserDTO dto = new UserDTO();
+        dto.setUserid(userid);
+        dto = service.userDetail(dto);
+//        int userno = dto.getUserno();
         //화면에 출력할 수 있도록 Model에 담는다.
         //원래는 string타입으로 담겨야하지만 스프링에서는 자동으로 형변환이 되서 int타입으로 담긴다.
 
@@ -63,7 +70,7 @@ public class UserController {
     @RequestMapping("/user/userUpdate")
     public String userUpdate(UserDTO dto) {
         service.userUpdate(dto);
-        return "redirect:detail?id=" + dto.getUserid();
+        return "user/userList";
     }
 
     @RequestMapping("/user/deleteUser")

@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO userDetail(UserDTO userid) {
         return userDao.userDetail(userid);
     }
+
     public void userInsert(UserDTO dto) {
         userDao.userInsert(dto);
     }

@@ -12,13 +12,13 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h3>[ ${dto.name } ]고객 정보</h3>
+<h3>${dto.name } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
         <table class='w-pct60'>
             <tr>
                 <th>회원번호</th>
-                <td>${dto.no }</td>
+                <td>${dto.userno }</td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -58,7 +58,7 @@
         </table>
         <div class='btnSet'>
             <a class='btn-fill' href="userList">고객 목록</a>
-            <a class='btn-fill' href="userUpdate">수정</a>
+            <a class='btn-fill' href="updateUser?userid=${dto.userid}">수정</a>
             <a class='btn-fill' onclick="fn_delete()">삭제</a>
         </div>
     </div>

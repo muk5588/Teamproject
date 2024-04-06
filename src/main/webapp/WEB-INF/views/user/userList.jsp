@@ -30,7 +30,7 @@
                 <c:forEach var="UserDTO" items="${list}">
                     <tr>
                         <td>${UserDTO.userno }</td>
-                        <td><a href='detail?userid=${UserDTO.userid}'>${UserDTO.name }</a></td>
+                        <td><a href='detailUser?userid=${UserDTO.userid}'>${UserDTO.name }</a></td>
                         <td>${UserDTO.userid }</td>
                         <td>${UserDTO.gender }</td>
                     </a>

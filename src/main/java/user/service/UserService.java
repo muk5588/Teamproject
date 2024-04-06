@@ -10,7 +10,7 @@ public interface UserService {
 
     List<UserDTO> userList();
 
-    UserDTO userDetail(UserDTO userno);
+    UserDTO userDetail(UserDTO userid);
 
     void userUpdate(UserDTO dto);
 

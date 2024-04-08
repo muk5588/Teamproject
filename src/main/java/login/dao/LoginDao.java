@@ -5,5 +5,5 @@ import user.dto.UserDTO;
 
 @Repository("LoginDao")
 public interface LoginDao {
-    UserDTO loginProc(UserDTO dto);
+	public UserDTO loginProc(UserDTO dto);
 }

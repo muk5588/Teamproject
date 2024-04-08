@@ -13,27 +13,27 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h3>${dto.gradename } 고객 정보</h3>
+<h3>${grade.gradename } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
         <table class='w-pct60'>
             <tr>
                 <th>등급 번호</th>
-                <td name="gradeno">${dto.gradeno }</td>
+                <td name="gradeno">${grade.gradeno }</td>
             </tr>
             <tr>
                 <th>등급 이름</th>
-                <td>${dto.gradename }</td>
+                <td>${grade.gradename }</td>
             </tr>
             <tr>
                 <th>추가 설명</th>
-                <td>${dto.comm }</td>
+                <td>${grade.comm }</td>
             </tr>
         </table>
         <div class='btnSet'>
             <a class='btn-fill' href="gradeList">등급 목록</a>
-            <a class='btn-fill' href="updateGrade?gradeid=${dto.gradeid}">수정</a>
-            <a class='btn-fill' href="/grade/deleteGrade?gradeno=${dto.gradeno}">삭제</a>
+            <a class='btn-fill' href="gradeUpdate?gradeno=${grade.gradeno}">수정</a>
+            <a class='btn-fill' href="grade/deleteGrade?gradeno=${grade.gradeno}">삭제</a>
         </div>
     </div>
 </div>

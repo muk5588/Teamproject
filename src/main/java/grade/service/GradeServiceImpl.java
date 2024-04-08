@@ -19,8 +19,8 @@ public class GradeServiceImpl implements GradeService{
     }
 
     @Override
-    public Grade gradeDetail(Grade grade) {
-        return gradeDao.gradeDetail(grade);
+    public Grade gradeDetail(Grade gradeno) {
+        return gradeDao.gradeDetail(gradeno);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 public interface GradeDao {
     List<Grade> gradeList();
 
-    Grade gradeDetail(Grade grade);
+    Grade gradeDetail(Grade gradeno);
 
     void gradeDelete(Grade grade);
 

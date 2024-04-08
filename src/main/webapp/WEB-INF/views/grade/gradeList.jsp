@@ -17,6 +17,7 @@
     <div class="warp">
         <div id="content">
             <h3>회원등급 목록</h3>
+
             <table class='w-pct60'>
                 <tr>
                     <th class='w-px60'>등급번호</th>
@@ -26,11 +27,11 @@
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-                <c:forEach var="list" items="${list}">
+                <c:forEach var="Grade" items="${list}">
                     <tr>
-                        <td>${list.gradeno }</td>
-                        <td><a href='detailGrade?gradeid=${list.gradeno}'>${list.gradename }</a></td>
-                        <td>${list.comm}</td>
+                        <td>${Grade.gradeno }</td>
+                        <td><a href='gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
+                        <td>${Grade.comm}</td>
                     </a>
                     </tr>
                 </c:forEach>

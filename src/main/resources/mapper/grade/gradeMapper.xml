@@ -11,7 +11,7 @@
 
     <insert id="gradeInsert" parameterType="Grade">
         insert into GRADETB_TEST (GRADENO,GRADENAME,COMM)
-        values (#{gradeno},#{gradename}, #{comm});
+        values (#{gradeno},#{gradename}, #{comm})
     </insert>
 
     <update id="gradeUpdate" parameterType="Grade">
@@ -19,6 +19,7 @@
         set GRADENO = #{gradeno},
             GRADENAME = #{gradename},
             COMM = #{comm}
+        where gradeno = #{gradeno}
     </update>
 
     <delete id="gradeDelete" parameterType="Grade">

@@ -2,15 +2,15 @@ package grade.dto;
 
 public class Grade {
     private int gradeno;
-    private String gradeName;
+    private String gradename;
     private String comm;
 
     public Grade() {
     }
 
-    public Grade(int gradeno, String gradeName, String comm) {
+    public Grade(int gradeno, String gradename, String comm) {
         this.gradeno = gradeno;
-        this.gradeName = gradeName;
+        this.gradename = gradename;
         this.comm = comm;
     }
 
@@ -18,7 +18,7 @@ public class Grade {
     public String toString() {
         return "Grade{" +
                 "gradeno=" + gradeno +
-                ", gradeName='" + gradeName + '\'' +
+                ", gradename='" + gradename + '\'' +
                 ", comm='" + comm + '\'' +
                 '}';
     }
@@ -31,12 +31,12 @@ public class Grade {
         this.gradeno = gradeno;
     }
 
-    public String getGradeName() {
-        return gradeName;
+    public String getgradename() {
+        return gradename;
     }
 
-    public void setGradeName(String gradeName) {
-        this.gradeName = gradeName;
+    public void setgradename(String gradename) {
+        this.gradename = gradename;
     }
 
     public String getComm() {

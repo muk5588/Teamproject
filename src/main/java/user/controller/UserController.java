@@ -44,7 +44,7 @@ public class UserController {
         dto.setUserid(userid);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
-        model.addAttribute("dto", true);
+        model.addAttribute("dto", dto);
         return "user/userUpdate";
     }
     //상세페이지(마이페이지로 사용가능)

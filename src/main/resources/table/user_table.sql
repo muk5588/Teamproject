@@ -6,6 +6,7 @@ create table USERTB_TEST
     NAME          VARCHAR2(500) not null,
     USERID        VARCHAR2(500) not null,
     USERPW        VARCHAR2(500) not null,
+    nickname      varchar2(500) not null,
     GENDER        VARCHAR2(500),
     EMAIL         VARCHAR2(500) not null,
     ADDRESS       VARCHAR2(500) not null,

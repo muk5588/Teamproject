@@ -20,8 +20,9 @@
             <table class='w-pct60'>
                 <tr>
                     <th class='w-px60'>회원번호</th>
-                    <th class='w-px200'>이름</th>
                     <th>아이디</th>
+                    <th class='w-px200'>이름</th>
+                    <th>닉네임</th>
                     <th>성별</th>
                 </tr>
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
@@ -30,8 +31,9 @@
                 <c:forEach var="UserDTO" items="${list}">
                     <tr>
                         <td>${UserDTO.userno }</td>
-                        <td><a href='detailUser?userid=${UserDTO.userid}'>${UserDTO.name }</a></td>
                         <td>${UserDTO.userid }</td>
+                        <td><a href='detailUser?userid=${UserDTO.userid}'>${UserDTO.name }</a></td>
+                        <td>${UserDTO.nickname}</td>
                         <td>${UserDTO.gender }</td>
                     </a>
                     </tr>

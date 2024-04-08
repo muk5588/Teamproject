@@ -70,6 +70,10 @@
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" value="${dto.name}"/><br>
             </div>
+            <div id="nickbox">
+                <label for="nickname">닉네임</label>
+                <input type="text" name="nickname" id="nickname" value="${dto.nickname}"><br>
+            </div>
             <div id="genderbox">
                 <label>성별</label>
                 <input type="radio" name="gender" value="남" checked/>남

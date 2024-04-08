@@ -9,6 +9,24 @@
 <html>
 <head>
     <title>Title</title>
+    <script type="text/javascript">
+        function fn_delete() {
+            $.ajax({
+                type:"post"
+                ,url:"/user/deleteUser"
+                ,data:{
+                    userno: $("#userno").val()
+                }
+                ,success: function () {
+                    alert("삭제되었습니다")
+                }
+                ,error: function (){
+                    alert("삭제하지 못했습니다")
+                    return;
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -18,7 +36,7 @@
         <table class='w-pct60'>
             <tr>
                 <th>회원번호</th>
-                <td>${dto.userno }</td>
+                <td name="userno">${dto.userno }</td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -27,6 +45,10 @@
             <tr>
                 <th>아이디</th>
                 <td>${dto.userid }</td>
+            </tr>
+            <tr>
+                <th>닉네임</th>
+                <td>${dto.nickname }</td>
             </tr>
             <tr>
                 <th>성별</th>

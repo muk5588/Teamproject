@@ -2,16 +2,17 @@ package user.dto;
 
 
 public class UserDTO {
-	private String name, userid, userpw, gender,email, address,detailAddress,extraAddress,phone;
+	private String name, userid, userpw,nickname, gender,email, address,detailAddress,extraAddress,phone;
 	private int userno, postcode, adminno,reportno;
 
 	public UserDTO() {
 	}
 
-	public UserDTO(String name, String userid, String userpw, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int userno, int postcode, int adminno, int reportno) {
+	public UserDTO(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int userno, int postcode, int adminno, int reportno) {
 		this.name = name;
 		this.userid = userid;
 		this.userpw = userpw;
+		this.nickname = nickname;
 		this.gender = gender;
 		this.email = email;
 		this.address = address;
@@ -30,6 +31,7 @@ public class UserDTO {
 				"name='" + name + '\'' +
 				", userid='" + userid + '\'' +
 				", userpw='" + userpw + '\'' +
+				", nickname='" + nickname + '\'' +
 				", gender='" + gender + '\'' +
 				", email='" + email + '\'' +
 				", address='" + address + '\'' +
@@ -65,6 +67,14 @@ public class UserDTO {
 
 	public void setUserpw(String userpw) {
 		this.userpw = userpw;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getGender() {

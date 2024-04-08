@@ -1,4 +1,4 @@
--- 유저테이블
+# user테이블
 create table USERTB_TEST
 (
     USERNO        NUMBER        not null
@@ -6,7 +6,6 @@ create table USERTB_TEST
     NAME          VARCHAR2(500) not null,
     USERID        VARCHAR2(500) not null,
     USERPW        VARCHAR2(500) not null,
-    nickname      varchar2(500) not null,
     GENDER        VARCHAR2(500),
     EMAIL         VARCHAR2(500) not null,
     ADDRESS       VARCHAR2(500) not null,
@@ -15,6 +14,7 @@ create table USERTB_TEST
     PHONE         VARCHAR2(500),
     POSTCODE      NUMBER,
     ADMINNO       NUMBER,
-    REPORTNO      NUMBER
-);
+    REPORTNO      NUMBER,
+    NICKNAME      VARCHAR2(500) not null
+)
 create sequence USER_SEQ_TEST;

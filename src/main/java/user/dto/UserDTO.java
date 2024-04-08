@@ -2,7 +2,7 @@ package user.dto;
 
 
 public class UserDTO {
-	private String name, userid, userpw,nickname, gender,email, address,detailAddress,extraAddress,phone;
+	private String name, userid, userpw, nickname, gender,email, address,detailAddress,extraAddress,phone;
 	private int userno, postcode, adminno,reportno;
 
 	public UserDTO() {

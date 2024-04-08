@@ -9,25 +9,6 @@
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript">
-        function fn_delete() {
-            $.ajax({
-                type:"post"
-                ,url:"/user/deleteUser?userno=${dto.userno}"
-                ,data:{
-                    userno: $("#userno").val()
-                }
-                ,dataType: 'json'
-                ,success: function () {
-                    alert("삭제되었습니다")
-                }
-                ,error: function (){
-                    alert("삭제하지 못했습니다")
-                    return;
-                }
-            })
-        }
-    </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -83,7 +64,7 @@
         <div class='btnSet'>
             <a class='btn-fill' href="userList">고객 목록</a>
             <a class='btn-fill' href="updateUser?userid=${dto.userid}">수정</a>
-            <a class='btn-fill' onclick="fn_delete()">삭제</a>
+            <a class='btn-fill' href="user/deleteUser?userno${dto.userno}">삭제</a>
         </div>
     </div>
 </div>

@@ -22,7 +22,6 @@
                 <tr>
                     <th class='w-px60'>회원번호</th>
                     <th class='w-px200'>회원이름</th>
-                    <th>등급번호</th>
                     <th>등급이름</th>
                     <th>추가사항</th>
                 </tr>
@@ -33,7 +32,6 @@
                     <tr>
                         <td>${Menu.userno }</td>
                         <td>${Menu.userid }</td>
-                        <td>${Menu.gradeno }</td>
                         <td>${Menu.gradename }</td>
                         <td>${Menu.comm}</td>
                     </a>

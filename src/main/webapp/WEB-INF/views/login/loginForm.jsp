@@ -33,16 +33,17 @@
 <body>
 <h1>로그인 테스트</h1>
 <hr>
-<c:if test="${empty login}">
-    <form action="<%=request.getContextPath()%>/login/login" method="post">
+<c:if test="${empty dto}">
+    <form action="login/loginProc" method="post">
         <input type="hidden" name="no" id="no">
-        <label for="loginid">아이디: <input type="text" name="loginid" id="loginid"></label><br>
-        <label for="loginpw">비밀번호: <input type="text" name="loginpw" id="loginpw"></label><br><br>
+        <label for="userid">아이디: <input type="text" name="userid" id="userid"></label><br>
+        <label for="userpw">비밀번호: <input type="text" name="userpw" id="userpw"></label><br><br>
         <button>로그인</button>
+        <button><a href="insertUser">회원가입</a></button>
     </form>
 </c:if>
-<c:if test="${not empty login and login }">
-    <button onclick="location.href = '<%=request.getContextPath()%>/com.test.com.test.com.test.com.test.login/logout'">로그아웃</button>
+<c:if test="${not empty dto and dto }">
+    <a href = 'userDetail?userid=${dto.userid}'>마이페이지</a>
 </c:if>
 
 </body>

@@ -27,6 +27,6 @@ public interface UserDao {
     public void userUpdate(UserDTO dto);
 
     
-    public void userDelete(int userno);
+    public void userDelete(UserDTO dto);
 
 }

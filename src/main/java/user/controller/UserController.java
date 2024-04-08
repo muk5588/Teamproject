@@ -44,12 +44,12 @@ public class UserController {
         dto.setUserid(userid);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
-        model.addAttribute("dto", dto);
+        model.addAttribute("dto", true);
         return "user/userUpdate";
     }
     //상세페이지(마이페이지로 사용가능)
     @RequestMapping("/detailUser")
-    public String detail(String userid, Model model) {
+    public String userDetail(String userid, Model model) {
         //선택한 고객 정보를 DB에 조회해와서
         UserDTO dto = new UserDTO();
         dto.setUserid(userid);
@@ -79,8 +79,8 @@ public class UserController {
     }
 
     @RequestMapping("/user/deleteUser")
-    public String deleteUser(int userno) {
-        service.userDelete(userno);
+    public String deleteUser(UserDTO dto) {
+        service.userDelete(dto);
         return "redirect: /userList";
     }
 }

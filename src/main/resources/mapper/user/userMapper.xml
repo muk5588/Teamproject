@@ -10,8 +10,8 @@
 	</select>
 
 	<insert id="userInsert" parameterType="UserDTO">
-		INSERT INTO usertb_test(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, adminno, nickname)
-		VALUES (user_seq_test.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone}, 0,  #{nickname})
+		INSERT INTO usertb_test(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname)
+		VALUES (user_seq_test.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone},  #{nickname})
 	</insert>
 
 	<update id="userUpdate" parameterType="UserDTO">
@@ -28,7 +28,7 @@
 		WHERE userno = #{userno }
 	</update>
 
-	<delete id="userDelete" parameterType="int">
+	<delete id="userDelete" parameterType="UserDTO">
 		DELETE FROM usertb_test WHERE userno=#{userno }
 	</delete>
 </mapper>

@@ -18,6 +18,14 @@
 <button><a href="insertUser">가입</a></button>
 <button><a href="detailUser">가입</a></button>
 <button onclick="location.href = 'userList'">조회</button>
+<c:if test="${empty dto}">
+	<button><a href="login">로그인</a></button>
+	<button><a href="insertUser">회원가입</a></button>
+</c:if>
+<c:if test="${dto}">
+	<a href = 'userDetail?userid=${dto.userid}'>마이페이지</a>
+	<a href="login/logout">로그아웃</a>
+</c:if>
 <jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

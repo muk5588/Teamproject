@@ -13,10 +13,11 @@
         function fn_delete() {
             $.ajax({
                 type:"post"
-                ,url:"/user/deleteUser"
+                ,url:"/user/deleteUser?userno=${dto.userno}"
                 ,data:{
                     userno: $("#userno").val()
                 }
+                ,dataType: 'json'
                 ,success: function () {
                     alert("삭제되었습니다")
                 }
@@ -77,6 +78,7 @@
             <tr>
                 <th>전화번호</th>
                 <td>${dto.phone }</td>
+            </tr>
         </table>
         <div class='btnSet'>
             <a class='btn-fill' href="userList">고객 목록</a>

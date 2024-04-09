@@ -22,12 +22,13 @@ public class UserController {
     /**
      * 화면부분
      * */
+    //관리자페이지
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
-        List<UserDTO> list = service.userList();
+        List<UserDTO> list = service.userList();//board생성후 userAll로 변경
         model.addAttribute("list", list);
 
-        return "user/adminPage";
+        return ".user/adminPage";
     }
     @RequestMapping("/insertUser")
     //가입페이지

@@ -5,5 +5,5 @@ import menu.dto.Menu;
 import java.util.List;
 
 public interface MenuService {
-    List<Menu> menuList();
+    public List<Menu> menuList();
 }

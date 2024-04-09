@@ -5,13 +5,13 @@ import grade.dto.Grade;
 import java.util.List;
 
 public interface GradeService {
-    List<Grade> gradeList();
+    public List<Grade> gradeList();
 
-    Grade gradeDetail(Grade grade);
+    public Grade gradeDetail(Grade grade);
 
-    void gradeDelete(Grade grade);
+    public void gradeDelete(Grade grade);
 
-    void gradeUpdate(Grade grade);
+    public void gradeUpdate(Grade grade);
 
-    void gradeInsert(Grade grade);
+    public void gradeInsert(Grade grade);
 }

@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository("GradeDao")
 public interface GradeDao {
-    List<Grade> gradeList();
+	public List<Grade> gradeList();
 
-    Grade gradeDetail(Grade gradeno);
+	public Grade gradeDetail(Grade gradeno);
 
-    void gradeDelete(Grade grade);
+	public void gradeDelete(Grade grade);
 
-    void gradeUpdate(Grade grade);
+	public void gradeUpdate(Grade grade);
 
-    void gradeInsert(Grade grade);
+	public void gradeInsert(Grade grade);
 }

@@ -15,7 +15,7 @@ public class GradeController {
     @Autowired
     private GradeService service;
     @RequestMapping("/gradeList")
-    public String gradeList(HttpSession session, Model model){
+    public String gradeList(Model model){
         List<Grade> list = service.gradeList();
         model.addAttribute("list",list);
         return "grade/gradeList";

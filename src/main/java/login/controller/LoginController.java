@@ -9,13 +9,13 @@ import user.dto.UserDTO;
 
 import javax.servlet.http.HttpSession;
 
-@Controller("/login")
+@Controller
 public class LoginController {
     @Autowired
     private LoginService loginService;
 
     //로그인 요청
-    @RequestMapping("loginProc")
+    @RequestMapping("/login/loginProc")
     public String loginproc(UserDTO dto, Model model) {
 
         dto = loginService.loginProc(dto);
@@ -28,10 +28,10 @@ public class LoginController {
         }
     }
     //로그아웃 요청
-    @RequestMapping("/logout")
+    @RequestMapping("/login/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login/login";
+        return "redirect:/login/l";
     }
 
 

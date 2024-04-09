@@ -31,7 +31,7 @@ public class UserController {
 
     @RequestMapping("/userList")
     //유저전체리스트 페이지
-    public String userList(HttpSession session, Model model) {
+    public String userList( Model model) {
         List<UserDTO> list = service.userList();
         model.addAttribute("list", list);
         return "user/userList";

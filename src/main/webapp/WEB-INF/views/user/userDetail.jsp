@@ -63,7 +63,7 @@
         </table>
         <div class='btnSet'>
             <a class='btn-fill' href="userList">고객 목록</a>
-            <a class='btn-fill' href="updateUser?userid=${dto.userid}">수정</a>
+            <a class='btn-fill' href="updateUser?userno=${dto.userno}">수정</a>
             <a class='btn-fill' href="user/deleteUser?userno${dto.userno}">삭제</a>
         </div>
     </div>

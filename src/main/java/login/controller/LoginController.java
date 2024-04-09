@@ -7,13 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import user.dto.UserDTO;
 
-@Controller
+import javax.servlet.http.HttpSession;
+
+@Controller("/login")
 public class LoginController {
     @Autowired
     private LoginService loginService;
 
     //로그인 요청
-    @RequestMapping("/login/loginProc")
+    @RequestMapping("loginProc")
     public String loginproc(UserDTO dto, Model model) {
 
         dto = loginService.loginProc(dto);
@@ -26,9 +28,10 @@ public class LoginController {
         }
     }
     //로그아웃 요청
-    @RequestMapping("/login/logout")
-    public void logout() {
-
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login/login";
     }
 
 

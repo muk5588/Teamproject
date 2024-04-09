@@ -39,9 +39,9 @@ public class UserController {
 
     //수정 페이지
     @RequestMapping("/updateUser")
-    public String userUpdate(String userid, Model model) {
+    public String userUpdate(int userno, Model model) {
         UserDTO dto = new UserDTO();
-        dto.setUserid(userid);
+        dto.setUserno(userno);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
         model.addAttribute("dto", dto);
@@ -49,10 +49,10 @@ public class UserController {
     }
     //상세페이지(마이페이지로 사용가능)
     @RequestMapping("/detailUser")
-    public String userDetail(String userid, Model model) {
+    public String userDetail(int userno, Model model) {
         //선택한 고객 정보를 DB에 조회해와서
         UserDTO dto = new UserDTO();
-        dto.setUserid(userid);
+        dto.setUserno(userno);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
         //화면에 출력할 수 있도록 Model에 담는다.

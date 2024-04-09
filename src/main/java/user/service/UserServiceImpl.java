@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO userDetail(UserDTO userid) {
-        return userDao.userDetail(userid);
+    public UserDTO userDetail(UserDTO userno) {
+        return userDao.userDetail(userno);
     }
 
     public void userInsert(UserDTO dto) {

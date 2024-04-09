@@ -21,7 +21,7 @@ public interface UserDao {
     public List<UserDTO> userList();
 
 
-    public UserDTO userDetail(UserDTO userid);
+    public UserDTO userDetail(UserDTO userno);
 
     
     public void userUpdate(UserDTO dto);

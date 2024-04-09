@@ -8,5 +8,8 @@ import java.util.List;
 public interface MenuService {
     public List<Menu> menuList();
 
-    void menuUpdate(UserDTO dto);
+    public UserDTO update(UserDTO dto);
+
+
+    public void menuUpdate(UserDTO dto);
 }

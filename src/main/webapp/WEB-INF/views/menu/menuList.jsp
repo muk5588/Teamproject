@@ -17,10 +17,8 @@
     <div class="warp">
         <div id="content">
             <h3>회원등급 목록</h3>
-
             <table class='w-pct60'>
                 <tr>
-                    <th><input type="checkbox" name="all" id="all" value="all"></th>
                     <th class='w-px60'>회원번호</th>
                     <th class='w-px200'>회원이름</th>
                     <th>등급이름</th>
@@ -32,12 +30,11 @@
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
                 <c:forEach var="Menu" items="${list}">
                     <tr>
-                        <td><input type="checkbox" name="${Menu.userno}" id="${Menu.userno}"></td>
                         <td>${Menu.userno }</td>
                         <td>${Menu.userid }</td>
                         <td>${Menu.gradename }</td>
                         <td>${Menu.comm}</td>
-                        <td><button onclick="location.href='/menu/menuUpdate?userno=${Menu.userno}'" >수정</button></td>
+                        <td><button onclick="location.href='/menu/update?userno=${Menu.userno}'" >수정</button></td>
                     </a>
                     </tr>
                 </c:forEach>

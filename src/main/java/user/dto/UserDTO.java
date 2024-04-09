@@ -3,12 +3,12 @@ package user.dto;
 
 public class UserDTO {
 	private String name, userid, userpw, nickname, gender,email, address,detailAddress,extraAddress,phone;
-	private int userno, postcode, adminno,reportno;
+	private int userno, postcode, gradeno,reportno;
 
 	public UserDTO() {
 	}
 
-	public UserDTO(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int userno, int postcode, int adminno, int reportno) {
+	public UserDTO(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, int userno, int postcode, int gradeno, int reportno) {
 		this.name = name;
 		this.userid = userid;
 		this.userpw = userpw;
@@ -21,7 +21,7 @@ public class UserDTO {
 		this.phone = phone;
 		this.userno = userno;
 		this.postcode = postcode;
-		this.adminno = adminno;
+		this.gradeno = gradeno;
 		this.reportno = reportno;
 	}
 
@@ -40,7 +40,7 @@ public class UserDTO {
 				", phone='" + phone + '\'' +
 				", userno=" + userno +
 				", postcode=" + postcode +
-				", adminno=" + adminno +
+				", gradeno=" + gradeno +
 				", reportno=" + reportno +
 				'}';
 	}
@@ -133,12 +133,12 @@ public class UserDTO {
 		this.postcode = postcode;
 	}
 
-	public int getAdminno() {
-		return adminno;
+	public int getgradeno() {
+		return gradeno;
 	}
 
-	public void setAdminno(int adminno) {
-		this.adminno = adminno;
+	public void setgradeno(int gradeno) {
+		this.gradeno = gradeno;
 	}
 
 	public int getReportno() {

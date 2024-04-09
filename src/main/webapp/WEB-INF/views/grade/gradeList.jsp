@@ -30,7 +30,7 @@
                 <c:forEach var="Grade" items="${list}">
                     <tr>
                         <td>${Grade.gradeno }</td>
-                        <td><a href='gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
+                        <td><a href='/grade/gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
                         <td>${Grade.comm}</td>
                     </a>
                     </tr>

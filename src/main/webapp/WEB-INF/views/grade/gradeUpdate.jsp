@@ -16,7 +16,7 @@
 <h3>회원등급수정</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="grade/updateGrade?gradeno=${grade.gradeno}" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/grade/updateGrade?gradeno=${grade.gradeno}" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="nobox">
                 <label for="gradeno">등급 번호</label>
                 <input type="text" name="gradeno" id="gradeno" value="${grade.gradeno}" readonly/><br>

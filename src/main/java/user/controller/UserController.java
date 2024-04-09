@@ -28,7 +28,7 @@ public class UserController {
         List<UserDTO> list = service.userList();//board생성후 userAll로 변경
         model.addAttribute("list", list);
 
-        return ".user/adminPage";
+        return "user/adminPage";
     }
     @RequestMapping("/insertUser")
     //가입페이지
@@ -73,21 +73,21 @@ public class UserController {
      * 기능부분
      * param: UserDTO
      * */
-    @RequestMapping("/user/userInsert")
+    @RequestMapping("/userInsert")
     public String userInsert(UserDTO dto) {
         service.userInsert(dto);
-        return "redirect: /userList";
+        return "redirect: ./userList";
     }
 
-    @RequestMapping("/user/userUpdate")
+    @RequestMapping("/userUpdate")
     public String userUpdate(UserDTO dto) {
         service.userUpdate(dto);
-        return "redirect: /userList";
+        return "redirect: ./userList";
     }
 
-    @RequestMapping("/user/deleteUser")
+    @RequestMapping("/deleteUser")
     public String deleteUser(UserDTO dto) {
         service.userDelete(dto);
-        return "redirect: /userList";
+        return "redirect: ./userList";
     }
 }

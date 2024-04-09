@@ -15,11 +15,11 @@
 <P>  The time on the server is ${serverTime}. </P>
 <jsp:include page="/WEB-INF/views/header.jsp" />
 <button><a href="login">로그인</a></button>
-<button><a href="insertUser">가입</a></button>
+<button><a href="/user/insertUser">가입</a></button>
 <button><a href="gradeInsert">가입</a></button>
 <button onclick="location.href = 'gradeList'">권한조회</button>
 <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
-<button onclick="location.href = 'userList'">유저조회</button>
+<button onclick="location.href = '/user/userList'">유저조회</button>
 <c:if test="${empty dto}">
 	<button><a href="login">로그인</a></button>
 	<button><a href="insertUser">회원가입</a></button>

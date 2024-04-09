@@ -32,7 +32,7 @@
                     <tr>
                         <td>${UserDTO.userno }</td>
                         <td>${UserDTO.userid }</td>
-                        <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
+                        <td><a href='/user/detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
                         <td>${UserDTO.nickname}</td>
                         <td>${UserDTO.gender }</td>
                     </a>

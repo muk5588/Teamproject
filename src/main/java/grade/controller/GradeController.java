@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequestMapping("/grade")
 public class GradeController {
     @Autowired
     private GradeService service;
@@ -45,17 +46,17 @@ public class GradeController {
      * 기능부분
      * param: Grade
      * */
-    @RequestMapping("grade/insertGrade")
+    @RequestMapping("/insertGrade")
     public String insertGrade(Grade grade){
         service.gradeInsert(grade);
         return "redirect: /gradeList";
     }
-    @RequestMapping("grade/updateGrade")
+    @RequestMapping("/updateGrade")
     public String updateGrade(Grade grade){
         service.gradeUpdate(grade);
         return "redirect: /gradeList";
     }
-    @RequestMapping("grade/deleteGrade")
+    @RequestMapping("/deleteGrade")
     public String deleteGrade(Grade grade){
         service.gradeDelete(grade);
         return "redirect: /gradeList";

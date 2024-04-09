@@ -31,9 +31,9 @@
             </tr>
         </table>
         <div class='btnSet'>
-            <a class='btn-fill' href="gradeList">등급 목록</a>
-            <a class='btn-fill' href="gradeUpdate?gradeno=${grade.gradeno}">수정</a>
-            <a class='btn-fill' href="grade/deleteGrade?gradeno=${grade.gradeno}">삭제</a>
+            <a class='btn-fill' href="/grade/gradeList">등급 목록</a>
+            <a class='btn-fill' href="/grade/gradeUpdate?gradeno=${grade.gradeno}">수정</a>
+            <a class='btn-fill' href="/grade/deleteGrade?gradeno=${grade.gradeno}">삭제</a>
         </div>
     </div>
 </div>

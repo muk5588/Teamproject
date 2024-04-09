@@ -14,8 +14,8 @@
 <body>
 <h3>관리자 페이지</h3>
 <hr>
-<button><a href="insertUser">회원추가</a></button>
-<button><a href="gradeInsert">권한추가</a></button>
+<button><a href="/user/insertUser">회원추가</a></button>
+<button><a href="/grade/gradeInsert">권한추가</a></button>
 <button onclick="location.href = '/grade/gradeList'">권한조회</button>
 <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
 <button onclick="location.href = '/user/userList'">유저조회</button>

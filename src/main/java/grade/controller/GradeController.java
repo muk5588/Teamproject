@@ -20,7 +20,7 @@ public class GradeController {
         model.addAttribute("list",list);
         return "grade/gradeList";
     }
-    @RequestMapping("gradeInsert")
+    @RequestMapping("/gradeInsert")
     public  String gradeInsert(){
         return "grade/gradeInsert";
     }

@@ -3,26 +3,32 @@ package user.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import user.dto.UserDTO;
 import user.service.UserService;
-import user.service.UserServiceImpl;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Autowired
     private UserService service;
     /**
      * 화면부분
      * */
+    @RequestMapping("/adminPage")
+    public String adminPage(Model model){
+        List<UserDTO> list = service.userList();
+        model.addAttribute("list", list);
+
+        return "user/adminPage";
+    }
     @RequestMapping("/insertUser")
     //가입페이지
     public String userInsert() {
@@ -66,7 +72,7 @@ public class UserController {
      * 기능부분
      * param: UserDTO
      * */
-    @RequestMapping("user/userInsert")
+    @RequestMapping("/user/userInsert")
     public String userInsert(UserDTO dto) {
         service.userInsert(dto);
         return "redirect: /userList";

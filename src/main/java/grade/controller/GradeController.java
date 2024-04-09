@@ -7,13 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class GradeController {
     @Autowired
     private GradeService service;
+
     @RequestMapping("/gradeList")
     public String gradeList(Model model){
         List<Grade> list = service.gradeList();

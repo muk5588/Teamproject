@@ -13,21 +13,25 @@ import user.dto.UserDTO;
 import java.util.List;
 
 @Controller
+@RequestMapping("/menu")
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
     @Autowired
     private GradeService gradeService;
+//    @Autowired  Board기능 개발후 업데이트
+//    private
 
-    @RequestMapping("/menu/menuList")
+    @RequestMapping("/menuList")
     public String menuList(Model model) {
         List<Menu> list = menuService.menuList();
         model.addAttribute("list", list);
+//        List<>
         return "menu/menuList";
     }
 
-    @RequestMapping("/menu/update")
+    @RequestMapping("/update")
     public String update(int userno, Model model) {
         UserDTO dto = new UserDTO();
         dto.setUserno(userno);
@@ -38,9 +42,20 @@ public class MenuController {
         return "menu/update";
     }
 
-    @RequestMapping("/menu/menuUpdate")
+    @RequestMapping("/menuUpdate")
     public String menuUpdate(UserDTO dto) {
         menuService.menuUpdate(dto);
+        return "redirect: /menu/menuList";
+    }
+    @RequestMapping("/updateBorad")
+    public String updateBorad(int boardno, Model model) {
+//        List<Board> list =
+        return "redirect: /menu/updateBoard";
+    }
+    @RequestMapping("/menuUpdate")
+    public String menuUpdateBoard() {
+//        menuService.updateBoardMenu();
+
         return "redirect: /menu/menuList";
     }
 }

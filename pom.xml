@@ -143,6 +143,13 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		<!-- 스프링 메일 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>		
 		<!--  위도 경도 라이브러리  -->
 		<dependency>
 			<groupId>com.google.code.geocoder-java</groupId>

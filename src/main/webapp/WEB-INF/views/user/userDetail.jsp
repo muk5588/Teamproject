@@ -11,54 +11,54 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h3>${dto.name } 고객 정보</h3>
+<jsp:include page="/WEB-INF/views/header.jsp" />
+<h3>${loginInfo.nickname } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
         <table class='w-pct60'>
             <tr>
                 <th>회원번호</th>
-                <td name="userno">${dto.userno }</td>
+                <td name="userno">${loginInfo.userno }</td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td>${dto.name }</td>
+                <td>${loginInfo.name }</td>
             </tr>
             <tr>
                 <th>아이디</th>
-                <td>${dto.userid }</td>
+                <td>${loginInfo.userid }</td>
             </tr>
             <tr>
                 <th>닉네임</th>
-                <td>${dto.nickname }</td>
+                <td>${loginInfo.nickname }</td>
             </tr>
             <tr>
                 <th>성별</th>
-                <td>${dto.gender }</td>
+                <td>${loginInfo.gender }</td>
             </tr>
             <tr>
                 <th>이메일</th>
-                <td>${dto.email }</td>
+                <td>${loginInfo.email }</td>
             </tr>
             <tr>
                 <th>우편번호</th>
-                <td>${dto.postcode }</td>
+                <td>${loginInfo.postcode }</td>
             </tr>
             <tr>
                 <th>주소</th>
-                <td>${dto.address }</td>
+                <td>${loginInfo.address }</td>
             </tr>
             <tr>
                 <th>상세주소</th>
-                <td>${dto.detailAddress }</td>
+                <td>${loginInfo.detailAddress }</td>
             </tr>
             <tr>
                 <th>참고항목</th>
-                <td>${dto.extraAddress }</td>
+                <td>${loginInfo.extraAddress }</td>
             </tr>
             <tr>
                 <th>전화번호</th>
-                <td>${dto.phone }</td>
+                <td>${loginInfo.phone }</td>
             </tr>
         </table>
         <div class='btnSet'>
@@ -68,6 +68,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

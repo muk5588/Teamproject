@@ -49,17 +49,17 @@ public class GradeController {
     @RequestMapping("/insertGrade")
     public String insertGrade(Grade grade){
         service.gradeInsert(grade);
-        return "redirect: /gradeList";
+        return "redirect: ./gradeList";
     }
     @RequestMapping("/updateGrade")
     public String updateGrade(Grade grade){
         service.gradeUpdate(grade);
-        return "redirect: /gradeList";
+        return "redirect: ./gradeList";
     }
     @RequestMapping("/deleteGrade")
     public String deleteGrade(Grade grade){
         service.gradeDelete(grade);
-        return "redirect: /gradeList";
+        return "redirect: ./gradeList";
     }
 
 }

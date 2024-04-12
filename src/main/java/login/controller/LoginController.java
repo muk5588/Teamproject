@@ -54,7 +54,7 @@ public class LoginController {
     public String login() {
         return "login/loginForm";
     }
-
+//    마이페이지
     @RequestMapping("/user/userDetail")
     public void mypage(@SessionAttribute("loginno") int loginno, Model model){
 
@@ -62,5 +62,10 @@ public class LoginController {
 
         model.addAttribute("loginInfo", login);
     }
-
+//    @RequestMapping("/user/userUpdate")
+//    public void update(@SessionAttribute("loginno") int loginno, Model model){
+//        UserDTO login = loginService.info(loginno);
+//
+//        model.addAttribute("loginInfo", login);
+//    }
 }

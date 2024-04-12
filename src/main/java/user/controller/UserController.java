@@ -1,5 +1,6 @@
 package user.controller;
 
+import login.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private LoginService loginService;
     /**
      * 화면부분
      * */
@@ -54,7 +57,7 @@ public class UserController {
         model.addAttribute("dto", dto);
         return "user/userUpdate";
     }
-    //상세페이지(마이페이지로 사용가능)
+    //유져상세페이지(관리자용)
     @RequestMapping("/detailUser")
     public String userDetail(int userno, Model model) {
         //선택한 고객 정보를 DB에 조회해와서

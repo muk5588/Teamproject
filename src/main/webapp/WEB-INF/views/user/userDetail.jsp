@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: c
@@ -15,6 +16,9 @@
 <h3>${loginInfo.nickname } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
+        <c:if test="">
+
+        </c:if>
         <table class='w-pct60'>
             <tr>
                 <th>회원번호</th>
@@ -63,8 +67,8 @@
         </table>
         <div class='btnSet'>
             <a class='btn-fill' href="/user/userList">고객 목록</a>
-            <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
-            <a class='btn-fill' href="/user/deleteUser?userno${dto.userno}">삭제</a>
+            <a class='btn-fill' href="/user/updateUser">수정</a>
+            <a class='btn-fill' href="/user/deleteUser">삭제</a>
         </div>
     </div>
 </div>

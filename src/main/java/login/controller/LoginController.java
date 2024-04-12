@@ -25,10 +25,11 @@ public class LoginController {
         if(isLogin){
             //로그인 성공
             int loginno = loginService.getLoginNo(dto);
-
+            
 
             session.setAttribute("isLogin", isLogin);
             session.setAttribute("loginno", loginno);
+
         }else{  //로그인 실패
             session.invalidate();
             return "/login/loginFail";
@@ -60,7 +61,7 @@ public class LoginController {
 
         UserDTO login = loginService.info(loginno);
 
-        model.addAttribute("loginInfo", login);
+        model.addAttribute("dto", login);
     }
 //    @RequestMapping("/user/userUpdate")
 //    public void update(@SessionAttribute("loginno") int loginno, Model model){

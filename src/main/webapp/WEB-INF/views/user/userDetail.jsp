@@ -12,66 +12,74 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp" />
-<h3>${loginInfo.nickname } 고객 정보</h3>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
+<h3>${dto.nickname } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
-        <c:if test="">
-
-        </c:if>
         <table class='w-pct60'>
             <tr>
                 <th>회원번호</th>
-                <td name="userno">${loginInfo.userno }</td>
+                <td name="userno">${dto.userno }</td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td>${loginInfo.name }</td>
+                <td>${dto.name }</td>
             </tr>
             <tr>
                 <th>아이디</th>
-                <td>${loginInfo.userid }</td>
+                <td>${dto.userid }</td>
             </tr>
             <tr>
                 <th>닉네임</th>
-                <td>${loginInfo.nickname }</td>
+                <td>${dto.nickname }</td>
             </tr>
             <tr>
                 <th>성별</th>
-                <td>${loginInfo.gender }</td>
+                <td>${dto.gender }</td>
             </tr>
             <tr>
                 <th>이메일</th>
-                <td>${loginInfo.email }</td>
+                <td>${dto.email }</td>
             </tr>
             <tr>
                 <th>우편번호</th>
-                <td>${loginInfo.postcode }</td>
+                <td>${dto.postcode }</td>
             </tr>
             <tr>
                 <th>주소</th>
-                <td>${loginInfo.address }</td>
+                <td>${dto.address }</td>
             </tr>
             <tr>
                 <th>상세주소</th>
-                <td>${loginInfo.detailAddress }</td>
+                <td>${dto.detailAddress }</td>
             </tr>
             <tr>
                 <th>참고항목</th>
-                <td>${loginInfo.extraAddress }</td>
+                <td>${dto.extraAddress }</td>
             </tr>
             <tr>
                 <th>전화번호</th>
-                <td>${loginInfo.phone }</td>
+                <td>${dto.phone }</td>
             </tr>
         </table>
-        <div class='btnSet'>
-            <a class='btn-fill' href="/user/userList">고객 목록</a>
-            <a class='btn-fill' href="/user/updateUser">수정</a>
-            <a class='btn-fill' href="/user/deleteUser">삭제</a>
-        </div>
+        <c:if test="${not empty isLogin and isLogin and dto.gradeno >= 1}">
+            <div class='btnSet'>
+                <a class='btn-fill' href="/user/updateUser">수정</a>
+                <a class='btn-fill' href="/user/deleteUser">삭제</a>
+            </div>
+        </c:if>
+        <c:if test="${dto.gradeno < 1}">
+            <div class='btnSet'>
+                <a class='btn-fill' href="/user/userList">고객 목록</a>
+                <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
+                <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
+            </div>
+
+        </c:if>
+
+
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

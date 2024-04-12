@@ -29,7 +29,7 @@
 	<select id="selectByNo" resultType="UserDTO" parameterType="int">
 		select
 			userno, name, userid, nickname, gender, email, postcode, address,
-			detailAddress, extraAddress, phone
+			detailAddress, extraAddress, phone, gradeno
 		FROM usertb_test
 		<where>
 			and userno = #{userno }

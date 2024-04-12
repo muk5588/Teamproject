@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -31,7 +32,7 @@
 <body>
 <h1>로그인 테스트</h1>
 <hr>
-<c:if test="${empty login}">
+<c:if test="${empty dto}">
     <form action="<%=request.getContextPath()%>/login/login" method="post">
         <input type="hidden" name="no" id="no">
         <label for="loginid">아이디: <input type="text" name="loginid" id="loginid"></label><br>
@@ -40,7 +41,7 @@
         <button><a href="insertUser">회원가입</a> </button>
     </form>
 </c:if>
-<c:if test="${not empty login and login }">
+<c:if test="${not empty isLogin and isLogin }">
     <button onclick="location.href = '<%=request.getContextPath()%>/login/logout'">로그아웃</button>
 </c:if>
 

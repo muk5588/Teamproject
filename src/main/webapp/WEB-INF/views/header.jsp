@@ -54,18 +54,18 @@
 
     <div style="position: absolute; right: 0; top: 25px; margin-right: 100px;">
         <!-- 로그인한 경우 -->
-        <core:if test="${!empty login_info }">
+        <core:if test="${not empty isLogin and isLogin }">
             <ul>
-                <li>${login_info.name } [ ${login_info.id } ]</li>
+                <li>${loginInfo.name } [${loginInfo.nickname } ]</li>
                 <li><a class="btn-fill" href="login/logout">로그아웃</a></li>
             </ul>
         </core:if>
 
         <!-- 로그인하지 않은 경우 -->
-        <core:if test="${empty login_info }">
+        <core:if test="${empty isLogin }">
             <ul>
                 <li><a class="btn-fill" href="login">로그인</a></li>
-                <li><a class="btn-fill" href="insertUser">회원가입</a></li>
+                <li><a class="btn-fill" href="/user/insertUser">회원가입</a></li>
             </ul>
         </core:if>
     </div>
@@ -104,7 +104,7 @@
     function go_logout() {
         $.ajax({
             type: "post",
-            url: "logout",
+            url: "/",
             success: function() {
                 location.reload();
             },

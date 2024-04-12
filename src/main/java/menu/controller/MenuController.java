@@ -52,10 +52,10 @@ public class MenuController {
 //        List<Board> list =
         return "redirect: /menu/updateBoard";
     }
-    @RequestMapping("/menuUpdate")
-    public String menuUpdateBoard() {
-//        menuService.updateBoardMenu();
-
-        return "redirect: /menu/menuList";
-    }
+//    @RequestMapping("/menuUpdate")
+//    public String menuUpdateBoard() {
+////        menuService.updateBoardMenu();
+//
+//        return "redirect: /menu/menuList";
+//    }
 }

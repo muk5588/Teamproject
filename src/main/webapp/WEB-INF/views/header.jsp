@@ -57,14 +57,14 @@
         <core:if test="${not empty isLogin and isLogin }">
             <ul>
                 <li>${loginInfo.name } [${loginInfo.nickname } ]</li>
-                <li><a class="btn-fill" href="login/logout">로그아웃</a></li>
+                <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
             </ul>
         </core:if>
 
         <!-- 로그인하지 않은 경우 -->
         <core:if test="${empty isLogin }">
             <ul>
-                <li><a class="btn-fill" href="login">로그인</a></li>
+                <li><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></li>
                 <li><a class="btn-fill" href="/user/insertUser">회원가입</a></li>
             </ul>
         </core:if>

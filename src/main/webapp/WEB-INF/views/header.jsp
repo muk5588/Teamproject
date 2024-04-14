@@ -56,7 +56,7 @@
         <!-- 로그인한 경우 -->
         <core:if test="${not empty isLogin and isLogin }">
             <ul>
-                <li>${loginInfo.name } [${loginInfo.nickname } ]</li>
+                <li>${dto.name } [${dto.nickname } ]</li>
                 <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
             </ul>
         </core:if>

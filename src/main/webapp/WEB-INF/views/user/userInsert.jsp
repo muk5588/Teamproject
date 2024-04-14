@@ -6,6 +6,36 @@
     <title>join JSP</title>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+        $(document).ready(function(){
+            // 취소
+            $(".cencle").on("click", function(){
+                location.href = "/";
+            })
+
+            $("#submit").on("click", function(){
+                if($("#userid").val()==""){
+                    alert("아이디를 입력해주세요.");
+                    $("#userid").focus();
+                    return false;
+                }
+                if($("#userpw").val()==""){
+                    alert("비밀번호를 입력해주세요.");
+                    $("#userpw").focus();
+                    return false;
+                }
+                if($("#name").val()==""){
+                    alert("이름을 입력해주세요.");
+                    $("#name").focus();
+                    return false;
+                }
+                var idChkVal = $("#idChk").val();
+                if(idChkVal == "N"){
+                    alert("중복확인 버튼을 눌러주세요.");
+                }else if(idChkVal == "Y"){
+                    $("#userform").submit();
+                }
+            });
+        })
         function DaumPostcode() {
             new daum.Postcode({
                 oncomplete: function (data) {
@@ -53,6 +83,29 @@
                 }
             }).open();
         }
+
+
+        function fn_idChk(){
+            $.ajax({
+                url : "/user/idChk",
+                type : "post",
+                dataType : "json",
+                data : {"userid" : $("#userid").val()},
+                success : function(data){
+                    if($("#userid").val()==""){
+                        alert("아이디를 입력해주세요.");
+                        $("#userid").focus();
+                        return false;
+                    }
+                    if(data == 1){
+                        alert("중복된 아이디입니다.");
+                    }else if(data == 0){
+                        $("#idChk").attr("value", "Y");
+                        alert("사용가능한 아이디입니다.");
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -60,14 +113,15 @@
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/userInsert" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/user/userInsert" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/><br>
             </div>
             <div id="useridbox">
                 <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid"><br>
+                <input type="text" name="userid" id="userid">
+                <button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
             </div>
             <div id="userpwbox">
                 <label for="userpw">비밀번호</label>

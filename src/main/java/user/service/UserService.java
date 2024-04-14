@@ -15,4 +15,8 @@ public interface UserService {
     public void userUpdate(UserDTO dto);
 
     public void userDelete(UserDTO dto);
+
+    public int passChk(UserDTO dto);
+
+    public int idChk(UserDTO dto);
 }

@@ -31,5 +31,15 @@
 	<delete id="userDelete" parameterType="UserDTO">
 		DELETE FROM usertb_test WHERE userno=#{userno }
 	</delete>
+	<select id="passChk" resultType="int">
+		select count(*) from usertb_test
+		where userid = #{userid}
+		and userpw = #{userpw}
+	</select>
+
+	<select id="idChk" resultType="int">
+		select count(*) from usertb_test
+		where userid = #{userid}
+	</select>
 </mapper>
 

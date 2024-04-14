@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import user.dto.UserDTO;
 import user.service.UserService;
 
@@ -93,7 +94,31 @@ public class UserController {
         service.userDelete(dto);
         return "redirect: ./userList";
     }
-
-
+    @ResponseBody
+    @RequestMapping("/passChk")
+    public int passChk(UserDTO dto) throws Exception {
+        int res = service.passChk(dto);
+        return res;
+    }
+    @ResponseBody
+    @RequestMapping("/idChk")
+    public int idChk(UserDTO dto) throws Exception {
+        int res = service.idChk(dto);
+        return res;
+    }
+    @RequestMapping("/idckeck")
+    public String idckeck(UserDTO dto) throws Exception {
+        int res = service.idChk(dto);
+        try {
+            if (res == 1) {
+                return "redirect: /user/insertUser";
+            }else if (res == 0) {
+                service.userInsert(dto);
+            }
+        }catch (Exception e) {
+            throw new Exception();
+        }
+        return "redirect: /";
+    }
 
 }

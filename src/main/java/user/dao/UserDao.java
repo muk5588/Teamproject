@@ -29,4 +29,7 @@ public interface UserDao {
     
     public void userDelete(UserDTO dto);
 
+    public int passChk(UserDTO dto);
+
+    public int idChk(UserDTO dto);
 }

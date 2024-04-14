@@ -37,6 +37,18 @@ public class UserServiceImpl implements UserService {
         userDao.userDelete(dto);
     }
 
+    @Override
+    public int passChk(UserDTO dto) {
+        int result = userDao.passChk(dto);
+        return result;
+    }
+
+    @Override
+    public int idChk(UserDTO dto) {
+        int result = userDao.idChk(dto);
+        return result;
+    }
+
 }
 
 

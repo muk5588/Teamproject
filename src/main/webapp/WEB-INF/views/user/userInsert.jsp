@@ -6,36 +6,36 @@
     <title>join JSP</title>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        $(document).ready(function(){
-            // 취소
-            $(".cencle").on("click", function(){
-                location.href = "/";
-            })
-
-            $("#submit").on("click", function(){
-                if($("#userid").val()==""){
+        $(document).ready(function () {
+            $("#submit").click("click", function () {
+                if ($("#userid").val() == "") {
                     alert("아이디를 입력해주세요.");
                     $("#userid").focus();
                     return false;
                 }
-                if($("#userpw").val()==""){
+                if ($("#userpw").val() == "") {
                     alert("비밀번호를 입력해주세요.");
                     $("#userpw").focus();
                     return false;
                 }
-                if($("#name").val()==""){
+                if ($("#name").val() == "") {
                     alert("이름을 입력해주세요.");
                     $("#name").focus();
                     return false;
                 }
                 var idChkVal = $("#idChk").val();
-                if(idChkVal == "N"){
+                if (idChkVal == "N") {
                     alert("중복확인 버튼을 눌러주세요.");
-                }else if(idChkVal == "Y"){
+                } else if (idChkVal == "Y") {
                     $("#userform").submit();
                 }
             });
         })
+        function reset() {
+            $("#userform").val("")
+
+        }
+
         function DaumPostcode() {
             new daum.Postcode({
                 oncomplete: function (data) {
@@ -85,26 +85,13 @@
         }
 
 
-        function fn_idChk(){
-            $.ajax({
-                url : "/user/idChk",
-                type : "post",
-                dataType : "json",
-                data : {"userid" : $("#userid").val()},
-                success : function(data){
-                    if($("#userid").val()==""){
-                        alert("아이디를 입력해주세요.");
-                        $("#userid").focus();
-                        return false;
-                    }
-                    if(data == 1){
-                        alert("중복된 아이디입니다.");
-                    }else if(data == 0){
-                        $("#idChk").attr("value", "Y");
-                        alert("사용가능한 아이디입니다.");
-                    }
-                }
-            })
+        function fn_idChk() {
+            if ($("#userid").val() == "") {
+                alert("아이디를 입력해주세요.");
+                $("#userid").focus();
+                return false;
+            }
+
         }
     </script>
 </head>
@@ -113,55 +100,57 @@
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/userInsert" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
-            <div id="namebox">
-                <label for="name">이름</label>
-                <input type="text" name="name" id="name"/><br>
-            </div>
-            <div id="useridbox">
-                <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid">
-                <button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
-            </div>
-            <div id="userpwbox">
-                <label for="userpw">비밀번호</label>
-                <input type="text" name="userpw" id="userpw"><br>
+            <form action="/user/userInsert" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+                <div id="namebox">
+                    <label for="name">이름</label>
+                    <input type="text" name="name" id="name"/><br>
+                </div>
+                <div id="useridbox">
+                    <label for="userid">아이디</label>
+                    <input type="text" name="userid" id="userid">
+                    <button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
+                    <br>
+                </div>
+                <div id="userpwbox">
+                    <label for="userpw">비밀번호</label>
+                    <input type="text" name="userpw" id="userpw"><br>
 
-                <label for="userpwchk">비밀번호 확인</label>
-                <input type="text" name="userpwchk" id="userpwchk"><br>
-            </div>
-            <div id="nickbox">
-                <label for="nickname">닉네임</label>
-                <input type="text" name="nickname" id="nickname"><br>
-            </div>
-            <div id="genderbox">
-                <label>성별</label>
-                <input type="radio" name="gender" value="남" checked/>남
-                <input type="radio" name="gender" value="여"/>여<br>
-            </div>
-            <div id=emailbox">
-                <label for="email">이메일</label>
-                <input type="email" name="email" id="email"/><br>
-            </div>
-            <div id="postcodebox">
-                <label for="postcode">우편번호</label>
-                <input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly>
-                <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
-            </div>
-            <div id="addressbox">
-                <label for="detailAddress">주소</label>
-                <input type="text" name="address" id="address" placeholder="주소" readonly><br>
-                <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
-                <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목"><br>
-            </div>
-            <div id="phonebox">
-                <label for="phone">전화번호</label>
-                <input type="text" name="phone" id="phone">
-            </div>
-            <br><br>
-            <input type="submit" id="submit" name="submit" value="회원가입"/>
-            <input type="reset" id="reset" name="reset" value="초기화"/>
-        </form>
+                    <label for="userpwchk">비밀번호 확인</label>
+                    <input type="text" name="userpwchk" id="userpwchk"><br>
+                </div>
+                <div id="nickbox">
+                    <label for="nickname">닉네임</label>
+                    <input type="text" name="nickname" id="nickname"><br>
+                </div>
+                <div id="genderbox">
+                    <label>성별</label>
+                    <input type="radio" name="gender" value="남" checked/>남
+                    <input type="radio" name="gender" value="여"/>여<br>
+                </div>
+                <div id=emailbox">
+                    <label for="email">이메일</label>
+                    <input type="email" name="email" id="email"/><br>
+                </div>
+                <div id="postcodebox">
+                    <label for="postcode">우편번호</label>
+                    <input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly>
+                    <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
+                </div>
+                <div id="addressbox">
+                    <label for="detailAddress">주소</label>
+                    <input type="text" name="address" id="address" placeholder="주소" readonly><br>
+                    <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
+                    <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목"><br>
+                </div>
+                <div id="phonebox">
+                    <label for="phone">전화번호</label>
+                    <input type="text" name="phone" id="phone">
+                </div>
+                <br><br>
+                <button type="submit" id="submit" name="submit">회원가입</button>
+                <button type="reset" id="reset" name="reset" onclick="reset()">초기화</button>
+            </form>
+
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

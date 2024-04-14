@@ -29,6 +29,8 @@ public class LoginController {
 
             session.setAttribute("isLogin", isLogin);
             session.setAttribute("loginno", loginno);
+            UserDTO login = loginService.info(loginno);
+            session.setAttribute("dto", login);
 
         }else{  //로그인 실패
             session.invalidate();

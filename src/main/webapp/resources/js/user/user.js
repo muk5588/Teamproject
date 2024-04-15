@@ -103,7 +103,7 @@ window.addEventListener("DOMContentLoaded",function () {
             $("#alertpw2").text("비밀번호가 일치합니다.")
     });
         var code="";
-       $("#checkemail").click(function () {
+       $("#checkmail").click(function () {
            $.ajax({
                type: "post",
                url: "/user/checkEmail",
@@ -112,6 +112,7 @@ window.addEventListener("DOMContentLoaded",function () {
                },
                dataType: "json",
                success: function (data){
+                   console.log("data",data)
                    if (data.result == "error"){
                        alert("서버와 통신 중 에러가 발생했습니다. ")
                        $("#alertemail").css({
@@ -120,6 +121,7 @@ window.addEventListener("DOMContentLoaded",function () {
                        });
                        $("#alertemail").text("서버와 통신 중 에러가 발생했습니다. ")
                    }else {
+                       console.log("aaaa",data)
                        alert("이메일이 발송 되었습니다")
                        $("#alertemail").css({
                            "color": "red",
@@ -127,8 +129,8 @@ window.addEventListener("DOMContentLoaded",function () {
                        });
                        $("#alertemail").text("인증번호를 입력해 주세요")
                        code = data.code;
-                       $("#email").attr("disabled",false)
-                       $("#checkemail").attr("disabled",true)
+                       $("#checkmail").attr("disabled",true)
+                       $("#checkcode").attr("disabled",false)
                    }
                }
            })
@@ -146,6 +148,7 @@ window.addEventListener("DOMContentLoaded",function () {
                    "font-size": "10px"
                });
                $("#alertemail").text("인증이 완료 되었습니다")
+
            }
        })
     $("#join").click(function () {

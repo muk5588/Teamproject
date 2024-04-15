@@ -71,16 +71,15 @@
                     <label for="userid">아이디</label>
                     <input type="text" name="userid" id="userid">
                     <div id="alertid" name="alertid"></div>
-                    <br>
                 </div>
                 <div id="userpwbox">
                     <label for="userpw">비밀번호</label>
                     <input type="text" name="userpw" id="userpw">
                     <div id="alertpw" name="alertpw"></div>
-                    <div id="alertpw2" name="alertpw2"></div>
-                    <br>
+
                     <label for="userpwchk">비밀번호 확인</label>
-                    <input type="text" name="userpwchk" id="userpwchk"><br>
+                    <input type="text" name="userpwchk" id="userpwchk">
+                    <div id="alertpw2" name="alertpw2"></div>
                 </div>
                 <div id="nickbox">
                     <label for="nickname">닉네임</label>
@@ -94,10 +93,9 @@
                 <div id=emailbox">
                     <label for="email">이메일</label>
                     <input type="email" name="email" id="email"/>
-                    <button type="button" id="checkemail">인증번호 발송</button><br>
-                    <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled>
-
-                    <div id="alertemail"></div>
+                    <button type="button" id="checkmail">인증번호 발송</button><br>
+                    <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
+                    <div id="alertemail" name="alertmail"></div>
                     <br>
                 </div>
                 <div id="postcodebox">

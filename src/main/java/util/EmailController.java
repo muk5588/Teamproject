@@ -48,12 +48,11 @@ public class EmailController {
         return "redirect:/";
 		
 	}
-
 	@PostMapping("/user/checkEmail")
 	public HashMap<String,Object> checkEmail (String email){
 		HashMap<String,Object> data = new HashMap<>();
 
-        Random random =new Random();
+		Random random =new Random();
 		int checkNum = random.nextInt(888888)+111111;
 		String subject = "회원가입 인증 메일입니다";
 		String content = "방문해 주셔서 감사합니다"+
@@ -73,8 +72,8 @@ public class EmailController {
 			mailHelper.setText(content,true);
 
 			//첨부파일 있을경우 추가
-//			FileSystemResource file = new FileSystemResource(new File("경로"));
-//			mailHelper.addAttachment("경로", file);
+//         FileSystemResource file = new FileSystemResource(new File("경로"));
+//         mailHelper.addAttachment("경로", file);
 
 
 			mailSender.send(mail);
@@ -84,6 +83,8 @@ public class EmailController {
 		data.put("code",checkNum);
 		return data;
 	}
+
+
 
 	
 	

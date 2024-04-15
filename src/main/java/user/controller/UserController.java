@@ -1,17 +1,26 @@
 package user.controller;
 
-import login.service.LoginService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import login.service.LoginService;
+import user.dto.EmailCheck;
 import user.dto.UserDTO;
 import user.service.UserService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -121,4 +130,15 @@ public class UserController {
         return "redirect: /";
     }
 
+    
+    @PostMapping("/checkEmail")
+	public @ResponseBody EmailCheck checkEmail (String email , Model model){
+		HashMap<String,Object> data = new HashMap<>();
+		
+		int num =  service.checkEmail(email);
+		
+		
+		return new EmailCheck(email,num);
+	}
+    
 }

@@ -156,7 +156,7 @@ window.addEventListener("DOMContentLoaded",function () {
             alert("아이디 중복 확인을 해주세요")
             return;
         }
-        if($("#alertpw").text() != "비밀번호가 일치합니다."){
+        if($("#alertpw2").text() != "비밀번호가 일치합니다."){
             alert("비밀번호를 확인 해주세요")
             return;;
         }

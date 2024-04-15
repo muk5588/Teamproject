@@ -65,10 +65,12 @@ public class LoginController {
 
         model.addAttribute("dto", login);
     }
+
+    //유저 수정하기
 //    @RequestMapping("/user/userUpdate")
 //    public void update(@SessionAttribute("loginno") int loginno, Model model){
 //        UserDTO login = loginService.info(loginno);
 //
-//        model.addAttribute("loginInfo", login);
+//        model.addAttribute("dto", login);
 //    }
 }

@@ -14,7 +14,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<jsp:include page="/WEB-INF/views/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <%--<button><a href="login">로그인</a></button>--%>
 <%--<button><a href="/user/insertUser">가입</a></button>--%>
 <button><a href="user/adminPage">가입</a></button>
@@ -31,6 +31,6 @@
 	<a href ="user/userDetail"><button>마이페이지</button></a>
 <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
 </c:if>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>
 </html>

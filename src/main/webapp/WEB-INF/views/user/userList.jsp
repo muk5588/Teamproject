@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <div class="warpper">
     <div class="warp">
         <div id="content">
@@ -141,6 +141,6 @@
     </ul>
 
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </body>
 </html>

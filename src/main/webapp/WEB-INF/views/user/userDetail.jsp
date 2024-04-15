@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <h3>${dto.nickname } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
@@ -80,6 +80,6 @@
 
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

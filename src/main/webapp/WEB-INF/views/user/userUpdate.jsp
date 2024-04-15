@@ -61,7 +61,7 @@
     </script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <h3>회원정보수정</h3>
 <div class="warpper">
     <div class="warp">
@@ -104,7 +104,7 @@
         </form>
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 
 </body>
 </html>

@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <h3>${grade.gradename } 고객 정보</h3>
 <div class="warpper">
     <div class="warp">
@@ -37,6 +37,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </body>
 </html>

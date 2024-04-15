@@ -49,7 +49,7 @@
 <div class="container">
 	<header class="Main-Header">
 		<div class="Menu-List" id="menuList">
-			<img id="list-icon" src="/resources/img/list.png" alt="우측 상단 목록"  onclick="toggleLoginMenu();"><br>
+			<img id="list-icon" src="/resources/img/list.png" alt="우측 상단 목록" onclick="toggleLoginMenu();"><br>
 		</div>
 		<div class="Header-Name">
 			<a href="/" class="Site-Name">사이트 이름</a>

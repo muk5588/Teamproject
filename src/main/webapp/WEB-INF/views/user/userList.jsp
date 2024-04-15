@@ -20,7 +20,7 @@
     <div class="warp">
         <div id="content">
             <h3>회원 목록</h3>
-            <table class='w-pct60'>
+            <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>
                     <th>아이디</th>

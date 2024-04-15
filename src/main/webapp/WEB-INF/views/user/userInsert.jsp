@@ -108,12 +108,15 @@
                 <div id="useridbox">
                     <label for="userid">아이디</label>
                     <input type="text" name="userid" id="userid">
-                    <button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
+                    <span id="alertid" name="alertid"/>
+
                     <br>
                 </div>
                 <div id="userpwbox">
                     <label for="userpw">비밀번호</label>
-                    <input type="text" name="userpw" id="userpw"><br>
+                    <input type="text" name="userpw" id="userpw">
+                    <span id="alertpw" name="alertpw"/>
+                    <br>
 
                     <label for="userpwchk">비밀번호 확인</label>
                     <input type="text" name="userpwchk" id="userpwchk"><br>
@@ -129,7 +132,12 @@
                 </div>
                 <div id=emailbox">
                     <label for="email">이메일</label>
-                    <input type="email" name="email" id="email"/><br>
+                    <input type="email" name="email" id="email"/>
+                    <button type="button" id="checkemail">인증번호 발송</button><br>
+                    <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled>
+
+                    <span id="alertemail"/>
+                    <br>
                 </div>
                 <div id="postcodebox">
                     <label for="postcode">우편번호</label>

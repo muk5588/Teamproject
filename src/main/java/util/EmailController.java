@@ -30,7 +30,6 @@ public class EmailController {
         	MimeMessage mail = mailSender.createMimeMessage();
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true,"UTF-8");
 			//true : multipart Message
-			
 			mailHelper.setFrom(from);
 			
 			mailHelper.setTo(to);
@@ -50,24 +49,28 @@ public class EmailController {
 		
 	}
 
-	@PostMapping("/checkEmail")
+	@PostMapping("/user/checkEmail")
 	public HashMap<String,Object> checkEmail (String email){
 		HashMap<String,Object> data = new HashMap<>();
-		Random random =new Random();
+
+        Random random =new Random();
 		int checkNum = random.nextInt(888888)+111111;
 		String subject = "회원가입 인증 메일입니다";
 		String content = "방문해 주셔서 감사합니다"+
 				"인증번호는" + checkNum + " 입니다." + "\r\n" + "해당 인증번호를 인증번호 확인란에 기입라여 주세요";
 		String from = "jxoow1531155@gmail.com";
+
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true,"UTF-8");
 			//true : multipart Message
 
+
 			mailHelper.setFrom(from,"관리자");
 
 			mailHelper.setTo(email);
 			mailHelper.setSubject(subject);
+
 			mailHelper.setText(content,true);
 
 			//첨부파일 있을경우 추가

@@ -133,11 +133,7 @@ public class UserController {
     
     @PostMapping("/checkEmail")
 	public @ResponseBody EmailCheck checkEmail (String email , Model model){
-		HashMap<String,Object> data = new HashMap<>();
-		
 		int num =  service.checkEmail(email);
-		
-		
 		return new EmailCheck(email,num);
 	}
     

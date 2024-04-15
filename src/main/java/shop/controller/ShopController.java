@@ -14,7 +14,7 @@ public class ShopController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private ShopService shopService = new ShopServiceImpl();
+	private ShopService shopService;
 	
 	@RequestMapping("/main")
 	public void shopMain() {

@@ -128,7 +128,7 @@ window.addEventListener("DOMContentLoaded",function () {
                            "font-size": "10px"
                        });
                        $("#alertemail").text("인증번호를 입력해 주세요")
-                       code = data.code;
+                       code = data.authNum;
                        $("#checkmail").attr("disabled",true)
                        $("#checkcode").attr("disabled",false)
                    }

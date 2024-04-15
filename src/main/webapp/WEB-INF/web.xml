@@ -12,7 +12,7 @@
 		<!-- CharacterEncodingFilter의 클래스에 매개 변수가 2개여서 안될 때는 forceEncoding까지 지정 -->
 		<init-param>
 			<param-name>encoding</param-name>
-			<param-value>utf-8</param-value><!-- 'utf-8' << 대소문자 관계 없다 -->
+			<param-value>UTF-8</param-value><!-- 'utf-8' << 대소문자 관계 없다 -->
 		</init-param>
 		<init-param>
 			<param-name>forceEncoding</param-name>

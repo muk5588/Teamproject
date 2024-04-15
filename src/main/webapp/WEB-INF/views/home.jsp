@@ -9,12 +9,13 @@
 	<title>Home</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<jsp:include page="/WEB-INF/views/layout/header.jsp" />
+
 <%--<button><a href="login">로그인</a></button>--%>
 <%--<button><a href="/user/insertUser">가입</a></button>--%>
 <button><a href="user/adminPage">가입</a></button>

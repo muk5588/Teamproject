@@ -13,7 +13,7 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>z
+<P>  The time on the server is ${serverTime}. </P>
 <jsp:include page="/WEB-INF/views/header.jsp" />
 <%--<button><a href="login">로그인</a></button>--%>
 <%--<button><a href="/user/insertUser">가입</a></button>--%>

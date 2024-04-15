@@ -4,38 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>join JSP</title>
+    <script src="/resources/js/user/user.js" charset="UTF-8"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#submit").click("click", function () {
-                if ($("#userid").val() == "") {
-                    alert("아이디를 입력해주세요.");
-                    $("#userid").focus();
-                    return false;
-                }
-                if ($("#userpw").val() == "") {
-                    alert("비밀번호를 입력해주세요.");
-                    $("#userpw").focus();
-                    return false;
-                }
-                if ($("#name").val() == "") {
-                    alert("이름을 입력해주세요.");
-                    $("#name").focus();
-                    return false;
-                }
-                var idChkVal = $("#idChk").val();
-                if (idChkVal == "N") {
-                    alert("중복확인 버튼을 눌러주세요.");
-                } else if (idChkVal == "Y") {
-                    $("#userform").submit();
-                }
-            });
-        })
-        function reset() {
-            $("#userform").val("")
-
-        }
-
         function DaumPostcode() {
             new daum.Postcode({
                 oncomplete: function (data) {
@@ -83,17 +54,8 @@
                 }
             }).open();
         }
-
-
-        function fn_idChk() {
-            if ($("#userid").val() == "") {
-                alert("아이디를 입력해주세요.");
-                $("#userid").focus();
-                return false;
-            }
-
-        }
     </script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -108,16 +70,15 @@
                 <div id="useridbox">
                     <label for="userid">아이디</label>
                     <input type="text" name="userid" id="userid">
-                    <span id="alertid" name="alertid"/>
-
+                    <div id="alertid" name="alertid"></div>
                     <br>
                 </div>
                 <div id="userpwbox">
                     <label for="userpw">비밀번호</label>
                     <input type="text" name="userpw" id="userpw">
-                    <span id="alertpw" name="alertpw"/>
+                    <div id="alertpw" name="alertpw"></div>
+                    <div id="alertpw2" name="alertpw2"></div>
                     <br>
-
                     <label for="userpwchk">비밀번호 확인</label>
                     <input type="text" name="userpwchk" id="userpwchk"><br>
                 </div>
@@ -136,7 +97,7 @@
                     <button type="button" id="checkemail">인증번호 발송</button><br>
                     <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled>
 
-                    <span id="alertemail"/>
+                    <div id="alertemail"></div>
                     <br>
                 </div>
                 <div id="postcodebox">
@@ -155,7 +116,7 @@
                     <input type="text" name="phone" id="phone">
                 </div>
                 <br><br>
-                <button type="submit" id="submit" name="submit">회원가입</button>
+                <button type="button" id="join" name="join">회원가입</button>
                 <button type="reset" id="reset" name="reset" onclick="reset()">초기화</button>
             </form>
 

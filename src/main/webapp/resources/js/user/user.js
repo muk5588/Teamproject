@@ -1,5 +1,9 @@
 window.addEventListener("DOMContentLoaded",function () {
-    $("userid").keyup(function () {
+    $("#name").keyup(function () {
+        var value = $(event.target).val();
+
+    })
+    $("#userid").keyup(function () {
         var value = $(event.target).val();
         var num = value.search(/[0-9]/g);
         var eng = value.search(/[a-z]/ig);
@@ -83,19 +87,20 @@ window.addEventListener("DOMContentLoaded",function () {
     })
     $("#userpwchk").keyup(function () {
         var val = $("#userpwchk").val()
-        if(val != $("#userpw").val)
+        if(val != $("#userpw").val())
         {
-            $("#alertpw").css({
+            $("#alertpw2").css({
                 "color": "red",
                 "font-size": "10px"
             });
-            $("#alertpw").text("! 비밀번호가 일치하지 않습니다.")
+            $("#alertpw2").text("비밀번호가 일치하지 않습니다.")
+            return;
         }
-        $("#alertpw").css({
-            "color": "black",
-            "font-size": "12px"
-        });
-        $("#alertpw").text("비밀번호가 일치합니다.")
+            $("#alertpw2").css({
+                "color": "black",
+                "font-size": "12px"
+            });
+            $("#alertpw2").text("비밀번호가 일치합니다.")
     });
         var code="";
        $("#checkemail").click(function () {

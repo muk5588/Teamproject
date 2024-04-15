@@ -65,7 +65,6 @@ public class EmailController {
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true,"UTF-8");
 			//true : multipart Message
 
-
 			mailHelper.setFrom(from,"관리자");
 
 			mailHelper.setTo(email);

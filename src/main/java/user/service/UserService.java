@@ -19,4 +19,11 @@ public interface UserService {
     public int passChk(UserDTO dto);
 
     public int idChk(UserDTO dto);
+    
+    /**
+     * 이메일 인증 서비스
+     * @param email - 입력받은 이메일
+     * @return - 생성된 인증 번호
+     */
+	public int checkEmail(String email);
 }

@@ -4,6 +4,10 @@
 <!-- 그 중에 jstl 라이브러리도 있기 때문에 사용할 수 있는것 -->
 <!-- 라이브러리 목록은 iot/pom.xml, c:\사용자\.m2에서 확인가능 -->
 
+<link href="/resources/css/main.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/resources/js/main.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/common.css?v=<%=new java.util.Date().getTime() %>">
 <!-- rel : 형태는 스타일 시트, 타입은 텍스트로된 css -->
 <!-- 주소 뒤에 ?v=로 버전관리를 할 수 있다 -->
@@ -41,16 +45,46 @@
     header ul li input { display:block; }
 
 </style>
-<header style="border-bottom: 1px solid #ccc; padding: 15px 0; text-align: left">
-    <div class="category" style="margin-left: 100px;">
-        <ul>
-            <li><a href="<core:url value='/' />"><img src="img/logo.png" /></a></li>
-            <li><a href='list.cu' ${category eq 'cu' ? "class='active'" : '' } >고객 관리</a></li>
-            <li><a href='list.no'>공지사항</a></li>
-            <li><a href='list.bo'>방명록</a></li>
-            <li><a href='list.da'>공공 데이터</a></li>
-        </ul>
-    </div>
+
+<div class="container">
+	<header class="Main-Header">
+		<div class="Menu-List" id="menuList">
+			<img id="list-icon" src="/resources/img/list.png" alt="우측 상단 목록"  onclick="toggleLoginMenu();"><br>
+		</div>
+		<div class="Header-Name">
+			<a href="/" class="Site-Name">사이트 이름</a>
+		</div>
+		
+		<div class="Header-Search">
+    		<input type="text" placeholder="검색어를 입력하세요">
+   		 	<img src="/resources/img/search.png" alt="검색" id="search-icon">
+		</div>
+		
+		<ul class="Header-Button">
+			<li><a href="#">공지사항</a></li>
+			<li><a href="#">여행지 정보</a></li>
+			<li><a href="#">사진 갤러리</a></li>
+			<li><a href="#">여행 Q&A</a></li>
+			<li><a href="#">지역별 여행</a></li>
+			<li><a href="#">여행 상품</a></li>
+			<li><a href="#">이벤트</a></li>
+			<li><a href="#">고객지원</a></li>
+		</ul>
+		
+		<!-- <div id="login-menu" class="login-menu">
+    		<div class="login-button-container">
+        	<a href="#" id="login-button">로그인</a>
+    		</div>
+		</div> -->
+		<div id="login-menu" class="login-menu">
+			<ul class="login-button-container">
+        		<li><a href="#">회원가입</a></li>
+        		<li><a href="#">로그인</a></li>
+			</ul>
+		</div>
+		
+	</header>
+</div>
 
     <div style="position: absolute; right: 0; top: 25px; margin-right: 100px;">
         <!-- 로그인한 경우 -->

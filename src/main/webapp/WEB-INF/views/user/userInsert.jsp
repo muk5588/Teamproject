@@ -58,7 +58,7 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
@@ -93,9 +93,9 @@
                 <div id=emailbox">
                     <label for="email">이메일</label>
                     <input type="email" name="email" id="email"/>
-                    <button type="button" id="checkmail">인증번호 발송</button><br>
+                    <button type="button" id="checkmail" disabled>인증번호 발송</button><br>
                     <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
-                    <div id="alertemail" name="alertmail"></div>
+                    <div id="alertemail" name="alertemail"></div>
                     <br>
                 </div>
                 <div id="postcodebox">
@@ -120,6 +120,6 @@
 
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -34,12 +34,12 @@
 <h1>로그인 테스트</h1>
 <hr>
 <c:if test="${empty dto}">
-    <form action="login/loginProc" method="post">
+    <form action="/login/loginProc" method="post">
         <input type="hidden" name="no" id="no">
-        <label for="userid">아이디: <input type="text" name="userid" id="userid"></label><br>
-        <label for="userpw">비밀번호: <input type="text" name="userpw" id="userpw"></label><br><br>
+        <label for="userid">아이디: <input type="text" name="userid" id="userid" autocomplete="off"></label><br>
+        <label for="userpw">비밀번호: <input type="password" name="userpw" id="userpw" autocomplete="off"></label><br><br>
         <button>로그인</button>
-        <button><a href="insertUser">회원가입</a></button>
+        <button><a href="/user/insertUser">회원가입</a></button>
     </form>
 </c:if>
 <c:if test="${not empty dto and dto }">

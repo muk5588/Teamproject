@@ -16,15 +16,116 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
     <style type="text/css">
-        #content {
-            width: 45%;
-            float: left;
-            margin-right: 5%;
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
 
-        #content2 {
-            width: 45%;
-            float: left;
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* 페이지 제목 스타일 */
+        h3 {
+            color: #333;
+        }
+
+        /* 버튼 스타일 */
+        #button {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* 페이지네이션 스타일 */
+        #bar {
+            text-align: center;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .page-item {
+            display: inline-block;
+        }
+
+        .page-link {
+            color: #007bff;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+
+        .page-link:hover {
+            background-color: #f2f2f2;
+        }
+
+        .active .page-link {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .table-container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .table-wrapper, #content2 {
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+
+        .table-wrapper:last-child {
+            margin-right: 0;
+        }
+        #content1, #content2 {
+            flex-grow: 1;
         }
     </style>
 </head>
@@ -38,7 +139,9 @@
 <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
 <button onclick="location.href = '/user/userList'">유저조회</button>
 </div>
-<div id="content">
+<div class="container">
+<div class="table-container">
+<div class="table-wrapper">
     <h3>전체 회원 목록</h3>
     <table class="table table-striped table-hover table-sm">
         <tr>
@@ -88,8 +191,9 @@
         </c:forEach>
     </table>
 </div>
-<div class="bar"></div>
-<div>
+</div>
+</div>
+<div id = "bar">
     <ul class="pagination pagination-sm justify-content-center">
         <%-- 첫 페이지로 이동 --%>
         <c:if test="${paging.curPage ne 1 }">

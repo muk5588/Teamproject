@@ -102,6 +102,19 @@ window.addEventListener("DOMContentLoaded",function () {
             });
             $("#alertpw2").text("비밀번호가 일치합니다.")
     });
+    $("#email").keyup(function () {
+        var regex = new RegExp("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[0-9a-zA-Z]{2,3}$");
+        if(!regex.test($("#email").val())){
+            $("#alertemail").css({
+                "color": "red",
+                "font-size": "10px"
+            });
+            $("#alertemail").text("이메일 형식이 맞지 않습니다.")
+        }else {
+            $("#alertemail").text("")
+            $("#checkmail").attr("disabled",false);
+        }
+    })
         var code="";
        $("#checkmail").click(function () {
            $.ajax({
@@ -128,7 +141,7 @@ window.addEventListener("DOMContentLoaded",function () {
                            "font-size": "10px"
                        });
                        $("#alertemail").text("인증번호를 입력해 주세요")
-                       code = data.code;
+                       code = data.authNum;
                        $("#checkmail").attr("disabled",true)
                        $("#checkcode").attr("disabled",false)
                    }

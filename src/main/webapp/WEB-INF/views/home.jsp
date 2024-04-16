@@ -9,15 +9,16 @@
 	<title>Home</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<jsp:include page="/WEB-INF/views/header.jsp" />
+
 <%--<button><a href="login">로그인</a></button>--%>
 <%--<button><a href="/user/insertUser">가입</a></button>--%>
-<button><a href="user/adminPage">가입</a></button>
+<button><a href="/user/adminPage">가입</a></button>
 <button onclick="location.href = '/grade/gradeList'">권한조회</button>
 <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
 <button onclick="location.href = '/user/userList'">유저조회</button>
@@ -28,9 +29,9 @@
 <%--</c:if>--%>
 
 <c:if test="${not empty isLogin and isLogin}">
-	<a href ="user/userDetail"><button>마이페이지</button></a>
+	<a href ="/user/userDetail"><button>마이페이지</button></a>
 <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
 </c:if>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>
 </html>

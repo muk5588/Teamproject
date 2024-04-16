@@ -96,7 +96,6 @@
                     <button type="button" id="checkmail" disabled>인증번호 발송</button><br>
                     <div id="alertemail" name="alertemail"></div>
                     <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
-
                     <br>
                 </div>
                 <div id="postcodebox">

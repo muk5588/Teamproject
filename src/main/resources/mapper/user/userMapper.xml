@@ -41,5 +41,10 @@
 		select count(*) from usertb_test
 		where userid = #{userid}
 	</select>
+	<select id="findUserid" resultType="UserDTO">
+		select * from USERTB_TEST
+		where name = #{name }
+		and email = #{email }
+	</select>
 </mapper>
 

@@ -3,15 +3,13 @@ package user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import user.dao.UserDao;
 import user.dto.UserDTO;
 
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Random;
-
-import javax.mail.internet.MimeMessage;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -92,9 +90,12 @@ public class UserServiceImpl implements UserService {
 		
 		return checkNum;
 	}
-    
-    
-    
+
+    @Override
+    public UserDTO findUserId(UserDTO dto) {
+        return userDao.findUserid(dto);
+    }
+
 
 }
 

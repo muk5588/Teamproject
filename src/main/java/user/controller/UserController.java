@@ -10,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import user.dto.EmailCheck;
 import user.dto.UserDTO;
 import user.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -81,6 +84,11 @@ public class UserController {
         model.addAttribute("dto", dto);
         return "user/userDetail";
     }
+    @RequestMapping("/searchUser")
+    public String searchid(String value,Model model) {
+        model.addAttribute("value", value);
+        return "user/userSearch";
+    }
 
     /**
      * 기능부분
@@ -129,12 +137,52 @@ public class UserController {
         }
         return "redirect: /";
     }
-
-    
     @PostMapping("/checkEmail")
 	public @ResponseBody EmailCheck checkEmail (String email , Model model){
 		int num =  service.checkEmail(email);
 		return new EmailCheck(email,num);
 	}
-    
+    @RequestMapping("/searchId")
+    public String searchId(HttpServletRequest request, Model model, UserDTO dto,
+                           @RequestParam String name,
+                           @RequestParam String email) {
+        try {
+            dto.setName(name);
+            dto.setEmail(email);
+            UserDTO userid = service.findUserId(dto);
+            model.addAttribute("finduserid", userid);
+            String value = "id";
+            model.addAttribute("value", value);
+
+        } catch (Exception e) {
+            model.addAttribute("msg", "오류가 발생되었습니다.");
+            e.printStackTrace();
+        }
+        return "user/findResult";
+    }
+    @RequestMapping("/searchPw")
+    public String searchPw(HttpServletRequest request, Model model,
+                               @RequestParam String id, @RequestParam String name,@RequestParam String email,
+                               UserDTO dto) {
+        try {
+            dto.setUserid(id);
+            dto.setName(name);
+            dto.setEmail(email);
+            int search = service.findUserpw(dto);
+
+            if(search == 0) {
+                model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
+            }
+
+            String newPwd = UUID.randomUUID().toString().split("-")[4];
+            dto.setUserpw(newPwd);
+            service.pwdUpdate(dto);
+            model.addAttribute("newPwd", newPwd);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("msg", "오류가 발생되었습니다.");
+        }
+        return "user/findResult";
+    }
 }

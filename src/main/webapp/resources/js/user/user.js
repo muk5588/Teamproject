@@ -1,8 +1,4 @@
 window.addEventListener("DOMContentLoaded",function () {
-    $("#name").keyup(function () {
-        var value = $(event.target).val();
-
-    })
     $("#userid").keyup(function () {
         var value = $(event.target).val();
         var num = value.search(/[0-9]/g);

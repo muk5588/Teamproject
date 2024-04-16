@@ -1,11 +1,7 @@
 package user.dao;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import user.dto.UserDTO;
-import user.service.UserService;
 
 import java.util.List;
 
@@ -32,4 +28,6 @@ public interface UserDao {
     public int passChk(UserDTO dto);
 
     public int idChk(UserDTO dto);
+
+    public UserDTO findUserid(UserDTO dto);
 }

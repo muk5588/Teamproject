@@ -26,4 +26,6 @@ public interface UserService {
      * @return - 생성된 인증 번호
      */
 	public int checkEmail(String email);
+
+    public UserDTO findUserId(UserDTO dto);
 }

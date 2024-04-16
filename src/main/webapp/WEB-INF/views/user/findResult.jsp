@@ -19,13 +19,17 @@
                 <p class="inquiry">조회결과가 없습니다.</p>
             </c:when>
             <c:otherwise>
+                <p class="title">회원님의 아이디 입니다</p>
                 <p>${finduserid.userid}</p>
+
             </c:otherwise>
         </c:choose>
     </div>
 </c:if>
 <c:if test="${value =='pw'}">
-
+<p class="title">회원님의 임시 비밀번호 입니다</p>
+<div class="result-box">
+    <p>${newPwd}</p>
 </c:if>
 <br>
 <button><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></button>

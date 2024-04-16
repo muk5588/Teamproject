@@ -178,7 +178,8 @@ public class UserController {
             dto.setUserpw(newPwd);
             service.updateUserpw(dto);
             model.addAttribute("newPwd", newPwd);
-
+            String value = "pw";
+            model.addAttribute("value", value);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("msg", "오류가 발생되었습니다.");

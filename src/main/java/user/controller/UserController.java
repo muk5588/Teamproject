@@ -174,9 +174,9 @@ public class UserController {
                 model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
             }
 
-            String newPwd = UUID.randomUUID().toString().split("-")[4];
+            String newPwd = UUID.randomUUID().toString().split("-")[4] + "!!";
             dto.setUserpw(newPwd);
-            service.pwdUpdate(dto);
+            service.updateUserpw(dto);
             model.addAttribute("newPwd", newPwd);
 
         } catch (Exception e) {

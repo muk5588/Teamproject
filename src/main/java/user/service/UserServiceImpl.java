@@ -96,6 +96,16 @@ public class UserServiceImpl implements UserService {
         return userDao.findUserid(dto);
     }
 
+    @Override
+    public void updateUserpw(UserDTO dto) {
+        userDao.updateUserpw(dto);
+    }
+
+    @Override
+    public int findUserpw(UserDTO dto) {
+        return userDao.findUserpw(dto);
+    }
+
 
 }
 

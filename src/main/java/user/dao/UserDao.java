@@ -30,4 +30,8 @@ public interface UserDao {
     public int idChk(UserDTO dto);
 
     public UserDTO findUserid(UserDTO dto);
+
+    public int findUserpw(UserDTO dto);
+
+    public void updateUserpw(UserDTO dto);
 }

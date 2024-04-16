@@ -42,9 +42,22 @@
 		where userid = #{userid}
 	</select>
 	<select id="findUserid" resultType="UserDTO">
-		select * from USERTB_TEST
+		select userid from usertb_test
 		where name = #{name }
 		and email = #{email }
 	</select>
+	<select id="findUserpw" resultType="UserDTO">
+		select userpw from usertb_test
+		where userid = #{userid }
+		  and  name = #{name }
+		  and email = #{email }
+	</select>
+	<update id="updateUserpw" parameterType="UserDTO">
+		update usertb_test
+		set userpw = #{userpw }
+		where userid = #{userid }
+		  and  name = #{name }
+		  and email = #{email }
+	</update>
 </mapper>
 

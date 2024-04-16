@@ -28,4 +28,8 @@ public interface UserService {
 	public int checkEmail(String email);
 
     public UserDTO findUserId(UserDTO dto);
+
+    public void updateUserpw(UserDTO dto);
+
+    public int findUserpw(UserDTO dto);
 }

@@ -31,5 +31,5 @@ public interface UserService {
 
     public void updateUserpw(UserDTO dto);
 
-    public int findUserpw(UserDTO dto);
+    public UserDTO findUserpw(UserDTO dto);
 }

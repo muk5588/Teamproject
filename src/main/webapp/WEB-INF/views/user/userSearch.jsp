@@ -42,8 +42,8 @@
             <div id="searchpw">
                 <form action="/user/searchPw" method="post" id="userpwform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
                     <div id="namebox2">
-                        <label for="name">이름</label>
-                        <input type="text" name="name" id="name2"/><br>
+                        <label for="name2">이름</label>
+                        <input type="text" name="name2" id="name2"/><br>
                     </div>
                     <div id="useridbox2">
                         <label for="userid2">아이디</label>

@@ -162,15 +162,15 @@ public class UserController {
     }
     @RequestMapping("/searchPw")
     public String searchPw(HttpServletRequest request, Model model,
-                               @RequestParam String id, @RequestParam String name,@RequestParam String email,
+                               @RequestParam String userid2, @RequestParam String name2,@RequestParam String email2,
                                UserDTO dto) {
         try {
-            dto.setUserid(id);
-            dto.setName(name);
-            dto.setEmail(email);
-            int search = service.findUserpw(dto);
+            dto.setUserid(userid2);
+            dto.setName(name2);
+            dto.setEmail(email2);
+            UserDTO search = service.findUserpw(dto);
 
-            if(search == 0) {
+            if(search == null) {
                 model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
             }
 

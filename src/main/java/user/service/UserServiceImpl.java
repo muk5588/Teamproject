@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int findUserpw(UserDTO dto) {
+    public UserDTO findUserpw(UserDTO dto) {
         return userDao.findUserpw(dto);
     }
 

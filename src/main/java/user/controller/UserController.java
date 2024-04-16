@@ -1,26 +1,21 @@
 package user.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
-
+import grade.dto.Grade;
+import grade.service.GradeService;
+import login.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import login.service.LoginService;
 import user.dto.EmailCheck;
 import user.dto.UserDTO;
 import user.service.UserService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +26,8 @@ public class UserController {
     @Autowired
     private UserService service;
     @Autowired
+    private GradeService gradeService;
+    @Autowired
     private LoginService loginService;
     /**
      * 화면부분
@@ -39,8 +36,11 @@ public class UserController {
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
         List<UserDTO> list = service.userList();//board생성후 userAll로 변경
+//        List<Board> list2  = boardService.boardList();
+        List<Grade> list3 = gradeService.gradeList();
         model.addAttribute("list", list);
-
+//        model.addAttribute("list2", list2);
+        model.addAttribute("list3", list3);
         return "user/adminPage";
     }
     @RequestMapping("/insertUser")

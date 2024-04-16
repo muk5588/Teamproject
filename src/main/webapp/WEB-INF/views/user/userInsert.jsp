@@ -94,8 +94,9 @@
                     <label for="email">이메일</label>
                     <input type="email" name="email" id="email"/>
                     <button type="button" id="checkmail" disabled>인증번호 발송</button><br>
-                    <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
                     <div id="alertemail" name="alertemail"></div>
+                    <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
+
                     <br>
                 </div>
                 <div id="postcodebox">
@@ -115,7 +116,7 @@
                 </div>
                 <br><br>
                 <button type="button" id="join" name="join">회원가입</button>
-                <button type="reset" id="reset" name="reset" onclick="reset()">초기화</button>
+                <button type="reset" id="reset" name="reset">초기화</button>
             </form>
 
     </div>

@@ -35,7 +35,6 @@
                         <td>${Grade.gradeno }</td>
                         <td><a href='/grade/gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
                         <td>${Grade.comm}</td>
-                    </a>
                     </tr>
                 </c:forEach>
             </table>

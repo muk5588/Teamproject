@@ -38,6 +38,7 @@
         /* 버튼 스타일 */
         #button {
             margin-bottom: 20px;
+            text-align: center;
         }
 
         button {
@@ -103,6 +104,7 @@
             background-color: #007bff;
             color: #fff;
         }
+
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -124,7 +126,8 @@
         .table-wrapper:last-child {
             margin-right: 0;
         }
-        #content1, #content2 {
+
+        #content1, #content2, #content3 {
             flex-grow: 1;
         }
     </style>
@@ -133,67 +136,88 @@
 <h3>관리자 페이지</h3>
 <hr>
 <div id="button">
-<button><a href="/user/insertUser">회원추가</a></button>
-<button><a href="/grade/gradeInsert">권한추가</a></button>
-<button onclick="location.href = '/grade/gradeList'">권한조회</button>
-<button onclick="location.href = '/menu/menuList'">권한부여상황</button>
-<button onclick="location.href = '/user/userList'">유저조회</button>
+    <button><a href="/user/insertUser">회원추가</a></button>
+    <button><a href="/grade/gradeInsert">권한추가</a></button>
+    <button onclick="location.href = '/grade/gradeList'">권한조회</button>
+    <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
+    <button onclick="location.href = '/user/userList'">유저조회</button>
 </div>
 <div class="container">
-<div class="table-container">
-<div class="table-wrapper">
-    <h3>전체 회원 목록</h3>
-    <table class="table table-striped table-hover table-sm">
-        <tr>
-            <th class='w-px60'>회원번호</th>
-            <th>아이디</th>
-            <th class='w-px200'>이름</th>
-            <th>닉네임</th>
-            <th>성별</th>
-        </tr>
-        <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
-        <!-- items : 배열 변수 -->
-        <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-        <c:forEach var="UserDTO" items="${list}">
+    <div class="table-container">
+        <div class="table-wrapper">
+            <h3>전체 회원 목록</h3>
+            <table class="table table-striped table-hover table-sm">
+                <tr>
+                    <th class='w-px60'>회원번호</th>
+                    <th>아이디</th>
+                    <th class='w-px200'>이름</th>
+                    <th>닉네임</th>
+                    <th>성별</th>
+                </tr>
+                <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
+                <!-- items : 배열 변수 -->
+                <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
+                <c:forEach var="UserDTO" items="${list}">
+                    <tr>
+                        <td>${UserDTO.userno }</td>
+                        <td>${UserDTO.userid }</td>
+                        <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
+                        <td>${UserDTO.nickname}</td>
+                        <td>${UserDTO.gender }</td>
+                        </a>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div id="content2">
+            <h3>회원등급 목록</h3>
+
+            <table class='table table-striped table-hover table-sm'>
+                <tr>
+                    <th class='w-px60'>등급번호</th>
+                    <th class='w-px200'>등급이름</th>
+                    <th>설명</th>
+                </tr>
+                <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
+                <!-- items : 배열 변수 -->
+                <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
+                <c:forEach var="Grade" items="${list3}">
+                    <tr>
+                        <td>${Grade.gradeno }</td>
+                        <td><a href='/grade/gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
+                        <td>${Grade.comm}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="bar">
+    <div id="content3">
+        <h3>전체 작성글 목록</h3>
+        <table class="table table-striped table-hover table-sm">
             <tr>
-                <td>${UserDTO.userno }</td>
-                <td>${UserDTO.userid }</td>
-                <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
-                <td>${UserDTO.nickname}</td>
-                <td>${UserDTO.gender }</td>
-                </a>
+                <th class='w-px60'>회원번호</th>
+                <th>아이디</th>
+                <th class='w-px200'>이름</th>
+                <th>닉네임</th>
+                <th>성별</th>
             </tr>
-        </c:forEach>
-    </table>
-</div>
-<div id="content2">
-    <h3>전체 회원 목록</h3>
-    <table class="table table-striped table-hover table-sm">
-        <tr>
-            <th class='w-px60'>회원번호</th>
-            <th>아이디</th>
-            <th class='w-px200'>이름</th>
-            <th>닉네임</th>
-            <th>성별</th>
-        </tr>
-        <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
-        <!-- items : 배열 변수 -->
-        <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-        <c:forEach var="UserDTO" items="${list}">
-            <tr>
-                <td>${UserDTO.userno }</td>
-                <td>${UserDTO.userid }</td>
-                <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
-                <td>${UserDTO.nickname}</td>
-                <td>${UserDTO.gender }</td>
-                </a>
-            </tr>
-        </c:forEach>
-    </table>
-</div>
-</div>
-</div>
-<div id = "bar">
+            <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
+            <!-- items : 배열 변수 -->
+            <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
+            <c:forEach var="UserDTO" items="${list}">
+                <tr>
+                    <td>${UserDTO.userno }</td>
+                    <td>${UserDTO.userid }</td>
+                    <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
+                    <td>${UserDTO.nickname}</td>
+                    <td>${UserDTO.gender }</td>
+                    </a>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
     <ul class="pagination pagination-sm justify-content-center">
         <%-- 첫 페이지로 이동 --%>
         <c:if test="${paging.curPage ne 1 }">
@@ -282,7 +306,6 @@
             </li>
         </c:if>
     </ul>
-</div>
 </div>
 
 </body>

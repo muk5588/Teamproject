@@ -94,9 +94,9 @@ window.addEventListener("DOMContentLoaded", function () {
     $("#checkmail2").click(function () {
         $.ajax({
             type: "post",
-            url: "/user/checkemail",
+            url: "/user/checkEmail",
             data: {
-                email2: $("#email2").val()
+                email: $("#email2").val()
             },
             dataType: "json",
             success: function (data) {
@@ -117,7 +117,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     });
                     $("#alertemail2").text("인증번호를 입력해 주세요")
                     code = data.authNum;
-                    $("#checkmai2").attr("disabled", true)
+                    $("#checkmail2").attr("disabled", true)
                     $("#checkcode2").attr("disabled", false)
                 }
             }

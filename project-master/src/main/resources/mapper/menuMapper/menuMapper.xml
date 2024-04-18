@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu.dao.MenuDao">
+    <select id="menuList" resultType="Menu">
+        select userno, userid , g.gradename, g.comm
+        from usertb_test u left outer join gradetb_test g
+        on u.gradeno = g.gradeno
+        order by userno
+    </select>
+    <select id="Update" parameterType="UserDTO" resultType="UserDTO">
+        select userno, userid, g.gradename, g.comm
+        from usertb_test u
+                 left outer join gradetb_test g
+                                 on u.gradeno = g.gradeno
+        WHERE userno = #{userno}
+    </select>
+    <update id="menuUpdate" parameterType="UserDTO">
+        UPDATE usertb_test
+        SET ADMINNO = #{adminno}
+        WHERE userno = #{userno }
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

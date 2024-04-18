@@ -16,9 +16,7 @@
     <c:if test="${userId ne null || email ne null}">
         <h1>로그인 성공입니다</h1>
        <button onclick="location.href='/user/userDetail'">마이페이지</button>
-		<button onclick="location.href='/member/login/logout'">로그아웃</button>
-        
-        <input type="button" value="로그아웃" onclick="location.href='./logout'">
+		<button onclick="location.href='/login/logout'">로그아웃</button>
     </c:if>
 </body>
 </html>

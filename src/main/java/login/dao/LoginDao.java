@@ -13,4 +13,10 @@ public interface LoginDao {
 	public int selectNoByIdPw(UserDTO dto);
 
 	public UserDTO selectByNo(int loginno);
+
+    public UserDTO selectSuser(String sosId);
+
+	public int selectKakao(UserDTO dto);
+
+	public void kakaoinsert(UserDTO dto);
 }

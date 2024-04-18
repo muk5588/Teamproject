@@ -13,15 +13,15 @@
     <title>Title</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
-        $(function (){
+        $(function () {
             $("#loginid").focus()
             $("form").submit(function () {
-                if($("#loginid").val() == ''){
+                if ($("#loginid").val() == '') {
                     alert("아이디를 입력하세요");
                     $("#loginid").focus()
                     return false;
                 }
-                if($('#loginpw').val() == ''){
+                if ($('#loginpw').val() == '') {
                     alert("비밀번호를 입력하세요");
                     $("#loginpw").focus()
                     return false;
@@ -41,12 +41,13 @@
         <button>로그인</button>
         <button><a href="/user/insertUser">회원가입</a></button>
         <div class="kakao">
-            <c:import url="../login/kakaoLogin.jsp" />
+            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin">
+                <img src="/resources/img/kakao_login_medium_narrow.png"></a>
         </div>
     </form>
 </c:if>
 <c:if test="${not empty dto and dto }">
-    <a href = 'userDetail?userid=${dto.userid}'>마이페이지</a>
+    <a href='userDetail?userid=${dto.userid}'>마이페이지</a>
 </c:if>
 
 </body>

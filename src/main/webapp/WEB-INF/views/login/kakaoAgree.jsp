@@ -9,8 +9,8 @@
 </head>
 <body>
     <c:if test="${userId eq null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=fecd7b77d17e2393c47ca5ce09dd6b34&redirect_uri=http://localhost:8888/member/kakaoLogin&response_type=code">
-			<img src="/resources/member/img/kakao.png">
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin">
+            <img src="/resources/img/kakao_login_medium_narrow.png"></a>
         </a>
     </c:if>
     

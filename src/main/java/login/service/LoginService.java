@@ -9,4 +9,5 @@ public interface LoginService {
 	public int getLoginNo(UserDTO dto);
 
 	public UserDTO info(int loginno);
+
 }

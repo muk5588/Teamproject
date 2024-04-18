@@ -37,7 +37,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public UserDTO info(int loginno) {
-
         return loginDao.selectByNo(loginno);
     }
 }

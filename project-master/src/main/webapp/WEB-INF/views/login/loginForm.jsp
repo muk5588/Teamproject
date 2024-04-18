@@ -1,0 +1,50 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: c
+  Date: 2024-03-25
+  Time: 오전 9:12
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#loginid").focus()
+            $("form").submit(function () {
+                if($("#loginid").val() == ''){
+                    alert("아이디를 입력하세요");
+                    $("#loginid").focus()
+                    return false;
+                }
+                if($('#loginpw').val() == ''){
+                    alert("비밀번호를 입력하세요");
+                    $("#loginpw").focus()
+                    return false;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>로그인 테스트</h1>
+<hr>
+<c:if test="${empty dto}">
+    <form action="/login/loginProc" method="post">
+        <input type="hidden" name="no" id="no">
+        <label for="userid">아이디: <input type="text" name="userid" id="userid" autocomplete="off"></label><br>
+        <label for="userpw">비밀번호: <input type="password" name="userpw" id="userpw" autocomplete="off"></label><br><br>
+        <button>로그인</button>
+        <button><a href="/user/insertUser">회원가입</a></button>
+    </form>
+</c:if>
+<c:if test="${not empty dto and dto }">
+    <a href = 'userDetail?userid=${dto.userid}'>마이페이지</a>
+</c:if>
+
+</body>
+</html>

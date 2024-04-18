@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.Footer-Button {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    justify-content: center; 
+}
+
+.Footer-Button li {
+    margin-right: 10px; 
+}
+
+.Footer-Button li a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none; 
+    color: #000000;
+    /* background-color: #DCDCDC; */ 
+    border-radius: 20px; 
+    margin-right: 0; 
+}
+
+.Footer-Button li:nth-child(2) a, 
+.Footer-Button li:nth-child(3) a { 
+    font-weight: bold; 
+}
+
+
+.Footer-Button li a:hover {
+	border: 1px solid #000000;
+}
+

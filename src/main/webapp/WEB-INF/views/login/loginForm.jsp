@@ -40,8 +40,9 @@
         <label for="userpw">비밀번호: <input type="password" name="userpw" id="userpw" autocomplete="off"></label><br><br>
         <button>로그인</button>
         <button><a href="/user/insertUser">회원가입</a></button>
-        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin">
-            <img src="/resources/img/kakao_login_medium_narrow.png"></a>
+        <div class="kakao">
+            <c:import url="../login/kakaoLogin.jsp" />
+        </div>
     </form>
 </c:if>
 <c:if test="${not empty dto and dto }">

@@ -11,7 +11,33 @@
     <title>Title</title>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        function DaumPostcode() {
+        window.addEventListener("DOMContentLoaded", function () {
+            $("#update").click(function () {
+                var val = $(event.target).val();
+                if ($("#name").val() == null || val.replace(/\s| /gi,"").length == 0) {
+                    alert("이름을 입력해 주세요")
+                    return;
+                }
+                if ($("#nickname").val() == null|| val.replace(/\s| /gi,"").length == 0) {
+                    alert("닉네임을 입력해 주세요")
+                    return;
+                }
+                if ($("#email").val() == null || val.replace(/\s| /gi,"").length == 0) {
+                    alert("이메일을 입력해 주세요")
+                    return;
+                }
+                if ($("#address").val() == null|| val.replace(/\s| /gi,"").length == 0) {
+                    alert("주소를 검색해 주세요")
+                    return;
+                }
+                if ($("#phone").val() == null|| val.replace(/\s| /gi,"").length == 0) {
+                    alert("전화번호를 입력해 주세요")
+                    return;
+                }
+                $("#updateform").submit();
+            })
+        })
+            function DaumPostcode() {
             new daum.Postcode({
                 oncomplete: function (data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -65,14 +91,15 @@
 <h3>회원정보수정</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/userUpdate?userno=${dto.userno}" method="post"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/user/userUpdate?userno=${dto.userno}" method="post" id="updateform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" value="${dto.name}"/><br>
             </div>
             <div id="nickbox">
                 <label for="nickname">닉네임</label>
-                <input type="text" name="nickname" id="nickname" value="${dto.nickname}"><br>
+                <input type="text" name="nickname" id="nickname" value="${dto.nickname}">
+                <br>
             </div>
             <div id="genderbox">
                 <label>성별</label>
@@ -99,7 +126,7 @@
                 <input type="text" name="phone" id="phone"value="${dto.phone}">
             </div>
             <br><br>
-            <input type="submit" id="submit" name="submit" value="수정"/>
+            <input type="button" id="update" name="update" value="수정"/>
             <input type="reset" id="reset" name="reset" value="초기화"/>
         </form>
     </div>

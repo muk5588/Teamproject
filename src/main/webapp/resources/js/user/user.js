@@ -162,14 +162,17 @@ window.addEventListener("DOMContentLoaded",function () {
     $("#update").click(function () {
         if ($("#alertid").text() != "사용가능한 아이디입니다."){
             alert("아이디 중복 확인을 해주세요")
+            $("#userid").focus()
             return;
         }
         if($("#alertpw2").text() != "비밀번호가 일치합니다."){
             alert("비밀번호를 확인 해주세요")
+            $("#userpw").focus()
             return;;
         }
         if ($("#alertemail").text() != "인증이 완료 되었습니다"){
             alert("메일 인증을 해주세요")
+            $("#email").focus()
             return;
         }
         $("#userform").submit();

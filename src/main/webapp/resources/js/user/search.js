@@ -62,11 +62,12 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     })
     $("#search").click(function () {
-        if ($("#name").val() == null) {
+        var val = $(event.target).val();
+        if ($("#name").val() == null || val.replace(/\s| /gi,"").length == 0) {
             alert("이름을 입력해 주세요")
             return;
         }
-        if ($("#email").val() == null) {
+        if ($("#email").val() == null || val.replace(/\s| /gi,"").length == 0) {
             alert("이메일을 입력해 주세요")
             return;
         }
@@ -142,10 +143,12 @@ window.addEventListener("DOMContentLoaded", function () {
     $("#search2").click(function () {
         if ($("#name2").val() == null) {
             alert("이름을 입력해 주세요")
+            $("#userid").focus()
             return;
         }
         if ($("#email2").val() == null) {
             alert("이메일을 입력해 주세요")
+            $("#email2").focus()
             return;
         }
         if ($("#alertemail2").text() != "인증이 완료 되었습니다") {

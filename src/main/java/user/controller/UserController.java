@@ -17,6 +17,7 @@ import user.dto.UserDTO;
 import user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,6 +89,14 @@ public class UserController {
     public String searchid(String value,Model model) {
         model.addAttribute("value", value);
         return "user/userSearch";
+    }
+    @RequestMapping("/updatePass")
+    public String updatePass(int userno, Model model) {
+        UserDTO dto = new UserDTO();
+        dto.setUserno(userno);
+        dto = service.userDetail(dto);
+        model.addAttribute("dto", dto);
+        return "user/updatePassword";
     }
 
     /**
@@ -185,5 +194,16 @@ public class UserController {
             model.addAttribute("msg", "오류가 발생되었습니다.");
         }
         return "user/findResult";
+    }
+    @RequestMapping("/userPass")
+    public String userPass(HttpServletRequest request, HttpSession session) {
+        UserDTO dto = new UserDTO();
+        dto.setName(request.getParameter("name"));
+        dto.setEmail(request.getParameter("email"));
+        dto.setUserid(request.getParameter("userid"));
+        dto.setUserpw(request.getParameter("userpw"));
+        service.updateUserpw(dto);
+        session.invalidate();
+        return "redirect: /";
     }
 }

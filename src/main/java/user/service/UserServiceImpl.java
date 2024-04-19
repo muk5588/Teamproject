@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 		int checkNum = random.nextInt(888888)+111111;
 		String subject = "회원가입 인증 메일입니다";
 		String content = "방문해 주셔서 감사합니다"+
-				"인증번호는" + checkNum + " 입니다." + "\r\n" + "해당 인증번호를 인증번호 확인란에 기입라여 주세요";
+				"인증번호는"+"<h1 style='color=blue'>" + checkNum + "</h1>" + " 입니다." + "\r\n" + "해당 인증번호를 인증번호 확인란에 기입라여 주세요";
 		String from = "jxoow1531155@gmail.com";
 
 		try {

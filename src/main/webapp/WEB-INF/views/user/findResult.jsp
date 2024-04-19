@@ -33,5 +33,6 @@
 </c:if>
 <br>
 <button><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></button>
+<button><a class="btn-fill" href="<%=request.getContextPath()%>/">홈으로</a></button>
 </body>
 </html>

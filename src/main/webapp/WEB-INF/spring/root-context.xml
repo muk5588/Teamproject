@@ -36,6 +36,7 @@
             <value>*.dto</value>
         </property>
     </bean>
+
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="SqlSessionFactory"/>
     </bean>
@@ -61,6 +62,7 @@
 		</props>
 		</property>
 	</bean>
+
     
     
 </beans>

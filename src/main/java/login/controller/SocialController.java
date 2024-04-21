@@ -1,7 +1,10 @@
 package login.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.JsonObject;
+
 import login.dto.NaverLoginVO;
+import login.service.SocialService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,14 +36,15 @@ import java.util.Map;
 @RequestMapping("/login")
 public class SocialController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	@Autowired SocialService socialService;
 	
-    @Autowired
-    private NaverLoginVO naverLoginVO;
+//    @Autowired
+//    private NaverLoginVO naverLoginVO;
     private String apiResult = null;
-    @Autowired
-    private void setnaverLoginVO(NaverLoginVO naverLoginVO) {
-        this.naverLoginVO = naverLoginVO;
-    }
+//    @Autowired
+//    private void setnaverLoginVO(NaverLoginVO naverLoginVO) {
+//        this.naverLoginVO = naverLoginVO;
+//    }
 //    @RequestMapping(value = "/naverLogin", method = { RequestMethod.GET, RequestMethod.POST })
 //    public String login(Model model, HttpSession session) {
 //
@@ -73,74 +78,45 @@ public class SocialController {
 //    }
 
 	@RequestMapping("/naver/login")
-	public void main(HttpSession session, Model model) {
-		String state = naverLoginVO.getstate();
+	public ModelAndView main(HttpSession session, Model model) {
+		String state = socialService.getstate();
 		
-		String apiURL = naverLoginVO.getApiURL(state);
+		String apiURL = socialService.getApiURL(state);
 		
 	    session.setAttribute("state", state);
 	    logger.info("state~~~ {}",state);
 	    logger.info("apiu~~~ {}",apiURL);
 	    
 	    model.addAttribute("apiURL", apiURL);
+	    return new ModelAndView("redirect:"+apiURL);
 	}
 	
 	@RequestMapping("/naver/callback")
 	public String callback(HttpServletRequest request, HttpServletResponse response
 			) {
-		
-		   String clientId = "vwSp_7gB7SNQ8Di_skGL";//애플리케이션 클라이언트 아이디값";
-		    String clientSecret = "mFSPW6AxlM";//애플리케이션 클라이언트 시크릿값";
 		    String code = request.getParameter("code");
 		    String state = request.getParameter("state");
-		    String redirectURI = null;
+		    logger.debug("code : {} ", request.getParameter("code"));
+		    logger.debug("state : {} ", request.getParameter("state"));
 		    
-			try {
-				redirectURI = URLEncoder.encode("http://localhost:8088/social/naver/callback", "UTF-8");
-			} catch (UnsupportedEncodingException e1) {
-				
-				e1.printStackTrace();
-			}
-		    String apiURL;
-		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-		    apiURL += "client_id=" + clientId;
-		    apiURL += "&client_secret=" + clientSecret;
-		    apiURL += "&redirect_uri=" + redirectURI;
-		    apiURL += "&code=" + code;
-		    apiURL += "&state=" + state;
-		    String access_token = "";
-		    String refresh_token = "";
-		    System.out.println("apiURL="+apiURL);
-		    try {
-		      URL url = new URL(apiURL);
-		      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		      con.setRequestMethod("GET");
-		      con.setDoOutput(true);
-		      int responseCode = con.getResponseCode();
-		      BufferedReader br;
-		      System.out.print("responseCode="+responseCode);
-//		      OutputStream out = con.getOutputStream();
-		      if(responseCode==200) { // 정상 호출
-		        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		      } else {  // 에러 발생
-		        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-		      }
-		      logger.info("code : {} ", code);
-		      logger.info("state : {} ", state);
-		      logger.info("redirectURI : {} ", redirectURI);
-		      String inputLine;
-		      StringBuffer res = new StringBuffer();
-		      while ((inputLine = br.readLine()) != null) {
-		        res.append(inputLine);
-		      }
-		      br.close();
-		      if(responseCode==200) {
-//		        logger.info("res :: {} ", res.toString());
-		      }
-		    } catch (Exception e) {
-		      System.out.println(e);
-		    }
+		    String apiURL = socialService.getApiURL(code,state);
+		    logger.debug("apiURL : {} ", apiURL);
+		    
+		    JsonObject token = socialService.getToken(apiURL);
+//		    logger.debug("-----------------error : {} ----------------", token.get("error"));
+//		    logger.debug("error_description : {} ", token.get("error_description"));
+//		    logger.debug("expires_in : {} ", token.get("expires_in"));
+//		    logger.debug("access_token : {} ", token.get("access_token"));
+//		    logger.debug("refresh_token : {} ", token.get("refresh_token"));
+//		    logger.debug("-------------------token_type : {} ----------------", token.get("token_type"));
+		    
+		    HashMap<String, Object> info = socialService.getUserInfo(token);
+		    
 		    return "login/naver/success";
 	}
 
+	@RequestMapping("/naver/naver/logoutCallback")
+	public void naverLogout() {
+		
+	}
 }

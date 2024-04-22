@@ -1,12 +1,5 @@
 package login.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import user.dto.UserDTO;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +11,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import user.dto.UserDTO;
 
 @Service
 public class SocialServiceImpl implements SocialService {
@@ -85,10 +87,10 @@ public class SocialServiceImpl implements SocialService {
 			BufferedReader bufferedReader;
 			if (responseCode == 200) { // 정상 호출
 				bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-				logger.debug("responseCode : {}", responseCode);
+				logger.info("responseCode : {}", responseCode);
 			} else { // 에러 발생
 				bufferedReader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-				logger.debug("responseCode : {}", responseCode);
+				logger.info("responseCode : {}", responseCode);
 			}
 
 			String input;
@@ -99,12 +101,12 @@ public class SocialServiceImpl implements SocialService {
 
 			bufferedReader.close();
 			if (responseCode == 200) {
-				logger.debug("res : {}", res.toString());
+				logger.info("res : {}", res.toString());
 
 				Gson gson = new Gson();
 
 				JsonObject jsonObj = gson.fromJson(res, JsonObject.class);
-				logger.debug("jsonObj : {}", jsonObj);
+				logger.info("jsonObj : {}", jsonObj);
 
 				return jsonObj;
 			}
@@ -140,8 +142,8 @@ public class SocialServiceImpl implements SocialService {
 			int responseCode = con.getResponseCode();
 
 			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			logger.debug("###################br : {}", bufferReader);
-			logger.debug("responseCode : {}", responseCode);
+			logger.info("###################br : {}", bufferReader);
+			logger.info("responseCode : {}", responseCode);
 
 			String line = "";
 			String res = "";
@@ -153,18 +155,18 @@ public class SocialServiceImpl implements SocialService {
 			Gson gson = new Gson();
 
 			JsonObject jsonObject = gson.fromJson(res, JsonObject.class);
-			logger.debug("jsonObject : {}", jsonObject);
+			logger.info("jsonObject : {}", jsonObject);
 
 			JsonObject response = jsonObject.getAsJsonObject("response");
-			logger.debug("response : {}", response);
+			logger.info("response : {}", response);
 
 			String email = response.get("email").getAsString().trim();
 			String id = response.get("id").getAsString().trim();
 			String name = response.get("name").getAsString().trim();
 
-			logger.debug("email : {} ",email);
-			logger.debug("id : {} ",id);
-			logger.debug("name : {} ",name);
+			logger.info("email : {} ",email);
+			logger.info("id : {} ",id);
+			logger.info("name : {} ",name);
 			
 			bufferReader.close();
 
@@ -172,7 +174,7 @@ public class SocialServiceImpl implements SocialService {
 			e.printStackTrace();
 		}
 
-		logger.debug("info : {}", info);
+		logger.info("info : {}", info);
 
 		return info;
 	}//getUserInfo(token)

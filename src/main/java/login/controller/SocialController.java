@@ -1,7 +1,11 @@
 package login.controller;
 
-import com.google.gson.JsonObject;
-import login.service.SocialService;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import com.google.gson.JsonObject;
+
+import login.service.SocialService;
 
 @Controller
 @RequestMapping("/login")
@@ -61,7 +64,8 @@ public class SocialController {
 //    }
 
 	@RequestMapping("/naver/login")
-	public ModelAndView main(HttpSession session, Model model) {
+//	public ModelAndView main(HttpSession session, Model model) {
+	public void main(HttpSession session, Model model) {
 		String state = socialService.getstate();
 		
 		String apiURL = socialService.getApiURL(state);
@@ -71,7 +75,7 @@ public class SocialController {
 	    logger.info("apiu~~~ {}",apiURL);
 	    
 	    model.addAttribute("apiURL", apiURL);
-	    return new ModelAndView("redirect:"+apiURL);
+//	    return new ModelAndView("redirect:"+apiURL);
 	}
 	
 	@RequestMapping("/naver/callback")
@@ -79,19 +83,19 @@ public class SocialController {
 			) {
 		    String code = request.getParameter("code");
 		    String state = request.getParameter("state");
-		    logger.debug("code : {} ", request.getParameter("code"));
-		    logger.debug("state : {} ", request.getParameter("state"));
+		    logger.info("code : {} ", request.getParameter("code"));
+		    logger.info("state : {} ", request.getParameter("state"));
 		    
 		    String apiURL = socialService.getApiURL(code,state);
-		    logger.debug("apiURL : {} ", apiURL);
+		    logger.info("apiURL : {} ", apiURL);
 		    
 		    JsonObject token = socialService.getToken(apiURL);
-//		    logger.debug("-----------------error : {} ----------------", token.get("error"));
-//		    logger.debug("error_description : {} ", token.get("error_description"));
-//		    logger.debug("expires_in : {} ", token.get("expires_in"));
-//		    logger.debug("access_token : {} ", token.get("access_token"));
-//		    logger.debug("refresh_token : {} ", token.get("refresh_token"));
-//		    logger.debug("-------------------token_type : {} ----------------", token.get("token_type"));
+//		    logger.info("-----------------error : {} ----------------", token.get("error"));
+//		    logger.info("error_description : {} ", token.get("error_description"));
+//		    logger.info("expires_in : {} ", token.get("expires_in"));
+//		    logger.info("access_token : {} ", token.get("access_token"));
+//		    logger.info("refresh_token : {} ", token.get("refresh_token"));
+//		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
 		    
 		    HashMap<String, Object> info = socialService.getUserInfo(token);
 		    

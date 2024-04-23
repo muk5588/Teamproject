@@ -17,14 +17,5 @@ $(function(){
 })
 </script>
 <html>
-  <head>
-    <title>네이버로그인</title>
-  </head>
-  <body>
-<h1>로그인 테스트</h1>
-<hr>
-
-
   <a href="${apiURL }" id="link"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-  </body>
 </html>

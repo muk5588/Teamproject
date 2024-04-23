@@ -43,7 +43,7 @@
         <div class="kakao">
             <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin">
                 <img src="/resources/img/kakao_login_medium_narrow.png"></a>
-            <a href="${apiURL }" id="link"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+             <a href="/login/naver/login"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
         </div>
     </form>
 </c:if>

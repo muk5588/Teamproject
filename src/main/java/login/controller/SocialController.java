@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import user.dto.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +64,8 @@ public class SocialController {
 //    }
 
 	@RequestMapping("/naver/login")
-//	public ModelAndView main(HttpSession session, Model model) {
-	public void main(HttpSession session, Model model) {
+	public ModelAndView main(HttpSession session, Model model) {
+//	public void main(HttpSession session, Model model) {
 		String state = socialService.getstate();
 		
 		String apiURL = socialService.getApiURL(state);
@@ -74,7 +75,7 @@ public class SocialController {
 	    logger.info("apiu~~~ {}",apiURL);
 	    
 	    model.addAttribute("apiURL", apiURL);
-//	    return new ModelAndView("redirect:"+apiURL);
+	    return new ModelAndView("redirect:"+apiURL);
 	}
 	
 	@RequestMapping("/naver/callback")

@@ -1,8 +1,8 @@
 package login.service;
 
-import java.util.HashMap;
-
 import com.google.gson.JsonObject;
+
+import java.util.HashMap;
 
 public interface SocialService {
 
@@ -42,4 +42,7 @@ public interface SocialService {
 	 */
 	public HashMap<String, Object> getUserInfo(JsonObject token);
 
+	public String getSosid(HashMap<String, Object> info);
+
+	public HashMap<String, Object> socialLogin(String sosid);
 }

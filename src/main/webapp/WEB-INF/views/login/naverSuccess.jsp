@@ -42,4 +42,3 @@
 
 </body>
 </html>
-[출처] 13회차_Spring MVC기반 소셜 로그인 구현(1)_네이버 Open API|작성자 4분의 1

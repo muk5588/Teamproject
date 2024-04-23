@@ -1,5 +1,14 @@
 package login.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import login.dao.SocialDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import user.dto.UserDTO;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,15 +21,6 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import user.dto.UserDTO;
-
 @Service
 public class SocialServiceImpl implements SocialService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -28,6 +28,8 @@ public class SocialServiceImpl implements SocialService {
 	private final static String CALLBACK_URI = "http://localhost:8088/login/naver/callback";
 	private final static String CLIENT_SECRET = "mFSPW6AxlM";// 애플리케이션 클라이언트 시크릿값";
 
+	@Autowired
+	SocialDao socialDao;
 	@Override
 	public String getApiURL(String state) {
 		String redirectURI = null;
@@ -178,5 +180,17 @@ public class SocialServiceImpl implements SocialService {
 
 		return info;
 	}//getUserInfo(token)
+
+	@Override
+	public String getSosid(HashMap<String, Object> info) {
+		String id = info.get("id").toString();
+		return socialDao.getSosid(id);
+	}
+
+	@Override
+	public HashMap<String, Object> socialLogin(String sosid) {
+
+        return socialDao.socialLogin(sosid);
+    }
 
 }

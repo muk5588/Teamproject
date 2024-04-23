@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,6 @@ public class SocialController {
 	@Autowired SocialService socialService;
 	
 //    @Autowired
-//    private NaverLoginVO naverLoginVO;
     private String apiResult = null;
 //    @Autowired
 //    private void setnaverLoginVO(NaverLoginVO naverLoginVO) {
@@ -94,19 +94,24 @@ public class SocialController {
 //		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
 		    
 		    HashMap<String, Object> info = socialService.getUserInfo(token);
+			logger.info("info : {} ", info);
 		    String socid = socialService.getSosid(info);
 			if(socid!=null) {
 				HashMap<String, Object> sosid = socialService.socialLogin(socid);
-
+				session.setAttribute("sosid", sosid);
 				return "/";
 			}else{
-
+				return "login/naver/naverjoin";
 			}
-		    return "login/naver/success";
 	}
 
 	@RequestMapping("/naver/naver/logoutCallback")
 	public void naverLogout() {
 		
 	}
+	@GetMapping("/naverjoin")
+	public String naverJoin(Model model) {
+		return "naver/naverjoin";
+	}
+
 }

@@ -7,9 +7,9 @@
 <mapper namespace="login.dao.SocialDao">
 	
 	<select id="getSosid" resultType="String" parameterType="String">
-		select social_no from usertb_test
+		select SUSERNO from usertb_test
 		<where>
-			and id = #{socid }
+			and SUSERNO = #{id }
 		</where>
 	</select>
 

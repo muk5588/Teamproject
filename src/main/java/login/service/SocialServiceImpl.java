@@ -165,7 +165,9 @@ public class SocialServiceImpl implements SocialService {
 			String email = response.get("email").getAsString().trim();
 			String id = response.get("id").getAsString().trim();
 			String name = response.get("name").getAsString().trim();
-
+			info.put("id",id);
+			info.put("name",name);
+			info.put("email",email);
 			logger.info("email : {} ",email);
 			logger.info("id : {} ",id);
 			logger.info("name : {} ",name);
@@ -176,7 +178,6 @@ public class SocialServiceImpl implements SocialService {
 			e.printStackTrace();
 		}
 
-		logger.info("info : {}", info);
 
 		return info;
 	}//getUserInfo(token)

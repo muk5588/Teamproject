@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+.Menu-List {
+ 	position: absolute;
+    top: 27px; 
+    right: 20px; 
+}
+
+.Menu-List img {
+	float: right;
+	margin-left: 10px;
+	width: 55px;
+	height: 55px;
+	cursor: pointer;
+}
+
+.Header-Name{
+	width: 100%;
+	height: 70px;
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.Site-Name{
+	font-size: 40px;
+	text-decoration: none;
+	display: inline-block;
+	font-weight: bold;
+	color: #000000;
+}
+
+.Header-Button {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.Header-Button li {
+    display: inline-block;
+    margin: 0 5px; 
+}
+
+.Header-Button li a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #696969;
+    background-color: #DCDCDC; 
+    border-radius: 20px; 
+    font-weight: bold;
+}
+
+.Header-Button li a:hover {
+	border: 1px solid #000000;
+}
+
+.Header-Search {
+    position: relative;
+    width: 930px;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Header-Search input[type="text"] {
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    width: 800px;
+    height: 100%;
+    background-color: #DCDCDC; 
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+#search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.login-menu {
+    position: fixed;
+    top: 0;
+    right: -250px; 
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(220, 220, 220, 0.8);
+    transition: right 0.3s ease; 
+}
+
+.login-menu.show {
+    right: 0; 
+}
+
+.login-button-container {
+    /* text-align: center; 
+    margin-top: 200px; 
+    margin-bottom: 100px;
+    border-radius: 20px;
+    padding: 10px 20px; */
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 100px;
+}
+
+.login-button-container li {
+    margin-bottom: 10px;
+}
+
+.login-button-container li a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #696969;
+    background-color: #ABB6BC; 
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.login-button-container li a:hover {
+    border: 1px solid #000000;
+}
+
+
+
+
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="*.service">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-chuncheon-1.oraclecloud.com))(connect_data=(service_name=g5175ab50d5150d_project2_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"/>
+        <property name="username" value="admin"/>
+        <property name="password" value="Travelsquare1"/>
+    </bean>
+    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--  스프링 빈으로 등록된 dataSource를 이용한 DB접속 정보 설정  -->
+        <property name="dataSource" ref="dataSource"/>
+        <!--  마이바티스 설정 파일(XML)의 위치 지정하기  -->
+        <!--				        <property name="configLocation" ref="classpath:/myBatis-config.xml"/>-->
+
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+                <property name="jdbcTypeForNull" value="NULL"/>
+            </bean>
+        </property>
+        <!--  mapper XML파일의 위치 설정 -->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:/**/mapper/**/*.xml</value>
+            </array>
+        </property>
+        <property name="typeAliasesPackage">
+            <value>*.dto</value>
+        </property>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="SqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="*.dao"/>
+    </bean>
+    
+    <!-- gmail설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     	<property name="host" value="smtp.gmail.com" />
+  		<property name="port" value="587" />
+ 		<property name="username" value="jxoow1531155@gmail.com"/> <!-- 이메일 -->
+	 	<property name="password" value="qevknonitspqghvz"/> <!-- 비밀번호 -->
+		<property name="javaMailProperties">
+		<props>
+           	<prop key="mail.transport.protocol">smtp</prop>
+			<prop key="mail.smtp.auth">true</prop>
+			<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+			<prop key="mail.smtp.starttls.enable">true</prop>
+			<prop key="mail.debug">true</prop>
+			<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+			<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+		</props>
+		</property>
+	</bean>
+
+    
+    
+</beans>

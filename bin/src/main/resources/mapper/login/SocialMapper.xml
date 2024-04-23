@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login.dao.SocialDao">
+	
+	<select id="getSosid" resultType="String" parameterType="String">
+		select social_no from usertb_test
+		<where>
+			and id = #{socid }
+		</where>
+	</select>
+
+	<select id="socialLogin" resultType="HashMap" parameterType="String">
+		select
+			userno, name, userid, nickname, gender, email, postcode, address,
+			detailAddress, extraAddress, phone, gradeno
+		FROM usertb_test
+		<where>
+			and userno = #{userno }
+		</where>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

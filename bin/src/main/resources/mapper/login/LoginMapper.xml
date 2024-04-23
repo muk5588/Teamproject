@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login.dao.LoginDao">
+	
+	<select id="selectCntIdPw" resultType="int" parameterType="UserDTO">
+		select count(*) from (
+		select userno from usertb_test
+		<where>
+			and userid = #{userid }
+			and userpw = #{userpw }
+
+		</where>
+		)
+	</select>
+
+	<select id="selectNoByIdPw" resultType="int" parameterType="UserDTO">
+		select userno from usertb_test
+		<where>
+			and userid = #{userid }
+			and userpw = #{userpw }
+		</where>
+
+	</select>
+
+	<select id="selectByNo" resultType="UserDTO" parameterType="int">
+		select
+			userno, name, userid, nickname, gender, email, postcode, address,
+			detailAddress, extraAddress, phone, gradeno
+		FROM usertb_test
+		<where>
+			and userno = #{userno }
+		</where>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

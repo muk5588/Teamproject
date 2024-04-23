@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user.dao.UserDao">
+	<select id="userDetail" parameterType="UserDTO" resultType="UserDTO">
+		SELECT * FROM usertb_test WHERE userno = #{userno}
+	</select>
+
+	<select id="userList" resultType="UserDTO">
+		SELECT * FROM usertb_test order by userno
+	</select>
+
+	<insert id="userInsert" parameterType="UserDTO">
+		INSERT INTO usertb_test(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname)
+		VALUES (user_seq_test.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone},  #{nickname})
+	</insert>
+
+	<update id="userUpdate" parameterType="UserDTO">
+		UPDATE usertb_test
+		SET name  = #{name},
+			email =#{email},
+			gender=#{gender},
+			postcode=#{postcode},
+			address       =#{address},
+			detailAddress = #{detailAddress},
+			extraAddress  = #{extraAddress},
+			phone         = #{phone},
+			nickname      = #{nickname}
+		WHERE userno = #{userno }
+	</update>
+
+	<delete id="userDelete" parameterType="UserDTO">
+		DELETE FROM usertb_test WHERE userno=#{userno }
+	</delete>
+	<select id="passChk" resultType="int">
+		select count(*) from usertb_test
+		where userid = #{userid}
+		and userpw = #{userpw}
+	</select>
+
+	<select id="idChk" resultType="int">
+		select count(*) from usertb_test
+		where userid = #{userid}
+	</select>
+	<select id="findUserid" resultType="UserDTO">
+		select userid from usertb_test
+		where name = #{name }
+		and email = #{email }
+	</select>
+	<select id="findUserpw"  resultType="UserDTO">
+		select userpw from usertb_test
+		where userid = #{userid }
+		  and  name = #{name }
+		  and email = #{email }
+	</select>
+	<update id="updateUserpw" parameterType="UserDTO">
+		update usertb_test
+		set userpw = #{userpw }
+		where userid = #{userid }
+		  and  name = #{name }
+		  and email = #{email }
+	</update>
+</mapper>
+

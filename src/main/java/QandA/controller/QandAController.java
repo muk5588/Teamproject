@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import QandA.service.face.QandAService;
-import QandA.service.impl.QandAServiceImpl;
+import QandA.service.QandAService;
 
 @Controller
 @RequestMapping("/qanda")

@@ -1,12 +1,13 @@
 package login.dao;
 
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
+import user.dto.UserDTO;
 
 @Repository("SocialDao")
 public interface SocialDao {
     public String getSosid(String id) ;
+    
+    public void socialJoin(UserDTO dto);
 
-    public HashMap<String, Object> socialLogin(String sosid);
+    public UserDTO socialLogin(String socid);
 }

@@ -1,8 +1,7 @@
-package QandA.service.impl;
+package QandA.service;
 
 import QandA.dao.QandADao;
 import QandA.dto.QandA;
-import QandA.service.face.QandAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

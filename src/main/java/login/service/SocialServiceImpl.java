@@ -189,9 +189,14 @@ public class SocialServiceImpl implements SocialService {
 	}
 
 	@Override
-	public HashMap<String, Object> socialLogin(String sosid) {
+	public void socialJoin(UserDTO dto) {
+		socialDao.socialJoin(dto);
+	}
 
-        return socialDao.socialLogin(sosid);
-    }
+	@Override
+	public UserDTO socialLogin(String socid) {
+		return socialDao.socialLogin(socid);
+	}
+
 
 }

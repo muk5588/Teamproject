@@ -1,4 +1,4 @@
-package QandA.service.face;
+package QandA.service;
 
 import QandA.dto.QandA;
 import java.util.List;

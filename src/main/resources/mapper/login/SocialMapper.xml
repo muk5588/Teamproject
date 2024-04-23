@@ -13,15 +13,16 @@
 		</where>
 	</select>
 
-	<select id="socialLogin" resultType="HashMap" parameterType="String">
-		select
-			userno, name, userid, nickname, gender, email, postcode, address,
-			detailAddress, extraAddress, phone, gradeno
-		FROM usertb_test
+	<select id="socialLogin" resultType="UserDTO" parameterType="String">
+		select name, nickname FROM usertb_test
 		<where>
-			and userno = #{userno }
+			and suserno = #{suserno }
 		</where>
 	</select>
+	<insert id="socialJoin" parameterType="UserDTO">
+		INSERT INTO usertb_test(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname,suserno)
+		VALUES (user_seq_test.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone},  #{nickname}, #{suserno})
+	</insert>
 </mapper>
 
 

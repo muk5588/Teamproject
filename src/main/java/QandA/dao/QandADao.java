@@ -1,8 +1,11 @@
 package QandA.dao;
 
 import QandA.dto.QandA;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository("QandADao")
 public interface QandADao {
    
 	public List<QandA> findAll();

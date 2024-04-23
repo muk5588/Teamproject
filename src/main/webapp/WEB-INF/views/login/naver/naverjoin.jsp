@@ -65,24 +65,10 @@
 <h3>회원가입 화면</h3>
 <div class="warpper">
     <div class="warp">
-        <form action="/user/userInsert" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+        <form action="/login/naverjoin" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
             <div id="namebox">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" value="${sosid.name}"/><br>
-            </div>
-            <div id="useridbox">
-                <label for="userid">아이디</label>
-                <input type="text" name="userid" id="userid">
-                <div id="alertid" name="alertid"></div>
-            </div>
-            <div id="userpwbox">
-                <label for="userpw">비밀번호</label>
-                <input type="text" name="userpw" id="userpw">
-                <div id="alertpw" name="alertpw"></div>
-
-                <label for="userpwchk">비밀번호 확인</label>
-                <input type="text" name="userpwchk" id="userpwchk">
-                <div id="alertpw2" name="alertpw2"></div>
             </div>
             <div id="nickbox">
                 <label for="nickname">닉네임</label>
@@ -114,11 +100,10 @@
                 <input type="text" name="phone" id="phone">
             </div>
             <div id="social" hidden="hidden">
-                <input type="hidden" name="socialid" id="socialid" value="${sosid.id}">
-                <input type="hidden" name="socialtype" id="socialtype" value="naver">
+                <input type="hidden" name="suserno" id="suserno" value="${sosid.id}">
             </div>
             <br><br>
-            <button type="button" id="join" name="join">회원가입</button>
+            <button type="submit" >회원가입</button>
             <button type="reset" id="reset" name="reset">초기화</button>
         </form>
 

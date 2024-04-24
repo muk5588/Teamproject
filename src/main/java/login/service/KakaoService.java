@@ -14,5 +14,6 @@ public interface KakaoService {
 	public JsonObject getToken(HashMap<String, Object> map);
 
 	public HashMap<String, Object> getUserInfo(JsonObject token);
-	public void kakaoLogout(HttpSession session);
+	
+	public boolean kakaoLogout(HttpSession session);
 }

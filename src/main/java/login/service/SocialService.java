@@ -63,7 +63,7 @@ public interface SocialService {
 
 	public String getKakaoid(HashMap<String, Object> userInfo);
 
-	public void naverLogout(HttpSession session);
+	public boolean naverLogout(HttpSession session);
 
 
 }

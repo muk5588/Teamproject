@@ -99,7 +99,7 @@ public class SocialController {
 //		    logger.info("access_token : {} ", token.get("access_token"));
 //		    logger.info("refresh_token : {} ", token.get("refresh_token"));
 //		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
-		    session.setAttribute("token",token.get("access_token") );
+		    session.setAttribute("token",token.get("access_token").toString() );
 		    HashMap<String, Object> info = socialService.getUserInfo(token);
 			logger.info("info : {} ", info);
 		    String socid = socialService.getSosid(info);
@@ -159,7 +159,7 @@ public class SocialController {
 
 		HashMap<String, Object> userInfo = kakaoService.getUserInfo(token);
 		logger.info("AFTER getUserInfo - userInfo : {}", userInfo);
-		session.setAttribute("token1", token);
+		session.setAttribute("token1", token.toString());
 		String socid = socialService.getKakaoid(userInfo);
 		if(socid!=null) {
 			UserDTO dto = socialService.socialLogin(socid);

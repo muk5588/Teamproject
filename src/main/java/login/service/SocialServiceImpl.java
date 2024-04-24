@@ -148,7 +148,7 @@ public class SocialServiceImpl implements SocialService {
             int responseCode = con.getResponseCode();
 
             BufferedReader bufferReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            logger.info("###################br : {}", bufferReader);
+            logger.info("###################br : {}", bufferReader.toString());
             logger.info("responseCode : {}", responseCode);
 
             String line = "";
@@ -289,9 +289,9 @@ public class SocialServiceImpl implements SocialService {
     }
 
     @Override
-    public void naverLogout(HttpSession session) {
-        String redirectURI = null;
+    public boolean naverLogout(HttpSession session) {
         String ACCESS_TOKEN =(String) (session.getAttribute("token"));
+        logger.info("서비스 토큰값 확인 : {}",session.getAttribute("token"));
 //        try {
 //            redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
 //        } catch (UnsupportedEncodingException e) {
@@ -304,8 +304,48 @@ public class SocialServiceImpl implements SocialService {
         apiURL += "&client_id=" + CLIENT_ID;
         apiURL += "&client_secret=" + CLIENT_SECRET;
         apiURL += "&access_token=" + ACCESS_TOKEN;
+        
+        try {
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			
+			int responseCode = con.getResponseCode();
+			logger.info(" responseCode : {}", responseCode);
+			BufferedReader bufferedReader;
+            bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            logger.info("responseCode : {}", responseCode);
+			
+            String input;
+            String res = "";
+            while ((input = bufferedReader.readLine()) != null) {
+                res += input;
+            }
+
+            bufferedReader.close();
+            
+            if (responseCode == 200) {
+                logger.info("res : {}", res.toString());
+
+                Gson gson = new Gson();
+
+                JsonObject jsonObj = gson.fromJson(res, JsonObject.class);
+                logger.info("jsonObj : {}", jsonObj);
+                String result = jsonObj.get("result").getAsString().trim();
+                
+                if( result == null || "".equals(result)) {
+                	return false;
+                }
+            }
+			 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+        
         logger.info("log",ACCESS_TOKEN);
         session.invalidate();
-    }
+        return true;
+        
+    }//naverLogout(session)
 
 }

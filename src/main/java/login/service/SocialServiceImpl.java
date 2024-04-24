@@ -279,4 +279,10 @@ public class SocialServiceImpl implements SocialService {
 
 		return null;
 	}
+
+	@Override
+	public String getKakaoid(HashMap<String, Object> userInfo) {
+		String id = userInfo.get("id").toString();
+		return socialDao.getSosid(id);
+	}
 }

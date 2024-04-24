@@ -59,4 +59,6 @@ public interface SocialService {
 	public String getGoogleURL(String code, String state);
 
 	public JsonObject getGoogleToken(String apiURL);
+
+	public String getKakaoid(HashMap<String, Object> userInfo);
 }

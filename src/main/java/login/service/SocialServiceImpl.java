@@ -291,20 +291,20 @@ public class SocialServiceImpl implements SocialService {
     @Override
     public void naverLogout(HttpSession session) {
         String redirectURI = null;
-        JsonObject ACCESS_TOKEN =(JsonObject) session.getAttribute("token");
-        try {
-            redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        String ACCESS_TOKEN =String.valueOf(session.getAttribute("token"));
+//        try {
+//            redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        ?grant_type=delete&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&access_token=ACCESS_TOKEN
 
         String apiURL = "";
         apiURL += "https://nid.naver.com/oauth2.0/token?grant_type=delete";
         apiURL += "&client_id=" + CLIENT_ID;
         apiURL += "&client_secret=" + CLIENT_SECRET;
-        apiURL += "&redirect_uri=" + redirectURI;
         apiURL += "&access_token=" + ACCESS_TOKEN;
-
+        logger.info("log",ACCESS_TOKEN);
         session.invalidate();
     }
 

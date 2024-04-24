@@ -99,7 +99,7 @@ public class SocialController {
 //		    logger.info("access_token : {} ", token.get("access_token"));
 //		    logger.info("refresh_token : {} ", token.get("refresh_token"));
 //		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
-		    session.setAttribute("token", token);
+		    session.setAttribute("token",token.get("access_token") );
 		    HashMap<String, Object> info = socialService.getUserInfo(token);
 			logger.info("info : {} ", info);
 		    String socid = socialService.getSosid(info);
@@ -166,6 +166,7 @@ public class SocialController {
 			boolean isLogin = true;
 			session.setAttribute("isLogin", isLogin);
 			session.setAttribute("dto", dto);
+
 			return "redirect: /";
 		}else{
 			session.setAttribute("sosid", userInfo);

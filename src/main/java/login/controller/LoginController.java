@@ -59,6 +59,7 @@ public class LoginController {
             socialService.naverLogout(session);
         }else if(session.getAttribute("token1") != null){
             kakaoService.kakaoLogout(session);
+            session.invalidate();
         }
         else {
             session.invalidate();

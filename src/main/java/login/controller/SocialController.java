@@ -1,7 +1,12 @@
 package login.controller;
 
-import com.google.gson.JsonObject;
-import login.service.SocialService;
+import java.util.HashMap;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +16,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import user.dto.UserDTO;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.UUID;
+import com.google.gson.JsonObject;
+
+import login.service.KakaoService;
+import login.service.SocialService;
+import user.dto.UserDTO;
 
 @Controller
 @RequestMapping("/login")
 public class SocialController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired SocialService socialService;
+	@Autowired KakaoService kakaoService;
 	
 //    @Autowired
     private String apiResult = null;
@@ -63,6 +68,7 @@ public class SocialController {
 //        return "login/naverSuccess";
 //    }
 
+    //1.네이버 로그인
 	@RequestMapping("/naver/login")
 	public ModelAndView main(HttpSession session, Model model) {
 //	public void main(HttpSession session, Model model) {
@@ -129,4 +135,36 @@ public class SocialController {
 		socialService.socialJoin(dto);
 		return "redirect: ./login";
 	}
+	
+	//--------------------------------------------------------------------------------------------
+	//2.카카오 로그인 처리
+	@RequestMapping("/kakao/login")
+	public String kakaoLogin() {
+		String state = kakaoService.getState();
+	    String apiURL = kakaoService.getURL(state);
+		
+	    return "redirect:" + apiURL;
+	}
+	
+	@RequestMapping("/kakaoLogin")
+//	@RequestMapping("/kakao/redirect")
+	public void kakaoRedirect(HttpServletRequest request) {
+		String code = request.getParameter("code");
+		String state = request.getParameter("state");
+		logger.info("code : {} ", request.getParameter("code"));
+		logger.info("state : {} ", request.getParameter("state"));
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("code", code);
+		map.put("state", state);
+		
+		JsonObject token = kakaoService.getToken(map);
+		logger.info("토큰값 : {}", token.toString());
+		
+		HashMap<String, Object> userInfo = kakaoService.getUserInfo(token);
+		logger.info("AFTER getUserInfo - userInfo : {}", userInfo);
+		
+	}//카카오 리다이렉트
+	
+	
+	
 }

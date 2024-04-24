@@ -41,7 +41,8 @@
         <button>로그인</button>
         <button><a href="/user/insertUser">회원가입</a></button>
         <div class="kakao">
-            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin">
+<!--             <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=51dc08395da36cf607b66233b4371516&redirect_uri=http://localhost:8088/login/kakaoLogin"> -->
+            <a href="/login/kakao/login">
                 <img src="/resources/img/kakao_login_medium_narrow.png"></a>
              <a href="/login/naver/login"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
         </div>

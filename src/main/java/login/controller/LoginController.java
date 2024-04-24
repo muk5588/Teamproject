@@ -3,6 +3,9 @@ package login.controller;
 import login.service.KakaoService;
 import login.service.LoginService;
 import login.service.SocialService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
+	private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -55,16 +59,24 @@ public class LoginController {
     //로그아웃 요청
     @RequestMapping("/login/logout")
     public String logout(HttpSession session) {
+    	logger.info("s#############ession DATA  : {} ", session.getAttribute("token"));
+    	boolean res;
         if (session.getAttribute("token") != null) {
-            socialService.naverLogout(session);
+        	logger.info("네이버 로그아웃쪽 컨트롤러");
+        	res = socialService.naverLogout(session);
         }else if(session.getAttribute("token1") != null){
-            kakaoService.kakaoLogout(session);
+        	logger.info("카카오 로그아웃쪽 컨트롤러");
+        	res = kakaoService.kakaoLogout(session);
             session.invalidate();
         }
         else {
             session.invalidate();
         }
-        return "redirect:/";
+        
+        if( res = true ) {
+        	return "redirect:/";
+        }
+        return "/error";
     }
 
 

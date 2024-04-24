@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -19,10 +20,8 @@ public class KakaoServiceImpl implements KakaoService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private final static String KAKAO_URL = "https://kauth.kakao.com/oauth/authorize";
-//	private final static String REST_API_KEY = "32ca1a3f959af764663dcdadd262dce1";	//선진
-	private final static String REST_API_KEY = "51dc08395da36cf607b66233b4371516";	//도영
-	private final static String REDIRECT_URL = "http://localhost:8088/login/kakaoLogin";	//도영
-//	private final static String REDIRECT_URL = "http://localhost:8088/login/kakao/redirect";	//선진
+	private final static String REST_API_KEY = "51dc08395da36cf607b66233b4371516";
+	private final static String REDIRECT_URL = "http://localhost:8088/login/kakaoLogin";
 	private final static String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private final static String GET_INFO_URL = "https://kapi.kakao.com/v2/user/me";
 	
@@ -171,15 +170,68 @@ public class KakaoServiceImpl implements KakaoService {
 	}//getUserInfo(Json token)
 
 	@Override
-	public void kakaoLogout(HttpSession session) {
-		String redirectURI = null;
-		String ACCESS_TOKEN =String.valueOf(session.getAttribute("token1"));
-		if(ACCESS_TOKEN != null && !"".equals(ACCESS_TOKEN)){
-			session.removeAttribute("token1");
-		}else{
-			System.out.println("accessToken is null");
+	public boolean kakaoLogout(HttpSession session) {
+		String ACCESS_TOKEN = (String) session.getAttribute("token1");
+		if(ACCESS_TOKEN == null || "".equals(ACCESS_TOKEN)){
+			return false;
 		}
-	}
+		
+		String apiUrl = "https://kapi.kakao.com/v1/user/logout";
+		URL url;
+		try {
+			url = new URL(apiUrl);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		
+			con.setRequestMethod("POST");
+			//POST 요청을 수행하려면 serDoOutput()을 true로 설정해줘야함.
+			con.setDoOutput(true);
+			
+			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+		    String sb = "grant_type=authorization_code" +
+				"&client_id=" + REST_API_KEY + // REST_API_KEY
+				"&redirect_uri="+ REDIRECT_URL + // REDIRECT_URI
+				"&code=" + code;
+			bufferedWriter.write(sb);
+			bufferedWriter.flush();
+//			https://kauth.kakao.com/oauth/logout
+			int responseCode = con.getResponseCode();
+			
+			BufferedReader bufferedReader;
+			if( responseCode == 200) {	//정상응답
+				bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				logger.info("responseCode : {}", responseCode);
+			} else {	//에러 발생
+				bufferedReader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				logger.info("responseCode : {}", responseCode);
+			}
+			
+			String input;
+			String res = "";
+			while ((input = bufferedReader.readLine()) != null) {
+				res += input;
+			}
+			
+			bufferedReader.close();
+			if (responseCode == 200) {
+				logger.info("res : {}", res.toString());
+				
+				Gson gson = new Gson();
+				
+				JsonObject jsonObj = gson.fromJson(res, JsonObject.class);
+				logger.info("jsonObj : {}", jsonObj);
+				
+				return jsonObj;
+			}
+			
+			
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}//kakaoLogout(session)
 
 
 

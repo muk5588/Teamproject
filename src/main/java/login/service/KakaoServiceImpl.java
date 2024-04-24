@@ -2,6 +2,7 @@ package login.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -177,24 +178,15 @@ public class KakaoServiceImpl implements KakaoService {
 		}
 		
 		String apiUrl = "https://kapi.kakao.com/v1/user/logout";
-		URL url;
 		try {
-			url = new URL(apiUrl);
+			URL url = new URL(apiUrl);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		
 			con.setRequestMethod("POST");
 			//POST 요청을 수행하려면 serDoOutput()을 true로 설정해줘야함.
 			con.setDoOutput(true);
-			
-			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
-		    String sb = "grant_type=authorization_code" +
-				"&client_id=" + REST_API_KEY + // REST_API_KEY
-				"&redirect_uri="+ REDIRECT_URL + // REDIRECT_URI
-				"&code=" + code;
-			bufferedWriter.write(sb);
-			bufferedWriter.flush();
-//			https://kauth.kakao.com/oauth/logout
-			int responseCode = con.getResponseCode();
+			con.setRequestProperty("Authorization", " Bearer "+ACCESS_TOKEN);
+		    int responseCode = con.getResponseCode();
 			
 			BufferedReader bufferedReader;
 			if( responseCode == 200) {	//정상응답
@@ -219,12 +211,12 @@ public class KakaoServiceImpl implements KakaoService {
 				
 				JsonObject jsonObj = gson.fromJson(res, JsonObject.class);
 				logger.info("jsonObj : {}", jsonObj);
-				
-				return jsonObj;
+				String id = jsonObj.get("id").getAsString().trim();
+				String sessionId = (String) session.getAttribute("socid");
+				if( id == sessionId ) {
+					return true;
+				}
 			}
-			
-			
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();

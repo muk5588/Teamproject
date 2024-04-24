@@ -159,11 +159,12 @@ public class SocialController {
 
 		HashMap<String, Object> userInfo = kakaoService.getUserInfo(token);
 		logger.info("AFTER getUserInfo - userInfo : {}", userInfo);
-		session.setAttribute("token1", token.toString());
+		session.setAttribute("token1", token.get("access_token").toString());
 		String socid = socialService.getKakaoid(userInfo);
 		if(socid!=null) {
 			UserDTO dto = socialService.socialLogin(socid);
 			boolean isLogin = true;
+			session.setAttribute("socid", socid);
 			session.setAttribute("isLogin", isLogin);
 			session.setAttribute("dto", dto);
 

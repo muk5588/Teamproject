@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login.dao.SocialDao">
-	
 	<select id="getSosid" resultType="String" parameterType="String">
-		select SUSERNO from usertb_test
+		select SUSERNO from usertb
 		<where>
 			and SUSERNO = #{id }
 		</where>
 	</select>
 
 	<select id="socialLogin" resultType="UserDTO" parameterType="String">
-		select name, nickname FROM usertb_test
+		select name, nickname FROM usertb
 		<where>
 			and suserno = #{suserno }
 		</where>
 	</select>
 	<insert id="socialJoin" parameterType="UserDTO">
-		INSERT INTO usertb_test(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname,suserno)
+		INSERT INTO usertb(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname,SUSER_NO)
 		VALUES (user_seq_test.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone},  #{nickname}, #{suserno})
 	</insert>
 </mapper>

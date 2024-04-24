@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="grade.dao.GradeDao">
 	<select id="gradeDetail" parameterType="Grade" resultType="Grade">
-        select * from GRADETB_TEST where GRADENO = #{gradeno}
+        select * from grade where GRADENO = #{gradeno}
     </select>
 
     <select id="gradeList" resultType="Grade">
-        select GRADENO,GRADENAME,COMM from GRADETB_TEST order by GRADENO
+        select GRADENO,GRADENAME,COMM from grade order by GRADENO
     </select>
 
     <insert id="gradeInsert" parameterType="Grade">
-        insert into GRADETB_TEST (GRADENO,GRADENAME,COMM)
+        insert into grade (GRADENO,GRADENAME,COMM)
         values (#{gradeno},#{gradename}, #{comm})
     </insert>
 
     <update id="gradeUpdate" parameterType="Grade">
-        UPDATE GRADETB_TEST
+        UPDATE grade
         set GRADENO = #{gradeno},
             GRADENAME = #{gradename},
             COMM = #{comm}
@@ -23,7 +23,7 @@
     </update>
 
     <delete id="gradeDelete" parameterType="Grade">
-        delete from GRADETB_TEST where GRADENO = #{gradeno}
+        delete from grade where GRADENO = #{gradeno}
     </delete>
 </mapper>
 

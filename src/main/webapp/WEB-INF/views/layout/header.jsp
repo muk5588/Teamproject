@@ -90,7 +90,7 @@
                 <ul>
                     <li>${dto.name } [${dto.nickname } ]</li>
                     <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
-                    <c:if test="${dto.gradeno < 1}">
+                    <c:if test="${dto.gradeno < 1 || dto.gradeno == 5000}">
                         <br>
                         <a href="/user/adminPage" style="margin-left: 90px">관리자페이지</a>
                     </c:if>

@@ -291,7 +291,7 @@ public class SocialServiceImpl implements SocialService {
     @Override
     public void naverLogout(HttpSession session) {
         String redirectURI = null;
-        String ACCESS_TOKEN =String.valueOf(session.getAttribute("token"));
+        String ACCESS_TOKEN =(String) (session.getAttribute("token"));
 //        try {
 //            redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
 //        } catch (UnsupportedEncodingException e) {

@@ -1,12 +1,8 @@
 package login.controller;
 
-import java.util.HashMap;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.google.gson.JsonObject;
+import login.service.KakaoService;
+import login.service.SocialService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.JsonObject;
-
-import login.service.KakaoService;
-import login.service.SocialService;
 import user.dto.UserDTO;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/login")
@@ -164,7 +161,56 @@ public class SocialController {
 		logger.info("AFTER getUserInfo - userInfo : {}", userInfo);
 		
 	}//카카오 리다이렉트
-	
-	
+
+	//511805987241-tigiok5tle9vo2uttu80i7r1voe65kle.apps.googleusercontent.com
+	//RA3VsWUWETduFax9fD8jr1Cg6yAI
+	// api 키: AIzaSyDQK7F8ggaZtyQBZ-8keLi6hfVtkz3YvEg
+	@RequestMapping("/google/login")
+//	public ModelAndView google(HttpSession session, Model model) {
+	public void google(HttpSession session, Model model) {
+		String state = socialService.getstate();
+
+		String apiURL = socialService.googleURL(state);
+
+		session.setAttribute("state", state);
+		logger.info("state~~~ {}",state);
+		logger.info("apiu~~~ {}",apiURL);
+
+		model.addAttribute("apiURL", apiURL);
+//		return new ModelAndView("redirect:"+apiURL);
+	}
+	@RequestMapping("/google/callback")
+	public String googlecallback(HttpServletRequest request, HttpServletResponse response, HttpSession session
+	) {
+		String code = request.getParameter("code");
+		String state = request.getParameter("state");
+		logger.info("code : {} ", request.getParameter("code"));
+		logger.info("state : {} ", request.getParameter("state"));
+
+		String apiURL = socialService.getGoogleURL(code,state);
+		logger.info("apiURL : {} ", apiURL);
+
+		JsonObject token = socialService.getGoogleToken(apiURL);
+//		    logger.info("-----------------error : {} ----------------", token.get("error"));
+//		    logger.info("error_description : {} ", token.get("error_description"));
+//		    logger.info("expires_in : {} ", token.get("expires_in"));
+//		    logger.info("access_token : {} ", token.get("access_token"));
+//		    logger.info("refresh_token : {} ", token.get("refresh_token"));
+//		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
+
+		HashMap<String, Object> info = socialService.getUserInfo(token);
+		logger.info("info : {} ", info);
+		String socid = socialService.getSosid(info);
+		if(socid!=null) {
+			UserDTO dto = socialService.socialLogin(socid);
+			boolean isLogin = true;
+			session.setAttribute("isLogin", isLogin);
+			session.setAttribute("dto", dto);
+			return "redirect: /";
+		}else{
+			session.setAttribute("sosid", info);
+			return "login/naver/naverjoin";
+		}
+	}
 	
 }

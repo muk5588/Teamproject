@@ -27,7 +27,9 @@ public class SocialServiceImpl implements SocialService {
 	private final static String CLIENT_ID = "vwSp_7gB7SNQ8Di_skGL";// 애플리케이션 클라이언트 아이디값";
 	private final static String CALLBACK_URI = "http://localhost:8088/login/naver/callback";
 	private final static String CLIENT_SECRET = "mFSPW6AxlM";// 애플리케이션 클라이언트 시크릿값";
-
+	private final static String GOOGLE_ID = "511805987241-56svgbqbgd3rlefh42uc5f4ghrh59egd.apps.googleusercontent.com";
+	private final static String GOOGLE_URI = "http://localhost:8088/login/google/callback";
+	private final static String GOOGLE_SECRET = "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";
 	@Autowired
 	SocialDao socialDao;
 	@Override
@@ -198,5 +200,83 @@ public class SocialServiceImpl implements SocialService {
 		return socialDao.socialLogin(socid);
 	}
 
+	@Override
+	public String googleURL(String state) {
+		String redirectURI = null;
+		try {
+			redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			logger.info("리다이렉트 URL : URL인코더.인코드('콜백 URL',인코딩타입 ) 부분 Exception발생");
+			e.printStackTrace();
+		}
+		String apiURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=profile&response_type=code";
+		apiURL += "&client_id=" + GOOGLE_ID;
+		apiURL += "&redirect_uri=" + redirectURI;
+		apiURL += "&state=" + state;
 
+		return apiURL;
+	}
+
+	@Override
+	public String getGoogleURL(String code, String state) {
+		String redirectURI = null;
+
+		try {
+			redirectURI = URLEncoder.encode(CALLBACK_URI, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		String apiURL = "";
+		apiURL += "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=";
+		apiURL += "AIzaSyDQK7F8ggaZtyQBZ-8keLi6hfVtkz3YvEg";
+
+		return apiURL;
+	}
+
+	@Override
+	public JsonObject getGoogleToken(String apiURL) {
+		try {
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+			con.setRequestMethod("GET");
+
+			int responseCode = con.getResponseCode();
+
+			BufferedReader bufferedReader;
+			if (responseCode == 200) { // 정상 호출
+				bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				logger.info("responseCode : {}", responseCode);
+			} else { // 에러 발생
+				bufferedReader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				logger.info("responseCode : {}", responseCode);
+			}
+
+			String input;
+			String res = "";
+			while ((input = bufferedReader.readLine()) != null) {
+				res += input;
+			}
+
+			bufferedReader.close();
+			if (responseCode == 200) {
+				logger.info("res : {}", res.toString());
+
+				Gson gson = new Gson();
+
+				JsonObject jsonObj = gson.fromJson(res, JsonObject.class);
+				logger.info("jsonObj : {}", jsonObj);
+
+				return jsonObj;
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

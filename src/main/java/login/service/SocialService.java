@@ -49,4 +49,14 @@ public interface SocialService {
 
 
 	public UserDTO socialLogin(String socid);
+	/**
+	 *  입력된 state, client_id, redirect_uri 을 포함한 (String) apiURL 을 반환한다
+	 * @param state - 랜덤 String
+	 * @return apiURL
+	 */
+	public String googleURL(String state);
+
+	public String getGoogleURL(String code, String state);
+
+	public JsonObject getGoogleToken(String apiURL);
 }

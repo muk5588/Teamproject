@@ -1,8 +1,9 @@
 package login.service;
 
-import java.util.HashMap;
-
 import com.google.gson.JsonObject;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 public interface KakaoService {
 
@@ -13,5 +14,5 @@ public interface KakaoService {
 	public JsonObject getToken(HashMap<String, Object> map);
 
 	public HashMap<String, Object> getUserInfo(JsonObject token);
-
+	public void kakaoLogout(HttpSession session);
 }

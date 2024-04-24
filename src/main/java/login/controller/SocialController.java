@@ -99,7 +99,7 @@ public class SocialController {
 //		    logger.info("access_token : {} ", token.get("access_token"));
 //		    logger.info("refresh_token : {} ", token.get("refresh_token"));
 //		    logger.info("-------------------token_type : {} ----------------", token.get("token_type"));
-		    
+		    session.setAttribute("token", token);
 		    HashMap<String, Object> info = socialService.getUserInfo(token);
 			logger.info("info : {} ", info);
 		    String socid = socialService.getSosid(info);
@@ -116,8 +116,8 @@ public class SocialController {
 	}
 
 	@RequestMapping("/naver/naver/logoutCallback")
-	public void naverLogout() {
-		
+	public void naverLogout(HttpSession session) {
+		socialService.naverLogout(session);
 	}
 	@GetMapping("/naverjoin")
 	public String naverJoin(Model model) {
@@ -156,9 +156,10 @@ public class SocialController {
 		
 		JsonObject token = kakaoService.getToken(map);
 		logger.info("토큰값 : {}", token.toString());
-		
+
 		HashMap<String, Object> userInfo = kakaoService.getUserInfo(token);
 		logger.info("AFTER getUserInfo - userInfo : {}", userInfo);
+		session.setAttribute("token1", token);
 		String socid = socialService.getKakaoid(userInfo);
 		if(socid!=null) {
 			UserDTO dto = socialService.socialLogin(socid);
@@ -171,7 +172,6 @@ public class SocialController {
 			return "login/naver/naverjoin";
 		}
 	}//카카오 리다이렉트
-
 //	//511805987241-tigiok5tle9vo2uttu80i7r1voe65kle.apps.googleusercontent.com
 //	//RA3VsWUWETduFax9fD8jr1Cg6yAI
 //	// api 키: AIzaSyDQK7F8ggaZtyQBZ-8keLi6hfVtkz3YvEg

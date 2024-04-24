@@ -1,24 +1,19 @@
 package login.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.math.BigInteger;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.security.SecureRandom;
-import java.util.HashMap;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.util.HashMap;
 
 @Service
 public class KakaoServiceImpl implements KakaoService {
@@ -176,6 +171,21 @@ public class KakaoServiceImpl implements KakaoService {
 		return info;
 	}//getUserInfo(Json token)
 
+	@Override
+	public void kakaoLogout(HttpSession session) {
+		String redirectURI = null;
+		JsonObject ACCESS_TOKEN =(JsonObject) session.getAttribute("token1");
+		try {
+			redirectURI = URLEncoder.encode(REDIRECT_URL, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+//		https://kauth.kakao.com/oauth/logout?client_id=${YOUR_REST_API_KEY}&logout_redirect_uri=${YOUR_LOGOUT_REDIRECT_URI}
+		String apiURL = "";
+		apiURL += "https://kapi.kakao.com/v1/user/logout";
+		apiURL += ACCESS_TOKEN;
+		session.invalidate();
+	}
 
 
 

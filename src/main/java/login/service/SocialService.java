@@ -3,6 +3,7 @@ package login.service;
 import com.google.gson.JsonObject;
 import user.dto.UserDTO;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 public interface SocialService {
@@ -61,4 +62,8 @@ public interface SocialService {
 	public JsonObject getGoogleToken(String apiURL);
 
 	public String getKakaoid(HashMap<String, Object> userInfo);
+
+	public void naverLogout(HttpSession session);
+
+
 }

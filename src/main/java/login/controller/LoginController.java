@@ -1,6 +1,8 @@
 package login.controller;
 
+import login.service.KakaoService;
 import login.service.LoginService;
+import login.service.SocialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,10 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+    @Autowired
+    SocialService socialService;
+    @Autowired
+    KakaoService kakaoService;
 
     //로그인 요청
     @RequestMapping("/login/loginProc")
@@ -49,7 +55,14 @@ public class LoginController {
     //로그아웃 요청
     @RequestMapping("/login/logout")
     public String logout(HttpSession session) {
-        session.invalidate();
+        if (session.getAttribute("token") != null) {
+            socialService.naverLogout(session);
+        }else if(session.getAttribute("token1") != null){
+            kakaoService.kakaoLogout(session);
+        }
+        else {
+            session.invalidate();
+        }
         return "redirect:/";
     }
 

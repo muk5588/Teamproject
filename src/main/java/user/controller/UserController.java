@@ -146,6 +146,14 @@ public class UserController {
         }
         return "redirect: /";
     }
+    @ResponseBody
+    @PostMapping("/nickChk")
+    public int nickChk(User dto) {
+    	int res = service.nickChk(dto);
+
+        return res;
+    	
+    }
     @PostMapping("/checkEmail")
 	public @ResponseBody EmailCheck checkEmail (String email , Model model){
 		int num =  service.checkEmail(email);

@@ -34,4 +34,7 @@ public interface UserDao {
     public User findUserpw(User dto);
 
     public void updateUserpw(User dto);
+
+
+	public int nickChk(User dto);
 }

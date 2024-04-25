@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class Message {
 	private int messageNo;
-	private int senduserNo;
-	private int touserNo;
+	private int sendUserNo;
+	private int toUserNo;
 	private String content;
 	private Date sendDate;
-	private char read;
-	private char save;
+	private char read='N';
+	private char save='N';
 	public Message() {}
-	public Message(int messageNo, int senduserNo, int touserNo, String content, Date sendDate, char read, char save) {
+	public Message(int messageNo, int sendUserNo, int toUserNo, String content, Date sendDate, char read, char save) {
 		super();
 		this.messageNo = messageNo;
-		this.senduserNo = senduserNo;
-		this.touserNo = touserNo;
+		this.sendUserNo = sendUserNo;
+		this.toUserNo = toUserNo;
 		this.content = content;
 		this.sendDate = sendDate;
 		this.read = read;
@@ -23,7 +23,7 @@ public class Message {
 	}
 	@Override
 	public String toString() {
-		return "Message [messageNo=" + messageNo + ", senduserNo=" + senduserNo + ", touserNo=" + touserNo
+		return "Message [messageNo=" + messageNo + ", sendUserNo=" + sendUserNo + ", toUserNo=" + toUserNo
 				+ ", content=" + content + ", sendDate=" + sendDate + ", read=" + read + ", save=" + save + "]";
 	}
 	public int getMessageNo() {
@@ -32,17 +32,17 @@ public class Message {
 	public void setMessageNo(int messageNo) {
 		this.messageNo = messageNo;
 	}
-	public int getSenduserNo() {
-		return senduserNo;
+	public int getSendUserNo() {
+		return sendUserNo;
 	}
-	public void setSenduserNo(int senduserNo) {
-		this.senduserNo = senduserNo;
+	public void setSendUserNo(int sendUserNo) {
+		this.sendUserNo = sendUserNo;
 	}
-	public int getTouserNo() {
-		return touserNo;
+	public int getToUserNo() {
+		return toUserNo;
 	}
-	public void setTouserNo(int touserNo) {
-		this.touserNo = touserNo;
+	public void setToUserNo(int toUserNo) {
+		this.toUserNo = toUserNo;
 	}
 	public String getContent() {
 		return content;
@@ -68,5 +68,6 @@ public class Message {
 	public void setSave(char save) {
 		this.save = save;
 	}
+
 	
 }

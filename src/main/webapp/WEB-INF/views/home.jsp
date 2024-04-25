@@ -24,6 +24,7 @@
 <button onclick="location.href = '/user/userList'">유저조회</button>
 <button onclick="location.href = '/user/searchUser?value=id'">아이디찾기</button>
 <button onclick="location.href = '/user/searchUser?value=pw'">비밀번호찾기</button>
+<button onclick="location.href = '/message/'">메세지 테스트</button>
 
 
 <%--<c:if test="${empty isLogin}">--%>

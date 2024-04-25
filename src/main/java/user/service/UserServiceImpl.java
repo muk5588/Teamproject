@@ -54,6 +54,12 @@ public class UserServiceImpl implements UserService {
         int result = userDao.idChk(dto);
         return result;
     }
+    
+    @Override
+    public int nickChk(User dto) {
+    	int result =userDao.nickChk(dto);
+    	return result;
+    }
 
 	@Override
 	public int checkEmail(String email) {

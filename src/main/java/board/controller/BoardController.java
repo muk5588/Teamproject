@@ -102,13 +102,13 @@ public class BoardController {
 		Board board = new Board();
 		board.setContent(content);
 		board.setTitle(content);
-		if( null != session.getAttribute("member") ) {
-			User user = (User) session.getAttribute("member");
+		if( null != session.getAttribute("userid") ) {
+			User user = (User) session.getAttribute("userid");
 			board.setBoardNo(user.getUserno());
 			board.setNickName(user.getNickname());
 			int res = boardService.write(board);
 		}else {
-			return "redirect:/User/login";
+			return "redirect:/login";
 		}
 		
 		logger.info("board 값 확인 : {}", board);

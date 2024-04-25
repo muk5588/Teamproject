@@ -180,8 +180,7 @@ $(function(){
 				<td class="nick">${board.nickName }</td>
 				<td class="hit">${board.boardView }</td>
 				<td class="date">
-					<fmt:parseDate value="${board.createDate }" pattern="yyyy-MM-dd" var="myDate"/>
-					<fmt:formatDate value="${myDate }" pattern="yyyy-MM-dd"/>
+					<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 				</td>
 				<c:forEach var="map" items="${totalrecomm }">
 					<c:if test="${map.BOARDNO eq board.boardNo }">

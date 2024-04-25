@@ -31,16 +31,17 @@
 
 </select>
 
-<delete id="deleteByMessageNo" parameterType="hashmap">
-	<if test="messageNoArr != null">
-	DELETE FROM MESSAGE
-	<where>  MESSAGENO IN
-	<foreach collection="messageNoArr" item="messageNos" separator="OR" close=")" open="(">
-		 #{messageNos}        
-	</foreach>
-	</where>
-	</if>
-</delete>
+<!-- 에러 수정 예정 -->
+<!-- <delete id="deleteByMessageNo" parameterType="hashmap"> -->
+<!-- 	<if test="messageNoArr != null"> -->
+<!-- 	DELETE FROM MESSAGE -->
+<!-- 	<where>  MESSAGENO IN -->
+<!-- 	<foreach collection="messageNoArr" item="messageNos" separator="OR" close=")" open="("> -->
+<!-- 		 #{messageNos}         -->
+<!-- 	</foreach> -->
+<!-- 	</where> -->
+<!-- 	</if> -->
+<!-- </delete> -->
 
 
 </mapper>

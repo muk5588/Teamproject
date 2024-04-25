@@ -37,7 +37,7 @@ public class MessageController {
 		logger.debug("/send ajax 들어옴");
 		logger.debug("touser : {}",touser);
 		logger.debug("content : {}",content);
-		
+		//
 		int res = 0;
 		if( content == null || "".equals(content)) {
 //			return null;
@@ -80,7 +80,8 @@ public class MessageController {
 		HashMap<String, Object> param = new HashMap<>();
 		param.put("messageNoArr", messageNos);
 		
-		int res = messageService.deleteByMessageNo(param);
+		//에러남
+//		int res = messageService.deleteByMessageNo(param);
 		
 	}
 	

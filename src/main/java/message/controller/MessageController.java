@@ -2,6 +2,7 @@ package message.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -50,9 +51,16 @@ public class MessageController {
 		return res;
 	}
 	
-//	@RequestMapping("list")
-//	public void list() {
-//		List<Message> list = messageService.getListByUserno();
-//	}
-//	
+	@RequestMapping("list")
+	public void list(HttpSession session, HttpServletRequest res) {
+		int userNo = (int) session.getAttribute("loginno");
+		List<Message> list = messageService.getListByUserno(userNo);
+		for(Message m : list) {
+			logger.debug("m : {}", m);
+		}
+		logger.debug("list : {} ", list);
+		
+		res.setAttribute("list", list);
+	}
+	
 }

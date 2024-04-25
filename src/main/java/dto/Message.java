@@ -3,6 +3,7 @@ package dto;
 import java.util.Date;
 
 public class Message {
+	private String sender;
 	private int messageNo;
 	private int sendUserNo;
 	private int toUserNo;
@@ -11,8 +12,10 @@ public class Message {
 	private char read='N';
 	private char save='N';
 	public Message() {}
-	public Message(int messageNo, int sendUserNo, int toUserNo, String content, Date sendDate, char read, char save) {
+	public Message(String sender, int messageNo, int sendUserNo, int toUserNo, String content, Date sendDate, char read,
+			char save) {
 		super();
+		this.sender = sender;
 		this.messageNo = messageNo;
 		this.sendUserNo = sendUserNo;
 		this.toUserNo = toUserNo;
@@ -23,8 +26,15 @@ public class Message {
 	}
 	@Override
 	public String toString() {
-		return "Message [messageNo=" + messageNo + ", sendUserNo=" + sendUserNo + ", toUserNo=" + toUserNo
-				+ ", content=" + content + ", sendDate=" + sendDate + ", read=" + read + ", save=" + save + "]";
+		return "Message [sender=" + sender + ", messageNo=" + messageNo + ", sendUserNo=" + sendUserNo + ", toUserNo="
+				+ toUserNo + ", content=" + content + ", sendDate=" + sendDate + ", read=" + read + ", save=" + save
+				+ "]";
+	}
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 	public int getMessageNo() {
 		return messageNo;
@@ -68,6 +78,5 @@ public class Message {
 	public void setSave(char save) {
 		this.save = save;
 	}
-
 	
 }

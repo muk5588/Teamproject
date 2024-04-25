@@ -1,5 +1,7 @@
 package message.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int insertMessage(Message message) {
 		return messageDao.insertMessage(message);
-	}
+	}//insertMessage(message)
+
+	@Override
+	public List<Message> getListByUserno(int userNo) {
+		return messageDao.getListByUserno(userNo);
+	}//getListByUserno(userNo)
 	
 }

@@ -1,5 +1,7 @@
 package message.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Message;
@@ -27,5 +29,12 @@ public interface MessageService {
 	 * @return - 조회된 전체 행
 	 */
 	public List<Message> getListByUserno(int userNo);
+
+	/**
+	 * 전달받은 messageNo로 메세지 삭제
+	 * @param param - Ajax로 전달받은 messageNo ArrayList<Integer>
+	 * @return - 영향을 받은 행 수
+	 */
+	public int deleteByMessageNo(HashMap<String, Object> param);
 
 }

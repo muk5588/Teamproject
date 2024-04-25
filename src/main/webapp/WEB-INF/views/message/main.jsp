@@ -22,13 +22,15 @@ $(function(){
 				,touser : $("#touser").val()
 			}
 			, dataType:"json"
-			,success: function(  ){
+			,success: function( res ){
 				console.log("AJAX 성공")
-// 				console.log(res)
+				console.log(res)
 				
-// 				$(function(){
-// 					$(location).attr('href', './list?curPage=${curPage}')
-// 				})
+				if( res > 0){
+					$(function(){
+						$(location).attr('href', '/')
+					})
+				}
 				
 			}
 			,error: function(){

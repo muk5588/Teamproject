@@ -1,5 +1,6 @@
 package message.service;
 
+import dto.Message;
 import user.dto.User;
 
 public interface MessageService {
@@ -10,5 +11,12 @@ public interface MessageService {
 	 * @return
 	 */
 	public User getUserByNickName(String touser);
+
+	/**
+	 * 내용, 보내는사람, 받는사람 정보를 Message TB에 삽입
+	 * @param message - content, toUser, sendUser 정보를 담은 DTO 객체
+	 * @return - 영향을 받은 행 개수 0:실패 | 1:성공
+	 */
+	public int insertMessage(Message message);
 
 }

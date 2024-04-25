@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dto.Message;
 import message.dao.MessageDao;
 import user.dto.User;
 
@@ -15,7 +16,15 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public User getUserByNickName(String touser) {
+		if( messageDao.userCntByNickName(touser) > 0) {
+			return messageDao.getUserByNickName(touser);
+		}
 		return null;
 	}//getUserByNickName(touser)
+
+	@Override
+	public int insertMessage(Message message) {
+		return messageDao.insertMessage(message);
+	}
 	
 }

@@ -10,9 +10,9 @@
 $(function(){
 	
 	$("#send").click(function(){
-		console.log("버튼 클릭 인식.")
-		console.log($("#content").val())
-		console.log($("#touser").val())
+// 		console.log("버튼 클릭 인식.")
+// 		console.log($("#content").val())
+// 		console.log($("#touser").val())
 		
 		$.ajax({
 			type:"get"
@@ -53,7 +53,8 @@ $(function(){
 <button id="send">쪽지 보내기</button>
 
 </div>
-<a href="/"><button>홈으로</button></a>
+<a href="/"><button>홈으로</button></a><br>
+<a href="./list"><button>메시지 함으로</button></a>
 
 </body>
 </html>

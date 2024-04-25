@@ -1,24 +1,24 @@
 package user.service;
 
-import user.dto.UserDTO;
+import user.dto.User;
 
 import java.util.List;
 
 public interface UserService {
 
-	public void userInsert(UserDTO dto);
+	public void userInsert(User dto);
 
-    public List<UserDTO> userList();
+    public List<User> userList();
 
-    public UserDTO userDetail(UserDTO userid);
+    public User userDetail(User userid);
 
-    public void userUpdate(UserDTO dto);
+    public void userUpdate(User dto);
 
-    public void userDelete(UserDTO dto);
+    public void userDelete(User dto);
 
-    public int passChk(UserDTO dto);
+    public int passChk(User dto);
 
-    public int idChk(UserDTO dto);
+    public int idChk(User dto);
     
     /**
      * 이메일 인증 서비스
@@ -27,9 +27,9 @@ public interface UserService {
      */
 	public int checkEmail(String email);
 
-    public UserDTO findUserId(UserDTO dto);
+    public User findUserId(User dto);
 
-    public void updateUserpw(UserDTO dto);
+    public void updateUserpw(User dto);
 
-    public UserDTO findUserpw(UserDTO dto);
+    public User findUserpw(User dto);
 }

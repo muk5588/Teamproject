@@ -1,17 +1,17 @@
 package login.dao;
 
 import org.springframework.stereotype.Repository;
-import user.dto.UserDTO;
+import user.dto.User;
 
 @Repository("LoginDao")
 public interface LoginDao {
 //	public UserDTO loginProc(UserDTO dto);
 
 
-	public int selectCntIdPw(UserDTO dto);
+	public int selectCntIdPw(User dto);
 
-	public int selectNoByIdPw(UserDTO dto);
+	public int selectNoByIdPw(User dto);
 
-	public UserDTO selectByNo(int loginno);
+	public User selectByNo(int loginno);
 
 }

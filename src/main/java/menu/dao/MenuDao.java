@@ -2,7 +2,7 @@ package menu.dao;
 
 import menu.dto.Menu;
 import org.springframework.stereotype.Repository;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public interface MenuDao {
     public List<Menu> menuList();
 
-    public UserDTO Update(UserDTO dto);
+    public User Update(User dto);
 
-    public void menuUpdate(UserDTO dto);
+    public void menuUpdate(User dto);
 }

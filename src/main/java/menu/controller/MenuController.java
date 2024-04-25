@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class MenuController {
 
     @RequestMapping("/update")
     public String update(int userno, Model model) {
-        UserDTO dto = new UserDTO();
+        User dto = new User();
         dto.setUserno(userno);
         dto = menuService.update(dto);
         List<Grade> list = gradeService.gradeList();
@@ -43,7 +43,7 @@ public class MenuController {
     }
 
     @RequestMapping("/menuUpdate")
-    public String menuUpdate(UserDTO dto) {
+    public String menuUpdate(User dto) {
         menuService.menuUpdate(dto);
         return "redirect: /menu/menuList";
     }

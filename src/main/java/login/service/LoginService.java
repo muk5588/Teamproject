@@ -1,13 +1,13 @@
 package login.service;
 
-import user.dto.UserDTO;
+import user.dto.User;
 
 public interface LoginService {
-	public boolean login(UserDTO dto);
+	public boolean login(User dto);
 
 
-	public int getLoginNo(UserDTO dto);
+	public int getLoginNo(User dto);
 
-	public UserDTO info(int loginno);
+	public User info(int loginno);
 
 }

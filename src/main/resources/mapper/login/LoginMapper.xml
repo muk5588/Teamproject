@@ -5,7 +5,7 @@
 
 <mapper namespace="login.dao.LoginDao">
 	
-	<select id="selectCntIdPw" resultType="int" parameterType="UserDTO">
+	<select id="selectCntIdPw" resultType="int" parameterType="User">
 		select count(*) from (
 		select userno from usertb
 		<where>
@@ -16,7 +16,7 @@
 		)
 	</select>
 
-	<select id="selectNoByIdPw" resultType="int" parameterType="UserDTO">
+	<select id="selectNoByIdPw" resultType="int" parameterType="User">
 		select userno from usertb
 		<where>
 			and userid = #{userid }
@@ -25,7 +25,7 @@
 
 	</select>
 
-	<select id="selectByNo" resultType="UserDTO" parameterType="int">
+	<select id="selectByNo" resultType="User" parameterType="int">
 		select
 			userno, name, userid, nickname, gender, email, postcode, address,
 			detailAddress, extraAddress, phone, gradeno

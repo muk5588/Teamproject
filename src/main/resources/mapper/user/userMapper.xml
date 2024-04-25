@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.dao.UserDao">
-	<select id="userDetail" parameterType="UserDTO" resultType="UserDTO">
+	<select id="userDetail" parameterType="User" resultType="User">
 		SELECT * FROM usertb WHERE userno = #{userno}
 	</select>
 
-	<select id="userList" resultType="UserDTO">
+	<select id="userList" resultType="User">
 		SELECT * FROM usertb order by userno
 	</select>
 
-	<insert id="userInsert" parameterType="UserDTO">
+	<insert id="userInsert" parameterType="User">
 		INSERT INTO usertb(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname)
 		VALUES (USER_SEQ.nextval, #{name}, #{userid},#{userpw}, #{email}, #{gender}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{phone},  #{nickname})
 	</insert>
 
-	<update id="userUpdate" parameterType="UserDTO">
+	<update id="userUpdate" parameterType="User">
 		UPDATE usertb
 		SET name  = #{name},
 			email =#{email},
@@ -28,7 +28,7 @@
 		WHERE userno = #{userno }
 	</update>
 
-	<delete id="userDelete" parameterType="UserDTO">
+	<delete id="userDelete" parameterType="User">
 		DELETE FROM usertb WHERE userno=#{userno }
 	</delete>
 	<select id="passChk" resultType="int">
@@ -41,18 +41,18 @@
 		select count(*) from usertb
 		where userid = #{userid}
 	</select>
-	<select id="findUserid" resultType="UserDTO">
+	<select id="findUserid" resultType="User">
 		select userid from usertb
 		where name = #{name }
 		and email = #{email }
 	</select>
-	<select id="findUserpw"  resultType="UserDTO">
+	<select id="findUserpw"  resultType="User">
 		select userpw from usertb
 		where userid = #{userid }
 		  and  name = #{name }
 		  and email = #{email }
 	</select>
-	<update id="updateUserpw" parameterType="UserDTO">
+	<update id="updateUserpw" parameterType="User">
 		update usertb
 		set userpw = #{userpw }
 		where userid = #{userid }

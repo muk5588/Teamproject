@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -193,12 +193,12 @@ public class SocialServiceImpl implements SocialService {
     }
 
     @Override
-    public void socialJoin(UserDTO dto) {
+    public void socialJoin(User dto) {
         socialDao.socialJoin(dto);
     }
 
     @Override
-    public UserDTO socialLogin(String socid) {
+    public User socialLogin(String socid) {
         return socialDao.socialLogin(socid);
     }
 

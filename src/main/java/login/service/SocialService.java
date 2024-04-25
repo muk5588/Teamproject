@@ -1,7 +1,7 @@
 package login.service;
 
 import com.google.gson.JsonObject;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -46,10 +46,10 @@ public interface SocialService {
 
 	public String getSosid(HashMap<String, Object> info);
 	
-	public void socialJoin(UserDTO dto);
+	public void socialJoin(User dto);
 
 
-	public UserDTO socialLogin(String socid);
+	public User socialLogin(String socid);
 	/**
 	 *  입력된 state, client_id, redirect_uri 을 포함한 (String) apiURL 을 반환한다
 	 * @param state - 랜덤 String

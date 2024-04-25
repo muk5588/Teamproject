@@ -1,14 +1,14 @@
 package user.dto;
 
 
-public class UserDTO {
+public class User {
 	private String name, userid, userpw, nickname, gender,email, address,detailAddress,extraAddress,phone, suserno	;
 	private int userno, postcode, gradeno,reportno;
 
-	public UserDTO() {
+	public User() {
 	}
 
-	public UserDTO(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String suserno, int userno, int postcode, int gradeno, int reportno) {
+	public User(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String suserno, int userno, int postcode, int gradeno, int reportno) {
 		this.name = name;
 		this.userid = userid;
 		this.userpw = userpw;

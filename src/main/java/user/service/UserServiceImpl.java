@@ -5,7 +5,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import user.dao.UserDao;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import javax.mail.internet.MimeMessage;
 import java.util.List;
@@ -20,37 +20,37 @@ public class UserServiceImpl implements UserService {
 	private JavaMailSender mailSender;	//메일
     
     @Override
-    public List<UserDTO> userList() {
+    public List<User> userList() {
         return userDao.userList();
     }
 
     @Override
-    public UserDTO userDetail(UserDTO userno) {
+    public User userDetail(User userno) {
         return userDao.userDetail(userno);
     }
 
-    public void userInsert(UserDTO dto) {
+    public void userInsert(User dto) {
         userDao.userInsert(dto);
     }
 
     @Override
-    public void userUpdate(UserDTO dto) {
+    public void userUpdate(User dto) {
         userDao.userUpdate(dto);
     }
 
     @Override
-    public void userDelete(UserDTO dto) {
+    public void userDelete(User dto) {
         userDao.userDelete(dto);
     }
 
     @Override
-    public int passChk(UserDTO dto) {
+    public int passChk(User dto) {
         int result = userDao.passChk(dto);
         return result;
     }
 
     @Override
-    public int idChk(UserDTO dto) {
+    public int idChk(User dto) {
         int result = userDao.idChk(dto);
         return result;
     }
@@ -92,17 +92,17 @@ public class UserServiceImpl implements UserService {
 	}
 
     @Override
-    public UserDTO findUserId(UserDTO dto) {
+    public User findUserId(User dto) {
         return userDao.findUserid(dto);
     }
 
     @Override
-    public void updateUserpw(UserDTO dto) {
+    public void updateUserpw(User dto) {
         userDao.updateUserpw(dto);
     }
 
     @Override
-    public UserDTO findUserpw(UserDTO dto) {
+    public User findUserpw(User dto) {
         return userDao.findUserpw(dto);
     }
 

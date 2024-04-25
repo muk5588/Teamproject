@@ -4,7 +4,7 @@ import menu.dto.Menu;
 import menu.dao.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public UserDTO update(UserDTO dto) {
+    public User update(User dto) {
         return menuDao.Update(dto);
     }
 
     @Override
-    public void menuUpdate(UserDTO dto) {
+    public void menuUpdate(User dto) {
         menuDao.menuUpdate(dto);
     }
 

@@ -3,7 +3,7 @@ package login.service;
 import login.dao.LoginDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import user.dto.UserDTO;
+import user.dto.User;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
 //    }
 
     @Override
-    public boolean login(UserDTO dto) {
+    public boolean login(User dto) {
 
         int result = loginDao.selectCntIdPw(dto);
 
@@ -30,13 +30,13 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public int getLoginNo(UserDTO dto) {
+    public int getLoginNo(User dto) {
 
         return loginDao.selectNoByIdPw(dto);
     }
 
     @Override
-    public UserDTO info(int loginno) {
+    public User info(int loginno) {
         return loginDao.selectByNo(loginno);
     }
 }

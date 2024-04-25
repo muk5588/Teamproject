@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import user.dto.EmailCheck;
-import user.dto.UserDTO;
+import user.dto.User;
 import user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class UserController {
     //관리자페이지
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
-        List<UserDTO> list = service.userList();//board생성후 userAll로 변경
+        List<User> list = service.userList();//board생성후 userAll로 변경
 //        List<Board> list2  = boardService.boardList();
         List<Grade> list3 = gradeService.gradeList();
         model.addAttribute("list", list);
@@ -56,7 +56,7 @@ public class UserController {
     @RequestMapping("/userList")
     //유저전체리스트 페이지
     public String userList( Model model) {
-        List<UserDTO> list = service.userList();
+        List<User> list = service.userList();
         model.addAttribute("list", list);
         return "user/userList";
     }
@@ -64,7 +64,7 @@ public class UserController {
     //수정 페이지
     @RequestMapping("/updateUser")
     public String userUpdate(int userno, Model model) {
-        UserDTO dto = new UserDTO();
+        User dto = new User();
         dto.setUserno(userno);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
@@ -75,7 +75,7 @@ public class UserController {
     @RequestMapping("/detailUser")
     public String userDetail(int userno, Model model) {
         //선택한 고객 정보를 DB에 조회해와서
-        UserDTO dto = new UserDTO();
+        User dto = new User();
         dto.setUserno(userno);
         dto = service.userDetail(dto);
 //        int userno = dto.getUserno();
@@ -92,7 +92,7 @@ public class UserController {
     }
     @RequestMapping("/updatePass")
     public String updatePass(int userno, Model model) {
-        UserDTO dto = new UserDTO();
+        User dto = new User();
         dto.setUserno(userno);
         dto = service.userDetail(dto);
         model.addAttribute("dto", dto);
@@ -104,36 +104,36 @@ public class UserController {
      * param: UserDTO
      * */
     @RequestMapping("/userInsert")
-    public String userInsert(UserDTO dto) {
+    public String userInsert(User dto) {
         service.userInsert(dto);
         return "redirect: ./userList";
     }
 
     @RequestMapping("/userUpdate")
-    public String userUpdate(UserDTO dto) {
+    public String userUpdate(User dto) {
         service.userUpdate(dto);
         return "redirect: ./userList";
     }
 
     @RequestMapping("/deleteUser")
-    public String deleteUser(UserDTO dto) {
+    public String deleteUser(User dto) {
         service.userDelete(dto);
         return "redirect: ./userList";
     }
     @ResponseBody
     @RequestMapping("/passChk")
-    public int passChk(UserDTO dto) throws Exception {
+    public int passChk(User dto) throws Exception {
         int res = service.passChk(dto);
         return res;
     }
     @ResponseBody
     @RequestMapping("/idChk")
-    public int idChk(UserDTO dto) throws Exception {
+    public int idChk(User dto) throws Exception {
         int res = service.idChk(dto);
         return res;
     }
     @RequestMapping("/idckeck")
-    public String idckeck(UserDTO dto) throws Exception {
+    public String idckeck(User dto) throws Exception {
         int res = service.idChk(dto);
         try {
             if (res == 1) {
@@ -152,13 +152,13 @@ public class UserController {
 		return new EmailCheck(email,num);
 	}
     @RequestMapping("/searchId")
-    public String searchId(HttpServletRequest request, Model model, UserDTO dto,
+    public String searchId(HttpServletRequest request, Model model, User dto,
                            @RequestParam String name,
                            @RequestParam String email) {
         try {
             dto.setName(name);
             dto.setEmail(email);
-            UserDTO userid = service.findUserId(dto);
+            User userid = service.findUserId(dto);
             model.addAttribute("finduserid", userid);
             String value = "id";
             model.addAttribute("value", value);
@@ -172,12 +172,12 @@ public class UserController {
     @RequestMapping("/searchPw")
     public String searchPw(HttpServletRequest request, Model model,
                                @RequestParam String userid2, @RequestParam String name2,@RequestParam String email2,
-                               UserDTO dto) {
+                               User dto) {
         try {
             dto.setUserid(userid2);
             dto.setName(name2);
             dto.setEmail(email2);
-            UserDTO search = service.findUserpw(dto);
+            User search = service.findUserpw(dto);
 
             if(search == null) {
                 model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
@@ -197,7 +197,7 @@ public class UserController {
     }
     @RequestMapping("/userPass")
     public String userPass(HttpServletRequest request, HttpSession session) {
-        UserDTO dto = new UserDTO();
+        User dto = new User();
         dto.setName(request.getParameter("name"));
         dto.setEmail(request.getParameter("email"));
         dto.setUserid(request.getParameter("userid"));

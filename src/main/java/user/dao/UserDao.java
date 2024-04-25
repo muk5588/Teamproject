@@ -1,7 +1,7 @@
 package user.dao;
 
 import org.springframework.stereotype.Repository;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import java.util.List;
 
@@ -11,27 +11,27 @@ public interface UserDao {
     //Autowired : 메모리에 올려둔 주소들이 자동으로 연결 됨
 
     
-    public void userInsert(UserDTO dto);
+    public void userInsert(User dto);
 
 
-    public List<UserDTO> userList();
+    public List<User> userList();
 
 
-    public UserDTO userDetail(UserDTO userno);
-
-    
-    public void userUpdate(UserDTO dto);
+    public User userDetail(User userno);
 
     
-    public void userDelete(UserDTO dto);
+    public void userUpdate(User dto);
 
-    public int passChk(UserDTO dto);
+    
+    public void userDelete(User dto);
 
-    public int idChk(UserDTO dto);
+    public int passChk(User dto);
 
-    public UserDTO findUserid(UserDTO dto);
+    public int idChk(User dto);
 
-    public UserDTO findUserpw(UserDTO dto);
+    public User findUserid(User dto);
 
-    public void updateUserpw(UserDTO dto);
+    public User findUserpw(User dto);
+
+    public void updateUserpw(User dto);
 }

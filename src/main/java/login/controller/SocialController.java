@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import user.dto.UserDTO;
+import user.dto.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -104,7 +104,7 @@ public class SocialController {
 			logger.info("info : {} ", info);
 		    String socid = socialService.getSosid(info);
 			if(socid!=null) {
-				UserDTO dto = socialService.socialLogin(socid);
+				User dto = socialService.socialLogin(socid);
 				boolean isLogin = true;
 				session.setAttribute("isLogin", isLogin);
 				session.setAttribute("dto", dto);
@@ -124,7 +124,7 @@ public class SocialController {
 		return "naver/naverjoin";
 	}
 	@PostMapping("/naverjoin")
-	public String naverJoinPost(UserDTO dto) {
+	public String naverJoinPost(User dto) {
 		String id = UUID.randomUUID().toString();
 		String pw = UUID.randomUUID().toString();
 		dto.setUserid(id);
@@ -162,7 +162,7 @@ public class SocialController {
 		session.setAttribute("token1", token.get("access_token").toString());
 		String socid = socialService.getKakaoid(userInfo);
 		if(socid!=null) {
-			UserDTO dto = socialService.socialLogin(socid);
+			User dto = socialService.socialLogin(socid);
 			boolean isLogin = true;
 			session.setAttribute("socid", socid);
 			session.setAttribute("isLogin", isLogin);

@@ -1,5 +1,7 @@
 package message.service;
 
+import java.util.List;
+
 import dto.Message;
 import user.dto.User;
 
@@ -18,5 +20,12 @@ public interface MessageService {
 	 * @return - 영향을 받은 행 개수 0:실패 | 1:성공
 	 */
 	public int insertMessage(Message message);
+
+	/**
+	 * 유저 번호로 메세지 조회
+	 * @param userNo - 유저 번호
+	 * @return - 조회된 전체 행
+	 */
+	public List<Message> getListByUserno(int userNo);
 
 }

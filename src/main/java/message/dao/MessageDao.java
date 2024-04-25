@@ -1,5 +1,7 @@
 package message.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import dto.Message;
@@ -13,5 +15,7 @@ public interface MessageDao {
 	public User getUserByNickName(String touser);
 
 	public int insertMessage(Message message);
+
+	public List<Message> getListByUserno(int userNo);
 	
 }

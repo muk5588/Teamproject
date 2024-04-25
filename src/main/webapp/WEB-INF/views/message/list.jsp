@@ -16,6 +16,44 @@ $(function(){
 		$(".delCheckBox").prop("checked", $(this).prop("checked"));
 	})
 	
+		$("#deleteBtn").click(function(){
+		
+		var datas = [];
+		$("input[name=deleteNum]:checked").each(function(){
+			var no = $(this).val();
+			datas.push(no);
+		})
+// 		console.log("값:",datas)
+		if( datas.length <= 0){
+// 			console.log("값이 없음")
+			
+			return false;
+		}
+		
+// 		$.ajaxSettings,traditional = true
+		$.ajax({
+			type:"get"
+			,url:"./delete"
+			,data:{
+				messageNo : datas
+			}
+			, dataType:"json"
+			,success: function( res ){
+				console.log("AJAX 성공")
+				console.log(res)
+				
+				$(function(){
+					$(location).attr('href', './list?curPage=${curPage}')
+				})
+				
+			}
+			,error: function(){
+				console.log("AJAX 실패")
+			}
+		})
+		
+	})
+	
 })
 </script>
 </head>
@@ -24,7 +62,7 @@ $(function(){
 <h1>메시지함</h1>
 <hr>
 <div id="content">
-<table>
+<table style="align-content: center;">
 <tr>
 	<th><input type="checkbox" id="checkboxAllCheck"></th>
 	<th>보낸이</th>
@@ -35,18 +73,21 @@ $(function(){
 </tr>
 <c:forEach items="${list}" var="list">
 <tr>
-	<td class="checkbox"><input type="checkbox" value="${list.messageNo }" name="deleteNum"></td>
+	<td class="checkbox"><input type="checkbox" value="${list.messageNo }" name="deleteNum" class="delCheckBox"></td>
 	<td class="sender">${list.sender}</td>
 	<td class="content">${list.content}</td>
 	<td class="date">
 		<fmt:formatDate value="${list.sendDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</td>
 	<td class="read">${list.read}</td>
-	<td class="save">${list.save}</td>
+	<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
 	<td >
 </tr>
 </c:forEach>
 </table>
+<button id="deleteBtn">삭제하기</button>
+<br><br><br><br>
+
 
 </div>
 <a href="./sendForm"><button>쪽지쓰기</button></a><br>

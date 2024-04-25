@@ -1,5 +1,6 @@
 package message.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -33,5 +34,10 @@ public class MessageServiceImpl implements MessageService {
 	public List<Message> getListByUserno(int userNo) {
 		return messageDao.getListByUserno(userNo);
 	}//getListByUserno(userNo)
+
+	@Override
+	public int deleteByMessageNo(HashMap<String, Object> param) {
+		return messageDao.deleteByMessageNo(param);
+	}//deleteByMessageNo(int[] messageNo)
 	
 }

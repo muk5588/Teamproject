@@ -1,5 +1,8 @@
 package message.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dto.Message;
@@ -65,7 +69,19 @@ public class MessageController {
 	@RequestMapping("/sendForm")
 	public void sendForm() {}
 	
+	@ResponseBody
 	@RequestMapping("/delete")
-	public void delete() {}
+	public void delete(
+			@RequestParam("messageNo[]") String[] messageNos
+			) {
+		for(int i = 0; messageNos.length >i; i++) {
+			logger.debug("messageNo : {}", Arrays.toString(messageNos));
+		}
+		HashMap<String, Object> param = new HashMap<>();
+		param.put("messageNoArr", messageNos);
+		
+		int res = messageService.deleteByMessageNo(param);
+		
+	}
 	
 }

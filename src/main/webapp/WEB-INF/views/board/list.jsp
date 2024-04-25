@@ -177,12 +177,12 @@ $(function(){
 					<a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
 				</td>
 				<td class="content">${board.content }</td>
-				<td class="id">${board.writerId }</td>
-				<td class="nick">${board.writerNick }</td>
-				<td class="hit">${board.hit }</td>
+				<td class="id">${board.userNo }</td>
+				<td class="nick">${board.nickName }</td>
+				<td class="hit">${board.boardView }</td>
 				<td class="date">
-					<fmt:parseDate value="${board.writeDate }" pattern="yyyy-MM-dd HH:mm:ss" var="myDate"/>
-					<fmt:formatDate value="${myDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					<fmt:parseDate value="${board.createDate }" pattern="yyyy-MM-dd" var="myDate"/>
+					<fmt:formatDate value="${myDate }" pattern="yyyy-MM-dd"/>
 				</td>
 				<c:forEach var="map" items="${totalrecomm }">
 					<c:if test="${map.BOARDNO eq board.boardNo }">

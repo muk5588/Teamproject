@@ -121,7 +121,7 @@
 
 	<update id="hit" >
 		UPDATE board
-		set hit = hit+1
+		set boardView = boardView+1
 		<where>
 			boardno = #{boardno}
 		</where>

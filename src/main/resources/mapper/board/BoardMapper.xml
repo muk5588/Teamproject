@@ -131,8 +131,8 @@
 	<selectKey resultType="int" order="BEFORE" keyProperty="boardNo">
 		SELECT board_seq.nextval FROM DUAL
 	</selectKey>
-		INSERT INTO BOARD (boardno, title, content, writer_id, writer_nick)
-		VALUES( #{boardNo}, #{title}, #{content}, #{writerId}, #{writerNick} )
+		INSERT INTO BOARD (boardno, title, content, userno, nickname)
+		VALUES( #{boardNo}, #{title}, #{content}, #{userNo}, #{nickname} )
 	</insert>
 
 

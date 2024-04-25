@@ -305,7 +305,6 @@
                 <th>글 번호</th>
                 <th>제목</th>
                 <th>본문</th>
-                <th>작성자 아이디</th>
                 <th>작정자 닉네임</th>
                 <th>조회수</th>
                 <th>최초작성일</th>
@@ -316,12 +315,10 @@
                 <td class="no">${board.boardNo }</td>
                 <td class="title">${board.title }</td>
                 <td class="content">${board.content }</td>
-                <td class="id">${board.writerId }</td>
-                <td class="nick">${board.writerNick }</td>
-                <td class="hit">${board.hit }</td>
+                <td class="nick">${board.nickName }</td>
+                <td class="hit">${board.boardView }</td>
                 <td class="date">
-                    <fmt:parseDate value="${board.writeDate }" pattern="yyyy-MM-dd HH:mm:ss" var="myDate"/>
-                    <fmt:formatDate value="${myDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
                 </td>
                 <td><a id="totalRecommend">${recomm }</a></td>
             </tr>

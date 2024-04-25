@@ -72,7 +72,7 @@ public class BoardController {
 		board =  boardService.viewByBoardNo(boardno);
 		int recomm = boardService.viewRecommend(boardno);
 		
-		if( null != session.getAttribute("userid")) {
+		if( null != session.getAttribute("userno")) {
 			boolean isRecommend = boardService.isRecommend(session,boardno);
 			model.addAttribute("recommend", isRecommend);
 		}
@@ -102,8 +102,8 @@ public class BoardController {
 		Board board = new Board();
 		board.setContent(content);
 		board.setTitle(content);
-		if( null != session.getAttribute("userid") ) {
-			User user = (User) session.getAttribute("userid");
+		if( null != session.getAttribute("userno") ) {
+			User user = (User) session.getAttribute("userno");
 			board.setBoardNo(user.getUserno());
 			board.setNickName(user.getNickname());
 			int res = boardService.write(board);
@@ -173,7 +173,7 @@ public class BoardController {
 			Board recommendBoard
 			, HttpSession session
 			) {
-		logger.info("추천 확인 {}, {} ", recommendBoard, session.getAttribute("userid"));
+		logger.info("추천 확인 {}, {} ", recommendBoard, session.getAttribute("userno"));
 		
 		boardService.recommend(recommendBoard);
 		

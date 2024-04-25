@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="web.dao.face.CommentDao">
+<mapper namespace="comment.dao.CommentDao">
 
 <select id="selectCommentByBoardNo" resultType="Comment" parameterType="Board">
-	SELECT rnum commseq, commno, boardno, USERNO, COMMCONTENT, commdate FROM (
+	SELECT rnum comm_seq, commno, boardno, USERNO, COMMCONTENT, commdate FROM (
 		SELECT rownum rnum, B.* FROM(
 			SELECT COMMNO, boardno, USERNO, COMMCONTENT, commdate
-			FROM ADMIN.COMMENTTB
+			FROM COMMENTTB
 			WHERE boardno = #{boardNo}
 			ORDER BY commdate ASC
 		) B

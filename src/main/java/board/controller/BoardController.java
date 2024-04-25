@@ -53,7 +53,10 @@ public class BoardController {
 		List<Board> list = boardService.list(paging);
 		
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
-		
+		logger.debug("recommList : {}", recommList);
+		for(Map<String, Object> M : recommList) {
+			logger.debug("M : {}", M.toString());
+		}
 		model.addAttribute("totalrecomm", recommList);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("paging", paging);

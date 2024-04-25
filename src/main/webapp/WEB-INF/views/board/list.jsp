@@ -182,7 +182,11 @@ $(function(){
 				<td class="date">
 					<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 				</td>
-				<td><a id="totalRecommend">${recomm }</a></td>
+				<c:forEach items="${totalrecomm }" var="recommList">
+				<c:if test="${recommList.BOARDNO eq board.boardNo }">
+					<td><a id="totalRecommend">${recommList.GOOD }</a></td>
+				</c:if>
+				</c:forEach>
 			</tr>
 		</c:forEach>
 			<tr>

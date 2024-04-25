@@ -178,4 +178,39 @@ window.addEventListener("DOMContentLoaded",function () {
         $("#userform").submit();
     })
 
+
+   $("#nickname").keyup(function () {
+            var value = $(event.target).val();
+            var num = value.search(/[0-9]/g);
+            var eng = value.search(/[a-z]/ig);
+            if(value.replace(/\s| /gi, "").length == 0){
+                $("#alertnick").css({
+                    "color": "red",
+                    "font-size": "10px"
+                });
+                $("#alertnick").text("닉네임에 공백은 사용 불가합니다.")
+            }
+            else {
+                $.ajax({
+                    url: "/user/nickChk",
+                    type: "post",
+                    dataType: "json",
+                    data: {"nickname": $("#nickname").val()},
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#alertnick").css({
+                                "color": "red",
+                                "font-size": "10px"
+                            });
+                            $("#alertnick").text("중복된 닉네임입니다.");
+                        } else if (data == 0) {
+                            $("#alertnick").css({
+                                "color": "black",
+                            });
+                            $("#alertnick").text("사용가능한 닉네임입니다.");
+                        }
+                    }
+                });
+            }
+        });
 });

@@ -20,6 +20,9 @@
 	<logger name="login">
 		<level value="debug" />
 	</logger>
+	<logger name="message">
+		<level value="debug" />
+	</logger>
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

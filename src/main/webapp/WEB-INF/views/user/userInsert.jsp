@@ -84,6 +84,7 @@
                 <div id="nickbox">
                     <label for="nickname">닉네임</label>
                     <input type="text" name="nickname" id="nickname"><br>
+                    <div id="alertnick" name="alertnick"></div>
                 </div>
                 <div id="genderbox">
                     <label>성별</label>

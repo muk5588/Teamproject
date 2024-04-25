@@ -32,4 +32,6 @@ public interface UserService {
     public void updateUserpw(User dto);
 
     public User findUserpw(User dto);
+
+	public int nickChk(User dto);
 }

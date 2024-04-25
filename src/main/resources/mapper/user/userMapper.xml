@@ -41,6 +41,10 @@
 		select count(*) from usertb
 		where userid = #{userid}
 	</select>
+	<select id="nickChk" resultType="int" parameterType="User">
+		select count(*) from usertb
+		where nickname = #{nickname}
+	</select>
 	<select id="findUserid" resultType="User">
 		select userid from usertb
 		where name = #{name }

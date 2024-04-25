@@ -4,14 +4,11 @@
 <!-- 그 중에 jstl 라이브러리도 있기 때문에 사용할 수 있는것 -->
 <!-- 라이브러리 목록은 iot/pom.xml, c:\사용자\.m2에서 확인가능 -->
 
-<link href="/resources/css/main.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/header.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="/resources/js/main.js"></script>
+<script type="text/javascript" src="/resources/js/header.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/common.css?v=<%=new java.util.Date().getTime() %>">
-<!-- rel : 형태는 스타일 시트, 타입은 텍스트로된 css -->
-<!-- 주소 뒤에 ?v=로 버전관리를 할 수 있다 -->
-<!-- Date()가 임포트가 안될경우 패키지명을 직접 지정해도 된다. -->
+
 
 <!-- 어느 페이지에 가도 인클루드 되어있는 헤더에 jQuery 선언문을 넣는다. -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

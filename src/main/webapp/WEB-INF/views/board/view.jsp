@@ -72,7 +72,7 @@
         $(document).ready(function () {
             handleCommentRefresh();
             $("#commentRefresh").click()
-            if (${empty login || !login}) {
+            if (${empty islogin || !isLogin}) {
                 return false;
             }
             if (${recommend || empty recommend}) {
@@ -88,7 +88,7 @@
 
         $(document).ready(function () {
 
-            if (${empty login || !login}) {
+            if (${empty isLogin || !isLogin}) {
                 return false
             }
 
@@ -375,7 +375,7 @@
                     <th>댓글내용</th>
                 </tr>
                 <tr>
-                    <td><input class="form-control" type="text" value="${userid }" id="commentWriter"
+                    <td><input class="form-control" type="text" value="${dto.nickName }" id="commentWriter"
                                aria-label="Disabled input example" disabled style="text-align: center;"></td>
                     <td>
                         <input name="commentContent" id="commentContent">

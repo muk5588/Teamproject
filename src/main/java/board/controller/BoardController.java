@@ -51,7 +51,7 @@ public class BoardController {
 		logger.info("{}", paging);
 		
 		List<Board> list = boardService.list(paging);
-		
+
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
@@ -75,7 +75,7 @@ public class BoardController {
 		board =  boardService.viewByBoardNo(boardno);
 		int recomm = boardService.viewRecommend(boardno);
 		
-		if( null != session.getAttribute("userno")) {
+		if( null != session.getAttribute("dto")) {
 			boolean isRecommend = boardService.isRecommend(session,boardno);
 			model.addAttribute("recommend", isRecommend);
 		}

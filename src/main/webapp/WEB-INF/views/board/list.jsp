@@ -131,15 +131,11 @@ $(function(){
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 
-<header class="header text-center">
-	<h1>Spring Board</h1>
-</header>
 
 	<div class="container">
 	
 	<h1>전체 게시판 List</h1>
-	<a href="../member/login"><button>로그인 페이지로</button></a>
-	<a href="../member/main"><button>메인 페이지로</button></a>
+	<a href="../main"><button>메인 페이지로</button></a>
 	<div>
 	<form action="" method="get" id="searchForm">
 		<select name="searchKind" id="searchKind">

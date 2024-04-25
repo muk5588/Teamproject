@@ -159,7 +159,7 @@ window.addEventListener("DOMContentLoaded",function () {
                $("#alertemail").text("인증이 완료 되었습니다")
            }
        })
-    $("#update").click(function () {
+    $("#join").click(function () {
         if ($("#alertid").text() != "사용가능한 아이디입니다."){
             alert("아이디 중복 확인을 해주세요")
             $("#userid").focus()

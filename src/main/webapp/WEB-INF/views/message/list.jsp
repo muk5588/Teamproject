@@ -7,6 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$("#checkboxAllCheck").click(function(){
+		//attr => 속성값, prop해서 변경해야함
+		$(".delCheckBox").prop("checked", $(this).prop("checked"));
+	})
+	
+})
+</script>
 </head>
 <body>
 
@@ -15,6 +26,7 @@
 <div id="content">
 <table>
 <tr>
+	<th><input type="checkbox" id="checkboxAllCheck"></th>
 	<th>보낸이</th>
 	<th>내용</th>
 	<th>전송일</th>
@@ -23,6 +35,7 @@
 </tr>
 <c:forEach items="${list}" var="list">
 <tr>
+	<td class="checkbox"><input type="checkbox" value="${list.messageNo }" name="deleteNum"></td>
 	<td class="sender">${list.sender}</td>
 	<td class="content">${list.content}</td>
 	<td class="date">
@@ -30,11 +43,13 @@
 	</td>
 	<td class="read">${list.read}</td>
 	<td class="save">${list.save}</td>
+	<td >
 </tr>
 </c:forEach>
 </table>
 
 </div>
+<a href="./sendForm"><button>쪽지쓰기</button></a><br>
 <a href="/"><button>홈으로</button></a><br>
 </body>
 </html>

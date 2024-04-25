@@ -24,7 +24,7 @@ public class MessageController {
 	
 	@RequestMapping("/")
 	public String message() {
-		return "/message/main";
+		return "redirect:/message/list";
 	}
 	
 	@ResponseBody
@@ -51,7 +51,7 @@ public class MessageController {
 		return res;
 	}
 	
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public void list(HttpSession session, HttpServletRequest res) {
 		int userNo = (int) session.getAttribute("loginno");
 		List<Message> list = messageService.getListByUserno(userNo);
@@ -62,5 +62,10 @@ public class MessageController {
 		
 		res.setAttribute("list", list);
 	}
+	@RequestMapping("/sendForm")
+	public void sendForm() {}
+	
+	@RequestMapping("/delete")
+	public void delete() {}
 	
 }

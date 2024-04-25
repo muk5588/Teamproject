@@ -1,4 +1,4 @@
-package dto;
+package board.dto;
 
 public class BoardFile {
 	private int fileNo;

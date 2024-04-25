@@ -1,4 +1,4 @@
-package dto;
+package comment.dto;
 
 import java.util.Date;
 

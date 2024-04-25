@@ -1,4 +1,4 @@
-package dto;
+package comment.dto;
 
 public class CommReportType {
 	private int commReportTypeNo;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.dao.face.CommentDao">
+
+<select id="selectCommentByBoardNo" resultType="Comment" parameterType="Board">
+	SELECT rnum commseq, commno, boardno, USERNO, COMMCONTENT, commdate FROM (
+		SELECT rownum rnum, B.* FROM(
+			SELECT COMMNO, boardno, USERNO, COMMCONTENT, commdate
+			FROM ADMIN.COMMENTTB
+			WHERE boardno = #{boardNo}
+			ORDER BY commdate ASC
+		) B
+	)
+	ORDER BY rnum ASC
+</select>
+
+<insert id="commentInsert" parameterType="Comment">
+	<selectKey keyProperty="commentno" order="BEFORE" resultType="int">
+		SELECT commentTB_seq.nextval FROM dual
+	</selectKey>
+	INSERT INTO COMMENTTB( commentno, boardno, userid, content)
+	VALUES( #{commentno}, #{boardno}, #{userid}, #{content} )
+</insert>
+	
+<delete id="deleteComment" parameterType="Comment">
+DELETE ADMIN.COMMENTTB
+<where>
+	AND commentno = #{commentno}
+	AND boardno = #{boardno}
+</where> 
+
+</delete>
+
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="board.dao.BoardDao">
+	
+	<sql id="selectBoard">
+		SELECT 
+			boardno, title, content
+		FROM board
+	</sql>
+	
+	<sql id="search">
+				<if test="search != null and searchKind != null">
+				<choose>
+				 <when test="searchKind.equals('title')">
+					WHERE title Like '%${search}%'
+				 </when>
+				 <when test="searchKind.equals('content')">
+					WHERE content Like '%${search}%'
+				 </when>
+				</choose>
+				</if>
+	</sql>
+	
+	<select id="selectAll" resultType="Board" parameterType="util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				<include refid="selectBoard" />
+				<include refid="search"/>
+				ORDER BY board_no DESC
+			) B
+		)
+		<where>
+			AND rnum BETWEEN #{startNo } AND #{endNo}
+		</where>
+		
+	</select>
+	
+	<select id="selectAllRecomm" resultType="HashMap"  parameterType="util.Paging">
+		SELECT A.board_no boardno, A.title, recommend 
+		FROM (
+			SELECT rownum rnum , B.* 
+			FROM (
+				SELECT 
+					board_no, title
+				FROM board
+				<include refid="search"/>
+				ORDER BY board_no DESC
+				) B
+			) C , ( 
+			SELECT
+				board_No,
+				title,
+				(SELECT COUNT(*) FROM recommend 
+				WHERE boardno = board.BOARD_NO
+				<if test="search != null and searchKind != null">
+				<choose>
+				 <when test="searchKind.equals('title')">
+					AND title Like '%${search}%'
+				 </when>
+				 <when test="searchKind.equals('content')">
+					AND content Like '%${search}%'
+				 </when>
+				</choose>
+				</if>	
+				) AS recommend
+			FROM board
+			) A
+			<where>
+				AND rnum BETWEEN #{startNo} AND #{endNo}
+				AND C.board_no = A.board_no
+			</where>
+	</select>
+	
+	<select id="selectCntAll" resultType="int" parameterType="util.Paging">
+		SELECT count(*) FROM (
+			<include refid="selectBoard" />
+			<include refid="search"/>
+		)
+	</select>
+	
+	<select id="selectCntTitleBySearch" parameterType="int" resultType="int">
+		SELECT count(*) FROM (
+			<include refid="selectBoard" />
+			<where>
+<!-- 				AND CONTENT Like '%${search}%' -->
+				AND TITLE Like  '%${search}%'
+			</where>
+		)
+	</select>
+	
+	<select id="selectBySearch" resultType="Board" parameterType="util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				<include refid="selectBoard" />
+				<where>
+<!-- 				AND CONTENT Like '%${search}%' -->
+				AND TITLE Like  '%${search}%'
+				</where>
+				ORDER BY board_no DESC
+			) B
+		)
+		<where>
+			AND rnum BETWEEN #{startNo } AND #{endNo}
+		</where>
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Board">
+		<include refid="selectBoard"/>
+		<where>
+			board_no = #{boardno}
+		</where>
+	</select>
+	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="Board">
+		<include refid="selectBoard"/>
+		<where>
+			board_no = #{boardNo}
+		</where>
+	</select>
+	
+	<update id="hit" >
+		UPDATE board
+		set hit = hit+1
+		<where>
+			board_no = #{boardno}
+		</where>
+	</update>
+	
+	<insert id="write" parameterType="Board" >
+	<selectKey resultType="int" order="BEFORE" keyProperty="boardNo">
+		SELECT board_seq.nextval FROM DUAL
+	</selectKey>
+		INSERT INTO BOARD (board_no, title, content, writer_id, writer_nick)
+		VALUES( #{boardNo}, #{title}, #{content}, #{writerId}, #{writerNick} )
+	</insert>
+	
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		<set>
+			<if test="title != null and !title.equals('')">
+				title = #{title},
+			</if>
+			<if test="content != null and !content.equals('')">
+				content = #{content},
+			</if>
+		</set>
+		<where>
+			AND board_no = #{boardNo}
+		</where>
+	</update>
+	
+	<delete id="deleteBoard" parameterType="Board">
+		DELETE BOARD
+		WHERE BOARDNO = #{boardNo}
+	</delete>
+	
+	<insert id="insertRecommend" parameterType="Good">
+		INSERT INTO GOOD (USERNO, boardno)
+    	VALUES (#{userno}, #{boardno})
+	</insert>
+	
+	<select id="isRecomm" parameterType="Good">
+		SELECT count(*)
+		FROM (
+			SELECT * FROM GOOD
+			<where>
+				AND userno = #{userno}
+				AND boardno = #{boardno}
+			</where>
+		)
+	</select>
+	
+	<delete id="deleteRecommend" parameterType="Good">
+		DELETE recommend
+		<where>
+			AND userno = #{userno}
+			AND boardno = #{boardno}
+		</where>
+	</delete>
+	
+	<select id="getRecommendRes" parameterType="Good" resultType="RecommendRes">
+		SELECT * FROM (
+			SELECT count(*) totalRecommend FROM (
+				SELECT * FROM GOOD
+				WHERE boardno = #{boardno}
+				) 
+			) ,(
+			SELECT count(*) isRecommend FROM (
+				SELECT * FROM GOOD
+				WHERE boardno = #{boardno}
+				AND userno = #{userno}
+				)
+			)
+	</select>
+	
+	
+	<select id="getRecommend" parameterType="int" resultType="int">
+		SELECT count(*) recomm FROM (
+			SELECT * FROM GOOD
+			WHERE boardno = #{boardno}
+			)
+	</select>
+	
+	<delete id="listDelete" parameterType="int">
+		DELETE board
+		WHERE BOARDNO = #{boardno}
+	</delete>
+	
+	
+	
+</mapper>

@@ -1,4 +1,4 @@
-package dto;
+package board.dto;
 
 import java.util.Date;
 

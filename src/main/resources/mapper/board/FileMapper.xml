@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.dao.FileDao">
+
+	<insert id="insert" parameterType="BoardFile">
+		<selectKey resultType="int" order="BEFORE" keyProperty="fileno">
+			SELECT boardfile_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO boardfile( fileno, boardno, origin_name, stored_name)
+		VALUES( #{fileno}, #{boardno}, #{originName}, #{storedName})
+	</insert>
+	
+</mapper>

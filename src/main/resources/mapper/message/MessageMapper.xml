@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message.dao.MessageDao">
 
+<select id="userCntByNickName" resultType="int" parameterType="String">
+	SELECT count(*) FROM userTB
+	WHERE nickname = #{touser}
+</select>
 
+<select id="getUserByNickName" resultType="User" parameterType="String">
+	SELECT * FROM userTB
+	WHERE nickname = #{touser}
+</select>
+
+<insert id="insertMessage" parameterType="dto.Message">
+	<selectKey keyProperty="messageNo" order="BEFORE" resultType="int">
+		SELECT MESSAGE_SEQ.nextval FROM dual
+	</selectKey>
+	INSERT INTO message(messageno, SENDUSERNO ,TOUSERNO ,CONTENT)
+	VALUES(#{messageNo}, #{sendUserNo}, #{toUserNo}, #{content} )
+</insert>
 
 </mapper>

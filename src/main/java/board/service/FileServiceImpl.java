@@ -24,7 +24,7 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public void filesave(Board board, MultipartFile file) {
-		String storedPath = servletContext.getRealPath("upload");
+		String storedPath = servletContext.getRealPath("upload/board");
 		logger.info("storedPath : {}", storedPath);
 		
 		File storedFolder = new File(storedPath);

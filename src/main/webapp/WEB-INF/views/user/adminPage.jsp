@@ -142,6 +142,7 @@
     <button onclick="location.href = '/grade/gradeList'">권한조회</button>
     <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
     <button onclick="location.href = '/user/userList'">유저조회</button>
+    <button onclick="location.href = '/board/list'">게시글조회</button>
 </div>
 <div class="container">
     <div class="table-container">

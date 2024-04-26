@@ -12,14 +12,9 @@
  import org.springframework.stereotype.Controller;
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
- import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import user.dto.User;
+ import user.dto.User;
  import util.Paging;
 
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
  import javax.servlet.http.HttpSession;
  import java.util.ArrayList;
  import java.util.List;
@@ -85,10 +80,7 @@ public class BoardController {
 		board =  boardService.viewByBoardNo(boardno);
 		int recomm = boardService.viewRecommend(boardno);
 		
-		if( null != session.getAttribute("dto")) {
-			boolean isRecommend = boardService.isRecommend(session,boardno);
-			model.addAttribute("recommend", isRecommend);
-		}
+
 		
 		List<Comment> comment = boardService.commentList(board);
 		

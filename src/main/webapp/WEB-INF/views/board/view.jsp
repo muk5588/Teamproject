@@ -72,9 +72,6 @@
         $(document).ready(function () {
             handleCommentRefresh();
             $("#commentRefresh").click()
-            if (${empty islogin || !isLogin}) {
-                return false;
-            }
             if (${recommend || empty recommend}) {
                 $(".doRecomm").toggle()
             }
@@ -88,9 +85,6 @@
 
         $(document).ready(function () {
 
-            if (${empty isLogin || !isLogin}) {
-                return false
-            }
 
             $("#commentInput").css("visibility", "visible")
 
@@ -323,8 +317,8 @@
                 <td><a id="totalRecommend">${recomm }</a></td>
             </tr>
         </table>
-
-        <div id="reBtn" style="visibility: hidden">
+<c:if test="${not empty isLogin and isLogin }">
+        <div id="reBtn">
             <div class="recommendBtn cancle">
                 <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>
                 <a>
@@ -366,7 +360,7 @@
             <!-- 	</table> -->
         </div>
 
-        <div id="commentInput" style="visibility: hidden">
+        <div id="commentInput">
             <hr>
             <br>
             <table>
@@ -375,7 +369,7 @@
                     <th>댓글내용</th>
                 </tr>
                 <tr>
-                    <td><input class="form-control" type="text" value="${dto.nickName }" id="commentWriter"
+                    <td><input class="form-control" type="text" value="${dto.nickname }" id="commentWriter"
                                aria-label="Disabled input example" disabled style="text-align: center;"></td>
                     <td>
                         <input name="commentContent" id="commentContent">
@@ -386,7 +380,7 @@
                 </tr>
             </table>
         </div>
-        -
+</c:if>
         <!-- 	  - 로그인아이디, 댓글 입력 창, 입력 버튼 생성 -->
         <!--   - 댓글 리스트(댓글순번, 작성자, 댓글내용, 작성일, 삭제) -->
 

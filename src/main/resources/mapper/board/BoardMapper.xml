@@ -21,6 +21,9 @@
 				</choose>
 				</if>
 	</sql>
+	<select id="boardList" resultType="Board">
+		<include refid="selectBoard" />
+	</select>
 	
 	<select id="selectAll" resultType="Board" parameterType="util.Paging">
 		SELECT * FROM (

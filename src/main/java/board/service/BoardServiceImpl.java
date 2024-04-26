@@ -143,5 +143,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.categoryList();
 	}
 
+	@Override
+	public List<Board> boardList() {
+		return boardDao.boardList();
+	}
+
 
 }

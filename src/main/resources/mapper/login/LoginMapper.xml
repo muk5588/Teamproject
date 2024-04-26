@@ -59,6 +59,12 @@
 		</where>
 
 	</update>
+	<select id="loginHistory" resultType="AccessHistory">
+		select ACCESSNO,ACCESSDATE,USERNO,u.nickname, u.USERID
+		from ACCESSHISTORY a
+		left outer join USERTB U on U.USERNO = a.USERNO
+		order by ACCESSDATE
+	</select>
 </mapper>
 
 

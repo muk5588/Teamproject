@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Title</title>
@@ -194,26 +195,26 @@
 </div>
 <div id="bar">
     <div id="content3">
-        <h3>전체 작성글 목록</h3>
+        <h3>로그인 기록</h3>
         <table class="table table-striped table-hover table-sm">
             <tr>
-                <th class='w-px60'>회원번호</th>
+                <th>번호</th>
                 <th>아이디</th>
-                <th class='w-px200'>이름</th>
                 <th>닉네임</th>
-                <th>성별</th>
+                <th>최근 접속 시간</th>
             </tr>
             <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
             <!-- items : 배열 변수 -->
             <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-            <c:forEach var="UserDTO" items="${list}">
+            <c:forEach var="login" items="${list2 }">
                 <tr>
-                    <td>${UserDTO.userno }</td>
-                    <td>${UserDTO.userid }</td>
-                    <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
-                    <td>${UserDTO.nickname}</td>
-                    <td>${UserDTO.gender }</td>
-                    </a>
+                    <td class="no">${login.accessNo }</td>
+                    <td class="title">
+                        ${login.userId}
+                    </td>
+                    <td class="nick">${login.nickName }</td>
+                    <td class="hit">${login.accessDate }</td>
+
                 </tr>
             </c:forEach>
         </table>

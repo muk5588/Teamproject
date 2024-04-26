@@ -1,6 +1,5 @@
 package login.controller;
 
-import dto.AccessHistory;
 import login.service.KakaoService;
 import login.service.LoginService;
 import login.service.SocialService;

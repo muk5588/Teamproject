@@ -69,4 +69,6 @@ public interface BoardDao {
 
 
     public List<Category> categoryList();
+
+	public List<Board> boardList();
 }

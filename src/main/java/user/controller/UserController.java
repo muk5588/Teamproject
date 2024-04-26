@@ -2,6 +2,7 @@ package user.controller;
 
 import grade.dto.Grade;
 import grade.service.GradeService;
+import login.dto.AccessHistory;
 import login.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,10 +41,10 @@ public class UserController {
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
         List<User> list = service.userList();//board생성후 userAll로 변경
-//        List<Board> list2  = boardService.boardList();
+        List<AccessHistory> list2  = loginService.loginHistory();
         List<Grade> list3 = gradeService.gradeList();
         model.addAttribute("list", list);
-//        model.addAttribute("list2", list2);
+        model.addAttribute("list2", list2);
         model.addAttribute("list3", list3);
         return "user/adminPage";
     }

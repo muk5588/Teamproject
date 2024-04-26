@@ -132,7 +132,7 @@
 		SELECT board_seq.nextval FROM DUAL
 	</selectKey>
 		INSERT INTO BOARD (boardno, title, content, userno, nickname)
-		VALUES( #{boardNo}, #{title}, #{content}, #{userNo}, #{nickname} )
+		VALUES( #{boardNo}, #{title}, #{content}, #{userNo}, #{nickName} )
 	</insert>
 
 
@@ -212,6 +212,9 @@
 		</foreach>
 		</where>
 	</delete>
-	
+
+	<select id="categoryList" resultType="Category">
+		select CATEGORYNAME, CATEGORYNO from CATEGORY order by CATEGORYNO
+	</select>
 	
 </mapper>

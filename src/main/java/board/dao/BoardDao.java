@@ -1,15 +1,15 @@
 package board.dao;
 
 import board.dto.Board;
+import board.dto.Category;
 import board.dto.Good;
 import board.dto.RecommendRes;
+import org.apache.ibatis.annotations.Param;
 import util.Paging;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface BoardDao {
 
@@ -67,5 +67,6 @@ public interface BoardDao {
 
 	public int listDeleteByBoardNo(@Param("arr")ArrayList<Integer> boardno);
 
-	
+
+    public List<Category> categoryList();
 }

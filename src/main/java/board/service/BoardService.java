@@ -1,6 +1,7 @@
 package board.service;
 
 import board.dto.Board;
+import board.dto.Category;
 import board.dto.RecommendRes;
 import comment.dto.Comment;
 import util.Paging;
@@ -73,4 +74,5 @@ public interface BoardService {
 	public int listDeleteByBoardNo(ArrayList<Integer> boardno);
 
 
+    public List<Category> categoryList();
 }

@@ -2,6 +2,7 @@ package board.service;
 
 import board.dao.BoardDao;
 import board.dto.Board;
+import board.dto.Category;
 import board.dto.Good;
 import board.dto.RecommendRes;
 import comment.dao.CommentDao;
@@ -137,7 +138,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.listDeleteByBoardNo(boardno);
 	}
 
+	@Override
+	public List<Category> categoryList() {
+		return boardDao.categoryList();
+	}
 
 
-	
 }

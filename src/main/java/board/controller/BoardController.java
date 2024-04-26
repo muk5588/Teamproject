@@ -1,25 +1,26 @@
  package board.controller;
 
-import board.dto.Board;
-import board.dto.RecommendRes;
-import board.service.BoardService;
-import board.service.FileService;
-import comment.dto.Comment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import user.dto.User;
-import util.Paging;
+ import board.dto.Board;
+ import board.dto.Category;
+ import board.dto.RecommendRes;
+ import board.service.BoardService;
+ import board.service.FileService;
+ import comment.dto.Comment;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+ import org.springframework.web.bind.annotation.*;
+ import org.springframework.web.multipart.MultipartFile;
+ import user.dto.User;
+ import util.Paging;
 
-import javax.servlet.http.HttpSession;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+ import javax.servlet.http.HttpServletRequest;
+ import javax.servlet.http.HttpSession;
+ import java.util.ArrayList;
+ import java.util.List;
+ import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
@@ -54,6 +55,8 @@ public class BoardController {
 		
 		List<Board> list = boardService.list(paging);
 
+
+
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
@@ -64,7 +67,9 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 	}
-	
+	@GetMapping("/category")
+	public void category(Model model){
+	}
 	
 	@GetMapping("/view")
 	public void view(
@@ -91,30 +96,27 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public void write() {}
+	public void write(Model model, HttpSession session) {
+		List<Category> categorylist = boardService.categoryList();
+		model.addAttribute("categorylist", categorylist);
+	}
 	
 	@PostMapping("/write")
 	public String writeProc(
 			HttpSession session
-			,String title
-			,String content
+			, Board board
 			, MultipartFile file
+			, HttpServletRequest request
 			) {
-		logger.info("title : {}", title);
-		logger.info("content : {}", content);
-		logger.info("file : {}",file);
-		
-		Board board = new Board();
-		board.setContent(content);
-		board.setTitle(content);
-		if( null != session.getAttribute("userno") ) {
-			User user = (User) session.getAttribute("userno");
-			board.setBoardNo(user.getUserno());
-			board.setNickName(user.getNickname());
-			int res = boardService.write(board);
-		}else {
-			return "redirect:/login";
-		}
+//		Category category = (Category) session.getAttribute("categorylist");
+		User user = (User) session.getAttribute("dto");
+		int category = Integer.parseInt(request.getParameter("category"));
+		logger.info("category : {}", category);
+		board.setCategoryNo(category);
+		board.setUserNo(user.getUserno());
+		board.setNickName(user.getNickname());
+		int res = boardService.write(board);
+
 		
 		logger.info("board 값 확인 : {}", board);
 		

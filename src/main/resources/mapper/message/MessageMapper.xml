@@ -26,7 +26,7 @@
 		(SELECT u.*, m.* FROM usertb u, message m
 		WHERE u.USERNO = m.SENDUSERNO 
 	) d
-	WHERE d.SENDUSERNO = #{userNo}
+	WHERE d.TOUSERNO = #{userNo}
 	ORDER BY d.SENDDATE DESC 
 
 </select>
@@ -50,5 +50,15 @@
 	messageno = #{messageNo}
 	</where>
 </update>
+
+<select id="getListBySendUser" parameterType="java.util.ArrayList" resultType="dto.Message">
+	SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
+	FROM 
+		(SELECT u.*, m.* FROM usertb u, message m
+		WHERE u.USERNO = m.SENDUSERNO 
+	) d
+	WHERE d.SENDUSERNO = #{userNo}
+	ORDER BY d.SENDDATE DESC 
+</select>
 
 </mapper>

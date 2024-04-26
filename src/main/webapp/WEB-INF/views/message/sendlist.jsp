@@ -10,48 +10,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-
-	$("#checkboxAllCheck").click(function(){
-		//attr => 속성값, prop해서 변경해야함
-		$(".delCheckBox").prop("checked", $(this).prop("checked"));
-	})
-	
-		$("#deleteBtn").click(function(){
-		
-		var datas = [];
-		$("input[name=deleteNum]:checked").each(function(){
-			var no = $(this).val();
-			datas.push(no);
-		})
-// 		console.log("값:",datas)
-		if( datas.length <= 0){
-// 			console.log("값이 없음")
-			
-			return false;
-		}
-		
-		$.ajaxSettings.traditional = true;
-		$.ajax({
-			type:"get"
-			,url:"./delete"
-			,data:{
-				messageNo : datas
-			}
-			, dataType:"json"
-			,success: function( res ){
-				console.log("AJAX 성공")
-				
-				$(function(){
-					$(location).attr('href', './list')
-				})
-				
-			}
-			,error: function(){
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
 	
 		$(".saveCheckBox").on("change", function(e) {
 			console.log("qqqeqwewq")
@@ -89,35 +47,24 @@ $(function(){
 </head>
 <body>
 
-<h1>받은 쪽지함</h1>
+<h1>보낸 메일함</h1>
 <hr>
 <div id="content">
 <table>
 <tr>
-	<th><input type="checkbox" id="checkboxAllCheck"></th>
-	<th>보낸이</th>
+	<th>받은이</th>
 	<th>내용</th>
 	<th>전송일</th>
-	<th>읽음 여부</th>
-	<th>저장 여부</th>
+	<th>읽음</th>
 </tr>
 <c:forEach items="${list}" var="list">
 <tr>
-	<td class="checkbox"><input type="checkbox" value="${list.messageNo }" name="deleteNum" class="delCheckBox"></td>
 	<td class="sender">${list.sender}</td>
 	<td class="content">${list.content}</td>
 	<td class="date">
 		<fmt:formatDate value="${list.sendDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</td>
 	<td class="read">${list.read}</td>
-	<td class="save">
-	<c:if test="${not empty list.save and list.save eq 'Y'}">
-        <input name="saveNum" class="saveCheckBox" type="checkbox" value="${list.messageNo}" checked="checked">
-    </c:if>
-    <c:if test="${empty list.save or list.save eq 'N'}">
-        <input name="saveNum" class="saveCheckBox" type="checkbox" value="${list.messageNo}" >
-	</c:if>
-	</td>
 </tr>
 </c:forEach>
 </table>
@@ -126,7 +73,7 @@ $(function(){
 
 
 </div>
-<a href="./sendlist"><button>보낸 쪽지함</button></a><br>
+<a href="./list"><button>받은 쪽지함</button></a><br>
 <a href="./sendForm"><button>쪽지쓰기</button></a><br>
 <a href="/"><button>홈으로</button></a><br>
 </body>

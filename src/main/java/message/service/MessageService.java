@@ -44,5 +44,12 @@ public interface MessageService {
 	 */
 	public int saveUpdateBySave(Message saveMessage);
 
+	/**
+	 * 전달받은 Sender의 번호를 전체 조회
+	 * @param sendUser - 현재 로그인한 사람의 userNo
+	 * @return 조회된 전체 행
+	 */
+	public List<Message> getListBySendUser(int sendUser);
+
 
 }

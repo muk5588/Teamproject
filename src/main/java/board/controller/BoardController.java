@@ -83,7 +83,6 @@ public class BoardController {
 		board =  boardService.viewByBoardNo(boardno);
 		int recomm = boardService.viewRecommend(boardno);
 		
-
 		
 		List<Comment> comment = boardService.commentList(board);
 		

@@ -12,7 +12,10 @@
  import org.springframework.stereotype.Controller;
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
- import user.dto.User;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
+
+import user.dto.User;
  import util.Paging;
 
  import javax.servlet.http.HttpSession;
@@ -101,11 +104,12 @@ public class BoardController {
 			HttpSession session
 			, Board board
 			, @RequestParam("categoryno") int categoryno
+			, MultipartFile file
 			) {
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto");
 		logger.info("category : {}", categoryno);
-			board.setCategoryNo(categoryno);
+		board.setCategoryNo(categoryno);
 		board.setUserNo(user.getUserno());
 		board.setNickName(user.getNickname());
 		int res = boardService.write(board);
@@ -113,14 +117,14 @@ public class BoardController {
 		
 		logger.info("board 값 확인 : {}", board);
 		
-//		if( null == file ) {
-//			logger.debug("첨부 파일 없음");
-//		}else if( file.getSize() <= 0 ){
-//			logger.debug("파일의 크기가 0");
-//		}else {
-//			fileService.filesave(board,file);
-//			
-//		}
+		if( null == file ) {
+			logger.debug("첨부 파일 없음");
+		}else if( file.getSize() <= 0 ){
+			logger.debug("파일의 크기가 0");
+		}else { 
+			fileService.filesave(board,file);
+			
+		}
 		
 		return "redirect:/board/list";
 	}

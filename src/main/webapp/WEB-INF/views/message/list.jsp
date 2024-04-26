@@ -30,7 +30,7 @@ $(function(){
 			return false;
 		}
 		
-// 		$.ajaxSettings,traditional = true
+		$.ajaxSettings,traditional = true
 		$.ajax({
 			type:"get"
 			,url:"./delete"
@@ -40,10 +40,9 @@ $(function(){
 			, dataType:"json"
 			,success: function( res ){
 				console.log("AJAX 성공")
-				console.log(res)
 				
 				$(function(){
-					$(location).attr('href', './list?curPage=${curPage}')
+					$(location).attr('href', './list')
 				})
 				
 			}

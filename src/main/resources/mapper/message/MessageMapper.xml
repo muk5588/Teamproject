@@ -31,17 +31,15 @@
 
 </select>
 
-<!-- 에러 수정 예정 -->
-<!-- <delete id="deleteByMessageNo" parameterType="hashmap"> -->
-<!-- 	<if test="messageNoArr != null"> -->
-<!-- 	DELETE FROM MESSAGE -->
-<!-- 	<where>  MESSAGENO IN -->
-<!-- 	<foreach collection="messageNoArr" item="messageNos" separator="OR" close=")" open="("> -->
-<!-- 		 #{messageNos}         -->
-<!-- 	</foreach> -->
-<!-- 	</where> -->
-<!-- 	</if> -->
-<!-- </delete> -->
+<delete id="deleteByMessageNo" parameterType="java.util.ArrayList">
+	DELETE FROM message
+	<where>
+	messageno in 
+	<foreach collection="arr" item="data" open="(" close=")" separator="," >
+		#{data}
+	</foreach>
+	</where>
+</delete>
 
 
 </mapper>

@@ -1,5 +1,6 @@
 package message.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,9 +36,11 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.getListByUserno(userNo);
 	}//getListByUserno(userNo)
 
+	//test용 
 	@Override
-	public int deleteByMessageNo(HashMap<String, Object> param) {
-		return messageDao.deleteByMessageNo(param);
-	}//deleteByMessageNo(int[] messageNo)
+	public int deleteByMessageNo(ArrayList<Integer> messageNo) {
+		return messageDao.deleteByMessageNo(messageNo);
+	}
+
 	
 }

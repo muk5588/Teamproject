@@ -32,9 +32,10 @@ public interface MessageService {
 
 	/**
 	 * 전달받은 messageNo로 메세지 삭제
-	 * @param param - Ajax로 전달받은 messageNo ArrayList<Integer>
+	 * @param map - Ajax로 전달받은 messageNo ArrayList<Integer>
 	 * @return - 영향을 받은 행 수
 	 */
-	public int deleteByMessageNo(HashMap<String, Object> param);
+	public int deleteByMessageNo(ArrayList<Integer> messageNo);
+
 
 }

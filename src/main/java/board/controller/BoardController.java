@@ -1,7 +1,8 @@
  package board.controller;
 
  import board.dto.Board;
- import board.dto.Category;
+import board.dto.BoardFile;
+import board.dto.Category;
  import board.dto.RecommendRes;
  import board.service.BoardService;
  import board.service.FileService;
@@ -55,7 +56,6 @@ public class BoardController {
 		logger.info("{}", paging);
 		
 		List<Board> list = boardService.list(paging);
-
 
 
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
@@ -197,6 +197,22 @@ public class BoardController {
 		int res = boardService.listDeleteByBoardNo(boardno);
 		logger.debug("삭제 완료");
 		return res;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/boardFileChk")
+	private void boardImageChk(int boardno) {
+		logger.debug("파일 체크 ");
+		logger.debug("boardno : {}", boardno);
+//		int res = fileService.getFileCnt(boardno);
+//		if(res <= 0) {
+////			return null;
+//		}else if(res == 1) {
+//			BoardFile file = fileService.getFileByBoardNo(boardno);
+//		}else if(res > 1) {
+////			List<BoardFile> file = fileService.getFileByBoardNo(boardno);
+//		}
+		
 	}
 	
 	

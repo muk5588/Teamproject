@@ -71,17 +71,17 @@ public class MessageController {
 	
 	@ResponseBody
 	@RequestMapping("/delete")
-	public void delete(
-			@RequestParam("messageNo[]") String[] messageNos
+	public int delete(
+			@RequestParam("messageNo[]") int[] param
 			) {
-		for(int i = 0; messageNos.length >i; i++) {
-			logger.debug("messageNo : {}", Arrays.toString(messageNos));
+		ArrayList<Integer> messageNo = new ArrayList<Integer>();
+		for(int i = 0; param.length >i; i++) {
+			messageNo.add(param[i]);
 		}
-		HashMap<String, Object> param = new HashMap<>();
-		param.put("messageNoArr", messageNos);
 		
-		//에러남
-//		int res = messageService.deleteByMessageNo(param);
+		int res = messageService.deleteByMessageNo(messageNo);
+		
+		return res;
 		
 	}
 	

@@ -42,5 +42,10 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.deleteByMessageNo(messageNo);
 	}
 
+	@Override
+	public int saveUpdateBySave(Message saveMessage) {
+		return messageDao.saveUpdateBySave(saveMessage);
+	}
+
 	
 }

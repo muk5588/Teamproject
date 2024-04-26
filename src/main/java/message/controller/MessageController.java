@@ -85,4 +85,22 @@ public class MessageController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping("/saveProc")
+	public int saveProc(@RequestParam("messageNo")int messageNo , @RequestParam("check")boolean check) {
+		logger.debug("messageNo : {}", messageNo);
+		logger.debug("check : {}", check);
+		String save = "N";
+		if( check ) {
+			save = "Y";
+		}else if( check ) {
+			save = "N";
+		}
+		Message saveMessage = new Message();
+		saveMessage.setSave(save);
+		saveMessage.setMessageNo(messageNo);
+		int res = messageService.saveUpdateBySave(saveMessage);
+		return res;
+	}
+	
 }

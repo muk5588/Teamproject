@@ -37,5 +37,12 @@ public interface MessageService {
 	 */
 	public int deleteByMessageNo(ArrayList<Integer> messageNo);
 
+	/**
+	 * AJAX로 통신받은 체크 상태로 저장 여부 업데이트
+	 * @param saveMessage - messageno, save ( 'N' | 'Y' ) 를 담은 DTO 객체 
+	 * @return - 영향을 받은 행 수
+	 */
+	public int saveUpdateBySave(Message saveMessage);
+
 
 }

@@ -9,11 +9,11 @@ public class Message {
 	private int toUserNo;
 	private String content;
 	private Date sendDate;
-	private char read='N';
-	private char save='N';
+	private String read="N";
+	private String save="N";
 	public Message() {}
-	public Message(String sender, int messageNo, int sendUserNo, int toUserNo, String content, Date sendDate, char read,
-			char save) {
+	public Message(String sender, int messageNo, int sendUserNo, int toUserNo, String content, Date sendDate, String read,
+			String save) {
 		super();
 		this.sender = sender;
 		this.messageNo = messageNo;
@@ -66,16 +66,16 @@ public class Message {
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
 	}
-	public char getRead() {
+	public String getRead() {
 		return read;
 	}
-	public void setRead(char read) {
+	public void setRead(String read) {
 		this.read = read;
 	}
-	public char getSave() {
+	public String getSave() {
 		return save;
 	}
-	public void setSave(char save) {
+	public void setSave(String save) {
 		this.save = save;
 	}
 	

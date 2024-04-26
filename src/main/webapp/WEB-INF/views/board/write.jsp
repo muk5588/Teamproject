@@ -59,7 +59,8 @@
 <hr>
 
 
-<form action="./write" method="post" id="writeFrom" enctype="multipart/form-data">
+<!-- <form action="./write" method="post" id="writeFrom" enctype="multipart/form-data"> -->
+<form action="./write" method="post" id="writeFrom" >
 
     <!-- 	<label for="title">제목</label> -->
     <!-- 	<input type="text" name="title" id="title"> -->
@@ -69,7 +70,7 @@
         <label for="categoryno" class="form-label">게시물 종류</label>
         <select name="categoryno" id="categoryno" placeholder="종류를 선택해 주세요" class="form-option">
             <c:forEach var="category" items="${categorylist }">
-                <option value="${category.categoryNo}" name="category">${category.categoryName}</option>
+                <option value="${category.categoryNo}" >${category.categoryName}</option>
             </c:forEach>
         </select>
     </div>
@@ -82,10 +83,10 @@
         <textarea class="form-control" id="content" rows="3" name="content" placeholder="내용을 적어주세요"></textarea>
     </div>
 
-    <div class="mb-3">
-        <label for="file" class="form-label">첨부파일</label>
-        <input type="file" id="file" name="file">
-    </div>
+<!--     <div class="mb-3"> -->
+<!--         <label for="file" class="form-label">첨부파일</label> -->
+<!--         <input type="file" id="file" name="file"> -->
+<!--     </div> -->
 
     <button id="btnWrite">작성하기</button>
 </form>

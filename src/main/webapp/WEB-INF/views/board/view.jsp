@@ -122,11 +122,6 @@
         $("#insertBtn").click(function () {
             console.log("#insertBtn Click")
 
-            if ($("#commentWriter").val() !== '${userid}') {
-                alert('로그인한 아이디와 다릅니다')
-                return false;
-            }
-
             var contentTerm = $("#commentContent").val().trim()
             if (!contentTerm) {
                 alert("댓글 내용을 입력해주세요")
@@ -145,7 +140,7 @@
                 , url: "../comment/insert"
                 , data: {
                     boardno: ${board.boardNo}
-                    , userid: $("#commentWriter").val()
+                    , NickName: $("#commentWriter").val()
                     , content: $("#commentContent").val()
                 }
                 , dataType: "json"
@@ -365,7 +360,7 @@
             <br>
             <table>
                 <tr>
-                    <th>아이디</th>
+                    <th>닉네임</th>
                     <th>댓글내용</th>
                 </tr>
                 <tr>

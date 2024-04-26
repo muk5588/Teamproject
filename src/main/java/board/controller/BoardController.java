@@ -105,7 +105,7 @@ public class BoardController {
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto");
 		logger.info("category : {}", categoryno);
-		board.setCategoryNo(categoryno);
+			board.setCategoryNo(categoryno);
 		board.setUserNo(user.getUserno());
 		board.setNickName(user.getNickname());
 		int res = boardService.write(board);

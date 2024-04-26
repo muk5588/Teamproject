@@ -35,17 +35,21 @@ public class MessageServiceImpl implements MessageService {
 	public List<Message> getListByUserno(int userNo) {
 		return messageDao.getListByUserno(userNo);
 	}//getListByUserno(userNo)
-
-	//test용 
+ 
 	@Override
 	public int deleteByMessageNo(ArrayList<Integer> messageNo) {
 		return messageDao.deleteByMessageNo(messageNo);
-	}
+	}//deleteByMessageNo(ArrayList<Integer> messageNo)
 
 	@Override
 	public int saveUpdateBySave(Message saveMessage) {
 		return messageDao.saveUpdateBySave(saveMessage);
-	}
+	}//saveUpdateBySave(saveMessage)
+
+	@Override
+	public List<Message> getListBySendUser(int sendUser) {
+		return messageDao.getListBySendUser(sendUser);
+	}//getListBySendUser(int sendUser)
 
 	
 }

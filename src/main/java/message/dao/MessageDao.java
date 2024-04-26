@@ -25,5 +25,7 @@ public interface MessageDao {
 
 	public int saveUpdateBySave(Message saveMessage);
 
+	public List<Message> getListBySendUser(int sendUser);
+
 	
 }

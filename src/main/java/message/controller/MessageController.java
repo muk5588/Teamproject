@@ -103,4 +103,16 @@ public class MessageController {
 		return res;
 	}
 	
+	@RequestMapping("/sendlist")
+	public void sendlist(HttpSession session, HttpServletRequest res) {
+		int sendUser = (int) session.getAttribute("loginno");
+		List<Message> list = messageService.getListBySendUser(sendUser);
+		for(Message m : list) {
+			logger.debug("m : {}", m);
+		}
+		logger.debug("list : {} ", list);
+		
+		res.setAttribute("list", list);
+	}
+	
 }

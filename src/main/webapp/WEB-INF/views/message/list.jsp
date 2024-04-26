@@ -79,7 +79,12 @@ $(function(){
 		<fmt:formatDate value="${list.sendDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</td>
 	<td class="read">${list.read}</td>
-	<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
+	<c:if test="${list.save eq 'Y' }">
+		<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
+	</c:if>
+	<c:if test="${list.save not eq 'Y' }">
+		<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
+	</c:if>
 	<td >
 </tr>
 </c:forEach>

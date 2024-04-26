@@ -6,6 +6,8 @@ import comment.dto.Comment;
 import util.Paging;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +70,7 @@ public interface BoardService {
 
 	public void commentDelete(Comment comment);
 
-	public void listDelete(int boardno);
+	public int listDeleteByBoardNo(ArrayList<Integer> boardno);
 
 
 }

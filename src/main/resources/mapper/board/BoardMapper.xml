@@ -203,11 +203,15 @@
 			)
 	</select>
 	
-	<delete id="listDelete" parameterType="int">
-		DELETE board
-		WHERE BOARDNO = #{boardno}
+	<delete id="listDeleteByBoardNo" parameterType="java.util.ArrayList">
+		DELETE FROM board
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
 	</delete>
-	
 	
 	
 </mapper>

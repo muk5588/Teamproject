@@ -106,9 +106,11 @@ $(function(){
 // 				console.log("AJAX 성공")
 // 				console.log(res)
 				
-				$(function(){
-					$(location).attr('href', './list?curPage=${curPage}')
-				})
+				if( res > 0){
+					$(function(){
+						$(location).attr('href', './list?curPage=${curPage}')
+					})
+				}
 				
 			}
 			,error: function(){

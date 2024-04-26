@@ -5,8 +5,11 @@ import board.dto.Good;
 import board.dto.RecommendRes;
 import util.Paging;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface BoardDao {
 
@@ -62,7 +65,7 @@ public interface BoardDao {
 
 	public List<Board> selectBySearch(Paging paging);
 
-	public void listDelete(int boardno);
+	public int listDeleteByBoardNo(@Param("arr")ArrayList<Integer> boardno);
 
 	
 }

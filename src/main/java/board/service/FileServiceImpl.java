@@ -59,5 +59,15 @@ public class FileServiceImpl implements FileService {
 		
 		fileDao.insert(filetest);
 	}
+
+	@Override
+	public int getFileCnt(int boardno) {
+		return fileDao.getFileCnt(boardno);
+	}
+
+	@Override
+	public BoardFile getFileByBoardNo(int boardno) {
+		return fileDao.getFileByBoardNo(boardno);
+	}
 	
 }

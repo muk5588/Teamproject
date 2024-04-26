@@ -11,4 +11,19 @@
 		VALUES( #{fileNo}, #{boardNo}, #{originName}, #{storedName})
 	</insert>
 	
+	<select id="getFileCnt" parameterType="int" resultType="int">
+		SELECT count(*) FROM
+		(
+			SELECT FILENO,BOARDNO,origin_name, stored_name
+			FROM boardfile
+			WHERE  BOARDNO = #{boardno}
+		)
+	</select>
+	
+	<select id="getFileCnt" parameterType="int" resultType="int">
+		SELECT FILENO,BOARDNO,origin_name, stored_name
+		FROM boardfile
+		WHERE  BOARDNO = #{boardno}
+	</select>
+	
 </mapper>

@@ -70,7 +70,10 @@
     $(function () {
 
         $(document).ready(function () {
+        	//HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
             handleCommentRefresh();
+        	//HTML전체 로딩이 끝나면 파일을 비동기통신으로 가져오기 위해.
+            handleGetFile();
             $("#commentRefresh").click()
             if (${recommend || empty recommend}) {
                 $(".doRecomm").toggle()
@@ -255,9 +258,30 @@
 
             })
         }
+	
+	
+        function handleGetFile() {
+        	console.log("이미지 가져오기 실행.")
+        	
+        	$.ajax({
+                    type: "get"
+                    , url: "./boardFileChk"
+                    , data: {
+                        boardno: ${board.boardNo}
+                    }
+                    , dataType: "json"
+                    , success: function (res) {
+                        console.log("AJAX 성공")
 
-
-    })
+                    }
+                    , error: function () {
+                        console.log("AJAX 실패")
+                    }
+                })
+        }
+        
+        
+})
 </script>
 </head>
 <body>

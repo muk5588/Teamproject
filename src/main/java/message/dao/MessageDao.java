@@ -23,6 +23,7 @@ public interface MessageDao {
 
 	public int deleteByMessageNo(@Param("arr")ArrayList<Integer> messageNo);
 
-//	public int deleteByMessageNo(@Param("messageNos")HashMap<String, Object> map);
+	public int saveUpdateBySave(Message saveMessage);
+
 	
 }

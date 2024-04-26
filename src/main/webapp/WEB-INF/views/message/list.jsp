@@ -30,7 +30,7 @@ $(function(){
 			return false;
 		}
 		
-		$.ajaxSettings,traditional = true
+		$.ajaxSettings.traditional = true;
 		$.ajax({
 			type:"get"
 			,url:"./delete"
@@ -53,6 +53,37 @@ $(function(){
 		
 	})
 	
+		$(".saveCheckBox").on("change", function(e) {
+			console.log("qqqeqwewq")
+			console.log("tar value",  $(e.target).val(), $(e.target).is(":checked"))
+			var no = $(e.target).val();
+			var check = $(e.target).is(":checked");
+
+		$.ajaxSettings,traditional = true
+		$.ajax({
+			type:"get"
+			,url:"./saveProc"
+			,data:{
+				messageNo : no
+				,check : check
+			}
+			, dataType:"json"
+			,success: function( res ){
+				console.log("AJAX 성공")
+				console.log(res)
+				
+				$(function(){
+					$(location).attr('href', './list')
+				})
+				
+			}
+			,error: function(){
+				console.log("AJAX 실패")
+			}
+		})
+		
+	})
+	
 })
 </script>
 </head>
@@ -61,7 +92,7 @@ $(function(){
 <h1>메시지함</h1>
 <hr>
 <div id="content">
-<table style="align-content: center;">
+<table>
 <tr>
 	<th><input type="checkbox" id="checkboxAllCheck"></th>
 	<th>보낸이</th>
@@ -79,13 +110,14 @@ $(function(){
 		<fmt:formatDate value="${list.sendDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</td>
 	<td class="read">${list.read}</td>
-	<c:if test="${list.save eq 'Y' }">
-		<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
+	<td class="save">
+	<c:if test="${not empty list.save and list.save eq 'Y'}">
+        <input name="saveNum" class="saveCheckBox" type="checkbox" value="${list.messageNo}" checked="checked">
+    </c:if>
+    <c:if test="${empty list.save or list.save eq 'N'}">
+        <input name="saveNum" class="saveCheckBox" type="checkbox" value="${list.messageNo}" >
 	</c:if>
-	<c:if test="${list.save not eq 'Y' }">
-		<td class="save"><input type="checkbox" value="${not empty list.read || list.save eq 'Y'}"></td>
-	</c:if>
-	<td >
+	</td>
 </tr>
 </c:forEach>
 </table>

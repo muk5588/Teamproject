@@ -48,12 +48,12 @@
 
 	<insert id="insertAccessHistory" parameterType="int">
 
-		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userNo}, sysdate)
+		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userNo}, sysdate + 9/24)
 
 	</insert>
 
 	<update id="updateAccessHistory" parameterType="int">
-		update ACCESSHISTORY set ACCESSDATE = sysdate
+		update ACCESSHISTORY set ACCESSDATE = sysdate + 9/24
 		<where>
 			and userNo = #{userno}
 		</where>

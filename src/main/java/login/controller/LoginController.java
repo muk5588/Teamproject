@@ -1,9 +1,9 @@
 package login.controller;
 
+import dto.AccessHistory;
 import login.service.KakaoService;
 import login.service.LoginService;
 import login.service.SocialService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ public class LoginController {
     @Autowired
     KakaoService kakaoService;
 
+
     //로그인 요청
     @RequestMapping("/login/loginProc")
     public String loginproc(User dto, HttpSession session) {
@@ -36,6 +37,15 @@ public class LoginController {
             //로그인 성공
             int loginno = loginService.getLoginNo(dto);
 
+
+            int historyCheck = loginService.historyCheck(loginno);
+            logger.info("historyCheck : {}", historyCheck);
+
+            if(historyCheck == 0){
+                loginService.insertAccessHistory(loginno);
+            }else if(historyCheck == 1){
+                loginService.updateAccessHistory(loginno);
+            }
 
             session.setAttribute("isLogin", isLogin);
             session.setAttribute("loginno", loginno);

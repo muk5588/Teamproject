@@ -14,4 +14,10 @@ public interface LoginDao {
 
 	public User selectByNo(int loginno);
 
+
+	public int historyCheck(int loginno);
+
+	public void insertAccessHistory(int loginno);
+
+	public void updateAccessHistory(int loginno);
 }

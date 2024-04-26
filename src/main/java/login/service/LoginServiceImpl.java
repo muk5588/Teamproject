@@ -39,4 +39,21 @@ public class LoginServiceImpl implements LoginService {
     public User info(int loginno) {
         return loginDao.selectByNo(loginno);
     }
+
+    @Override
+    public int historyCheck(int loginno) {
+        return loginDao.historyCheck(loginno);
+    }
+
+    @Override
+    public void insertAccessHistory(int loginno) {
+        loginDao.insertAccessHistory(loginno);
+    }
+
+    @Override
+    public void updateAccessHistory(int loginno) {
+        loginDao.updateAccessHistory(loginno);
+    }
+
+
 }

@@ -34,6 +34,31 @@
 			and userno = #{userno }
 		</where>
 	</select>
+
+
+	<select id="historyCheck" resultType="int" parameterType="int">
+		select count(*) from (
+		    select userno, ACCESSDATE from ACCESSHISTORY
+							 )
+		<where>
+			AND userNo = #{userno}
+		</where>
+
+	</select>
+
+	<insert id="insertAccessHistory" parameterType="int">
+
+		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userNo}, sysdate)
+
+	</insert>
+
+	<update id="updateAccessHistory" parameterType="int">
+		update ACCESSHISTORY set ACCESSDATE = sysdate
+		<where>
+			and userNo = #{userno}
+		</where>
+
+	</update>
 </mapper>
 
 

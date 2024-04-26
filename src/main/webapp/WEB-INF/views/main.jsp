@@ -15,7 +15,6 @@
 
 <div class="slideshow-container">
 
-  <!-- Full-width images with number and caption text -->
   <div class="mySlides fade">
     <div class="numbertext">1 / 3</div>
     <img src="/resources/img/mainPage/japan_01.jpg" style="width:100%">
@@ -43,8 +42,6 @@
   <span class="dot" onclick="currentSlide(2)"></span>
   <span class="dot" onclick="currentSlide(3)"></span>
 </div>
-
-
 
 </body>
 

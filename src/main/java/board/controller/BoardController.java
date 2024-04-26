@@ -13,10 +13,13 @@
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
  import org.springframework.web.multipart.MultipartFile;
- import user.dto.User;
+import org.springframework.web.multipart.MultipartRequest;
+
+import user.dto.User;
  import util.Paging;
 
- import javax.servlet.http.HttpServletRequest;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
  import javax.servlet.http.HttpSession;
  import java.util.ArrayList;
  import java.util.List;
@@ -105,14 +108,12 @@ public class BoardController {
 	public String writeProc(
 			HttpSession session
 			, Board board
-			, MultipartFile file
-			, HttpServletRequest request
+			, @RequestParam("categoryno") int categoryno
 			) {
-//		Category category = (Category) session.getAttribute("categorylist");
+		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto");
-		int category = Integer.parseInt(request.getParameter("category"));
-		logger.info("category : {}", category);
-		board.setCategoryNo(category);
+		logger.info("category : {}", categoryno);
+		board.setCategoryNo(categoryno);
 		board.setUserNo(user.getUserno());
 		board.setNickName(user.getNickname());
 		int res = boardService.write(board);
@@ -120,14 +121,14 @@ public class BoardController {
 		
 		logger.info("board 값 확인 : {}", board);
 		
-		if( null == file ) {
-			logger.debug("첨부 파일 없음");
-		}else if( file.getSize() <= 0 ){
-			logger.debug("파일의 크기가 0");
-		}else {
-			fileService.filesave(board,file);
-			
-		}
+//		if( null == file ) {
+//			logger.debug("첨부 파일 없음");
+//		}else if( file.getSize() <= 0 ){
+//			logger.debug("파일의 크기가 0");
+//		}else {
+//			fileService.filesave(board,file);
+//			
+//		}
 		
 		return "redirect:/board/list";
 	}

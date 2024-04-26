@@ -44,7 +44,8 @@ public class MessageController {
 		}
 		if( touser != null && !"".equals(touser)) {
 			User toUser = messageService.getUserByNickName(touser);
-			int sendUser = (int) session.getAttribute("loginno");
+			User user = (User) session.getAttribute("dto");
+			int sendUser = user.getUserno();
 			Message message = new Message();
 			message.setSendUserNo(sendUser);
 			message.setToUserNo(toUser.getUserno());
@@ -105,7 +106,8 @@ public class MessageController {
 	
 	@RequestMapping("/sendlist")
 	public void sendlist(HttpSession session, HttpServletRequest res) {
-		int sendUser = (int) session.getAttribute("loginno");
+		User user = (User) session.getAttribute("dto");
+		int sendUser = user.getUserno();
 		List<Message> list = messageService.getListBySendUser(sendUser);
 		for(Message m : list) {
 			logger.debug("m : {}", m);

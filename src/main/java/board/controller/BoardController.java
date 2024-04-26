@@ -1,4 +1,4 @@
-package board.controller;
+ package board.controller;
 
 import board.dto.Board;
 import board.dto.RecommendRes;
@@ -16,6 +16,8 @@ import user.dto.User;
 import util.Paging;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -184,16 +186,18 @@ public class BoardController {
 		return res;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/listDelete")
-	public @ResponseBody board.dto.delete listDelete(
+	public int listDelete(
 //		public void listDelete( 
-			@RequestParam("boardNo[]") int[] boardno) {
-		for(int i = 0; i < boardno.length; i++) {
-			boardService.listDelete(boardno[i]);
+			@RequestParam("boardNo[]") int[] no) {
+		ArrayList<Integer> boardno = new ArrayList<Integer>();
+		for(int i = 0; i < no.length; i++) {
+//			boardService.listDelete(boardno[i]);
+			boardno.add(no[i]);
 		}
-		logger.info("삭제 완료");
-		board.dto.delete res = new board.dto.delete();
-		res.setResult("true");
+		int res = boardService.listDeleteByBoardNo(boardno);
+		logger.debug("삭제 완료");
 		return res;
 	}
 	

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import util.Paging;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -131,9 +133,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void listDelete(int boardno) {
-//		Map<String, List<Integer>> map = new HashMap<String, List<Integer>>(); 
-		boardDao.listDelete(boardno);
+	public int listDeleteByBoardNo(ArrayList<Integer> boardno) {
+		return boardDao.listDeleteByBoardNo(boardno);
 	}
 
 

@@ -2,6 +2,7 @@ package login.controller;
 
 import com.google.gson.JsonObject;
 import login.service.KakaoService;
+import login.service.LoginService;
 import login.service.SocialService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ public class SocialController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired SocialService socialService;
 	@Autowired KakaoService kakaoService;
+	@Autowired LoginService loginService;
 	
 //    @Autowired
     private String apiResult = null;
@@ -105,8 +107,6 @@ public class SocialController {
 		    String socid = socialService.getSosid(info);
 			if(socid!=null) {
 				User dto = socialService.socialLogin(socid);
-				boolean isLogin = true;
-				session.setAttribute("isLogin", isLogin);
 				session.setAttribute("dto", dto);
 				return "redirect: /";
 			}else{
@@ -163,11 +163,8 @@ public class SocialController {
 		String socid = socialService.getKakaoid(userInfo);
 		if(socid!=null) {
 			User dto = socialService.socialLogin(socid);
-			boolean isLogin = true;
-			session.setAttribute("socid", socid);
-			session.setAttribute("isLogin", isLogin);
-			session.setAttribute("dto", dto);
 
+			session.setAttribute("dto", dto);
 			return "redirect: /";
 		}else{
 			session.setAttribute("sosid", userInfo);

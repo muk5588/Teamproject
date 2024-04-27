@@ -5,16 +5,7 @@
 
 <mapper namespace="login.dao.LoginDao">
 	
-	<select id="selectCntIdPw" resultType="int" parameterType="User">
-		select count(*) from (
-		select userno from usertb
-		<where>
-			and userid = #{userid }
-			and userpw = #{userpw }
 
-		</where>
-		)
-	</select>
 
 	<select id="selectNoByIdPw" resultType="int" parameterType="User">
 		select userno from usertb

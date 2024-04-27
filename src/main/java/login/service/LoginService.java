@@ -11,12 +11,12 @@ public interface LoginService {
 	 * @param dto
 	 * @return
 	 */
-	public boolean login(User dto);
+	public int login(User dto);
 
 
-	public int getLoginNo(User dto);
 
-	public User info(int loginno);
+
+	public User info(User dto);
 
 
 	public int historyCheck(int loginno);

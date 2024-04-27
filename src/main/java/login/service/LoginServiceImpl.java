@@ -19,28 +19,18 @@ public class LoginServiceImpl implements LoginService {
 //    }
 
     @Override
-    public boolean login(User dto) {
+    public int login(User dto) {
 
-        int result = loginDao.selectCntIdPw(dto);
+        int result = loginDao.selectNoByIdPw(dto);
 
-        if(result > 0) {
-            return true;     //로그인 성공
-        }else {
-
-        return false;
-        }
+        return result;
 
     }
 
-    @Override
-    public int getLoginNo(User dto) {
-
-        return loginDao.selectNoByIdPw(dto);
-    }
 
     @Override
-    public User info(int loginno) {
-        return loginDao.selectByNo(loginno);
+    public User info(User dto) {
+        return loginDao.selectByNo(dto);
     }
 
     @Override

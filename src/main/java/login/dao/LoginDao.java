@@ -11,11 +11,11 @@ public interface LoginDao {
 //	public UserDTO loginProc(UserDTO dto);
 
 
-	public int selectCntIdPw(User dto);
+
 
 	public int selectNoByIdPw(User dto);
 
-	public User selectByNo(int loginno);
+	public User selectByNo(User dto);
 
 
 	public int historyCheck(int loginno);

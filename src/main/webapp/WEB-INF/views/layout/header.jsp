@@ -83,7 +83,7 @@
         </div> -->
         <div style="position: absolute; right: 0; top: 35px; margin-right: 100px;">
             <!-- 로그인한 경우 -->
-            <c:if test="${not empty isLogin and isLogin }">
+            <c:if test="${not empty isLogin}">
                 <ul>
                     <li>${dto.name } [${dto.nickname } ]</li>
                     <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>

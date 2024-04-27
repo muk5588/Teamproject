@@ -30,25 +30,24 @@ public class LoginController {
     public String loginproc(User dto, HttpSession session) {
 
 //        dto = loginService.loginProc(dto);
-        boolean isLogin = loginService.login(dto);
+        //userno
+        int isLogin = loginService.login(dto);
+        logger.info("isLogin : {}", isLogin);
+        if (isLogin > 0) {  //로그인 성공
+            //유저 정보
+            User login = loginService.info(dto);
 
-        if (isLogin) {
-            //로그인 성공
-            int loginno = loginService.getLoginNo(dto);
 
-
-            int historyCheck = loginService.historyCheck(loginno);
+            int historyCheck = loginService.historyCheck(isLogin);
             logger.info("historyCheck : {}", historyCheck);
 
             if(historyCheck == 0){
-                loginService.insertAccessHistory(loginno);
+                loginService.insertAccessHistory(isLogin);
             }else if(historyCheck == 1){
-                loginService.updateAccessHistory(loginno);
+                loginService.updateAccessHistory(isLogin);
             }
 
             session.setAttribute("isLogin", isLogin);
-            session.setAttribute("loginno", loginno);
-            User login = loginService.info(loginno);
             session.setAttribute("dto", login);
 
         } else {  //로그인 실패
@@ -96,9 +95,8 @@ public class LoginController {
 
     //    마이페이지
     @RequestMapping("/user/userDetail")
-    public void mypage(@SessionAttribute("loginno") int loginno, Model model) {
+    public void mypage(@SessionAttribute("login") User login, Model model) {
 
-        User login = loginService.info(loginno);
 
         model.addAttribute("dto", login);
     }

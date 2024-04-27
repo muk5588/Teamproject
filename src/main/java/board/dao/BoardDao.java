@@ -5,12 +5,14 @@ import board.dto.Category;
 import board.dto.Good;
 import board.dto.RecommendRes;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import util.Paging;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Repository("BoardDao")
 public interface BoardDao {
 
 	/**

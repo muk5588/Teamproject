@@ -20,7 +20,7 @@
 		)
 	</select>
 	
-	<select id="getFileCnt" parameterType="int" resultType="int">
+	<select id="getFile" parameterType="int" resultType="int">
 		SELECT FILENO,BOARDNO,origin_name, stored_name
 		FROM boardfile
 		WHERE  BOARDNO = #{boardno}

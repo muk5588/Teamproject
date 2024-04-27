@@ -95,7 +95,7 @@ public class LoginController {
 
     //    마이페이지
     @RequestMapping("/user/userDetail")
-    public void mypage(@SessionAttribute("login") User login, Model model) {
+    public void mypage(@SessionAttribute(value = "dto", required = false) User login, Model model) {
 
 
         model.addAttribute("dto", login);

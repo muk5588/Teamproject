@@ -1,7 +1,9 @@
 package board.dao;
 
 import board.dto.BoardFile;
+import org.springframework.stereotype.Repository;
 
+@Repository("FileDao")
 public interface FileDao {
 
 	public void insert(BoardFile filetest);

@@ -8,15 +8,18 @@ public class AccessHistory {
 	private Date accessDate;
 	private  String nickName;
 	private  String userId;
+	private  int accessCount;
 	public AccessHistory() {}
 
-	public AccessHistory(int accessNo, int userNo, Date accessDate, String nickName, String userId) {
+	public AccessHistory(int accessNo, int userNo, Date accessDate, String nickName, String userId, int accessCount) {
 		this.accessNo = accessNo;
 		this.userNo = userNo;
 		this.accessDate = accessDate;
 		this.nickName = nickName;
 		this.userId = userId;
+		this.accessCount = accessCount;
 	}
+
 	@Override
 	public String toString() {
 		return "AccessHistory{" +
@@ -25,6 +28,7 @@ public class AccessHistory {
 				", accessDate=" + accessDate +
 				", nickName='" + nickName + '\'' +
 				", userId='" + userId + '\'' +
+				", accessCount=" + accessCount +
 				'}';
 	}
 
@@ -66,5 +70,13 @@ public class AccessHistory {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public int getAccessCount() {
+		return accessCount;
+	}
+
+	public void setAccessCount(int accessCount) {
+		this.accessCount = accessCount;
 	}
 }

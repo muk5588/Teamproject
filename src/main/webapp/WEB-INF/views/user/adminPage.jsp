@@ -166,7 +166,9 @@
                         <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
                         <td>${UserDTO.nickname}</td>
                         <td>${UserDTO.gender }</td>
-                        </a>
+
+
+
                     </tr>
                 </c:forEach>
             </table>
@@ -200,21 +202,19 @@
         <table class="table table-striped table-hover table-sm">
             <tr>
                 <th>번호</th>
-                <th>아이디</th>
                 <th>닉네임</th>
                 <th>최근 접속 시간</th>
+                <th>로그인 횟수</th>
             </tr>
             <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
             <!-- items : 배열 변수 -->
             <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
             <c:forEach var="login" items="${list2 }">
                 <tr>
-                    <td class="no">${login.accessNo }</td>
-                    <td class="title">
-                        ${login.userId}
-                    </td>
+                    <td class="no">${login.userNo }</td>
                     <td class="nick">${login.nickName }</td>
-                    <td class="hit">${login.accessDate }</td>
+                    <td class="hit"><fmt:formatDate value="${login.accessDate }" pattern="yyyy-MM-dd"/></td>
+                    <td class="count">${login.accessCount }</td>
 
                 </tr>
             </c:forEach>

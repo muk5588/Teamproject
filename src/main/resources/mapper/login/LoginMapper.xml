@@ -44,11 +44,11 @@
 	</insert>
 
 	<select id="loginHistory" resultType="AccessHistory">
-		select ACCESSNO, ACCESSDATE, u.NICKNAME, u.USERID
-		from ACCESSHISTORY a
-		left outer join USERTB U
-		    on U.USERNO = a.USERNO
-		order by ACCESSDATE
+		SELECT a.USERNO, COUNT(*) AS ACCESS_COUNT, a.ACCESSDATE,a.ACCESSNO, u.NICKNAME
+		FROM ACCESSHISTORY a
+				 LEFT OUTER JOIN USERTB u ON u.USERNO = a.USERNO
+		GROUP BY a.ACCESSDATE, a.USERNO, u.NICKNAME, a.ACCESSNO
+		ORDER BY a.ACCESSDATE, a.USERNO
 	</select>
 </mapper>
 

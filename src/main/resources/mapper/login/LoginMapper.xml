@@ -16,7 +16,7 @@
 
 	</select>
 
-	<select id="selectByNo" resultType="User" parameterType="int">
+	<select id="selectByNo" resultType="User" parameterType="User">
 		select
 			userno, name, userid, nickname, gender, email, postcode, address,
 			detailAddress, extraAddress, phone, gradeno

@@ -35,8 +35,9 @@ public class LoginController {
         logger.info("isLogin : {}", isLogin);
         if (isLogin > 0) {  //로그인 성공
             //유저 정보
+            dto.setUserno(isLogin);
             User login = loginService.info(dto);
-
+            logger.info("login : {}", login);
 
             int historyCheck = loginService.historyCheck(isLogin);
             logger.info("historyCheck : {}", historyCheck);

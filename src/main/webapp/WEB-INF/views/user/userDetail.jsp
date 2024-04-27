@@ -62,7 +62,7 @@
                 <td>${dto.phone }</td>
             </tr>
         </table>
-        <c:if test="${not empty isLogin and isLogin and dto.gradeno >= 1}">
+        <c:if test="${dto.gradeno >= 1}">
             <div class='btnSet'>
                 <a class='btn-fill' href="/user/updateUser">수정</a>
                 <a class='btn-fill' href="/user/updatePass?userno=${dto.userno}">비밀번호번경</a>

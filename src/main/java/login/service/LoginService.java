@@ -19,11 +19,11 @@ public interface LoginService {
 	public User info(User dto);
 
 
-	public int historyCheck(int loginno);
-
-	public void insertAccessHistory(int loginno);
-
-	public void updateAccessHistory(int loginno);
-
 	public List<AccessHistory> loginHistory();
+
+	/**
+	 * 유저 접속로그 추가
+	 * @param login - 유저 정보를 담은 DTO 객체
+	 */
+	public void insertAccessHistory(User login);
 }

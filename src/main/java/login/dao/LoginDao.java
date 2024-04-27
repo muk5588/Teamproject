@@ -20,9 +20,7 @@ public interface LoginDao {
 
 	public int historyCheck(int loginno);
 
-	public void insertAccessHistory(int loginno);
-
-	public void updateAccessHistory(int loginno);
+	public void insertAccessHistory(User login);
 
     public List<AccessHistory> loginHistory();
 }

@@ -39,15 +39,8 @@ public class LoginController {
             User login = loginService.info(dto);
             logger.info("login : {}", login);
 
-            int historyCheck = loginService.historyCheck(isLogin);
-            logger.info("historyCheck : {}", historyCheck);
-
-            if(historyCheck == 0){
-                loginService.insertAccessHistory(isLogin);
-            }else if(historyCheck == 1){
-                loginService.updateAccessHistory(isLogin);
-            }
-
+            loginService.insertAccessHistory(login);
+            
             session.setAttribute("isLogin", isLogin);
             session.setAttribute("dto", login);
 

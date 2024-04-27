@@ -65,5 +65,11 @@ public interface SocialService {
 
 	public boolean naverLogout(HttpSession session);
 
+	/**
+	 * 유저 접속로그 추가
+	 * @param dto - 소셜 유저 정보를 담은 DTO 객체
+	 */
+	public void insertAccessHistory(User dto);
+
 
 }

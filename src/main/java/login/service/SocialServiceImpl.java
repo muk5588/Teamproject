@@ -348,4 +348,9 @@ public class SocialServiceImpl implements SocialService {
         
     }//naverLogout(session)
 
+	@Override
+	public void insertAccessHistory(User dto) {
+		socialDao.insertAccessHistory(dto);
+	}
+
 }

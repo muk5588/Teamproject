@@ -107,6 +107,7 @@ public class SocialController {
 		    String socid = socialService.getSosid(info);
 			if(socid!=null) {
 				User dto = socialService.socialLogin(socid);
+				socialService.insertAccessHistory(dto);
 				session.setAttribute("dto", dto);
 				return "redirect: /";
 			}else{
@@ -164,6 +165,7 @@ public class SocialController {
 		if(socid!=null) {
 			User dto = socialService.socialLogin(socid);
 
+			socialService.insertAccessHistory(dto);
 			session.setAttribute("dto", dto);
 			return "redirect: /";
 		}else{

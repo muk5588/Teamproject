@@ -10,4 +10,6 @@ public interface SocialDao {
     public void socialJoin(User dto);
 
     public User socialLogin(String socid);
+
+	public void insertAccessHistory(User dto);
 }

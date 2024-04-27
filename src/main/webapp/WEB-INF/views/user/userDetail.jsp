@@ -62,22 +62,22 @@
                 <td>${dto.phone }</td>
             </tr>
         </table>
-        <c:if test="${dto.gradeno >= 1}">
+        <c:choose>
+            <c:when test="${dto.gradeno == 0 || dto.gradeno == 5000}">
+                <div class='btnSet'>
+                    <a class='btn-fill' href="/user/userList">고객 목록</a>
+                    <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
+                    <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
+                </div>
+            </c:when>
+        <c:otherwise>
             <div class='btnSet'>
-                <a class='btn-fill' href="/user/updateUser">수정</a>
-                <a class='btn-fill' href="/user/updatePass?userno=${dto.userno}">비밀번호번경</a>
-                <a class='btn-fill' href="/user/deleteUser">삭제</a>
-            </div>
-        </c:if>
-        <c:if test="${dto.gradeno < 1}">
-            <div class='btnSet'>
-                <a class='btn-fill' href="/user/userList">고객 목록</a>
                 <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
+                <a class='btn-fill' href="/user/updatePass?userno=${dto.userno}">비밀번호번경</a>
                 <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
             </div>
-
-        </c:if>
-
+        </c:otherwise>
+        </c:choose>
 
     </div>
 </div>

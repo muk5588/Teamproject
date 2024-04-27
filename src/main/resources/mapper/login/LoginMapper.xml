@@ -39,7 +39,7 @@
 
 	<insert id="insertAccessHistory" parameterType="User">
 
-		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userNo}, sysdate + 9/24)
+		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userno}, sysdate + 9/24)
 
 	</insert>
 

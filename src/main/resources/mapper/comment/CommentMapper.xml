@@ -3,24 +3,20 @@
 
 <mapper namespace="comment.dao.CommentDao">
 
-<select id="selectCommentByBoardNo" resultType="Comment" parameterType="Board">
-	SELECT rnum comm_seq, commno, boardno, USERNO, COMMCONTENT, commdate FROM (
-		SELECT rownum rnum, B.* FROM(
-			SELECT COMMNO, boardno, USERNO, COMMCONTENT, commdate
-			FROM COMMENTTB
-			WHERE boardno = #{boardNo}
-			ORDER BY commdate ASC
-		) B
-	)
-	ORDER BY rnum ASC
-</select>
-
+	<select id="selectCommentByBoardNo" resultType="Comment" parameterType="Board">
+        SELECT c.commno, c.boardno, c.USERNO, u.nickname, c.COMMCONTENT, c.commdate
+        FROM (SELECT COMMNO, boardno, USERNO, COMMCONTENT, commdate
+              FROM COMMENTTB
+              WHERE boardno = #{boardNo}) c
+                 INNER JOIN usertb u ON u.userno = c.USERNO
+        ORDER BY c.commdate ASC
+    </select>
 <insert id="commentInsert" parameterType="Comment">
 	<selectKey keyProperty="commNo" order="BEFORE" resultType="int">
 		SELECT commentTB_seq.nextval FROM dual
 	</selectKey>
 	INSERT INTO COMMENTTB( COMMNO, boardno, userno, commContent)
-	VALUES( #{commNo }, #{boardNo }, #{userNo }, #{commContent } )
+	VALUES( #{commNo }, #{boardNo }, #{userNo }, #{commContent		 } )
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">

@@ -68,9 +68,7 @@
     $(function () {
 
         $(document).ready(function () {
-        	//HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
-            handleCommentRefresh();
-        	//HTML전체 로딩이 끝나면 파일을 비동기통신으로 가져오기 위해.
+            //HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
             handleGetFile();
             $("#commentRefresh").click()
             if (${recommend || empty recommend}) {
@@ -138,8 +136,8 @@
                 type: "get"
                 , url: "/comment/insert"
                 , data: {
-                	boardNo: ${board.boardNo}
-                    , commNo : $("#userid").val()
+                    boardNo: ${board.boardNo}
+                    , commNo: $("#userid").val()
                     , commContent: $("#commentContent").val()
                 }
                 , dataType: "json"
@@ -191,97 +189,32 @@
             })
         }
 
-        function handleCommentRefresh() {
-            $("#commentRefresh").click(function () {
-                console.log("#commentRefresh Click")
 
-                $.ajax({
-                    type: "get"
-                    , url: "../comment/refresh"
-                    , data: {
-                        boardno: ${board.boardNo}
-                    }
-                    , dataType: "json"
-                    , success: function (res) {
-                        console.log(res); // 받아온 데이터 출력
+        function handleGetFile() {
+            console.log("이미지 가져오기 실행.")
 
-                        // 댓글을 표시하는 부분
-                        var comments = res; // JSON 데이터에서 댓글 배열을 가져옴
+            $.ajax({
+                type: "get"
+                , url: "./boardFileChk"
+                , data: {
+                    boardno: ${board.boardNo}
+                }
+                , dataType: "json"
+                , success: function (res) {
+                    console.log("AJAX 성공")
 
-                        // 댓글을 표시할 HTML 문자열 생성
-                        var commentHTML = "";
-                        commentHTML += '<table border="1px" style="width: 80%; text-align: center;">';
-                        commentHTML += "<thead>";
-                        commentHTML += "<tr>";
-                        commentHTML += "<th>댓글 순번</th>	"
-                        commentHTML += "<th>작성자</th>"
-                        commentHTML += "<th>댓글내용</th>"
-                        commentHTML += "<th>작성일</th>"
-                        commentHTML += "</thead>";
-                        commentHTML += "</tr>";
-                        commentHTML += "<tbody>";
-                        for (var i = 0; i < comments.length; i++) {
-                            commentHTML += "<tr>";
-                            commentHTML += "<td>" + comments[i].commseq + "</td>";
-                            commentHTML += "<td>" + comments[i].userid + "</td>";
-                            commentHTML += "<td>" + comments[i].content + "</td>";
-                            commentHTML += "<td>" + comments[i].writeDate + "</td>";
-                            if ('${userid}' === comments[i].userid) {
-                                // 현재 사용자의 아이디와 댓글 작성자의 아이디가 같으면 삭제 버튼을 추가
-                                commentHTML += "<td>"; // 삭제 버튼을 생성하는 부분 추가
-                                commentHTML += "<button class='commentDelete' value='" + comments[i].commentno + "'>삭제</button>";
-                                commentHTML += "</td>";
-                            } else {
-                                // 아니면 빈 칸으로 처리
-                                commentHTML += "<td></td>";
-                            }
-                            commentHTML += "</tr>";
-                            commentHTML += "</tbody>";
-
-                        }
-                        commentHTML += "</table>";
-
-                        // 생성한 HTML을 삽입
-                        $(".comment").html(commentHTML);
-
-                        handleCommentDelete();
-
-                    }
-                    , error: function () {
-                        console.log("AJAX 실패")
-                    }
-                })
-
+                }
+                , error: function () {
+                    console.log("AJAX 실패")
+                }
             })
         }
 
 
-        function handleGetFile() {
-        	console.log("이미지 가져오기 실행.")
-        	
-        	$.ajax({
-                    type: "get"
-                    , url: "./boardFileChk"
-                    , data: {
-                        boardno: ${board.boardNo}
-                    }
-                    , dataType: "json"
-                    , success: function (res) {
-                        console.log("AJAX 성공")
-
-                    }
-                    , error: function () {
-                        console.log("AJAX 실패")
-                    }
-                })
-        }
-
-
-})
+    })
 </script>
 </head>
 <body>
-
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 
@@ -305,9 +238,6 @@
 
         <hr>
 
-        <div>
-            <button id="commentRefresh">댓글창 새로고침</button>
-        </div>
         <div id="file"></div>
         <table class="table table-striped table-hover table-sm">
             <tr>
@@ -333,69 +263,70 @@
             </tr>
         </table>
         <c:if test="${isLogin > 0}">
-        <div id="reBtn">
-            <div class="recommendBtn cancle">
-                <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>
-                <a>
-                    <button class="cancle">추천취소하기</button>
-                </a>
+            <div id="reBtn">
+                <div class="recommendBtn cancle">
+                        <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>
+                    <a>
+                        <button class="cancle">추천취소하기</button>
+                    </a>
+                </div>
+
+                <div class="recommendBtn doRedomm">
+                    <a>
+                        <button class="doRecomm">추천하기</button>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="comment">
+                <table border="1px" style="width: 80%; text-align: center;">
+                    <tr>
+                        <th>댓글 순번</th>
+                        <th>작성자</th>
+                        <th>댓글내용</th>
+                        <th>작성일</th>
+                    </tr>
+                    <c:forEach var="comment" items="${comment }">
+                        <tr>
+                            <td class="no">${comment.commNo}</td>
+                            <td>${comment.nickName }</td>
+                            <td>${comment.content }</td>
+                            <td>
+                                <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
+                            </td>
+                            <c:if test="${userNo eq comment.userNo }">
+                                <td>
+                                    <button class="commentDelete" value="${comment.commeNo}">삭제</button>
+                                </td>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
 
-            <div class="recommendBtn doRedomm">
-                <a>
-                    <button class="doRecomm">추천하기</button>
-                </a>
+            <div id="commentInput">
+                <hr>
+                <br>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>닉네임</th>
+                        <th>댓글내용</th>
+                    </tr>
+                    <tr>
+                        <td><input type="hidden" value="${dto.userno }" id="userid" name="userid"></td>
+                        <td><input class="form-control" type="text" value="${dto.nickname }" id="commentWriter"
+                                   aria-label="Disabled input example" disabled style="text-align: center;"></td>
+                        <td>
+                            <input name="commentContent" id="commentContent">
+                        </td>
+                        <td>
+                            <button id="insertBtn"> 댓글 작성</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
-        </div>
         </c:if>
-        <div class="comment">
-            <hr>
-            <!-- 	<table border="1px" style="width: 80%; text-align: center;"> -->
-            <!-- 		<tr> -->
-            <!-- 			<th>댓글 순번</th>		 -->
-            <!-- 			<th>작성자</th>		 -->
-            <!-- 			<th>댓글내용</th>		 -->
-            <!-- 			<th>작성일</th>		 -->
-            <!-- 		</tr> -->
-            <%-- 		<c:forEach var="comment" items="${comment }"> --%>
-            <!-- 		<tr> -->
-            <%-- 			<td class="no">${comment.commseq}</td>		 --%>
-            <%-- 			<td>${comment.userid }</td>		 --%>
-            <%-- 			<td>${comment.content }</td>		 --%>
-            <!-- 			<td> -->
-            <%-- 				<fmt:parseDate value="${comment.writeDate }" pattern="yyyy-MM-dd HH:mm:ss" var="writeDate"/> --%>
-            <%-- 				<fmt:formatDate value="${writeDate }" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
-            <!-- 			</td> -->
-            <%-- 			<c:if test="${userid eq comment.userid }"> --%>
-            <%-- 				<td><button class="commentDelete" value="${comment.commentno}">삭제</button></td> --%>
-            <%-- 			</c:if>		 --%>
-            <!-- 		</tr> -->
-            <%-- 		</c:forEach> --%>
-            <!-- 	</table> -->
-        </div>
-
-        <div id="commentInput">
-            <hr>
-            <br>
-            <table>
-                <tr>
-                    <th></th>
-                    <th>닉네임</th>
-                    <th>댓글내용</th>
-                </tr>
-                <tr>
-                    <td><input type="hidden" value="${dto.userno }" id="userid" name="userid"></td>
-                    <td><input class="form-control" type="text" value="${dto.nickname }" id="commentWriter"
-                               aria-label="Disabled input example" disabled style="text-align: center;"></td>
-                    <td>
-                        <input name="commentContent" id="commentContent">
-                    </td>
-                    <td>
-                        <button id="insertBtn"> 댓글 작성</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
         <!-- 	  - 로그인아이디, 댓글 입력 창, 입력 버튼 생성 -->
         <!--   - 댓글 리스트(댓글순번, 작성자, 댓글내용, 작성일, 삭제) -->
 

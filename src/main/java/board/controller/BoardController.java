@@ -85,7 +85,6 @@ public class BoardController {
 		
 		
 		List<Comment> comment = boardService.commentList(board);
-		
 		model.addAttribute("comment", comment);
 		model.addAttribute("recomm", recomm);
 		model.addAttribute("curPage", curPage);

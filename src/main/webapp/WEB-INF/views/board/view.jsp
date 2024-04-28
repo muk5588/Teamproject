@@ -140,11 +140,11 @@
 
             $.ajax({
                 type: "get"
-                , url: "../comment/insert"
+                , url: "/comment/insert"
                 , data: {
-                    boardno: ${board.boardNo}
-                    , userno : $("#userid").val()
-                    , content: $("#commentContent").val()
+                	boardNo: ${board.boardNo}
+                    , commNo : $("#userid").val()
+                    , commContent: $("#commentContent").val()
                 }
                 , dataType: "json"
                 , success: function (res) {

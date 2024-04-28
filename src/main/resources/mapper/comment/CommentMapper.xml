@@ -16,18 +16,18 @@
 </select>
 
 <insert id="commentInsert" parameterType="Comment">
-	<selectKey keyProperty="commentno" order="BEFORE" resultType="int">
+	<selectKey keyProperty="commNo" order="BEFORE" resultType="int">
 		SELECT commentTB_seq.nextval FROM dual
 	</selectKey>
-	INSERT INTO COMMENTTB( commentno, boardno, userno, content)
-	VALUES( #{commentno }, #{boardno }, #{userno }, #{content } )
+	INSERT INTO COMMENTTB( COMMNO, boardno, userno, commContent)
+	VALUES( #{commNo }, #{boardNo }, #{userNo }, #{commContent } )
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">
 DELETE ADMIN.COMMENTTB
 <where>
-	AND commentno = #{commentno}
-	AND boardno = #{boardno}
+	AND COMMNO = #{commNo}
+	AND boardno = #{boardNo}
 </where> 
 
 </delete>

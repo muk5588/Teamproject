@@ -5,9 +5,9 @@ public class Coupon {
 	private int userNo;
 	private String couponName;
 	private int salePer;
-	private char use;
+	private String use;
 	public Coupon() {}
-	public Coupon(int couponNo, int userNo, String couponName, int salePer, char use) {
+	public Coupon(int couponNo, int userNo, String couponName, int salePer, String use) {
 		super();
 		this.couponNo = couponNo;
 		this.userNo = userNo;
@@ -44,10 +44,10 @@ public class Coupon {
 	public void setSalePer(int salePer) {
 		this.salePer = salePer;
 	}
-	public char getUse() {
+	public String getUse() {
 		return use;
 	}
-	public void setUse(char use) {
+	public void setUse(String use) {
 		this.use = use;
 	}
 	

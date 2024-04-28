@@ -26,6 +26,9 @@
 	<logger name="board">
 		<level value="debug" />
 	</logger>
+	<logger name="comment">
+		<level value="debug" />
+	</logger>
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

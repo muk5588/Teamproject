@@ -5,9 +5,9 @@ public class Profile {
 	private int userNo;
 	private String originName;
 	private String storedName;
-	private char use;
+	private String use;
 	public Profile() {}
-	public Profile(int no, int userNo, String originName, String storedName, char use) {
+	public Profile(int no, int userNo, String originName, String storedName, String use) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -44,10 +44,10 @@ public class Profile {
 	public void setStoredName(String storedName) {
 		this.storedName = storedName;
 	}
-	public char getUse() {
+	public String getUse() {
 		return use;
 	}
-	public void setUse(char use) {
+	public void setUse(String use) {
 		this.use = use;
 	}
 	

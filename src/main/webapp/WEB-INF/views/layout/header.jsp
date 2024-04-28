@@ -9,7 +9,6 @@
 <script type="text/javascript" src="/resources/js/header.js"></script>
 
 
-
 <!-- 어느 페이지에 가도 인클루드 되어있는 헤더에 jQuery 선언문을 넣는다. -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -39,11 +38,12 @@
         font-size: 14px;
     }
 
-    Header-Button{
+    Header-Button {
         display: inline-block;
         text-align: center;
 
     }
+
     header ul li input {
         display: block;
     }
@@ -87,10 +87,16 @@
                 <ul>
                     <li>${dto.name } [${dto.nickname } ]</li>
                     <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
-                    <c:if test="${dto.gradeno < 1 || dto.gradeno == 5000}">
-                        <br>
-                        <a href="/user/adminPage" style="margin-left: 90px">관리자페이지</a>
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${dto.gradeno == 0 || dto.gradeno == 5000}">
+                            <br>
+                            <a href="/user/adminPage" style="margin-left: 90px">관리자페이지</a>
+                        </c:when>
+                        <c:otherwise>
+                            <br>
+                            <a href="/user/userDetail">마이페이지</a>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </c:if>
 

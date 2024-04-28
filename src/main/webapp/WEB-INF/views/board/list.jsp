@@ -205,7 +205,7 @@
 
     </div>
     <!-- .container End -->
-    <c:if test="${not empty isLogin and isLogin }">
+    <c:if test="${isLogin != 0}">
     <div>
         <form action="./write" method="get">
             <button id="btnWrite" me>글쓰기</button>

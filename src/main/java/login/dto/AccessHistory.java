@@ -1,8 +1,10 @@
 package login.dto;
 
+import dto.OrderItem;
+
 import java.util.Date;
 
-public class AccessHistory {
+public class AccessHistory extends OrderItem {
 	private int accessNo;
 	private int userNo;
 	private Date accessDate ,lastAccessDate;

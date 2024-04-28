@@ -258,8 +258,8 @@
 
             })
         }
-	
-	
+
+
         function handleGetFile() {
         	console.log("이미지 가져오기 실행.")
         	
@@ -279,8 +279,8 @@
                     }
                 })
         }
-        
-        
+
+
 })
 </script>
 </head>

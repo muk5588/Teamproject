@@ -40,10 +40,8 @@ public class UserController {
     //관리자페이지
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
-        List<User> list = service.userList();//board생성후 userAll로 변경
         List<AccessHistory> list2  = loginService.loginHistory();
         List<Grade> list3 = gradeService.gradeList();
-        model.addAttribute("list", list);
         model.addAttribute("list2", list2);
         model.addAttribute("list3", list3);
         return "user/adminPage";
@@ -107,19 +105,19 @@ public class UserController {
     @RequestMapping("/userInsert")
     public String userInsert(User dto) {
         service.userInsert(dto);
-        return "redirect: ./userList";
+        return "redirect: ./userDetail";
     }
 
     @RequestMapping("/userUpdate")
     public String userUpdate(User dto) {
         service.userUpdate(dto);
-        return "redirect: ./userList";
+        return "redirect: ./userDetail";
     }
 
     @RequestMapping("/deleteUser")
     public String deleteUser(User dto) {
         service.userDelete(dto);
-        return "redirect: ./userList";
+        return "redirect: /";
     }
     @ResponseBody
     @RequestMapping("/passChk")

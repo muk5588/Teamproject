@@ -1,6 +1,8 @@
 package user.dto;
 
-public class EmailCheck {
+import login.service.SocialServiceImpl;
+
+public class EmailCheck extends SocialServiceImpl {
 
 	private String email;
 	private int authNum;

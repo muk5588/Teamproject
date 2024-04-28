@@ -336,7 +336,7 @@
                 <td><a id="totalRecommend">${recomm }</a></td>
             </tr>
         </table>
-<c:if test="${not empty isLogin and isLogin }">
+<c:if test="${not empty isLogin and isLogin eq 1 }">
         <div id="reBtn">
             <div class="recommendBtn cancle">
                 <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>

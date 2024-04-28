@@ -10,7 +10,7 @@ public class Inquiry {
 	private Date inquiryDate;
 	private int managerNo;
 	private String answer;
-	private char complete;
+	private String complete;
 	private Date answerDate;
 	public Inquiry() {}
 	public int getInquiryNo() {
@@ -49,10 +49,10 @@ public class Inquiry {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public char getComplete() {
+	public String getComplete() {
 		return complete;
 	}
-	public void setComplete(char complete) {
+	public void setComplete(String complete) {
 		this.complete = complete;
 	}
 	public Date getAnswerDate() {
@@ -68,7 +68,7 @@ public class Inquiry {
 				+ complete + ", answerDate=" + answerDate + "]";
 	}
 	public Inquiry(int inquiryNo, int userNo, String inquiryDetail, Date inquiryDate, int managerNo, String answer,
-			char complete, Date answerDate) {
+			String complete, Date answerDate) {
 		super();
 		this.inquiryNo = inquiryNo;
 		this.userNo = userNo;

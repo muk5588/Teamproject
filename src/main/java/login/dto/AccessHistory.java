@@ -5,17 +5,20 @@ import java.util.Date;
 public class AccessHistory {
 	private int accessNo;
 	private int userNo;
-	private Date accessDate;
-	private  String nickName;
+	private Date accessDate ,lastAccessDate;
+	private  String nickName,name ,gender;
 	private  String userId;
 	private  int accessCount;
 	public AccessHistory() {}
 
-	public AccessHistory(int accessNo, int userNo, Date accessDate, String nickName, String userId, int accessCount) {
+	public AccessHistory(int accessNo, int userNo, Date accessDate, Date lastAccessDate, String nickName, String name, String gender, String userId, int accessCount) {
 		this.accessNo = accessNo;
 		this.userNo = userNo;
 		this.accessDate = accessDate;
+		this.lastAccessDate = lastAccessDate;
 		this.nickName = nickName;
+		this.name = name;
+		this.gender = gender;
 		this.userId = userId;
 		this.accessCount = accessCount;
 	}
@@ -26,7 +29,10 @@ public class AccessHistory {
 				"accessNo=" + accessNo +
 				", userNo=" + userNo +
 				", accessDate=" + accessDate +
+				", lastAccessDate=" + lastAccessDate +
 				", nickName='" + nickName + '\'' +
+				", name='" + name + '\'' +
+				", gender='" + gender + '\'' +
 				", userId='" + userId + '\'' +
 				", accessCount=" + accessCount +
 				'}';
@@ -78,5 +84,29 @@ public class AccessHistory {
 
 	public void setAccessCount(int accessCount) {
 		this.accessCount = accessCount;
+	}
+
+	public Date getLastAccessDate() {
+		return lastAccessDate;
+	}
+
+	public void setLastAccessDate(Date lastAccessDate) {
+		this.lastAccessDate = lastAccessDate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }

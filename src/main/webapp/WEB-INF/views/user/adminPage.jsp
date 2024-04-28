@@ -151,24 +151,23 @@
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>
-                    <th>아이디</th>
                     <th class='w-px200'>이름</th>
                     <th>닉네임</th>
                     <th>성별</th>
+                    <th>최근 접속 시간</th>
+                    <th>로그인 횟수</th>
                 </tr>
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-                <c:forEach var="UserDTO" items="${list}">
+                <c:forEach var="login" items="${list2 }">
                     <tr>
-                        <td>${UserDTO.userno }</td>
-                        <td>${UserDTO.userid }</td>
-                        <td><a href='detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
-                        <td>${UserDTO.nickname}</td>
-                        <td>${UserDTO.gender }</td>
-
-
-
+                        <td class="no">${login.userNo }</td>
+                        <td class="nick">${login.nickName }</td>
+                        <td class="name">${login.name }</td>
+                        <td class="name">${login.gender }</td>
+                        <td class="hit"><fmt:formatDate value="${login.lastAccessDate }" pattern="yyyy-MM-dd"/></td>
+                        <td class="count">${login.accessCount }</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -199,26 +198,6 @@
 <div id="bar">
     <div id="content3">
         <h3>로그인 기록</h3>
-        <table class="table table-striped table-hover table-sm">
-            <tr>
-                <th>번호</th>
-                <th>닉네임</th>
-                <th>최근 접속 시간</th>
-                <th>로그인 횟수</th>
-            </tr>
-            <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
-            <!-- items : 배열 변수 -->
-            <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-            <c:forEach var="login" items="${list2 }">
-                <tr>
-                    <td class="no">${login.userNo }</td>
-                    <td class="nick">${login.nickName }</td>
-                    <td class="hit"><fmt:formatDate value="${login.accessDate }" pattern="yyyy-MM-dd"/></td>
-                    <td class="count">${login.accessCount }</td>
-
-                </tr>
-            </c:forEach>
-        </table>
     </div>
     <ul class="pagination pagination-sm justify-content-center">
         <%-- 첫 페이지로 이동 --%>

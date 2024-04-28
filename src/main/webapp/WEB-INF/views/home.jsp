@@ -70,7 +70,7 @@
 <%--	<a href="insertUser"><button>회원가입</button></a>--%>
 <%--</c:if>--%>
 
-<c:if test="${isLogin != 0}">
+<c:if test="${isLogin > 0}">
 	<a href ="/user/userDetail"><button>마이페이지</button></a>
 <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
 </c:if>

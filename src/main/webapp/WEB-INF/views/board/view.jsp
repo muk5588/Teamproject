@@ -62,9 +62,7 @@
     /* <!-- td.date { --> */
     /* <!-- 	width: 200px; --> */
     /* <!-- } --> */
-    .recommendBtn {
-        display: inline-block;
-    }
+
 </style>
 <script type="text/javascript">
     $(function () {
@@ -82,8 +80,6 @@
                 $(".cancle").toggle()
             }
 
-            $("#reBtn").css("visibility", "visible")
-
         })
 
         $(document).ready(function () {
@@ -94,8 +90,8 @@
         })
 
 
-        $(".recommendBtn").click(function () {
-            console.log("#recommendBtn Click")
+        $(".doRecomm").click(function () {
+            console.log("#doRecomm   Click")
 
             $.ajax({
                 type: "get"
@@ -336,7 +332,7 @@
                 <td><a id="totalRecommend">${recomm }</a></td>
             </tr>
         </table>
-<c:if test="${not empty isLogin and isLogin eq 1 }">
+        <c:if test="${isLogin > 0}">
         <div id="reBtn">
             <div class="recommendBtn cancle">
                 <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>
@@ -345,14 +341,13 @@
                 </a>
             </div>
 
-
             <div class="recommendBtn doRedomm">
                 <a>
                     <button class="doRecomm">추천하기</button>
                 </a>
             </div>
         </div>
-
+        </c:if>
         <div class="comment">
             <hr>
             <!-- 	<table border="1px" style="width: 80%; text-align: center;"> -->
@@ -401,7 +396,6 @@
                 </tr>
             </table>
         </div>
-</c:if>
         <!-- 	  - 로그인아이디, 댓글 입력 창, 입력 버튼 생성 -->
         <!--   - 댓글 리스트(댓글순번, 작성자, 댓글내용, 작성일, 삭제) -->
 

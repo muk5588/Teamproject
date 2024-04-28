@@ -19,8 +19,8 @@
 	<selectKey keyProperty="commentno" order="BEFORE" resultType="int">
 		SELECT commentTB_seq.nextval FROM dual
 	</selectKey>
-	INSERT INTO COMMENTTB( commentno, boardno, userid, content)
-	VALUES( #{commentno}, #{boardno}, #{userid}, #{content} )
+	INSERT INTO COMMENTTB( commentno, boardno, userno, content)
+	VALUES( #{commentno }, #{boardno }, #{userno }, #{content } )
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">

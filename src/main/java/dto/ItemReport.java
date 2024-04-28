@@ -10,10 +10,10 @@ public class ItemReport {
 	private Date reportDate;
 	private String reportContent;
 	private Date resultDate;
-	private char result;
+	private String result;
 	public ItemReport() {}
 	public ItemReport(int reportNo, int itemNo, int userNo, int itemReportNo, Date reportDate, String reportContent,
-			Date resultDate, char result) {
+			Date resultDate, String result) {
 		super();
 		this.reportNo = reportNo;
 		this.itemNo = itemNo;
@@ -72,10 +72,10 @@ public class ItemReport {
 	public void setResultDate(Date resultDate) {
 		this.resultDate = resultDate;
 	}
-	public char getResult() {
+	public String getResult() {
 		return result;
 	}
-	public void setResult(char result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 	

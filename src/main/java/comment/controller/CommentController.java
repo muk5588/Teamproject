@@ -3,6 +3,8 @@ package comment.controller;
 import board.dto.Board;
 import board.service.BoardService;
 import comment.dto.Comment;
+import user.dto.User;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/comment")
@@ -21,8 +25,12 @@ public class CommentController {
 	
 	@RequestMapping("/insert")
 	public @ResponseBody Comment commentInsert(
-			Comment comment 
+			Comment comment ,HttpSession session
 			) {
+		logger.debug("#################들옴");
+		logger.debug("comment : {}", comment);
+		User user = (User) session.getAttribute("dto");
+		comment.setUserNo(user.getUserno());
 		int res = boardService.commentInsert(comment);
 		logger.info("Ajax{}",res);
 		

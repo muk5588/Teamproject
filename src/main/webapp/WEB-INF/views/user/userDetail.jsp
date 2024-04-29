@@ -1,11 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: c
   Date: 2024-04-04
   Time: 오후 12:47
   To change this template use File | Settings | File Templates.
+
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,11 +17,11 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
-<h3>${dto.nickname } 회원 정보</h3>
 <div class="warpper">
     <div class="warp">
         <c:choose>
             <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != dto.userno)}">
+                <h3>${dto.nickname } 회원 정보</h3>
                 <table class='w-pct60'>
                     <tr>
                         <th>회원번호</th>
@@ -43,6 +46,7 @@
                 </div>
             </c:when>
             <c:otherwise>
+                <h3>${dto1.nickname } 회원 정보</h3>
                 <table class='w-pct60'>
                     <tr>
                         <th>이름</th>
@@ -66,7 +70,14 @@
                     </tr>
                     <tr>
                         <th>우편번호</th>
-                        <td>${dto1.postcode }</td>
+                        <c:choose>
+                            <c:when test="${dto1.postcode <= 9999}">
+                                <td>0${dto1.postcode}</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>${dto1.postcode}</td>
+                            </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
                         <th>주소</th>

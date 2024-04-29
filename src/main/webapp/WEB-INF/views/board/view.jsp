@@ -232,13 +232,14 @@
         <a href="./list?curPage=${curPage }">
             <button>목록으로</button>
         </a>
-        <a href="./update?boardNo=${board.boardNo }">
-            <button id="btnUpdate">수정</button>
-        </a>
-        <a href="./delete?boardNo=${board.boardNo }">
-            <button id="btnDelete">삭제</button>
-        </a>
-
+        <c:if test="${isLogin == board.userNo}">
+            <a href="./update?boardNo=${board.boardNo }">
+                <button id="btnUpdate">수정</button>
+            </a>
+            <a href="./delete?boardNo=${board.boardNo }">
+                <button id="btnDelete">삭제</button>
+            </a>
+        </c:if>
         <hr>
 
         <div id="file"></div>
@@ -274,32 +275,32 @@
                 </div>
             </div>
         </c:if>
-            <hr>
-            <div class="comment">
-                <table border="1px" style="width: 80%; text-align: center;">
+        <hr>
+        <div class="comment">
+            <table border="1px" style="width: 80%; text-align: center;">
+                <tr>
+                    <th>댓글 순번</th>
+                    <th>작성자</th>
+                    <th>댓글내용</th>
+                    <th>작성일</th>
+                </tr>
+                <c:forEach var="comment" items="${comment }">
                     <tr>
-                        <th>댓글 순번</th>
-                        <th>작성자</th>
-                        <th>댓글내용</th>
-                        <th>작성일</th>
-                    </tr>
-                    <c:forEach var="comment" items="${comment }">
-                        <tr>
-                            <td class="no">${comment.commNo}</td>
-                            <td>${comment.nickName }</td>
-                            <td>${comment.commContent }</td>
+                        <td class="no">${comment.commNo}</td>
+                        <td>${comment.nickName }</td>
+                        <td>${comment.commContent }</td>
+                        <td>
+                            <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
+                        </td>
+                        <c:if test="${userNo eq comment.userNo }">
                             <td>
-                                <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
+                                <button class="commentDelete" value="${comment.commeNo}">삭제</button>
                             </td>
-                            <c:if test="${userNo eq comment.userNo }">
-                                <td>
-                                    <button class="commentDelete" value="${comment.commeNo}">삭제</button>
-                                </td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <c:if test="${isLogin > 0}">
             <div id="commentInput">
                 <hr>

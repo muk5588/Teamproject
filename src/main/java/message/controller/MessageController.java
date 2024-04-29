@@ -1,13 +1,7 @@
 package message.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import dto.Message;
+import message.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import dto.Message;
-import message.service.MessageService;
 import user.dto.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/message")
@@ -44,7 +40,7 @@ public class MessageController {
 		}
 		if( touser != null && !"".equals(touser)) {
 			User toUser = messageService.getUserByNickName(touser);
-			User user = (User) session.getAttribute("dto");
+			User user = (User) session.getAttribute("dto1");
 			int sendUser = user.getUserno();
 			Message message = new Message();
 			message.setSendUserNo(sendUser);
@@ -58,7 +54,7 @@ public class MessageController {
 	
 	@RequestMapping("/list")
 	public void list(HttpSession session, HttpServletRequest res) {
-		int userNo = (int) session.getAttribute("loginno");
+		int userNo = (int) session.getAttribute("isLogin");
 		List<Message> list = messageService.getListByUserno(userNo);
 		for(Message m : list) {
 			logger.debug("m : {}", m);

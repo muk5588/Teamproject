@@ -71,12 +71,12 @@
             //HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
             handleGetFile();
             $("#commentRefresh").click()
-            if (${recommend || empty recommend}) {
-                $(".doRecomm").toggle()
-            }
-            if (!${recommend && not empty recommend}) {
-                $(".cancle").toggle()
-            }
+            <%--if (${recommend || empty recommend}) {--%>
+            <%--    $(".doRecomm").toggle()--%>
+            <%--}--%>
+            <%--if (!${recommend && not empty recommend}) {--%>
+            <%--    $(".cancle").toggle()--%>
+            <%--}--%>
 
         })
 
@@ -277,6 +277,7 @@
                     </a>
                 </div>
             </div>
+        </c:if>
             <hr>
             <div class="comment">
                 <table border="1px" style="width: 80%; text-align: center;">
@@ -290,7 +291,7 @@
                         <tr>
                             <td class="no">${comment.commNo}</td>
                             <td>${comment.nickName }</td>
-                            <td>${comment.content }</td>
+                            <td>${comment.commContent }</td>
                             <td>
                                 <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
                             </td>
@@ -303,7 +304,7 @@
                     </c:forEach>
                 </table>
             </div>
-
+        <c:if test="${isLogin > 0}">
             <div id="commentInput">
                 <hr>
                 <br>

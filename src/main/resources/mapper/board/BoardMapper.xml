@@ -111,7 +111,7 @@
 	<select id="select" parameterType="int" resultType="Board">
 		<include refid="selectBoard"/>
 		<where>
-			boardno = #{boardno}
+			boardno = #{boardNo}
 		</where>
 	</select>
 
@@ -124,9 +124,9 @@
 
 	<update id="hit" >
 		UPDATE board
-		set boardView = boardView+1
+		set boardView = boardView + 1
 		<where>
-			boardno = #{boardno}
+			and boardno = #{boardNo}
 		</where>
 	</update>
 

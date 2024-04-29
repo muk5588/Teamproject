@@ -77,4 +77,5 @@ public interface BoardService {
     public List<Category> categoryList();
 
 	public List<Board> boardList();
+
 }

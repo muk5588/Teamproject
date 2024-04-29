@@ -1,8 +1,7 @@
  package board.controller;
 
  import board.dto.Board;
-import board.dto.BoardFile;
-import board.dto.Category;
+ import board.dto.Category;
  import board.dto.RecommendRes;
  import board.service.BoardService;
  import board.service.FileService;
@@ -13,10 +12,8 @@ import board.dto.Category;
  import org.springframework.stereotype.Controller;
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import user.dto.User;
+ import org.springframework.web.multipart.MultipartFile;
+ import user.dto.User;
  import util.Paging;
 
  import javax.servlet.http.HttpSession;
@@ -81,6 +78,7 @@ public class BoardController {
 			, @RequestParam(value="curPage", defaultValue="0") int curPage
 			) {
 		board =  boardService.viewByBoardNo(boardno);
+
 		int recomm = boardService.viewRecommend(boardno);
 		
 		

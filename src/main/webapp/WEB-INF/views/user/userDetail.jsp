@@ -40,10 +40,6 @@
                 <div class='btnSet'>
                     <a class='btn-fill' href="/user/userList">고객 목록</a>
                     <a class='btn-fill' href="/user/userList">사용자 정지</a>
-                    <c:if test="${isLogin == dto.userno}">
-                        <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
-                        <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
-                    </c:if>
                 </div>
             </c:when>
             <c:otherwise>

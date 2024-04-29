@@ -45,6 +45,7 @@
 	<select id="history" resultType="AccessHistory">
 		select ACCESSNO, USERNO, ACCESSDATE from ACCESSHISTORY order by ACCESSDATE desc
 	</select>
+
 	<select id="loginHistory" resultType="AccessHistory">
 		SELECT u.nickname,u.gender,u.name, B.USERNO, SUM(B.ACCESS_COUNT) AS ACCESS_COUNT, A.LAST_ACCESSDATE
 		FROM (

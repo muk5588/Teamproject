@@ -3,18 +3,16 @@ package comment.controller;
 import board.dto.Board;
 import board.service.BoardService;
 import comment.dto.Comment;
-import user.dto.User;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
+import user.dto.User;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/comment")
@@ -29,7 +27,7 @@ public class CommentController {
 			) {
 		logger.debug("#################들옴");
 		logger.debug("comment : {}", comment);
-		User user = (User) session.getAttribute("dto");
+		User user = (User) session.getAttribute("dto1");
 		comment.setUserNo(user.getUserno());
 		int res = boardService.commentInsert(comment);
 		logger.info("Ajax{}",res);

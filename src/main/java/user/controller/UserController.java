@@ -213,4 +213,10 @@ public class UserController {
         session.invalidate();
         return "redirect: /";
     }
+    @RequestMapping("/userLog")
+    public String userLog(Model model){
+        List<AccessHistory> list = loginService.history();
+        model.addAttribute("list",list);
+        return "user/userLog";
+    }
 }

@@ -26,4 +26,6 @@ public interface LoginService {
 	 * @param login - 유저 정보를 담은 DTO 객체
 	 */
 	public void insertAccessHistory(User login);
+
+    public List<AccessHistory> history();
 }

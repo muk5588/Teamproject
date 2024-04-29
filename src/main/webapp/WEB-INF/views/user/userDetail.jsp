@@ -93,61 +93,62 @@
             </c:otherwise>
         </c:choose>
         <h3>작성한 게시물</h3>
-        <button onclick="location.href='../board/list'">전체 작성글</button>
         <c:choose>
-        <c:when test="${not empty list}">
-            <table class="table table-striped table-hover table-sm">
-                    <%-- <colgroup> --%>
-                    <%-- 	<col style="width: 10%;"> --%>
-                    <%-- 	<col style="width: 45%;"> --%>
-                    <%-- 	<col style="width: 15%;"> --%>
-                    <%-- 	<col style="width: 10%;"> --%>
-                    <%-- 	<col style="width: 20%;"> --%>
-                    <%-- </colgroup> --%>
-                <tr>
-                    <th>글 번호</th>
-                    <th>제목</th>
-                    <th>본문</th>
-                    <th>작성자 닉네임</th>
-                    <th>조회수</th>
-                    <th>최초작성일</th>
-                    <th>추천수</th>
-                </tr>
-                <c:forEach var="board" items="${list }" begin="0" end="3">
+            <c:when test="${not empty list}">
+                <button onclick="location.href='../board/userbyboardlist'">전체 작성글</button>
+                <table class="table table-striped table-hover table-sm">
+                        <%-- <colgroup> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 45%;"> --%>
+                        <%-- 	<col style="width: 15%;"> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 20%;"> --%>
+                        <%-- </colgroup> --%>
                     <tr>
-                        <td class="no">${board.boardNo }</td>
-                        <td class="title">
-                            <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
-                        </td>
-                        <td class="content">${board.content }</td>
-                        <td class="nick">${board.nickName }</td>
-                        <td class="hit">${board.boardView }</td>
-                        <td class="date">
-                            <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-                        </td>
-                        <c:forEach items="${totalrecomm }" var="recommList">
-                            <c:if test="${recommList.BOARDNO eq board.boardNo }">
-                                <td><a id="totalRecommend">${recommList.GOOD }</a></td>
-                            </c:if>
-                        </c:forEach>
+                        <th>글 번호</th>
+                        <th>제목</th>
+                        <th>본문</th>
+                        <th>작성자 닉네임</th>
+                        <th>조회수</th>
+                        <th>최초작성일</th>
+                        <th>추천수</th>
                     </tr>
-                </c:forEach>
-            </table>
-        </c:when>
-        <c:otherwise>
-        <table class="table table-striped table-hover table-sm">
-                <%-- <colgroup> --%>
-                <%-- 	<col style="width: 10%;"> --%>
-                <%-- 	<col style="width: 45%;"> --%>
-                <%-- 	<col style="width: 15%;"> --%>
-                <%-- 	<col style="width: 10%;"> --%>
-                <%-- 	<col style="width: 20%;"> --%>
-                <%-- </colgroup> --%>
-            <tr>
-                <th>작성한 글이 없습니다</th>
-            </tr>
+                    <c:forEach var="board" items="${list }" begin="0" end="3">
+                        <tr>
+                            <td class="no">${board.boardNo }</td>
+                            <td class="title">
+                                <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                            </td>
+                            <td class="content">${board.content }</td>
+                            <td class="nick">${board.nickName }</td>
+                            <td class="hit">${board.boardView }</td>
+                            <td class="date">
+                                <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+                            </td>
+                            <c:forEach items="${totalrecomm }" var="recommList">
+                                <c:if test="${recommList.BOARDNO eq board.boardNo }">
+                                    <td><a id="totalRecommend">${recommList.GOOD }</a></td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <table class="table table-striped table-hover table-sm">
+                        <%-- <colgroup> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 45%;"> --%>
+                        <%-- 	<col style="width: 15%;"> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 20%;"> --%>
+                        <%-- </colgroup> --%>
+                    <tr>
+                        <th>작성한 글이 없습니다</th>
+                    </tr>
+                </table>
             </c:otherwise>
-            </c:choose>
+        </c:choose>
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>

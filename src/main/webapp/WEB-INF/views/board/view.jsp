@@ -140,7 +140,7 @@
                 , url: "/comment/insert"
                 , data: {
                     boardNo: ${board.boardNo}
-                    , commNo: $("#userid").val()
+                    , userNo: $("#userid").val()
                     , commContent: $("#commentContent").val()
                 }
                 , dataType: "json"
@@ -312,8 +312,8 @@
                         <th>댓글내용</th>
                     </tr>
                     <tr>
-                        <td><input type="hidden" value="${dto.userno }" id="userid" name="userid"></td>
-                        <td><input class="form-control" type="text" value="${dto.nickname }" id="commentWriter"
+                        <td><input type="hidden" value="${dto1.userno }" id="userid" name="userid"></td>
+                        <td><input class="form-control" type="text" value="${dto1.nickname }" id="commentWriter"
                                    aria-label="Disabled input example" disabled style="text-align: center;"></td>
                         <td>
                             <input name="commentContent" id="commentContent">

@@ -143,6 +143,7 @@
     <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
     <button onclick="location.href = '/user/userList'">유저조회</button>
     <button onclick="location.href = '/board/list'">게시글조회</button>
+    <button onclick="location.href = '/user/userLog'">전체로그</button>
 </div>
 <div class="container">
     <div class="table-container">
@@ -196,9 +197,7 @@
     </div>
 </div>
 <div id="bar">
-    <div id="content3">
-        <h3>로그인 기록</h3>
-    </div>
+
     <ul class="pagination pagination-sm justify-content-center">
         <%-- 첫 페이지로 이동 --%>
         <c:if test="${paging.curPage ne 1 }">

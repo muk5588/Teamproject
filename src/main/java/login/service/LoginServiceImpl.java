@@ -44,5 +44,10 @@ public class LoginServiceImpl implements LoginService {
 		loginDao.insertAccessHistory(login);
 	}
 
+    @Override
+    public List<AccessHistory> history() {
+        return loginDao.history();
+    }
+
 
 }

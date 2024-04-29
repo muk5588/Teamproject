@@ -23,4 +23,6 @@ public interface LoginDao {
 	public void insertAccessHistory(User login);
 
     public List<AccessHistory> loginHistory();
+
+    public List<AccessHistory> history();
 }

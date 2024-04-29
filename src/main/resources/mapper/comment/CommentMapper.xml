@@ -16,7 +16,7 @@
 		SELECT commentTB_seq.nextval FROM dual
 	</selectKey>
 	INSERT INTO COMMENTTB( COMMNO, boardno, userno, commContent)
-	VALUES( #{commNo }, #{boardNo }, #{userNo }, #{commContent		 } )
+	VALUES( #{commNo }, #{boardNo }, #{userNo }, #{commContent} )
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">

@@ -218,10 +218,10 @@ public class BoardController {
 			@RequestParam(defaultValue ="0") int curPage
 			,@RequestParam(value="search",required = false) String search
 			,@RequestParam(value="searchKind", required = false ) String searchKind
-			,HttpSession session
+			,int userno
 			) {
 		// 페이징 계산
-		int userno = (int)session.getAttribute("dto1");
+
 		Paging paging = new Paging();
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);

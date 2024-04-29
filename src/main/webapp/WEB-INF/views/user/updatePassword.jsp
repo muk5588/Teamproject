@@ -39,11 +39,11 @@
             </div>
             <div id="userpwbox">
                 <label for="userpw">비밀번호</label>
-                <input type="text" name="userpw" id="userpw">
+                <input type="password" name="userpw" id="userpw">
                 <div id="alertpw" name="alertpw"></div>
 
                 <label for="userpwchk">비밀번호 확인</label>
-                <input type="text" name="userpwchk" id="userpwchk">
+                <input type="password" name="userpwchk" id="userpwchk">
                 <div id="alertpw2" name="alertpw2"></div>
             </div>
             <button type="button" id="update" name="update">비밀번호변경</button>

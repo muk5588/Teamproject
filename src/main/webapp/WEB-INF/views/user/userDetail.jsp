@@ -124,7 +124,7 @@
                         <th>최초작성일</th>
                         <th>추천수</th>
                     </tr>
-                    <c:forEach var="board" items="${list }" begin="0" end="3">
+                    <c:forEach var="board" items="${list }" begin="0" end="4">
                         <tr>
                             <td class="no">${board.boardNo }</td>
                             <td class="title">

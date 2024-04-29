@@ -106,8 +106,11 @@
                     $(".doRecomm").toggle()
                     $(".cancle").toggle()
 
-                    $("#totalRecommend").html(res.totalRecommend)
-
+                    if (res) {
+                        $(function () {
+                            $(location).attr('href', './view?boardNo=${board.boardNo }')
+                        })
+                    }
                 }
                 , error: function () {
                     console.log("AJAX 실패")

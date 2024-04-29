@@ -161,7 +161,7 @@
 
 	<insert id="insertRecommend" parameterType="Good">
 		INSERT INTO GOOD (USERNO, boardno)
-    	VALUES (#{userno}, #{boardno})
+    	VALUES (#{userNo}, #{boardNo})
 	</insert>
 
 	<select id="isRecomm" parameterType="Good">
@@ -169,17 +169,17 @@
 		FROM (
 			SELECT * FROM GOOD
 			<where>
-				AND userno = #{userno}
-				AND boardno = #{boardno}
+				AND userno = #{userNo}
+				AND boardno = #{boardNo}
 			</where>
 		)
 	</select>
 
 	<delete id="deleteRecommend" parameterType="Good">
-		DELETE recommend
+		DELETE GOOD
 		<where>
-			AND userno = #{userno}
-			AND boardno = #{boardno}
+			AND userno = #{userNo}
+			AND boardno = #{boardNo}
 		</where>
 	</delete>
 
@@ -187,13 +187,13 @@
 		SELECT * FROM (
 			SELECT count(*) totalRecommend FROM (
 				SELECT * FROM GOOD
-				WHERE boardno = #{boardno}
+				WHERE boardno = #{boardNo}
 				)
 			) ,(
 			SELECT count(*) isRecommend FROM (
 				SELECT * FROM GOOD
-				WHERE boardno = #{boardno}
-				AND userno = #{userno}
+				WHERE boardno = #{boardNo}
+				AND userno = #{userNo}
 				)
 			)
 	</select>
@@ -202,7 +202,7 @@
 	<select id="getRecommend" parameterType="int" resultType="int">
 		SELECT count(*) recomm FROM (
 			SELECT * FROM GOOD
-			WHERE boardno = #{boardno}
+			WHERE boardno = #{boardNo}
 			)
 	</select>
 	

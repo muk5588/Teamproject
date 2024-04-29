@@ -173,7 +173,7 @@ public class BoardController {
 			Board recommendBoard
 			, HttpSession session
 			) {
-		logger.info("추천 확인 {}, {} ", recommendBoard, session.getAttribute("userno"));
+		logger.info("추천 확인 {}, {} ", recommendBoard, session.getAttribute("isLogin"));
 		
 		boardService.recommend(recommendBoard);
 		

@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void recommend(Board recommendBoard) {
 		
-		int userno = (int)session.getAttribute("userno");
+		int userno = (int)session.getAttribute("isLogin");
 		int no = recommendBoard.getBoardNo();
 		Good good = new Good(userno, no);
 		

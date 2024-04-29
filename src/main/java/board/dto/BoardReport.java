@@ -11,11 +11,11 @@ public class BoardReport {
 	private Date reportDate;
 	private int managerNo;
 	private String resultContent;
-	private char result;
+	private String result;
 	private Date resultDate;
 	public BoardReport() {}
 	public BoardReport(int boardReportNo, int boardNo, int userNo, int reportTypeNo, String reportContent,
-			Date reportDate, int managerNo, String resultContent, char result, Date resultDate) {
+			Date reportDate, int managerNo, String resultContent, String result, Date resultDate) {
 		super();
 		this.boardReportNo = boardReportNo;
 		this.boardNo = boardNo;
@@ -83,10 +83,10 @@ public class BoardReport {
 	public void setResultContent(String resultContent) {
 		this.resultContent = resultContent;
 	}
-	public char getResult() {
+	public String getResult() {
 		return result;
 	}
-	public void setResult(char result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 	public Date getResultDate() {

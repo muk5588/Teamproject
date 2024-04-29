@@ -2,14 +2,14 @@ package user.dto;
 
 
 public class User {
-	private String name, userid, userpw, nickname, gender,email, address,detailAddress,extraAddress,phone, suserno	;
-	private int userno, postcode, reportno;
+	private String name, userid, userpw, nickname, gender,email, address,detailAddress,extraAddress,phone, suserno,black	;
+	private int userno, postcode;
 	private int gradeno=1;
 
 	public User() {
 	}
 
-	public User(String name, String userid, String userpw, String nickname, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String suserno, int userno, int postcode, int gradeno, int reportno) {
+	public User(String name, String userid, String userpw, String nickname,String black, String gender, String email, String address, String detailAddress, String extraAddress, String phone, String suserno, int userno, int postcode, int gradeno, int reportno) {
 		this.name = name;
 		this.userid = userid;
 		this.userpw = userpw;
@@ -24,7 +24,7 @@ public class User {
 		this.userno = userno;
 		this.postcode = postcode;
 		this.gradeno = gradeno;
-		this.reportno = reportno;
+		this.black = black;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class User {
 				", userno=" + userno +
 				", postcode=" + postcode +
 				", gradeno=" + gradeno +
-				", reportno=" + reportno +
+				", black=" + black +
 				'}';
 	}
 
@@ -144,12 +144,12 @@ public class User {
 		this.gradeno = gradeno;
 	}
 
-	public int getReportno() {
-		return reportno;
+	public String getBlack() {
+		return black;
 	}
 
-	public void setReportno(int reportno) {
-		this.reportno = reportno;
+	public void setReportno(String black) {
+		this.black = black;
 	}
 
 	public int getUserno() {

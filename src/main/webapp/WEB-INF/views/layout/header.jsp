@@ -85,10 +85,10 @@
             <!-- 로그인한 경우 -->
             <c:if test="${not empty isLogin}">
                 <ul>
-                    <li>${dto.name } [${dto.nickname } ]</li>
+                    <li>${dto1.name } [${dto1.nickname } ]</li>
                     <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
                     <c:choose>
-                        <c:when test="${dto.gradeno == 0 || dto.gradeno == 5000}">
+                        <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
                             <br>
                             <a href="/user/adminPage" style="margin-left: 90px">관리자페이지</a>
                         </c:when>

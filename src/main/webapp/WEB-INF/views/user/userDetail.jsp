@@ -17,68 +17,87 @@
 <h3>${dto.nickname } 회원 정보</h3>
 <div class="warpper">
     <div class="warp">
-        <table class='w-pct60'>
-            <tr>
-                <th>회원번호</th>
-                <td name="userno">${dto.userno }</td>
-            </tr>
-            <tr>
-                <th>이름</th>
-                <td>${dto.name }</td>
-            </tr>
-            <tr>
-                <th>아이디</th>
-                <td>${dto.userid }</td>
-            </tr>
-            <tr>
-                <th>닉네임</th>
-                <td>${dto.nickname }</td>
-            </tr>
-            <tr>
-                <th>성별</th>
-                <td>${dto.gender }</td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>${dto.email }</td>
-            </tr>
-            <tr>
-                <th>우편번호</th>
-                <td>${dto.postcode }</td>
-            </tr>
-            <tr>
-                <th>주소</th>
-                <td>${dto.address }</td>
-            </tr>
-            <tr>
-                <th>상세주소</th>
-                <td>${dto.detailAddress }</td>
-            </tr>
-            <tr>
-                <th>참고항목</th>
-                <td>${dto.extraAddress }</td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td>${dto.phone }</td>
-            </tr>
-        </table>
         <c:choose>
-            <c:when test="${dto.gradeno == 0 || dto.gradeno == 5000}">
+            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != dto.userno)}">
+                <table class='w-pct60'>
+                    <tr>
+                        <th>회원번호</th>
+                        <td name="userno">${dto.userno }</td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td>${dto.name }</td>
+                    </tr>
+                    <tr>
+                        <th>닉네임</th>
+                        <td>${dto.nickname }</td>
+                    </tr>
+                    <tr>
+                        <th>정지여부</th>
+                        <td>${dto.black }</td>
+                    </tr>
+                </table>
                 <div class='btnSet'>
                     <a class='btn-fill' href="/user/userList">고객 목록</a>
-                    <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
-                    <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
+                    <a class='btn-fill' href="/user/userList">사용자 정지</a>
+                    <c:if test="${isLogin == dto.userno}">
+                        <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
+                        <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
+                    </c:if>
                 </div>
             </c:when>
             <c:otherwise>
+                <table class='w-pct60'>
+                    <tr>
+                        <th>이름</th>
+                        <td>${dto1.name }</td>
+                    </tr>
+                    <tr>
+                        <th>아이디</th>
+                        <td>${dto1.userid }</td>
+                    </tr>
+                    <tr>
+                        <th>닉네임</th>
+                        <td>${dto1.nickname }</td>
+                    </tr>
+                    <tr>
+                        <th>성별</th>
+                        <td>${dto1.gender }</td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td>${dto1.email }</td>
+                    </tr>
+                    <tr>
+                        <th>우편번호</th>
+                        <td>${dto1.postcode }</td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td>${dto1.address }</td>
+                    </tr>
+                    <tr>
+                        <th>상세주소</th>
+                        <td>${dto1.detailAddress }</td>
+                    </tr>
+                    <tr>
+                        <th>참고항목</th>
+                        <td>${dto1.extraAddress }</td>
+                    </tr>
+                    <tr>
+                        <th>전화번호</th>
+                        <td>${dto1.phone }</td>
+                    </tr>
+                </table>
                 <div class='btnSet'>
-                    <a class='btn-fill' href="/user/updateUser?userno=${dto.userno}">수정</a>
-                    <a class='btn-fill' href="/user/updatePass?userno=${dto.userno}">비밀번호번경</a>
-                    <a class='btn-fill' href="/user/deleteUser?userno=${dto.userno}">삭제</a>
+                    <a class='btn-fill' href="/user/updateUser?userno=${dto1.userno}">수정</a>
+                    <a class='btn-fill' href="/user/updatePass?userno=${dto1.userno}">비밀번호번경</a>
+                    <a class='btn-fill' href="/user/deleteUser?userno=${dto1.userno}">삭제</a>
                 </div>
             </c:otherwise>
         </c:choose>
+        <h3>작성한 게시물</h3>
+        <button onclick="location.href='../board/'"></button>
         <c:choose>
         <c:when test="${not empty list}">
             <table class="table table-striped table-hover table-sm">
@@ -90,7 +109,6 @@
                     <%-- 	<col style="width: 20%;"> --%>
                     <%-- </colgroup> --%>
                 <tr>
-                    <th><input type="checkbox" id="checkboxAllCheck"></th>
                     <th>글 번호</th>
                     <th>제목</th>
                     <th>본문</th>
@@ -101,11 +119,9 @@
                 </tr>
                 <c:forEach var="board" items="${list }" begin="0" end="3">
                     <tr>
-                        <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-                                                    class="delCheckBox"></td>
                         <td class="no">${board.boardNo }</td>
                         <td class="title">
-                            <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                            <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="content">${board.content }</td>
                         <td class="nick">${board.nickName }</td>
@@ -120,11 +136,6 @@
                         </c:forEach>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <td>
-                        <button id="deleteBtn">체크 삭제</button>
-                    </td>
-                </tr>
             </table>
         </c:when>
         <c:otherwise>
@@ -137,7 +148,7 @@
                 <%-- 	<col style="width: 20%;"> --%>
                 <%-- </colgroup> --%>
             <tr>
-               <th>작성한 글이 없습니다</th>
+                <th>작성한 글이 없습니다</th>
             </tr>
             </c:otherwise>
             </c:choose>

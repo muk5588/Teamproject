@@ -13,11 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import user.dto.User;
-import util.Paging;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -30,6 +28,8 @@ public class LoginController {
     KakaoService kakaoService;
     @Autowired
     BoardService boardService;
+    @Autowired
+    private HttpSession httpSession;
 
     //로그인 요청
     @RequestMapping("/login/loginProc")
@@ -48,7 +48,7 @@ public class LoginController {
             loginService.insertAccessHistory(login);
             
             session.setAttribute("isLogin", isLogin);
-            session.setAttribute("dto", login);
+            session.setAttribute("dto1", login);
 
         } else {  //로그인 실패
             session.invalidate();
@@ -95,14 +95,14 @@ public class LoginController {
 
     //    마이페이지
     @RequestMapping("/user/userDetail")
-    public void mypage(@SessionAttribute(value = "dto", required = false) User login, Model model) {
+    public void mypage(@SessionAttribute(value = "dto1", required = false) User login, Model model) {
         int userno = login.getUserno();
         List<Board> list = boardService.boardList(userno);
-        Paging paging = new Paging();
-        List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
-        model.addAttribute("dto", login);
+
+        model.addAttribute("dto1", login);
         model.addAttribute("list", list);
-        model.addAttribute("totalrecomm", recommList);
+        model.addAttribute("userno", userno);
+//        model.addAttribute("totalrecomm", recommList);
     }
 
     //유저 수정하기

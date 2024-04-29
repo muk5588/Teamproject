@@ -267,13 +267,6 @@
         </table>
         <c:if test="${isLogin > 0}">
             <div id="reBtn">
-                <div class="recommendBtn cancle">
-                        <%-- 	<c:if test="${not empty recommend  and recommend }"> --%>
-                    <a>
-                        <button class="cancle">추천취소하기</button>
-                    </a>
-                </div>
-
                 <div class="recommendBtn doRedomm">
                     <a>
                         <button class="doRecomm">추천하기</button>

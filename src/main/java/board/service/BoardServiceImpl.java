@@ -101,8 +101,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public RecommendRes getRecommendRes(Board recommendBoard) {
-		if( null != session.getAttribute("userno")) {
-			Good good = new Good((int)this.session.getAttribute("userno"), recommendBoard.getBoardNo());
+		if( null != session.getAttribute("isLogin")) {
+			Good good = new Good((int)this.session.getAttribute("isLogin"), recommendBoard.getBoardNo());
 			return boardDao.getRecommendRes(good);
 		}
 		return null;

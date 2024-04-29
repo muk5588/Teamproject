@@ -80,8 +80,7 @@ public class BoardController {
 		board =  boardService.viewByBoardNo(boardno);
 
 		int recomm = boardService.viewRecommend(boardno);
-		
-		
+
 		List<Comment> comment = boardService.commentList(board);
 		model.addAttribute("comment", comment);
 		model.addAttribute("recomm", recomm);
@@ -103,7 +102,7 @@ public class BoardController {
 			, MultipartFile file
 			) {
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		User user = (User) session.getAttribute("dto");
+		User user = (User) session.getAttribute("dto1");
 		logger.info("category : {}", categoryno);
 		board.setCategoryNo(categoryno);
 		board.setUserNo(user.getUserno());

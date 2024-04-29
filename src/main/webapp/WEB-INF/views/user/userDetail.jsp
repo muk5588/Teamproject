@@ -20,7 +20,7 @@
 <div class="warpper">
     <div class="warp">
         <c:choose>
-            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != dto.userno)}">
+            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != userno)}">
                 <h3>${dto.nickname } 회원 정보</h3>
                 <table class='w-pct60'>
                     <tr>
@@ -106,7 +106,7 @@
         <h3>작성한 게시물</h3>
         <c:choose>
             <c:when test="${not empty list}">
-                <button onclick="location.href='../board/userbyboardlist'">전체 작성글</button>
+                <button onclick="location.href='../board/userbyboardlist?userno=${dto1.userno}'">전체 작성글</button>
                 <table class="table table-striped table-hover table-sm">
                         <%-- <colgroup> --%>
                         <%-- 	<col style="width: 10%;"> --%>

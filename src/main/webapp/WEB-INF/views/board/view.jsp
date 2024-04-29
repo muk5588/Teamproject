@@ -232,7 +232,7 @@
         <a href="./list?curPage=${curPage }">
             <button>목록으로</button>
         </a>
-        <c:if test="${isLogin == board.userNo}">
+        <c:if test="${board.userNo == dto.userno }">
             <a href="./update?boardNo=${board.boardNo }">
                 <button id="btnUpdate">수정</button>
             </a>
@@ -248,7 +248,7 @@
                 <th>글 번호</th>
                 <th>제목</th>
                 <th>본문</th>
-                <th>작정자 닉네임</th>
+                <th>작정자닉네임</th>
                 <th>조회수</th>
                 <th>최초작성일</th>
                 <th>추천수</th>

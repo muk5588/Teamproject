@@ -1,5 +1,7 @@
 package user.controller;
 
+import board.dto.Board;
+import board.service.BoardService;
 import grade.dto.Grade;
 import grade.service.GradeService;
 import login.dto.AccessHistory;
@@ -34,6 +36,8 @@ public class UserController {
     private GradeService gradeService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private BoardService boardService;
     /**
      * 화면부분
      * */
@@ -72,16 +76,22 @@ public class UserController {
     }
     //유져상세페이지(관리자용)
     @RequestMapping("/detailUser")
-    public String userDetail(int userno, Model model) {
+    public String userDetail(int userno, Model model, HttpSession session) {
         //선택한 고객 정보를 DB에 조회해와서
         User dto = new User();
         dto.setUserno(userno);
         dto = service.userDetail(dto);
+        model.addAttribute("dto", dto);
+        User login = (User) session.getAttribute("dto1");
+        model.addAttribute("dto1", login);
+        model.addAttribute("userno", userno);
+        List<Board> list = boardService.boardList(userno);
+        model.addAttribute("list", list);
 //        int userno = dto.getUserno();
         //화면에 출력할 수 있도록 Model에 담는다.
         //원래는 string타입으로 담겨야하지만 스프링에서는 자동으로 형변환이 되서 int타입으로 담긴다.
 
-        model.addAttribute("dto", dto);
+
         return "user/userDetail";
     }
     @RequestMapping("/searchUser")

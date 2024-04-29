@@ -11,7 +11,7 @@
 		select userno from usertb
 		<where>
 			and userid = #{userid }
-			and userpw = #{userpw }
+			and userpw = CRYPTO.ENCRYPT_AES(#{userpw})
 		</where>
 
 	</select>

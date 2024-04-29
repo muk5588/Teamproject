@@ -1,5 +1,7 @@
 package login.controller;
 
+import board.dto.Board;
+import board.service.BoardService;
 import login.service.KakaoService;
 import login.service.LoginService;
 import login.service.SocialService;
@@ -11,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import user.dto.User;
+import util.Paging;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -23,7 +28,8 @@ public class LoginController {
     SocialService socialService;
     @Autowired
     KakaoService kakaoService;
-
+    @Autowired
+    BoardService boardService;
 
     //로그인 요청
     @RequestMapping("/login/loginProc")
@@ -90,9 +96,13 @@ public class LoginController {
     //    마이페이지
     @RequestMapping("/user/userDetail")
     public void mypage(@SessionAttribute(value = "dto", required = false) User login, Model model) {
-
-
+        int userno = login.getUserno();
+        List<Board> list = boardService.boardList(userno);
+        Paging paging = new Paging();
+        List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
         model.addAttribute("dto", login);
+        model.addAttribute("list", list);
+        model.addAttribute("totalrecomm", recommList);
     }
 
     //유저 수정하기

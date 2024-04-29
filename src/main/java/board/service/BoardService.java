@@ -76,7 +76,7 @@ public interface BoardService {
 
     public List<Category> categoryList();
 
-	public List<Board> boardList();
+	public List<Board> boardList(int userno);
 
 	public void commentDeleteAll(Comment comment);
 }

@@ -144,8 +144,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> boardList() {
-		return boardDao.boardList();
+	public List<Board> boardList(int userno) {
+		return boardDao.boardList(userno);
 	}
 /**
  * 보드 삭제시 그 보드에 연관된 댓글과 파일삭제*/

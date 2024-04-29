@@ -72,5 +72,5 @@ public interface BoardDao {
 
     public List<Category> categoryList();
 
-	public List<Board> boardList();
+	public List<Board> boardList(int userno);
 }

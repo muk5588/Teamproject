@@ -21,8 +21,12 @@
 				</choose>
 				</if>
 	</sql>
-	<select id="boardList" resultType="Board">
+	<select id="boardList" parameterType="int" resultType="Board">
 		<include refid="selectBoard" />
+		<where>
+			and userno = #{userNo}
+		</where>
+		order by createdate desc
 	</select>
 	
 	<select id="selectAll" resultType="Board" parameterType="util.Paging">

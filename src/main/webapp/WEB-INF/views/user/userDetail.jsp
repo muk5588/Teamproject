@@ -105,7 +105,7 @@
         </c:choose>
         <h3>작성한 게시물</h3>
         <c:choose>
-            <c:when test="${not empty list}">
+            <c:when test="${not empty list and (userno == dto1.userno)}">
                 <button onclick="location.href='../board/userbyboardlist?userno=${dto1.userno}'">전체 작성글</button>
                 <table class="table table-striped table-hover table-sm">
                         <%-- <colgroup> --%>

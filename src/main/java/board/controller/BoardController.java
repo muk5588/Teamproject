@@ -161,8 +161,10 @@ public class BoardController {
 		logger.debug("delete 변수 : {}",boardno);
 		
 		Board deleteBoard = new Board();
+		Comment comment	= new Comment();
 		deleteBoard.setBoardNo(boardno);
-		
+		comment.setBoardNo(boardno);
+		boardService.commentDeleteAll(comment);
 		boardService.boardDelete(deleteBoard);
 		
 		return "redirect:./list";

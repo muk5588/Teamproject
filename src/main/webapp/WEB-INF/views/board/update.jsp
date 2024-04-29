@@ -40,12 +40,10 @@
 				<td class="no"> ${board.boardNo } <input type="text" hidden="hidden" value="${board.boardNo }" name="boardNo"> </td>
 				<td class="title"><input type="text" value="${board.title }" name="title"></td>
 				<td class="content"><input type="text" value="${board.content }" name="content"></td>
-				<td class="id">${board.writerId }</td>
-				<td class="nick">${board.writerNick }</td>
-				<td class="hit">${board.hit }</td>
+				<td class="nick">${board.nickName }</td>
+				<td class="hit">${board.boardView }</td>
 				<td class="date">
-					<fmt:parseDate value="${board.writeDate }" pattern="yyyy-MM-dd HH:mm:ss" var="myDate"/>
-					<fmt:formatDate value="${myDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 				</td>
 		</tr>
 	</table>

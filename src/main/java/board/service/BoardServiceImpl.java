@@ -147,6 +147,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> boardList() {
 		return boardDao.boardList();
 	}
+/**
+ * 보드 삭제시 그 보드에 연관된 댓글과 파일삭제*/
+	@Override
+	public void commentDeleteAll(Comment comment) {
+		commentDao.deleteCommentAll(comment);
+	}
 
 
 }

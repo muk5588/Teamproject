@@ -13,4 +13,5 @@ public interface CommentDao {
 
 	public void deleteComment(Comment comment);
 
+	public void deleteCommentAll(Comment comment);
 }

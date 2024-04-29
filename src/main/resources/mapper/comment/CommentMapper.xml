@@ -20,12 +20,16 @@
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">
-DELETE ADMIN.COMMENTTB
-<where>
-	AND COMMNO = #{commNo}
-	AND boardno = #{boardNo}
-</where> 
-
+	DELETE ADMIN.COMMENTTB
+	<where>
+		AND COMMNO = #{commNo}
+		AND boardno = #{boardNo}
+	</where>
 </delete>
-
+	<delete id="deleteCommentAll" parameterType="Comment">
+		DELETE COMMENTTB
+		<where>
+			AND boardno = #{boardNo}
+		</where>
+	</delete>
 </mapper>

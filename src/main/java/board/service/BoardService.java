@@ -78,4 +78,5 @@ public interface BoardService {
 
 	public List<Board> boardList();
 
+	public void commentDeleteAll(Comment comment);
 }

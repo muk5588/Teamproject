@@ -93,7 +93,7 @@
             </c:otherwise>
         </c:choose>
         <h3>작성한 게시물</h3>
-        <button onclick="location.href='../board/'"></button>
+        <button onclick="location.href='../board/list'">전체 작성글</button>
         <c:choose>
         <c:when test="${not empty list}">
             <table class="table table-striped table-hover table-sm">

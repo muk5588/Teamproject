@@ -178,7 +178,7 @@ public class BoardController {
 		logger.info("추천 확인 {}, {} ", recommendBoard, session.getAttribute("isLogin"));
 		
 		boardService.recommend(recommendBoard);
-		
+
 		RecommendRes res = boardService.getRecommendRes(recommendBoard);
 		return res;
 	}
@@ -213,6 +213,41 @@ public class BoardController {
 //		}
 		
 	}
-	
+	@RequestMapping("/userbyboardlist")
+	public String userByBoardList(
+			Model model,
+			@RequestParam(defaultValue ="0") int curPage
+			,@RequestParam(value="search",required = false) String search
+			,@RequestParam(value="searchKind", required = false ) String searchKind
+			,HttpSession session
+			) {
+		// 페이징 계산
+		int userno = (int)session.getAttribute("isLogin");
+		Paging paging = new Paging();
+		paging.setSearch(search);
+		paging.setSearchKind(searchKind);
+		if(null !=  search && !"".equals(search)) {
+			paging = boardService.getPaging(curPage,paging);
+		}else {
+			paging = boardService.getPaging(curPage,paging);
+		}
+		paging.setSearch(search);
+		paging.setSearchKind(searchKind);
+		logger.info("{}", paging);
+
+		List<Board> list = boardService.boardList(userno);
+
+
+		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
+		logger.debug("recommList : {}", recommList);
+		for(Map<String, Object> M : recommList) {
+			logger.debug("M : {}", M.toString());
+		}
+		model.addAttribute("totalrecomm", recommList);
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("paging", paging);
+		model.addAttribute("list", list);
+		return "board/list";
+	}
 	
 }

@@ -63,5 +63,12 @@
 		  and  name = #{name }
 		  and email = #{email }
 	</update>
+	<update id="userBlack" parameterType="User">
+		UPDATE usertb
+		SET BLACK = Y
+		WHERE userno = #{userno }
+	</update>
+	
+	
 </mapper>
 

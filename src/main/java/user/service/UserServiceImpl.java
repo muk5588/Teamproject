@@ -1,15 +1,17 @@
 package user.service;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
 import user.dao.UserDao;
 import user.dto.User;
-
-import javax.mail.internet.MimeMessage;
-import java.util.List;
-import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -111,6 +113,11 @@ public class UserServiceImpl implements UserService {
     public User findUserpw(User dto) {
         return userDao.findUserpw(dto);
     }
+
+	@Override
+	public void userBlack(User dto) {
+		userDao.userBlack(dto);
+	}
 
 
 }

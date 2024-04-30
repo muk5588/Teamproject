@@ -26,7 +26,13 @@
         <tr>
             <td>${dto.userno }</td>
             <td>${dto.userid }</td>
-            <td><input type="text" value="${dto.gradeno }" style="width: 50px"></td>
+            <td>
+                <select name="gradeno" id="gradeno" placeholder="등급을 선택해 주세요" class="form-option">
+                    <c:forEach var="grade" items="${list }">
+                        <option value="${reportType.reportTypeNo}">${reportType.reportType}</option>
+                    </c:forEach>
+                </select>
+            </td>
             <td>
                 <button onclick="location.href='/menu/menuUpdate?userno=${dto.userno}'">수정</button>
             </td>

@@ -299,6 +299,9 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+                <c:if test="${isLogin > 0}">
+                    <button onclick="location.href='../report/boardReport?boardno=${board.boardNo}'"> 신고하기</button>
+                </c:if>
             </table>
         </div>
         <c:if test="${isLogin > 0}">

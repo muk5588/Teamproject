@@ -1,4 +1,4 @@
-package board.dto;
+package report.dto;
 
 import java.util.Date;
 

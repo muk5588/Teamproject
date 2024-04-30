@@ -1,4 +1,4 @@
-package board.dto;
+package report.dto;
 
 public class BoardReportType {
 	

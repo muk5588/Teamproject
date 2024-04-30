@@ -35,6 +35,7 @@ public interface UserDao {
 
     public void updateUserpw(User dto);
 
-
 	public int nickChk(User dto);
+
+	public void userBlack(User dto);
 }

@@ -34,4 +34,7 @@ public interface UserService {
     public User findUserpw(User dto);
 
 	public int nickChk(User dto);
+
+	public void userBlack(User dto);
+	
 }

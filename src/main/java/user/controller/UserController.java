@@ -1,28 +1,32 @@
 package user.controller;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import board.dto.Board;
 import board.service.BoardService;
 import grade.dto.Grade;
 import grade.service.GradeService;
 import login.dto.AccessHistory;
 import login.service.LoginService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import user.dto.EmailCheck;
 import user.dto.User;
 import user.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -64,6 +68,14 @@ public class UserController {
         return "user/userList";
     }
 
+    @RequestMapping("/userBlack")
+    //유저블랙리스트 페이지
+    public String userBlack( Model model) {
+        List<User> list = service.userList();
+        model.addAttribute("list", list);
+        return "user/userBlack";
+    }
+    
     //수정 페이지
     @RequestMapping("/updateUser")
     public String userUpdate(int userno, Model model) {
@@ -124,11 +136,18 @@ public class UserController {
         return "redirect: ./userDetail";
     }
 
+	@PostMapping("/userBlack") 
+    public String userBlack(User dto) {
+        service.userBlack(dto);
+        return "redirect: ./userBlack";
+    }
+    
     @RequestMapping("/deleteUser")
     public String deleteUser(User dto) {
         service.userDelete(dto);
         return "redirect: /";
     }
+    
     @ResponseBody
     @RequestMapping("/passChk")
     public int passChk(User dto) throws Exception {
@@ -229,4 +248,5 @@ public class UserController {
         model.addAttribute("list",list);
         return "user/userLog";
     }
+    
 }

@@ -11,43 +11,40 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="/resources/js/report/boardReport.js" charset="UTF-8"></script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <div class="warpper">
     <div class="warp">
         <h3>게시물 신고</h3>
-        <form name="reportform" method="post" action="">
-            <table class="table table-striped table-hover table-sm">
-                <tr>
-                    <th>신고 종류</th>
-                    <td>
-                        <select name="categoryno" id="categoryno" placeholder="종류를 선택해 주세요" class="form-option">
+        <form id="reportform" method="post" action="./boardReport">
+                <div>
+                    <label>신고 종류</label>
+                        <select name="reportTypeNo" id="reportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
                             <c:forEach var="reportType" items="${list }">
                                 <option value="${reportType.reportTypeNo}">${reportType.reportType}</option>
                             </c:forEach>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>신고내용</th>
-                    <td class="content"><textarea name="reportContent" id="reportContent" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th>신고하는 글번호</th>
-                    <td class="no">${board.boardNo }</td>
-                </tr>
-                <tr>
-                    <th>신고하는 글 제목</th>
+                </div>
+                <div>
+                    <label for="reportContent">신고내용</label>
+                    <textarea name="reportContent" id="reportContent" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
+                </div>
+                <div>
+                    <label>신고하는 글번호</label>
+                    <input type="text" name="boardNo" id="boardNo" class="boardNo" value="${board.boardNo }" style="border: 1px white" readonly>
+                </div>
+                <div>
+                    <label>신고하는 글 제목</label>
                     <td class="title">${board.title }</td>
-                </tr>
-                <tr>
-                    <th>작정자닉네임</th>
+                </div>
+                <div>
+                    <label>작정자닉네임</label>
                     <td class="nick">${board.nickName }</td>
-                </tr>
-            </table>
-            <button type="button" id="join" name="join">신고</button>
+                </div>
+            <button type="button" id="report" name="report">신고</button>
         </form>
     </div>
 </div>

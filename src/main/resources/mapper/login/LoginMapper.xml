@@ -47,19 +47,31 @@
 	</select>
 
 	<select id="loginHistory" resultType="AccessHistory">
-		SELECT u.nickname,u.gender,u.name, B.USERNO, SUM(B.ACCESS_COUNT) AS ACCESS_COUNT, A.LAST_ACCESSDATE
-		FROM (
-				 SELECT USERNO, TRUNC(ACCESSDATE) AS ACCESSDATE, COUNT(*) AS ACCESS_COUNT
-				 FROM ACCESSHISTORY
-				 GROUP BY TRUNC(ACCESSDATE), USERNO
-			 ) B
-				 INNER JOIN usertb u ON u.userno = B.userno
-				 INNER JOIN (
-			SELECT USERNO, MAX(TRUNC(ACCESSDATE)) AS LAST_ACCESSDATE
-			FROM ACCESSHISTORY
-			GROUP BY USERNO
-		) A ON A.USERNO = B.userno
-		GROUP BY u.nickname,u.gender,u.name, B.USERNO,  A.LAST_ACCESSDATE
+		SELECT C.*, D.nickname, D.gender FROM
+			(SELECT A.*, LAST_ACCESSDATE  FROM
+			(
+				SELECT userno, Max(accessCount) AS accessCount
+				FROM( 
+					SELECT 
+					    userno, 
+					    TRUNC(ACCESSDATE) AS access_date, 
+					    COUNT(ACCESSDATE) AS access_count, 
+					    ROW_NUMBER() OVER(PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
+					FROM 
+					    ACCESSHISTORY
+					GROUP BY 
+					    userno, TRUNC(ACCESSDATE))
+					GROUP BY userno
+					ORDER BY userno) A, 
+			(
+				SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
+				FROM ACCESSHISTORY
+				GROUP BY USERNO
+		) B
+		WHERE A.userno = b.userno
+		ORDER BY A.userno) C ,(
+			SELECT  * FROM usertb) D
+		WHERE C.userno = D.userno
 	</select>
 </mapper>
 

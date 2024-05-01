@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script type="text/javascript" src="<c:url value="/resources/smarteditor/js/HuskyEZCreator.js"/>" charset="utf-8"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -52,6 +53,16 @@
 
     })
 </script>
+<script type="text/javascript">
+var oFileUploader = new jindo.FileUploader(jindo.$("file_select"), {
+    //업로드할 서버의 URL(Form 전송 대상)
+    sUrl : '/board/fileupload',
+    //업로드 이후에 IFRMAME이 리다이렉트될 콜백 페이지 주소
+    sCallback : '/resources/editor/sample/photo_uploader/callback.html',
+    //post할 데이터 셋. 예: { blogId : "testid" }
+    htData : {}
+});
+</script>
 </head>
 <body>
 
@@ -80,7 +91,8 @@
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea class="form-control" id="content" rows="3" name="content" placeholder="내용을 적어주세요"></textarea>
+<!--         <textarea class="form-control" id="content" rows="3" name="content" placeholder="내용을 적어주세요"></textarea> -->
+	<iframe src="/resources/editor/SmartEditor2.html" width="90%" height="100%" style="text-align: center;"/>
     </div>
 
     <div class="mb-3">
@@ -94,6 +106,9 @@
 <a href="./list">
     <button>게시판으로</button>
 </a>
+<div style="width: 90%;">
+</div>
+<%-- <jsp:include page="/resources/editor/SmartEditor2.html"/> --%>
 
 </body>
 </html>

@@ -39,8 +39,10 @@ public class FileServiceImpl implements FileService {
 		
 		do {
 			storedName = file.getOriginalFilename(); //원본파일 명
+			logger.debug("originName : {} ", storedName);
 			storedName += UUID.randomUUID().toString().split("-")[4]; //UUID 추가
 			logger.debug("storedName : {} ", storedName);
+			logger.debug("UUID.randomUUID().toString().split(\"-\")[4] : {} ", UUID.randomUUID().toString().split("-")[4]);
 			
 			dest = new File(storedFolder, storedName);
 		}while( dest.exists() );

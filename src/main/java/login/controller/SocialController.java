@@ -28,6 +28,7 @@ public class SocialController {
 	@Autowired SocialService socialService;
 	@Autowired KakaoService kakaoService;
 	@Autowired LoginService loginService;
+
 	
 //    @Autowired
     private String apiResult = null;

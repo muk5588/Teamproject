@@ -8,7 +8,7 @@
 
 
 	<select id="selectNoByIdPw" resultType="int" parameterType="User">
-		select userno from usertb
+		select count(*) from usertb
 		<where>
 			and userid = #{userid }
 			and userpw = CRYPTO.ENCRYPT_AES(#{userpw})
@@ -22,7 +22,8 @@
 			detailAddress, extraAddress, phone, gradeno
 		FROM usertb
 		<where>
-			and userno = #{userno }
+			and userid = #{userid }
+			and userpw = CRYPTO.ENCRYPT_AES(#{userpw})
 		</where>
 	</select>
 

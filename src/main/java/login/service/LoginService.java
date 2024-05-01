@@ -20,7 +20,7 @@ public interface LoginService {
 	public User info(User dto);
 
 
-	public List<AccessHistory> loginHistory();
+	public List<AccessHistory> loginHistory(Paging paging);
 
 	/**
 	 * 유저 접속로그 추가

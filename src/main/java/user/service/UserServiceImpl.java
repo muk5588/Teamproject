@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import user.dao.UserDao;
 import user.dto.User;
+import util.Paging;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -118,6 +119,8 @@ public class UserServiceImpl implements UserService {
 	public void userBlack(User dto) {
 		userDao.userBlack(dto);
 	}
+
+
 
 
 }

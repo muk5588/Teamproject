@@ -73,6 +73,6 @@
 		WHERE userno = #{userno }
 	</update>
 	
-	
+
 </mapper>
 

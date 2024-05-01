@@ -1,6 +1,7 @@
 package user.service;
 
 import user.dto.User;
+import util.Paging;
 
 import java.util.List;
 
@@ -36,5 +37,5 @@ public interface UserService {
 	public int nickChk(User dto);
 
 	public void userBlack(User dto);
-	
+
 }

@@ -2,6 +2,7 @@ package user.dao;
 
 import org.springframework.stereotype.Repository;
 import user.dto.User;
+import util.Paging;
 
 import java.util.List;
 
@@ -38,4 +39,5 @@ public interface UserDao {
 	public int nickChk(User dto);
 
 	public void userBlack(User dto);
+
 }

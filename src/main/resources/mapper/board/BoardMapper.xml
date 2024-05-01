@@ -230,4 +230,10 @@
 		)
 	</select>
 
+	<select id="selectAdminCntAll" resultType="int" parameterType="util.Paging">
+		select count(*) from (
+								 select USERNO from USERTB
+							 )
+	</select>
+
 </mapper>

@@ -81,4 +81,6 @@ public interface BoardService {
 	public void commentDeleteAll(Comment comment);
 
     public Comment commentByBoardNo(int commno);
+
+	public Paging getLogPaging(int curPage, Paging paging);
 }

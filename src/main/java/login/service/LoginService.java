@@ -2,6 +2,7 @@ package login.service;
 
 import login.dto.AccessHistory;
 import user.dto.User;
+import util.Paging;
 
 import java.util.List;
 
@@ -27,5 +28,5 @@ public interface LoginService {
 	 */
 	public void insertAccessHistory(User login);
 
-    public List<AccessHistory> history();
+    public List<AccessHistory> history(Paging paging);
 }

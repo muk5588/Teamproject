@@ -73,4 +73,6 @@ public interface BoardDao {
     public List<Category> categoryList();
 
 	public List<Board> boardList(int userno);
+
+	public int selectLogCntAll(Paging paging);
 }

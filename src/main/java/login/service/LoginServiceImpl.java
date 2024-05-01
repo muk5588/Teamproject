@@ -5,6 +5,7 @@ import login.dto.AccessHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import user.dto.User;
+import util.Paging;
 
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
     @Override
-    public List<AccessHistory> history() {
-        return loginDao.history();
+    public List<AccessHistory> history(Paging paging) {
+        return loginDao.history(paging);
     }
 
 

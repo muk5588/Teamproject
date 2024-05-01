@@ -43,8 +43,14 @@
 		insert into ACCESSHISTORY (ACCESSNO, USERNO, ACCESSDATE) VALUES (ACCESSHISTORY_SEQ.nextval, #{userno}, sysdate + 9/24)
 
 	</insert>
-	<select id="history" resultType="AccessHistory">
+	<select id="history" resultType="AccessHistory" parameterType="util.Paging">
+		select * from(
+		   select rownum rnum, B.* from (
 		select ACCESSNO, USERNO, ACCESSDATE from ACCESSHISTORY order by ACCESSDATE desc
+		) B )
+		<where>
+			AND rnum BETWEEN #{startNo } AND #{endNo}
+		</where>
 	</select>
 
 	<select id="loginHistory" resultType="AccessHistory">

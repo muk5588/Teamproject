@@ -3,6 +3,7 @@ package login.dao;
 import login.dto.AccessHistory;
 import org.springframework.stereotype.Repository;
 import user.dto.User;
+import util.Paging;
 
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface LoginDao {
 
     public List<AccessHistory> loginHistory();
 
-    public List<AccessHistory> history();
+    public List<AccessHistory> history(Paging paging);
 }

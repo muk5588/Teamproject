@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import user.dto.EmailCheck;
 import user.dto.User;
 import user.service.UserService;
+import util.Paging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -239,9 +240,15 @@ public class UserController {
         return "redirect: /";
     }
     @RequestMapping("/userLog")
-    public String userLog(Model model){
-        List<AccessHistory> list = loginService.history();
+    public String userLog(Model model,@RequestParam(defaultValue ="0") int curPage){
+        Paging paging = new Paging();
+
+        paging = boardService.getLogPaging(curPage,paging);
+
+
+        List<AccessHistory> list = loginService.history(paging);
         model.addAttribute("list",list);
+        model.addAttribute("paging", paging);
         return "user/userLog";
     }
     

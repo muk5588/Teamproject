@@ -135,6 +135,7 @@
 <div class="container">
     <div class="table-container">
         <div class="table-wrapper">
+            <button onclick="location.href='/user/adminPage'">관리자 페이지</button>
             <h3>로그인 기록</h3>
             <table class="table table-striped table-hover table-sm">
                 <tr>
@@ -155,6 +156,7 @@
                     </tr>
                 </c:forEach>
             </table>
+            <c:import url="/WEB-INF/views/layout/userLogPaging.jsp"/>
         </div>
     </div>
 </div>

@@ -160,5 +160,15 @@ public class BoardServiceImpl implements BoardService {
 		return commentDao.commentByBoardNo(commno);
 	}
 
+	@Override
+	public Paging getLogPaging(int curPage, Paging paging) {
+
+		int totalCount = boardDao.selectLogCntAll(paging);
+
+		Paging pagingres = new Paging(totalCount, curPage);
+
+		return pagingres;
+	}
+
 
 }

@@ -223,5 +223,11 @@
 	<select id="categoryList" resultType="Category">
 		select CATEGORYNAME, CATEGORYNO from CATEGORY order by CATEGORYNO
 	</select>
-	
+
+	<select id="selectLogCntAll" resultType="int" parameterType="util.Paging">
+		SELECT count(*) FROM (
+		    select ACCESSNO, USERNO, ACCESSDATE from ACCESSHISTORY
+		)
+	</select>
+
 </mapper>

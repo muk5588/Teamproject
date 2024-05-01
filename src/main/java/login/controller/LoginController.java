@@ -35,13 +35,12 @@ public class LoginController {
     @RequestMapping("/login/loginProc")
     public String loginproc(User dto, HttpSession session) {
 
-//        dto = loginService.loginProc(dto);
-        //userno
+        //cnt
         int isLogin = loginService.login(dto);
         logger.info("isLogin : {}", isLogin);
         if (isLogin > 0) {  //로그인 성공
             //유저 정보
-            dto.setUserno(isLogin);
+//            dto.setUserno(isLogin);
             User login = loginService.info(dto);
             logger.info("login : {}", login);
 

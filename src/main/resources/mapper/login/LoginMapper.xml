@@ -47,32 +47,26 @@
 	</select>
 
 	<select id="loginHistory" resultType="AccessHistory">
-		SELECT C.*, D.nickname, D.gender FROM
-			(SELECT A.*, LAST_ACCESSDATE  FROM
-			(
-				SELECT userno, Max(accessCount) AS accessCount
-				FROM( 
-					SELECT 
-					    userno, 
-					    TRUNC(ACCESSDATE) AS access_date, 
-					    COUNT(ACCESSDATE) AS access_count, 
-					    ROW_NUMBER() OVER(PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
-					FROM 
-					    ACCESSHISTORY
-					GROUP BY 
-					    userno, TRUNC(ACCESSDATE))
-					GROUP BY userno
-					ORDER BY userno) A, 
-			(
-				SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
-				FROM ACCESSHISTORY
-				GROUP BY USERNO
-		) B
-		WHERE A.userno = b.userno
-		ORDER BY A.userno) C ,(
-			SELECT  * FROM usertb) D
-		WHERE C.userno = D.userno
-	</select>
+        SELECT C.*, D.nickname, D.gender
+        FROM (SELECT A.*, LAST_ACCESSDATE
+              FROM (SELECT userno, Max(accessCount) AS accessCount
+                    FROM (SELECT userno,
+                                 TRUNC(ACCESSDATE)                                                  AS access_date,
+                                 COUNT(ACCESSDATE)                                                  AS access_count,
+                                 ROW_NUMBER() OVER (PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
+                          FROM ACCESSHISTORY
+                          GROUP BY userno, TRUNC(ACCESSDATE))
+                    GROUP BY userno
+                    ORDER BY userno) A,
+                   (SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
+                    FROM ACCESSHISTORY
+                    GROUP BY USERNO) B
+              WHERE A.userno = b.userno
+              ORDER BY A.userno) C,
+             (SELECT *
+              FROM usertb) D
+        WHERE C.userno = D.userno
+    </select>
 </mapper>
 
 

@@ -24,10 +24,10 @@ public class MenuController {
 //    private
 
     @RequestMapping("/menuList")
-    public String menuList(Model model) {
+    public String menuList(Model model ) {
         List<Menu> list = menuService.menuList();
         model.addAttribute("list", list);
-//        List<>
+
         return "menu/menuList";
     }
 

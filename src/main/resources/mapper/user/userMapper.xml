@@ -6,8 +6,12 @@
 	</select>
 
 	<select id="userList" resultType="User">
-		SELECT userno,userid,name,NICKNAME,GENDER FROM usertb order by userno
-	</select>
+        SELECT userno,userid,name,NICKNAME,GENDER,gradeno FROM usertb
+        <where>
+            and gradeno <![CDATA[ < 5000 ]]>
+        </where>
+		order by userno
+    </select>
 
 	<insert id="userInsert" parameterType="User">
 		INSERT INTO usertb(userno, name, userid, userpw,  email, gender, postcode, address, detailAddress, extraAddress, phone, nickname)

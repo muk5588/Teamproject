@@ -6,7 +6,11 @@
     </select>
 
     <select id="gradeList" resultType="Grade">
-        select GRADENO,GRADENAME,COMM from grade order by GRADENO
+        select GRADENO,GRADENAME,COMM from grade
+        <where>
+                and gradeno <![CDATA[ < 5000 ]]>
+        </where>
+        order by GRADENO
     </select>
 
     <insert id="gradeInsert" parameterType="Grade">

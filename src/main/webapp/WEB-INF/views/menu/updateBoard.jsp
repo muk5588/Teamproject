@@ -23,7 +23,8 @@
     <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
     <!-- items : 배열 변수 -->
     <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-    <form action="/menu/categoryUpdate?categoryno=${category.categoryNo}" method="post">
+    <form action="/menu/categoryUpdate" method="post">
+    	<input hidden="hidden" name="categoryNo" value="${category.categoryNo }">
         <tr>
             <td>${category.categoryNo }</td>
             <td>${category.categoryName }</td>
@@ -36,7 +37,7 @@
                 </select>
             </td>
             <td>
-                <button onclick="location.href='/menu/categoryUpdate?categoryno=${category.categoryNo}'">수정</button>
+                <button onclick="location.href='/menu/categoryUpdate">수정</button>
             </td>
         </tr>
     </form>

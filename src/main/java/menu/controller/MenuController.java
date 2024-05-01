@@ -65,6 +65,7 @@ public class MenuController {
 
     @RequestMapping("/categoryUpdate")
     public String menuUpdateBoard(Category category) {
+    	logger.debug("~~~~~category : {}", category);
         menuService.categoryUpdate(category);
         return "redirect: /menu/menuList";
     }

@@ -1,9 +1,12 @@
 package menu.controller;
 
+import board.dto.Category;
 import grade.dto.Grade;
 import grade.service.GradeService;
 import menu.dto.Menu;
 import menu.service.MenuService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MenuService menuService;
     @Autowired
@@ -24,10 +27,11 @@ public class MenuController {
 //    private
 
     @RequestMapping("/menuList")
-    public String menuList(Model model ) {
+    public String menuList(Model model) {
         List<Menu> list = menuService.menuList();
+        List<Category> list2 = menuService.categoryList();
         model.addAttribute("list", list);
-
+        model.addAttribute("list2", list2);
         return "menu/menuList";
     }
 
@@ -38,7 +42,7 @@ public class MenuController {
         dto = menuService.update(dto);
         List<Grade> list = gradeService.gradeList();
         model.addAttribute("dto", dto);
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
         return "menu/update";
     }
 
@@ -47,15 +51,21 @@ public class MenuController {
         menuService.menuUpdate(dto);
         return "redirect: /menu/menuList";
     }
-    @RequestMapping("/updateBorad")
-    public String updateBorad(int boardno, Model model) {
-//        List<Board> list =
-        return "redirect: /menu/updateBoard";
+
+    @RequestMapping("/updateBoard")
+    public String updateBorad(int categoryno, Model model) {
+        Category category = new Category();
+        category.setCategoryNo(categoryno);
+        category = menuService.updateBorad(category);
+        List<Grade> list = gradeService.gradeList();
+        model.addAttribute("category", category);
+        model.addAttribute("list", list);
+        return "menu/updateBoard";
     }
-//    @RequestMapping("/menuUpdate")
-//    public String menuUpdateBoard() {
-////        menuService.updateBoardMenu();
-//
-//        return "redirect: /menu/menuList";
-//    }
+
+    @RequestMapping("/categoryUpdate")
+    public String menuUpdateBoard(Category category) {
+        menuService.categoryUpdate(category);
+        return "redirect: /menu/menuList";
+    }
 }

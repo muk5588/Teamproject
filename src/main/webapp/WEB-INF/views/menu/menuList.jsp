@@ -17,12 +17,12 @@
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <div class="warpper">
     <div class="warp">
-        <div id="content">
+        <div id="content1">
             <h3>회원등급 목록</h3>
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>
-                    <th class='w-px200'>회원이름</th>
+                    <th class='w-px200'>닉네임</th>
                     <th>등급이름</th>
                     <th>추가사항</th>
                     <th>수정</th>
@@ -33,7 +33,7 @@
                 <c:forEach var="Menu" items="${list}">
                     <tr>
                         <td>${Menu.userno }</td>
-                        <td>${Menu.userid }</td>
+                        <td>${Menu.nickname }</td>
                         <td>${Menu.gradename }</td>
                         <td>${Menu.comm}</td>
                         <td><button onclick="location.href='/menu/update?userno=${Menu.userno}'" >수정</button></td>
@@ -41,7 +41,31 @@
                     </tr>
                 </c:forEach>
             </table>
-
+        </div>
+        <div id="content2">
+            <h3>게시판별 열람등급</h3>
+            <table class="table table-striped table-hover table-sm">
+                <tr>
+                    <th class='w-px60'>게시판종류 번호</th>
+                    <th class='w-px200'>게시판이름</th>
+                    <th>등급이름</th>
+                    <th>추가사항</th>
+                    <th>수정</th>
+                </tr>
+                <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
+                <!-- items : 배열 변수 -->
+                <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
+                <c:forEach var="Menu" items="${list2}">
+                    <tr>
+                        <td>${Menu.categoryNo }</td>
+                        <td>${Menu.categoryName }</td>
+                        <td>${Menu.gradename }</td>
+                        <td>${Menu.comm}</td>
+                        <td><button onclick="location.href='/menu/updateBoard?categoryno=${Menu.categoryNo }'" >수정</button></td>
+                        </a>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </div>
 </div>

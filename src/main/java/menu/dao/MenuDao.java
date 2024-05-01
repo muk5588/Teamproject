@@ -1,5 +1,6 @@
 package menu.dao;
 
+import board.dto.Category;
 import menu.dto.Menu;
 import org.springframework.stereotype.Repository;
 import user.dto.User;
@@ -13,4 +14,10 @@ public interface MenuDao {
     public User Update(User dto);
 
     public void menuUpdate(User dto);
+
+    public List<Category> categoryList();
+
+    public Category updateBorad(Category category);
+
+    public void categoryUpdate(Category category);
 }

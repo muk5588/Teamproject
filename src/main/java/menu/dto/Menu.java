@@ -2,17 +2,20 @@ package menu.dto;
 
 public class Menu {
     private int userno,gradeno;
-    private String userid,gradename,comm;
-
+    private String nickname,gradename,comm;
+    private String categoryName;
+    private int categoryNo;
     public Menu() {
     }
 
-    public Menu(int userno, int gradeno, String userid, String gradename, String comm) {
+    public Menu(int userno, int gradeno, String nickname, String gradename, String comm, String categoryName, int categoryNo) {
         this.userno = userno;
         this.gradeno = gradeno;
-        this.userid = userid;
+        this.nickname = nickname;
         this.gradename = gradename;
         this.comm = comm;
+        this.categoryName = categoryName;
+        this.categoryNo = categoryNo;
     }
 
     @Override
@@ -20,9 +23,11 @@ public class Menu {
         return "Menu{" +
                 "userno=" + userno +
                 ", gradeno=" + gradeno +
-                ", userid='" + userid + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", gradename='" + gradename + '\'' +
                 ", comm='" + comm + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryNo=" + categoryNo +
                 '}';
     }
 
@@ -42,12 +47,12 @@ public class Menu {
         this.gradeno = gradeno;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getnickname() {
+        return nickname;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setnickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getGradename() {
@@ -64,5 +69,21 @@ public class Menu {
 
     public void setComm(String comm) {
         this.comm = comm;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCategoryNo() {
+        return categoryNo;
+    }
+
+    public void setCategoryNo(int categoryNo) {
+        this.categoryNo = categoryNo;
     }
 }

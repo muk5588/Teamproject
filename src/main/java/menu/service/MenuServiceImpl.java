@@ -1,5 +1,6 @@
 package menu.service;
 
+import board.dto.Category;
 import menu.dto.Menu;
 import menu.dao.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,21 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void menuUpdate(User dto) {
         menuDao.menuUpdate(dto);
+    }
+
+    @Override
+    public List<Category> categoryList() {
+        return menuDao.categoryList();
+    }
+
+    @Override
+    public Category updateBorad(Category category) {
+        return menuDao.updateBorad(category);
+    }
+
+    @Override
+    public void categoryUpdate(Category category) {
+        menuDao.categoryUpdate(category);
     }
 
 

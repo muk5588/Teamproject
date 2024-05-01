@@ -20,6 +20,9 @@
 	<logger name="login">
 		<level value="debug" />
 	</logger>
+	<logger name="menu">
+		<level value="debug" />
+	</logger>
 	<logger name="message">
 		<level value="debug" />
 	</logger>

@@ -240,6 +240,7 @@
                 <button id="btnDelete">삭제</button>
             </a>
         </c:if>
+
         <hr>
 
         <div id="file"></div>
@@ -274,6 +275,7 @@
                     </a>
                 </div>
             </div>
+            <button onclick="location.href='../report/boardReport?boardno=${board.boardNo}'"> 신고하기</button>
         </c:if>
         <hr>
         <div class="comment">
@@ -283,6 +285,10 @@
                     <th>작성자</th>
                     <th>댓글내용</th>
                     <th>작성일</th>
+                    <c:if test="${isLogin > 0}">
+                        <th>신고하기</th>
+                    </c:if>
+                    <th>삭제</th>
                 </tr>
                 <c:forEach var="comment" items="${comment }">
                     <tr>
@@ -292,16 +298,16 @@
                         <td>
                             <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
                         </td>
-                        <c:if test="${userNo eq comment.userNo }">
+                        <c:if test="${isLogin > 0}">
+                            <td><a href='../report/commentReport?commno=${comment.commNo}'> 댓글신고하기</a></td>
+                        </c:if>
+                        <c:if test="${userNo == comment.userNo }">
                             <td>
                                 <button class="commentDelete" value="${comment.commeNo}">삭제</button>
                             </td>
                         </c:if>
                     </tr>
                 </c:forEach>
-                <c:if test="${isLogin > 0}">
-                    <button onclick="location.href='../report/boardReport?boardno=${board.boardNo}'"> 신고하기</button>
-                </c:if>
             </table>
         </div>
         <c:if test="${isLogin > 0}">

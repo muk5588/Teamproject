@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import report.dao.ReportDao;
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
+import report.dto.CommReport;
 
 import java.util.List;
 @Service
@@ -19,5 +20,15 @@ ReportDao reportDao;
     @Override
     public void reportBoard(BoardReport boardReport) {
         reportDao.reportBoard(boardReport);
+    }
+
+    @Override
+    public List<BoardReportType> commReportType() {
+        return reportDao.commReportType();
+    }
+
+    @Override
+    public void reportComm(CommReport commReport) {
+        reportDao.reportComm(commReport);
     }
 }

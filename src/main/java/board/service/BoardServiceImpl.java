@@ -58,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardByBoardNo(boardNo);
 	}
 
+
 	@Override
 	public int boardUpdate(Board board) {
 		return boardDao.updateBoard(board);
@@ -152,6 +153,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void commentDeleteAll(Comment comment) {
 		commentDao.deleteCommentAll(comment);
+	}
+
+	@Override
+	public Comment commentByBoardNo(int commno) {
+		return commentDao.commentByBoardNo(commno);
 	}
 
 

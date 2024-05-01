@@ -79,4 +79,6 @@ public interface BoardService {
 	public List<Board> boardList(int userno);
 
 	public void commentDeleteAll(Comment comment);
+
+    public Comment commentByBoardNo(int commno);
 }

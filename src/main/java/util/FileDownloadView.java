@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
+import board.dto.BoardFile;
+
 public class FileDownloadView extends AbstractView {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,10 +38,10 @@ public class FileDownloadView extends AbstractView {
 		//-------------------------------------------------------------------------------
 
 		//모델값 가져오기
-		FileDto downFile = (FileDto) model.get("downFile");
+		BoardFile downFile = (BoardFile) model.get("downFile");
 
 		//저장된 파일의 폴더 (upload)
-		String path = servletContext.getRealPath("upload");
+		String path = servletContext.getRealPath("/resources/boardUpload");
 
 		//실제 업로드된 파일의 이름
 		String filename = downFile.getStoredName();

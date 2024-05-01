@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,11 +25,14 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public void filesave(Board board, MultipartFile file) {
-		String storedPath = "/resources/img/boardupload";
+		//파일 업로드 경로 지정
+//		String storedPath = "/resources/boardupload";
+		String storedPath = servletContext.getRealPath("/resources/boardUpload");
 		logger.info("storedPath : {}", storedPath);
 		
 		File storedFolder = new File(storedPath);
 		storedFolder.mkdir();
+		logger.debug("폴더 확인 : {}", storedFolder.toPath());
 		
 		String storedName = null;
 		File dest = null;
@@ -44,6 +48,7 @@ public class FileServiceImpl implements FileService {
 		try {
 			//업로드된 임시 파일을 upload 폴더로 옮기기
 			file.transferTo(dest);
+			logger.debug("파일 옮기기 완료 : {}", dest);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -68,6 +73,11 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public BoardFile getFileByBoardNo(int boardno) {
 		return fileDao.getFileByBoardNo(boardno);
+	}
+
+	@Override
+	public List<BoardFile> getFilesByBoardNo(int boardno) {
+		return fileDao.getFilesByBoardNo(boardno);
 	}
 	
 }

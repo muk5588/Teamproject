@@ -26,4 +26,16 @@
 		WHERE  BOARDNO = #{boardno}
 	</select>
 	
+	<select id="getFileByBoardNo" parameterType="int" resultType="BoardFile">
+		SELECT FILENO,BOARDNO,origin_name, stored_name
+		FROM boardfile
+		WHERE  BOARDNO = #{boardno} 
+	</select>
+	
+	<select id="getFilesByBoardNo" parameterType="int" resultType="BoardFile">
+		SELECT FILENO,BOARDNO,origin_name, stored_name
+		FROM boardfile
+		WHERE  BOARDNO = #{boardno}
+	</select>
+	
 </mapper>

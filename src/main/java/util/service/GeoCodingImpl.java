@@ -1,4 +1,4 @@
-package util;
+package util.service;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -97,5 +97,12 @@ public class GeoCodingImpl implements GeoCoding {
 
 
         return XYMap;
+        /**샘플코드*/
+        /*
+        geoCoding.getKakaoApiFromAddress( address);
+		HashMap<String, String> XYMap = geoCoding.getXYMapfromJson( geoCoding.getKakaoApiFromAddress( address) );
+        XYMap.get("x");
+		XYMap.get("y");
+		*/
     }
 }

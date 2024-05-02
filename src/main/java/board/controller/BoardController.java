@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -118,7 +119,7 @@ public class BoardController {
 			HttpSession session
 			, Board board
 			, @RequestParam("categoryNo") int categoryNo
-			, MultipartFile file
+			, @RequestAttribute(required = false)MultipartFile file
 			) {
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto1");
@@ -129,7 +130,28 @@ public class BoardController {
 		board.setNickName(user.getNickname());
 		int res = boardService.write(board);
 
-		
+		String content = board.getContent();
+		logger.info("content 확인 : {}", content);
+		List<String> originNames = fileService.extractOriginName(content);
+		logger.info("originNames 확인 : {}", originNames);
+		List<String> storedNames = fileService.extractStoredName(content, originNames);
+		logger.info("storedNames 확인 : {}", storedNames);
+		if (originNames != null && storedNames != null && originNames.size() == storedNames.size()) {
+			ArrayList<BoardFile> files = new ArrayList<>();
+		    for (int i = 0; i < originNames.size(); i++) {
+		        String originName = originNames.get(i);
+		        String storedName = storedNames.get(i);
+		        if (originName != null && storedName != null) {
+		            BoardFile bf = new BoardFile();
+		            bf.setBoardNo(board.getBoardNo());
+		            bf.setOriginName(originName);
+		            bf.setStoredName(storedName);
+		            files.add(bf);
+		        }
+		    }
+		    fileService.setFile(files);
+		}
+        
 		logger.info("board 값 확인 : {}", board);
 		
 		if( null == file ) {
@@ -139,6 +161,7 @@ public class BoardController {
 		}else { 
 			fileService.filesave(board,file);
 		}
+		
 		
 		
 		

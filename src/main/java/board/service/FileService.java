@@ -41,4 +41,24 @@ public interface FileService {
 
 	public void listDeleteByBoardNo(ArrayList<Integer> boardno);
 
+	/**
+	 * content 안의 OriginName 정규식으로 검사
+	 * @param content
+	 * @return
+	 */
+	public List<String> extractOriginName(String content);
+	
+	/**
+	 * content 안의 StoredName 정규식으로 검사
+	 * @param content
+	 * @return
+	 */
+	public List<String> extractStoredName(String content,  List<String> originNames);
+
+	/**
+	 * 파일 DB에 저장
+	 * @param files - BoardFile 객체
+	 */
+	public void setFile(ArrayList<BoardFile> files);
+
 }

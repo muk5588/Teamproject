@@ -48,5 +48,14 @@
 		</where>
 	</delete>
 	
+	<insert id="setFile" parameterType="java.util.ArrayList">
+<!-- 		<selectKey resultType="int" order="BEFORE" keyProperty="fileNo"> -->
+<!-- 			SELECT boardfile_seq.nextval FROM dual -->
+<!-- 		</selectKey> -->
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+		INSERT INTO boardfile( fileno, boardno, origin_name, stored_name)
+		VALUES( boardfile_seq.nextval, #{data.boardNo}, #{data.originName}, #{data.storedName})
+		</foreach>
+	</insert>
 	
 </mapper>

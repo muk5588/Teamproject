@@ -92,10 +92,9 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public ArrayList<BoardFile> fileTempSave(HttpServletRequest request, HttpServletResponse response) {
+	public BoardFile fileTempSave(HttpServletRequest request, HttpServletResponse response) {
 		
-		ArrayList<BoardFile> files = new ArrayList<BoardFile>();
-		BoardFile bFile = new BoardFile();
+		BoardFile TempFile = new BoardFile();
 		
 		String sFileInfo  = "";
 		//파일명을 받는다 - 일반 원본파일명
@@ -167,18 +166,17 @@ public class FileServiceImpl implements FileService {
 				printWriter.flush();
 				printWriter.close();
 				logger.debug("sFileInfo : {}", sFileInfo);
-				bFile.setOriginName(sFilename);
-				bFile.setStoredName(sRealFileNm);
-				logger.debug("bFile : {}", bFile);
-				files.add(bFile);
+				TempFile.setOriginName(sFilename);
+				TempFile.setStoredName(sRealFileNm);
+				logger.debug("TempFile : {}", TempFile);
 				
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.debug("files : {}", files);
+		logger.debug("TempFile : {}", TempFile);
 		
-		return files;
+		return TempFile;
 	}
 	
 }

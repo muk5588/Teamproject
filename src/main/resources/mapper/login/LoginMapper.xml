@@ -53,8 +53,11 @@
 		</where>
 	</select>
 
-	<select id="loginHistory" resultType="AccessHistory">
-        SELECT C.*, D.nickname, D.gender
+	<select id="loginHistory" resultType="AccessHistory" parameterType="util.Paging">
+	select * from(
+	select rownum rnum, E.* from(
+
+		SELECT C.*, D.nickname, D.gender
         FROM (SELECT A.*, LAST_ACCESSDATE
               FROM (SELECT userno, Max(accessCount) AS accessCount
                     FROM (SELECT userno,
@@ -72,7 +75,10 @@
               ORDER BY A.userno) C,
              (SELECT *
               FROM usertb) D
-        WHERE C.userno = D.userno
+        WHERE C.userno = D.userno) E )
+		<where>
+			and rnum between #{startNo} and #{endNo}
+		</where>
     </select>
 </mapper>
 

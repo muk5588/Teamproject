@@ -35,8 +35,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public List<AccessHistory> loginHistory(){
-     return loginDao.loginHistory();
+    public List<AccessHistory> loginHistory(Paging paging){
+     return loginDao.loginHistory(paging);
     }
 
 

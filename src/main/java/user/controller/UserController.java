@@ -44,11 +44,15 @@ public class UserController {
      * */
     //관리자페이지
     @RequestMapping("/adminPage")
-    public String adminPage(Model model){
-        List<AccessHistory> list2  = loginService.loginHistory();
+    public String adminPage(Model model, @RequestParam(defaultValue ="0") int curPage){
+        Paging paging = new Paging();
+        paging = boardService.getAdminPaging(curPage, paging);
+
+        List<AccessHistory> list2  = loginService.loginHistory(paging);
         List<Grade> list3 = gradeService.gradeList();
         model.addAttribute("list2", list2);
         model.addAttribute("list3", list3);
+        model.addAttribute("paging", paging);
         return "user/adminPage";
     }
     @RequestMapping("/insertUser")

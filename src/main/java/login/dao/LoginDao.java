@@ -23,7 +23,7 @@ public interface LoginDao {
 
 	public void insertAccessHistory(User login);
 
-    public List<AccessHistory> loginHistory();
+    public List<AccessHistory> loginHistory(Paging paging);
 
     public List<AccessHistory> history(Paging paging);
 }

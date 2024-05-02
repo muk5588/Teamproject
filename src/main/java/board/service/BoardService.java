@@ -83,4 +83,6 @@ public interface BoardService {
     public Comment commentByBoardNo(int commno);
 
 	public Paging getLogPaging(int curPage, Paging paging);
+
+    public Paging getAdminPaging(int curPage, Paging paging);
 }

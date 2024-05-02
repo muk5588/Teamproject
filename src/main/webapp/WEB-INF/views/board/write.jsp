@@ -10,7 +10,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="<c:url value="/resources/smarteditor/js/HuskyEZCreator.js"/>" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "ir1",
+ sSkinURI: "/resources/editor/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+function submitContents(elClickedObj) {
+	// 에디터의 내용이 textarea에 적용된다.
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	
+	 // 에디터의 내용에 대한 값 검증은 이곳에서
+	 // document.getElementById("ir1").value를 이용해서 처리한다.
+	
+	 try {
+	     elClickedObj.form.submit();
+	 } catch(e) {} }
+</script>
 <script type="text/javascript">
     $(function () {
 
@@ -20,7 +40,7 @@
             var titleTerm = $("#title").val().trim()
             var contentTerm = $("#content").val().trim()
             console.log("#writeFrom submit contentTerm", contentTerm)
-
+	
             if (!titleTerm) {
                 alert("제목을 입력해주세요")
                 $("#title").focus()
@@ -53,19 +73,9 @@
 
     })
 </script>
-<script type="text/javascript">
-var oFileUploader = new jindo.FileUploader(jindo.$("file_select"), {
-    //업로드할 서버의 URL(Form 전송 대상)
-    sUrl : '/board/fileupload',
-    //업로드 이후에 IFRMAME이 리다이렉트될 콜백 페이지 주소
-    sCallback : '/resources/editor/sample/photo_uploader/callback.html',
-    //post할 데이터 셋. 예: { blogId : "testid" }
-    htData : {}
-});
 </script>
 </head>
 <body>
-
 <h1>글쓰기 페이지</h1>
 <hr>
 

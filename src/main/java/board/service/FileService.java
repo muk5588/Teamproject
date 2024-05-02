@@ -1,6 +1,10 @@
 package board.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,5 +30,13 @@ public interface FileService {
 	 * @return - 조회된 파일 정보 전체
 	 */
 	public List<BoardFile> getFilesByBoardNo(int boardno);
+
+	/**
+	 * Ajax 통신으로 받은 파일 임시 저장.
+	 * @param request - 요청
+	 * @param response - 응답
+	 * @return 
+	 */
+	public ArrayList<BoardFile> fileTempSave(HttpServletRequest request, HttpServletResponse response);
 
 }

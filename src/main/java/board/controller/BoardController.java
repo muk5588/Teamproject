@@ -1,9 +1,18 @@
  package board.controller;
 
- import java.util.ArrayList;
+ import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,9 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.dto.Board;
+import board.dto.BoardFile;
 import board.dto.Category;
 import board.dto.RecommendRes;
 import board.service.BoardService;
@@ -37,6 +46,7 @@ public class BoardController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired private BoardService boardService;
 	@Autowired private FileService fileService;
+	@Autowired private ServletContext servletContext;
 	
 	@GetMapping("/list")
 	public void list(
@@ -134,23 +144,16 @@ public class BoardController {
 	}
 	
 	@PostMapping("/fileupload")
-	public void fileupload(HttpServletRequest request, HttpServletResponse response
-			, MultipartHttpServletRequest multiRequest , Board board) {
+	public void fileupload(HttpServletResponse response
+			, HttpServletRequest request
+//			, MultipartFile file
+//			, MultipartHttpServletRequest multiRequest 
+//			, Board board
+			) {
 		logger.debug("/fileupload&&&&&&&&&&&&&&&&&&&&&&&&");
-		logger.debug("board : {}", board);
-		String callback = multiRequest.getParameter("callback");
-		String callback_func = "?callback_func=" +multiRequest.getParameter("callback_func");
-		String return_url ="";
-		logger.debug("multiRequest.getFile(\"Filedata\") : {}",multiRequest.getFile("Filedata"));
-		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		
-//		fileService.filesave(board, multiRequest.getFile("Filedata"));
-		
-		return_url += "&bNewLine=true";
-//		return_url += "&sFileName=" +fileNm();
-//		return_url += "&sFileURL=/upload/"+data+"/"+newName+"."+fileExt;
+//		logger.debug("file : {}", file);
+		ArrayList<BoardFile> files =fileService.fileTempSave(request,response); 
+		logger.debug("!@$#!@#!@#!@#!@#!files : {}", files);
 		
 		
 	}

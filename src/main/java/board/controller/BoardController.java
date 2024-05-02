@@ -117,13 +117,14 @@ public class BoardController {
 	public String writeProc(
 			HttpSession session
 			, Board board
-			, @RequestParam("categoryno") int categoryno
+			, @RequestParam("categoryNo") int categoryNo
 			, MultipartFile file
 			) {
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto1");
-		logger.info("category : {}", categoryno);
-		board.setCategoryNo(categoryno);
+		logger.info("board : {}", board);
+		logger.info("categoryNo : {}", categoryNo);
+		board.setCategoryNo(categoryNo);
 		board.setUserNo(user.getUserno());
 		board.setNickName(user.getNickname());
 		int res = boardService.write(board);
@@ -143,6 +144,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@ResponseBody
 	@PostMapping("/fileupload")
 	public void fileupload(HttpServletResponse response
 			, HttpServletRequest request
@@ -152,9 +154,8 @@ public class BoardController {
 			) {
 		logger.debug("/fileupload&&&&&&&&&&&&&&&&&&&&&&&&");
 //		logger.debug("file : {}", file);
-		ArrayList<BoardFile> files =fileService.fileTempSave(request,response); 
-		logger.debug("!@$#!@#!@#!@#!@#!files : {}", files);
-		
+		BoardFile file =fileService.fileTempSave(request,response); 
+		logger.debug("!@$#!@#!@#!@#!@#!files : {}", file);
 		
 	}
 	

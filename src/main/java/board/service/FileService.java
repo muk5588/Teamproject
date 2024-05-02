@@ -37,6 +37,6 @@ public interface FileService {
 	 * @param response - 응답
 	 * @return 
 	 */
-	public ArrayList<BoardFile> fileTempSave(HttpServletRequest request, HttpServletResponse response);
+	public BoardFile fileTempSave(HttpServletRequest request, HttpServletResponse response);
 
 }

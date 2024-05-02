@@ -116,8 +116,13 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public void userBlack(User dto) {
-		userDao.userBlack(dto);
+	public void blackUser(Long no) {
+		userDao.blackUser(no);
+	}
+
+	@Override
+	public void whiteUser(Long no) {
+		userDao.whiteUser(no);
 	}
 
 

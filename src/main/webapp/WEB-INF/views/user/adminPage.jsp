@@ -144,6 +144,7 @@
     <button onclick="location.href = '/user/userList'">유저조회</button>
     <button onclick="location.href = '/board/list'">게시글조회</button>
     <button onclick="location.href = '/user/userLog'">전체로그</button>
+    <button onclick="location.href = '/user/userBlack'">블랙리스트</button>
 </div>
 <div class="container">
     <div class="table-container">

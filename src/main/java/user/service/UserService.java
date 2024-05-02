@@ -36,6 +36,8 @@ public interface UserService {
 
 	public int nickChk(User dto);
 
-	public void userBlack(User dto);
+	public void blackUser(Long no);
+
+	public void whiteUser(Long no);
 
 }

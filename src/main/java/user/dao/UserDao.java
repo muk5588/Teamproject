@@ -1,10 +1,11 @@
 package user.dao;
 
-import org.springframework.stereotype.Repository;
-import user.dto.User;
-import util.Paging;
-
 import java.util.List;
+
+import org.apache.ibatis.ognl.BooleanExpression;
+import org.springframework.stereotype.Repository;
+
+import user.dto.User;
 
 @Repository("UserDao")
 public interface UserDao {
@@ -38,6 +39,10 @@ public interface UserDao {
 
 	public int nickChk(User dto);
 
-	public void userBlack(User dto);
+	public void blackUser(Long no);
+
+	public void whiteUser(Long no);
+	
+	
 
 }

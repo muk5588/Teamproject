@@ -54,31 +54,83 @@ function allChecked(target){
         });
     }
     
-// 블랙 버튼 클릭 이벤트 처리
-document.querySelector('.btn-danger').addEventListener('click', function() {
-    var selectedUsers = document.querySelectorAll('input[name="userCheckbox"]:checked');
-    var userid = [];
-    selectedUsers.forEach(function(user) {
-        userid.push(user.value);
-    });
-    // 서버로 선택된 유저의 아이디들을 전송
-    userBlack(userid);
-});
+function userBlack(){
 
+	 //체크박스 체크된 항목
+	 const query = 'input[name="chk"]:checked'
+        const selectedElements = document.querySelectorAll(query)
 
-// 서버로 유저의 BLACK 상태를 업데이트하는 함수
-function userBlack(userid) {
-    // AJAX 요청을 사용하여 서버로 데이터 전송
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/user/userBlack', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // 업데이트 성공 시 적절한 처리
-            console.log('User black status updated successfully');
+        //체크박스 체크된 항목의 개수
+        const selectedElementsCnt = selectedElements.length;
+
+        if(selectedElementsCnt == 0){
+            alert("블랙할 항목을 선택해주세요.");
+            return false;
         }
-    };
-    xhr.send(JSON.stringify(userid));
-}
+
+        else{
+            if (confirm("정말로 블랙하시겠습니까?")) {
+                //배열생성
+                const arr = new Array(selectedElementsCnt);
+
+                document.querySelectorAll('input[name="chk"]:checked').forEach(function(v, i) {
+                    arr[i] = v.value;
+                });
+
+                const form = document.createElement('form');
+                form.setAttribute('method', 'post');        //Post 메소드 적용
+                form.setAttribute('action', '/user/userBlack');
+
+                var input1 = document.createElement('input');
+                input1.setAttribute("type", "hidden");
+                input1.setAttribute("name", "userNos");
+                input1.setAttribute("value", arr);
+                form.appendChild(input1);
+                console.log(form);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    }
+    
+function userWhite(){
+
+	 //체크박스 체크된 항목
+	 const query = 'input[name="chk"]:checked'
+        const selectedElements = document.querySelectorAll(query)
+
+        //체크박스 체크된 항목의 개수
+        const selectedElementsCnt = selectedElements.length;
+
+        if(selectedElementsCnt == 0){
+            alert("해제할 항목을 선택해주세요.");
+            return false;
+        }
+
+        else{
+            if (confirm("정말로 해제하시겠습니까?")) {
+                //배열생성
+                const arr = new Array(selectedElementsCnt);
+
+                document.querySelectorAll('input[name="chk"]:checked').forEach(function(v, i) {
+                    arr[i] = v.value;
+                });
+
+                const form = document.createElement('form');
+                form.setAttribute('method', 'post');        //Post 메소드 적용
+                form.setAttribute('action', '/user/userWhite');
+
+                var input1 = document.createElement('input');
+                input1.setAttribute("type", "hidden");
+                input1.setAttribute("name", "userNos");
+                input1.setAttribute("value", arr);
+                form.appendChild(input1);
+                console.log(form);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+   }
+
 
 

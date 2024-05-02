@@ -35,9 +35,11 @@ function save(){
 	oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);  
     		//스마트 에디터 값을 텍스트컨텐츠로 전달
 	var content = document.getElementById("smartEditor").value;
-	alert(document.getElementById("txtContent").value); 
+    		//확인용. alert로 띄우기
+// 	alert(document.getElementById("txtContent").value); 
 	document.getElementById("content").value = document.getElementById("txtContent").value;
     		// 값을 불러올 땐 document.get으로 받아오기
+    document.getElementById('btnWrite').click();
 	return; 
 }
 </script>
@@ -122,10 +124,10 @@ function save(){
     </div>
 <textarea rows="10" cols="100" id="txtContent" style="width: 100%;"></textarea>
 <div id="se2_sample" style="margin:10px 0;">
-	<input type="button" onclick="save();" value="본문 내용 가져오기">
+	<input type="button" onclick="save();" value="작성하기">
 </div>
 
-    <button id="btnWrite">작성하기</button>
+    <button hidden="hidden" id="btnWrite">작성하기</button>
 </form>
 
 <script id="smartEditor" type="text/javascript"> 

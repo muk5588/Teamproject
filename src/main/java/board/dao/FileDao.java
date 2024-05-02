@@ -2,8 +2,10 @@ package board.dao;
 
 import board.dto.BoardFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository("FileDao")
@@ -17,4 +19,5 @@ public interface FileDao {
 
 	public List<BoardFile> getFilesByBoardNo(int boardno);
 
+	public void listDeleteByBoardNo(@Param("arr")ArrayList<Integer> boardno);
 }

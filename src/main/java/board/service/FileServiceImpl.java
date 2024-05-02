@@ -178,5 +178,12 @@ public class FileServiceImpl implements FileService {
 		
 		return TempFile;
 	}
+
+	@Override
+	public void listDeleteByBoardNo(ArrayList<Integer> boardno) {
+		fileDao.listDeleteByBoardNo(boardno);
+		// TODO Auto-generated method stub
+		
+	}	
 	
 }

@@ -38,4 +38,15 @@
 		WHERE  BOARDNO = #{boardno}
 	</select>
 	
+	<delete id="listDeleteByBoardNo" parameterType="java.util.ArrayList">
+		DELETE FROM boardFILE
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+	</delete>
+	
+	
 </mapper>

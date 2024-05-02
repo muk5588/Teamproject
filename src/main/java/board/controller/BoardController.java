@@ -138,8 +138,9 @@ public class BoardController {
 			logger.debug("파일의 크기가 0");
 		}else { 
 			fileService.filesave(board,file);
-			
 		}
+		
+		
 		
 		return "redirect:/board/list";
 	}
@@ -227,6 +228,7 @@ public class BoardController {
 //			boardService.listDelete(boardno[i]);
 			boardno.add(no[i]);
 		}
+		fileService.listDeleteByBoardNo(boardno);
 		int res = boardService.listDeleteByBoardNo(boardno);
 		logger.debug("삭제 완료");
 		return res;

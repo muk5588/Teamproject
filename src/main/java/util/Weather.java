@@ -34,19 +34,25 @@ public class Weather {
         System.out.println(address);
         HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
         System.out.println(XYMap);
-        String nx = XYMap.get("x");   //위도
-        String ny = XYMap.get("y");   //경도
+        String x = XYMap.get("x");   //위도
+        String y = XYMap.get("y");   //경도
+        String nx = x.substring(0,x.lastIndexOf("."));
+        String ny = y.substring(0,y.lastIndexOf("."));
+        System.out.println(nx);
+        System.out.println(ny);
         String baseDate = strToday;    //조회하고싶은 날짜
         String baseTime = "0000";    //조회하고싶은 시간
         String type = "json";    //조회하고 싶은 type(json, xml 중 고름)
         String serviceKey = "T3X%2FxwFRUNtn%2FzTw6jl8fy2bMMq%2FZIeQh4Ao2AoJ0NQYj5eYWao63d%2FQNd3KflFbjUvg%2Ba5luRueWOJ0m9X39g%3D%3D";
-        String apiUrl = "http://apis.data.go.kr/1360000/TourStnInfoService/getTourStnVilageFcst";
+        String apiUrl = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
         StringBuilder urlBuilder = new StringBuilder(apiUrl);
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey);
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey);
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(nx, "UTF-8")); //경도
         urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(ny, "UTF-8")); //위도
         urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(baseDate, "UTF-8")); /* 조회하고싶은 날짜*/
-        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8")); /* 조회하고싶은 시간 AM 02시부터 3시간 단위 */
+        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8")); /* 조회하고싶은 시간 */
         urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8"));    /* 타입 */
 
         URL url = new URL(urlBuilder.toString());

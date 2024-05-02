@@ -6,7 +6,7 @@
 	</select>
 
 	<select id="userList" resultType="User">
-        SELECT userno,userid,name,NICKNAME,GENDER,gradeno FROM usertb
+        SELECT userno,userid,name,NICKNAME,GENDER,gradeno,black FROM usertb
         <where>
             and gradeno <![CDATA[ < 5000 ]]>
         </where>
@@ -67,11 +67,17 @@
 		  and  name = #{name }
 		  and email = #{email }
 	</update>
-	<update id="userBlack" parameterType="User">
+	<update id="blackUser" parameterType="java.lang.Long">
 		UPDATE usertb
-		SET BLACK = Y
-		WHERE userno = #{userno }
+		SET BLACK = 'Y'
+		WHERE userno = #{userno}
 	</update>
+	<update id="whiteUser" parameterType="java.lang.Long">
+		UPDATE usertb
+		SET BLACK = 'N'
+		WHERE userno = #{userno}
+	</update>
+	
 	
 
 </mapper>

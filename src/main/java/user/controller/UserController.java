@@ -9,9 +9,11 @@ import login.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,9 +73,10 @@ public class UserController {
 
     @RequestMapping("/userBlack")
     //유저블랙리스트 페이지
-    public String userBlack( Model model) {
+    public String userBlack( Model model, String searchVal) {
         List<User> list = service.userList();
         model.addAttribute("list", list);
+        model.addAttribute("searchVal", searchVal);
         return "user/userBlack";
     }
     
@@ -138,11 +141,23 @@ public class UserController {
     }
 
 	@PostMapping("/userBlack") 
-    public String userBlack(User dto) {
-        service.userBlack(dto);
-        return "redirect: ./userBlack";
+    public String userBlack(@RequestParam List<String> userNos) {
+		for(int i=0; i<userNos.size(); i++){
+            Long no = Long.valueOf(userNos.get(i));
+            service.blackUser(no);
+        }
+		return "redirect: /user/userBlack";
     }
     
+	@PostMapping("/userWhite") 
+	public String userWhite(@RequestParam List<String> userNos) {
+		for(int i=0; i<userNos.size(); i++){
+			Long no = Long.valueOf(userNos.get(i));
+			service.whiteUser(no);
+		}
+		return "redirect: /user/userBlack";
+	}
+	
     @RequestMapping("/deleteUser")
     public String deleteUser(User dto) {
         service.userDelete(dto);

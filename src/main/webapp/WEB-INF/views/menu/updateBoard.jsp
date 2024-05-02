@@ -37,7 +37,7 @@
                 </select>
             </td>
             <td>
-                <button onclick="location.href='/menu/categoryUpdate">수정</button>
+                <button onclick="location.href='/menu/categoryUpdate'">수정</button>
             </td>
         </tr>
     </form>

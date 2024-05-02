@@ -39,4 +39,6 @@ public interface FileService {
 	 */
 	public BoardFile fileTempSave(HttpServletRequest request, HttpServletResponse response);
 
+	public void listDeleteByBoardNo(ArrayList<Integer> boardno);
+
 }

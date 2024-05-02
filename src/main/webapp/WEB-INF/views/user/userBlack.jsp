@@ -30,6 +30,7 @@
                     <th class='w-px200'>이름</th>
                     <th>닉네임</th>
                     <th>성별</th>
+                    <th>블랙여부</th>
                 </tr>
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
@@ -38,23 +39,25 @@
                     <tr>
                     	<td>
                          <label class="checkbox-inline">
-                         <input type="checkbox" name="chk" class="chk"onclick="chkClicked()" value="${UserDTO.userno }">
+                         	<input type="checkbox" name="chk" class="chk"onclick="chkClicked()" value="${UserDTO.userno }">
                          </label>
                         <td>${UserDTO.userno }</td>
                         <td>${UserDTO.userid }</td>
                         <td><a href='/user/detailUser?userno=${UserDTO.userno}'>${UserDTO.name }</a></td>
                         <td>${UserDTO.nickname}</td>
                         <td>${UserDTO.gender }</td>
+                        <td>${UserDTO.black }</td>
                     </tr>
                 </c:forEach>
             </table>
     	</div>
 	</div>
 </div>
-
+<br>
 	<div class="d-flex justify-content-end">
-      <a id="btnBlack" class="btn btn-danger">블랙</a>
-      <a id="btnWarning" class="btn btn-warning">경고</a>
+      <!-- <a id="btnBlack" class="btn btn-danger">블랙</a> -->
+      <a href='javascript:userBlack();' class="btn btn-danger">블랙</a>
+      <a href='javascript:userWhite();' class="btn btn-warning">해제</a>
     </div>
 
 <div>
@@ -154,6 +157,7 @@
 
 </div>
 
+<!-- ------------------------------------------------------------------------- -->
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </body>

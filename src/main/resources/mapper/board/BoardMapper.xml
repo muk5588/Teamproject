@@ -236,4 +236,18 @@
 							 )
 	</select>
 
+	<select id="userByBoardList" resultType="Board" parameterType="util.Paging">
+		select * from (
+		select rownum rnum, A.* from (
+		<include refid="selectBoard" />
+		<where>
+			and userno = #{userno}
+		</where>
+		order by createdate desc) A )
+		<where>
+			and rnum between #{startNo} and #{endNo}
+		</where>
+
+
+	</select>
 </mapper>

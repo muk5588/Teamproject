@@ -7,7 +7,7 @@
 	<ul class="pagination pagination-sm justify-content-center ">
 	
 	<c:choose>
-	<c:when test="${empty paging.search }">
+	<c:when test="${empty paging.search and empty param.userno }">
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
@@ -82,7 +82,7 @@
 	 
 	 
 	<%-- 검색어가 존재하는 경우 --%>
-	<c:when test="${not empty paging.search }"> 
+	<c:when test="${not empty paging.search and empty param.userno}">
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
@@ -156,15 +156,15 @@
 	
 	</c:when>
 
-	<%--<c:when test="${}">
-		&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;
+	<c:when test="${not empty param.userno}">
+		<%--&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne 1 }">
 			<li class="page-item">
-				<a class="page-link" href="/board/userbyboardlist">&larr; 처음</a>
+				<a class="page-link" href="/board/userbyboardlist?userno=${dto1.userno}">&larr; 처음</a>
 			</li>
 		</c:if>
 
-		&lt;%&ndash; 이전 페이징 리스트 이동 &ndash;%&gt;
+		<%--&lt;%&ndash; 이전 페이징 리스트 이동 &ndash;%&gt;--%>
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
 				<li class="page-item">
@@ -178,14 +178,14 @@
 			</c:when>
 		</c:choose>
 
-		&lt;%&ndash; 이전 페이지로 이동 &ndash;%&gt;
+		<%--&lt;%&ndash; 이전 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage > 1 }">
 			<li class="page-item">
 				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage - 1 }&userno=${dto1.userno}">&lt;</a>
 			</li>
 		</c:if>
 
-		&lt;%&ndash; 페이징 번호 목록 &ndash;%&gt;
+		<%--&lt;%&ndash; 페이징 번호 목록 &ndash;%&gt;--%>
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 			<c:if test="${paging.curPage eq i }">
 				<li class="page-item">
@@ -199,14 +199,14 @@
 			</c:if>
 		</c:forEach>
 
-		&lt;%&ndash; 다음 페이지로 이동 &ndash;%&gt;
+		<%--&lt;%&ndash; 다음 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage < paging.totalPage }">
 			<li class="page-item">
 				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage + 1 }&userno=${dto1.userno}">&gt;</a>
 			</li>
 		</c:if>
 
-		&lt;%&ndash; 다음 페이징 리스트 이동 &ndash;%&gt;
+		<%--&lt;%&ndash; 다음 페이징 리스트 이동 &ndash;%&gt;--%>
 		<c:choose>
 			<c:when test="${paging.startPage ne paging.totalPage }">
 				<li class="page-item">
@@ -220,7 +220,7 @@
 			</c:when>
 		</c:choose>
 
-		&lt;%&ndash; 마지막 페이지로 이동 &ndash;%&gt;
+		<%--&lt;%&ndash; 마지막 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 			<li class="page-item">
 				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.totalPage }&userno=${dto1.userno}">끝 &rarr;</a>
@@ -228,7 +228,7 @@
 		</c:if>
 		</ul>
 
-	</c:when>--%>
+	</c:when>
 
 
 	</c:choose>

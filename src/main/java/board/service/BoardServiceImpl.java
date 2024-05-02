@@ -179,5 +179,10 @@ public class BoardServiceImpl implements BoardService {
 		return pagingres;
 	}
 
+	@Override
+	public List<Board> userByBoardList(Paging paging) {
+		return boardDao.userByBoardList(paging);
+	}
+
 
 }

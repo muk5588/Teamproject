@@ -85,4 +85,6 @@ public interface BoardService {
 	public Paging getLogPaging(int curPage, Paging paging);
 
     public Paging getAdminPaging(int curPage, Paging paging);
+
+	public List<Board> userByBoardList(Paging paging);
 }

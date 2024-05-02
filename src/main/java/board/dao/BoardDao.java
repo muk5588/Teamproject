@@ -77,4 +77,6 @@ public interface BoardDao {
 	public int selectLogCntAll(Paging paging);
 
     public int selectAdminCntAll(Paging paging);
+
+    public List<Board> userByBoardList(Paging paging);
 }

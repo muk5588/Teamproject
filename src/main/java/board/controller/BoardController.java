@@ -7,12 +7,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+ import java.util.*;
 
-import javax.servlet.ServletContext;
+ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -268,8 +265,13 @@ public class BoardController {
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
 		logger.info("{}", paging);
+		paging.setUserno(userno);
+		List<Board> list = boardService.userByBoardList(paging);
 
-		List<Board> list = boardService.boardList(userno);
+
+		logger.info("list : {}", list);
+
+
 
 
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);

@@ -191,6 +191,7 @@ public class FileServiceImpl implements FileService {
 		List<String> originNames = new ArrayList<>();
         // originName 추출을 위한 정규식 패턴
         Pattern pattern = Pattern.compile("title=\"([^\"\\\\]+\\.(?:png|jpg|gif|PNG|JPG|GIF))\"");
+        logger.info("pattern : {}",pattern);
         Matcher matcher = pattern.matcher(content);
         while (matcher.find()) {
             originNames.add(matcher.group(1));
@@ -201,19 +202,24 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public List<String> extractStoredName(String content,  List<String> originNames) {
 		List<String> storedNames = new ArrayList<>();
+		String temp = "";
         // storedName 추출을 위한 정규식 패턴
-//        for (String originName : originNames) {
-//        	Pattern pattern = Pattern.compile("img src=\"\\resources\\boardUpload\\([^\"\\\\]+\\.(?:png|jpg|gif|PNG|JPG|GIF))\"");
-//        	logger.info("pattern : {}",pattern);
-//            Matcher matcher = pattern.matcher(content);
-//            logger.info("matcher : {}",matcher);
-//            logger.info("matcher.find() : {}",matcher.find());
-//            logger.info("matcher.group(1) : {}",matcher.group(1));
-//            if (matcher.find()) {
-//                storedNames.add(matcher.group(1));
-//                logger.info("matcher.group(1) : {}",matcher.group(1));
-//            }
-//        }
+        for (String originName : originNames) {
+//        	Pattern pattern = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(?:png|jpg|gif|PNG|JPG|GIF)\"");
+        	Pattern pattern = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
+        	logger.info("pattern : {}",pattern);
+            Matcher matcher = pattern.matcher(content);
+            logger.info("matcher : {}",matcher);
+            logger.info("matcher.find() : {}",matcher.find());
+            if (matcher.find()) {
+            	temp = "";
+            	temp += matcher.group(1);
+            	temp += ".";
+            	temp += matcher.group(2);
+                storedNames.add(temp);
+                logger.info("matcher.group(1) : {}",matcher.group(1));
+            }
+        }
         return storedNames;
 	}
 

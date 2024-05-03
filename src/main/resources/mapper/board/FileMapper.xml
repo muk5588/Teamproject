@@ -48,23 +48,6 @@
 		</where>
 	</delete>
 	
-<!-- 	<insert id="setFile" parameterType="BoardFile"> -->
-<!-- 	INSERT ALL -->
-<!-- 		<foreach collection="files" item="file"> -->
-<!-- 		INSERT INTO boardfile( fileno, boardno, origin_name, stored_name) -->
-<!-- 		VALUES( boardfile_seq.nextval, #{file.boardNo}, #{file.originName}, #{file.storedName}) -->
-<!-- 		</foreach> -->
-<!-- 		SELECT * FROM DUAL -->
-<!-- 	</insert> -->
-	
-<!-- <insert id="setFile" parameterType="java.util.ArrayList"> -->
-<!--         INSERT ALL -->
-<!--         <foreach collection="files" item="file"> -->
-<!--             INTO boardfile (fileno, boardno, origin_name, stored_name) -->
-<!--             VALUES (boardfile_seq.nextval, #{file.boardNo}, #{file.originName}, #{file.storedName}) -->
-<!--         </foreach> -->
-<!--         SELECT * FROM DUAL -->
-<!-- </insert> -->
 
 <insert id="setFile" parameterType="java.util.ArrayList">
         INSERT into boardfile(fileno, boardno, origin_name, stored_name)

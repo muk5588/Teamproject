@@ -226,6 +226,16 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public void setFile(ArrayList<BoardFile> files) {
 		fileDao.setFile(files);
+	}
+
+	@Override
+	public List<BoardFile> getFileList(int boardNo) {
+		return fileDao.getFileList(boardNo);
+	}
+
+	@Override
+	public BoardFile getFileByFileNo(int fileNo) {
+		return fileDao.getFileByFileNo(fileNo);
 	}	
 	
 }

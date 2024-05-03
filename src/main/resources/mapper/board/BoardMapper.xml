@@ -210,6 +210,20 @@
 			)
 	</select>
 	
+	<select id="getRecommendVO" parameterType="Good" resultType="vo.GoodVO">
+		SELECT totalRecomm, isRecomm  FROM (
+			SELECT count(*) totalRecomm FROM(
+				SELECT boardno, userno FROM GOOD
+				WHERE boardno = #{boardNo})
+			) B, 
+		(	SELECT count(*) isRecomm FROM(
+				SELECT * FROM GOOD
+				WHERE boardno = #{boardNo}
+				AND userno=#{userNo}
+				)
+			) A
+	</select>
+	
 	<delete id="listDeleteByBoardNo" parameterType="java.util.ArrayList">
 		DELETE FROM board
 		<where>

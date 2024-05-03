@@ -10,10 +10,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import login.dto.AccessHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -22,9 +22,8 @@ import board.dto.BoardFile;
 public class FileDownloadView extends AbstractView {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private ServletContext servletContext;
+	@Autowired private ServletContext servletContext;
 
-	//현재 실행중인 서블릿의 객체
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -39,10 +38,13 @@ public class FileDownloadView extends AbstractView {
 
 		//모델값 가져오기
 		BoardFile downFile = (BoardFile) model.get("downFile");
-
+		logger.info("downFile : {}",downFile);
+		
 		//저장된 파일의 폴더 (upload)
+//		String path = servletContext.getRealPath("/resources/boardUpload");
 		String path = servletContext.getRealPath("/resources/boardUpload");
-
+		logger.info("path : {}",path);
+		
 		//실제 업로드된 파일의 이름
 		String filename = downFile.getStoredName();
 

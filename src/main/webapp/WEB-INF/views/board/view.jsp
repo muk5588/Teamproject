@@ -69,14 +69,15 @@
 
         $(document).ready(function () {
             //HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
-            handleGetFile();
+//             handleGetFile();
+            handleFileChk();
             $("#commentRefresh").click()
-            <%--if (${recommend || empty recommend}) {--%>
-            <%--    $(".doRecomm").toggle()--%>
-            <%--}--%>
-            <%--if (!${recommend && not empty recommend}) {--%>
-            <%--    $(".cancle").toggle()--%>
-            <%--}--%>
+            if (${empty isRecomm or isRecomm eq 0}) {
+               $(".cancle").toggle()
+            }
+            if (${not empty isRecomm and isRecomm eq 1}) {
+               $(".do").toggle()
+            }
 
         })
 
@@ -103,14 +104,14 @@
                     console.log(res)
 
 
-                    $(".doRecomm").toggle()
+                    $(".do").toggle()
                     $(".cancle").toggle()
 
-                    if (res) {
-                        $(function () {
-                            $(location).attr('href', './view?boardNo=${board.boardNo }')
-                        })
-                    }
+//                     if (res) {
+//                         $(function () {
+//                             $(location).attr('href', './view?boardNo=${board.boardNo }')
+//                         })
+//                     }
                 }
                 , error: function () {
                     console.log("AJAX 실패")
@@ -191,6 +192,38 @@
 
             })
         }
+        
+        function handleFileChk() {
+                console.log("handleFileChk")
+
+                $.ajax({
+                    type: "get"
+                    , url: "./fileChk"
+                    , data: {
+                        boardno: ${board.boardNo}
+                    }
+                    , dataType: "json"
+                    , success: function (res) {
+                        console.log("AJAX 성공")
+                        console.log(res)
+                        console.log(res[0].fileNo)
+                        if( res.length > 0 ){
+                        var fileList = "";
+                        fileList += '<p>첨부파일</p><br>'
+	                        for(var i=0;  res.length >i ; i++){
+								fileList += '<a href="./fileDown?fileNo=' + res[i].fileNo + '">' + res[i].originName + '<br>';
+	                        }
+	                        
+	        			    $("#fileDown").html(fileList);
+                        }
+
+                    }
+                    , error: function () {
+                        console.log("AJAX 실패")
+                    }
+                })
+
+        }
 
 
         function handleGetFile() {
@@ -256,6 +289,11 @@
             </tr>
 
             <tr>
+            	<td>
+            		<div id="fileDown"></div>
+            	</td>
+            </tr>
+            <tr>
                 <td class="no">${board.boardNo }</td>
                 <td class="title">${board.title }</td>
                 <td class="content">${board.content }</td>
@@ -270,9 +308,16 @@
         <c:if test="${isLogin > 0}">
             <div id="reBtn">
                 <div class="recommendBtn doRedomm">
+                <c:if test="${empty isRecomm or isRecomm eq 0 }">
                     <a>
-                        <button class="doRecomm">추천하기</button>
+                        <button class="doRecomm do">추천하기</button>
                     </a>
+                </c:if>
+                <c:if test="${not empty isRecomm and isRecomm eq 1 }">
+                    <a>
+                        <button class="doRecomm cancel">추천취소하기</button>
+                    </a>
+                </c:if>
                 </div>
             </div>
             <button onclick="location.href='../report/boardReport?boardno=${board.boardNo}'"> 신고하기</button>

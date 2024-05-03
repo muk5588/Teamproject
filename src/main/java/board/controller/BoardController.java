@@ -1,19 +1,15 @@
  package board.controller;
 
- import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
- import java.util.*;
+ import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
- import javax.servlet.ServletContext;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +27,14 @@ import org.springframework.web.multipart.MultipartFile;
 import board.dto.Board;
 import board.dto.BoardFile;
 import board.dto.Category;
+import board.dto.Good;
 import board.dto.RecommendRes;
 import board.service.BoardService;
 import board.service.FileService;
 import comment.dto.Comment;
 import user.dto.User;
 import util.Paging;
+import vo.GoodVO;
 
 @Controller
 @RequestMapping("/board")
@@ -97,12 +95,22 @@ public class BoardController {
 			, @RequestParam(value="curPage", defaultValue="0") int curPage
 			) {
 		board =  boardService.viewByBoardNo(boardno);
-
-		int recomm = boardService.viewRecommend(boardno);
-
+		User user = (User)session.getAttribute("dto1");
+		int recomm = 0;
+		if( null == user) {
+			recomm = boardService.viewRecommend(boardno);
+		}else {
+			Good paramGood = new Good(user.getUserno(), boardno);
+			GoodVO good = boardService.getRecommendVO(paramGood);
+			model.addAttribute("isRecomm", good.getIsRecomm());
+			logger.info("isRecomm : {}", good.getIsRecomm());
+			recomm = good.getTotalRecomm();
+		}
+		
 		List<Comment> comment = boardService.commentList(board);
 		model.addAttribute("comment", comment);
 		model.addAttribute("recomm", recomm);
+		logger.info("recomm : {}", recomm);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("board", board);
 	}
@@ -135,8 +143,9 @@ public class BoardController {
 		logger.info("originNames 확인 : {}", originNames);
 		List<String> storedNames = fileService.extractStoredName(content, originNames);
 		logger.info("storedNames 확인 : {}", storedNames);
-		if (originNames != null && storedNames != null && originNames.size() == storedNames.size()) {
+		if (originNames != null && storedNames != null && originNames.size() == storedNames.size() && !originNames.isEmpty() && !storedNames.isEmpty()) {
 			ArrayList<BoardFile> files = new ArrayList<>();
+			logger.info("이미지 파일 처리중 :%%%%%%%%%%%%%%%%%%%%%%%%%%" );
 		    for (int i = 0; i < originNames.size(); i++) {
 		        String originName = originNames.get(i);
 		        String storedName = storedNames.get(i);
@@ -158,6 +167,7 @@ public class BoardController {
 		}else if( file.getSize() <= 0 ){
 			logger.debug("파일의 크기가 0");
 		}else { 
+//			for( )
 			fileService.filesave(board,file);
 		}
 		
@@ -182,9 +192,12 @@ public class BoardController {
 		
 	}
 	
+	@ResponseBody
 	@RequestMapping("/fileChk")
-	public void fileChk() {
-		
+	public List<BoardFile> fileChk(@RequestParam("boardno")int boardNo) {
+		List<BoardFile> files = fileService.getFileList(boardNo);
+		logger.info("fileChk : {}", files);
+		return files;
 	}
 	
 	@GetMapping("/update")
@@ -310,5 +323,19 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return "board/userbyboardlist";
 	}
+	
+	@RequestMapping("/fileDown")
+	public String fileDown(int fileNo, Model model) {
+		BoardFile file = fileService.getFileByFileNo(fileNo);
+		logger.info("파일 다운로드 : {}", file);
+		
+		model.addAttribute("downFile", file);
+		
+		logger.info("파일 다운로드 : {}", file);
+		return "downView";
+	}
+	
+	
+	
 	
 }

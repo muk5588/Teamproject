@@ -32,13 +32,23 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+	    <beans:property name="order" value="1" />
 	</beans:bean>
-	<context:component-scan base-package="com.test.www, *.controller,util">
-	</context:component-scan>
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"/>
+	</beans:bean>
+	
+	<context:component-scan base-package="com.test.www, *.controller,util" />
+	
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+	<!-- 	<resources mapping="URL패턴" location="자원의 경로" /> -->
+	<resources mapping="/boardUpload/**" location="/boardUpload/" />
+<!-- 		<resources mapping="/upload/**" location="/upload/" /> -->
 	
 	<!-- 파일업로더 관련 설정 BoardFile을 FileDownloadView 빈 객체 등록 --> 
-	<beans:bean id="BoardDownView" class="util.FileDownloadView" />
-	
+	<beans:bean id="downView" class="util.FileDownloadView" />
 		<!--  파일업로드(multipart/form-data)를 처리하는 스프링 빈 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 	<!-- 메모리에서 임시 파일을 처리할 수 있는 최대 크기 :1MB  -->

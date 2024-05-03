@@ -61,4 +61,18 @@ public interface FileService {
 	 */
 	public void setFile(ArrayList<BoardFile> files);
 
+	/**
+	 * Ajax 통신을 통한 파일 정보 조회
+	 * @param boardNo - 게시글 번호
+	 * @return - 조회된 파일 행
+	 */
+	public List<BoardFile> getFileList(int boardNo);
+
+	/**
+	 * 파일 번호로 다운로드
+	 * @param fileNo - 파일 번호
+	 * @return - 조회된 파일 정보
+	 */
+	public BoardFile getFileByFileNo(int fileNo);
+
 }

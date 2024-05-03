@@ -63,5 +63,14 @@
         ) D
 </insert>
 
+<select id="getFileList" parameterType="int" resultType="BoardFile">
+	SELECT FILENO,BOARDNO,ORIGIN_NAME,STORED_NAME FROM BOARDFILE 
+	WHERE BOARDNO = #{boardNo}
+</select>
+
+<select id="getFileByFileNo" parameterType="int" resultType="BoardFile">
+	SELECT FILENO,BOARDNO,ORIGIN_NAME,STORED_NAME FROM BOARDFILE 
+	WHERE FILENO = #{fileNo}
+</select>
 	
 </mapper>

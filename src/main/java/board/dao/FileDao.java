@@ -22,4 +22,8 @@ public interface FileDao {
 	public void listDeleteByBoardNo(@Param("arr")ArrayList<Integer> boardno);
 
 	public void setFile(@Param("files")ArrayList<BoardFile> files);
+
+	public List<BoardFile> getFileList(int boardNo);
+
+	public BoardFile getFileByFileNo(int fileNo);
 }

@@ -1,16 +1,18 @@
 package board.service;
 
-import board.dto.Board;
-import board.dto.Category;
-import board.dto.RecommendRes;
-import comment.dto.Comment;
-import util.Paging;
-
-import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import board.dto.Board;
+import board.dto.Category;
+import board.dto.Good;
+import board.dto.RecommendRes;
+import comment.dto.Comment;
+import util.Paging;
+import vo.GoodVO;
 
 public interface BoardService {
 
@@ -93,4 +95,6 @@ public interface BoardService {
 	public void deleteComment(ArrayList<Integer> boardno);
 
 	public void deleteGood(ArrayList<Integer> boardno);
+
+	public GoodVO getRecommendVO(Good paramGood);
 }

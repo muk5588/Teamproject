@@ -6,6 +6,7 @@ import board.dto.Good;
 import board.dto.RecommendRes;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import user.dto.User;
 import util.Paging;
 
 import java.util.ArrayList;
@@ -79,4 +80,10 @@ public interface BoardDao {
     public int selectAdminCntAll(Paging paging);
 
     public List<Board> userByBoardList(Paging paging);
+
+	public List<Board> userrecommList(int userno);
+
+	public void deleteComment(@Param("arr")ArrayList<Integer> boardno);
+
+	public void deleteGood(@Param("arr")ArrayList<Integer> boardno);
 }

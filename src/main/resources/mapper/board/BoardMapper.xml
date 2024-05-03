@@ -250,4 +250,37 @@
 
 
 	</select>
+
+	<select id="userrecommList" resultType="Board" parameterType="int">
+		SELECT
+			g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+		FROM good g, board b
+		<where>
+			and g.boardno = b.boardno
+			and g.userno = #{userno}
+		</where>
+		order by createdate desc
+	</select>
+	
+	<delete id="deleteComment" parameterType="java.util.ArrayList">
+		DELETE FROM commenttb
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+	</delete>
+	
+	<delete id="deleteGood" parameterType="java.util.ArrayList">
+		DELETE FROM GOOD
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+	</delete>
+	
+	
 </mapper>

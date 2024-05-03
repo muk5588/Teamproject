@@ -184,5 +184,20 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.userByBoardList(paging);
 	}
 
+	@Override
+	public List<Board> userrecommList(int userno) {
+		return boardDao.userrecommList(userno);
+	}
+
+	@Override
+	public void deleteComment(ArrayList<Integer> boardno) {
+		boardDao.deleteComment(boardno);
+	}
+
+	@Override
+	public void deleteGood(ArrayList<Integer> boardno) {
+		boardDao.deleteGood(boardno);
+	}
+
 
 }

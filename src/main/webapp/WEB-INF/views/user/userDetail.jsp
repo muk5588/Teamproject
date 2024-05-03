@@ -118,7 +118,6 @@
                     <tr>
                         <th>글 번호</th>
                         <th>제목</th>
-                        <th>본문</th>
                         <th>작성자 닉네임</th>
                         <th>조회수</th>
                         <th>최초작성일</th>
@@ -130,7 +129,6 @@
                             <td class="title">
                                 <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                             </td>
-                            <td class="content">${board.content }</td>
                             <td class="nick">${board.nickName }</td>
                             <td class="hit">${board.boardView }</td>
                             <td class="date">
@@ -138,7 +136,7 @@
                             </td>
                             <c:forEach items="${totalrecomm }" var="recommList">
                                 <c:if test="${recommList.BOARDNO eq board.boardNo }">
-                                    <td><a id="totalRecommend">${recommList.GOOD }</a></td>
+                                    <td><a id="totalRecommend2">${recommList.GOOD }</a></td>
                                 </c:if>
                             </c:forEach>
                         </tr>
@@ -156,6 +154,55 @@
                         <%-- </colgroup> --%>
                     <tr>
                         <th>작성한 글이 없습니다</th>
+                    </tr>
+                </table>
+            </c:otherwise>
+        </c:choose>
+        <h3>추천한 게시물</h3>
+        <c:choose>
+            <c:when test="${not empty list2 and (userno == dto1.userno)}">
+                <button onclick="location.href='../board/userbyrecommlist?userno=${dto1.userno}'">전체 추천글</button>
+                <table class="table table-striped table-hover table-sm">
+                        <%-- <colgroup> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 45%;"> --%>
+                        <%-- 	<col style="width: 15%;"> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 20%;"> --%>
+                        <%-- </colgroup> --%>
+                    <tr>
+                        <th>글 번호</th>
+                        <th>제목</th>
+                        <th>작성자 닉네임</th>
+                        <th>조회수</th>
+                        <th>최초작성일</th>
+                    </tr>
+                    <c:forEach var="board2" items="${list2 }" begin="0" end="4">
+                        <tr>
+                            <td class="no">${board2.boardNo }</td>
+                            <td class="title">
+                                <a href="../board/view?boardNo=${board2.boardNo }&curPage=${curPage}">${board2.title }</a>
+                            </td>
+                            <td class="nick">${board2.nickName }</td>
+                            <td class="hit">${board2.boardView }</td>
+                            <td class="date">
+                                <fmt:formatDate value="${board2.createDate }" pattern="yyyy-MM-dd"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <table class="table table-striped table-hover table-sm">
+                        <%-- <colgroup> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 45%;"> --%>
+                        <%-- 	<col style="width: 15%;"> --%>
+                        <%-- 	<col style="width: 10%;"> --%>
+                        <%-- 	<col style="width: 20%;"> --%>
+                        <%-- </colgroup> --%>
+                    <tr>
+                        <th>추천한 글이 없습니다</th>
                     </tr>
                 </table>
             </c:otherwise>

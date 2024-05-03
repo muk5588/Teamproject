@@ -87,4 +87,10 @@ public interface BoardService {
     public Paging getAdminPaging(int curPage, Paging paging);
 
 	public List<Board> userByBoardList(Paging paging);
+
+	public List<Board> userrecommList(int userno);
+
+	public void deleteComment(ArrayList<Integer> boardno);
+
+	public void deleteGood(ArrayList<Integer> boardno);
 }

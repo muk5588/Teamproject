@@ -97,9 +97,11 @@ public class LoginController {
     public void mypage(@SessionAttribute(value = "dto1", required = false) User login, Model model) {
         int userno = login.getUserno();
         List<Board> list = boardService.boardList(userno);
-
+        List<Board> list2 = boardService.userrecommList(userno);
+        logger.info("list2 : {}", list2);
         model.addAttribute("dto1", login);
         model.addAttribute("list", list);
+        model.addAttribute("list2", list2);
         model.addAttribute("userno", userno);
 //        model.addAttribute("totalrecomm", recommList);
     }

@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -182,8 +184,48 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public void listDeleteByBoardNo(ArrayList<Integer> boardno) {
 		fileDao.listDeleteByBoardNo(boardno);
-		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public List<String> extractOriginName(String content) {
+		List<String> originNames = new ArrayList<>();
+        // originName 추출을 위한 정규식 패턴
+        Pattern pattern = Pattern.compile("title=\"([^\"\\\\]+\\.(?:png|jpg|gif|PNG|JPG|GIF))\"");
+        logger.info("pattern : {}",pattern);
+        Matcher matcher = pattern.matcher(content);
+        while (matcher.find()) {
+            originNames.add(matcher.group(1));
+        }
+        return originNames;
+	}
+
+	@Override
+	public List<String> extractStoredName(String content,  List<String> originNames) {
+		List<String> storedNames = new ArrayList<>();
+		String temp = "";
+        // storedName 추출을 위한 정규식 패턴
+        for (String originName : originNames) {
+//        	Pattern pattern = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(?:png|jpg|gif|PNG|JPG|GIF)\"");
+        	Pattern pattern = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
+        	logger.info("pattern : {}",pattern);
+            Matcher matcher = pattern.matcher(content);
+            logger.info("matcher : {}",matcher);
+            logger.info("matcher.find() : {}",matcher.find());
+            if (matcher.find()) {
+            	temp = "";
+            	temp += matcher.group(1);
+            	temp += ".";
+            	temp += matcher.group(2);
+                storedNames.add(temp);
+                logger.info("matcher.group(1) : {}",matcher.group(1));
+            }
+        }
+        return storedNames;
+	}
+
+	@Override
+	public void setFile(ArrayList<BoardFile> files) {
+		fileDao.setFile(files);
 	}	
 	
 }

@@ -294,10 +294,6 @@ public class BoardController {
 		List<Board> list = boardService.userByBoardList(paging);
 
 
-		logger.info("list : {}", list);
-
-
-
 
 		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
@@ -308,7 +304,7 @@ public class BoardController {
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
-		return "board/list";
+		return "board/userbyboardlist";
 	}
 	
 }

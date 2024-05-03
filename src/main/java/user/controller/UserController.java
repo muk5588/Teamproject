@@ -100,9 +100,10 @@ public class UserController {
         model.addAttribute("dto", dto);
         User login = (User) session.getAttribute("dto1");
         model.addAttribute("dto1", login);
-        model.addAttribute("userno", userno);
         List<Board> list = boardService.boardList(userno);
+        model.addAttribute("userno", userno);
         model.addAttribute("list", list);
+
 //        int userno = dto.getUserno();
         //화면에 출력할 수 있도록 Model에 담는다.
         //원래는 string타입으로 담겨야하지만 스프링에서는 자동으로 형변환이 되서 int타입으로 담긴다.

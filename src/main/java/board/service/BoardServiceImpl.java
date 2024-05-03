@@ -184,5 +184,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.userByBoardList(paging);
 	}
 
+	@Override
+	public List<Board> userrecommList(int userno) {
+		return boardDao.userrecommList(userno);
+	}
+
 
 }

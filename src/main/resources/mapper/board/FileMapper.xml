@@ -48,14 +48,20 @@
 		</where>
 	</delete>
 	
-	<insert id="setFile" parameterType="java.util.ArrayList">
-<!-- 		<selectKey resultType="int" order="BEFORE" keyProperty="fileNo"> -->
-<!-- 			SELECT boardfile_seq.nextval FROM dual -->
-<!-- 		</selectKey> -->
-		<foreach collection="arr" item="data" open="(" close=")" separator="," >
-		INSERT INTO boardfile( fileno, boardno, origin_name, stored_name)
-		VALUES( boardfile_seq.nextval, #{data.boardNo}, #{data.originName}, #{data.storedName})
-		</foreach>
-	</insert>
+
+<insert id="setFile" parameterType="java.util.ArrayList">
+        INSERT into boardfile(fileno, boardno, origin_name, stored_name)
+        SELECT boardfile_seq.nextval, D.* FROM ( 
+        <foreach collection="files" item="file" separator="UNION ALL ">
+        <![CDATA[
+        	SELECT
+            #{file.boardNo} AS boardNo
+            ,#{file.originName} AS origin_name
+            ,#{file.storedName} AS stored_name
+        FROM DUAL]]>
+        </foreach>
+        ) D
+</insert>
+
 	
 </mapper>

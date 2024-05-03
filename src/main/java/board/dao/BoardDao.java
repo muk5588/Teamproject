@@ -82,4 +82,8 @@ public interface BoardDao {
     public List<Board> userByBoardList(Paging paging);
 
 	public List<Board> userrecommList(int userno);
+
+	public void deleteComment(@Param("arr")ArrayList<Integer> boardno);
+
+	public void deleteGood(@Param("arr")ArrayList<Integer> boardno);
 }

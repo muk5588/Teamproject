@@ -261,4 +261,26 @@
 		</where>
 		order by createdate desc
 	</select>
+	
+	<delete id="deleteComment" parameterType="java.util.ArrayList">
+		DELETE FROM commenttb
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+	</delete>
+	
+	<delete id="deleteGood" parameterType="java.util.ArrayList">
+		DELETE FROM GOOD
+		<where>
+		BOARDNO in 
+		<foreach collection="arr" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+	</delete>
+	
+	
 </mapper>

@@ -250,6 +250,8 @@ public class BoardController {
 //			boardService.listDelete(boardno[i]);
 			boardno.add(no[i]);
 		}
+		boardService.deleteComment(boardno);
+		boardService.deleteGood(boardno);
 		fileService.listDeleteByBoardNo(boardno);
 		int res = boardService.listDeleteByBoardNo(boardno);
 		logger.debug("삭제 완료");

@@ -89,4 +89,8 @@ public interface BoardService {
 	public List<Board> userByBoardList(Paging paging);
 
 	public List<Board> userrecommList(int userno);
+
+	public void deleteComment(ArrayList<Integer> boardno);
+
+	public void deleteGood(ArrayList<Integer> boardno);
 }

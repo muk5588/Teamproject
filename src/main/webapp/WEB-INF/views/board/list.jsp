@@ -169,7 +169,6 @@
                 <th><input type="checkbox" id="checkboxAllCheck"></th>
                 <th>글 번호</th>
                 <th>제목</th>
-                <th>본문</th>
                 <th>작성자 닉네임</th>
                 <th>조회수</th>
                 <th>최초작성일</th>
@@ -183,7 +182,6 @@
                     <td class="title">
                         <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                     </td>
-                    <td class="content">${board.content }</td>
                     <td class="nick">${board.nickName }</td>
                     <td class="hit">${board.boardView }</td>
                     <td class="date">

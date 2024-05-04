@@ -80,6 +80,11 @@
 			and rnum between #{startNo} and #{endNo}
 		</where>
     </select>
+    
+    <select id="getUserBlack" resultType="String">
+    	SELECT black FROM usertb WHERE userid = #{userid} 
+    </select>
+    
 </mapper>
 
 

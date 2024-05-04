@@ -29,4 +29,7 @@ public interface LoginService {
 	public void insertAccessHistory(User login);
 
     public List<AccessHistory> history(Paging paging);
+    
+    public String getUserBlack(String userId);
+
 }

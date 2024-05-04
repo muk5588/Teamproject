@@ -20,25 +20,17 @@ public class Weather {
     @Autowired
     private GeoCoding geoCoding;
     private Logger logger = LoggerFactory.getLogger(getClass());
-    private String sky, temperature, rain, snow, humidity;
-    private String current_weather_code;
-    // 현재 날짜/시간
-    LocalDateTime t = LocalDateTime.now().minusMinutes(30);
-
-    enum WeatherValue {
-        T1H, RN1, SKY, UUU, VVV, REH, PTY, LGT, VEC, WSD
-    }
 
 
     @GetMapping("/weather")
     public String getWeather(Model model, HttpSession session) throws IOException, ParseException {
-        WeatherDto weather = new WeatherDto();
         User user = (User) session.getAttribute("dto1");
         String address = user.getAddress();
         HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
         String x = XYMap.get("x");   //위도
         String y = XYMap.get("y");   //경도
-        model.addAttribute("weather", weather);
+        model.addAttribute("x",x);
+        model.addAttribute("y",y);
         return "layout/weather";
     }
 }

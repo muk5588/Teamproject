@@ -17,8 +17,6 @@
         });
         var x= ${x}
         var y= ${y}
-        console.log(x)
-        console.log(y)
         var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + y +
             "&lon=" + x +
             "&units=metric&appid=e776c451f21037ecc76b1a9ecf704f77";
@@ -42,8 +40,6 @@
     </script>
 </head>
 <body>
-<input type="hidden" class="x" name="x" id="x" value="${x}">
-<input type="hidden" class="y" name="y" id="y" value="${y}">
 <h3 class="Nowtemp">현재기온:</h3>
 <h3 class="Lowtemp">최저기온:</h3>
 <h3 class="Hightemp">최대기온:</h3>

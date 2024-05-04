@@ -51,4 +51,10 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
+	@Override
+	public String getUserBlack(String userId) {
+		return loginDao.getUserBlack(userId);
+	}
+
+
 }

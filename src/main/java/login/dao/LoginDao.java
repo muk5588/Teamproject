@@ -26,4 +26,6 @@ public interface LoginDao {
     public List<AccessHistory> loginHistory(Paging paging);
 
     public List<AccessHistory> history(Paging paging);
+    
+    public String getUserBlack(String userId);
 }

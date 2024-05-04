@@ -1,10 +1,9 @@
 package login.controller;
 
-import board.dto.Board;
-import board.service.BoardService;
-import login.service.KakaoService;
-import login.service.LoginService;
-import login.service.SocialService;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import user.dto.User;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import board.dto.Board;
+import board.service.BoardService;
+import login.service.KakaoService;
+import login.service.LoginService;
+import login.service.SocialService;
+import user.dto.User;
 
 @Controller
 public class LoginController {
@@ -49,6 +51,14 @@ public class LoginController {
             session.setAttribute("isLogin", isLogin);
             session.setAttribute("dto1", login);
 
+            String blackStatus = loginService.getUserBlack(dto.getUserid());
+            if(blackStatus != null && blackStatus.equals("Y")) {
+            	
+            	session.invalidate();
+            	return "/login/loginFail";
+            }
+            
+           
         } else {  //로그인 실패
             session.invalidate();
             return "/login/loginFail";

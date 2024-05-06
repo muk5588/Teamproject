@@ -71,7 +71,7 @@
                 <li><a href="#">사진 갤러리</a></li>
                 <li><a href="#">여행 Q&A</a></li>
                 <li><a href="#">지역별 여행</a></li>
-                <li><a href="#">여행 상품</a></li>
+                <li><a href="/shop/main">여행 상품</a></li>
                 <li><a href="#">이벤트</a></li>
                 <li><a href="#">고객지원</a></li>
             </ul>

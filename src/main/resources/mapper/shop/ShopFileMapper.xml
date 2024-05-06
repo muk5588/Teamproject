@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.dao.ShopFileDao">
+
+<select id="getTitleImgs" resultType="dto.ItemFile">
+	SELECT it.itemno, stored_Name storedName, origin_Name originName , fileNo  FROM item it, itemFile ItF 
+	WHERE it.itemno = itf.itemno
+	AND it.titleimg = itf.FILENO
+</select>
+
+<select id="getItemFilesByItemNo" parameterType="int" resultType="dto.ItemFile">
+	SELECT fileno, itemNo, stored_name, origin_name
+	FROM itemFile
+	<where>
+		AND itemno = #{itemNo}
+	</where>
+</select>
+
+</mapper>

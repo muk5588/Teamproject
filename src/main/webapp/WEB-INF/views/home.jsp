@@ -50,7 +50,9 @@
 <h1>
 	Hello world!  
 </h1>
-
+<div>
+    <jsp:include page="layout/weather.jsp"></jsp:include>
+</div>
 <P>  The time on the server is ${serverTime}. </P>
 
 <%--<button><a href="login">로그인</a></button>--%>

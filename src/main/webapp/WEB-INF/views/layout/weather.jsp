@@ -39,7 +39,8 @@
                 var weathericonUrl =
                     '<img src= "http://openweathermap.org/img/wn/'
                     + result.weather[0].icon +
-                    '.png" alt="' + result.weather[0].description + '"/>'
+                    '.png" alt="' + result.weather[0].description + '"' +
+                    'style="width: 100px; height: 100px"/>'
 
                 $('.Icon').html(weathericonUrl);
             });

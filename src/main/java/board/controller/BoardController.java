@@ -171,9 +171,6 @@ public class BoardController {
 			fileService.filesave(board,file);
 		}
 		
-		
-		
-		
 		return "redirect:/board/list";
 	}
 	

@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.dao.ShopDao">
 
+<select id="getList" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
+	FROM ITEM
+	ORDER BY itemno DESC
+</select>
 
+<select id="selectCntAll" resultType="int" parameterType="util.Paging">
+	SELECT count(*) FROM (
+		SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
+		FROM ITEM
+		<if test="search != null">
+		<where>
+			AND itemname LIKE '%${search}%'
+		</where>
+		</if>
+	)
+</select>
 
+<select id="getItemByItemNo" parameterType="int" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
+	FROM ITEM
+	<where>
+		AND itemno = #{itemNo}
+	</where>
+</select>
 </mapper>

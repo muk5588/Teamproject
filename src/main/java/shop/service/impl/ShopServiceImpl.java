@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import dto.Item;
 import shop.dao.ShopDao;
 import shop.service.face.ShopService;
+import util.Paging;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -18,8 +19,22 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired ShopDao shopDao;
 	
 	@Override
+	public Paging getPagging(Paging shopPaging) {
+		
+		int totalCount = shopDao.selectCntAll(shopPaging);
+		
+		Paging pagingres = new Paging(totalCount, shopPaging.getCurPage());
+		return pagingres;
+	}
+	
+	@Override
 	public List<Item> list() {
-		return null;
+		return shopDao.getList();
+	}
+
+	@Override
+	public Item getItemByItemNo(int itemNo) {
+		return shopDao.getItemByItemNo(itemNo);
 	}
 	
 }

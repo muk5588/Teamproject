@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.dao.BasketDao">
+	
+	<insert id="insertBasket" parameterType="dto.Basket">
+		<selectKey keyProperty="basketNo" order="BEFORE" resultType="int">
+			SELECT basket_seq.nextval FROM dual
+		</selectKey>
+		insert into Basket( basketno,userno,itemno,quantity)
+		VALUES(#{basketNo},#{userNo},#{itemNo},#{quantity})
+	</insert>
+	
+	<select id="basketListByUserNo" parameterType="int" resultType="dto.Basket">
+		SELECT basketno,userno,itemno,quantity,additionalDATE FROM BASKET
+		<where>
+			AND userno = #{userNo}
+		</where> 
+		ORDER BY additionalDATE DESC
+	</select>
+	
+	
+	
+	
+</mapper>

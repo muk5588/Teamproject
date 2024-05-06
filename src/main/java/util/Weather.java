@@ -24,13 +24,23 @@ public class Weather {
 
     @GetMapping("/weather")
     public String getWeather(Model model, HttpSession session) throws IOException, ParseException {
+        String x = null;
+        String y = null;
         User user = (User) session.getAttribute("dto1");
-        String address = user.getAddress();
-        HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
-        String x = XYMap.get("x");   //위도
-        String y = XYMap.get("y");   //경도
-        model.addAttribute("x",x);
-        model.addAttribute("y",y);
+        if (user == null) {
+            x = "126.98322015";
+            y = "37.57023746";
+            model.addAttribute("x",x);
+            model.addAttribute("y",y);
+        }else {
+            String address = user.getAddress();
+            HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
+            x = XYMap.get("x");   //위도
+            y = XYMap.get("y");   //경도
+            model.addAttribute("x",x);
+            model.addAttribute("y",y);
+        }
+
         return "layout/weather";
     }
 }

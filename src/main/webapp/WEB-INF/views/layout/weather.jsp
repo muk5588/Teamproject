@@ -15,24 +15,30 @@
         $(document).ready(function () {
 
         });
-        var x= ${x}
-        var y= ${y}
+        var x =
+        ${x}
+        var y =
+        ${y}
         var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + y +
             "&lon=" + x +
             "&units=metric&appid=e776c451f21037ecc76b1a9ecf704f77";
         $.getJSON(url,
             function (result) {
+                var now = (result.main.temp).toString().split('.')[0]+ "℃";
+                var low = (result.main.temp_min).toString().split('.')[0]+ "℃";
+                var high = (result.main.temp_max).toString().split('.')[0] + "℃";
+
                 //기온출력
-                $('.Nowtemp').append(result.main.temp);
-                $('.Lowtemp').append(result.main.temp_min);
-                $('.Hightemp').append(result.main.temp_max);
+                $('.Nowtemp').append(now);
+                $('.Lowtemp').append(low);
+                $('.Hightemp').append(high);
                 $('.Icon').append(result.weather[0].icon);
 
                 //날씨아이콘출력
                 //WeatherResult.weater[0].icon
                 var weathericonUrl =
                     '<img src= "http://openweathermap.org/img/wn/'
-                    + result.weather[0].icon+
+                    + result.weather[0].icon +
                     '.png" alt="' + result.weather[0].description + '"/>'
 
                 $('.Icon').html(weathericonUrl);

@@ -301,5 +301,36 @@
     	WHERE categoryno = #{categoryNo}
     	ORDER BY boardno DESC
 	</select>
-	
+
+	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">
+		SELECT A.boardno boardno, A.title, good
+		FROM (
+		SELECT rownum rnum , B.*
+		FROM (
+		SELECT
+		boardno, title, userno
+		FROM board
+		<where>
+			and userno = #{userno}
+		</where>
+		<include refid="search"/>
+		ORDER BY boardno DESC
+		) B
+		) C , (
+		SELECT
+		boardno,
+		title,
+		(SELECT COUNT(*) FROM good
+		WHERE boardno = board.BOARDNO
+		<include refid="search"/>
+		) AS good
+		FROM board
+		) A
+		<where>
+			AND rnum BETWEEN #{startNo} AND #{endNo}
+			AND C.boardno = A.boardno
+			AND userno = #{userno}
+		</where>
+	</select>
+
 </mapper>

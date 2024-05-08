@@ -353,7 +353,7 @@ public class BoardController {
 
 
 
-		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
+		List<Map<String, Object>> recommList = boardService.getuserRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());

@@ -1,6 +1,7 @@
 package login.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import board.dto.Board;
@@ -18,6 +20,7 @@ import login.service.KakaoService;
 import login.service.LoginService;
 import login.service.SocialService;
 import user.dto.User;
+import util.Paging;
 
 @Controller
 public class LoginController {
@@ -104,15 +107,31 @@ public class LoginController {
 
     //    마이페이지
     @RequestMapping("/user/userDetail")
-    public void mypage(@SessionAttribute(value = "dto1", required = false) User login, Model model) {
+    public void mypage(@SessionAttribute(value = "dto1", required = false) User login
+            , Model model
+            ,@RequestParam(defaultValue ="0") int curPage) {
         int userno = login.getUserno();
+        //작성한 게시물 조회
         List<Board> list = boardService.boardList(userno);
+        //추천한 게시물 조회
         List<Board> list2 = boardService.userrecommList(userno);
-        logger.info("list2 : {}", list2);
+
+        Paging paging = new Paging();
+        paging = boardService.getPaging(curPage,paging);
+        paging.setUserno(userno);
         model.addAttribute("dto1", login);
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
         model.addAttribute("userno", userno);
+
+        List<Map<String, Object>> recommList = boardService.getuserRecommendRes(paging);
+        logger.debug("recommList : {}", recommList);
+        for(Map<String, Object> M : recommList) {
+            logger.debug("M : {}", M.toString());
+        }
+        model.addAttribute("totalrecomm", recommList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("paging", paging);
 //        model.addAttribute("totalrecomm", recommList);
     }
 

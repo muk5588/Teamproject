@@ -101,4 +101,5 @@ public interface BoardService {
 	public List<Board> listByCategory(int categoryNo, Paging paging);
 
 
+	public List<Map<String, Object>> getuserRecommendRes(Paging paging);
 }

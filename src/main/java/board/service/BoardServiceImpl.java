@@ -212,5 +212,10 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Override
+	public List<Map<String, Object>> getuserRecommendRes(Paging paging) {
+		return boardDao.getuserRecommendRes(paging);
+	}
+
 
 }

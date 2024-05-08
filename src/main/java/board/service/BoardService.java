@@ -97,4 +97,8 @@ public interface BoardService {
 	public void deleteGood(ArrayList<Integer> boardno);
 
 	public GoodVO getRecommendVO(Good paramGood);
+
+	public List<Board> listByCategory(int categoryNo, Paging paging);
+
+
 }

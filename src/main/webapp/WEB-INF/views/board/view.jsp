@@ -262,6 +262,7 @@
 
         <h1>상세보기</h1>
 
+		
         <a href="./list?curPage=${curPage }">
             <button>목록으로</button>
         </a>

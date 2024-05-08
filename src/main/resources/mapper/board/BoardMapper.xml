@@ -296,5 +296,10 @@
 		</where>
 	</delete>
 	
+	<select id="listByCategory" parameterType="int" resultType="board.dto.Board">
+    	SELECT * FROM board
+    	WHERE categoryno = #{categoryNo}
+    	ORDER BY boardno DESC
+	</select>
 	
 </mapper>

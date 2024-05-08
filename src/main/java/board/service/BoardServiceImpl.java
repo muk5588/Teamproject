@@ -206,5 +206,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getRecommendVO(paramGood);
 	}
 
+	@Override
+	public List<Board> listByCategory(int categoryNo, Paging paging) {
+		 return boardDao.listByCategory(categoryNo);	
+
+	}
+
 
 }

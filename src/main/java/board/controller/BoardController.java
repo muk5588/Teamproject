@@ -82,6 +82,50 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 	}
+	
+	@GetMapping("/listByCategory")
+	public String listByCategory(
+			Model model, 
+			@RequestParam("categoryNo") 
+			int categoryNo, 
+			@RequestParam(defaultValue ="0") 
+			int curPage, 
+			@RequestParam(value="search",required = false) 
+			String search, 
+			@RequestParam(value="searchKind", 
+			required = false ) String searchKind) {
+	    logger.info("/board/listByCategory [GET]");
+	    logger.info("/board/listByCategory categoryNo : {}", categoryNo);
+	    logger.info("/board/listByCategory search : {}", search);
+	    logger.info("/board/listByCategory searchKind : {}", searchKind);
+	    
+	    // 페이징 계산
+	    Paging paging = new Paging();
+	    paging.setSearch(search);
+	    paging.setSearchKind(searchKind);
+	    if(null !=  search && !"".equals(search)) {
+	        paging = boardService.getPaging(curPage, paging);
+	    } else {
+	        paging = boardService.getPaging(curPage, paging);
+	    }
+	    paging.setSearch(search);
+	    paging.setSearchKind(searchKind);
+	    logger.info("{}", paging);
+	    
+	    List<Board> boardList = boardService.listByCategory(categoryNo, paging);
+
+	    List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
+	    logger.debug("recommList : {}", recommList);
+	    for(Map<String, Object> M : recommList) {
+	        logger.debug("M : {}", M.toString());
+	    }
+	    model.addAttribute("totalrecomm", recommList);
+	    model.addAttribute("curPage", curPage);
+	    model.addAttribute("paging", paging);
+	    model.addAttribute("list", boardList);
+	    return "board/list"; 
+	}
+	
 	@GetMapping("/category")
 	public void category(Model model){
 	}

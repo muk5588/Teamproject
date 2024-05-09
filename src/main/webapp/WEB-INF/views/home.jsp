@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%--<%@ page session="false" %>--%>
 <html>
@@ -14,6 +15,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp" />
 <hr>
 
 
@@ -47,9 +49,35 @@
   <span class="dot" onclick="currentSlide(3)"></span>
 </div>
 
-<h1>
-	Hello world!  
-</h1>
+<div id="login">
+    <c:if test="${empty isLogin }">
+        <button><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></button><br>
+        <a class="btn-fill" href="/user/insertUser">회원가입</a>
+        /
+        <a class="btn-fill" href="/user/searchUser?value=id">아이디찾기</a>
+        /
+        <a class="btn-fill" href="/user/searchUser?value=pw">비밀번호찾기</a>
+    </c:if>
+    <c:if test="${not empty isLogin}">
+
+            ${dto1.name } [${dto1.nickname } ]
+            <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
+            <c:choose>
+                <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                    <br>
+                    <a href="/user/userDetail">마이페이지</a>
+                    /
+                    <a href="/user/adminPage">관리자페이지</a>
+                </c:when>
+                <c:otherwise>
+                    <br>
+                    <a href="/user/userDetail">마이페이지</a>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+    </c:if>
+
+</div>
 <div>
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
@@ -71,7 +99,7 @@
 
 <%--<c:if test="${empty isLogin}">--%>
 <%--	<a href="login"><button>로그인</button></a>--%>
-<%--	<a href="insertUser"><button>회원가입</button></a>--%>
+<%--	<a href="insertUser">회원가입</a>--%>
 <%--</c:if>--%>
 
 <c:if test="${isLogin > 0}">

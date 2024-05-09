@@ -14,6 +14,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="/resources/js/user/blackList.js" defer></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
@@ -42,7 +43,7 @@
                 </table>
                 <div class='btnSet'>
                     <a class='btn-fill' href="/user/userList">고객 목록</a>
-                    <a class='btn-fill' href="/user/userList">사용자 정지</a>
+                    <a class='btn-fill' href='javascript:userBlack();' class="btn btn-danger">사용자 정지</a>
                 </div>
             </c:when>
             <c:otherwise>

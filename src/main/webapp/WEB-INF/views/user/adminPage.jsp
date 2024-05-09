@@ -106,7 +106,7 @@
             color: #fff;
         }
 
-        .container {
+        .container1 {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
@@ -134,8 +134,7 @@
     </style>
 </head>
 <body>
-<h3>관리자 페이지</h3>
-<hr>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <div id="button">
     <button><a href="/user/userList">회원리스트</a></button>
     <button onclick="location.href = '/grade/gradeList'">권한조회</button>
@@ -146,7 +145,7 @@
     <button onclick="location.href = '/user/userLog'">전체로그</button>
     <button onclick="location.href = '/user/userBlack'">블랙리스트</button>
 </div>
-<div class="container">
+<div class="container1">
     <div class="table-container">
         <div class="table-wrapper">
             <h3>전체 회원 목록</h3>

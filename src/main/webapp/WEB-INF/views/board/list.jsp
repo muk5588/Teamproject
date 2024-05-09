@@ -140,7 +140,7 @@
     <div class="container">
 
         <h1>전체 게시판 List</h1>
-        <a href="../main">
+        <a href="../">
             <button>메인 페이지로</button>
         </a>
         <div>

@@ -109,8 +109,9 @@ public class BasketServiceImpl implements BasketService {
 		//총 가격 기본 0 설정
 		userOrder.setTotalPrice(0);
 		userOrder.setUserName(user.getName());
-		userOrder.setAddress1(user.getAddress());
-		userOrder.setAddress2(user.getDetailAddress());
+		userOrder.setAddress(user.getAddress());
+		userOrder.setDetailAddress(user.getDetailAddress());
+		userOrder.setExtraAddress(user.getExtraAddress());
 		userOrder.setPostCode(user.getPostcode());
 		//결제금액 0 설정
 		userOrder.setParaMount(0);

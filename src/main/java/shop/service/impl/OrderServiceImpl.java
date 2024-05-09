@@ -38,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	        UserOrder userOrder = objectMapper.convertValue(resMap.get("UserOrder"), UserOrder.class);
 	        List<OrderItem> orderItems = objectMapper.convertValue(resMap.get("OrderItem"), new TypeReference<List<OrderItem>>(){});
 	        
+	        
 	        // 변환된 객체를 다시 맵에 담아서 반환
 	        Map<String, Object> result = new HashMap<>();
 	        result.put("UserOrder", userOrder);

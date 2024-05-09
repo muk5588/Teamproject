@@ -3,7 +3,7 @@ package shop.dao;
 import dto.OrderItem;
 import dto.UserOrder;
 
-public interface UserorderDao {
+public interface OrderDao {
 
 	public int insertUserorder(UserOrder userOrder);
 

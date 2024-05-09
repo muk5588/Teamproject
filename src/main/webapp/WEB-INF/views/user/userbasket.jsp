@@ -31,6 +31,9 @@ $(function(){
 					console.log("AJAX 성공")
 					console.log(res)
                         
+                    $(function () {
+                    	 window.location.href = "../order/ordersheet?res=" + encodeURIComponent(JSON.stringify(res));
+                    })
 
                     }
                     , error: function () {

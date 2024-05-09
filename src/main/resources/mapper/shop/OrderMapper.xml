@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="shop.dao.UserorderDao">
+<mapper namespace="shop.dao.OrderDao">
 
 <insert id="insertUserorder" parameterType="dto.UserOrder">
 	<selectKey order="BEFORE" resultType="int" keyProperty="orderNo">
 		SELECT USERORDER_SEQ.nextval FROM dual
 	</selectKey>
-	INSERT INTO UserOrder(orderno,userno,username,phone,pay,totalprice,post_code,address1,address2,paramount)
-	VALUES(#{orderNo},#[userNo},#{userName},#{phone},'N',#{totalPrice},#{postCode},#{address1},#{address2},#{paraMount})
+	INSERT INTO UserOrder(orderno,userno,username,phone,pay,totalprice,post_code,address1,address2,paramount,orderDate)
+	VALUES(#{orderNo},#{userNo},#{userName},#{phone},'N',#{totalPrice},#{postCode},#{address1},#{address2},#{paraMount},SYSDATE)
 </insert>
 
 <insert id="insertOrderItem" parameterType="dto.OrderItem">
@@ -15,7 +15,7 @@
 		SELECT ORDERITEM_SEQ.nextval FROM dual
 	</selectKey>
 	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price)
-	VALUES(#{orderItemNo},#[orderNo},#{itemNo},#{itemName},#{orderQuantity},#{price})
+	VALUES(#{orderItemNo},#{orderNo},#{itemNo},#{itemName},#{orderQuantity},#{price})
 </insert>
 
 </mapper>

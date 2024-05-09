@@ -89,13 +89,15 @@ public class BasketController {
 		return "/user/userbasket";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/buyBasket")
-	private void buyBasket(@RequestParam("basketNo[]")int[] no
+	private Map<String, Object> buyBasket(@RequestParam("basketNo[]")int[] no
 			, Model model) {
 		logger.debug("Ajax buyBasket : {}", no);
 		Map<String, Object> orderMap = basketService.userorderProc(no);
 		logger.debug("orderMap : {}",orderMap);
 		model.addAttribute("orderMap", orderMap);
+		return orderMap;
 	}
 	
 	

@@ -2,7 +2,6 @@ package shop.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import shop.dao.BasketDao;
-import shop.dao.UserorderDao;
+import shop.dao.OrderDao;
 import shop.service.face.BasketService;
 import user.dto.User;
 
@@ -28,7 +27,7 @@ public class BasketServiceImpl implements BasketService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired private BasketDao basketDao;
-	@Autowired private UserorderDao userorderDao;
+	@Autowired private OrderDao userorderDao;
 	@Autowired private HttpSession session;
 	
 	@Override
@@ -55,19 +54,19 @@ public class BasketServiceImpl implements BasketService {
 	public Map<String, Object> userorderProc(int[] no) {
 		logger.debug("Proc : {} ", no);
 		User user = (User) session.getAttribute("dto1");
-//		if(null == user) {
-//			return null;
-//		}
-//		if(user.getUserno() <=0 ) {
-//			return null;
-//		}
+		if(null == user) {
+			return null;
+		}
+		if(user.getUserno() <=0 ) {
+			return null;
+		}
 		List<Basket> basketsTemp = basketDao.basketListBybasketNos(no);
 		logger.debug("basketsTemp : {}", basketsTemp);
 		
 		//없을 경우 null
-//		if(baskets == null) {
-//			return null;
-//		}
+		if(basketsTemp == null) {
+			return null;
+		}
 		
 		List<Basket> baskets = new ArrayList<Basket>();
 		
@@ -100,9 +99,6 @@ public class BasketServiceImpl implements BasketService {
 		    baskets.add(basket);
 		}
 		
-		logger.debug("itemQuantityMap : {}", itemQuantityMap);
-		logger.debug("itemQuantityMap : {}", itemQuantityMap);
-		logger.debug("itemQuantityMap : {}", itemQuantityMap);
 		logger.debug("baskets : {}", baskets);
 		List<Item> items = basketDao.getItemPriceByItemNos(baskets);
 		logger.debug("items : {}", items);
@@ -118,13 +114,14 @@ public class BasketServiceImpl implements BasketService {
 		userOrder.setPostCode(user.getPostcode());
 		//결제금액 0 설정
 		userOrder.setParaMount(0);
+		logger.debug("userOrder : {}", userOrder);
 		//주문상세 정보를 담기 위한 회원주문 객체 Insert
-//		int res = userorderDao.insertUserorder(userOrder);
+		int res = userorderDao.insertUserorder(userOrder);
 		
 		//insert 결과 없을 경우 null 반환
-//		if(res <= 0 ) {
-//			return null;
-//		}
+		if(res <= 0 ) {
+			return null;
+		}
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("UserOrder", userOrder);
 		List<OrderItem> userOrderDetail = new ArrayList<OrderItem>();
@@ -137,14 +134,15 @@ public class BasketServiceImpl implements BasketService {
 					order.setItemName(i.getItemName());
 					order.setOrderQuantity(b.getQuantity()); 
 					order.setPrice(( b.getQuantity() * i.getPrice()));
-//					int orderitemRes = userorderDao.insertOrderItem(order);
-//					logger.debug("orderitemRes : {}", orderitemRes);
+					int orderitemRes = userorderDao.insertOrderItem(order);
+					logger.debug("orderitemRes : {}", orderitemRes);
 					logger.debug("order : {}", order);
-					returnMap.put("OrderItem",order);
+					userOrderDetail.add(order);
 				}
 			}
 		}
 		
+		returnMap.put("OrderItem",userOrderDetail);
 		return returnMap;
 		
 		

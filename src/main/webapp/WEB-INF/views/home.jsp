@@ -66,6 +66,7 @@
 <button onclick="location.href = '/user/searchUser?value=pw'">비밀번호찾기</button>
 <button onclick="location.href = '/message/'">메세지 테스트</button>
 <button onclick="location.href = '/weather'">시발날씨</button>
+<button onclick="location.href = '/basket/userbasket'">장바구니</button>
 
 
 <%--<c:if test="${empty isLogin}">--%>

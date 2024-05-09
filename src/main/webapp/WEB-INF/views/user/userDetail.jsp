@@ -103,6 +103,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <a href="/basket/userbasket"><button>장바구니</button></a>
         <h3>작성한 게시물</h3>
         <c:choose>
             <c:when test="${not empty list and (userno == dto1.userno)}">

@@ -1,9 +1,11 @@
 package shop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import dto.Basket;
+import dto.Item;
+import dto.ItemFile;
 import shop.service.face.BasketService;
 import user.dto.User;
 
@@ -57,19 +62,40 @@ public class BasketController {
 	}
 	
 	@RequestMapping("/userbasket")
-	private void userBakset(HttpSession session, Model model) {
+	private String userBakset(HttpSession session, Model model) {
 		logger.debug("userbasket");
 		User user = (User) session.getAttribute("dto1");
 		logger.debug("user : {}",user);
 		if( user == null) {
-			
-		}else {
-			int userNo = user.getUserno();
-			logger.debug("user : {}",user);
-			List<Basket> baskets = basketService.basketListByUserNo(userNo);
-			logger.debug("baskets : {}",baskets);
+			return "redirect:/login";
 		}
+		int userNo = user.getUserno();
+		logger.debug("user : {}",user);
+		//장바구니 정보
+		List<Basket> baskets = basketService.basketListByUserNo(userNo);
+		logger.debug("baskets : {}",baskets);
+		//상품 정보
+		List<Item> items = basketService.itemsByBasketNos(baskets);
+		logger.debug("items : {}",items);
+		//상품 이미지
+		List<ItemFile> itemFiles = basketService.itemFilesByBasketNos(baskets);
+		logger.debug("itemFiles : {}",itemFiles);
 		
+		
+		model.addAttribute("itemFiles", itemFiles);
+		model.addAttribute("baskets", baskets);
+		model.addAttribute("items", items);
+		
+		return "/user/userbasket";
+	}
+	
+	@RequestMapping("/buyBasket")
+	private void buyBasket(@RequestParam("basketNo[]")int[] no
+			, Model model) {
+		logger.debug("Ajax buyBasket : {}", no);
+		Map<String, Object> orderMap = basketService.userorderProc(no);
+		logger.debug("orderMap : {}",orderMap);
+		model.addAttribute("orderMap", orderMap);
 	}
 	
 	

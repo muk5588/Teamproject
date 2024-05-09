@@ -44,87 +44,121 @@ public class BoardController {
 	@Autowired private BoardService boardService;
 	@Autowired private FileService fileService;
 	@Autowired private ServletContext servletContext;
-	@Autowired SqlSession sqlSession;
 	
 	@GetMapping("/list")
 	public void list(
-			Model model, 
-			@RequestParam(defaultValue ="0") int curPage
-			,@RequestParam(value="search",required = false) String search
-			,@RequestParam(value="searchKind", required = false ) String searchKind) {
-		logger.info("/board/list [GET]");
-		logger.info("/board/list search : {}", search);
-		logger.info("/board/list searchKind : {}", searchKind);
-		
-		// 페이징 계산
-		Paging paging = new Paging();
-		paging.setSearch(search);
-		paging.setSearchKind(searchKind);
-		if(null !=  search && !"".equals(search)) {
-			paging = boardService.getPaging(curPage,paging);
-		}else {
-			paging = boardService.getPaging(curPage,paging);
-		}
-		paging.setSearch(search);
-		paging.setSearchKind(searchKind);
-		logger.info("{}", paging);
-		
-		List<Board> list = boardService.list(paging);
+	    Model model, 
+	    @RequestParam(defaultValue ="0") int curPage,
+	    @RequestParam(value="search",required = false) String search,
+	    @RequestParam(value="searchKind", required = false) String searchKind,
+	    @RequestParam(value="categoryNo", required = false) Integer categoryNo) {
 
-
-		List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
-		logger.debug("recommList : {}", recommList);
-		for(Map<String, Object> M : recommList) {
-			logger.debug("M : {}", M.toString());
-		}
-		model.addAttribute("totalrecomm", recommList);
-		model.addAttribute("curPage", curPage);
-		model.addAttribute("paging", paging);
-		model.addAttribute("list", list);
-	}
-	
-	@GetMapping("/listByCategory")
-	public String listByCategory(
-			Model model, 
-			@RequestParam("categoryNo") 
-			int categoryNo, 
-			@RequestParam(defaultValue ="0") 
-			int curPage, 
-			@RequestParam(value="search",required = false) 
-			String search, 
-			@RequestParam(value="searchKind", 
-			required = false ) String searchKind) {
-	    logger.info("/board/listByCategory [GET]");
-	    logger.info("/board/listByCategory categoryNo : {}", categoryNo);
-	    logger.info("/board/listByCategory search : {}", search);
-	    logger.info("/board/listByCategory searchKind : {}", searchKind);
+	    logger.info("/board/list [GET]");
+	    logger.info("/board/list search : {}", search);
+	    logger.info("/board/list searchKind : {}", searchKind);
+	    logger.info("/board/list categoryNo : {}", categoryNo);
 	    
 	    // 페이징 계산
 	    Paging paging = new Paging();
 	    paging.setSearch(search);
 	    paging.setSearchKind(searchKind);
-	    if(null !=  search && !"".equals(search)) {
-	        paging = boardService.getPaging(curPage, paging);
-	    } else {
-	        paging = boardService.getPaging(curPage, paging);
-	    }
-	    paging.setSearch(search);
-	    paging.setSearchKind(searchKind);
-	    logger.info("{}", paging);
-	    
-	    List<Board> boardList = boardService.listByCategory(categoryNo, paging);
 
-	    List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
-	    logger.debug("recommList : {}", recommList);
-	    for(Map<String, Object> M : recommList) {
-	        logger.debug("M : {}", M.toString());
+	    if (categoryNo != null) {
+	        paging.setCategoryNo(categoryNo);
 	    }
+
+	    if (search !=  null && !"".equals(search)) {
+	        paging = boardService.getPaging(curPage, paging);
+	    } 
+	    else {
+	        paging = boardService.getPaging(curPage, paging);
+	    }
+
+	    List<Board> list = null;
+	    List<Map<String, Object>> recommList = null;
+	    logger.info("paging : {}",paging);
+	    
+	    if (categoryNo != null) {
+	    	paging.setCategoryNo(categoryNo);
+	        list = boardService.listByCategory(paging);
+	        recommList = boardService.getRecommendRes(paging);
+	    } else {
+	        list = boardService.list(paging);
+	        recommList = boardService.getRecommendRes(paging);
+	    }
+
+//	    logger.debug("list : {}", list);
+//	    logger.debug("recommList : {}", recommList);
+	    for(Board M : list) {
+//			logger.debug("!!@!@!@M : {}", M); 
+	    }
+	    for(Map<String, Object> M : recommList) {
+//	        logger.debug("M : {}", M.toString());
+	    }
+
 	    model.addAttribute("totalrecomm", recommList);
 	    model.addAttribute("curPage", curPage);
 	    model.addAttribute("paging", paging);
-	    model.addAttribute("list", boardList);
-	    return "board/list"; 
+	    model.addAttribute("list", list);
+	    
 	}
+	
+	
+	
+	/*
+	 * @GetMapping("/list") public void list( Model model,
+	 * 
+	 * @RequestParam(defaultValue ="0") int curPage
+	 * ,@RequestParam(value="search",required = false) String search
+	 * ,@RequestParam(value="searchKind", required = false ) String searchKind) {
+	 * logger.info("/board/list [GET]"); logger.info("/board/list search : {}",
+	 * search); logger.info("/board/list searchKind : {}", searchKind);
+	 * 
+	 * // 페이징 계산 Paging paging = new Paging(); paging.setSearch(search);
+	 * paging.setSearchKind(searchKind); if(null != search && !"".equals(search)) {
+	 * paging = boardService.getPaging(curPage,paging); }else { paging =
+	 * boardService.getPaging(curPage,paging); } paging.setSearch(search);
+	 * paging.setSearchKind(searchKind); logger.info("{}", paging);
+	 * 
+	 * List<Board> list = boardService.list(paging);
+	 * 
+	 * 
+	 * List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
+	 * logger.debug("recommList : {}", recommList); for(Map<String, Object> M :
+	 * recommList) { logger.debug("M : {}", M.toString()); }
+	 * model.addAttribute("totalrecomm", recommList); model.addAttribute("curPage",
+	 * curPage); model.addAttribute("paging", paging); model.addAttribute("list",
+	 * list); }
+	 * 
+	 * @GetMapping("/listByCategory") public String listByCategory( Model model,
+	 * 
+	 * @RequestParam("categoryNo") int categoryNo,
+	 * 
+	 * @RequestParam(defaultValue ="0") int curPage,
+	 * 
+	 * @RequestParam(value="search",required = false) String search,
+	 * 
+	 * @RequestParam(value="searchKind", required = false ) String searchKind) {
+	 * logger.info("/board/listByCategory [GET]");
+	 * logger.info("/board/listByCategory categoryNo : {}", categoryNo);
+	 * logger.info("/board/listByCategory search : {}", search);
+	 * logger.info("/board/listByCategory searchKind : {}", searchKind);
+	 * 
+	 * // 페이징 계산 Paging paging = new Paging(); paging.setSearch(search);
+	 * paging.setSearchKind(searchKind); if(null != search && !"".equals(search)) {
+	 * paging = boardService.getPaging(curPage, paging); } else { paging =
+	 * boardService.getPaging(curPage, paging); } paging.setSearch(search);
+	 * paging.setSearchKind(searchKind); logger.info("{}", paging);
+	 * 
+	 * List<Board> boardList = boardService.listByCategory(categoryNo, paging);
+	 * 
+	 * List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
+	 * logger.debug("recommList : {}", recommList); for(Map<String, Object> M :
+	 * recommList) { logger.debug("M : {}", M.toString()); }
+	 * model.addAttribute("totalrecomm", recommList); model.addAttribute("curPage",
+	 * curPage); model.addAttribute("paging", paging); model.addAttribute("list",
+	 * boardList); return "board/list"; }
+	 */
 	
 	@GetMapping("/category")
 	public void category(Model model){

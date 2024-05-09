@@ -83,6 +83,11 @@
 		SELECT count(*) FROM (
 			<include refid="selectBoard" />
 			<include refid="search"/>
+			<where>
+            	<if test="categoryNo != null and categoryNo.equals('')">
+    				AND categoryNo = #{categoryNo}
+				</if>
+        </where>
 		)
 	</select>
 
@@ -296,10 +301,26 @@
 		</where>
 	</delete>
 	
-	<select id="listByCategory" parameterType="int" resultType="board.dto.Board">
-    	SELECT * FROM board
+	<select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				<include refid="selectBoard" />
+				<where>
+				AND categoryno = #{categoryNo}
+				AND TITLE Like  '%${search}%'
+				</where>
+				ORDER BY boardno DESC
+			) B
+		)
+		<where>
+			AND rnum BETWEEN #{startNo } AND #{endNo}
+		</where>
+    	
+	</select>
+
+	<select id="selectCntByCategory" resultType="int" parameterType="int">
+    	SELECT count(*) FROM board
     	WHERE categoryno = #{categoryNo}
-    	ORDER BY boardno DESC
 	</select>
 
 	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">

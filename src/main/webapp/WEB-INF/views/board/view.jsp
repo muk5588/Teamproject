@@ -263,9 +263,14 @@
         <h1>상세보기</h1>
 
 		
-        <a href="./list?curPage=${curPage }">
+        <%-- <a href="./list?curPage=${curPage }">
             <button>목록으로</button>
+        </a> --%>
+        <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}">
+        	<button>목록으로</button>
         </a>
+
+        
         <c:if test="${board.userNo == dto.userno }">
             <a href="./update?boardNo=${board.boardNo }">
                 <button id="btnUpdate">수정</button>

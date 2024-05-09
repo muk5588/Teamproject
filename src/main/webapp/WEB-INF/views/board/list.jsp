@@ -140,7 +140,7 @@
     <div class="container">
 
         <h1>전체 게시판 List</h1>
-        <a href="../main">
+        <a href="/">
             <button>메인 페이지로</button>
         </a>
         <div>
@@ -178,9 +178,10 @@
                 <tr>
                     <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
                                                 class="delCheckBox"></td>
+                                                
                     <td class="no">${board.boardNo }</td>
                     <td class="title">
-                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                        <a href="./view?${param.categoryNo ? 'categoryNo=' + param.categoryNo + '&' : ''}boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
                     </td>
                     <td class="nick">${board.nickName }</td>
                     <td class="hit">${board.boardView }</td>

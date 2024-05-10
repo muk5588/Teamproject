@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +42,10 @@ public class BoardController {
 	@Autowired private BoardService boardService;
 	@Autowired private FileService fileService;
 	@Autowired private ServletContext servletContext;
-	@Autowired SqlSession sqlSession;
 	
 	@GetMapping("/list")
 	public void list(
-	    Model model, 
+	    Model model,
 	    @RequestParam(defaultValue ="0") int curPage,
 	    @RequestParam(value="search",required = false) String search,
 	    @RequestParam(value="searchKind", required = false) String searchKind,
@@ -58,22 +56,25 @@ public class BoardController {
 	    logger.info("/board/list searchKind : {}", searchKind);
 	    logger.info("/board/list categoryNo : {}", categoryNo);
 		
-	    // ÌéòÏù¥Ïßï Í≥ÑÏÇ∞
+	    
+	    // ∆‰¿Ã¬° ∞ËªÍ
 	    Paging paging = new Paging();
 	    paging.setSearch(search);
 	    paging.setSearchKind(searchKind);
-
+	    
 	    if (categoryNo != null) {
 	        paging.setCategoryNo(categoryNo);
 	    }
-
-	    if (search !=  null && !"".equals(search)) {
+	    
+	    if (null !=  search && !"".equals(search)) {
 	        paging = boardService.getPaging(curPage, paging);
 	    } 
 	    else {
 	        paging = boardService.getPaging(curPage, paging);
 	    }
-
+	    paging.setSearch(search);
+	    paging.setSearchKind(searchKind);
+	    
 	    List<Board> list = null;
 	    List<Map<String, Object>> recommList = null;
 	    logger.info("paging : {}",paging);
@@ -100,51 +101,8 @@ public class BoardController {
 	    model.addAttribute("curPage", curPage);
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("list", list);
-
+  
 	}
-	
-//	@GetMapping("/listByCategory")
-//	public String listByCategory(
-//			Model model, 
-//			@RequestParam("categoryNo") 
-//			int categoryNo, 
-//			@RequestParam(defaultValue ="0") 
-//			int curPage, 
-//			@RequestParam(value="search",required = false) 
-//			String search, 
-//			@RequestParam(value="searchKind", 
-//			required = false ) String searchKind) {
-//	    logger.info("/board/listByCategory [GET]");
-//	    logger.info("/board/listByCategory categoryNo : {}", categoryNo);
-//	    logger.info("/board/listByCategory search : {}", search);
-//	    logger.info("/board/listByCategory searchKind : {}", searchKind);
-//	    
-//	    // ÌéòÏù¥Ïßï Í≥ÑÏÇ∞
-//	    Paging paging = new Paging();
-//	    paging.setSearch(search);
-//	    paging.setSearchKind(searchKind);
-//	    if(null !=  search && !"".equals(search)) {
-//	        paging = boardService.getPaging(curPage, paging);
-//	    } else {
-//	        paging = boardService.getPaging(curPage, paging);
-//	    }
-//	    paging.setSearch(search);
-//	    paging.setSearchKind(searchKind);
-//	    logger.info("{}", paging);
-//	    
-//	    List<Board> boardList = boardService.listByCategory(categoryNo, paging);
-//
-//	    List<Map<String, Object>> recommList = boardService.getRecommendRes(paging);
-//	    logger.debug("recommList : {}", recommList);
-//	    for(Map<String, Object> M : recommList) {
-//	        logger.debug("M : {}", M.toString());
-//	    }
-//	    model.addAttribute("totalrecomm", recommList);
-//	    model.addAttribute("curPage", curPage);
-//	    model.addAttribute("paging", paging);
-//	    model.addAttribute("list", boardList);
-//	    return "board/list"; 
-//	}
 	
 	@GetMapping("/category")
 	public void category(Model model){
@@ -158,6 +116,7 @@ public class BoardController {
 			, HttpSession session
 			, @RequestParam(value="curPage", defaultValue="0") int curPage
 			) {
+
 		board =  boardService.viewByBoardNo(boardno);
 		User user = (User)session.getAttribute("dto1");
 		int recomm = 0;
@@ -202,14 +161,14 @@ public class BoardController {
 		int res = boardService.write(board);
 
 		String content = board.getContent();
-		logger.info("content ÌôïÏù∏ : {}", content);
+		logger.info("content »Æ¿Œ : {}", content);
 		List<String> originNames = fileService.extractOriginName(content);
-		logger.info("originNames ÌôïÏù∏ : {}", originNames);
+		logger.info("originNames »Æ¿Œ : {}", originNames);
 		List<String> storedNames = fileService.extractStoredName(content, originNames);
-		logger.info("storedNames ÌôïÏù∏ : {}", storedNames);
+		logger.info("storedNames »Æ¿Œ : {}", storedNames);
 		if (originNames != null && storedNames != null && originNames.size() == storedNames.size() && !originNames.isEmpty() && !storedNames.isEmpty()) {
 			ArrayList<BoardFile> files = new ArrayList<>();
-			logger.info("Ïù¥ÎØ∏ÏßÄ ÌååÏùº Ï≤òÎ¶¨Ï§ë :%%%%%%%%%%%%%%%%%%%%%%%%%%" );
+			logger.info("¿ÃπÃ¡ˆ ∆ƒ¿œ √≥∏Æ¡ﬂ :%%%%%%%%%%%%%%%%%%%%%%%%%%" );
 		    for (int i = 0; i < originNames.size(); i++) {
 		        String originName = originNames.get(i);
 		        String storedName = storedNames.get(i);
@@ -224,12 +183,12 @@ public class BoardController {
 		    fileService.setFile(files);
 		}
         
-		logger.info("board Í∞í ÌôïÏù∏ : {}", board);
+		logger.info("board ∞™ »Æ¿Œ : {}", board);
 		
 		if( null == file ) {
-			logger.debug("Ï≤®Î∂Ä ÌååÏùº ÏóÜÏùå");
+			logger.debug("√∑∫Œ ∆ƒ¿œ æ¯¿Ω");
 		}else if( file.getSize() <= 0 ){
-			logger.debug("ÌååÏùºÏùò ÌÅ¨Í∏∞Í∞Ä 0");
+			logger.debug("∆ƒ¿œ¿« ≈©±‚∞° 0");
 		}else { 
 //			for( )
 			fileService.filesave(board,file);
@@ -289,7 +248,7 @@ public class BoardController {
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("boardNo") int boardno) {
-		logger.debug("delete Î≥ÄÏàò : {}",boardno);
+		logger.debug("delete ∫Øºˆ : {}",boardno);
 		
 		Board deleteBoard = new Board();
 		Comment comment	= new Comment();
@@ -306,7 +265,7 @@ public class BoardController {
 			Board recommendBoard
 			, HttpSession session
 			) {
-		logger.info("Ï∂îÏ≤ú ÌôïÏù∏ {}, {} ", recommendBoard, session.getAttribute("isLogin"));
+		logger.info("√ﬂ√µ »Æ¿Œ {}, {} ", recommendBoard, session.getAttribute("isLogin"));
 		
 		boardService.recommend(recommendBoard);
 
@@ -328,14 +287,14 @@ public class BoardController {
 		boardService.deleteGood(boardno);
 		fileService.listDeleteByBoardNo(boardno);
 		int res = boardService.listDeleteByBoardNo(boardno);
-		logger.debug("ÏÇ≠Ï†ú ÏôÑÎ£å");
+		logger.debug("ªË¡¶ øœ∑·");
 		return res;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/boardFileChk")
 	private void boardImageChk(int boardno) {
-		logger.debug("ÌååÏùº Ï≤¥ÌÅ¨ ");
+		logger.debug("∆ƒ¿œ √º≈© ");
 		logger.debug("boardno : {}", boardno);
 //		int res = fileService.getFileCnt(boardno);
 //		if(res <= 0) {
@@ -355,7 +314,7 @@ public class BoardController {
 			,@RequestParam(value="searchKind", required = false ) String searchKind
 			,int userno
 			) {
-		// ÌéòÏù¥Ïßï Í≥ÑÏÇ∞
+		// ∆‰¿Ã¬° ∞ËªÍ
 
 		Paging paging = new Paging();
 		paging.setSearch(search);
@@ -388,11 +347,11 @@ public class BoardController {
 	@RequestMapping("/fileDown")
 	public String fileDown(int fileNo, Model model) {
 		BoardFile file = fileService.getFileByFileNo(fileNo);
-		logger.info("ÌååÏùº Îã§Ïö¥Î°úÎìú : {}", file);
+		logger.info("∆ƒ¿œ ¥ŸøÓ∑ŒµÂ : {}", file);
 		
 		model.addAttribute("downFile", file);
 		
-		logger.info("ÌååÏùº Îã§Ïö¥Î°úÎìú : {}", file);
+		logger.info("∆ƒ¿œ ¥ŸøÓ∑ŒµÂ : {}", file);
 		return "downView";
 	}
 	

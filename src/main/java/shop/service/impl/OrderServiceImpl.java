@@ -1,8 +1,13 @@
 package shop.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,46 +16,115 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dto.Basket;
+import dto.Item;
+import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import shop.dao.OrderDao;
 import shop.service.face.OrderService;
+import user.dto.User;
 @Service
 public class OrderServiceImpl implements OrderService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired private OrderDao orderDao;
+	@Autowired HttpSession session;
+	@Autowired HttpServletRequest req;
+	@Override
+	public int[] getItemNosByorderDatas(String[] orderDatas) {
+		int[] orderNumbers = new int[orderDatas.length];
+		for (int i = 0; i < orderDatas.length; i++) {
+	        orderNumbers[i] = Integer.parseInt(orderDatas[i]);
+	    }
+	    logger.debug("서비스 orderNumbers : {}", Arrays.toString(orderNumbers));
+		return orderNumbers;
+	}
 	
 	@Override
-	public Map<String, Object> getParam(String orderDatas) {
-	    if (null == orderDatas) {
-	        return null;
-	    }
-	    
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    Map<String, Object> resMap = new HashMap<>();
-	    try {
-	        resMap = objectMapper.readValue(orderDatas, new TypeReference<Map<String,Object>>(){});
-	        logger.debug("resMap : {}", resMap);
-	        
-	        // UserOrder와 OrderItem 객체로 직접 변환
-	        UserOrder userOrder = objectMapper.convertValue(resMap.get("UserOrder"), UserOrder.class);
-	        List<OrderItem> orderItems = objectMapper.convertValue(resMap.get("OrderItem"), new TypeReference<List<OrderItem>>(){});
-	        
-	        
-	        // 변환된 객체를 다시 맵에 담아서 반환
-	        Map<String, Object> result = new HashMap<>();
-	        result.put("UserOrder", userOrder);
-	        result.put("OrderItem", orderItems);
-	        
-	        return result;
-	    } catch (JsonProcessingException e) {
-	        e.printStackTrace();
-	    }
-	    
-	    return resMap;
+	public Map<String, Object> userorderProc(int[] orderNumbers) {
+		logger.debug("Proc : {} ", orderNumbers);
+		User user = (User) session.getAttribute("dto1");
+		if(null == user) {
+			return null;
+		}
+		if(user.getUserno() <=0 ) {
+			return null;
+		}
+		List<Basket> basketsTemp = orderDao.basketListBybasketNos(orderNumbers);
+		logger.debug("basketsTemp : {}", basketsTemp);
+		
+		//없을 경우 null
+		if(basketsTemp == null) {
+			return null;
+		}
+		
+		List<Basket> baskets = new ArrayList<Basket>();
+		
+		//상품의 수량 합산을 위한 Map 객체 생성
+		Map<Integer, Integer> itemQuantityMap = new HashMap<>();
+		
+		//같은 물건의 경우 합산 처리
+		for(Basket b : basketsTemp) {
+			int itemNo = b.getItemNo();
+			int quantity = b.getQuantity();
+			
+		    // 이미 해당 ITEMNO가 맵에 있는 경우 기존 값과 더함
+		    if (itemQuantityMap.containsKey(itemNo)) {
+		        int currentQuantity = itemQuantityMap.get(itemNo);
+		        itemQuantityMap.put(itemNo, currentQuantity + quantity);
+		    } else {
+		        // 해당 ITEMNO가 맵에 없는 경우 새로운 키로 추가
+		        itemQuantityMap.put(itemNo, quantity);
+		    }			
+		}
+		//결과 Map itemno : quantity 쌍을  List<Basket>에 담기
+		for (Map.Entry<Integer, Integer> entry : itemQuantityMap.entrySet()) {
+		    int itemNo = entry.getKey();
+		    int totalQuantity = entry.getValue();
+		    
+		    Basket basket = new Basket();
+		    basket.setItemNo(itemNo);
+		    basket.setQuantity(totalQuantity);
+		    
+		    baskets.add(basket);
+		}
+		//장바구니에 담긴 상품 정보 조회
+		logger.debug("baskets : {}", baskets);
+		List<Item> items = orderDao.getItemByItemNos(baskets);
+		logger.debug("items : {}", items);
+
+		//상품의 대표 이미지 조회
+	    List<ItemFile> imgFiles = orderDao.getTitleImgs(items);
+
+		
+		Map<String, Object>  returnMap = new HashMap<>();
+		
+		returnMap.put("baskets", baskets);
+		returnMap.put("items", items);
+		returnMap.put("imgFiles", imgFiles);
+		
+		return returnMap;
 	}
+
+	@Override
+	public UserOrder makeUserOrder() {
+		User user = (User) session.getAttribute("dto1");
+		
+		UserOrder userOrder = new UserOrder();
+		userOrder.setUserName(user.getName());
+		userOrder.setUserNo(user.getUserno());
+		userOrder.setPostCode(user.getPostcode());
+		userOrder.setAddress(user.getAddress());
+		userOrder.setDetailAddress(user.getDetailAddress());
+		userOrder.setExtraAddress(user.getExtraAddress());
+		userOrder.setPhone(user.getPhone());
+		
+		return userOrder;
+	}
+	
 
 	
 }

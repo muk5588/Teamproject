@@ -57,7 +57,7 @@
             <img id="list-icon" src="/resources/img/mainPage/list.png" alt="우측 상단 목록" onclick="toggleLoginMenu();"><br>
         </div>
         <div class="Header-Name">
-            <a href="/" class="Site-Name">사이트 이름</a>
+            <a href="/" class="Site-Name"><img src="/resources/img/mainPage/title.png" ></a>
         </div>
 
 

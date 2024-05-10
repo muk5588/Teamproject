@@ -56,7 +56,6 @@ public class BoardController {
 	    logger.info("/board/list searchKind : {}", searchKind);
 	    logger.info("/board/list categoryNo : {}", categoryNo);
 		
-	    
 	    // ∆‰¿Ã¬° ∞ËªÍ
 	    Paging paging = new Paging();
 	    paging.setSearch(search);
@@ -78,7 +77,7 @@ public class BoardController {
 	    List<Board> list = null;
 	    List<Map<String, Object>> recommList = null;
 	    logger.info("paging : {}",paging);
-
+	    
 	    if (categoryNo != null) {
 	    	paging.setCategoryNo(categoryNo);
 	        list = boardService.listByCategory(paging);
@@ -96,7 +95,7 @@ public class BoardController {
 	    for(Map<String, Object> M : recommList) {
 //	        logger.debug("M : {}", M.toString());
 	    }
-
+	    
 	    model.addAttribute("totalrecomm", recommList);
 	    model.addAttribute("curPage", curPage);
 	    model.addAttribute("paging", paging);

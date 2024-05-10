@@ -1,3 +1,4 @@
+<%@page import="dto.Item"%>
 <%@page import="dto.OrderItem"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -62,9 +63,9 @@
             }).open();
         }
 </script>        
-<% List<OrderItem> items = (List<OrderItem>)request.getAttribute("orderItems");
+<% List<Item> items = (List<Item>)request.getAttribute("items");
 	String itemNames = "";
-	for(OrderItem o: items){
+	for(Item o: items){
 		itemNames += o.getItemName();
 	}
 	request.setAttribute("itemNames", itemNames);
@@ -98,7 +99,7 @@ IMP.request_pay({
 	
 	name: '${itemNames}',				//주문 상품 이름
 	
-	buyer_email: document.getElementById("email").value,		// 주문자 정보들
+	buyer_email: '${dto1.email}',		// 주문자 정보들
 	buyer_name: document.getElementById("userName").value,					// 주문자 정보들
 	buyer_tel: document.getElementById("phone").value,				// 주문자 정보들
 	buyer_addr: document.getElementById("address").value,	// 주문자 정보들
@@ -108,84 +109,41 @@ IMP.request_pay({
    //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
 	
     console.log( rsp )
-    
-    $("<form>")
-    .attr("action","")
-    .attr("method","post")
-    .append(
-    	$("<input>")
-    	.attr({
-    		type:"text"
-    		, name:"imp_uid"
-    		, value: rsp.imp_uid
-    	}) )
-    .append(
-    	$("<input>")
-    	.attr({
-    		type:"text"
-    		, name:"merchant_uid"
-    		, value: rsp.merchant_uid
-    	}) )
-    .appendTo( $(document.body) )
-    
-    
+    console.log( rsp.imp_uid )
+    var imp_uid = rsp.imp_uid
+    var pay_method = rsp.pay_method
+    //rsp.imp_uid -> 결제 실패시 null 반환
+    if( rsp.success && imp_uid ){
+    var form = $("#orderForm");
+    document.getElementById("impUid").value = imp_uid
+    document.getElementById("pay_method").value = pay_method
+//     $("<form>")
+//     .attr("action","")
+//     .attr("method","post")
+//     .append(
+//     	$("<input>")
+//     	.attr({
+//     		type:"text"
+//     		, name:"imp_uid"
+//     		, value: rsp.imp_uid
+//     	}) )
+//     .append(
+//     	$("<input>")
+//     	.attr({
+//     		type:"text"
+//     		, name:"merchant_uid"
+//     		, value: rsp.merchant_uid
+//     	}) )
+//     .appendTo( $(document.body) )
+    	alert('결제를 완료 했습니다')
+    form.submit();
+    }else{
+    	alert('결제 오류 입니다 [원인] : ' + rsp.error_msg)
+    }
     
    
 });
  
-//JSON 요청을 처리하기 위해 body-parser 미들웨어 세팅
-app.use(bodyParser.json());
-
-// POST 요청을 받는 /payments/complete
-app.post("/payment/complete", async (req, res) => {
-  try {
-    // 요청의 body로 imp_uid와 merchant_uid가 전달되기를 기대합니다.
-    const { imp_uid, merchant_uid } = req.body;
-
-    // 1. 포트원 API 엑세스 토큰 발급
-    const tokenResponse = await fetch("https://api.iamport.kr/users/getToken", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        imp_key: "1267261348683316", // REST API 키
-        imp_secret: "raGfKIOia3gSi4pnjct8TNHvFrsW6JOyc11ckSRfM87vhJI0EulIZ44aSSXnu6a042r9j70mFsNa6P9v", // REST API Secret
-      }),
-    });
-    if (!tokenResponse.ok)
-      throw new Error(`tokenResponse: ${tokenResponse.statusText}`);
-    const { access_token } = await tokenResponse.json();
-
-    // 2. 포트원 결제내역 단건조회 API 호출
-    const paymentResponse = await fetch(
-      `https://api.iamport.kr/payments/${imp_uid}`,
-      { headers: { Authorization: access_token } },
-    );
-    if (!paymentResponse.ok)
-      throw new Error(`paymentResponse: ${paymentResponse.statusText}`);
-    const payment = await paymentResponse.json();
-
-    // 3. 고객사 내부 주문 데이터의 가격과 실제 지불된 금액을 비교합니다.
-    const order = await OrderService.findById(merchant_uid);
-    if (order.amount === payment.amount) {
-      switch (payment.status) {
-        case "ready": {
-          // 가상 계좌가 발급된 상태입니다.
-          // 계좌 정보를 이용해 원하는 로직을 구성하세요.
-          break;
-        }
-        case "paid": {
-          // 모든 금액을 지불했습니다! 완료 시 원하는 로직을 구성하세요.
-          break;
-        }
-      }
-    } else {
-      // 결제 금액이 불일치하여 위/변조 시도가 의심됩니다.
-    }
-  } catch (e) {
-    // 결제 검증에 실패했습니다.
-    res.status(400).send(e);
-  }
-});
 }
 
 </script>
@@ -193,6 +151,7 @@ app.post("/payment/complete", async (req, res) => {
 $(function(){
 	$("#payBtn").click(function(){
 		console.log("결제버튼 클릭")
+		requestPay();
 	})
 	
 })
@@ -209,9 +168,9 @@ $(function(){
         
 <div id="orderwrap">
 <table>
+<form method="post" action="./completed" id="orderForm">
 	<tr><td>주문자명<input type="text" name="userName" id="userName" value="${userOrder.userName }"></td></tr>
 	<tr><td>핸드폰번호<input type="text" name="phone" id="phone" value="${userOrder.phone }"></td></tr>
-	<tr><td>이메일<input type="text" id="email" name="email"></td></tr>
 	<tr><td>배송지 우편주소<input type="text" name="postCode" id="postCode" value="${userOrder.postCode }" readonly="readonly">
 		<input type="button" onclick="DaumPostcode()" value="우편번호 찾기">
 	</td></tr>
@@ -228,25 +187,52 @@ $(function(){
 	    <th>가격</th>
 	</tr>
 	<c:set var="sum" value="0"/>
-    <c:forEach items="${orderItems }" var="orderItem">
+    <c:forEach items="${items }" var="item">
+    <c:forEach items="${baskets}" var="basket">
+    <c:if test="${item.itemNo eq basket.itemNo }">
    		<tr>
-   			<td>${orderItem.itemName }</td>
-   			<td>${orderItem.orderQuantity }</td>
-   			<td>이미지</td>
-   			<td>${orderItem.price}</td>
-			<c:set var="sum" value="${sum + orderItem.price }"/>
+   			<td>${item.itemName }</td>
+   			<td>${basket.quantity }</td>
+   			<td>
+   			<c:choose>
+	    	<c:when test="${not empty imgFiles}">
+		    	<c:forEach items="${imgFiles}" var="files">
+		    	<c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
+		    		<img alt="ItemImg" src="/resources/img/shop/upload/${files.storedName }">
+		    	</c:if>
+		    	<c:if test="${empty files.itemNo}">
+		    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+		    	</c:if>
+		   		</c:forEach>
+	   		</c:when>
+	   		<c:when test="${empty imgFiles }">
+	    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+	   		</c:when>
+   			</c:choose>
+   			</td>
+   			<td>${item.price * basket.quantity}
+   				<c:set var="i" value="${item.price * basket.quantity }"/>
+   			</td>
+			<c:set var="sum" value="${sum + i}"/>
    		</tr>
+   	</c:if>
+   	</c:forEach>
     </c:forEach>
     <tr>
     	<td>총계 : 
     	  <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${sum }"/>
-    	  <input hidden="hidden" id="totalPrice" value="${sum }"></td>
+    	  <input hidden="hidden" id="totalPrice" value="${sum }">
     	</td>
     </tr>
 </table>
-<button onclick="requestPay();">결제</button>
-<button id="payBtn" onclick="requestPay();">결제하기</button>
-
+<input type="hidden" id="pay_method" name="pay" value=''/>
+<input type="hidden" id="impUid" name="impUid" value=''/>
+<input type="hidden" id="items" name="items" value='${items}'/>
+<%-- <input type="hidden" id="basketNos" name="basketNos" value='${basketNos}'/> --%>
+<input type="hidden" id="baskets" name="baskets" value='${baskets}'/>
+<!-- <button onclick="requestPay();">결제</button> -->
+<button onclick="requestPay();" type="button">결제하기</button>
+</form>
 </div>
        
 

@@ -18,4 +18,36 @@
 	VALUES(#{orderItemNo},#{orderNo},#{itemNo},#{itemName},#{orderQuantity},#{price})
 </insert>
 
+<select id="basketListBybasketNos" parameterType="int" resultType="dto.Basket">
+	SELECT basketno,userno,itemno,quantity,additionalDATE+ INTERVAL '9' HOUR AS additionalDATE FROM BASKET
+	<where>
+	basketNo in 
+	<foreach collection="basketNos" item="data" open="(" close=")" separator="," >
+		#{data}
+	</foreach>
+	</where>
+</select>
+
+<select id="getItemByItemNos" parameterType="dto.Basket" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+		<where>
+		itemno in 
+		<foreach collection="baskets" item="data" open="(" close=")" separator="," >
+			#{data.itemNo}
+		</foreach>
+		</where>
+</select>
+
+<select id="getTitleImgs" resultType="dto.ItemFile">
+	SELECT it.itemno, stored_Name storedName, origin_Name originName , fileNo  FROM item it, itemFile ItF 
+	<where>
+	AND it.itemno = itf.itemno
+	AND it.titleimg = itf.FILENO
+	AND it.itemno IN
+	<foreach collection="items" item="data" open="(" close=")" separator="," >
+		#{data.itemNo}
+	</foreach>
+	</where>
+</select>
+
 </mapper>

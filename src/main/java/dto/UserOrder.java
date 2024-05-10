@@ -16,9 +16,11 @@ public class UserOrder {
 	private String method;
 	private int paraMount;
 	private Date orderDate;
+	private String impUid;
 	public UserOrder() {}
 	public UserOrder(int orderNo, int userNo, String userName, String phone, String pay, int totalPrice, int postCode,
-			String address, String detailAddress, String extraAddress, String method, int paraMount, Date orderDate) {
+			String address, String detailAddress, String extraAddress, String method, int paraMount, Date orderDate,
+			String impUid) {
 		super();
 		this.orderNo = orderNo;
 		this.userNo = userNo;
@@ -33,13 +35,14 @@ public class UserOrder {
 		this.method = method;
 		this.paraMount = paraMount;
 		this.orderDate = orderDate;
+		this.impUid = impUid;
 	}
 	@Override
 	public String toString() {
 		return "UserOrder [orderNo=" + orderNo + ", userNo=" + userNo + ", userName=" + userName + ", phone=" + phone
 				+ ", pay=" + pay + ", totalPrice=" + totalPrice + ", postCode=" + postCode + ", address=" + address
 				+ ", detailAddress=" + detailAddress + ", extraAddress=" + extraAddress + ", method=" + method
-				+ ", paraMount=" + paraMount + ", orderDate=" + orderDate + "]";
+				+ ", paraMount=" + paraMount + ", orderDate=" + orderDate + ", impUid=" + impUid + "]";
 	}
 	public int getOrderNo() {
 		return orderNo;
@@ -118,6 +121,12 @@ public class UserOrder {
 	}
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+	public String getImpUid() {
+		return impUid;
+	}
+	public void setImpUid(String impUid) {
+		this.impUid = impUid;
 	}
 	
 }

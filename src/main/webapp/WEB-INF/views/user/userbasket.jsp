@@ -11,36 +11,39 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	 $("#buyBtn").click(function() {
-	        var datas = [];
-	        $("input[name=deleteNo]:checked").each(function() {
-	        	var no = $(this).val();
-	        	datas.push(no);
-	        });
-	        console.log(datas); // 체크된 상품들의 값 확인용
-			
-            $.ajaxSettings, traditional = true
-	        $.ajax({
-                    type: "get"
-                    , url: "./buyBasket"
-                    , data: {
-                        basketNo: datas
-                    }
-                    , dataType: "json"
-                    , success: function (res) {
-					console.log("AJAX 성공")
-					console.log(res)
-                        
-                    $(function () {
-                    	 window.location.href = "../order/ordersheet?res=" + encodeURIComponent(JSON.stringify(res));
-                    })
-
-                    }
-                    , error: function () {
-                        console.log("AJAX 실패")
-                    }
-                })
+	$("#buyBtn").click(function() {
+	    var datas = [];
+	    var urlData = [];
+	    $("input[name=deleteNo]:checked").each(function() {
+	        var no = $(this).val();
+	        datas.push(no);
+	        var param = 'res=' + $(this).val();
+	        urlData.push(param);
 	    });
+	    var urlQueryString = urlData.join('&');
+	    console.log(datas); // 체크된 상품들의 값 확인용
+	            
+	    $.ajaxSettings, traditional = true
+	    $.ajax({
+	        type: "get",
+	        url: "./buyBasket",
+	        data: {
+	            basketNo: datas
+	        },
+	        dataType: "json",
+	        success: function (res) {
+	            console.log("AJAX 성공")
+	            console.log(res)
+	                        
+	            $(function () {
+	                window.location.href = "../order/ordersheet?" + urlQueryString;
+	            })
+	        },
+	        error: function () {
+	            console.log("AJAX 실패")
+	        }
+	    });
+	});
 	
 })
 </script>

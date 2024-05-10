@@ -90,7 +90,7 @@ public interface BoardDao {
 
 	public GoodVO getRecommendVO(Good paramGood);
 
-	public List<Board> listByCategory(int categoryNo);
+	public List<Board> listByCategory(Paging paging);
 
     public List<Map<String, Object>> getuserRecommendRes(Paging paging);
 }

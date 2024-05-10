@@ -13,6 +13,15 @@ public class Paging {
 	private int endNo; // 화면에 보이는 게시글의 끝 번호
 	private String search;	//검색어
 	private String searchKind; // 검색어 종류 ( 제목: title, 내용:content)
+	private int categoryNo;
+	
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
 
 	private int userno;
 	

@@ -98,7 +98,7 @@ public interface BoardService {
 
 	public GoodVO getRecommendVO(Good paramGood);
 
-	public List<Board> listByCategory(int categoryNo, Paging paging);
+	public List<Board> listByCategory(Paging paging);
 
 
 	public List<Map<String, Object>> getuserRecommendRes(Paging paging);

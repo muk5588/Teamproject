@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired private BoardDao boardDao;
 	@Autowired private CommentDao commentDao;
 	@Autowired private HttpSession session;
+	@Autowired private SqlSession sqlSession;
 	
 	@Override
 	public List<Board> list(Paging paging) {
@@ -38,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
 	public Paging getPaging(int curPage, Paging paging) {
 		
 		int totalCount = boardDao.selectCntAll(paging);
-		
+		logger.info("totalCount : {}",totalCount);
 		Paging pagingres = new Paging(totalCount, curPage);
 		
 		return pagingres;
@@ -207,8 +209,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> listByCategory(int categoryNo, Paging paging) {
-		 return boardDao.listByCategory(categoryNo);	
+	public List<Board> listByCategory(Paging paging) {
+		 return boardDao.listByCategory(paging);	
 
 	}
 

@@ -1,14 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-
 <%--
   Created by IntelliJ IDEA.
   User: c
   Date: 2024-04-04
   Time: 오후 12:47
   To change this template use File | Settings | File Templates.
-
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -18,6 +15,23 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -42,7 +43,7 @@
+  
 <div class="warpper">
     <div class="warp">
         <c:choose>
@@ -47,6 +61,17 @@
                 </div>
             </c:when>
             <c:otherwise>
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
                 <h3>${dto1.nickname } 회원 정보</h3>
                 <table class='w-pct60'>
                     <tr>

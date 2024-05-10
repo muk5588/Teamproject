@@ -24,24 +24,20 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
         }
-
         /* 페이지 제목 스타일 */
         h3 {
             color: #333;
         }
-
         /* 버튼 스타일 */
         #button {
             margin-bottom: 20px;
             text-align: center;
         }
-
         button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -51,83 +47,84 @@
             cursor: pointer;
             margin-right: 10px;
         }
-
         button a {
             color: #fff;
             text-decoration: none;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         /* 테이블 스타일 */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-
         th, td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         /* 페이지네이션 스타일 */
         #bar {
             text-align: center;
         }
-
         .pagination {
             display: inline-block;
         }
-
         .page-item {
             display: inline-block;
         }
-
         .page-link {
             color: #007bff;
             padding: 5px 10px;
             text-decoration: none;
         }
-
         .page-link:hover {
             background-color: #f2f2f2;
         }
-
         .active .page-link {
             background-color: #007bff;
             color: #fff;
         }
-
         .container1 {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -134,8 +134,7 @@
+  
             display: flex;
             justify-content: space-between;
         }
-
         .table-container {
             display: flex;
             flex-grow: 1;
         }
-
         .table-wrapper, #content2 {
             margin-right: 20px;
             flex-grow: 1;
         }
-
         .table-wrapper:last-child {
             margin-right: 0;
         }
-
         #content1, #content2, #content3 {
             flex-grow: 1;
         }
@@ -138,6 +135,17 @@
 <div id="button">
     <button><a href="/user/userList">회원리스트</a></button>
     <button onclick="location.href = '/grade/gradeList'">권한조회</button>
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -146,7 +145,7 @@
+  
     <button><a href="/grade/gradeInsert">권한추가</a></button>
     <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
     <button onclick="location.href = '/user/userList'">유저조회</button>
@@ -149,6 +157,17 @@
     <div class="table-container">
         <div class="table-wrapper">
             <h3>전체 회원 목록</h3>
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>
@@ -176,7 +195,6 @@
         </div>
         <div id="content2">
             <h3>회원등급 목록</h3>
-
             <table class='table table-striped table-hover table-sm'>
                 <tr>
                     <th class='w-px60'>등급번호</th>
@@ -197,7 +215,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

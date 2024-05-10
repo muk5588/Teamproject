@@ -48,29 +48,49 @@ public class OrderController {
 	    UserOrder userOrder = orderService.makeUserOrder();
 	    logger.debug("userOrder check : {}", userOrder);
 	    model.addAttribute("userOrder", userOrder);
+	    model.addAttribute("orderDatas", orderDatas);
 	    
 	}
 	
 	@PostMapping("/completed")
-	private void orderCompleted(
+	private String orderCompleted(
 		HttpServletRequest req
-		,String items
-		,String baskets
+		,String orderDatas
 		,UserOrder userOrder
+		, Model model
 		) {
 		logger.debug("결제 완료 페이지");
+		User user = (User) session.getAttribute("dto1");
 //		logger.debug("orderItemNos 확인 : {}", orderItemNos);
-		logger.debug("userOrder 확인 : {}", userOrder);
-		logger.debug("items 확인 : {}", items);
-		logger.debug("baskets 확인 : {}", baskets);
+		logger.debug("userOrder 확인1 : {}", userOrder);
+		logger.debug("orderDatas 확인 toString: {}", orderDatas.toString());
+		logger.debug("orderDatas 확인 : {}", orderDatas);
+		userOrder.setUserNo(user.getUserno());
+		int resUserOrder = orderService.insertUserOrder(userOrder);
+		logger.debug("resUserOrder 확인 : {}", resUserOrder);
 		
+		if(!(resUserOrder > 0)) {
+			return "redircet:/";
+			//insertUserOrder 실패시 코드 작성
+		}
 		
+		logger.debug("userOrder 확인2 : {}", userOrder);
+		int resOrderItems = orderService.insertOrderItems(orderDatas,userOrder );
+		logger.debug("resOrderItems : {}", resOrderItems);
 		
+		if(!(resOrderItems > 0)) {
+			return "redircet:/";
+			//insertOrderItems 실패시 코드 작성
+		}
+		model.addAttribute("userOrder", userOrder);
 		
-		
+		return "redircet:./orderresult";
 		
 	}
 	
-	
+	@RequestMapping("/orderresult")
+	private void result() {
+		
+	}
 	
 }

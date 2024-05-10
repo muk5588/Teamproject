@@ -21,6 +21,10 @@ public interface OrderDao {
 	public List<Item> getItemByItemNos(@Param("baskets")List<Basket> baskets);
 
 	public List<ItemFile> getTitleImgs(@Param("items")List<Item> items);
+
+	public int insertUserOrder(UserOrder userOrder);
+
+	public int insertOrderItems(@Param("orderItems")List<OrderItem> userOrderDetail);
 	
 	
 }

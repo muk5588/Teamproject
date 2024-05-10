@@ -1,3 +1,4 @@
+<%@page import="java.util.UUID"%>
 <%@page import="dto.Item"%>
 <%@page import="dto.OrderItem"%>
 <%@page import="java.util.List"%>
@@ -69,6 +70,9 @@
 		itemNames += o.getItemName();
 	}
 	request.setAttribute("itemNames", itemNames);
+	String uuid = UUID.randomUUID().toString().split("-")[4];
+	uuid += UUID.randomUUID().toString().split("-")[4];
+	request.setAttribute("uuid", uuid);
 %>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript">
@@ -77,12 +81,12 @@
 //가맹점 식별코드 초기화
 IMP.init('imp21765258')
 
-//        var today = new Date();   
-//         var hours = today.getHours(); // 시
-//         var minutes = today.getMinutes();  // 분
-//         var seconds = today.getSeconds();  // 초
-//         var milliseconds = today.getMilliseconds();
-//         var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+       var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = '' +hours +  minutes + seconds + milliseconds;
         
 function requestPay() {
 	
@@ -93,7 +97,7 @@ IMP.request_pay({
 	
 	pay_method: "card",						//결제 수단 (필수)
 // 	merchant_uid: ${userOrder.orderNo}+makeMerchantUid,	// 고유 주문번호(필수) (unique)
-	merchant_uid: ${userOrder.orderNo},	// 고유 주문번호(필수) (unique)
+	merchant_uid: '${uuid}' + makeMerchantUid,	// 고유 주문번호(필수) (unique)
 // 	amount: document.getElementById("totalPrice").value,		// 결제 금액 (필수)
 	amount: 1,		// 결제 금액 (필수)
 	
@@ -110,32 +114,64 @@ IMP.request_pay({
 	
     console.log( rsp )
     console.log( rsp.imp_uid )
-    var imp_uid = rsp.imp_uid
-    var pay_method = rsp.pay_method
     //rsp.imp_uid -> 결제 실패시 null 반환
+    var imp_uid = rsp.imp_uid
     if( rsp.success && imp_uid ){
     var form = $("#orderForm");
-    document.getElementById("impUid").value = imp_uid
-    document.getElementById("pay_method").value = pay_method
-//     $("<form>")
-//     .attr("action","")
-//     .attr("method","post")
-//     .append(
-//     	$("<input>")
-//     	.attr({
-//     		type:"text"
-//     		, name:"imp_uid"
-//     		, value: rsp.imp_uid
-//     	}) )
-//     .append(
-//     	$("<input>")
-//     	.attr({
-//     		type:"text"
-//     		, name:"merchant_uid"
-//     		, value: rsp.merchant_uid
-//     	}) )
-//     .appendTo( $(document.body) )
-    	alert('결제를 완료 했습니다')
+
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"impUid"
+    		, value: rsp.imp_uid
+    	}) )
+    .appendTo(form)
+    
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"pay"
+    		, value: rsp.pay_method
+    	}) )
+    .appendTo(form)
+    
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"userNo"
+    		, value: ${dto1.userno}
+    	}) )
+    .appendTo(form)
+    
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"merchantUid"
+    		, value: rsp.merchant_uid
+    	}) )
+    .appendTo(form)
+    
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"paraMount"
+    		, value: rsp.paid_amount
+    	}) )
+    .appendTo(form)
+    
+    
+   	alert('결제를 완료 했습니다')
+   	
     form.submit();
     }else{
     	alert('결제 오류 입니다 [원인] : ' + rsp.error_msg)
@@ -221,15 +257,14 @@ $(function(){
     <tr>
     	<td>총계 : 
     	  <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${sum }"/>
-    	  <input hidden="hidden" id="totalPrice" value="${sum }">
+    	  <input hidden="hidden" name="totalPrice" id="totalPrice" value="${sum }">
     	</td>
     </tr>
 </table>
-<input type="hidden" id="pay_method" name="pay" value=''/>
-<input type="hidden" id="impUid" name="impUid" value=''/>
-<input type="hidden" id="items" name="items" value='${items}'/>
 <%-- <input type="hidden" id="basketNos" name="basketNos" value='${basketNos}'/> --%>
-<input type="hidden" id="baskets" name="baskets" value='${baskets}'/>
+<c:forEach items="${orderDatas}" var="orderData">
+    <input type="hidden" name="orderDatas" value="${orderData}" />
+</c:forEach>
 <!-- <button onclick="requestPay();">결제</button> -->
 <button onclick="requestPay();" type="button">결제하기</button>
 </form>

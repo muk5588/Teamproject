@@ -50,4 +50,31 @@
 	</where>
 </select>
 
+<insert id="insertUserOrder" parameterType="dto.UserOrder">
+	<selectKey order="BEFORE" resultType="int" keyProperty="orderNo">
+		SELECT USERORDER_SEQ.nextval FROM dual
+	</selectKey>
+	INSERT INTO UserOrder(orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impuid,merchantUid)
+	VALUES(#{orderNo},#{userNo},#{userName},#{phone},#{pay},#{totalPrice},#{postCode},#{address},#{detailAddress},#{extraAddress},#{paraMount},SYSDATE,#{impUid},#{merchantUid})
+</insert>
+
+<!-- <insert id="insertUserOrder" parameterType="int"> -->
+<!-- 	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price) -->
+<!-- 	SELECT ORDERITEM_SEQ.nextval, D.* FROM ( -->
+<!-- 	<foreach collection="orderItems" item="items" separator="UNION ALL"> -->
+<!-- 	<![CDATA[ -->
+<!-- 		SELECT -->
+<!-- 		#{orderNo} AS orderNo -->
+<!-- 		, #{itemNo} AS itemNo -->
+<!-- 		, #{itemName} AS itemName -->
+<!-- 		, #{orderQuantity} AS orderQuantity -->
+<!-- 		, #{price} AS #{price} -->
+<!-- 		FROM DUAL]]> -->
+<!-- 	</foreach> -->
+<!-- 	)D  -->
+<!-- </insert> -->
+
+
+
+
 </mapper>

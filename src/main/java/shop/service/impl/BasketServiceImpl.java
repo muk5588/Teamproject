@@ -135,8 +135,6 @@ public class BasketServiceImpl implements BasketService {
 					order.setItemName(i.getItemName());
 					order.setOrderQuantity(b.getQuantity()); 
 					order.setPrice(( b.getQuantity() * i.getPrice()));
-					int orderitemRes = userorderDao.insertOrderItem(order);
-					logger.debug("orderitemRes : {}", orderitemRes);
 					logger.debug("order : {}", order);
 					userOrderDetail.add(order);
 				}

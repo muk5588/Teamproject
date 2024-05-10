@@ -17,10 +17,11 @@ public class UserOrder {
 	private int paraMount;
 	private Date orderDate;
 	private String impUid;
+	private String merchantUid;
 	public UserOrder() {}
 	public UserOrder(int orderNo, int userNo, String userName, String phone, String pay, int totalPrice, int postCode,
 			String address, String detailAddress, String extraAddress, String method, int paraMount, Date orderDate,
-			String impUid) {
+			String impUid, String merchantUid) {
 		super();
 		this.orderNo = orderNo;
 		this.userNo = userNo;
@@ -36,13 +37,15 @@ public class UserOrder {
 		this.paraMount = paraMount;
 		this.orderDate = orderDate;
 		this.impUid = impUid;
+		this.merchantUid = merchantUid;
 	}
 	@Override
 	public String toString() {
 		return "UserOrder [orderNo=" + orderNo + ", userNo=" + userNo + ", userName=" + userName + ", phone=" + phone
 				+ ", pay=" + pay + ", totalPrice=" + totalPrice + ", postCode=" + postCode + ", address=" + address
 				+ ", detailAddress=" + detailAddress + ", extraAddress=" + extraAddress + ", method=" + method
-				+ ", paraMount=" + paraMount + ", orderDate=" + orderDate + ", impUid=" + impUid + "]";
+				+ ", paraMount=" + paraMount + ", orderDate=" + orderDate + ", impUid=" + impUid + ", merchantUid="
+				+ merchantUid + "]";
 	}
 	public int getOrderNo() {
 		return orderNo;
@@ -127,6 +130,12 @@ public class UserOrder {
 	}
 	public void setImpUid(String impUid) {
 		this.impUid = impUid;
+	}
+	public String getMerchantUid() {
+		return merchantUid;
+	}
+	public void setMerchantUid(String merchantUid) {
+		this.merchantUid = merchantUid;
 	}
 	
 }

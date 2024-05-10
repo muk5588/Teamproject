@@ -23,6 +23,21 @@ public interface OrderService {
 	 */
 	public UserOrder makeUserOrder();
 
+	/**
+	 * 결제 정보에서 입력받은 정보를 토대로 UserOrder객체 insert
+	 * @param userOrder
+	 * @return
+	 */
+	public int insertUserOrder(UserOrder userOrder);
+
+	/**
+	 * 결제한 목록을 장바구니 -> 주문 상세로 인서트
+	 * @param orderDatas
+	 * @param userOrder 
+	 * @return
+	 */
+	public int insertOrderItems(String orderDatas, UserOrder userOrder);
+
 	
 	
 }

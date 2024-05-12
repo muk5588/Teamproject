@@ -150,7 +150,7 @@
 
                     if (res) {
                         $(function () {
-                            $(location).attr('href', './view?boardNo=${board.boardNo }')
+                            $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
                         })
                     }
 
@@ -181,7 +181,7 @@
 
                         if (res) {
                             $(function () {
-                                $(location).attr('href', './view?boardNo=${board.boardNo }')
+                                $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
                             })
                         }
                     }
@@ -325,7 +325,7 @@
                 </c:if>
                 </div>
             </div>
-            <button onclick="location.href='../report/boardReport?boardno=${board.boardNo}'"> 신고하기</button>
+            <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'"> 신고하기</button>
         </c:if>
         <hr>
         <div class="comment">

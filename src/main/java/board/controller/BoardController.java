@@ -56,7 +56,7 @@ public class BoardController {
 	    logger.info("/board/list searchKind : {}", searchKind);
 	    logger.info("/board/list categoryNo : {}", categoryNo);
 		
-	    // ÆäÀÌÂ¡ °è»ê
+	    // í˜ì´ì§• ê³„ì‚°
 	    Paging paging = new Paging();
 	    paging.setSearch(search);
 	    paging.setSearchKind(searchKind);
@@ -160,14 +160,14 @@ public class BoardController {
 		int res = boardService.write(board);
 
 		String content = board.getContent();
-		logger.info("content È®ÀÎ : {}", content);
+		logger.info("content È®ï¿½ï¿½ : {}", content);
 		List<String> originNames = fileService.extractOriginName(content);
-		logger.info("originNames È®ÀÎ : {}", originNames);
+		logger.info("originNames È®ï¿½ï¿½ : {}", originNames);
 		List<String> storedNames = fileService.extractStoredName(content, originNames);
-		logger.info("storedNames È®ÀÎ : {}", storedNames);
+		logger.info("storedNames È®ï¿½ï¿½ : {}", storedNames);
 		if (originNames != null && storedNames != null && originNames.size() == storedNames.size() && !originNames.isEmpty() && !storedNames.isEmpty()) {
 			ArrayList<BoardFile> files = new ArrayList<>();
-			logger.info("ÀÌ¹ÌÁö ÆÄÀÏ Ã³¸®Áß :%%%%%%%%%%%%%%%%%%%%%%%%%%" );
+			logger.info("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ :%%%%%%%%%%%%%%%%%%%%%%%%%%" );
 		    for (int i = 0; i < originNames.size(); i++) {
 		        String originName = originNames.get(i);
 		        String storedName = storedNames.get(i);
@@ -182,12 +182,12 @@ public class BoardController {
 		    fileService.setFile(files);
 		}
         
-		logger.info("board °ª È®ÀÎ : {}", board);
+		logger.info("board ï¿½ï¿½ È®ï¿½ï¿½ : {}", board);
 		
 		if( null == file ) {
-			logger.debug("Ã·ºÎ ÆÄÀÏ ¾øÀ½");
+			logger.debug("Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}else if( file.getSize() <= 0 ){
-			logger.debug("ÆÄÀÏÀÇ Å©±â°¡ 0");
+			logger.debug("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â°¡ 0");
 		}else { 
 //			for( )
 			fileService.filesave(board,file);
@@ -247,7 +247,7 @@ public class BoardController {
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("boardNo") int boardno) {
-		logger.debug("delete º¯¼ö : {}",boardno);
+		logger.debug("delete ï¿½ï¿½ï¿½ï¿½ : {}",boardno);
 		
 		Board deleteBoard = new Board();
 		Comment comment	= new Comment();
@@ -264,7 +264,7 @@ public class BoardController {
 			Board recommendBoard
 			, HttpSession session
 			) {
-		logger.info("ÃßÃµ È®ÀÎ {}, {} ", recommendBoard, session.getAttribute("isLogin"));
+		logger.info("ï¿½ï¿½Ãµ È®ï¿½ï¿½ {}, {} ", recommendBoard, session.getAttribute("isLogin"));
 		
 		boardService.recommend(recommendBoard);
 
@@ -286,14 +286,14 @@ public class BoardController {
 		boardService.deleteGood(boardno);
 		fileService.listDeleteByBoardNo(boardno);
 		int res = boardService.listDeleteByBoardNo(boardno);
-		logger.debug("»èÁ¦ ¿Ï·á");
+		logger.debug("ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
 		return res;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/boardFileChk")
 	private void boardImageChk(int boardno) {
-		logger.debug("ÆÄÀÏ Ã¼Å© ");
+		logger.debug("ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ");
 		logger.debug("boardno : {}", boardno);
 //		int res = fileService.getFileCnt(boardno);
 //		if(res <= 0) {
@@ -313,7 +313,7 @@ public class BoardController {
 			,@RequestParam(value="searchKind", required = false ) String searchKind
 			,int userno
 			) {
-		// ÆäÀÌÂ¡ °è»ê
+		// ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½ï¿½
 
 		Paging paging = new Paging();
 		paging.setSearch(search);
@@ -346,11 +346,11 @@ public class BoardController {
 	@RequestMapping("/fileDown")
 	public String fileDown(int fileNo, Model model) {
 		BoardFile file = fileService.getFileByFileNo(fileNo);
-		logger.info("ÆÄÀÏ ´Ù¿î·Îµå : {}", file);
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµï¿½ : {}", file);
 		
 		model.addAttribute("downFile", file);
 		
-		logger.info("ÆÄÀÏ ´Ù¿î·Îµå : {}", file);
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµï¿½ : {}", file);
 		return "downView";
 	}
 	

@@ -111,7 +111,7 @@
 // 				console.log(res)
 
                     $(function () {
-                        $(location).attr('href', './list?curPage=${curPage}')
+                        $(location).attr('href', './list?categoryNo=${param.categoryNo}&curPage=${curPage}')
                     })
 
                 }
@@ -145,6 +145,7 @@
         </a>
         <div>
             <form action="" method="get" id="searchForm">
+                <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
                 <select name="searchKind" id="searchKind">
                     <option value="title">제목</option>
                     <option value="content">내용</option>

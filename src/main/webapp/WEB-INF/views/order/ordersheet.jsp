@@ -67,8 +67,13 @@
 <% 
 	List<Item> items = (List<Item>)request.getAttribute("items");
 	String itemNames = "";
+	int i =0;
 	for(Item o: items){
 		itemNames += o.getItemName();
+		if( i != 0){
+			itemNames += " , ";
+		}
+		i++;
 	}
 	request.setAttribute("itemNames", itemNames);
 	String uuid = UUID.randomUUID().toString().split("-")[4];

@@ -45,6 +45,42 @@
 	</where>
 </select>
 
+<insert id="insertItem" parameterType="dto.Item">
+	<selectKey keyProperty="itemNo" order="BEFORE" resultType="int">
+	SELECT item_seq.nextval FROM dual
+	</selectKey>
+	INSERT INTO ITEM(itemNo, userNo, itemName,itemComm,price,remain)
+	VALUES(#{itemNo},#{userNo},#{itemName},#{itemComm},#{price},#{remain})
+</insert>
 
+<insert id="fileSave" parameterType="dto.ItemFile">
+	INSERT into itemfile(fileNo,itemNo,originName,storedName)
+    SELECT itemfile_seq.nextval, D.* FROM ( 
+        <foreach collection="itemFiles" item="file" separator="UNION ALL ">
+        <![CDATA[
+        	SELECT
+            #{file.itemNo} AS boardNo
+            ,#{file.originName} AS origin_name
+            ,#{file.storedName} AS stored_name
+        FROM DUAL]]>
+        </foreach>
+        ) D
+</insert>
+
+<insert id="inserttitleImgFile" parameterType="dto.ItemFile">
+	<selectKey keyProperty="">
+	SELECT itemfile_seq.nextval FROM dual
+	</selectKey>
+	INSERT into itemfile(fileNo,itemNo,originName,storedName)
+    VALUES(#{fileNo},#{itemNo},#{originName},#{storedName}})
+</insert>
+
+<update id="updatetitleImgFile" parameterType="dto.ItemFile">
+	UPDATE item
+	set titleImg = #{fileNo}
+	<where>
+		AND itemNo = #{itemNo}
+	</where> 
+</update>
 
 </mapper>

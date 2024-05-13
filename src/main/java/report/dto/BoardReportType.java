@@ -1,5 +1,7 @@
 package report.dto;
 
+import org.apache.ibatis.type.Alias;
+
 public class BoardReportType {
 	
 	private int reportTypeNo;

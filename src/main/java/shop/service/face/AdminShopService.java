@@ -2,6 +2,8 @@ package shop.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import dto.Item;
 import dto.ItemFile;
 import util.Paging;
@@ -30,5 +32,39 @@ public interface AdminShopService {
 	 */
 	public List<ItemFile> selectTitleImgFile(List<Item> items);
 
+	/**
+	 * Ajax 로 전달 받은 이미지 파일을 저장 처리 
+	 * @return - 저장된 파일 객체( ItemFile)
+	 */
+	public ItemFile fileTempSave();
+
+	/**
+	 * 상품 정보 등록
+	 * @param item - 상품 객체
+	 * @return
+	 */
+	public int insertItem(Item item);
+
+	/**
+	 * itemComm 정규식 으로 원본, 저장된 파일명 추출 후 Insert
+	 * itemNo ( FK ) 
+	 * @param item - Item 객체
+	 * @return
+	 */
+	public int fileSave(Item item);
+
+	/**
+	 * 상품 대표 이미지 파일 설정
+	 * @param item - 상품 객체
+	 * @param file - 파일 객체
+	 * @return
+	 */
+	public int updatetitleImg(Item item, MultipartFile file);
+
+	
+	
+	
+	
+	
 
 }

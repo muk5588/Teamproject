@@ -34,38 +34,96 @@ public class OrderController {
 	@Autowired HttpSession session;
 	
 	@RequestMapping("/ordersheet")
-	private void ordersheet(@RequestParam("res")String[] orderDatas
+	private void ordersheet(@RequestParam(value="res", required = false)String[] orderDatas
 			, Model model
-			, HttpSession session) {
+			, HttpSession session
+			, @RequestParam(value="itemNo", required = false)String STitemNo
+			, @RequestParam(value="quantity", required = false)String STquantity) {
+		logger.debug("컨트롤러 itemNo : {}", STitemNo);
+		logger.debug("컨트롤러 quantity : {}", STquantity);
 		logger.debug("컨트롤러 orderDatas : {}", Arrays.toString(orderDatas));
+		if(orderDatas != null && STitemNo == null && STquantity == null) {
+		    int[] orderNumbers = orderService.getItemNosByorderDatas(orderDatas);
+			Map<String, Object> orderMap = orderService.userorderProc(orderNumbers);
+		    
+		    model.addAttribute("baskets", orderMap.get("baskets"));
+		    model.addAttribute("items",orderMap.get("items"));
+		    model.addAttribute("imgFiles",orderMap.get("imgFiles"));
+		    UserOrder userOrder = orderService.makeUserOrder();
+		    logger.debug("userOrder check : {}", userOrder);
+		    model.addAttribute("userOrder", userOrder);
+		    model.addAttribute("orderDatas", orderDatas);
+		}else if(orderDatas == null && STquantity != null && STitemNo != null) {
+			int itemNo , quantity;
+			itemNo = Integer.parseInt(STitemNo);
+			quantity = Integer.parseInt(STquantity);
+			logger.debug("else If 부분으로 빠졌음!!!!!!!!!!");
+			Map<String, Object> orderMap = orderService.getDatasByitemNoByquantity(itemNo,quantity);
+			logger.debug("orderMap : getDatasByitemNoByquantity check : {}", orderMap);
+			model.addAttribute("quantity", quantity);
+			UserOrder userOrder = orderService.makeUserOrder();
+			if(userOrder != null) {
+				logger.debug("userOrder check : {}", userOrder);
+				model.addAttribute("userOrder",userOrder);
+			}
+			
+			model.addAttribute("items",orderMap.get("items"));
+			model.addAttribute("imgFiles",orderMap.get("imgFiles"));
+			
+		}
+	    
 		
-	    int[] orderNumbers = orderService.getItemNosByorderDatas(orderDatas);
-		Map<String, Object> orderMap = orderService.userorderProc(orderNumbers);
-	    
-	    model.addAttribute("baskets", orderMap.get("baskets"));
-	    model.addAttribute("items",orderMap.get("items"));
-	    model.addAttribute("imgFiles",orderMap.get("imgFiles"));
-	    UserOrder userOrder = orderService.makeUserOrder();
-	    logger.debug("userOrder check : {}", userOrder);
-	    model.addAttribute("userOrder", userOrder);
-	    model.addAttribute("orderDatas", orderDatas);
-	    
 	}
 	
 	@PostMapping("/completed")
 	private String orderCompleted(
 		HttpServletRequest req
-		,String orderDatas
+		,@RequestParam(value="orderDatas", required = false)String orderDatas
 		,UserOrder userOrder
 		, Model model
+		, @RequestParam(value="itemNo", required = false)String STitemNo
+		, @RequestParam(value="quantity", required = false)String STquantity
 		) {
 		logger.debug("결제 완료 페이지");
+		logger.debug("결제 완료 페이지 STitemNo:{}",STitemNo);
+		logger.debug("결제 완료 페이지 STquantity:{}",STquantity);
 		User user = (User) session.getAttribute("dto1");
 		if(user == null ) {
 			return "redirect:/";
 		}
-//		logger.debug("orderItemNos 확인 : {}", orderItemNos);
 		logger.debug("userOrder 확인1 : {}", userOrder);
+		
+		//상품 단일 구매의 경우
+		if(orderDatas == null) {
+			int resUserOr = orderService.insertUserOrder(userOrder);
+			
+			if(resUserOr > 0) {
+				logger.debug("resUserOrresUserOr: {}", resUserOr);
+				OrderItem orderItem = new OrderItem();
+				int itemNo,quantity;
+				itemNo = Integer.parseInt(STitemNo);
+				quantity = Integer.parseInt(STquantity);
+				orderItem.setItemNo(itemNo);
+				orderItem.setOrderQuantity(quantity);
+				orderItem.setOrderNo(userOrder.getOrderNo());
+				int resa= orderService.insertOrderItem(orderItem);
+				logger.debug("orderItem : {}",orderItem);
+				if(resa > 0) {
+					orderItem = orderService.selectByOrderItem(orderItem);
+					logger.debug("orderItem : {}",orderItem);
+				}
+				model.addAttribute("userOrder", userOrder);
+				model.addAttribute("orderItem", orderItem);
+				logger.debug("orderItem : {}",orderItem);
+				return "/order/orderresult";
+				
+			}else {
+				return "redircet:/";
+			}
+			
+		}
+		
+//		logger.debug("orderItemNos 확인 : {}", orderItemNos);
 		logger.debug("orderDatas 확인 toString: {}", orderDatas.toString());
 		logger.debug("orderDatas 확인 : {}", orderDatas);
 		userOrder.setUserNo(user.getUserno());
@@ -96,7 +154,7 @@ public class OrderController {
 		logger.debug("imgFiles : {}", imgFiles);
 		model.addAttribute("imgFiles", imgFiles);
 		
-		return "./orderresult";
+		return "/order/orderresult";
 		
 	}
 	

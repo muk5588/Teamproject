@@ -46,6 +46,24 @@ public interface OrderService {
 	 */
 	public List<ItemFile> gettitleImg(List<OrderItem> resOrderItems);
 
+	/**
+	 * 상품 번호와 수량으로 선택한 상품의 데이터 가공
+	 * @param itemNo
+	 * @param quantity
+	 * @return
+	 */
+	public Map<String, Object> getDatasByitemNoByquantity(int itemNo, int quantity);
+
+	/**
+	 * 주문 상세 INSERT
+	 * @param orderItem - 주문 상세 객체
+	 * @return
+	 */
+	public int insertOrderItem(OrderItem orderItem);
+
+	public OrderItem selectByOrderItem(OrderItem orderItem);
+
+
 	
 	
 }

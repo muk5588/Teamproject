@@ -301,7 +301,7 @@
 		</where>
 	</delete>
 	
-	<select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
+	<!-- <select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
 		SELECT * FROM (
 			SELECT rownum rnum, B.* FROM (
 				<include refid="selectBoard" />
@@ -315,8 +315,30 @@
 		<where>
 			AND rnum BETWEEN #{startNo } AND #{endNo}
 		</where>
+	</select> -->
 
-	</select>
+<select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
+    SELECT * FROM (
+        SELECT rownum rnum, B.* FROM (
+            <include refid="selectBoard" />
+            <where>
+                AND categoryno = #{categoryNo}
+                <choose>
+                    <when test="searchKind != null and searchKind.equals('title')">
+                        AND TITLE Like '%${search}%'
+                    </when>
+                    <when test="searchKind != null and searchKind.equals('content')">
+                        AND CONTENT Like '%${search}%'
+                    </when>
+                </choose>
+            </where>
+            ORDER BY boardno DESC
+        ) B
+    )
+    <where>
+        AND rnum BETWEEN #{startNo } AND #{endNo}
+    </where>
+</select>
 
 	<select id="selectCntByCategory" resultType="int" parameterType="int">
     	SELECT count(*) FROM board
@@ -353,7 +375,5 @@
 			AND userno = #{userno}
 		</where>
 	</select>
-
-	
 
 </mapper>

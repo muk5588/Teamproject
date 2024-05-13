@@ -1,9 +1,6 @@
 package board.service;
 
-import board.dto.Board;
-import board.dto.Category;
-import board.dto.Good;
-import board.dto.RecommendRes;
+import board.dto.*;
 import comment.dto.Comment;
 import util.Paging;
 import vo.GoodVO;
@@ -108,4 +105,6 @@ public interface BoardService {
 	 * @return
 	 */
 	public String getCategoryName(int categoryNo);
+
+	public List<MainBoard> list();
 }

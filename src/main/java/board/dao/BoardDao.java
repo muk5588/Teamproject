@@ -1,18 +1,14 @@
 package board.dao;
 
+import board.dto.*;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import util.Paging;
+import vo.GoodVO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
-import board.dto.Board;
-import board.dto.Category;
-import board.dto.Good;
-import board.dto.RecommendRes;
-import util.Paging;
-import vo.GoodVO;
 
 @Repository("BoardDao")
 public interface BoardDao {
@@ -95,4 +91,6 @@ public interface BoardDao {
     public List<Map<String, Object>> getuserRecommendRes(Paging paging);
 
 	public String getCategoryName(int categoryNo);
+
+    public List<MainBoard> list();
 }

@@ -1,26 +1,21 @@
 package board.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
+import board.dao.BoardDao;
+import board.dto.*;
+import comment.dao.CommentDao;
+import comment.dto.Comment;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import board.dao.BoardDao;
-import board.dto.Board;
-import board.dto.Category;
-import board.dto.Good;
-import board.dto.RecommendRes;
-import comment.dao.CommentDao;
-import comment.dto.Comment;
 import util.Paging;
 import vo.GoodVO;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -232,6 +227,11 @@ public class BoardServiceImpl implements BoardService {
         }
 		
 		return cName;
+	}
+
+	@Override
+	public List<MainBoard> list() {
+		return boardDao.list();
 	}
 
 

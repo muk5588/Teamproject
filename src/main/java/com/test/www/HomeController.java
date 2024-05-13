@@ -1,5 +1,6 @@
 package com.test.www;
 
+import board.dto.MainBoard;
 import board.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -26,6 +28,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	GeoCoding geoCoding;
+	@Autowired
 	BoardService boardService;
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -37,8 +40,12 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-//		List<Board> list = boardService.listByCategoryno(categoryno);
+		List<MainBoard> list = boardService.list();
+		for (int i = 0; i < list.size(); i++) {
+			String cate = list.get(i).getCategoryName();
+			String category = cate.split("-")[1];
+			list.get(i).setCategoryName(category);
+		}
 		String formattedDate = dateFormat.format(date);
 		String x = null;
 		String y = null;
@@ -60,6 +67,7 @@ public class HomeController {
 			model.addAttribute("y",y);
 			model.addAttribute("address",address);
 		}
+		model.addAttribute("list",list);
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";

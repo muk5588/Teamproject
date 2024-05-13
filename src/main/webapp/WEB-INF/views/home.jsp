@@ -3,13 +3,14 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%--<%@ page session="false" %>--%>
 <html>
 <head>
-	<title>Home</title>
-	<script src="/resources/js/mainPage/mainSlide.js" defer></script>
-	<link  rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
+    <title>Home</title>
+    <script src="/resources/js/mainPage/mainSlide.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
     <script type="javascript">
         function adjustSlideshowPosition() {
             var menu = document.querySelector('.nav'); // 메뉴 요소 선택
@@ -25,43 +26,45 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/layout/header.jsp" />
-<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 
 
 <div class="slideshow-container">
 
-  <div class="mySlides fade">
-    <div class="numbertext">1 / 3</div>
-    <img src="/resources/img/mainPage/japan_01.jpg" style="width:100%">
-  </div>
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="/resources/img/mainPage/japan_01.jpg" style="width:100%">
+    </div>
 
-  <div class="mySlides fade">
-    <div class="numbertext">2 / 3</div>
-    <img src="/resources/img/mainPage/japan_02.jpg" style="width:100%">
-  </div>
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="/resources/img/mainPage/japan_02.jpg" style="width:100%">
+    </div>
 
-  <div class="mySlides fade">
-    <div class="numbertext">3 / 3</div>
-    <img src="/resources/img/mainPage/japan_03.jpg" style="width:100%">
-  </div>
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="/resources/img/mainPage/japan_03.jpg" style="width:100%">
+    </div>
 
-	<!-- 다음 & 이전 버튼 -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <!-- 다음 & 이전 버튼 -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 <br>
 
 <!-- 이미지 밑 점들 -->
 <div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
 </div>
 
 <div id="login" class="login">
     <c:if test="${empty isLogin }">
-        <a href="<%=request.getContextPath()%>/login"><button class="login-button">로그인</button></a><br>
+        <a href="<%=request.getContextPath()%>/login">
+            <button class="login-button">로그인</button>
+        </a><br>
         <a class="btn-fill" href="/user/insertUser">회원가입</a>
         /
         <a class="btn-fill" href="/user/searchUser?value=id">아이디찾기</a>
@@ -70,27 +73,27 @@
     </c:if>
     <c:if test="${not empty isLogin}">
 
-            ${dto1.name } [${dto1.nickname } ]
-            <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
-            <c:choose>
-                <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                    <br>
-                    <a href="/user/userDetail">마이페이지</a>
-                    /
-                    <a href="/user/adminPage">관리자페이지</a>
-                </c:when>
-                <c:otherwise>
-                    <br>
-                    <a href="/user/userDetail">마이페이지</a>
-                </c:otherwise>
-            </c:choose>
+        ${dto1.name } [${dto1.nickname } ]
+        <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
+        <c:choose>
+            <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                <br>
+                <a href="/user/userDetail">마이페이지</a>
+                /
+                <a href="/user/adminPage">관리자페이지</a>
+            </c:when>
+            <c:otherwise>
+                <br>
+                <a href="/user/userDetail">마이페이지</a>
+            </c:otherwise>
+        </c:choose>
         </ul>
     </c:if>
 </div>
 <div>
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
-<P>  The time on the server is ${serverTime}. </P>
+<P> The time on the server is ${serverTime}. </P>
 <div class="board-pre">
 
 </div>
@@ -115,9 +118,35 @@
 <%--</c:if>--%>
 
 <c:if test="${isLogin > 0}">
-	<a href ="/user/userDetail"><button>마이페이지</button></a>
-<%--	<a href="login/logout"><button>로그아웃</button></a>--%>
+    <a href="/user/userDetail">
+        <button>마이페이지</button>
+    </a>
+    <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
 </c:if>
-<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+<table class="table table-striped table-hover table-sm">
+    <%-- <colgroup> --%>
+    <%-- 	<col style="width: 10%;"> --%>
+    <%-- 	<col style="width: 45%;"> --%>
+    <%-- 	<col style="width: 15%;"> --%>
+    <%-- 	<col style="width: 10%;"> --%>
+    <%-- 	<col style="width: 20%;"> --%>
+    <%-- </colgroup> --%>
+    <tr>
+        <th>카테고리명</th>
+        <th>제목</th>
+        <th>작성자</th>
+    </tr>
+    <c:forEach var="board" items="${list }" begin="0" end="9">
+            <tr>
+                <td class="category">${board.categoryName}</td>
+                <td class="title">
+                    <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                </td>
+                <td class="nick">${board.nickName }</td>
+            </tr>
+    </c:forEach>
+
+</table>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

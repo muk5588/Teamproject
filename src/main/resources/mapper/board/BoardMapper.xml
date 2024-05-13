@@ -319,21 +319,21 @@
 
 <select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
     SELECT * FROM (
-        SELECT rownum rnum, B.* FROM (
-            <include refid="selectBoard" />
-            <where>
-                AND categoryno = #{categoryNo}
-                <choose>
-                    <when test="searchKind != null and searchKind.equals('title')">
-                        AND TITLE Like '%${search}%'
-                    </when>
-                    <when test="searchKind != null and searchKind.equals('content')">
-                        AND CONTENT Like '%${search}%'
-                    </when>
-                </choose>
-            </where>
-            ORDER BY boardno DESC
-        ) B
+    SELECT rownum rnum, B.* FROM (
+    <include refid="selectBoard"/>
+    <where>
+        AND categoryno = #{categoryNo}
+        <choose>
+            <when test="searchKind != null and searchKind.equals('title')">
+                AND TITLE Like '%${search}%'
+            </when>
+            <when test="searchKind != null and searchKind.equals('content')">
+                AND CONTENT Like '%${search}%'
+            </when>
+        </choose>
+    </where>
+    ORDER BY boardno DESC
+    ) B
     )
     <where>
         AND rnum BETWEEN #{startNo } AND #{endNo}
@@ -380,8 +380,14 @@
 <select id="getCategoryName" parameterType="int" resultType="String">
 	SELECT CATEGORYNAME FROM CATEGORY
 	WHERE CATEGORYno = #{categoryNo}
-</select> 
+</select>
 
+<select id="list" resultType="MainBoard">
+	SELECT TITLE, NICKNAME, BOARDNO, b.CATEGORYNO, b.CREATEDATE,  c.CATEGORYNAME
+	FROM BOARD b
+			 LEFT OUTER JOIN CATEGORY c ON b.CATEGORYNO = c.CATEGORYNO
+	ORDER BY b.CREATEDATE
+</select>
 
 
 </mapper>

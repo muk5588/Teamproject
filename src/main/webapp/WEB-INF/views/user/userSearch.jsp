@@ -11,12 +11,13 @@
 <head>
     <title>Title</title>
     <script src="/resources/js/user/search.js" charset="UTF-8"></script>
+	<link href="/resources/css/userSearch.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 <h3>회원정보 찾기</h3>
-<div class="warpper">
+<%-- <div class="warpper">
     <div class="warp">
         <c:if test="${value == 'id'}">
             <div id="searchid">
@@ -25,7 +26,7 @@
                         <label for="name">이름</label>
                         <input type="text" name="name" id="name"/><br>
                     </div>
-                    <div id=emailbox">
+                    <div id="emailbox">
                         <label for="email">이메일</label>
                         <input type="email" name="email" id="email"/>
                         <button type="button" id="checkmail" disabled>인증번호 발송</button>
@@ -64,6 +65,73 @@
             </div>
         </c:if>
     </div>
+</div> --%>
+
+<!-- <div class="wrapper"> -->
+	<div class="container">
+  
+  <!-- Links -->
+  <ul class="links">
+    <li>
+      <a href="#" id="idFind">아이디찾기</a>
+    </li>
+    <li>
+      <a href="#" id="pwFind">비밀번호찾기</a>
+    </li>
+  </ul>
+  
+  <!-- Form -->
+  <c:if test="${value == 'id'}">
+    <form action="/user/searchId" method="post" id="useridform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+      <!-- 이름 입력란 -->
+      <div class="id-find find__block id-find__block" id="namebox">
+        <input type="text" name="name" id="name" class="input" placeholder="이름"/>
+      </div>
+      
+      <!-- 이메일 입력란 -->
+      <div class="find__block" id="emailbox">
+        <input type="email" name="email" id="email" placeholder="이메일"/>
+        <button class="send__btn" type="button" id="checkmail" disabled>인증번호 발송</button>
+        <br>
+        <div id="alertemail" name="alertemail"></div>
+        <input type="text" id="checkcode" placeholder="인증번호를 입력해주세요" disabled="disabled">
+        <br>
+        <button class="search__btn" type="button" id="search" name="search">아이디찾기</button>
+      </div>
+    </form>
+  </c:if>
+  
+  <c:if test="${value == 'pw'}">
+    <form action="/user/searchPw" method="post" id="userpwform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
+      <!-- 이름 입력란 -->
+      <div id="namebox2">
+        <label for="name2">이름</label>
+        <input type="text" name="name2" id="name2"/><br>
+      </div>
+      
+      <!-- 아이디 입력란 -->
+      <div id="useridbox2">
+        <label for="userid2">아이디</label>
+        <input type="text" name="userid2" id="userid2">
+        <div id="alertid2" name="alertid2"></div>
+      </div>
+      
+      <!-- 이메일 입력란 -->
+      <div id="emailbox2">
+        <label for="email2">이메일</label>
+        <input type="email" name="email2" id="email2"/>
+        <button type="button" id="checkmail2" disabled>인증번호 발송</button>
+        <br>
+        <div id="alertemail2" name="alertemail2"></div>
+        <input type="text" id="checkcode2" placeholder="인증번호를 입력해주세요" disabled="disabled">
+        <br>
+        <button type="button" id="search2" name="search2">비밀번호찾기</button>
+      </div>
+    </form>
+  </c:if>
 </div>
+	<!-- </div> -->
+
+
 </body>
 </html>

@@ -1,18 +1,15 @@
 package user.service;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 import user.dao.UserDao;
 import user.dto.User;
-import util.Paging;
+
+import javax.mail.internet.MimeMessage;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -69,7 +66,7 @@ public class UserServiceImpl implements UserService {
 		
 		Random random =new Random();
 		int checkNum = random.nextInt(888888)+111111;
-		String subject = "회원가입 인증 메일입니다";
+		String subject = "인증 메일입니다";
 		String content = "방문해 주셔서 감사합니다"+
 				"인증번호는"+"<h1 style='color=blue'>" + checkNum + "</h1>" + " 입니다." + "\r\n" + "해당 인증번호를 인증번호 확인란에 기입라여 주세요";
 		String from = "jxoow1531155@gmail.com";

@@ -1,11 +1,5 @@
 package board.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import board.dto.Board;
 import board.dto.Category;
 import board.dto.Good;
@@ -13,6 +7,11 @@ import board.dto.RecommendRes;
 import comment.dto.Comment;
 import util.Paging;
 import vo.GoodVO;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
 

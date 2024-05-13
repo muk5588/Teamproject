@@ -15,23 +15,6 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -42,7 +43,7 @@
-  
 <div class="warpper">
     <div class="warp">
         <c:choose>
@@ -61,17 +44,6 @@
                 </div>
             </c:when>
             <c:otherwise>
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
                 <h3>${dto1.nickname } 회원 정보</h3>
                 <table class='w-pct60'>
                     <tr>

@@ -8,15 +8,25 @@
 <html>
 <head>
 	<title>Home</title>
-	
 	<script src="/resources/js/mainPage/mainSlide.js" defer></script>
 	<link  rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
+    <script type="javascript">
+        function adjustSlideshowPosition() {
+            var menu = document.querySelector('.nav'); // 메뉴 요소 선택
+            var slideshowContainer = document.querySelector('.slideshow-container'); // 슬라이드쇼 컨테이너 요소 선택
+
+            var menuHeight = menu.offsetHeight; // 메뉴의 높이
+            slideshowContainer.style.marginTop = menuHeight + 'px'; // 슬라이드쇼 컨테이너의 marginTop 설정
+        }
+
+        // 페이지 로드 시 조정 함수 호출
+        window.onload = adjustSlideshowPosition;
+    </script>
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <jsp:include page="/WEB-INF/views/layout/boardmenu.jsp" />
-<hr>
 
 
 <div class="slideshow-container">
@@ -51,7 +61,7 @@
 
 <div id="login" class="login">
     <c:if test="${empty isLogin }">
-        <a class="btn-fill" href="<%=request.getContextPath()%>/login"><button class="login-button">로그인</button></a><br>
+        <a href="<%=request.getContextPath()%>/login"><button class="login-button">로그인</button></a><br>
         <a class="btn-fill" href="/user/insertUser">회원가입</a>
         /
         <a class="btn-fill" href="/user/searchUser?value=id">아이디찾기</a>
@@ -81,6 +91,9 @@
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
 <P>  The time on the server is ${serverTime}. </P>
+<div class="board-pre">
+
+</div>
 
 <%--<button><a href="login">로그인</a></button>--%>
 <%--<button><a href="/user/insertUser">가입</a></button>--%>

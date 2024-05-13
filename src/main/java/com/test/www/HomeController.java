@@ -1,5 +1,6 @@
 package com.test.www;
 
+import board.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	GeoCoding geoCoding;
+	BoardService boardService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -35,7 +37,8 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+
+//		List<Board> list = boardService.listByCategoryno(categoryno);
 		String formattedDate = dateFormat.format(date);
 		String x = null;
 		String y = null;

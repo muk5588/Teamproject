@@ -5,7 +5,7 @@
 	
 	<sql id="selectBoard">
 		SELECT 
-			boardno, title, content, nickname, createdate, boardview
+			boardno, title, content, nickname, createdate, boardview, CATEGORYNO
 		FROM board
 	</sql>
 	

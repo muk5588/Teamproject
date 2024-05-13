@@ -355,7 +355,7 @@ public class BoardController {
 		return "downView";
 	}
 	
-	
+	//한국어 테스트
 	
 	
 }

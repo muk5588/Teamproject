@@ -230,7 +230,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<MainBoard> list() {
+	public List<Board> list() {
 		return boardDao.list();
 	}
 

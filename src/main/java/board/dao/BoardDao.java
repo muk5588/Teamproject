@@ -92,5 +92,5 @@ public interface BoardDao {
 
 	public String getCategoryName(int categoryNo);
 
-    public List<MainBoard> list();
+    public List<Board> list();
 }

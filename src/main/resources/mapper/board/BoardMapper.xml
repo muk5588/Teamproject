@@ -382,12 +382,16 @@
 	WHERE CATEGORYno = #{categoryNo}
 </select>
 
-<select id="list" resultType="MainBoard">
-	SELECT TITLE, NICKNAME, BOARDNO, b.CATEGORYNO, b.CREATEDATE,  c.CATEGORYNAME
-	FROM BOARD b
-			 LEFT OUTER JOIN CATEGORY c ON b.CATEGORYNO = c.CATEGORYNO
-	ORDER BY b.CREATEDATE
+<select id="list" resultType="Board">
+	SELECT TITLE, NICKNAME, BOARDNO, CATEGORYNO, CREATEDATE
+	FROM (
+	SELECT TITLE, NICKNAME, BOARDNO, CATEGORYNO, CREATEDATE,
+	ROW_NUMBER() OVER (PARTITION BY CATEGORYNO ORDER BY CREATEDATE) AS row_num
+	FROM BOARD
+	) ranked
+	WHERE row_num <![CDATA[ <= 10 ]]>
+	ORDER BY CATEGORYNO, CREATEDATE
 </select>
-
-
+<!--select ~~~ from (select *, rownum(*) FROM (SELECT * FROM board	where categoryNo = 12-->
+<!--	ORDER BY CreateDATE DESC)-->
 </mapper>

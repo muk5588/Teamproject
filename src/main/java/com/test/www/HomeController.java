@@ -1,6 +1,6 @@
 package com.test.www;
 
-import board.dto.MainBoard;
+import board.dto.Board;
 import board.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,12 +40,7 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		List<MainBoard> list = boardService.list();
-		for (int i = 0; i < list.size(); i++) {
-			String cate = list.get(i).getCategoryName();
-			String category = cate.split("-")[1];
-			list.get(i).setCategoryName(category);
-		}
+		List<Board> list = boardService.list();
 		String formattedDate = dateFormat.format(date);
 		String x = null;
 		String y = null;

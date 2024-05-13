@@ -58,23 +58,50 @@
 	VALUES(#{orderNo},#{userNo},#{userName},#{phone},#{pay},#{totalPrice},#{postCode},#{address},#{detailAddress},#{extraAddress},#{paraMount},SYSDATE,#{impUid},#{merchantUid})
 </insert>
 
-<!-- <insert id="insertUserOrder" parameterType="int"> -->
-<!-- 	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price) -->
-<!-- 	SELECT ORDERITEM_SEQ.nextval, D.* FROM ( -->
-<!-- 	<foreach collection="orderItems" item="items" separator="UNION ALL"> -->
-<!-- 	<![CDATA[ -->
-<!-- 		SELECT -->
-<!-- 		#{orderNo} AS orderNo -->
-<!-- 		, #{itemNo} AS itemNo -->
-<!-- 		, #{itemName} AS itemName -->
-<!-- 		, #{orderQuantity} AS orderQuantity -->
-<!-- 		, #{price} AS #{price} -->
-<!-- 		FROM DUAL]]> -->
-<!-- 	</foreach> -->
-<!-- 	)D  -->
-<!-- </insert> -->
+<insert id="insertOrderItems" parameterType="int">
+	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price)
+	SELECT ORDERITEM_SEQ.nextval, D.* FROM (
+	<foreach collection="orderItems" item="items" separator="UNION ALL">
+	<![CDATA[
+		SELECT 
+		#{items.orderNo} AS orderNo 
+		, #{items.itemNo} AS itemNo 
+		, #{items.itemName} AS itemName 
+		, #{items.orderQuantity} AS orderQuantity 
+		, #{items.price} AS price
+		FROM DUAL]]> 
+	</foreach>
+	)D 
+</insert>
 
+<select id="getBasketsByBasketNos" parameterType="int" resultType="dto.Basket">
+	SELECT basketno,userno,itemno,quantity,additionalDATE+ INTERVAL '9' HOUR AS additionalDATE FROM BASKET
+		<where>
+		basketNo in 
+		<foreach collection="basketNos" item="data" open="(" close=")" separator="," >
+			#{data}
+		</foreach>
+		</where>
+</select>
 
+<delete id="deleteBasketsByBasketNos">
+<if test="basketNos != null">
+DELETE FROM basket
+WHERE basketNo IN 
+	<foreach collection="basketNos" item="data" open="(" close=")" separator=",">
+		#{data}
+	</foreach>
+</if>
+</delete>
 
+<select id="gettitleImg" parameterType="dto.OrderItem" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+		<where>
+		itemno in 
+		<foreach collection="orderItems" item="data" open="(" close=")" separator="," >
+			#{data.itemNo}
+		</foreach>
+		</where>
+</select>
 
 </mapper>

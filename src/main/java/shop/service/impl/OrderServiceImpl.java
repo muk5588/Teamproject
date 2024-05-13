@@ -3,6 +3,7 @@ package shop.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -132,67 +133,75 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int insertOrderItems(String orderDatas, UserOrder userOrder) {
-//		String[] orderDataStrings = orderDatas.split(",");
-//		int[] orderDataInts = new int[orderDataStrings.length];
-//		for (int i = 0; i < orderDataStrings.length; i++) {
-//		    orderDataInts[i] = Integer.parseInt(orderDataStrings[i].trim()); // trim() 메서드를 사용하여 앞뒤 공백을 제거합니다.
-//		}
-//		
-//		List<Basket> basketsTemp = orderDao.basketListBybasketNos(orderDataInts);
-//		//상품의 수량 합산을 위한 Map 객체 생성
-//		Map<Integer, Integer> itemQuantityMap = new HashMap<>();
-//		List<Basket> baskets = new ArrayList<Basket>();
-//		
-//		//같은 물건의 경우 합산 처리
-//		for(Basket b : basketsTemp) {
-//			int itemNo = b.getItemNo();
-//			int quantity = b.getQuantity();
-//			
-//		    // 이미 해당 ITEMNO가 맵에 있는 경우 기존 값과 더함
-//		    if (itemQuantityMap.containsKey(itemNo)) {
-//		        int currentQuantity = itemQuantityMap.get(itemNo);
-//		        itemQuantityMap.put(itemNo, currentQuantity + quantity);
-//		    } else {
-//		        // 해당 ITEMNO가 맵에 없는 경우 새로운 키로 추가
-//		        itemQuantityMap.put(itemNo, quantity);
-//		    }			
-//		}
-//		//결과 Map itemno : quantity 쌍을  List<Basket>에 담기
-//		for (Map.Entry<Integer, Integer> entry : itemQuantityMap.entrySet()) {
-//		    int itemNo = entry.getKey();
-//		    int totalQuantity = entry.getValue();
-//		    
-//		    Basket basket = new Basket();
-//		    basket.setItemNo(itemNo);
-//		    basket.setQuantity(totalQuantity);
-//		    
-//		    baskets.add(basket);
-//		}
-//		
-//		logger.debug("baskets : {}", baskets);
-//		List<Item> items = orderDao.getItemByItemNos(baskets);
-//		List<OrderItem> userOrderDetail = new ArrayList<OrderItem>();
-//		for(Basket b : baskets) {
-//			for(Item i : items) {
-//				if(b.getItemNo() == i.getItemNo()) {
-//					OrderItem order = new OrderItem();
-//					order.setOrderNo(userOrder.getOrderNo());
-//					order.setItemNo(i.getItemNo());
-//					order.setItemName(i.getItemName());
-//					order.setOrderQuantity(b.getQuantity()); 
-//					order.setPrice(i.getPrice());
-//					logger.debug("order : {}", order);
-//					userOrderDetail.add(order);
-//				}
-//			}
-//		}
-//		
-//		model.addAttribute("orderItems", userOrderDetail);
-//		
-//		return orderDao.insertOrderItems(userOrderDetail);
-		return 0;
+	public List<OrderItem> insertOrderItems(String orderDatas, UserOrder userOrder) {
+		  // 장바구니 번호 배열로 변환
+	    String[] basketNos = orderDatas.split(",");
+	    int[] basketNumbers = new int[basketNos.length];
+	    for (int i = 0; i < basketNos.length; i++) {
+	        basketNumbers[i] = Integer.parseInt(basketNos[i].trim());
+	    }
+	    logger.debug("basketNumbers : {}", basketNumbers);
+	    
+	    // 장바구니 번호로 장바구니 목록 조회
+	    List<Basket> baskets = orderDao.getBasketsByBasketNos(basketNumbers);
+	    logger.debug("baskets : getBasketsByBasketNos: {}", baskets);
+	    
+	    //장바구니 목록의 상품 번호 목록 조회
+	    List<Item> items = orderDao.getItemByItemNos(baskets);
+	    
+	    // 주문 항목 목록
+	    List<OrderItem> orderItems = new ArrayList<>();
+	    
+	    // 장바구니 목록을 돌면서 주문 항목 생성
+	    for (Basket basket : baskets) {
+	        // 이미 추가된 상품인지 확인하기 위한 플래그
+	        boolean alreadyAdded = false;
+	        
+	        // 이미 추가된 주문 항목인지 확인하고, 있을 경우 수량을 증가시킴
+	        for (OrderItem orderItem : orderItems) {
+	            if (orderItem.getItemNo() == basket.getItemNo()) {
+	                orderItem.setOrderQuantity(orderItem.getOrderQuantity() + basket.getQuantity());
+	                alreadyAdded = true;
+	                logger.debug("orderItem 검사 : {}",orderItem);
+	                break;
+	            }
+	        }
+	        
+	        // 이미 추가된 상품이 아니라면 OrderItem 객체 생성
+	        if (!alreadyAdded) {
+	        	for(Item i : items) {
+	        		if( basket.getItemNo() == i.getItemNo()) {
+			            OrderItem orderItem = new OrderItem();
+			            orderItem.setOrderNo(userOrder.getOrderNo());
+			            orderItem.setItemNo(basket.getItemNo());
+			            orderItem.setItemName(i.getItemName()); // 상품명은 상품번호로 조회하여 설정
+			            orderItem.setOrderQuantity(basket.getQuantity());
+			            orderItem.setPrice(i.getPrice()); // 상품가격은 상품번호로 조회하여 설정
+			            // 할인 쿠폰 등 추가 정보 설정
+			            logger.debug("for 내부 orderItem : {}",orderItem);
+			            orderItems.add(orderItem);
+	        		}
+	        	}
+	        }
+	    }
+	    logger.debug("orderItems : {}",orderItems);
+	    int res = 0;
+	    // 주문 항목을 데이터베이스에 삽입
+	    res = orderDao.insertOrderItems(orderItems);
+	    
+	    //주문 항목 추가 성공 시 장바구니 목록 삭제
+	    int deleteBaskets = orderDao.deleteBasketsByBasketNos(basketNumbers);
+	    logger.debug("장바구니 목록 삭제 : {}", deleteBaskets);
+	    
+	    return orderItems;
 	}
+
+	@Override
+	public List<ItemFile> gettitleImg(List<OrderItem> resOrderItems) {
+		return orderDao.gettitleImg(resOrderItems);
+	}
+		
+		
 	
 
 	

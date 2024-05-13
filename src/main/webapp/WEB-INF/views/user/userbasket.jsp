@@ -53,7 +53,7 @@ $(function(){
    <div class="container">
 
         <h1>장바구니</h1>
-        <a href="../main">
+        <a href="/">
             <button>메인 페이지로</button>
         </a>
         

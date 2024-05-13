@@ -107,6 +107,9 @@
         <a href="/adminPage">
             <button>관리자 메인페이지로</button>
         </a>
+        <a href="./create">
+            <button>상품 추가하기</button>
+        </a>
         <div>
             <form action="" method="get" id="searchForm">
                 <input type="text" name="search" id="search">

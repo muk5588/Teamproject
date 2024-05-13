@@ -16,4 +16,12 @@ public interface AdminShopDao {
 
 	public List<ItemFile> selectTitleImgFile(@Param("items")List<Item> items);
 
+	public int insertItem(Item item);
+
+	public int fileSave(@Param("itemFiles")List<ItemFile> itemFiles);
+
+	public int inserttitleImgFile(ItemFile filetest);
+
+	public int updatetitleImgFile(ItemFile filetest);
+
 }

@@ -10,7 +10,7 @@ public class ReviewReport {
 	private Date reportDate;
 	private int managerNo;
 	private String resultContent;
-	private char result;
+	private String result;
 	private Date resultDate;
 	public ReviewReport() {}
 	public int getReportNo() {
@@ -55,10 +55,10 @@ public class ReviewReport {
 	public void setResultContent(String resultContent) {
 		this.resultContent = resultContent;
 	}
-	public char getResult() {
+	public String getResult() {
 		return result;
 	}
-	public void setResult(char result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 	public Date getResultDate() {
@@ -74,7 +74,7 @@ public class ReviewReport {
 				+ ", resultContent=" + resultContent + ", result=" + result + ", resultDate=" + resultDate + "]";
 	}
 	public ReviewReport(int reportNo, int userNo, int reviewNo, String reportContent, Date reportDate, int managerNo,
-			String resultContent, char result, Date resultDate) {
+			String resultContent, String result, Date resultDate) {
 		super();
 		this.reportNo = reportNo;
 		this.userNo = userNo;

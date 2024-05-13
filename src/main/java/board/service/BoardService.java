@@ -102,4 +102,11 @@ public interface BoardService {
 
 
 	public List<Map<String, Object>> getuserRecommendRes(Paging paging);
+
+	/**
+	 * 카테고리 번호로 카테고리 이름 조회.
+	 * @param categoryNo
+	 * @return
+	 */
+	public String getCategoryName(int categoryNo);
 }

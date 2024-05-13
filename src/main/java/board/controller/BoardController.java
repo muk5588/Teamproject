@@ -155,6 +155,11 @@ public class BoardController {
 		User user = (User) session.getAttribute("dto1");
 		logger.info("board : {}", board);
 		logger.info("categoryNo : {}", categoryNo);
+		String categoryTitle =  "[";
+		categoryTitle += boardService.getCategoryName(categoryNo);
+		categoryTitle += "]";
+		categoryTitle += board.getTitle();
+		board.setTitle(categoryTitle);
 		board.setCategoryNo(categoryNo);
 		board.setUserNo(user.getUserno());
 		board.setNickName(user.getNickname());

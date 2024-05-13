@@ -74,6 +74,10 @@ public class BasketController {
 		//장바구니 정보
 		List<Basket> baskets = basketService.basketListByUserNo(userNo);
 		logger.debug("baskets : {}",baskets);
+		//장바구니 정보가 없을 경우 return
+		if(baskets == null || baskets.isEmpty()) {
+			return "/user/userbasket";
+		}
 		//상품 정보
 		List<Item> items = basketService.itemsByBasketNos(baskets);
 		logger.debug("items : {}",items);

@@ -3,6 +3,7 @@ package shop.service.face;
 import java.util.List;
 import java.util.Map;
 
+import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 
@@ -31,12 +32,19 @@ public interface OrderService {
 	public int insertUserOrder(UserOrder userOrder);
 
 	/**
-	 * 결제한 목록을 장바구니 -> 주문 상세로 인서트
+	 * 결제한 목록을 장바구니 -> 주문 상세로 인서트(장바구니 삭제 처리)
 	 * @param orderDatas
 	 * @param userOrder 
 	 * @return
 	 */
-	public int insertOrderItems(String orderDatas, UserOrder userOrder);
+	public List<OrderItem> insertOrderItems(String orderDatas, UserOrder userOrder);
+
+	/**
+	 * 상품 번호로 대표 이미지 조회
+	 * @param resOrderItems - 상품 번호를 담은 주문 상세 객체
+	 * @return
+	 */
+	public List<ItemFile> gettitleImg(List<OrderItem> resOrderItems);
 
 	
 	

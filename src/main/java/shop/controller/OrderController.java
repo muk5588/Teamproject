@@ -61,6 +61,9 @@ public class OrderController {
 		) {
 		logger.debug("결제 완료 페이지");
 		User user = (User) session.getAttribute("dto1");
+		if(user == null ) {
+			return "redirect:/";
+		}
 //		logger.debug("orderItemNos 확인 : {}", orderItemNos);
 		logger.debug("userOrder 확인1 : {}", userOrder);
 		logger.debug("orderDatas 확인 toString: {}", orderDatas.toString());
@@ -75,16 +78,25 @@ public class OrderController {
 		}
 		
 		logger.debug("userOrder 확인2 : {}", userOrder);
-		int resOrderItems = orderService.insertOrderItems(orderDatas,userOrder );
+		List<OrderItem> resOrderItems = orderService.insertOrderItems(orderDatas,userOrder );
 		logger.debug("resOrderItems : {}", resOrderItems);
 		
-		if(!(resOrderItems > 0)) {
+		if( null == resOrderItems ) {
 			return "redircet:/";
 			//insertOrderItems 실패시 코드 작성
 		}
-		model.addAttribute("userOrder", userOrder);
 		
-		return "redircet:./orderresult";
+		
+		model.addAttribute("userOrder", userOrder);
+		logger.debug("userOrder : {}", userOrder);
+		model.addAttribute("orderItems", resOrderItems);
+		logger.debug("orderItems : {}", resOrderItems);
+		
+		List<ItemFile> imgFiles = orderService.gettitleImg(resOrderItems);
+		logger.debug("imgFiles : {}", imgFiles);
+		model.addAttribute("imgFiles", imgFiles);
+		
+		return "./orderresult";
 		
 	}
 	

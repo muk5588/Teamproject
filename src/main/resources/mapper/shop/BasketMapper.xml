@@ -19,6 +19,7 @@
 	</select>
 	
 	<select id="itemsByBasketNos" parameterType="dto.Basket">
+	<if test="baskets != null">
 		SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
 		<where>
 		itemno in 
@@ -26,6 +27,7 @@
 			#{data.itemNo}
 		</foreach>
 		</where>
+	</if>
 	</select>
 	
 	<select id="itemFilesByBasketNos">

@@ -94,14 +94,56 @@ WHERE basketNo IN
 </if>
 </delete>
 
-<select id="gettitleImg" parameterType="dto.OrderItem" resultType="dto.Item">
-	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
-		<where>
-		itemno in 
-		<foreach collection="orderItems" item="data" open="(" close=")" separator="," >
-			#{data.itemNo}
-		</foreach>
-		</where>
+<select id="gettitleImg" parameterType="dto.OrderItem" resultType="dto.ItemFile">
+	SELECT it.itemno, stored_Name storedName, origin_Name originName , fileNo  FROM item it, itemFile ItF 
+	<where>
+	AND it.itemno = itf.itemno
+	AND it.titleimg = itf.FILENO
+	AND it.itemno IN
+	<foreach collection="orderItems" item="data" open="(" close=")" separator="," >
+		#{data.itemNo}
+	</foreach>
+	</where>
 </select>
+
+<select id="getItemByItemNo" parameterType="int" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+	<where>
+		itemno = #{itemNo}
+	</where>
+</select>
+
+<select id="getitemTitleImg" parameterType="int" resultType="dto.ItemFile">
+	SELECT it.itemno, stored_Name storedName, origin_Name originName , fileNo  FROM item it, itemFile ItF 
+	<where>
+	AND it.itemno = itf.itemno
+	AND it.titleimg = itf.FILENO
+	AND it.itemno IN ( #{itemNo} )
+	</where>
+</select>
+
+<insert id="insertOrderItemByItemNoByquantity" parameterType="dto.OrderItem">
+	<selectKey keyProperty="orderItemNo" order="BEFORE" resultType="int">
+		SELECT orderitem_seq.nextval FROM dual
+	</selectKey>
+	INSERT INTO orderITEM(orderitemno,orderno,itemno, order_quantity,price, itemname)
+	SELECT orderItemNo,orderNo,B.itemNo,orderQuantity, price ,B.itemname
+	FROM (
+		SELECT  
+		#{orderItemNo} as orderItemNo
+		,#{orderNo} as orderNo
+		,#{orderQuantity} as orderQuantity
+		FROM DUAL )O, (
+		SELECT itemno,itemname,price
+		FROM item WHERE itemno= #{itemNo} ) B
+</insert>
+
+<select id="selectByOrderItem" parameterType="dto.OrderItem" resultType="dto.OrderItem">
+	SELECT * FROM orderitem
+	<where>
+		AND orderitemNo = #{orderItemNo}
+	</where>
+</select>
+
 
 </mapper>

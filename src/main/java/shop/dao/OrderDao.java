@@ -32,5 +32,13 @@ public interface OrderDao {
 
 	public List<ItemFile> gettitleImg(@Param("orderItems")List<OrderItem> resOrderItems);
 
+	public Item getItemByItemNo(int itemNo);
+
+	public int insertOrderItemByItemNoByquantity(OrderItem orderItem);
+
+	public ItemFile getitemTitleImg(int itemNo);
+	
+	public OrderItem selectByOrderItem(OrderItem orderItem);
+
 	
 }

@@ -3,7 +3,6 @@ package shop.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dto.Basket;
 import dto.Item;
@@ -114,7 +107,9 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public UserOrder makeUserOrder() {
 		User user = (User) session.getAttribute("dto1");
-		
+		if(user == null) {
+			return null;
+		}
 		UserOrder userOrder = new UserOrder();
 		userOrder.setUserName(user.getName());
 		userOrder.setUserNo(user.getUserno());
@@ -123,7 +118,6 @@ public class OrderServiceImpl implements OrderService {
 		userOrder.setDetailAddress(user.getDetailAddress());
 		userOrder.setExtraAddress(user.getExtraAddress());
 		userOrder.setPhone(user.getPhone());
-		
 		return userOrder;
 	}
 
@@ -174,10 +168,9 @@ public class OrderServiceImpl implements OrderService {
 			            OrderItem orderItem = new OrderItem();
 			            orderItem.setOrderNo(userOrder.getOrderNo());
 			            orderItem.setItemNo(basket.getItemNo());
-			            orderItem.setItemName(i.getItemName()); // 상품명은 상품번호로 조회하여 설정
+			            orderItem.setItemName(i.getItemName());
 			            orderItem.setOrderQuantity(basket.getQuantity());
-			            orderItem.setPrice(i.getPrice()); // 상품가격은 상품번호로 조회하여 설정
-			            // 할인 쿠폰 등 추가 정보 설정
+			            orderItem.setPrice(i.getPrice()); 
 			            logger.debug("for 내부 orderItem : {}",orderItem);
 			            orderItems.add(orderItem);
 	        		}
@@ -200,8 +193,32 @@ public class OrderServiceImpl implements OrderService {
 	public List<ItemFile> gettitleImg(List<OrderItem> resOrderItems) {
 		return orderDao.gettitleImg(resOrderItems);
 	}
-		
-		
+
+	@Override
+	public Map<String, Object> getDatasByitemNoByquantity(int itemNo, int quantity) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Item item = orderDao.getItemByItemNo(itemNo);
+		List<Item> items = new ArrayList<Item>();
+		items.add(item);
+		ItemFile itF = orderDao.getitemTitleImg(itemNo);
+		List<ItemFile> imgFiles = new ArrayList<ItemFile>();
+		imgFiles.add(itF);
+		map.put("items", items);
+		map.put("imgFiles", imgFiles);
+		return map;
+	}
+
+	@Override
+	public int insertOrderItem(OrderItem orderItem) {
+		return orderDao.insertOrderItemByItemNoByquantity(orderItem);
+	}
+
+	@Override
+	public OrderItem selectByOrderItem(OrderItem orderItem) {
+		return orderDao.selectByOrderItem(orderItem);
+	}
+
+
 	
 
 	

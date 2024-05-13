@@ -52,11 +52,9 @@ $(function(){
                 	 console.log(res)
 //     				console.log("AJAX 성공")
 //     				console.log(res)
-
-					//성공시 이동? 그냥할지 고민. 
-//                      $(function () {
-//                          $(location).attr('href', './list?curPage=${curPage}')
-//                      })
+					$(function () {
+	                	window.location.href = "../basket/userbasket";
+	            	})
 
                  }
                  , error: function () {
@@ -69,7 +67,11 @@ $(function(){
 
 	 //구매하기 버튼 클릭
      $("#purchaseBtn").click(function() {
-         
+		var itemNo = ${item.itemNo}
+		var quantity = $("#quantity").val()
+		$(function () {
+           	window.location.href = '../order/ordersheet?itemNo='+itemNo+'&quantity=' +quantity;
+       	})
      });
 	
 		
@@ -149,7 +151,7 @@ $(function(){
 
     </table>
 </div>
-
+<form id="" action="" hidden="hidden" method="post"></form>
        
 
     </div>

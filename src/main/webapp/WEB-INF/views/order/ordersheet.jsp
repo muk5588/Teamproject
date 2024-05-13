@@ -64,7 +64,8 @@
             }).open();
         }
 </script>        
-<% List<Item> items = (List<Item>)request.getAttribute("items");
+<% 
+	List<Item> items = (List<Item>)request.getAttribute("items");
 	String itemNames = "";
 	for(Item o: items){
 		itemNames += o.getItemName();
@@ -222,6 +223,8 @@ $(function(){
 	    <th>이미지</th>
 	    <th>가격</th>
 	</tr>
+	<c:choose>
+	<c:when test="${not empty baskets }">
 	<c:set var="sum" value="0"/>
     <c:forEach items="${items }" var="item">
     <c:forEach items="${baskets}" var="basket">
@@ -254,6 +257,44 @@ $(function(){
    	</c:if>
    	</c:forEach>
     </c:forEach>
+		<%-- <input type="hidden" id="basketNos" name="basketNos" value='${basketNos}'/> --%>
+		<c:forEach items="${orderDatas}" var="orderData">
+		    <input type="hidden" name="orderDatas" value="${orderData}" />
+		</c:forEach>
+    </c:when>
+    <c:when test="${empty baskets }">
+   	<c:set var="sum" value="0"/>
+    <c:forEach items="${items }" var="item">
+   		<tr>
+   			<td>${item.itemName }</td>
+   			<td>${quantity }</td>
+   			<td>
+   			<c:choose>
+	    	<c:when test="${not empty imgFiles}">
+		    	<c:forEach items="${imgFiles}" var="files">
+		    	<c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
+		    		<img alt="ItemImg" src="/resources/img/shop/upload/${files.storedName }">
+		    	</c:if>
+		    	<c:if test="${empty files.itemNo}">
+		    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+		    	</c:if>
+		   		</c:forEach>
+	   		</c:when>
+	   		<c:when test="${empty imgFiles }">
+	    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+	   		</c:when>
+   			</c:choose>
+   			</td>
+   			<td>${item.price * quantity}
+   				<c:set var="i" value="${item.price * quantity }"/>
+   			</td>
+			<c:set var="sum" value="${sum + i}"/>
+   		</tr>
+    	<input name="itemNo" value="${item.itemNo }" hidden="hidden">
+    	<input name="quantity" value="${quantity }" hidden="hidden">
+    </c:forEach>
+    </c:when>
+    </c:choose>
     <tr>
     	<td>총계 : 
     	  <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${sum }"/>
@@ -261,11 +302,6 @@ $(function(){
     	</td>
     </tr>
 </table>
-<%-- <input type="hidden" id="basketNos" name="basketNos" value='${basketNos}'/> --%>
-<c:forEach items="${orderDatas}" var="orderData">
-    <input type="hidden" name="orderDatas" value="${orderData}" />
-</c:forEach>
-<!-- <button onclick="requestPay();">결제</button> -->
 <button onclick="requestPay();" type="button">결제하기</button>
 </form>
 </div>
@@ -274,7 +310,6 @@ $(function(){
     </div>
     <!-- .container End -->
 
-    <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
 

@@ -181,7 +181,12 @@
                                                 class="delCheckBox"></td>
                     <td class="no">${board.boardNo }</td>
                     <td class="title">
+                    <c:if test="${not empty param.categoryNo }">
 						<a href="./view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
+					</c:if>
+                    <c:if test="${empty param.categoryNo }">
+						<a href="./view?&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
+					</c:if>
                     </td>
                     <td class="nick">${board.nickName }</td>
                     <td class="hit">${board.boardView }</td>

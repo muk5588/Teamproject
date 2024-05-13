@@ -114,6 +114,7 @@ public class BoardController {
 			, Model model
 			, HttpSession session
 			, @RequestParam(value="curPage", defaultValue="0") int curPage
+			, @RequestParam(value ="categoryNo", required = false, defaultValue = "0")int categoryNo 
 			) {
 
 		board =  boardService.viewByBoardNo(boardno);

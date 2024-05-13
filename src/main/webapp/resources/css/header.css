@@ -131,6 +131,43 @@
 .login-button-container li a:hover {
     border: 1px solid #000000;
 }
+.login{
+    width: 300px;
+    height: 200px;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 50px 0;
+    border-radius: 12px;
+    float: right;
+}
+.login-button{
+    width: 90%;
+    height: 60px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 12px;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 30px;
+}
+.weather{
+    clear: both;
+    float: right;
+    width: 300px;
+    height: 200px;
+}
+.icon {
+    float: left; /* 왼쪽 정렬 */
+    margin-right: 20px; /* 오른쪽 여백 */
+}
+.temp {
+    float: left; /* 왼쪽 정렬 */
+}
+.text, .text2{
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 요소들을 양쪽 끝에 정렬 */
+}
+
 
 
 

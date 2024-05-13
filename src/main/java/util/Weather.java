@@ -12,7 +12,6 @@ import util.service.GeoCoding;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Controller
@@ -26,19 +25,23 @@ public class Weather {
     public String getWeather(Model model, HttpSession session) throws IOException, ParseException {
         String x = null;
         String y = null;
+        String address = null;
         User user = (User) session.getAttribute("dto1");
         if (user == null) {
             x = "126.98322015";
             y = "37.57023746";
+            address = "서울특별시 종로1가";
             model.addAttribute("x",x);
             model.addAttribute("y",y);
+            model.addAttribute("address",address);
         }else {
-            String address = user.getAddress();
+            address = user.getAddress();
             HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
             x = XYMap.get("x");   //위도
             y = XYMap.get("y");   //경도
             model.addAttribute("x",x);
             model.addAttribute("y",y);
+            model.addAttribute("address",address);
         }
 
         return "layout/weather";

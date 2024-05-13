@@ -49,9 +49,9 @@
   <span class="dot" onclick="currentSlide(3)"></span>
 </div>
 
-<div id="login">
+<div id="login" class="login">
     <c:if test="${empty isLogin }">
-        <button><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></button><br>
+        <a class="btn-fill" href="<%=request.getContextPath()%>/login"><button class="login-button">로그인</button></a><br>
         <a class="btn-fill" href="/user/insertUser">회원가입</a>
         /
         <a class="btn-fill" href="/user/searchUser?value=id">아이디찾기</a>
@@ -76,7 +76,6 @@
             </c:choose>
         </ul>
     </c:if>
-
 </div>
 <div>
     <jsp:include page="layout/weather.jsp"></jsp:include>

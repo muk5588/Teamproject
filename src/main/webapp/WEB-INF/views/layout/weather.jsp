@@ -16,13 +16,14 @@
         ${x}
         var y =
         ${y}
+
         var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + y +
             "&lon=" + x +
             "&units=metric&appid=e776c451f21037ecc76b1a9ecf704f77";
         $.getJSON(url,
             function (result) {
-                var now = (result.main.temp).toString().split('.')[0]+ "℃";
-                var low = (result.main.temp_min).toString().split('.')[0]+ "℃";
+                var now = (result.main.temp).toString().split('.')[0] + "℃";
+                var low = (result.main.temp_min).toString().split('.')[0] + "℃";
                 var high = (result.main.temp_max).toString().split('.')[0] + "℃";
 
                 //기온출력
@@ -30,6 +31,7 @@
                 $('.Lowtemp').append(low);
                 $('.Hightemp').append(high);
                 $('.Icon').append(result.weather[0].icon);
+
 
                 //날씨아이콘출력
                 //WeatherResult.weater[0].icon
@@ -41,12 +43,22 @@
 
                 $('.Icon').html(weathericonUrl);
             });
+
     </script>
 </head>
 <body>
-<h3 class="Nowtemp">현재기온:</h3>
-<h3 class="Lowtemp">최저기온:</h3>
-<h3 class="Hightemp">최대기온:</h3>
-<h3 class="Icon"></h3>
+<div class="weather">
+    <div class="text">
+        <h4>날씨</h4><h5 class="text2">${address}</h5>
+    </div>
+    <div class="icon">
+        <h3 class="Icon"></h3>
+    </div>
+    <div class="temp">
+        <h3 class="Nowtemp">현재기온:</h3>
+        <h3 class="Lowtemp">최저기온:</h3>
+        <h3 class="Hightemp">최대기온:</h3>
+    </div>
+</div>
 </body>
 </html>

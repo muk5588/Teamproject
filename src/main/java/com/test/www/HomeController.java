@@ -1,10 +1,5 @@
 package com.test.www;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,10 @@ import user.dto.User;
 import util.service.GeoCoding;
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Handles requests for the application home page.
@@ -40,19 +39,23 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		String x = null;
 		String y = null;
+		String address = null;
 		User user = (User) session.getAttribute("dto1");
 		if (user == null) {
 			x = "126.98322015";
 			y = "37.57023746";
+			address = "서울특별시 종로1가";
 			model.addAttribute("x",x);
 			model.addAttribute("y",y);
+			model.addAttribute("address",address);
 		}else {
-			String address = user.getAddress();
+			address = user.getAddress();
 			HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
 			x = XYMap.get("x");   //위도
 			y = XYMap.get("y");   //경도
 			model.addAttribute("x",x);
 			model.addAttribute("y",y);
+			model.addAttribute("address",address);
 		}
 		model.addAttribute("serverTime", formattedDate );
 		

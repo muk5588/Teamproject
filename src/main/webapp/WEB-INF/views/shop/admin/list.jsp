@@ -91,6 +91,7 @@
 
 
 
+
     })
 </script>
 </head>
@@ -102,9 +103,9 @@
 
     <div class="container">
 
-        <h1>상품 구매</h1>
-        <a href="../main">
-            <button>메인 페이지로</button>
+        <h1>상품 관리</h1>
+        <a href="/adminPage">
+            <button>관리자 메인페이지로</button>
         </a>
         <div>
             <form action="" method="get" id="searchForm">
@@ -115,10 +116,10 @@
         </div>
         <hr>
         
-    	<c:set var="imgFiles" property="${files }"/>
+    	<c:set var="imgFiles" property="${itemFiles }"/>
 <div id="itemwarp">
     <ul>
-    <c:forEach var="item" items="${item }">
+    <c:forEach var="item" items="${items }">
     <div class="oneItem">
     	<li style="list-style: none; border: 1px solid #ccc;">
     	<div class="item Img">

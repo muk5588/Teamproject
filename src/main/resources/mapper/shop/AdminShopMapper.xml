@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.dao.AdminShopDao">
+<sql id="defaultSelect">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg
+	FROM ITEM
+</sql>
+<sql id="search">
+	<if test="search != null">
+	<where>
+		title Like '%${search}%'
+	</where>
+	</if>
+</sql>
+
+
+<select id="selectCnt" parameterType="util.ShopPaging" resultType="int">
+	SELECT count(*) FROM ITEM
+	<include refid="search"/>
+</select>
+
+<select id="selectItems" parameterType="util.ShopPaging" resultType="dto.Item">
+	SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
+			<include refid="defaultSelect" />
+			<include refid="search"/>
+			ORDER BY ItemNo DESC
+			) B
+		)
+	<where>
+		AND rnum BETWEEN #{startNo } AND #{endNo}
+	</where>
+		
+</select>
+
+<select id="selectTitleImgFile" parameterType="dto.Item" resultType="dto.ItemFile">
+	SELECT it.itemno, stored_Name storedName, origin_Name originName , fileNo  FROM item it, itemFile ItF 
+	<where>
+	AND it.itemno = itf.itemno
+	AND it.titleimg = itf.FILENO
+	AND it.itemno IN
+	<foreach collection="items" item="data" open="(" close=")" separator="," >
+		#{data.itemNo}
+	</foreach>
+	</where>
+</select>
+
+
+
+</mapper>

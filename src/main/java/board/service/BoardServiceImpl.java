@@ -219,5 +219,20 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getuserRecommendRes(paging);
 	}
 
+	@Override
+	public String getCategoryName(int categoryNo) {
+		String cName = "";
+		String str = boardDao.getCategoryName(categoryNo);
+		
+        if (str.contains(" - ")) {
+            String[] parts = str.split(" - ");
+            cName = parts[1];
+        } else {
+        	cName = str;
+        }
+		
+		return cName;
+	}
+
 
 }

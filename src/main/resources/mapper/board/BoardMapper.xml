@@ -376,4 +376,12 @@
 		</where>
 	</select>
 
+
+<select id="getCategoryName" parameterType="int" resultType="String">
+	SELECT CATEGORYNAME FROM CATEGORY
+	WHERE CATEGORYno = #{categoryNo}
+</select> 
+
+
+
 </mapper>

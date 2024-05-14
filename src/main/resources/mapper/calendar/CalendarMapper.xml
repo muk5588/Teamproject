@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar.dao.CalendarDao">
+
+    <select id="getCalData" resultType="Calendar" parameterType="int">
+        select calendar_no,userno, calendar_title, content, start1, end1 from calendar
+        <where>
+            and userno = #{userno}
+        </where>
+    </select>
+
+    <insert id="insertCalendar" parameterType="Calendar">
+        <selectKey resultType="int" order="BEFORE" keyProperty="calendarNo" >
+            select CAL_SEQ.nextval from dual
+        </selectKey>
+        insert into calendar (calendar_no, userno, calendar_title, content, start1, end1)
+        VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1}, #{end1})
+    </insert>
+
+    <update id="updateCalendar" parameterType="Calendar">
+
+    </update>
+</mapper>

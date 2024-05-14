@@ -24,10 +24,7 @@ td.nick{
     margin-left: 10%;
     text-align: left;
 }
-a{
-    color: black;
-    text-decoration-line: none;
-}
+
 div.boardPre{
     display: block;
     width: 90%;

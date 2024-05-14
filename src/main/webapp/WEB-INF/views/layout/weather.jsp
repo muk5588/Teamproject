@@ -49,15 +49,15 @@
 <body>
 <div class="weather">
     <div class="text">
-        <h4>날씨</h4><h5 class="text2">${address}</h5>
+        <h4>날씨</h4>
     </div>
     <div class="icon">
         <h3 class="Icon"></h3>
     </div>
     <div class="temp">
+        <h5 class="text2">${address}</h5>
         <h3 class="Nowtemp">현재기온:</h3>
-        <h3 class="Lowtemp">최저기온:</h3>
-        <h3 class="Hightemp">최대기온:</h3>
+        <span class="Lowtemp" style="color: blue"></span> / <span class="Hightemp" style="color: red"></span>
     </div>
 </div>
 </body>

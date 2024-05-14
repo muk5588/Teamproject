@@ -22,6 +22,17 @@ $(function(){
         window.location.href = url;
     });
 	
+	$("#deleteBtn").click(function() {
+        var itemNo = "${item.itemNo}";
+
+        // URL 생성
+        var url = "./delete?";
+        url += "itemNo=" + encodeURIComponent(itemNo);
+
+        // 페이지 이동
+        window.location.href = url;
+    });
+	
 })
 </script>
 </script>

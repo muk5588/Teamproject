@@ -82,6 +82,13 @@ public interface AdminShopService {
 	 */
 	public int updateIByItem(Item item);
 
+	/**
+	 * 삭제.
+	 * @param itemNo
+	 * @return
+	 */
+	public int deleteByItemNo(int itemNo);
+
 
 	
 	

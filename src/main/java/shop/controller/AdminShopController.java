@@ -98,7 +98,45 @@ public class AdminShopController {
 		logger.debug("파일 업로드 처리 결과 : {}", file);
 	}//파일 경로 /resources/itemUpload/
 	
+	@RequestMapping("/detail")
+	public void detail(int itemNo, Model model) {
+		Item item = adminShopService.selectItemByItemNo(itemNo);
+		List<ItemFile> files = adminShopService.selectItemFileByItemNo(itemNo);
+		logger.debug("item : {}", item);
+		logger.debug("files : {}", files);
+		model.addAttribute("item", item);
+		model.addAttribute("files", files);
+	}
 	
+	@GetMapping("/update")
+	public void update(Model model, @RequestParam(value="itemNo")int itemNo) {
+		logger.debug("get update");
+		logger.debug("get update itemNo  : {} ",itemNo);
+		Item item = adminShopService.selectItemByItemNo(itemNo);
+		List<ItemFile> files = adminShopService.selectItemFileByItemNo(itemNo);
+		logger.debug("item : {}", item);
+		logger.debug("files : {}", files);
+		model.addAttribute("item", item);
+		model.addAttribute("files", files);
+		
+	}
+	
+	@PostMapping("/update")
+	public String updateProc(Model model,@RequestAttribute(required = false)MultipartFile file
+			,Item item) {
+		logger.debug("post update");
+		logger.debug("post update item : {}", item);
+		if(  null != file && file.getSize() > 0) {
+			int titleImgFileNo = adminShopService.updatetitleImg(item,file);
+			item.setTitleImg(titleImgFileNo);
+			logger.debug("post create fileSave titleImgFileNo : {}", titleImgFileNo);
+		}else {
+			logger.debug("post create file  : {}", file);
+		}
+		int res = adminShopService.updateIByItem(item);
+		
+		return "redirect:./detail?itemNo=" +item.getItemNo();
+	}
 	
 	
 }

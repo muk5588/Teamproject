@@ -134,7 +134,7 @@
 <button onclick="location.href = '/board/list'">게시물조회</button>
 <button onclick="location.href = '/message/'">메세지 테스트</button>
 <button onclick="location.href = '/basket/userbasket'">장바구니</button>
-<button onclick="location.href = '/calendar'">^^ㅣ발캘린더</button>
+<button onclick="location.href = '/calendar'">캘린더</button>
 
 
 <%--<c:if test="${empty isLogin}">--%>

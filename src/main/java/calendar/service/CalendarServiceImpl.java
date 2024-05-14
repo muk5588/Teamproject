@@ -22,7 +22,12 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public void updateCalendar(Calendar calendar) {
-        calendarDao.updateCalendar(calendar);
+    public void updateDateCalendar(Calendar calendar) {
+        calendarDao.updateDateCalendar(calendar);
+    }
+
+    @Override
+    public void deleteCalendar(Calendar calendar) {
+        calendarDao.deleteCalendar(calendar);
     }
 }

@@ -17,7 +17,19 @@
         VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1}, #{end1})
     </insert>
 
-    <update id="updateCalendar" parameterType="Calendar">
-
+    <update id="updateDateCalendar" parameterType="Calendar">
+        update CALENDAR
+        set START1 = #{start}
+        , END1 = #{end}
     </update>
+
+    <delete id="deleteCalendar" parameterType="Calendar">
+        delete CALENDAR
+        <where>
+            and userno = #{userno}
+            and calendar_title = #{calendarTitle}
+            and start1 = #{start1}
+            and end1 = #{end1}
+        </where>
+    </delete>
 </mapper>

@@ -76,15 +76,19 @@ public class CalendarController {
             Date start = java.sql.Timestamp.valueOf(startDate);
             Date end = java.sql.Timestamp.valueOf(endDate);
 
+            if(title != null && content != null){
+                Calendar calendar = new Calendar();
+                calendar.setUserno(userno);
+                calendar.setCalendarTitle(title);
+                calendar.setContent(content);
+                calendar.setStart1(start);
+                calendar.setEnd1(end);
 
-           Calendar calendar = new Calendar();
-            calendar.setUserno(userno);
-           calendar.setCalendarTitle(title);
-           calendar.setContent(content);
-           calendar.setStart1(start);
-           calendar.setEnd1(end);
+                calendarService.insertCalendar(calendar);
+            }else{
+                return "/calendar/calendar";
+            }
 
-           calendarService.insertCalendar(calendar);
        }
 
 
@@ -97,34 +101,31 @@ public class CalendarController {
     @RequestMapping("/calendar/calendarUpdate")
     @ResponseBody
     public String calendarUpdate(@RequestBody List<Map<String, Object>> param
-            ,@SessionAttribute(value = "dto1", required = false) User login){
+        ,@SessionAttribute(value = "dto1", required = false) User login){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
         for (Map<String, Object> list : param) {
 
-            String title = (String) list.get("title");
-            String content = (String) list.get("content");
+            String eventName = (String) list.get("title"); // 이름 받아오기
             String startDateString = (String) list.get("start");
             String endDateString = (String) list.get("end");
 
-            LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
-            LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
+            String oldTitle = (String) list.get("oldTitle");
+            String oldStartString = (String) list.get("oldStart");
+            String oldEndString = (String) list.get("oldEnd");
 
-            LocalDateTime startDate = startDateUTC.plusHours(9);
-            LocalDateTime endDate = endDateUTC.plusHours(9);
-
-            int userno = login.getUserno();
-            Date start = java.sql.Timestamp.valueOf(startDate);
-            Date end = java.sql.Timestamp.valueOf(endDate);
+            LocalDateTime modifiedStartDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
+            LocalDateTime modifiedEndDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
+            LocalDateTime oldStart = LocalDateTime.parse(oldStartString, dateTimeFormatter);
+            LocalDateTime oldEnd = LocalDateTime.parse(oldEndString, dateTimeFormatter);
 
 
             Calendar calendar = new Calendar();
-            calendar.setUserno(userno);
-            calendar.setCalendarTitle(title);
-            calendar.setContent(content);
-            calendar.setStart1(start);
-            calendar.setEnd1(end);
+            calendar.setUserno(login.getUserno());
 
-            calendarService.updateCalendar(calendar);
+
+
+
+            calendarService.updateDateCalendar(calendar);
         }
 
 
@@ -138,42 +139,31 @@ public class CalendarController {
     public String calendarDelete(@RequestBody List<Map<String, Object>> param
         ,@SessionAttribute(value = "dto1", required = false) User login){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
+        for (Map<String, Object> list : param) {
 
-//        for (Map<String, Object> list : param) {
-//
-//            System.out.println("list = " + list);
-//
-//            String title = (String) list.get("title"); // 이름 받아오기
-//            String content = (String) list.get("content");
-//            String startDateString = (String) list.get("start");
-//            String endDateString = (String) list.get("end");
-//
-//            System.out.println("startDateString = " + startDateString);
-//
-//            LocalDateTime startDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
-//            LocalDateTime endDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
-//
-//            System.out.println("startDate = " + startDate);
-//
-//            int userno = login.getUserno();
-//
-//            Schedule schedule = scheduleService.findByScheduleDateTimeStartAndScheduleDateTimeEnd(startDate, endDate).get();
-//            Integer scheduleId = schedule.getId();
-//            System.out.println("=================================");
-//            System.out.println("scheduleId = " + scheduleId);
-//
-//            ManagerAssignSchedule assignSchedule = managerAssignScheduleService.findBySchedule(schedule).get();
-//            Integer assignScheduleId = assignSchedule.getId();
-//            System.out.println("========================");
-//            System.out.println("assignSchedule = " + assignSchedule);
-//            System.out.println("assignScheduleId = " + assignScheduleId);
-//
-//
-//
-//
-//                calendarService.deleteByDate(schedule);
+            String title = (String) list.get("title");
+            String startDateString = (String) list.get("start");
+            String endDateString = (String) list.get("end");
 
-//        }
+            LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
+            LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
+
+
+
+            int userno = login.getUserno();
+            Date start = java.sql.Timestamp.valueOf(startDateUTC);
+            Date end = java.sql.Timestamp.valueOf(endDateUTC);
+
+
+            Calendar calendar = new Calendar();
+            calendar.setUserno(userno);
+            calendar.setCalendarTitle(title);
+            calendar.setStart1(start);
+            calendar.setEnd1(end);
+
+            calendarService.deleteCalendar(calendar);
+        }
+
        return "/calendar/calendar";
     }
 }

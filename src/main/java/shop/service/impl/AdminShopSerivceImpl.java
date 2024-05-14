@@ -302,6 +302,18 @@ public class AdminShopSerivceImpl implements AdminShopService{
 		return res;
 	}
 
+	@Override
+	public int deleteByItemNo(int itemNo) {
+		int res = 0;
+		int res1, res2, res3;
+		res1=res2=res3=0;
+		res1=adminShopDao.deleteItemFK(itemNo);
+		res2=adminShopDao.deleteitemFileByItemNo(itemNo);
+		res3= adminShopDao.deleteitemByItemNo(itemNo);
+		res = res1+res2+res3;
+		return res;
+	}
+
 	
 	
 	

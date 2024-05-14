@@ -138,5 +138,15 @@ public class AdminShopController {
 		return "redirect:./detail?itemNo=" +item.getItemNo();
 	}
 	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam(value="itemNo",required = false)int itemNo) {
+		logger.debug("삭제 처리");
+		int res = adminShopService.deleteByItemNo(itemNo);
+		return "redirect:./list";
+	}
+	
+	
+	
+	
 	
 }

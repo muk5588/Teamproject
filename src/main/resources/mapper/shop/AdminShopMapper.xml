@@ -119,4 +119,24 @@
 	AND fileNo != (SELECT titleImg FROM Item WHERE itemNo = #{itemNo})
 </delete>
 
+<delete id="deleteitemByItemNo" parameterType="int">
+	DELETE ITEM
+	where itemNo = #{itemNo}
+</delete>
+
+<delete id="deleteitemFileByItemNo" parameterType="int">
+	DELETE ITEMFILE
+	where itemNo = #{itemNo}
+</delete>
+
+<update id="deleteItemFK" parameterType="int">
+	UPDATE item
+	<set>
+				titleImg = null
+	</set>
+	<where>
+		AND itemno = #{itemNo}
+	</where>
+</update>
+
 </mapper>

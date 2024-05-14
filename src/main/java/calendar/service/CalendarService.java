@@ -9,5 +9,7 @@ public interface CalendarService {
 
     public void insertCalendar(Calendar calendar);
 
-    public void updateCalendar(Calendar calendar);
+    public void updateDateCalendar(Calendar calendar);
+
+    public void deleteCalendar(Calendar calendar);
 }

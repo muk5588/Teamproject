@@ -123,34 +123,7 @@
     </a>
     <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
 </c:if>
-
-    <table class="table table-striped table-hover table-sm">
-            <%-- <colgroup> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 45%;"> --%>
-            <%-- 	<col style="width: 15%;"> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 20%;"> --%>
-            <%-- </colgroup> --%>
-        <tr>
-            <th>제목</th>
-            <th>작성자</th>
-        </tr>
-        <c:forEach var="board" items="${list }">
-            <c:if test="${board.categoryNo == 32}">
-
-            <%--        <c:if test="${board.categoryNo eq 31}">--%>
-            <tr>
-                <td class="title">
-                    <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
-                </td>
-                <td class="nick">${board.nickName }</td>
-            </tr>
-            <%--        </c:if>--%>
-            </c:if>
-        </c:forEach>
-    </table>
-
+<jsp:include page="/WEB-INF/views/layout/boardPreview.jsp"/>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

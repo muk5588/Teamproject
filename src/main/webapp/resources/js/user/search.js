@@ -34,8 +34,9 @@ window.addEventListener("DOMContentLoaded", function () {
                     console.log("aaaa", data)
                     alert("이메일이 발송 되었습니다")
                     $("#alertemail").css({
+                        "text-aline":"center",
                         "color": "red",
-                        "font-size": "10px"
+                        "font-size": "15px"
                     });
                     $("#alertemail").text("인증번호를 입력해 주세요")
                     code = data.authNum;
@@ -48,14 +49,16 @@ window.addEventListener("DOMContentLoaded", function () {
     $("#checkcode").keyup(function () {
         if ($("#checkcode").val().length != 6) {
             $("#alertemail").css({
+                "text-aline":"center",
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px"
             });
             $("#alertemail").text("인증번호가 일치하지 않습니다")
         } else if ($("#checkcode").val() == code) {
             $("#alertemail").css({
+                "text-aline":"center",
                 "color": "green",
-                "font-size": "10px"
+                "font-size": "15px"
             });
             $("#alertemail").text("인증이 완료 되었습니다")
 
@@ -63,11 +66,11 @@ window.addEventListener("DOMContentLoaded", function () {
     })
     $("#search").click(function () {
         var val = $(event.target).val();
-        if ($("#name").val() == null || val.replace(/\s| /gi,"").length == 0) {
+        if (val.replace(/\s| /gi,"").length == 0) {
             alert("이름을 입력해 주세요")
             return;
         }
-        if ($("#email").val() == null || val.replace(/\s| /gi,"").length == 0) {
+        if (val.replace(/\s| /gi,"").length == 0) {
             alert("이메일을 입력해 주세요")
             return;
         }

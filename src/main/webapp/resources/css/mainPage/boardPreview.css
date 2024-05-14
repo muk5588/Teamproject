@@ -1,0 +1,46 @@
+.boardContainer {
+    display: flex;
+    flex-wrap: wrap; /* 넘칠 경우 자동으로 줄바꿈 */
+    gap: 20px; /* 각 요소 사이의 간격 설정 */
+}
+
+.boardPre {
+    width: calc(35%); /* 2개의 열로 설정하고 간격을 제외한 폭 설정 */
+    margin-left: 10%;
+    /* 추가적인 스타일링이 필요할 경우 여기에 추가 */
+}
+.category{
+    margin-right: 10%;
+    color: black;
+    font-size: 24px ;
+}
+.title{
+    width: 50%;
+    text-align: left;
+
+}
+td.nick{
+    width: 20%;
+    margin-left: 10%;
+    text-align: left;
+}
+a{
+    color: black;
+    text-decoration-line: none;
+}
+div.boardPre{
+    display: block;
+    width: 90%;
+    max-width: 680px;
+    height: 20%;
+    min-height: 280px;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: none;
+    background: rgba(15, 19, 42, 0.1);
+    color: rgba(15, 19, 42, 0.3);
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    transition: .2s linear;
+}

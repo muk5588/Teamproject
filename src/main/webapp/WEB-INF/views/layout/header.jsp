@@ -19,25 +19,6 @@
         display: inline;
     }
 
-    header .category {
-        font-size: 18px;
-    }
-
-    header .category ul li:not(:first-child) { /* 첫번째 li만 빼고 지정 */
-        padding-left: 30px;
-    }
-
-    header .category ul li a:hover, header .category ul li a.active {
-        font-weight: bold;
-        color: #0000cd;
-    }
-
-    header #userid, header #userpw {
-        width: 100px;
-        height: 18px;
-        font-size: 14px;
-    }
-
     Header-Button {
         display: inline-block;
         text-align: center;
@@ -47,8 +28,6 @@
     header ul li input {
         display: block;
     }
-
-
 </style>
 
 <div class="container">

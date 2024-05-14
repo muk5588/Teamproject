@@ -11,6 +11,7 @@
     <title>Home</title>
     <script src="/resources/js/mainPage/mainSlide.js" defer></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <script type="javascript">
         function adjustSlideshowPosition() {
             var menu = document.querySelector('.nav'); // 메뉴 요소 선택
@@ -23,6 +24,27 @@
         // 페이지 로드 시 조정 함수 호출
         window.onload = adjustSlideshowPosition;
     </script>
+    <style type="text/css">
+        *{
+            font-family: "Gowun Batang", serif;
+        }
+        a{
+            color: black;
+            text-decoration-line: none;
+        }
+        .logout{
+            border-radius: 15px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding-top: 4px;
+        }
+        .logout img{
+            vertical-align: middle;
+        }
+        .usernick{
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
 
@@ -72,19 +94,24 @@
         <a class="btn-fill" href="/user/searchUser?value=pw">비밀번호찾기</a>
     </c:if>
     <c:if test="${not empty isLogin}">
+        <span class="usernick">${dto1.nickname }</span>
+        <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">
+            <button class="logout">로그아웃<img src="/resources/img/mainPage/로그아웃.png" width="30px" height="30px"></button>
+        </a><br>
+        <span class="email">${dto1.email }</span><br>
 
-        ${dto1.name } [${dto1.nickname } ]
-        <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
         <c:choose>
             <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                <br>
+                <a href = '/message/'>쪽지</a>
+                /
                 <a href="/user/userDetail">마이페이지</a>
                 /
                 <a href="/user/adminPage">관리자페이지</a>
             </c:when>
             <c:otherwise>
-                <br>
                 <a href="/user/userDetail">마이페이지</a>
+                /
+                <a href = '/message/'>쪽지</a>
             </c:otherwise>
         </c:choose>
         </ul>
@@ -105,10 +132,7 @@
 <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
 <button onclick="location.href = '/user/userList'">유저조회</button>
 <button onclick="location.href = '/board/list'">게시물조회</button>
-<button onclick="location.href = '/user/searchUser?value=id'">아이디찾기</button>
-<button onclick="location.href = '/user/searchUser?value=pw'">비밀번호찾기</button>
 <button onclick="location.href = '/message/'">메세지 테스트</button>
-<button onclick="location.href = '/weather'">시발날씨</button>
 <button onclick="location.href = '/basket/userbasket'">장바구니</button>
 <button onclick="location.href = '/calendar'">^^ㅣ발캘린더</button>
 
@@ -118,12 +142,6 @@
 <%--	<a href="insertUser">회원가입</a>--%>
 <%--</c:if>--%>
 
-<c:if test="${isLogin > 0}">
-    <a href="/user/userDetail">
-        <button>마이페이지</button>
-    </a>
-    <%--	<a href="login/logout"><button>로그아웃</button></a>--%>
-</c:if>
 <jsp:include page="/WEB-INF/views/layout/boardPreview.jsp"/>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>

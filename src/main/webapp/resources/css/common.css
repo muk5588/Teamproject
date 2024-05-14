@@ -1,3 +1,14 @@
-tr{
-    border-bottom: 1px solid black ;
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang&display=swap');
+a{
+    color: black;
+    text-decoration-line: none;
+}
+*{
+    font-family: "Gowun Batang", serif;
+}
+ul{
+    text-decoration-line: none;
+}
+li{
+    text-decoration-line: none;
 }

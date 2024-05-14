@@ -96,11 +96,11 @@ input:active {
     background: #87CEFA;
     color: white;
     display: block;
-    width: 92.5%;
+    width: 90.5%;
     max-width: 680px;
     height: 50px;
     border-radius: 8px;
-    margin: 10 auto 10px; 
+    margin: -30 auto 10px; 
     border: none;
     cursor: pointer;
     font-size: 14px;

@@ -33,7 +33,11 @@
 </head>
 <body>
 <div class="container">
-	<h1><a onclick="location.href='/'">Travel Square</a></h1>
+	<h1>
+		<a onclick="location.href='/'">
+			<img alt="로고" src="<%= request.getContextPath() %>/resources/img/title/18px.png">
+		</a>
+	</h1>
 	<ul class="links">
 		<li>
 			<a>로그인</a>

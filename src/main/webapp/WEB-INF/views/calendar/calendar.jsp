@@ -33,9 +33,9 @@
                         headerToolbar: {
                             left: 'prev,next today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            right: 'dayGridMonth,timeGridWeek,listWeek'
                         },
-
+                        allDaySlot:false,
                         navLinks: true,
                         editable: true,
                         selectable: true,
@@ -53,7 +53,6 @@
                                 var obj = new Object();
 
                                 obj.title = info.event._def.title;
-                                obj.content = info.event._def.content;
                                 obj.start = info.event._instance.range.start;
                                 obj.end = info.event._instance.range.end;
 
@@ -65,8 +64,6 @@
 
                                 console.log(events);
                             }else{
-                                // Get 방식으로 데이터를 조회해서 가져와야하는데 새로고침 하지 않고는 어떻게
-                                // 해야할지 감이 안잡혀서 우선 reload 방식으로..
                                 location.reload();
                             }
                             $(function modifyData() {
@@ -255,15 +252,6 @@
     </div>
 
 
-<%--    <script>--%>
-<%--        var calendarEl = document.getElementById('calendar');--%>
-
-<%--        var calendar = new FullCalendar.Calendar(calendarEl, {--%>
-<%--            plugins: ["dayGrid"]--%>
-<%--            , locale: "ko"--%>
-<%--        });--%>
-
-<%--    </script>--%>
 
     <script>
         // 기본 위치(top)값

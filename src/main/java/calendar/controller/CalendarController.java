@@ -48,7 +48,6 @@ public class CalendarController {
 
            jsonArr.add(hash);
        }
-       logger.info("jsonArrCheck: {}", jsonArr);
        return jsonArr;
    }
 
@@ -69,8 +68,11 @@ public class CalendarController {
            LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
            LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
 
+
            LocalDateTime startDate = startDateUTC.plusHours(9);
            LocalDateTime endDate = endDateUTC.plusHours(9);
+
+
 
            int userno = login.getUserno();
             Date start = java.sql.Timestamp.valueOf(startDate);
@@ -102,30 +104,34 @@ public class CalendarController {
     @ResponseBody
     public String calendarUpdate(@RequestBody List<Map<String, Object>> param
         ,@SessionAttribute(value = "dto1", required = false) User login){
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
         for (Map<String, Object> list : param) {
 
-            String eventName = (String) list.get("title"); // 이름 받아오기
+            String title = (String) list.get("title");
             String startDateString = (String) list.get("start");
             String endDateString = (String) list.get("end");
 
-            String oldTitle = (String) list.get("oldTitle");
-            String oldStartString = (String) list.get("oldStart");
-            String oldEndString = (String) list.get("oldEnd");
+
+
 
             LocalDateTime modifiedStartDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
             LocalDateTime modifiedEndDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
-            LocalDateTime oldStart = LocalDateTime.parse(oldStartString, dateTimeFormatter);
-            LocalDateTime oldEnd = LocalDateTime.parse(oldEndString, dateTimeFormatter);
+
+
+
+            Date start = java.sql.Timestamp.valueOf(modifiedStartDate);
+            Date end = java.sql.Timestamp.valueOf(modifiedEndDate);
 
 
             Calendar calendar = new Calendar();
             calendar.setUserno(login.getUserno());
+            calendar.setCalendarTitle(title);
+            calendar.setStart1(start);
+            calendar.setEnd1(end);
 
 
-
-
-            calendarService.updateDateCalendar(calendar);
+            calendarService.updateCalendar(calendar);
         }
 
 
@@ -144,6 +150,7 @@ public class CalendarController {
             String title = (String) list.get("title");
             String startDateString = (String) list.get("start");
             String endDateString = (String) list.get("end");
+
 
             LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
             LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);

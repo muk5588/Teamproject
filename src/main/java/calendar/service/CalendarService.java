@@ -2,6 +2,7 @@ package calendar.service;
 
 import calendar.dto.Calendar;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CalendarService {
@@ -9,7 +10,8 @@ public interface CalendarService {
 
     public void insertCalendar(Calendar calendar);
 
-    public void updateDateCalendar(Calendar calendar);
+    public void updateCalendar(Calendar calendar);
 
     public void deleteCalendar(Calendar calendar);
+
 }

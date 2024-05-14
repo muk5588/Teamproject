@@ -5,6 +5,7 @@ import calendar.dto.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,12 +23,14 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public void updateDateCalendar(Calendar calendar) {
-        calendarDao.updateDateCalendar(calendar);
+    public void updateCalendar(Calendar calendar) {
+        calendarDao.updateCalendar(calendar);
     }
 
     @Override
     public void deleteCalendar(Calendar calendar) {
         calendarDao.deleteCalendar(calendar);
     }
+
+
 }

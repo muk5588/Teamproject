@@ -6,7 +6,7 @@ body {
     background: white;
 }
 
-.container {
+.warpper {
     display: block;
     max-width: 680px;
     width: 80%;
@@ -23,18 +23,23 @@ h3 {
     text-decoration: none;
 }
 
-.idFind {
+.idpwFind {
     list-style-type: none;
 }
 
-.idFind li {
+.idpwFind li {
     display: inline-block;
     margin: 0 20px 0 0;
     transition: .2s linear;
+    
 }
-.idFind li a {
+
+
+
+
+.idpwFind a {
     text-decoration: none;
-    color: #0f132a;
+    color: #2196f3;
     font-weight: bolder;
     text-align: center;
     cursor: pointer;
@@ -56,7 +61,7 @@ form {
     content: "";
     position: absolute;
     top: -15px;
-    left: 50px;
+    left: 70px;
     display: block;
     width: 0;
     height: 0;
@@ -67,6 +72,20 @@ form {
     transition: .2s linear;
 }
 
+.find__block.pw-find__block::before{
+	content: "";
+  	position: absolute;
+  	top: -15px;
+  	left: 180px;
+  	display: block;
+  	width: 0;
+  	height: 0;
+  	background: transparent;
+  	border-left: 15px solid transparent;
+  	border-right: 15px solid transparent;
+  	border-bottom: 15px solid rgba(15, 19, 42, 0.1);
+  	transition: .2s linear;
+}
 
 
 input {
@@ -139,5 +158,9 @@ input:active {
     /* left: 510px; */
     left: calc(100% - 170px);
 }
+
+
+
+
 
 

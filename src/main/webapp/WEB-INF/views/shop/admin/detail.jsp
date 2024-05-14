@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script>
+$(function(){
+	$("#updateBtn").click(function() {
+        var itemNo = "${item.itemNo}";
+
+        // URL 생성
+        var url = "./update?";
+        url += "itemNo=" + encodeURIComponent(itemNo);
+
+        // 페이지 이동
+        window.location.href = url;
+    });
+	
+})
+</script>
+</script>
+</head>
+<body>
+
+   <div class="container">
+
+        <h1>상품 관리 상세 정보</h1>
+        <a href="/adminPage">
+            <button>관리자 메인페이지로</button>
+        </a>
+        <br><button type="button" id="updateBtn">수정하기</button>
+		<br><button type="button" id="deleteBtn">삭제하기</button>
+        
+<div id="itemwarp" style="border: 1px solid #ccc; padding: 20px; margin-top: 20px;">
+    <table>
+        <tr>
+            <td>
+                <c:choose>
+                    <c:when test="${not empty files}">
+                        <c:forEach items="${files}" var="files">
+                            <c:if test="${not empty file}">
+                                <img alt="ItemImg" src="/resources/img/shop/upload/${file.storedName}">
+                            </c:if>
+                            <c:if test="${empty files.itemNo}">
+                                <img src="/resources/img/shop/nullimg.jpg" alt="notready">
+                            </c:if>
+                        </c:forEach>
+                    </c:when>
+                    <c:when test="${empty imgFiles}">
+                        <img src="/resources/img/shop/nullimg.jpg" alt="notready">
+                    </c:when>
+                </c:choose>
+            </td>
+        </tr>
+        <tr>
+            <td>${item.itemName}</td>
+        </tr>
+        <tr>
+            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" /></td>
+        </tr>
+        <tr>
+            <td>재고 : ${item.remain}</td>
+        </tr>
+        <tr>
+            <td>${item.itemComm}</td>
+        </tr>
+
+    </table>
+</div>
+<form id="" action="" hidden="hidden" method="post"></form>
+       
+
+    </div>
+    <!-- .container End -->
+
+    <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>
+
+
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>

@@ -8,7 +8,7 @@
 <sql id="search">
 	<if test="search != null">
 	<where>
-		title Like '%${search}%'
+		itemName Like '%${search}%'
 	</where>
 	</if>
 </sql>
@@ -82,5 +82,41 @@
 		AND itemNo = #{itemNo}
 	</where> 
 </update>
+
+<select id="selectItemByItemNo" parameterType="int" resultType="dto.Item" >
+	SELECT itemno,userno, itemname,createdate,price,itemcomm,remain,titleImg
+	FROM item
+	<where>
+		AND itemno = #{itemNo}
+	</where>
+</select>
+
+<select id="selectItemFileByItemNo" parameterType="int" resultType="dto.ItemFile">
+	SELECT fileNo, itemNo, origin_name, stored_name
+	FROm itemFILE
+	<where>
+		AND itemNo = #{itemNo}
+	</where> 
+</select>
+
+<update id="updateIByItem" parameterType="dto.Item">
+	UPDATE item
+	<set> 
+		titleImg = #{titleImg}
+		,itemName = #{itemName}
+		,itemComm = #{itemComm}
+		,price = #{price}
+		,remain = #{remain}
+	</set>
+	<where>
+		AND itemNo = #{itemNo}
+	</where> 
+</update>
+
+<delete id="deleteByItemOldFile" parameterType="dto.Item">
+	DELETE FROM ItemFile
+	WHERE itemNo = #{itemNo}
+	AND fileNo != (SELECT titleImg FROM Item WHERE itemNo = #{itemNo})
+</delete>
 
 </mapper>

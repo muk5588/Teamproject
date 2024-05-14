@@ -83,14 +83,10 @@ public class AdminShopSerivceImpl implements AdminShopService{
 				}
 			}
 
-			//이미지가 아니라면
 			if(nCnt == 0) {
-				PrintWriter print = response.getWriter();
-				print.print("NOTALLOW_"+sFilename);
-				print.flush();
-				print.close();
+				//이미지가 아니라면 중단
+				return null;
 			} else {
-				//디렉토리 설정 및 업로드	
 				
 				//파일경로
 				String filePath = servletContext.getRealPath("/resources/itemUpload/");
@@ -168,8 +164,7 @@ public class AdminShopSerivceImpl implements AdminShopService{
 		String temp = "";
         // storedName 추출을 위한 정규식 패턴
         for (String originName : originNames) {
-//        	Pattern pattern = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(?:png|jpg|gif|PNG|JPG|GIF)\"");
-        	Pattern pattern1 = Pattern.compile("img src=\"\\\\resources\\\\boardUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
+        	Pattern pattern1 = Pattern.compile("img src=\"\\\\resources\\\\itemUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
         	logger.info("pattern : {}",pattern);
             Matcher matcherStored = pattern.matcher(itemComm);
             logger.info("matcher : {}",matcherStored);
@@ -245,10 +240,81 @@ public class AdminShopSerivceImpl implements AdminShopService{
 			updateRes= adminShopDao.updatetitleImgFile(filetest);
 		}
 		
-		return updateRes; 
+		return filetest.getFileNo(); 
 	}
 
+	@Override
+	public Item selectItemByItemNo(int itemNo) {
+		return adminShopDao.selectItemByItemNo(itemNo);
+	}
 
+	@Override
+	public List<ItemFile> selectItemFileByItemNo(int itemNo) {
+		return adminShopDao.selectItemFileByItemNo(itemNo);
+	}
+
+	@Override
+	public int updateIByItem(Item item) {
+		adminShopDao.updateIByItem(item);
+		adminShopDao.deleteByItemOldFile(item);
+		String itemComm = item.getItemComm();
+		List<String> originNames = new ArrayList<>();
+		// originName 추출을 위한 정규식 패턴
+		Pattern pattern = Pattern.compile("title=\"([^\"\\\\]+\\.(?:png|jpg|gif|PNG|JPG|GIF))\"");
+		logger.info("pattern : {}",pattern);
+		Matcher matcher = pattern.matcher(itemComm);
+		while (matcher.find()) {
+			originNames.add(matcher.group(1));
+		}
+		logger.debug("originNames : {} ",originNames);
+		if(originNames == null || originNames.isEmpty()) {
+			return 0;
+		}
+		List<String> storedNames = new ArrayList<>();
+		String temp = "";
+		// storedName 추출을 위한 정규식 패턴
+		for (String originName : originNames) {
+			Pattern pattern1 = Pattern.compile("img src=\"\\\\resources\\\\itemUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
+			logger.info("pattern : {}",pattern);
+			Matcher matcherStored = pattern.matcher(itemComm);
+			logger.info("matcher : {}",matcherStored);
+			logger.info("matcher.find() : {}",matcherStored.find());
+			if (matcher.find()) {
+				temp = "";
+				temp += matcher.group(1);
+				temp += ".";
+				temp += matcher.group(2);
+				storedNames.add(temp);
+				logger.info("matcher.group(1) : {}",matcher.group(1));
+			}
+			logger.debug("storedNames : {} ",storedNames);
+		}
+		// originName과 storedName을 함께 설정하여 ItemFile 객체 생성
+		List<ItemFile> itemFiles = new ArrayList<>();
+		for (int i = 0; i < originNames.size(); i++) {
+			ItemFile itemFile = new ItemFile();
+			itemFile.setOriginName(originNames.get(i));
+			itemFile.setStoredName(storedNames.get(i));
+			itemFile.setItemNo(item.getItemNo());
+			itemFiles.add(itemFile);
+		}
+		int res = adminShopDao.fileSave(itemFiles);
+		return res;
+	}
+
+	@Override
+	public int deleteByItemNo(int itemNo) {
+		int res = 0;
+		int res1, res2, res3;
+		res1=res2=res3=0;
+		res1=adminShopDao.deleteItemFK(itemNo);
+		res2=adminShopDao.deleteitemFileByItemNo(itemNo);
+		res3= adminShopDao.deleteitemByItemNo(itemNo);
+		res = res1+res2+res3;
+		return res;
+	}
+
+	
 	
 	
 }

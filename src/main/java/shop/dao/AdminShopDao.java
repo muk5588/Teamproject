@@ -24,4 +24,18 @@ public interface AdminShopDao {
 
 	public int updatetitleImgFile(ItemFile filetest);
 
+	public Item selectItemByItemNo(int itemNo);
+
+	public List<ItemFile> selectItemFileByItemNo(int itemNo);
+
+	public int updateIByItem(Item item);
+
+	public void deleteByItemOldFile(Item item);
+
+	public int deleteitemByItemNo(int itemNo);
+
+	public int deleteitemFileByItemNo(int itemNo);
+
+	public int deleteItemFK(int itemNo);
+	
 }

@@ -61,6 +61,35 @@ public interface AdminShopService {
 	 */
 	public int updatetitleImg(Item item, MultipartFile file);
 
+	/**
+	 * 상품 번호로 상품 조회
+	 * @param itemNo - 상품 번호
+	 * @return - 조회된 상품 행
+	 */
+	public Item selectItemByItemNo(int itemNo);
+
+	/**
+	 * 상품 번호로 상품 파일 조회
+	 * @param itemNo - 상품 번호
+	 * @return - 조회된 상품 파일 행List
+	 */
+	public List<ItemFile> selectItemFileByItemNo(int itemNo);
+
+	/**
+	 * 상품객체 UPDATE
+	 * @param item - 상품 객체
+	 * @return 
+	 */
+	public int updateIByItem(Item item);
+
+	/**
+	 * 삭제.
+	 * @param itemNo
+	 * @return
+	 */
+	public int deleteByItemNo(int itemNo);
+
+
 	
 	
 	

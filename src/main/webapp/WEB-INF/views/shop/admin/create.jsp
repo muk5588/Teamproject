@@ -45,12 +45,20 @@ function save(){
 // 스마트 에디터 (사진파일 업로드 URL)
 var sUploadURL = './uploaditemfile';
 
+//대표이미지 file 검사
 function validateFileUpload(input) {
+    const allowedExtensions = ["png", "jpg", "jpeg", "gif"];
+    const filePath = input.value;
+    const fileExtension = filePath.split('.').pop().toLowerCase();
     if (input.files.length > 1) {
         alert("하나의 파일만 선택하세요.");
-        
         //선택된 파일 삭제
         input.value = ''; 
+    }
+    if (!allowedExtensions.includes(fileExtension)) {
+        alert("파일은 .png, .jpg, .gif 형식만 가능합니다.");
+        //선택된 파일 삭제
+        input.value = '';
     }
 }
 </script>
@@ -119,11 +127,11 @@ function validateFileUpload(input) {
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">상품가격</label>
-        <input type="number" class="form-control" id="price" placeholder="가격을 적어주세요" name="price">
+        <input type="number" class="form-control" id="price" placeholder="가격을 적어주세요" name="price" min="0">
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">상품재고</label>
-        <input type="number" class="form-control" id="remain" placeholder="재고 수를적어주세요" name="remain">
+        <input type="number" class="form-control" id="remain" placeholder="재고 수를적어주세요" name="remain" min="0">
     </div>
 
     <div class="mb-3">

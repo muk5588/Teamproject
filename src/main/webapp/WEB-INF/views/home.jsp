@@ -10,6 +10,8 @@
 <head>
     <title>Home</title>
     <script src="/resources/js/mainPage/mainSlide.js" defer></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script type="javascript">
@@ -23,6 +25,24 @@
 
         // 페이지 로드 시 조정 함수 호출
         window.onload = adjustSlideshowPosition;
+
+    </script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar_home');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                titleFormat : {
+                    year : 'numeric', month : 'long'
+                },
+                headerToolbar: {
+                    start : 'title',
+                    center:'',
+                    end : ''
+                }
+            });
+            calendar.render();
+        });
     </script>
     <style type="text/css">
         @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
@@ -48,6 +68,14 @@
             font-size: 24px;
             margin-right: 1rem;
         }
+
+        #calendar_home{
+            clear: both;
+            float:right;
+            width: 300px;
+            height: 500px;
+        }
+
         .email{
             margin-top: 1em;
         }
@@ -128,6 +156,8 @@
 <div>
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
+
+<div id = "calendar_home"></div>
 <P> The time on the server is ${serverTime}. </P>
 <div class="board-pre">
 

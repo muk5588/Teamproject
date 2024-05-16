@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dto.Review;
 import shop.service.face.ReviewService;
 
-@Controller
+//@Controller
 @RequestMapping("/review")
 public class ReviewController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	@Autowired private ReviewService reviewService;
+//	@Autowired private ReviewService reviewService;
 	
 //	@RequestMapping("/")
 //	public void defaultPage() {

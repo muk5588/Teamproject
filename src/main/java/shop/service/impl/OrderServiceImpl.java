@@ -22,6 +22,7 @@ import dto.UserOrder;
 import shop.dao.OrderDao;
 import shop.service.face.OrderService;
 import user.dto.User;
+import vo.ItemVO;
 @Service
 public class OrderServiceImpl implements OrderService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -216,6 +217,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderItem selectByOrderItem(OrderItem orderItem) {
 		return orderDao.selectByOrderItem(orderItem);
+	}
+
+	@Override
+	public List<UserOrder> selectUserOrderByUser(User user) {
+		return orderDao.selectUserOrderByUser(user);
+	}
+
+	@Override
+	public List<OrderItem> selectOrderItemsByUserOrders(List<UserOrder> orders) {
+		return orderDao.selectOrderItemsByUserOrders(orders);
+	}
+
+	@Override
+	public List<ItemVO> selectItemByUserOrderItems(List<OrderItem> orderitems) {
+		return orderDao.selectItemByUserOrderItems(orderitems);
 	}
 
 

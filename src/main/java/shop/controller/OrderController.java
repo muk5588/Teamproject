@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import shop.service.face.OrderService;
 import user.dto.User;
+import vo.ItemVO;
 
 @Controller
 @RequestMapping("/order")
@@ -34,7 +36,7 @@ public class OrderController {
 	@Autowired HttpSession session;
 	
 	@RequestMapping("/ordersheet")
-	private void ordersheet(@RequestParam(value="res", required = false)String[] orderDatas
+	public void ordersheet(@RequestParam(value="res", required = false)String[] orderDatas
 			, Model model
 			, HttpSession session
 			, @RequestParam(value="itemNo", required = false)String STitemNo
@@ -76,7 +78,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/completed")
-	private String orderCompleted(
+	public String orderCompleted(
 		HttpServletRequest req
 		,@RequestParam(value="orderDatas", required = false)String orderDatas
 		,UserOrder userOrder
@@ -159,8 +161,31 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/orderresult")
-	private void result() {
+	public void result() {}
+	
+	@RequestMapping("/history")
+	public String history(Model model) {
+		logger.debug("구매기록");
+		User user = (User) session.getAttribute("dto1");
+		logger.debug("구매기록 user : {}",user);
+		if( null == user) {
+			logger.debug("구매기록 로그인 x");
+			return "redircet/login";
+		}
+		List<UserOrder> orders = orderService.selectUserOrderByUser(user);
+		logger.debug("구매기록 orders : {}",orders);
+		List<OrderItem> orderitems = orderService.selectOrderItemsByUserOrders(orders);
+		logger.debug("구매기록 orderitems : {}",orderitems);
+		List<ItemVO> items = orderService.selectItemByUserOrderItems(orderitems);
+		logger.debug("구매기록 items : {}",items);
 		
+//		model.addAttribute("orders", orders);
+//		model.addAttribute("orderitems", orderitems);
+//		model.addAttribute("items", items);
+//		
+		return null;
 	}
+	
+	
 	
 }

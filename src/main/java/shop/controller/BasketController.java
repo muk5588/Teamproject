@@ -30,13 +30,13 @@ public class BasketController {
 	@Autowired private BasketService basketService;
 	
 	@RequestMapping("/")
-	private void basket() {
+	public void basket() {
 		logger.debug("장바구니/ ");
 	}
 	
 	@ResponseBody
 	@RequestMapping("/insert")
-	private int basketInsert(
+	public int basketInsert(
 			@RequestParam("itemNo") int itemNo
 			, @RequestParam("quantity") int quantity
 			, HttpSession session
@@ -62,7 +62,7 @@ public class BasketController {
 	}
 	
 	@RequestMapping("/userbasket")
-	private String userBakset(HttpSession session, Model model) {
+	public String userBakset(HttpSession session, Model model) {
 		logger.debug("userbasket");
 		User user = (User) session.getAttribute("dto1");
 		logger.debug("user : {}",user);
@@ -95,7 +95,7 @@ public class BasketController {
 	
 	@ResponseBody
 	@RequestMapping("/buyBasket")
-	private int[] buyBasket(@RequestParam("basketNo[]")int[] no
+	public int[] buyBasket(@RequestParam("basketNo[]")int[] no
 			, Model model) {
 		logger.debug("Ajax buyBasket : {}", no);
 //		Map<String, Object> orderMap = basketService.userorderProc(no);

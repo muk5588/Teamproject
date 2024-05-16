@@ -22,7 +22,6 @@
             var menuHeight = menu.offsetHeight; // 메뉴의 높이
             slideshowContainer.style.marginTop = menuHeight + 'px'; // 슬라이드쇼 컨테이너의 marginTop 설정
         }
-
         // 페이지 로드 시 조정 함수 호출
         window.onload = adjustSlideshowPosition;
 
@@ -43,6 +42,25 @@
             });
             calendar.render();
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarLink = document.querySelector('.calendar_link');
+
+            calendarLink.addEventListener('click', function(event) {
+                // 세션에서 로그인 여부 확인
+                var isLogin = <%= session.getAttribute("isLogin") %>;
+
+                // 로그인 여부에 따라 페이지 이동 제어
+                if (!isLogin) {
+                    event.preventDefault(); // 기본 동작 중지 (페이지 이동 취소)
+                    alert('로그인이 필요합니다.'); // 사용자에게 알림 표시
+                    return false;
+                } else {
+                    // 로그인된 경우에만 페이지 이동
+                    location.href = '/calendar';
+                }
+            });
+        });
+
     </script>
     <style type="text/css">
         @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
@@ -157,7 +175,7 @@
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
 
-<a onclick="location.href = '/calendar'" class="calendar_link">
+<a class="calendar_link">
 <div id = "calendar_home"></div>
 </a>
 <P> The time on the server is ${serverTime}. </P>

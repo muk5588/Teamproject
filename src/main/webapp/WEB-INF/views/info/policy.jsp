@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이용약관</title>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <link href="/resources/css/info/policy.css" rel="stylesheet" type="text/css">
 
@@ -38,6 +38,9 @@ $(function(){
     </li>
     <li>
       <a href="/info/privacy" id="privacy">개인정보 처리방침</a>
+    </li>
+    <li>
+      <a href="/info/service" id="service">Travel Square 정책</a>
     </li>
  </ul>
  <hr>

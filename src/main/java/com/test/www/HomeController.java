@@ -87,5 +87,17 @@ public class HomeController {
 	public void privacy() {
 		
 	}
+	@RequestMapping("/info/service")
+	public void service() {
+		
+	}
+	@RequestMapping("/info/service2")
+	public void service2() {
+		
+	}
+	@RequestMapping("/info/customerService")
+	public void customerService() {
+		
+	}
 	
 }

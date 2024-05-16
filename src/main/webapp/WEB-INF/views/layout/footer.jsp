@@ -23,8 +23,8 @@
             <li><a href="/info/company">회사소개</a></li>
             <li><a href="/info/policy">이용약관</a></li>
             <li><a href="/info/privacy">개인정보처리방침</a></li>
-            <li><a href="#">Travel Square 정책</a></li>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="/info/service">Travel Square 정책</a></li>
+            <li><a href="/info/customerService">고객센터</a></li>
         </ul>
     </header>
 </div>

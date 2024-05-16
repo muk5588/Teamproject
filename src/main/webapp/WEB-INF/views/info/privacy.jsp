@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>개인정보 처리방침</title>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <link href="/resources/css/info/privacy.css" rel="stylesheet" type="text/css">
 <script>
@@ -41,6 +41,9 @@ $(function(){
     </li>
     <li>
       <a href="/info/privacy" id="privacy">개인정보 처리방침</a>
+    </li>
+    <li>
+      <a href="/info/service" id="service">Travel Square 정책</a>
     </li>
  </ul>
  <hr>
@@ -146,6 +149,7 @@ $(function(){
 <p>소 속 : Data Protection&Privacy</p>
 <p>직 위 : CPO / DPO</p>
 <p>전 화 : 1111-2222 메 일 : honggd12@gmail.com</p>
+
 <p>개인정보 보호담당자</p>
 <p>이 름 : 고길동</p>
 <p>소 속 : Data Protection&Privacy</p>

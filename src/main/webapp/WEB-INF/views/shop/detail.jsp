@@ -27,6 +27,12 @@
 <script type="text/javascript">
 $(function(){
 	
+	window.onload = function(){
+		console.log("확인용")
+		
+		
+	}
+	
 	//장바구니 담기 버튼
 	 $("#addToCartBtn").click(function() {
          // isLogin 변수에는 로그인 상태를 나타내는 값이 있어야 합니다.

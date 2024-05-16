@@ -65,15 +65,18 @@ public class BoardController {
 	    
 	    List<Board> list = null;
 	    List<Map<String, Object>> recommList = null;
+		String name = null;
 	    logger.info("paging : {}",paging);
 	    
 	    if (categoryNo != null) {
 	    	paging.setCategoryNo(categoryNo);
 	        list = boardService.listByCategory(paging);
 	        recommList = boardService.getRecommendRes(paging);
+			name = boardService.getCategoryName(categoryNo);
 	    } else {
 	        list = boardService.list(paging);
 	        recommList = boardService.getRecommendRes(paging);
+			name = "전체";
 	    }
 
 //	    logger.debug("list : {}", list);
@@ -84,12 +87,11 @@ public class BoardController {
 	    for(Map<String, Object> M : recommList) {
 //	        logger.debug("M : {}", M.toString());
 	    }
-	    
 	    model.addAttribute("totalrecomm", recommList);
 	    model.addAttribute("curPage", curPage);
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("list", list);
-  
+		model.addAttribute("name", name);
 	}
 	
 	@GetMapping("/category")
@@ -326,7 +328,8 @@ public class BoardController {
 
 
 
-		List<Map<String, Object>> recommList = boardService.getuserRecommendRes(paging);
+		List<Map<String, Object>> recommList = null;
+		recommList = boardService.getRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());

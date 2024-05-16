@@ -182,11 +182,11 @@
         <div class="mypage">
             <c:choose>
                 <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                    <a href='/message/'>쪽지</a>
-                    /
                     <a href="/user/userDetail">마이페이지</a>
                     /
                     <a href="/user/adminPage">관리자페이지</a>
+                    /
+                    <a href='/message/'>쪽지</a>
                 </c:when>
                 <c:otherwise>
                     <a href="/user/userDetail">마이페이지</a>

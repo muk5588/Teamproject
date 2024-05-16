@@ -97,7 +97,7 @@
             clear: both;
             float: right;
             width: 300px;
-            height: 500px;
+            height: 463px;
         }
 
         .logoutdiv {

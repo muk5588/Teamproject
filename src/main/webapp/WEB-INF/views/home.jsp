@@ -22,30 +22,31 @@
             var menuHeight = menu.offsetHeight; // 메뉴의 높이
             slideshowContainer.style.marginTop = menuHeight + 'px'; // 슬라이드쇼 컨테이너의 marginTop 설정
         }
+
         // 페이지 로드 시 조정 함수 호출
         window.onload = adjustSlideshowPosition;
 
     </script>
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar_home');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                titleFormat : {
-                    year : 'numeric', month : 'long'
+                titleFormat: {
+                    year: 'numeric', month: 'long'
                 },
                 headerToolbar: {
-                    start : 'title',
-                    center:'',
-                    end : ''
+                    start: 'title',
+                    center: '',
+                    end: ''
                 }
             });
             calendar.render();
         });
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarLink = document.querySelector('.calendar_link');
 
-            calendarLink.addEventListener('click', function(event) {
+            calendarLink.addEventListener('click', function (event) {
                 // 세션에서 로그인 여부 확인
                 var isLogin = <%= session.getAttribute("isLogin") %>;
 
@@ -64,38 +65,58 @@
     </script>
     <style type="text/css">
         @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
-        *{
+
+        * {
             font-family: 'NexonMaplestory';
             font-weight: 300;
             font-style: normal;
         }
-        a{
+
+        a {
             color: black;
             text-decoration-line: none;
         }
-        .logout{
+
+        .logout {
             border-radius: 15px;
             background-color: white;
             border: 1px solid #ccc;
             padding-top: 4px;
         }
-        .logout img{
+
+        .logout img {
             vertical-align: middle;
         }
-        .usernick{
+
+        .usernick {
             font-size: 24px;
             margin-right: 1rem;
         }
 
-        #calendar_home{
+        #calendar_home {
             clear: both;
-            float:right;
+            float: right;
             width: 300px;
             height: 500px;
         }
 
-        .email{
-            margin-top: 1em;
+        .logoutdiv {
+            width: auto;
+            height: 60%;
+        }
+
+        .email {
+            height: 20%;
+            margin-bottom: 10%;
+        }
+        .mypage{
+            width: 100%;
+            height: 30%;
+            margin: 0 auto;
+        }
+        .mypage a{
+            margin: 10px;
+            text-align: center;
         }
 
     </style>
@@ -148,26 +169,32 @@
         <a class="btn-fill" href="/user/searchUser?value=pw">비밀번호찾기</a>
     </c:if>
     <c:if test="${not empty isLogin}">
-        <span class="usernick">${dto1.nickname }</span>
-        <a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">
-            <button class="logout">로그아웃<img src="/resources/img/mainPage/로그아웃.png" width="30px" height="30px"></button>
-        </a><br>
-        <span class="email">${dto1.email }</span><br>
-
-        <c:choose>
-            <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                <a href = '/message/'>쪽지</a>
-                /
-                <a href="/user/userDetail">마이페이지</a>
-                /
-                <a href="/user/adminPage">관리자페이지</a>
-            </c:when>
-            <c:otherwise>
-                <a href="/user/userDetail">마이페이지</a>
-                /
-                <a href = '/message/'>쪽지</a>
-            </c:otherwise>
-        </c:choose>
+        <div class="logoutdiv">
+            <span class="usernick">${dto1.nickname }</span>
+            <a href="<%=request.getContextPath()%>/login/logout">
+                <button class="logout">로그아웃<img src="/resources/img/mainPage/로그아웃.png" width="30px" height="30px">
+                </button>
+            </a><br>
+        </div>
+        <div class="email">
+            <span>${dto1.email }</span><br>
+        </div>
+        <div class="mypage">
+            <c:choose>
+                <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                    <a href='/message/'>쪽지</a>
+                    /
+                    <a href="/user/userDetail">마이페이지</a>
+                    /
+                    <a href="/user/adminPage">관리자페이지</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/user/userDetail">마이페이지</a>
+                    /
+                    <a href='/message/'>쪽지</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
         </ul>
     </c:if>
 </div>
@@ -176,7 +203,7 @@
 </div>
 
 <a class="calendar_link">
-<div id = "calendar_home"></div>
+    <div id="calendar_home"></div>
 </a>
 <P> The time on the server is ${serverTime}. </P>
 <div class="board-pre">

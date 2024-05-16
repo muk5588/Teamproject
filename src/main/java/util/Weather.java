@@ -36,12 +36,14 @@ public class Weather {
             model.addAttribute("address",address);
         }else {
             address = user.getAddress();
+            String[] address1 = address.split("\\s");
+            String address2 = address1[0]+address1[1];
             HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
             x = XYMap.get("x");   //경도
             y = XYMap.get("y");   //위도
             model.addAttribute("x",x);
             model.addAttribute("y",y);
-            model.addAttribute("address",address);
+            model.addAttribute("address",address2);
         }
 
         return "layout/weather";

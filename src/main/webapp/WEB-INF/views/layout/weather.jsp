@@ -16,7 +16,6 @@
         ${x}
         var y =
         ${y}
-
         var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + y +
             "&lon=" + x +
             "&units=metric&appid=e776c451f21037ecc76b1a9ecf704f77";
@@ -43,7 +42,6 @@
 
                 $('.Icon').html(weathericonUrl);
             });
-
     </script>
 </head>
 <body>

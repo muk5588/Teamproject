@@ -9,6 +9,8 @@ import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
+import user.dto.User;
+import vo.ItemVO;
 
 public interface OrderDao {
 
@@ -39,6 +41,12 @@ public interface OrderDao {
 	public ItemFile getitemTitleImg(int itemNo);
 	
 	public OrderItem selectByOrderItem(OrderItem orderItem);
+
+	public List<UserOrder> selectUserOrderByUser(User user);
+
+	public List<OrderItem> selectOrderItemsByUserOrders(@Param("orders")List<UserOrder> orders);
+
+	public List<ItemVO> selectItemByUserOrderItems(@Param("orderitems")List<OrderItem> orderitems);
 
 	
 }

@@ -145,5 +145,43 @@ WHERE basketNo IN
 	</where>
 </select>
 
+<select id="selectUserOrderByUser" parameterType="User" resultType="dto.UserOrder">
+	SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
+	<where>
+		AND userno = {user.userno}
+	</where>
+	ORDER BY orderno DESC
+</select>
+
+<select id="selectOrderItemsByUserOrders" parameterType="dto.UserOrder" resultType="dto.OrderItem">
+	SELECT * FROM orderitem
+	<where> AND 1=1
+	<if test="orders != null">
+	AND orderno IN 
+		<foreach collection="orders" item="data" open="(" close=")" separator=",">
+		#{data.orderNo}
+		</foreach>
+	</if>
+	</where>
+</select>
+
+<select id="selectItemByUserOrderItems" parameterType="dto.OrderItem" resultType="vo.ItemVO">
+    SELECT i.itemno itemNo, itemname itemName, price, itemcomm itemComm, remain, titleImg, fileno, stored_Name, origin_Name
+    FROM (
+        SELECT * FROM item
+        WHERE itemno IN
+        <foreach item="item" collection="orderitems" open="(" separator="," close=")">
+            #{item.itemNo}
+        </foreach>
+    ) i
+    JOIN (
+        SELECT * FROM itemfile
+        WHERE itemno IN
+        <foreach item="item" collection="orderitems" open="(" separator="," close=")">
+            #{item.itemNo}
+        </foreach>
+    ) it ON i.itemno = it.itemno
+    AND i.titleimg = it.fileno
+</select>
 
 </mapper>

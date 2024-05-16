@@ -1,0 +1,30 @@
+
+.companySection{
+	width: 90%; 
+    max-width: 880px;
+    height: auto; 
+    border: solid 1px #0068FF;
+    border-radius: 20px;
+    box-shadow: 7px 7px 39px 0px #0068FF40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0; 
+    margin: 50px auto 100px; 
+}
+
+p{
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+body{
+	font-weight: bold;
+    text-decoration: none;
+    font-family: '돋움';
+    font-size: 14px;
+    text-align: left;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333;
+}

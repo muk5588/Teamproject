@@ -57,24 +57,31 @@
             }).open();
         }
         
-        function validateForm() {
-            var checkbox = document.getElementById('checkbox');
-            if (!checkbox.checked) {
-                alert('이용약관에 동의해야 합니다.');
-                return false;
-            }
-            
-            return true;
-        }
-        
         window.onload = function() {
-            document.getElementById('join').onclick = function() {
-                if (!validateForm()) {
-                	return false;
+            var checkbox = document.getElementById('checkbox');
+            var joinButton = document.getElementById('join');
+
+            // 이용약관 체크박스가 변경될 때마다 호출되는 함수
+            checkbox.addEventListener('change', function() {
+                joinButton.disabled = !checkbox.checked; // 체크 여부에 따라 버튼 활성화 상태 변경
+                if(checkbox.checked){
+                	alert('이용약관에 동의하셨습니다.')
                 }
-            }
+            });
+
+            // 초기 상태에서 버튼 비활성화
+            joinButton.disabled = true;
+
         };
         
+        window.onload = function() {
+            var sendButton = document.getElementById('checkmail');
+
+            // 인증번호 발송 버튼 클릭 시 이벤트 생성
+            sendButton.addEventListener('click', function(event) {
+                alert('발송 중이니 기다려 주세요.');
+            });
+        };
         
     </script>
 
@@ -151,7 +158,7 @@
     	<div class="memberinfo_box">
             <form action="/user/userInsert" method="post" id="userform"> <!-- action 값을 안주면 submit을 자기 자신에게 한다 -->
                 <div id="namebox">
-                    <input type="text" name="name" id="name" placeholder="*이름"/>
+                    <input type="text" name="name" id="name" placeholder="*성명"/>
                     <br><br>
                 </div>
                 <div id="useridbox">
@@ -203,14 +210,31 @@
                     <input type="radio" name="gender" value="F"/>여성
                 </div>
                </div>
+            </form>
     	</div>
+    	
+    		<div class="scroll-box-title">
+    				<p class="bold-text">개인정보 수집 이용 동의</p>
+    		</div>
+    		<div class="scroll-box">
+    				<p class="bold-text">수집하는 개인정보</p>
+    				<p>개인식별정보 : 성명, 주소, 전화번호, 휴대전화번호, 이메일을 수집합니다.</p>
+					<p class="bold-text">수집한 개인정보의 이용</p>
+					<p>제공하신 정보는 위촉절차의 집행 및 관리, 경력‧자격 등 확인(조회 및 검증), 위촉 여부의 결정, 민원처리에 사용 됩니다.
+					<p>① 본인 확인 및 범죄경력 조회에 이용: 성명, 생년월일</p>
+					<p>② 지원자와의 의사소통 및 정보 전달 등에 이용: 성명, 주소, 전화번호, 휴대전화번호, 이메일</p>
+					<p>③ 지원자 평가에 이용: 자격사항, 경력사항 등</p>
+					<p>④ 단, 지원자의 기본적 인권 침해의 우려가 있는 민감한 개인정보(인종 및 민족, 사상 및 신조, 정치적 성향 및 범죄기록 등)는 수집하지 않습니다.</p>
+					<p class="bold-text">개인정보 보관기간
+					<p>수집된 개인정보는 지원서 제출 후 위촉기간 만료 시 또는 지원서 삭제 요청 시까지 위 이용 목적을 위하여 보유‧이용됩니다. 또한 삭제 요청 시 지원자의 개인정보를 재생이 불가능한 방법으로 즉시 파기합니다.</p>
+    		</div>
+    		
     		<div class="agree_checkbox">
     			<div>
-    				<input type="checkbox" id="checkbox">이용약관 개인정보 수집 및 이용, 마케팅 활용 선택에 모두 동의합니다.
+    				<input type="checkbox" id="checkbox" value="true">이용약관 개인정보 수집 및 이용에 모두 동의합니다.
     				<br><br><hr>
     			</div>
     		</div>
-            </form>
     	<div class="button">
     		<div>
                 <button type="button" id="join" name="join">회원가입</button>

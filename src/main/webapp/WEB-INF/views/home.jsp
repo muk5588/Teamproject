@@ -157,7 +157,9 @@
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
 
+<a onclick="location.href = '/calendar'" class="calendar_link">
 <div id = "calendar_home"></div>
+</a>
 <P> The time on the server is ${serverTime}. </P>
 <div class="board-pre">
 

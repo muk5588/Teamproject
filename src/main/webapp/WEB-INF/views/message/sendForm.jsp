@@ -31,7 +31,7 @@ $(function(){
 						$(location).attr('href', '/')
 					})
 				}
-				
+				window.close();
 			}
 			,error: function(){
 				console.log("AJAX 실패")

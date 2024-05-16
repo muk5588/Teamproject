@@ -83,6 +83,13 @@ $(function(){
 		})
 		
 	})
+	var popupsendForm = document.querySelector('button#popupsendForm');
+
+	popupsendForm.onclick = function (){
+		let popOption = "width = 500px, height=500px, top=300px, left=300px"
+		let openUrl = './sendForm'
+		window.open(openUrl, 'popup', popOption);
+	}
 	
 })
 </script>
@@ -127,7 +134,7 @@ $(function(){
 
 </div>
 <a href="./sendlist"><button>보낸 쪽지함</button></a><br>
-<a href="./sendForm"><button>쪽지쓰기</button></a><br>
+<button id = "popupsendForm">쪽지쓰기</button><br>
 <a href="/"><button>홈으로</button></a><br>
 </body>
 </html>

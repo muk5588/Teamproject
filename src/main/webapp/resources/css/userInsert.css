@@ -177,7 +177,7 @@ h2 {
     padding: 50px;
     justify-content: space-around;
     width: 600px;
-    height: auto; /* 높이를 자동으로 설정 */
+    height: auto; 
     border: none;
 }
 
@@ -216,8 +216,20 @@ h2 {
     justify-content: center;
 }
 
+#emailbox {
+    position: relative; 
+}
+
 button#checkmail {
-    margin-left: 454px;
+    margin-left: 456px;
+    margin-top: -42px;
+    height: 41px;
+    border: solid 1px #0068FF;
+    border-radius: 20px;
+    color: #0068FF;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff ;
 }
 
 .button button {
@@ -235,8 +247,30 @@ input[type="radio"] {
     height: 20px;
 }
  
+ input#email{
+ width: 400px;
+ }
+ 
+ input[type="button"]{
+ 	color: #0068FF;
+ 	border: solid 1px #0068FF;
+ 	background-color: #ffffff ;
+ }
+ 
+.scroll-box {
+            max-height: 180px; 
+            overflow-y: auto; 
+            border: 1px solid #ccc; 
+            padding: 30px; 
+            margin-bottom: 10px; 
+            max-width: 556px;
+}
+ 
+.bold-text{
+	font-weight: bold;
+}
  
  
- 
+
  
  

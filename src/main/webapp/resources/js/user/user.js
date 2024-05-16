@@ -6,21 +6,23 @@ window.addEventListener("DOMContentLoaded",function () {
         if (value.length < 5){
             $("#alertid").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertid").text("아이디는 5자리 이상 이여야 합니다.")
         }
         else if(value.replace(/\s| /gi, "").length == 0){
             $("#alertid").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertid").text("아이디에 공백은 사용 불가합니다.")
         }
         else if(num<0||eng<0){
             $("#alertid").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
             });
             $("#alertid").text("아이디는 영어+숫자로 이루어저야 합니다.")
         }
@@ -34,7 +36,7 @@ window.addEventListener("DOMContentLoaded",function () {
                     if (data == 1) {
                         $("#alertid").css({
                             "color": "red",
-                            "font-size": "10px"
+                            "font-size": "15px"
                         });
                         $("#alertid").text("중복된 아이디입니다.");
                     } else if (data == 0) {
@@ -55,28 +57,32 @@ window.addEventListener("DOMContentLoaded",function () {
         if(val.length <8){
             $("#alertpw").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw").text("비밀번호는 8자리 이상이여야 합니다")
         }
         else if (val.replace(/\s| /gi,"").length == 0){
             $("#alertpw").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw").text("비밀번호에 공백은 사용할 수 없습니다.")
         }
         else if(num<0||eng>0||spe<0){
             $("#alertpw").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw").text("비밀번호는 영어+숫자+특수문자로 이루어저야 합니다.")
         }
         else{
             $("#alertpw").css({
                 "color": "black",
-                "font-size": "12px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw").text("사용가능한 비밀번호 입니다")
         }
@@ -87,14 +93,16 @@ window.addEventListener("DOMContentLoaded",function () {
         {
             $("#alertpw2").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw2").text("비밀번호가 일치하지 않습니다.")
             return;
         }
             $("#alertpw2").css({
                 "color": "black",
-                "font-size": "12px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertpw2").text("비밀번호가 일치합니다.")
     });
@@ -103,7 +111,8 @@ window.addEventListener("DOMContentLoaded",function () {
         if(!regex.test($("#email").val())){
             $("#alertemail").css({
                 "color": "red",
-                "font-size": "10px"
+                "font-size": "15px",
+                "text-align": "center"
             });
             $("#alertemail").text("이메일 형식이 맞지 않습니다.")
         }else {
@@ -126,7 +135,8 @@ window.addEventListener("DOMContentLoaded",function () {
                        alert("서버와 통신 중 에러가 발생했습니다. ")
                        $("#alertemail").css({
                            "color": "red",
-                           "font-size": "10px"
+                           "font-size": "15px",
+                           "text-align": "center"
                        });
                        $("#alertemail").text("서버와 통신 중 에러가 발생했습니다. ")
                    }else {
@@ -134,7 +144,8 @@ window.addEventListener("DOMContentLoaded",function () {
                        alert("이메일이 발송 되었습니다")
                        $("#alertemail").css({
                            "color": "red",
-                           "font-size": "10px"
+                           "font-size": "15px",
+                           "text-align": "center"
                        });
                        $("#alertemail").text("인증번호를 입력해 주세요")
                        code = data.authNum;
@@ -148,13 +159,15 @@ window.addEventListener("DOMContentLoaded",function () {
            if ($("#checkcode").val().length != 6){
                $("#alertemail").css({
                    "color": "red",
-                   "font-size": "10px"
+                   "font-size": "15px",
+                   "text-align": "center"
                });
                $("#alertemail").text("인증번호가 일치하지 않습니다")
            } else if ($("#checkcode").val() == code){
                $("#alertemail").css({
                    "color": "green",
-                   "font-size": "10px"
+                   "font-size": "15px",
+                   "text-align": "center"
                });
                $("#alertemail").text("인증이 완료 되었습니다")
            }
@@ -186,7 +199,8 @@ window.addEventListener("DOMContentLoaded",function () {
             if(value.replace(/\s| /gi, "").length == 0){
                 $("#alertnick").css({
                     "color": "red",
-                    "font-size": "10px"
+                    "font-size": "15px",
+                    "text-align": "center"
                 });
                 $("#alertnick").text("닉네임에 공백은 사용 불가합니다.")
             }
@@ -200,12 +214,14 @@ window.addEventListener("DOMContentLoaded",function () {
                         if (data == 1) {
                             $("#alertnick").css({
                                 "color": "red",
-                                "font-size": "10px"
+                                "font-size": "15px",
+                                "text-align": "center"
                             });
                             $("#alertnick").text("중복된 닉네임입니다.");
                         } else if (data == 0) {
                             $("#alertnick").css({
                                 "color": "black",
+                                "text-align": "center"
                             });
                             $("#alertnick").text("사용가능한 닉네임입니다.");
                         }

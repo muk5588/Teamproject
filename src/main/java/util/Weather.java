@@ -37,8 +37,8 @@ public class Weather {
         }else {
             address = user.getAddress();
             HashMap<String, String> XYMap = geoCoding.getXYMapfromJson(geoCoding.getKakaoApiFromAddress(address));
-            x = XYMap.get("x");   //위도
-            y = XYMap.get("y");   //경도
+            x = XYMap.get("x");   //경도
+            y = XYMap.get("y");   //위도
             model.addAttribute("x",x);
             model.addAttribute("y",y);
             model.addAttribute("address",address);

@@ -3,7 +3,9 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/boardPreview.css">
 <div class="boardContainer">
     <div class="boardPre">
-        <span class="category">여행지 정보 - 여행 이야기</span><a href="/board/list?categoryNo=11&curPage=${curPage}">+더보기</a>
+        <span class="category">여행지 정보 - 여행 이야기</span><a class="allboard"
+                                                        href="/board/list?categoryNo=11&curPage=${curPage}">+더보기</a>
+        <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
             <%-- 	<col style="width: 10%;"> --%>
@@ -18,9 +20,8 @@
             </tr>
             <c:forEach var="board" items="${list }">
                 <c:if test="${board.categoryNo == 11}">
-
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
-                    <tr>
+                    <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
                                href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
@@ -30,11 +31,13 @@
                     <%--        </c:if>--%>
                 </c:if>
             </c:forEach>
+
         </table>
     </div>
     <div class="boardPre">
-        <span class="category">여행지 정보 - 여행 팁 및 권고사항</span><a
-            href="/board/list?categoryNo=12&curPage=${curPage}">+더보기</a>
+        <span class="category">여행지 정보 - 여행 팁 및 권고사항</span><a class="allboard"
+                                                             href="/board/list?categoryNo=12&curPage=${curPage}">+더보기</a>
+        <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
             <%-- 	<col style="width: 10%;"> --%>
@@ -43,15 +46,15 @@
             <%-- 	<col style="width: 10%;"> --%>
             <%-- 	<col style="width: 20%;"> --%>
             <%-- </colgroup> --%>
-                <tr>
-                    <th class="title">제목</th>
-                    <th class="nick">작성자</th>
-                </tr>
+            <tr>
+                <th class="title">제목</th>
+                <th class="nick">작성자</th>
+            </tr>
             <c:forEach var="board" items="${list }">
                 <c:if test="${board.categoryNo == 12}">
 
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
-                    <tr>
+                    <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
                                href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
@@ -64,7 +67,8 @@
         </table>
     </div>
     <div class="boardPre">
-        <span class="category">여행관련 상품</span><a href="/board/list?categoryNo=61&curPage=${curPage}">+더보기</a>
+        <span class="category">여행관련 상품</span><a class="allboard" href="/board/list?categoryNo=61&curPage=${curPage}">+더보기</a>
+        <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
             <%-- 	<col style="width: 10%;"> --%>
@@ -73,15 +77,15 @@
             <%-- 	<col style="width: 10%;"> --%>
             <%-- 	<col style="width: 20%;"> --%>
             <%-- </colgroup> --%>
-                <tr>
-                    <th class="title">제목</th>
-                    <th class="nick">작성자</th>
-                </tr>
+            <tr>
+                <th class="title">제목</th>
+                <th class="nick">작성자</th>
+            </tr>
             <c:forEach var="board" items="${list }">
                 <c:if test="${board.categoryNo == 61}">
 
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
-                    <tr>
+                    <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
                                href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
@@ -94,7 +98,9 @@
         </table>
     </div>
     <div class="boardPre">
-        <span class="category">지역별 여행 - 지역 리스트</span><a href="/board/list?categoryNo=31&curPage=${curPage}">+더보기</a>
+        <span class="category">지역별 여행 - 지역 리스트</span><a class="allboard"
+                                                        href="/board/list?categoryNo=31&curPage=${curPage}">+더보기</a>
+        <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
             <%-- 	<col style="width: 10%;"> --%>
@@ -103,15 +109,15 @@
             <%-- 	<col style="width: 10%;"> --%>
             <%-- 	<col style="width: 20%;"> --%>
             <%-- </colgroup> --%>
-                <tr>
-                    <th class="title">제목</th>
-                    <th class="nick">작성자</th>
-                </tr>
+            <tr>
+                <th class="title">제목</th>
+                <th class="nick">작성자</th>
+            </tr>
             <c:forEach var="board" items="${list }">
                 <c:if test="${board.categoryNo == 31}">
 
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
-                    <tr>
+                    <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
                                href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>

@@ -25,8 +25,11 @@
         window.onload = adjustSlideshowPosition;
     </script>
     <style type="text/css">
+        @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
         *{
-            font-family: "Gowun Batang", serif;
+            font-family: 'NexonMaplestory';
+            font-weight: 300;
+            font-style: normal;
         }
         a{
             color: black;
@@ -43,7 +46,12 @@
         }
         .usernick{
             font-size: 24px;
+            margin-right: 1rem;
         }
+        .email{
+            margin-top: 1em;
+        }
+
     </style>
 </head>
 <body>

@@ -73,4 +73,17 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping("/info/company")
+	public void company() {
+		
+	}
+	@RequestMapping("/info/policy")
+	public void policy() {
+		
+	}
+	@RequestMapping("/info/privacy")
+	public void privacy() {
+		
+	}
+	
 }

@@ -58,7 +58,7 @@ public class ShopController {
 	}
 	
 	@RequestMapping("/detail")
-	private void detail(
+	public void detail(
 			@RequestParam("itemNo") int itemNo
 			, Model model
 			) {

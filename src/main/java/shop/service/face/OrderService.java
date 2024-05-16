@@ -6,6 +6,8 @@ import java.util.Map;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
+import user.dto.User;
+import vo.ItemVO;
 
 public interface OrderService {
 
@@ -63,6 +65,28 @@ public interface OrderService {
 
 	public OrderItem selectByOrderItem(OrderItem orderItem);
 
+	/**
+	 * 유저 객체로 회원주문 조회
+	 * @param user - 유저 정보
+	 * @return - 조회된 전체 행
+	 */
+	public List<UserOrder> selectUserOrderByUser(User user);
+
+	/**
+	 * 회원 주문 리스트로 주문 상세 조회
+	 * @param orders - 회원주문 List
+	 * @return - 조회된 전체 행
+	 */
+	public List<OrderItem> selectOrderItemsByUserOrders(List<UserOrder> orders);
+
+	/**
+	 * 주문상세 리스트로 상품 조회
+	 * @param orderitems - 주문상세 리스트
+	 * @return - 조회된 전체 행
+	 */
+	public List<ItemVO> selectItemByUserOrderItems(List<OrderItem> orderitems);
+
+	
 
 	
 	

@@ -27,11 +27,11 @@
 <script type="text/javascript">
 $(function(){
 	
-	window.onload = function(){
+    $(document).ready(function () {
+        //전체 로딩 끝난 후 리뷰 내용 AJAX 통신을 위해.
 		console.log("확인용")
-		
-		
-	}
+		handelGetReview()
+    })
 	
 	//장바구니 담기 버튼
 	 $("#addToCartBtn").click(function() {
@@ -80,7 +80,48 @@ $(function(){
        	})
      });
 	
+	 //리뷰 AJAX 통신
+	function handelGetReview(){
+		console.log("getReview")
 		
+		var itemNo = '${item.itemNo}'
+		 $.ajax({
+             type: "get"
+             , url: "../review/loadreview"
+             , data: {
+                 itemNo: itemNo
+             }
+             , dataType: "JSON"
+             , success: function (res) {
+            	 console.log(res)
+            	 //view에 보이도록 추가.
+                 renderReviews(res);
+           		
+             }
+             , error: function () {
+                 console.log("AJAX 실패")
+             }
+         })
+    	 
+	};
+	
+    function renderReviews(reviews) {
+        var reviewHtml = '';
+        if (reviews.length > 0) {
+            reviews.forEach(function(review) {
+                reviewHtml += '<div class="review">';
+                reviewHtml += '<h5>' + review.reviewTitle + '</h5>';
+                reviewHtml += '<h6>' + review.nickname + '</h6>';
+                reviewHtml += '<p>' + review.reviewContent + '</p>';
+                reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString() + '</small>';
+                reviewHtml += '</div><hr>';
+            });
+        } else {
+            reviewHtml = '<p>리뷰가 아직 작성되지 않았습니다</p>';
+        }
+
+        $("#reviewWrap").html(reviewHtml);
+    }
 	
 })
 </script>
@@ -156,9 +197,13 @@ $(function(){
         </tr>
 
     </table>
+    
 </div>
 <form id="" action="" hidden="hidden" method="post"></form>
        
+<div id="reviewWrap">
+	
+</div>
 
     </div>
     <!-- .container End -->

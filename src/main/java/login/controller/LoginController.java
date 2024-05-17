@@ -1,5 +1,6 @@
 package login.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -107,9 +108,11 @@ public class LoginController {
 
     //    마이페이지
     @RequestMapping("/user/userDetail")
-    public void mypage(@SessionAttribute(value = "dto1", required = false) User login
+    public void mypage(HttpSession session
             , Model model
-            ,@RequestParam(defaultValue ="0") int curPage) {
+            ,@RequestParam(defaultValue ="0", required =false) int curPage) {
+    	User login = (User) session.getAttribute("dto1");
+    	logger.debug("일단 마이페이지 들어는 와짐");
         int userno = login.getUserno();
         //작성한 게시물 조회
         List<Board> list = boardService.boardList(userno);
@@ -123,8 +126,18 @@ public class LoginController {
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
         model.addAttribute("userno", userno);
-
-        List<Map<String, Object>> recommList = boardService.getuserRecommendRes(paging);
+        
+        //작성, 추천 게시글 병합
+        List<Board> tempBoard = new ArrayList<>();
+        tempBoard.addAll(list);
+        tempBoard.addAll(list2);int i =0;
+        for(Board a : tempBoard) {
+        	logger.debug("i : {}", i);
+        	logger.debug("list : {}", a);
+        	i++;
+        }
+        logger.debug("tempBoardtempBoard: {}",tempBoard);
+        List<Map<String, Object>> recommList = boardService.getuserRecommendRes(tempBoard);
         logger.debug("recommList : {}", recommList);
         for(Map<String, Object> M : recommList) {
             logger.debug("M : {}", M.toString());

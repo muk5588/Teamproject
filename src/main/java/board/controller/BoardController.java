@@ -71,11 +71,11 @@ public class BoardController {
 	    if (categoryNo != null) {
 	    	paging.setCategoryNo(categoryNo);
 	        list = boardService.listByCategory(paging);
-	        recommList = boardService.getRecommendRes(paging);
+	        recommList = boardService.getuserRecommendRes(list);
 			name = boardService.getCategoryName(categoryNo);
 	    } else {
 	        list = boardService.list(paging);
-	        recommList = boardService.getRecommendRes(paging);
+	        recommList = boardService.getuserRecommendRes(list);
 			name = "전체";
 	    }
 
@@ -304,14 +304,18 @@ public class BoardController {
 	}
 	@RequestMapping("/userbyboardlist")
 	public String userByBoardList(
-			Model model,
+			Model model,HttpSession session,
 			@RequestParam(defaultValue ="0") int curPage
 			,@RequestParam(value="search",required = false) String search,
 			@RequestParam(value="searchKind", required = false) String searchKind
-			,@SessionAttribute(value = "dto1", required = false) User login
 			) {
 		// ����¡ ���
-
+		logger.debug("userbyboardlist ");
+		logger.debug("userbyboardlist ");
+		User login = (User) session.getAttribute("dto1");
+		if( login == null) {
+			return "redirect:/login";
+		}
 		Paging paging = new Paging();
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
@@ -326,10 +330,10 @@ public class BoardController {
 		logger.info("{}", paging);
 		List<Board> list = boardService.userByBoardList(paging);
 		logger.debug("list : {}", list);
-
-
+		
+		
 		List<Map<String, Object>> recommList = null;
-		recommList = boardService.getuserRecommendRes(paging);
+		recommList = boardService.getuserRecommendRes(list);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());
@@ -347,7 +351,7 @@ public class BoardController {
 								,@RequestParam(value="search",required = false) String search
 								,@RequestParam(value="searchKind", required = false ) String searchKind){
 
-
+		
 		Paging paging = new Paging();
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);

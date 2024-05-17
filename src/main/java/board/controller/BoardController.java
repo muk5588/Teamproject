@@ -336,7 +336,7 @@ public class BoardController {
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());
 		}
-		int usrno = login.getUserno();
+
 		model.addAttribute("totalrecomm", recommList);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("paging", paging);

@@ -12,11 +12,13 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="/resources/css/gradeList.css" rel="stylesheet" type="text/css">
+    
 
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
-<div class="warpper">
+<%-- <div class="warpper">
     <div class="warp">
         <div id="content">
             <h3>회원등급 목록</h3>
@@ -38,6 +40,43 @@
                     </tr>
                 </c:forEach>
             </table>
+        </div>
+    </div>
+</div> --%>
+
+    <h3>회원등급 목록</h3>
+		<div class="warpper">
+    <div class="warp">
+
+	<ul class="grade">
+    	<li>
+      		<a href="/grade/gradeList" id="gradeList">권한조회</a>
+    	</li>
+   	 	<li>
+      		<a href="/grade/gradeInsert" id="gradeInsert">권한추가</a>
+    	</li>
+  	</ul>
+
+        <div class="content" id="content">
+            <div class="list-grade grade__block list-grade__block">
+            <table class='table table-striped table-hover table-sm'>
+                <tr>
+                    <th class='w-px60'>등급번호</th>
+                    <th class='w-px200'>등급이름</th>
+                    <th>설명</th>
+                </tr>
+                <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
+                <!-- items : 배열 변수 -->
+                <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
+                <c:forEach var="Grade" items="${list}">
+                    <tr>
+                        <td>${Grade.gradeno }</td>
+                        <td><a href='/grade/gradeDetail?gradeno=${Grade.gradeno}'>${Grade.gradename }</a></td>
+                        <td>${Grade.comm}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+            </div>
         </div>
     </div>
 </div>

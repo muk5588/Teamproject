@@ -226,5 +226,11 @@ WHERE basketNo IN
     </where>
 </select>
 
+<select id="selectUserOrderByOrderNo" parameterType="int" resultType="dto.UserOrder">
+	SELECT * FROM USERORDER
+	<where>
+		AND orderNo = #{orderNo}
+	</where>
+</select>
 
 </mapper>

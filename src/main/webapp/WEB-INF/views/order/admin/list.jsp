@@ -88,11 +88,39 @@
             $("#search").val(searchTerm)
 
         })
-
-
-
-
-    })
+    });
+$(function(){
+	$(".refundBtn").click(function() {
+		console.log("refundBtn click")
+		var data = $(this).val();
+		console.log("refundBtn click ", data)
+		
+	    $.ajax({
+	        type: "get",
+	        url: "../ordercancle",
+	        data: {
+	        	orderNo: data
+	        },
+	        dataType: "json",
+	        success: function (res) {
+	            console.log("AJAX 성공")
+	            console.log(res)
+	                        
+// 	            $(function () {
+// 	                window.location.href = "./order/ordersheet?" + urlQueryString;
+// 	            })
+	        },
+	        error: function () {
+	            console.log("AJAX 실패")
+	        }
+	    });
+		
+		
+		
+	})
+	
+	
+})
 </script>
 </head>
 <body>
@@ -128,7 +156,10 @@
 <c:if test="${userOrder.orderNo eq orderItem.orderNo}">
 <c:if test="${orderItem.itemNo eq item.itemNo }">
 <c:if test="${i eq 0}">
-<tr><th><h3>주문 번호 : ${userOrder.orderNo }</h3></th></tr>
+<tr>
+	<th><h5>주문 번호 : ${userOrder.orderNo }</h5></th>
+	<th><button class="refundBtn" value="${userOrder.orderNo}">환불</button> </th>
+</tr>
 <tr>
 	<th>주문자 : ${userOrder.userName }</th>
 </tr>
@@ -143,6 +174,13 @@
 </tr>
 <tr>
 	<th>결제 가격 : ${userOrder.totalPrice }</th>
+</tr>
+<tr>
+	<th>결제 정보 : 
+		<c:if test="${userOrder.pay eq 'N' or empty userOrder.pay }">결제 대기</c:if>
+		<c:if test="${userOrder.pay eq 'Y' }">결제 완료</c:if>
+		<c:if test="${userOrder.pay eq 'C' }">환불 처리</c:if>
+	</th>
 </tr>
 <c:set var="i" value="${i + 1 }"/>
 </c:if>

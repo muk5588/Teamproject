@@ -306,9 +306,9 @@ public class BoardController {
 	public String userByBoardList(
 			Model model,
 			@RequestParam(defaultValue ="0") int curPage
-			,@RequestParam(value="search",required = false) String search
-			,@RequestParam(value="searchKind", required = false ) String searchKind
-			,int userno
+			,@RequestParam(value="search",required = false) String search,
+			@RequestParam(value="searchKind", required = false) String searchKind
+			,@SessionAttribute(value = "dto1", required = false) User login
 			) {
 		// ����¡ ���
 
@@ -322,8 +322,8 @@ public class BoardController {
 		}
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
+		paging.setUserno(login.getUserno());
 		logger.info("{}", paging);
-		paging.setUserno(userno);
 		List<Board> list = boardService.userByBoardList(paging);
 		logger.debug("list : {}", list);
 
@@ -343,13 +343,26 @@ public class BoardController {
 
 	@RequestMapping("/userbyrecommlist")
 	public void userbyRecommList(@SessionAttribute(value = "dto1", required = false) User login,
-								 @RequestParam(defaultValue ="0") int curPage, Model model){
+								 @RequestParam(defaultValue ="0") int curPage, Model model
+								,@RequestParam(value="search",required = false) String search
+								,@RequestParam(value="searchKind", required = false ) String searchKind){
 
-		int userno = login.getUserno();
 
-		List<Board> list2 = boardService.userrecommList(userno);
+		Paging paging = new Paging();
+		paging.setSearch(search);
+		paging.setSearchKind(searchKind);
+		if(null !=  search && !"".equals(search)) {
+			paging = boardService.getPaging(curPage,paging);
+		}else {
+			paging = boardService.getPaging(curPage,paging);
+		}
+		paging.setSearch(search);
+		paging.setSearchKind(searchKind);
+		paging.setUserno(login.getUserno());
+		List<Board> list2 = boardService.userbyrecommList(paging);
 
 		model.addAttribute("list2", list2);
+		model.addAttribute("paging", paging);
 	}
 	
 	@RequestMapping("/fileDown")

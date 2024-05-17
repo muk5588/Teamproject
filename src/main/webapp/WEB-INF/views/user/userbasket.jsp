@@ -9,6 +9,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script>
+    $(function(){
+        $(".decrement-button").click(function() {
+            var quantityElement = $(this).siblings(".quantity");
+            var currentValue = parseInt(quantityElement.text());
+            if (currentValue > 1) {
+                quantityElement.text(currentValue - 1);
+            }
+        });
+
+        $(".increment-button").click(function() {
+            var quantityElement = $(this).siblings(".quantity");
+            var currentValue = parseInt(quantityElement.text());
+            var remain = parseInt($(this).closest("tr").find(".max-quantity").text().split(":")[1].trim()); // 최대 재고량 가져오기
+            if (!isNaN(remain)) { // 최대 재고량이 숫자인지 확인
+                if (currentValue < remain) {
+                    quantityElement.text(currentValue + 1);
+                } else {
+                    alert("남은 재고를 초과할 수 없습니다.");
+                }
+            } else {
+                alert("최대 재고량이 올바르게 표시되지 않았습니다.");
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
 $(function(){
 	$("#buyBtn").click(function() {
@@ -107,6 +133,7 @@ $(function(){
                     <label class="form-check-label">구매하기</label>
                 </div>
             </td>
+             <td class="max-quantity">재고 : ${item.remain}</td>
         </tr>
     </c:if>
     </c:forEach>

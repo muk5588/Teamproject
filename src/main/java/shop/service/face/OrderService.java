@@ -104,6 +104,13 @@ public interface OrderService {
 	 */
 	public List<UserOrder> selectUserOrderAll(ShopPaging shopPaging);
 
+	/**
+	 * 주문 취소 (환불 처리)
+	 * @param orderNo - 취소할 주문 번호
+	 * @return - 결과 0:실패 | 1:성공
+	 */
+	public int updateUserOrderPayCancle(int orderNo);
+
 	
 
 	

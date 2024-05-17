@@ -325,11 +325,11 @@ public class BoardController {
 		logger.info("{}", paging);
 		paging.setUserno(userno);
 		List<Board> list = boardService.userByBoardList(paging);
-
+		logger.debug("list : {}", list);
 
 
 		List<Map<String, Object>> recommList = null;
-		recommList = boardService.getRecommendRes(paging);
+		recommList = boardService.getuserRecommendRes(paging);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());
@@ -339,6 +339,17 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		return "board/userbyboardlist";
+	}
+
+	@RequestMapping("/userbyrecommlist")
+	public void userbyRecommList(@SessionAttribute(value = "dto1", required = false) User login,
+								 @RequestParam(defaultValue ="0") int curPage, Model model){
+
+		int userno = login.getUserno();
+
+		List<Board> list2 = boardService.userrecommList(userno);
+
+		model.addAttribute("list2", list2);
 	}
 	
 	@RequestMapping("/fileDown")

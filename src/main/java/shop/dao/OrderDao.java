@@ -53,5 +53,7 @@ public interface OrderDao {
 
 	public List<UserOrder> selectUserOrderAll(ShopPaging shopPaging);
 
+	public UserOrder selectUserOrderByOrderNo(int orderNo);
+
 	
 }

@@ -158,13 +158,15 @@
 
         <table class="table table-striped table-hover table-sm">
 
-            <%-- <colgroup> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 45%;"> --%>
-            <%-- 	<col style="width: 15%;"> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 20%;"> --%>
-            <%-- </colgroup> --%>
+             <colgroup>
+             	 <col style="width: 5%;">
+             	 <col style="width: 8%;">
+             	 <col style="width: 45%;">
+             	 <col style="width: 15%;">
+             	 <col style="width: 8%;">
+                 <col style="width: 10%;">
+                 <col style="width: 10%;">
+             </colgroup>
             <tr>
                 <th><input type="checkbox" id="checkboxAllCheck"></th>
                 <th>글 번호</th>
@@ -180,7 +182,7 @@
                                                 class="delCheckBox"></td>
                     <td class="no">${board.boardNo }</td>
                     <td class="title">
-                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&userno=${usrno}">${board.title }</a>
                     </td>
                     <td class="nick">${board.nickName }</td>
                     <td class="hit">${board.boardView }</td>
@@ -194,15 +196,12 @@
                     </c:forEach>
                 </tr>
             </c:forEach>
-            <tr>
-                <td>
-                    <button id="deleteBtn">체크 삭제</button>
-                </td>
-            </tr>
+
         </table>
 
     </div>
     <!-- .container End -->
+    <button id="deleteBtn">체크 삭제</button>
     <c:if test="${isLogin != 0}">
     <div>
         <form action="./write" method="get">

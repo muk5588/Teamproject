@@ -118,14 +118,13 @@
 <div id="button">
     <button><a href="/user/userList">회원리스트</a></button>
     <button onclick="location.href = '/grade/gradeList'">권한조회</button>
-    <button><a href="/grade/gradeInsert">권한추가</a></button>
     <button onclick="location.href = '/menu/menuList'">권한부여상황</button>
-    <button onclick="location.href = '/user/userList'">유저조회</button>
     <button onclick="location.href = '/board/list'">게시글조회</button>
     <button onclick="location.href = '/user/userLog'">전체로그</button>
     <button onclick="location.href = '/user/userBlack'">블랙리스트</button>
     <button onclick="location.href = '/shop/admin/list'">상품 관리</button>
     <button onclick="location.href = '/order/admin/list'">결제 관리</button>
+    <button onclick="location.href = '/report/list'">신고 관리</button>
 </div>
 <div class="container1">
     <div class="table-container">

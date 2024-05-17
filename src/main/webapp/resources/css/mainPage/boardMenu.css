@@ -1,128 +1,90 @@
 /* 메인메뉴 */
 ul.nav {
     z-index: 1;
-    /*    ul태그의 기본 리스트 스타일(disc) 제거 */
     list-style-type: none;
-
-    /*    기본 여백 제거 */
     padding: 0;
     margin: 0;
-
-    /*    외부 정렬  */
-    /*    flex box를 이용한 외부 정렬 (중앙) */
     display: flex;
     justify-content: center;
-
 }
 
 /* 메인 메뉴의 항목 */
 ul.nav > li {
-    /*    수평으로 일렬로 배치하기 */
     float: left;
     border-radius: 45px;
-    /*    배경색 */
-    background-color: #666;
-
-    /*    항목 크기 변경 (배경 포함) */
-    /*    padding: 10px;    */
-
-    /*    항목 크기 변경 (배경 미포함) */
-    /*    margin: 10px;    */
-
-    /*    줄간격을 이용한 높이 조절 (배경 조절) */
+    background-color: #87CEFA;
     line-height: 2em;
-
-    /*    테두리를 이용한 항목 구분 */
-    /*    border-right: 1px solid red; */
     border-right: 1px solid #fff;
-
-    /*    서브 메뉴의 기준점으로 설정하기 */
     position: relative;
 }
 
-/* 메인 메뉴의 항목 텍스트 */
 ul.nav > li > a {
-    color: #fff;
+    color: #ecf0f1; /* 밝은 색 텍스트 */
     border-radius: 45px;
-    /*    글자 꾸밈선 제거 (underline) */
     text-decoration: none;
-
     font-size: 100%;
     font-weight: bold;
-    font-family: 굴림, gulim, 돋움, dotum;
-
-    /*    내부 여백 (링크 클릭 가능) */
     padding: 16px 24px;
-
-    /*    외부 여백 (링크 클릭 불가능) */
     margin: 0 5px;
-
-    /*    부모 <li>태그를 <a>태그로 가득 채우기 */
     display: block;
-
 }
 
-/* ul.nav >li:hover > a { */
 ul.nav > li > a:hover {
-    color: tomato;
-
+    color: #1abc9c; /* 네이버 쪽지함의 민트 색상 */
     transition: color 200ms;
-
 }
-
-/* ---------------------------------------------------------------------------------- */
 
 /* 서브 메뉴 */
 ul.nav > li > ul {
-    /*    ul태그의 기본 리스트 스타일(circle) 제거 */
     list-style-type: none;
-
-    /*    ul태그 기본 여백 제거 */
     padding: 0;
     margin: 0;
-
-    /*    서브 메뉴의 너비 */
     width: 200px;
-
-    /*    HTML 레이아웃 구조에서 빼내기 */
-    /*    다른 요소를 밀어내지 않도록 만들기 */
     position: absolute;
     z-index: 1;
 }
 
-/* 서브 메뉴의 항목 */
 ul.nav > li > ul > li {
-    background-color: #999;
+    background-color: #95a5a6; /* 서브 메뉴 배경색 */
     border-radius: 45px;
     display: none;
     margin-top: 10px;
 }
-
 
 ul.nav > li:hover > ul > li {
     display: list-item;
     text-align: center;
 }
 
-/* 서브 메뉴의 항목 텍스트 */
 ul.nav > li > ul > li > a {
-    background-color: #ccc;
+    background-color: #bdc3c7; /* 서브 메뉴 항목 배경색 */
     border-radius: 45px;
-    /*    부모<li>태그영역을 <a>태그로 가득 채우기 */
     display: block;
-
-    /*    padding: 10px; */
-
-    color: #333;
+    color: #2c3e50; /* 서브 메뉴 텍스트 색상 */
     text-decoration: none;
-
 }
 
-
 ul.nav > li > ul > li > a:hover {
-    background-color: #00c;
-    color: #c00;
+    background-color: #1abc9c; /* 서브 메뉴 항목 호버 색상 */
+    color: #ecf0f1; /* 서브 메뉴 항목 호버 시 텍스트 색상 */
+    transition: background 200ms, color 200ms;
+}
 
-    transition: background 2s, color 1s;
+.Header-Search {
+    margin-bottom: 20px;
+    text-align: center;
+}
 
+.Header-Search input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    width: 300px;
+}
+
+.Header-Search img {
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
 }

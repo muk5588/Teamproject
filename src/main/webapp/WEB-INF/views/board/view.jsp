@@ -269,8 +269,20 @@
         <%-- <a href="./list?curPage=${curPage }">
             <button>목록으로</button>
         </a> --%>
-        <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}" id="listButton">
-        	<button>목록으로</button>
+        <c:choose>
+            <c:when test="${usrno != 0 }">
+                <a href="./userbyboardlist?userno=${dto1.userno}">
+                    <button>목록으로</button>
+                </a>
+            </c:when>
+            <c:otherwise>
+                <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}">
+                    <button>목록으로</button>
+                </a>
+            </c:otherwise>
+        </c:choose>
+        <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}">
+            <button>목록으로</button>
         </a>
         <c:if test="${board.userNo == dto.userno }">
             <a href="./update?boardNo=${board.boardNo }">

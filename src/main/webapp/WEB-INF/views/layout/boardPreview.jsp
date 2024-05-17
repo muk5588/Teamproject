@@ -3,8 +3,9 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/boardPreview.css">
 <div class="boardContainer">
     <div class="boardPre">
-        <span class="category">여행지 정보 - 여행 이야기</span><a class="allboard"
-                                                        href="/board/list?categoryNo=11&curPage=${curPage}">+더보기</a>
+        <span class="category">여행지 정보 - 여행 이야기</span>
+        <a class="allboard"
+           href="/board/list?categoryNo=11&curPage=${curPage}">+더보기</a>
         <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
@@ -119,7 +120,8 @@
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
                     <tr class="boardcontent">
                         <td class="title">
-                            <a class="head" href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                            <a class="head"
+                               href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="nick">${board.nickName }</td>
                     </tr>

@@ -5,7 +5,7 @@
 	
 	<sql id="selectBoard">
 		SELECT 
-			boardno, title, content, nickname, createdate, boardview, CATEGORYNO
+			boardno, userno,  title, content, nickname, createdate, boardview, CATEGORYNO
 		FROM board
 	</sql>
 	
@@ -21,12 +21,16 @@
 				</choose>
 				</if>
 	</sql>
+
 	<select id="boardList" parameterType="int" resultType="Board">
-		<include refid="selectBoard" />
-		<where>
-			and userno = #{userNo}
-		</where>
-		order by createdate desc
+		SELECT C.* FROM(
+		SELECT b.*, rownum rnum FROM (
+		SELECT * FROM board
+		WHERE userNo = #{userNo}
+		ORDER BY boardNo desc
+		)b
+		)C
+		WHERE rnum BETWEEN 1 AND 5
 	</select>
 	
 	<select id="selectAll" resultType="Board" parameterType="util.Paging">
@@ -271,14 +275,18 @@
 	</select>
 
 	<select id="userrecommList" resultType="Board" parameterType="int">
-		SELECT
-			g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
-		FROM good g, board b
-		<where>
-			and g.boardno = b.boardno
-			and g.userno = #{userno}
-		</where>
-		order by createdate desc
+		SELECT c.* FROM
+			(SELECT rownum rnum, b.* FROM 
+			(SELECT
+				g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+			FROM good g, board b
+			where
+				 g.boardno = b.boardno 
+				and g.userno = #{userno}
+			order by createdate DESC
+			) b
+			) c
+			WHERE rnum BETWEEN  1 AND 5
 	</select>
 	
 	<delete id="deleteComment" parameterType="java.util.ArrayList">
@@ -346,34 +354,22 @@
 	</select>
 
 	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">
-		SELECT A.boardno boardno, A.title, good
-		FROM (
-		SELECT rownum rnum , B.*
-		FROM (
-		SELECT
-		boardno, title, userno
-		FROM board
-		<where>
-			and userno = #{userno}
-		</where>
-		<include refid="search"/>
-		ORDER BY boardno DESC
-		) B
-		) C , (
-		SELECT
-		boardno,
-		title,
-		(SELECT COUNT(*) FROM good
-		WHERE boardno = board.BOARDNO
-		<include refid="search"/>
-		) AS good
-		FROM board
-		) A
-		<where>
-			AND rnum BETWEEN #{startNo} AND #{endNo}
-			AND C.boardno = A.boardno
-			AND userno = #{userno}
-		</where>
+		SELECT b.*, NVL(good, 0) good FROM 
+	(SELECT * FROM board 
+	<where> 
+		and boardNo IN
+		<foreach collection="arr" item="data" open="(" close=")" separator=","> 
+		#{data.boardNo}
+		</foreach>
+	</where>
+	) b
+	left OUTER join
+	(SELECT BOARDNO, COUNT(BOARDNO) as good
+	    FROM GOOD
+	    GROUP BY BOARDNO 
+	    ORDER BY boardno DESC) g
+	ON b.boardno = g.boardno
+	ORDER BY b. boardNo DESC
 	</select>
 
 
@@ -394,4 +390,20 @@
 </select>
 <!--select ~~~ from (select *, rownum(*) FROM (SELECT * FROM board	where categoryNo = 12-->
 <!--	ORDER BY CreateDATE DESC)-->
+
+	<select id="userbyrecommList" resultType="Board" parameterType="util.Paging">
+		select * from (
+		    select rownum rnum, A.* from
+		(SELECT
+		g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+		FROM good g, board b
+		<where>
+			and g.boardno = b.boardno
+			and g.userno = #{userno}
+		</where>
+		order by createdate desc) A )
+		<where>
+			and rnum between #{startNo} and #{endNo}
+		</where>
+	</select>
 </mapper>

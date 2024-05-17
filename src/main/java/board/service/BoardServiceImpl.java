@@ -210,8 +210,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getuserRecommendRes(Paging paging) {
-		return boardDao.getuserRecommendRes(paging);
+	public List<Map<String, Object>> getuserRecommendRes(List<Board> list) {
+		return boardDao.getuserRecommendRes(list);
 	}
 
 	@Override
@@ -232,6 +232,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> list() {
 		return boardDao.list();
+	}
+
+	@Override
+	public List<Board> userbyrecommList(Paging paging) {
+		return boardDao.userbyrecommList(paging);
 	}
 
 

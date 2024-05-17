@@ -3,25 +3,67 @@
     flex-wrap: wrap; /* 넘칠 경우 자동으로 줄바꿈 */
     gap: 80px; /* 각 요소 사이의 간격 설정 */
     justify-content: center;
+    background-color: #f5f5f5;
 }
 
 .boardPre {
-    padding-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     /* 추가적인 스타일링이 필요할 경우 여기에 추가 */
 }
 .category{
     margin-right: 10%;
-    color: black;
-    font-size: 24px ;
+    font-weight: bold;
+    color: #2c3e50; /* 진한 파란색 계열 */
+    font-size: 2em;
+}
+.allboard {
+    float: right;
+    color: #1abc9c; /* 네이버 쪽지함과 어울리는 민트 색상 */
+    text-decoration: none;
+    font-size: 1.3em;
 }
 
-.title{
-    width: 80%;
-    text-align: left;
+.allboard:hover {
+    color: #16a085; /* 민트 색상의 어두운 버전 */
 }
-td.nick{
-    width: 13%;
+hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 10px 0;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+.table th, .table td {
     text-align: center;
+}
+.table th {
+    background-color: #34495e; /* 진한 회색 */
+    color: #ffffff;
+}
+.table tr:nth-child(even) {
+    background-color: #ecf0f1; /* 밝은 회색 */
+}
+.table tr:hover {
+    background-color: #dcdde1; /* 중간 회색 */
+}
+.title a {
+    color: #2980b9; /* 파란색 */
+    text-decoration: none;
+}
+
+.title a:hover {
+    color: #1abc9c; /* 민트 색상 */
+}
+
+.nick {
+    color: #7f8c8d; /* 회색 */
 }
 
 div.boardPre{

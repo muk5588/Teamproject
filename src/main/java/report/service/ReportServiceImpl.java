@@ -41,4 +41,14 @@ ReportDao reportDao;
     public List<CommReport> commlist() {
         return reportDao.commlist();
     }
+
+    @Override
+    public void deleteReport(int reportno) {
+        reportDao.deleteReport(reportno);
+    }
+
+    @Override
+    public void deleteCommReport(int reportno) {
+        reportDao.deleteCommReport(reportno);
+    }
 }

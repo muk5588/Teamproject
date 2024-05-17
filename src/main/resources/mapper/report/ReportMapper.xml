@@ -31,4 +31,10 @@
 				 LEFT OUTER JOIN COMMENTTB b ON r.COMMNO = b.COMMNO
 				 left outer join USERTB u on b.USERNO = u.USERNO
 	</select>
+	<delete id="deleteReport" parameterType="int">
+		delete BOARDREPORT where BOARDREPORTNO = #{boardReportNo}
+	</delete>
+	<delete id="deleteCommReport" parameterType="int">
+		delete COMMREPORT where COMMREPORTNO = #{commReportNo}
+	</delete>
 </mapper>

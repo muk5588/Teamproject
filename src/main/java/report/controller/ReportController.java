@@ -64,4 +64,14 @@ public class ReportController {
         model.addAttribute("commlist", commlist);
         return "report/reportlist";
     }
+    @RequestMapping("deleteReport")
+    public String deleteReport(int reportno) {
+        reportService.deleteReport(reportno);
+        return "redirect: ./list";
+    }
+    @RequestMapping("deleteCommReport")
+    public String deleteCommReport(int reportno) {
+        reportService.deleteCommReport(reportno);
+        return "redirect: ./list";
+    }
 }

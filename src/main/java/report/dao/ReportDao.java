@@ -19,4 +19,8 @@ public interface ReportDao {
     public List<BoardReport> boardlist();
 
     public List<CommReport> commlist();
+
+    public void deleteReport(int reportno);
+
+    public void deleteCommReport(int reportno);
 }

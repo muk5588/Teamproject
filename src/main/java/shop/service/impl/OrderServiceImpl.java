@@ -238,10 +238,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ShopPaging getPagging(ShopPaging shopPaging, int userno) {
 		
-		int totalCount = orderDao.selectCntAll(shopPaging, userno);
+		int totalCount = orderDao.selectCntByUserNo(shopPaging, userno);
 		logger.debug("$$$$totalCount : {}",totalCount);
 		ShopPaging pagingres = new ShopPaging(totalCount, shopPaging.getCurPage());
 		return pagingres;
+	}
+
+	@Override
+	public List<UserOrder> selectUserOrderAll(ShopPaging shopPaging) {
+		return orderDao.selectUserOrderAll(shopPaging);
 	}
 
 

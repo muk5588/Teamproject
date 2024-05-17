@@ -197,7 +197,7 @@ WHERE basketNo IN
         </foreach>
 </select>
 
-<select id="selectCntAll" resultType="int" parameterType="map">
+<select id="selectCntByUserNo" resultType="int" parameterType="map">
 	SELECT count(*) FROM (
 		SELECT u.orderno
 		FROM userorder u, orderitem o
@@ -206,10 +206,25 @@ WHERE basketNo IN
 		<if test="shopPaging.search != null">
 			AND itemname LIKE '%${shopPaging.search}%'
 		</if>
+		<if test="userno > 0">
 			AND userno = #{userno}
+		</if>
 		</where>
 		GROUP BY u.orderno
 	)
 </select>
+
+<select id="selectUserOrderAll" parameterType="util.ShopPaging" resultType="dto.UserOrder">
+	SELECT * FROM (
+	SELECT rownum rnum, B.* FROM
+	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
+	ORDER BY orderno DESC
+	) B
+	)
+	    <where>
+        AND rnum BETWEEN #{startNo } AND #{endNo}
+    </where>
+</select>
+
 
 </mapper>

@@ -23,11 +23,14 @@
 	</sql>
 
 	<select id="boardList" parameterType="int" resultType="Board">
-		<include refid="selectBoard" />
-		<where>
-			and userno = #{userNo}
-		</where>
-		order by createdate desc
+		SELECT C.* FROM(
+		SELECT b.*, rownum rnum FROM (
+		SELECT * FROM board
+		WHERE userNo = #{userNo}
+		ORDER BY boardNo desc
+		)b
+		)C
+		WHERE rnum BETWEEN 1 AND 5
 	</select>
 	
 	<select id="selectAll" resultType="Board" parameterType="util.Paging">
@@ -272,14 +275,18 @@
 	</select>
 
 	<select id="userrecommList" resultType="Board" parameterType="int">
-		SELECT
-			g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
-		FROM good g, board b
-		<where>
-			and g.boardno = b.boardno
-			and g.userno = #{userno}
-		</where>
-		order by createdate desc
+		SELECT c.* FROM
+			(SELECT rownum rnum, b.* FROM 
+			(SELECT
+				g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+			FROM good g, board b
+			where
+				 g.boardno = b.boardno 
+				and g.userno = #{userno}
+			order by createdate DESC
+			) b
+			) c
+			WHERE rnum BETWEEN  1 AND 5
 	</select>
 	
 	<delete id="deleteComment" parameterType="java.util.ArrayList">
@@ -347,38 +354,22 @@
 	</select>
 
 	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">
-		SELECT C.boardno, C.title, A.Good from
-		(SELECT * FROM (
-		SELECT rownum rnum, B.* FROM (
-		SELECT
-		boardno, title, content, nickname, createdate, boardview, CATEGORYNO
-		FROM board
-		<where>
-			and userno = #{userno}
-			<if test="search != null and searchKind != null">
-				<choose>
-					<when test="searchKind.equals('title')">
-						AND title Like '%${search}%'
-					</when>
-					<when test="searchKind.equals('content')">
-						AND content Like '%${search}%'
-					</when>
-				</choose>
-			</if>
-		</where>
-		ORDER BY boardno DESC
-		)B
-		)
-		WHERE rnum BETWEEN #{startNo} AND #{endNo}
-		) C,
-		(SELECT b.BOARDNO, COALESCE(g.count, 0) as Good
-		FROM BOARD b, (
-		SELECT BOARDNO, COUNT(BOARDNO) as count
-		FROM GOOD
-		GROUP BY BOARDNO) g
-		WHERE b.BOARDNO = g.BOARDNO) A
-		WHERE C.boardNo = A.boardNo
-		ORDER BY boardNO DESC
+		SELECT b.*, NVL(good, 0) good FROM 
+	(SELECT * FROM board 
+	<where> 
+		and boardNo IN
+		<foreach collection="arr" item="data" open="(" close=")" separator=","> 
+		#{data.boardNo}
+		</foreach>
+	</where>
+	) b
+	left OUTER join
+	(SELECT BOARDNO, COUNT(BOARDNO) as good
+	    FROM GOOD
+	    GROUP BY BOARDNO 
+	    ORDER BY boardno DESC) g
+	ON b.boardno = g.boardno
+	ORDER BY b. boardNo DESC
 	</select>
 
 

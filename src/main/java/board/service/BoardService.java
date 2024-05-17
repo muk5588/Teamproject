@@ -96,8 +96,12 @@ public interface BoardService {
 
 	public List<Board> listByCategory(Paging paging);
 
-
-	public List<Map<String, Object>> getuserRecommendRes(Paging paging);
+	/**
+	 * 보드 리스트로 
+	 * @param list
+	 * @return
+	 */
+	public List<Map<String, Object>> getuserRecommendRes(List<Board> list);
 
 	/**
 	 * 카테고리 번호로 카테고리 이름 조회.

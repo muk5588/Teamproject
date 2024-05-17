@@ -70,7 +70,7 @@ public interface BoardDao {
 
     public List<Category> categoryList();
 
-	public List<Board> boardList(int userno);
+	public List<Board> boardList(@Param("userNo")int userNo);
 
 	public int selectLogCntAll(Paging paging);
 
@@ -88,7 +88,7 @@ public interface BoardDao {
 
 	public List<Board> listByCategory(Paging paging);
 
-    public List<Map<String, Object>> getuserRecommendRes(Paging paging);
+    public List<Map<String, Object>> getuserRecommendRes(@Param("arr")List<Board> list);
 
 	public String getCategoryName(int categoryNo);
 

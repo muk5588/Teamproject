@@ -11,7 +11,116 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="/resources/js/user/blackList.js" defer></script>
+
+    <style type="text/css">
+        @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
+
+        * {
+            font-family: 'NexonMaplestory';
+            font-weight: 300;
+            font-style: normal;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .warpper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .warp {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btnSet {
+            margin-top: 20px;
+        }
+
+        .btn-fill {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-fill:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-sm th, .table-sm td {
+            padding: 8px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
@@ -110,13 +219,14 @@
                 <c:when test="${not empty list and (userno == dto1.userno)}">
                     <button onclick="location.href='../board/userbyboardlist?userno=${dto1.userno}'">전체 작성글</button>
                     <table class="table table-striped table-hover table-sm">
-                            <%-- <colgroup> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 45%;"> --%>
-                            <%-- 	<col style="width: 15%;"> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 20%;"> --%>
-                            <%-- </colgroup> --%>
+                             <colgroup>
+                             	 <col style="width: 8%;">
+                             	 <col style="width: 50%;">
+                             	 <col style="width: 15%;">
+                             	 <col style="width: 8%;">
+                             	 <col style="width: 10%;">
+                                 <col style="width: 8%;">
+                             </colgroup>
                         <tr>
                             <th>글 번호</th>
                             <th>제목</th>
@@ -146,18 +256,7 @@
                     </table>
                 </c:when>
                 <c:otherwise>
-                    <table class="table table-striped table-hover table-sm">
-                            <%-- <colgroup> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 45%;"> --%>
-                            <%-- 	<col style="width: 15%;"> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 20%;"> --%>
-                            <%-- </colgroup> --%>
-                        <tr>
-                            <th>작성한 글이 없습니다</th>
-                        </tr>
-                    </table>
+                    <span>작성한 게시글이 없습니다.</span>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -167,13 +266,13 @@
                 <c:when test="${not empty list2 and (userno == dto1.userno)}">
                     <button onclick="location.href='../board/userbyrecommlist?userno=${dto1.userno}'">전체 추천글</button>
                     <table class="table table-striped table-hover table-sm">
-                            <%-- <colgroup> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 45%;"> --%>
-                            <%-- 	<col style="width: 15%;"> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 20%;"> --%>
-                            <%-- </colgroup> --%>
+                             <colgroup>
+                             	<col style="width: 7%;">
+                             	<col style="width: 60%;">
+                             	<col style="width: 15% ;">
+                             	<col style="width: 7%;">
+                             	<col style="width: 10%;">
+                             </colgroup>
                         <tr>
                             <th>글 번호</th>
                             <th>제목</th>
@@ -197,18 +296,7 @@
                     </table>
                 </c:when>
                 <c:otherwise>
-                    <table class="table table-striped table-hover table-sm">
-                            <%-- <colgroup> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 45%;"> --%>
-                            <%-- 	<col style="width: 15%;"> --%>
-                            <%-- 	<col style="width: 10%;"> --%>
-                            <%-- 	<col style="width: 20%;"> --%>
-                            <%-- </colgroup> --%>
-                        <tr>
-                            <th>추천한 글이 없습니다</th>
-                        </tr>
-                    </table>
+                    <span>추천한 글이 없습니다.</span>
                 </c:otherwise>
             </c:choose>
         </div>

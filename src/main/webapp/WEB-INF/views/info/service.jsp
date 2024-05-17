@@ -30,7 +30,7 @@ $(function(){
 
 </head>
 <body>
-<h1>Travel Square 운영정책</h1>
+<h1>Travel Square 게시물 운영정책</h1>
 <hr>
 
 <ul class="rules">

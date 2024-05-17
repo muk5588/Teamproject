@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/message/list.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -99,6 +100,9 @@ $(function(){
 <h1>받은 쪽지함</h1>
 <hr>
 <div id="content">
+	<a href="./sendlist"><button>보낸 쪽지함</button></a>
+	<button id = "popupsendForm">쪽지쓰기</button>
+	<a href="/"><button>홈으로</button></a>
 <table>
 <tr>
 	<th><input type="checkbox" id="checkboxAllCheck"></th>
@@ -133,8 +137,6 @@ $(function(){
 
 
 </div>
-<a href="./sendlist"><button>보낸 쪽지함</button></a><br>
-<button id = "popupsendForm">쪽지쓰기</button><br>
-<a href="/"><button>홈으로</button></a><br>
+
 </body>
 </html>

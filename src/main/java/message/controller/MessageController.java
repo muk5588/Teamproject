@@ -102,7 +102,7 @@ public class MessageController {
 	
 	@RequestMapping("/sendlist")
 	public void sendlist(HttpSession session, HttpServletRequest res) {
-		User user = (User) session.getAttribute("dto");
+		User user = (User) session.getAttribute("dto1");
 		int sendUser = user.getUserno();
 		List<Message> list = messageService.getListBySendUser(sendUser);
 		for(Message m : list) {

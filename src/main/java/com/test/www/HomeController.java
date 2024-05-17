@@ -40,8 +40,8 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		List<Board> list = boardService.list();
 		String formattedDate = dateFormat.format(date);
+		List<Board> list = boardService.list();
 		String x = null;
 		String y = null;
 		String address = null;

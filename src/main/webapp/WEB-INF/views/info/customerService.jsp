@@ -12,10 +12,13 @@
 </head>
 <body>
 
-<h1>고객센터 문의</h1>
+<h1>TravelSquare 고객센터</h1>
 <hr>
 
-
+<div class="customerServiceSection">
+	<p class="bold-text">메일로 문의 부탁드립니다.</p>
+	<p class="bold-text">TravelSquare1@gmail.com</p>
+</div>
 
 
 <hr>

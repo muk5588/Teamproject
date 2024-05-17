@@ -103,6 +103,7 @@ $(function(){
 	<a href="./sendlist"><button>보낸 쪽지함</button></a>
 	<button id = "popupsendForm">쪽지쓰기</button>
 	<a href="/"><button>홈으로</button></a>
+	<button id="deleteBtn" class="deletebutton">삭제하기</button>
 <table>
 <tr>
 	<th><input type="checkbox" id="checkboxAllCheck"></th>
@@ -132,7 +133,7 @@ $(function(){
 </tr>
 </c:forEach>
 </table>
-<button id="deleteBtn">삭제하기</button>
+
 <br><br><br><br>
 
 

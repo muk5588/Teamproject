@@ -86,3 +86,6 @@ a button:hover {
 .save input[type="checkbox"] {
     margin-left: 15px;
 }
+.deletebutton{
+    float: right;
+}

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,6 +236,18 @@ public class OrderController {
 		
 		return "/order/admin/list";
 	}
+	
+	@RequestMapping("/ordercancle")
+	public void ordercancle(@Param("orderNo")int orderNo) {
+		logger.debug("주문 취소");
+		logger.debug("주문 취소 orderNo : {}",orderNo);
+		int res = orderService.updateUserOrderPayCancle(orderNo);
+//		logger.debug("주문 취소 : {} ",res);
+		
+		
+		
+	}
+	
 	
 	
 	

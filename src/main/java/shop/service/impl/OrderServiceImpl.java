@@ -249,6 +249,21 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.selectUserOrderAll(shopPaging);
 	}
 
+	@Override
+	public int updateUserOrderPayCancle(int orderNo) {
+		UserOrder order = orderDao.selectUserOrderByOrderNo(orderNo);
+		
+		String URL = "https://api.iamport.kr/payments/cancel";
+		
+		
+		
+		
+		
+		
+		
+		return 0;
+	}
+
 
 	
 

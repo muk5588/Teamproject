@@ -124,6 +124,8 @@
     <button onclick="location.href = '/board/list'">게시글조회</button>
     <button onclick="location.href = '/user/userLog'">전체로그</button>
     <button onclick="location.href = '/user/userBlack'">블랙리스트</button>
+    <button onclick="location.href = '/shop/admin/list'">상품 관리</button>
+    <button onclick="location.href = '/order/admin/list'">결제 관리</button>
 </div>
 <div class="container1">
     <div class="table-container">

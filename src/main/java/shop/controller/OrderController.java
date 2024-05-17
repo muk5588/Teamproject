@@ -233,9 +233,6 @@ public class OrderController {
 		model.addAttribute("items", items);
 		
 		
-		
-		
-		
 		return "/order/admin/list";
 	}
 	

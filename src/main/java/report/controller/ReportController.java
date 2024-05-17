@@ -56,4 +56,12 @@ public class ReportController {
         reportService.reportComm(commReport);
         return "redirect:../board/list";//추후에 자신의 신고내역으로 변경
     }
+    @RequestMapping("/list")
+    public String list(Model model) {
+        List<BoardReport> boardlist = reportService.boardlist();
+        List<CommReport> commlist = reportService.commlist();
+        model.addAttribute("boardlist", boardlist);
+        model.addAttribute("commlist", commlist);
+        return "report/reportlist";
+    }
 }

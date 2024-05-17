@@ -24,7 +24,7 @@
                     <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
-                               href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                               href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="nick">${board.nickName }</td>
                     </tr>
@@ -57,7 +57,7 @@
                     <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
-                               href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                               href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="nick">${board.nickName }</td>
                     </tr>
@@ -88,7 +88,7 @@
                     <tr class="boardcontent">
                         <td class="title">
                             <a class="head"
-                               href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                               href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="nick">${board.nickName }</td>
                     </tr>
@@ -119,8 +119,7 @@
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
                     <tr class="boardcontent">
                         <td class="title">
-                            <a class="head"
-                               href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                            <a class="head" href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                         </td>
                         <td class="nick">${board.nickName }</td>
                     </tr>

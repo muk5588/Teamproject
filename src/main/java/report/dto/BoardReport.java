@@ -13,10 +13,12 @@ public class BoardReport {
 	private String resultContent;
 	private String result;
 	private Date resultDate;
+	private String reportType;
+	private String content;
+	private String nickname;
 	public BoardReport() {}
-	public BoardReport(int boardReportNo, int boardNo, int userNo, int reportTypeNo, String reportContent,
-			Date reportDate, int managerNo, String resultContent, String result, Date resultDate) {
-		super();
+
+	public BoardReport(int boardReportNo, int boardNo, int userNo, int reportTypeNo, String reportContent, Date reportDate, int managerNo, String resultContent, String result, Date resultDate, String resultType, String content, String nickname) {
 		this.boardReportNo = boardReportNo;
 		this.boardNo = boardNo;
 		this.userNo = userNo;
@@ -27,14 +29,30 @@ public class BoardReport {
 		this.resultContent = resultContent;
 		this.result = result;
 		this.resultDate = resultDate;
+		this.reportType = reportType;
+		this.content = content;
+		this.nickname = nickname;
 	}
+
 	@Override
 	public String toString() {
-		return "BoardReport [boardReportNo=" + boardReportNo + ", boardNo=" + boardNo + ", userNo=" + userNo
-				+ ", reportTypeNo=" + reportTypeNo + ", reportContent=" + reportContent + ", reportDate=" + reportDate
-				+ ", managerNo=" + managerNo + ", resultContent=" + resultContent + ", result=" + result
-				+ ", resultDate=" + resultDate + "]";
+		return "BoardReport{" +
+				"boardReportNo=" + boardReportNo +
+				", boardNo=" + boardNo +
+				", userNo=" + userNo +
+				", reportTypeNo=" + reportTypeNo +
+				", reportContent='" + reportContent + '\'' +
+				", reportDate=" + reportDate +
+				", managerNo=" + managerNo +
+				", resultContent='" + resultContent + '\'' +
+				", result='" + result + '\'' +
+				", resultDate=" + resultDate +
+				", reportType='" + reportType + '\'' +
+				", content='" + content + '\'' +
+				", nickname='" + nickname + '\'' +
+				'}';
 	}
+
 	public int getBoardReportNo() {
 		return boardReportNo;
 	}
@@ -95,6 +113,28 @@ public class BoardReport {
 	public void setResultDate(Date resultDate) {
 		this.resultDate = resultDate;
 	}
-	
-	
+
+	public String getreportType() {
+		return reportType;
+	}
+
+	public void setreportType(String reportType) {
+		this.reportType = reportType;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

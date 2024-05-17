@@ -31,4 +31,14 @@ ReportDao reportDao;
     public void reportComm(CommReport commReport) {
         reportDao.reportComm(commReport);
     }
+
+    @Override
+    public List<BoardReport> boardlist() {
+        return reportDao.boardlist();
+    }
+
+    @Override
+    public List<CommReport> commlist() {
+        return reportDao.commlist();
+    }
 }

@@ -14,4 +14,8 @@ public interface ReportService {
     public List<BoardReportType> commReportType();
 
     public void reportComm(CommReport commReport);
+
+    public List<BoardReport> boardlist();
+
+    public List<CommReport> commlist();
 }

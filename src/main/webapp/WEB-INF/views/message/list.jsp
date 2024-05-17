@@ -36,7 +36,7 @@ $(function(){
 			type:"get"
 			,url:"./delete"
 			,data:{
-				messageNo : datas
+				messageNo: datas
 			}
 			, dataType:"json"
 			,success: function( res ){

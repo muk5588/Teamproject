@@ -97,6 +97,13 @@ public interface OrderService {
 	 */
 	public ShopPaging getPagging(ShopPaging shopPaging, int userno);
 
+	/**
+	 * 전체 주문 목록을 조회
+	 * @param shopPaging - 페이징 객체
+	 * @return - 조회된 전체 행
+	 */
+	public List<UserOrder> selectUserOrderAll(ShopPaging shopPaging);
+
 	
 
 	

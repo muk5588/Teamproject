@@ -69,13 +69,15 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/delete")
 	public int delete(
-			@RequestParam("messageNo[]") int[] param
+			@RequestParam("messageNo") String[] param
 			) {
 		ArrayList<Integer> messageNo = new ArrayList<Integer>();
+		int temp = 0;
 		for(int i = 0; param.length >i; i++) {
-			messageNo.add(param[i]);
+			temp = Integer.parseInt(param[i]);
+			messageNo.add(temp);
 		}
-		
+		logger.debug("messageNo : {}", messageNo);
 		int res = messageService.deleteByMessageNo(messageNo);
 		
 		return res;

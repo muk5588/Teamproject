@@ -118,8 +118,9 @@
         <hr>
         
 <div id="orderwrap">
-<c:forEach var="userOrder" items="${orders }">
+<c:forEach var="userOrder" items="${userOrders }">
 <c:set var="i" value="0"/>
+<c:if test="${not empty userOrder.orderNo }">
 <div class="oneOrder" style="border: 1px solid #ccc;">
 <table>
 <c:forEach items="${orderitems}" var="orderItem">
@@ -130,9 +131,6 @@
 <tr><th><h3>주문 번호 : ${userOrder.orderNo }</h3></th></tr>
 <tr>
 	<th>주문자 : ${userOrder.userName }</th>
-</tr>
-<tr>
-	<th><fmt:formatDate value="${userOrder.orderDate}" pattern="MM/dd HH:mm"/></th>
 </tr>
 <tr>
 	<th>배송지 : ${userOrder.address }</th>
@@ -180,6 +178,7 @@
     </c:forEach>
 </table>
 </div>
+</c:if>
 </c:forEach>
 </div>
 </div>

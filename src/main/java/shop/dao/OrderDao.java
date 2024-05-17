@@ -49,7 +49,9 @@ public interface OrderDao {
 
 	public List<Item> selectItemByUserOrderItems(@Param("orderitems")List<OrderItem> orderitems);
 
-	public int selectCntAll(@Param("shopPaging") ShopPaging shopPaging, @Param("userno") int userno);
+	public int selectCntByUserNo(@Param("shopPaging") ShopPaging shopPaging, @Param("userno") int userno);
+
+	public List<UserOrder> selectUserOrderAll(ShopPaging shopPaging);
 
 	
 }

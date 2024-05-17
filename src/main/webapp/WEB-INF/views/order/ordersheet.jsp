@@ -140,8 +140,18 @@ IMP.request_pay({
     	$("<input>")
     	.attr({
     		type:"text"
-    		, name:"pay"
+    		, name:"method"
     		, value: rsp.pay_method
+    	}) )
+    .appendTo(form)
+    
+    $("<input>")
+    .append(
+    	$("<input>")
+    	.attr({
+    		type:"text"
+    		, name:"pay"
+    		, value: "Y"
     	}) )
     .appendTo(form)
     

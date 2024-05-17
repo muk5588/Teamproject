@@ -202,6 +202,43 @@ public class OrderController {
 		return null;
 	}
 	
+	@RequestMapping("/admin/list")
+	public String adminlist(Model model, ShopPaging shopPaging,
+			@RequestParam(defaultValue ="0") int curPage,
+			@RequestParam(value="search",required = false) String search) {
+		logger.debug("관리자 주문 목록");
+		shopPaging.setCurPage(curPage);
+		if( search != null) {
+			shopPaging.setSearch(search);
+		}
+		logger.debug("관리자 주문 목록 shopPaging : {}", shopPaging);
+		
+		shopPaging = orderService.getPagging(shopPaging, 0);
+		if( search != null) {
+			shopPaging.setSearch(search);
+		}
+		logger.debug("Paging : {}", shopPaging);
+		model.addAttribute("paging", shopPaging);
+		model.addAttribute("curPage", curPage);
+		
+		List<UserOrder> userOrders = orderService.selectUserOrderAll(shopPaging);
+		logger.debug("관리자 주문 목록 userOrders : {}", userOrders);
+		List<OrderItem> orderitems = orderService.selectOrderItemsByUserOrders(userOrders);
+		logger.debug("구매기록 orderitems : {}",orderitems);
+		List<Item> items = orderService.selectItemByUserOrderItems(orderitems);
+		logger.debug("구매기록 items : {}",items);
+		
+		model.addAttribute("userOrders", userOrders);
+		model.addAttribute("orderitems", orderitems);
+		model.addAttribute("items", items);
+		
+		
+		
+		
+		
+		return "/order/admin/list";
+	}
+	
 	
 	
 }

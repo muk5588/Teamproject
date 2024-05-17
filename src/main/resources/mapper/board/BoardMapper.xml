@@ -262,7 +262,7 @@
 		<where>
 			and userno = #{userno}
 		</where>
-		order by createdate desc) A )
+		order by boardno desc) A )
 		<where>
 			and rnum between #{startNo} and #{endNo}
 		</where>

@@ -75,13 +75,24 @@ public class Paging {
 		startNo = (curPage - 1) * listCount + 1;
 		endNo = curPage * listCount;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", searchKind=" + searchKind
-				+ "]";
+		return "Paging{" +
+				"curPage=" + curPage +
+				", totalCount=" + totalCount +
+				", listCount=" + listCount +
+				", totalPage=" + totalPage +
+				", pageCount=" + pageCount +
+				", startPage=" + startPage +
+				", endPage=" + endPage +
+				", startNo=" + startNo +
+				", endNo=" + endNo +
+				", search='" + search + '\'' +
+				", searchKind='" + searchKind + '\'' +
+				", categoryNo=" + categoryNo +
+				", userno=" + userno +
+				'}';
 	}
 
 	public void setCurPage(int curPage) {

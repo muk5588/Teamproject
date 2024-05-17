@@ -5,7 +5,7 @@
 	
 	<sql id="selectBoard">
 		SELECT 
-			boardno, title, content, nickname, createdate, boardview, CATEGORYNO
+			boardno, userno,  title, content, nickname, createdate, boardview, CATEGORYNO
 		FROM board
 	</sql>
 	
@@ -21,6 +21,7 @@
 				</choose>
 				</if>
 	</sql>
+
 	<select id="boardList" parameterType="int" resultType="Board">
 		<include refid="selectBoard" />
 		<where>
@@ -346,34 +347,38 @@
 	</select>
 
 	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">
-		SELECT A.boardno boardno, A.title, good
-		FROM (
-		SELECT rownum rnum , B.*
-		FROM (
+		SELECT C.boardno, C.title, A.Good from
+		(SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
 		SELECT
-		boardno, title, userno
+		boardno, title, content, nickname, createdate, boardview, CATEGORYNO
 		FROM board
 		<where>
 			and userno = #{userno}
+			<if test="search != null and searchKind != null">
+				<choose>
+					<when test="searchKind.equals('title')">
+						AND title Like '%${search}%'
+					</when>
+					<when test="searchKind.equals('content')">
+						AND content Like '%${search}%'
+					</when>
+				</choose>
+			</if>
 		</where>
-		<include refid="search"/>
 		ORDER BY boardno DESC
-		) B
-		) C , (
-		SELECT
-		boardno,
-		title,
-		(SELECT COUNT(*) FROM good
-		WHERE boardno = board.BOARDNO
-		<include refid="search"/>
-		) AS good
-		FROM board
-		) A
-		<where>
-			AND rnum BETWEEN #{startNo} AND #{endNo}
-			AND C.boardno = A.boardno
-			AND userno = #{userno}
-		</where>
+		)B
+		)
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+		) C,
+		(SELECT b.BOARDNO, COALESCE(g.count, 0) as Good
+		FROM BOARD b, (
+		SELECT BOARDNO, COUNT(BOARDNO) as count
+		FROM GOOD
+		GROUP BY BOARDNO) g
+		WHERE b.BOARDNO = g.BOARDNO) A
+		WHERE C.boardNo = A.boardNo
+		ORDER BY boardNO DESC
 	</select>
 
 
@@ -394,4 +399,20 @@
 </select>
 <!--select ~~~ from (select *, rownum(*) FROM (SELECT * FROM board	where categoryNo = 12-->
 <!--	ORDER BY CreateDATE DESC)-->
+
+	<select id="userbyrecommList" resultType="Board" parameterType="util.Paging">
+		select * from (
+		    select rownum rnum, A.* from
+		(SELECT
+		g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+		FROM good g, board b
+		<where>
+			and g.boardno = b.boardno
+			and g.userno = #{userno}
+		</where>
+		order by createdate desc) A )
+		<where>
+			and rnum between #{startNo} and #{endNo}
+		</where>
+	</select>
 </mapper>

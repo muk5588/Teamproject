@@ -93,4 +93,6 @@ public interface BoardDao {
 	public String getCategoryName(int categoryNo);
 
     public List<Board> list();
+
+	public List<Board> userbyrecommList(Paging paging);
 }

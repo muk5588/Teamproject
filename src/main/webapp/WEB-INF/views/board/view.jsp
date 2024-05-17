@@ -349,11 +349,11 @@
                             <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
                         </td>
                         <c:if test="${isLogin > 0}">
-                            <td><a href='../report/commentReport?commno=${comment.commNo}'> 댓글신고하기</a></td>
+                            <td><a href='../report/commentReport?commno=${comment.commNo}'><button> 댓글신고하기</button></a></td>
                         </c:if>
                         <c:if test="${userNo == comment.userNo }">
                             <td>
-                                <button class="commentDelete" value="${comment.commeNo}">삭제</button>
+                                <button class="commentDelete" value="${comment.commNo}">삭제</button>
                             </td>
                         </c:if>
                     </tr>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: c
@@ -9,6 +10,8 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="/resources/js/report/commReport.js" charset="UTF-8"></script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
@@ -18,15 +21,15 @@
         <form id="reportform" method="post" action="./commentReport">
             <div>
                 <label>신고 종류</label>
-                <select name="reportTypeNo" id="reportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
+                <select name="commReportTypeNo" id="commReportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
                     <c:forEach var="reportType" items="${list }">
-                        <option value="${reportType.reportTypeNo}">${reportType.reportType}</option>
+                        <option value="${reportType.commReportTypeNo}">${reportType.commReport}</option>
                     </c:forEach>
                 </select>
             </div>
             <div>
-                <label for="reportContent">신고내용</label>
-                <textarea name="reportContent" id="reportContent" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
+                <label for="content">신고내용</label>
+                <textarea name="content" id="content" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
             </div>
             <div>
                 <label>신고하는 글번호</label>
@@ -37,7 +40,7 @@
                 <input type="text" name="commNo" id="commNo" class="boardNo" value="${comment.commNo }" style="border: 1px white" readonly>
             </div>
             <div>
-                <label>신고하는 댓글 제목</label>
+                <label>신고하는 댓글</label>
                 <td class="title">${comment.commContent }</td>
             </div>
             <div>

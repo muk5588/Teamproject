@@ -45,7 +45,7 @@ public class ReportController {
     public String commentReport(Model model, int commno) {
         List<BoardReportType> commReportTypeList = reportService.commReportType();
         Comment comment = boardService.commentByBoardNo(commno);
-        model.addAttribute("board", comment);
+        model.addAttribute("comment", comment);
         model.addAttribute("list", commReportTypeList);
         return "report/commentReport";
     }

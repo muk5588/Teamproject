@@ -16,7 +16,7 @@
 
 	<insert id="reportComm" parameterType="CommReport">
 		insert into COMMREPORT(COMMREPORTNO, COMMNO, userno, COMMREPORTTYPENO, CONTENT, COMMREPORTDATE)
-		values (COMMREPORT_SEQ.nextval,#{commNo},#{userNo},#{commReportTypeNo},#{content},#{commReportDate},sysdate + 9/24)
+		values (COMMREPORT_SEQ.nextval,#{commNo},#{userNo},#{commReportTypeNo},#{content},sysdate + 9/24)
 	</insert>
 	<select id="boardlist" resultType="BoardReport">
 		SELECT r.BOARDREPORTNO,r.BOARDNO, r.REPORTTYPENO, r.REPORTCONTENT, r.REPORTDATE, br.REPORTTYPE, b.CONTENT,b.NICKNAME

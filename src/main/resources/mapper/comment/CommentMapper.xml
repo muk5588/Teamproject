@@ -20,7 +20,7 @@
 </insert>
 	
 <delete id="deleteComment" parameterType="Comment">
-	DELETE ADMIN.COMMENTTB
+	DELETE COMMENTTB
 	<where>
 		AND COMMNO = #{commNo}
 		AND boardno = #{boardNo}
@@ -32,4 +32,11 @@
 			AND boardno = #{boardNo}
 		</where>
 	</delete>
+<select id="commentByBoardNo" resultType="Comment">
+	select c.COMMNO,c.USERNO,c.COMMNO, c.BOARDNO, c.COMMCONTENT, u.NICKNAME from COMMENTTB c
+	    left outer join USERTB u on c.USERNO = u.USERNO
+	<where>
+		AND COMMNO = #{commNo}
+	</where>
+</select>
 </mapper>

@@ -48,15 +48,15 @@
     <th>닉네임</th>
     <th></th>
 </tr>
-<c:forEach items="${commlist}" var="list">
+<c:forEach items="${commlist}" var="commlist">
     <tr>
-        <td>${list.commReportNo}</td>
-        <td>${list.content}</td>
-        <td><fmt:formatDate value="${list.commReportDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-        <td>${list.commReport}</td>
-        <td>${list.commContent}</td>
-        <td>${list.nickname}</td>
-        <td><a class='btn-fill' href="/report/deleteReport?reportno=${list.boardReportNo}"><button>삭제</button></a></td>
+        <td>${commlist.commReportNo}</td>
+        <td>${commlist.content}</td>
+        <td><fmt:formatDate value="${commlist.commReportDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+        <td>${commlist.commReport}</td>
+        <td>${commlist.commContent}</td>
+        <td>${commlist.nickname}</td>
+        <td><a class='btn-fill' href="/report/deleteCommReport?reportno=${commlist.commReportNo}"><button>삭제</button></a></td>
     </tr>
 </c:forEach>
 </table>

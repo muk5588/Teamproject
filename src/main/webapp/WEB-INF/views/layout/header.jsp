@@ -30,13 +30,13 @@
     }
 </style>
 
-<div class="container">
+<div class="Head">
     <header class="Main-Header">
         <div class="Menu-List" id="menuList">
             <img id="list-icon" src="/resources/img/mainPage/list.png" alt="우측 상단 목록" onclick="toggleLoginMenu();"><br>
         </div>
         <div class="Header-Name">
-            <a href="/" class="Site-Name"><img src="/resources/img/mainPage/title.png" ></a>
+            <a href="/" class="Site-Name"><img src="/resources/img/title/18px.png" class="site-Img" ></a>
         </div>
 
 

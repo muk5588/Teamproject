@@ -1,0 +1,149 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.header {
+    background: #87cefa;
+    color: white;
+    padding: 1em 0;
+    margin-bottom: 2em;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    margin-left: 165px;
+}
+
+.container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto 50px;
+    background: white;
+    padding: 29px 29px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+button {
+    background: #87cefa;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #39a9db;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    height: 10%
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: center;
+}
+
+th {
+    background: #f4f4f4;
+}
+
+#commentInput {
+    margin-top: 2em;
+}
+
+#commentInput table {
+    width: 100%;
+    border: none;
+}
+
+#commentInput th, #commentInput td {
+    border: none;
+    padding: 0.5em;
+}
+
+#commentInput input[type="text"], #commentInput input[name="commentContent"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#commentInput button {
+    margin-left: 1em;
+}
+
+.comment {
+    margin-top: 2em;
+}
+
+.comment table {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.comment th, .comment td {
+    padding: 0.5em;
+}
+
+.comment .commentDelete {
+    background: #f44336;
+    border: none;
+    padding: 0.5em 1em;
+    color: white;
+    cursor: pointer;
+}
+
+.comment .commentDelete:hover {
+    background: #e53935;
+}
+
+.recommendBtn a button {
+    background: #1e73be;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.recommendBtn a button:hover {
+    background: #005596;
+}
+
+button[onclick*="신고하기"] {
+    background: #f44336;
+}
+
+button[onclick*="신고하기"]:hover {
+    background: #e53935;
+}
+ 
+ 
+  
+  
+  

@@ -17,7 +17,7 @@
 
 <link href="/resources/css/footer.css" rel="stylesheet" type="text/css">
 
-<div class="container">
+<div class="Footer">
     <header class="Main-Footer">
         <ul class="Footer-Button">
             <li><a href="/info/company">회사소개</a></li>

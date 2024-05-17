@@ -341,7 +341,7 @@ public class BoardController {
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
-		model.addAttribute("usrno",usrno);
+
 		return "board/userbyboardlist";
 	}
 

@@ -1,6 +1,5 @@
 package shop.controller;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import shop.service.face.OrderService;
 import user.dto.User;
-import vo.ItemVO;
+import util.Paging;
+import util.ShopPaging;
 
 @Controller
 @RequestMapping("/order")
@@ -164,25 +161,44 @@ public class OrderController {
 	public void result() {}
 	
 	@RequestMapping("/history")
-	public String history(Model model) {
+	public String history(Model model, ShopPaging shopPaging,
+			@RequestParam(defaultValue ="0") int curPage,
+			@RequestParam(value="search",required = false) String search) {
 		logger.debug("구매기록");
+		logger.debug("curPage : {}", curPage);
 		User user = (User) session.getAttribute("dto1");
-		logger.debug("구매기록 user : {}",user);
+		//로그인 체크
 		if( null == user) {
 			logger.debug("구매기록 로그인 x");
-			return "redircet/login";
+			return "redirect:/login";
 		}
-		List<UserOrder> orders = orderService.selectUserOrderByUser(user);
+		//페이징
+		shopPaging.setCurPage(curPage);
+		int userno = user.getUserno();
+		if( null == search || "".equals(search)) {
+			shopPaging = orderService.getPagging(shopPaging,userno);
+		}else if( search != null && !"".equals(search)) {
+			shopPaging.setSearch(search);
+			shopPaging = orderService.getPagging(shopPaging,userno);
+			shopPaging.setSearch(search);
+		}
+		logger.debug("Paging : {}", shopPaging);
+		model.addAttribute("paging", shopPaging);
+		model.addAttribute("curPage", curPage);
+		
+		logger.debug("구매기록 user : {}",user);
+		List<UserOrder> orders = orderService.selectUserOrderByUser(user,shopPaging);
 		logger.debug("구매기록 orders : {}",orders);
 		List<OrderItem> orderitems = orderService.selectOrderItemsByUserOrders(orders);
 		logger.debug("구매기록 orderitems : {}",orderitems);
-		List<ItemVO> items = orderService.selectItemByUserOrderItems(orderitems);
+		List<Item> items = orderService.selectItemByUserOrderItems(orderitems);
 		logger.debug("구매기록 items : {}",items);
 		
-//		model.addAttribute("orders", orders);
-//		model.addAttribute("orderitems", orderitems);
-//		model.addAttribute("items", items);
+		model.addAttribute("orders", orders);
+		model.addAttribute("orderitems", orderitems);
+		model.addAttribute("items", items);
 //		
+		
 		return null;
 	}
 	

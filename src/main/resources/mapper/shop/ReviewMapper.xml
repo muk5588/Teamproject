@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.dao.ReviewDao">
 
-<select id="selectByItemNo" parameterType="int" resultType="vo.ReviewVO">
+<select id="selectByItemNo" parameterType="int" resultType="dto.Review">
 	SELECT reviewNo, u.userNo, itemNo, reviewTitle, reviewContent, CREATEREVIEWDATE, UPDATEREVIEWDATE, nickname FROM review r, usertb u
 	<where>
 		AND u.userNo = r.userNo 

@@ -22,7 +22,8 @@ import dto.UserOrder;
 import shop.dao.OrderDao;
 import shop.service.face.OrderService;
 import user.dto.User;
-import vo.ItemVO;
+import util.Paging;
+import util.ShopPaging;
 @Service
 public class OrderServiceImpl implements OrderService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -220,8 +221,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<UserOrder> selectUserOrderByUser(User user) {
-		return orderDao.selectUserOrderByUser(user);
+	public List<UserOrder> selectUserOrderByUser(User user, ShopPaging shopPaging) {
+		return orderDao.selectUserOrderByUser(user, shopPaging);
 	}
 
 	@Override
@@ -230,8 +231,17 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<ItemVO> selectItemByUserOrderItems(List<OrderItem> orderitems) {
+	public List<Item> selectItemByUserOrderItems(List<OrderItem> orderitems) {
 		return orderDao.selectItemByUserOrderItems(orderitems);
+	}
+
+	@Override
+	public ShopPaging getPagging(ShopPaging shopPaging, int userno) {
+		
+		int totalCount = orderDao.selectCntAll(shopPaging, userno);
+		logger.debug("$$$$totalCount : {}",totalCount);
+		ShopPaging pagingres = new ShopPaging(totalCount, shopPaging.getCurPage());
+		return pagingres;
 	}
 
 

@@ -2,10 +2,10 @@ package shop.dao;
 
 import java.util.List;
 
-import vo.ReviewVO;
+import dto.Review;
 
 public interface ReviewDao {
 
-	public List<ReviewVO> selectByItemNo(int itemNo);
+	public List<Review> selectByItemNo(int itemNo);
 
 }

@@ -12,9 +12,12 @@ public class Item {
 	private int price;
 	private int remain;
 	private int titleImg;
+	private int fileNo;
+	private String originName;
+	private String storedName;
 	public Item() {}
 	public Item(int itemNo, int userNo, String itemName, Date createDate, String itemComm, int price, int remain,
-			int titleImg) {
+			int titleImg, int fileNo, String originName, String storedName) {
 		super();
 		this.itemNo = itemNo;
 		this.userNo = userNo;
@@ -24,11 +27,15 @@ public class Item {
 		this.price = price;
 		this.remain = remain;
 		this.titleImg = titleImg;
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.storedName = storedName;
 	}
 	@Override
 	public String toString() {
 		return "Item [itemNo=" + itemNo + ", userNo=" + userNo + ", itemName=" + itemName + ", createDate=" + createDate
-				+ ", itemComm=" + itemComm + ", price=" + price + ", remain=" + remain + ", titleImg=" + titleImg + "]";
+				+ ", itemComm=" + itemComm + ", price=" + price + ", remain=" + remain + ", titleImg=" + titleImg
+				+ ", fileNo=" + fileNo + ", originName=" + originName + ", storedName=" + storedName + "]";
 	}
 	public int getItemNo() {
 		return itemNo;
@@ -77,6 +84,24 @@ public class Item {
 	}
 	public void setTitleImg(int titleImg) {
 		this.titleImg = titleImg;
+	}
+	public int getFileNo() {
+		return fileNo;
+	}
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+	public String getOriginName() {
+		return originName;
+	}
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+	public String getStoredName() {
+		return storedName;
+	}
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
 	}
 	
 	

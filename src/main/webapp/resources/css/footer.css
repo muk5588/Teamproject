@@ -6,6 +6,7 @@
     margin: 0;
     display: flex; 
     justify-content: center; 
+    margin-bottom: 2%;
 }
 
 .Footer-Button li {

@@ -120,7 +120,6 @@ public class BoardController {
 			logger.info("isRecomm : {}", good.getIsRecomm());
 			recomm = good.getTotalRecomm();
 		}
-		
 		List<Comment> comment = boardService.commentList(board);
 		model.addAttribute("comment", comment);
 		model.addAttribute("recomm", recomm);
@@ -330,18 +329,19 @@ public class BoardController {
 		logger.info("{}", paging);
 		List<Board> list = boardService.userByBoardList(paging);
 		logger.debug("list : {}", list);
-		
-		
+
 		List<Map<String, Object>> recommList = null;
 		recommList = boardService.getuserRecommendRes(list);
 		logger.debug("recommList : {}", recommList);
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());
 		}
+
 		model.addAttribute("totalrecomm", recommList);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
+		model.addAttribute("usrno",usrno);
 		return "board/userbyboardlist";
 	}
 

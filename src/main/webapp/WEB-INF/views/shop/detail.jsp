@@ -13,7 +13,12 @@
     function incrementQuantity() {
         var quantityInput = document.getElementById('quantity');
         var currentValue = parseInt(quantityInput.value);
-        quantityInput.value = currentValue + 1;
+        var remain = parseInt("${item.remain}");
+        if (currentValue < remain) {
+            quantityInput.value = currentValue + 1;
+        } else {
+            alert("남은 재고를 초과할 수 없습니다.");
+        }
     }
 
     function decrementQuantity() {
@@ -131,7 +136,7 @@ $(function(){
    <div class="container">
 
         <h1>상품 정보</h1>
-        <a href="../main">
+        <a href="/">
             <button>메인 페이지로</button>
         </a>
        
@@ -178,7 +183,7 @@ $(function(){
 		        <!-- 수량 선택기에 증가 및 감소 버튼 추가 -->
 		        <label for="quantity">수량:</label>
 		        <div class="quantity-selector">
-		            <input type="text" id="quantity" name="quantity" value="1">
+		            <input type="text" id="quantity" name="quantity" value="1" readonly="readonly">
 		            <button type="button" onclick="incrementQuantity()">+</button>
 		            <button type="button" onclick="decrementQuantity()">-</button>
 		        </div>

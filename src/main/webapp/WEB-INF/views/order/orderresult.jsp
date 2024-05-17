@@ -23,7 +23,9 @@
         <a href="/">
             <button>메인 페이지로</button>
         </a>
-        
+        <a href="/order/history">
+        	<button>전체 구매목록 조회</button>
+        </a>
 <div id="orderwrap">
 <table>
 <tr>

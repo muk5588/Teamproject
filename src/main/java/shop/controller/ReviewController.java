@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dto.Review;
 import shop.service.face.ReviewService;
-import vo.ReviewVO;
 
 @Controller
 @RequestMapping("/review")
@@ -36,10 +36,10 @@ public class ReviewController {
 	
 	@RequestMapping("/loadreview")
 	@ResponseBody
-	public List<ReviewVO> loadreview(
+	public List<Review> loadreview(
 		@RequestParam("itemNo")int itemNo) {
 		logger.debug("리뷰 가져오기");
-		List<ReviewVO> reviews = null;
+		List<Review> reviews = null;
 		//리뷰 가져오기
 		reviews = reviewService.selectByItemNo(itemNo);
 		logger.debug("리뷰 가져오기 reviews : {} ",reviews);

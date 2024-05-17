@@ -10,7 +10,8 @@ import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import user.dto.User;
-import vo.ItemVO;
+import util.Paging;
+import util.ShopPaging;
 
 public interface OrderDao {
 
@@ -42,11 +43,13 @@ public interface OrderDao {
 	
 	public OrderItem selectByOrderItem(OrderItem orderItem);
 
-	public List<UserOrder> selectUserOrderByUser(User user);
+	public List<UserOrder> selectUserOrderByUser(@Param("user")User user, @Param("shopPaging")ShopPaging shopPaging);
 
 	public List<OrderItem> selectOrderItemsByUserOrders(@Param("orders")List<UserOrder> orders);
 
-	public List<ItemVO> selectItemByUserOrderItems(@Param("orderitems")List<OrderItem> orderitems);
+	public List<Item> selectItemByUserOrderItems(@Param("orderitems")List<OrderItem> orderitems);
+
+	public int selectCntAll(@Param("shopPaging") ShopPaging shopPaging, @Param("userno") int userno);
 
 	
 }

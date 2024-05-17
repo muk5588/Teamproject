@@ -3,11 +3,13 @@ package shop.service.face;
 import java.util.List;
 import java.util.Map;
 
+import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import user.dto.User;
-import vo.ItemVO;
+import util.Paging;
+import util.ShopPaging;
 
 public interface OrderService {
 
@@ -68,9 +70,10 @@ public interface OrderService {
 	/**
 	 * 유저 객체로 회원주문 조회
 	 * @param user - 유저 정보
+	 * @param shopPaging 
 	 * @return - 조회된 전체 행
 	 */
-	public List<UserOrder> selectUserOrderByUser(User user);
+	public List<UserOrder> selectUserOrderByUser(User user, ShopPaging shopPaging);
 
 	/**
 	 * 회원 주문 리스트로 주문 상세 조회
@@ -84,7 +87,15 @@ public interface OrderService {
 	 * @param orderitems - 주문상세 리스트
 	 * @return - 조회된 전체 행
 	 */
-	public List<ItemVO> selectItemByUserOrderItems(List<OrderItem> orderitems);
+	public List<Item> selectItemByUserOrderItems(List<OrderItem> orderitems);
+
+	/**
+	 * 페이징
+	 * @param shopPaging
+	 * @param userno 
+	 * @return
+	 */
+	public ShopPaging getPagging(ShopPaging shopPaging, int userno);
 
 	
 

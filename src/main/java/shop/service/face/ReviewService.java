@@ -3,7 +3,6 @@ package shop.service.face;
 import java.util.List;
 
 import dto.Review;
-import vo.ReviewVO;
 
 public interface ReviewService {
 
@@ -12,7 +11,7 @@ public interface ReviewService {
 	 * @param itemNo - 상품 번호
 	 * @return - 조회된 행(List)
 	 */
-	public List<ReviewVO> selectByItemNo(int itemNo);
+	public List<Review> selectByItemNo(int itemNo);
 
 	
 }

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dto.Review;
 import shop.dao.ReviewDao;
 import shop.service.face.ReviewService;
-import vo.ReviewVO;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -17,7 +17,7 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired ReviewDao reviewDao;
 	
 	@Override
-	public List<ReviewVO> selectByItemNo(int itemNo) {
+	public List<Review> selectByItemNo(int itemNo) {
 		return reviewDao.selectByItemNo(itemNo);
 	}
 	

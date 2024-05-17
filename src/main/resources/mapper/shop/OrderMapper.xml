@@ -145,12 +145,19 @@ WHERE basketNo IN
 	</where>
 </select>
 
-<select id="selectUserOrderByUser" parameterType="User" resultType="dto.UserOrder">
-	SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
+<select id="selectUserOrderByUser" parameterType="map" resultType="dto.UserOrder">
+	SELECT * FROM (
+	SELECT rownum rnum, B.* FROM
+	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
 	<where>
-		AND userno = {user.userno}
+		AND userno = #{user.userno}
 	</where>
 	ORDER BY orderno DESC
+	) B
+	)
+	    <where>
+        AND rnum BETWEEN #{shopPaging.startNo } AND #{shopPaging.endNo}
+    </where>
 </select>
 
 <select id="selectOrderItemsByUserOrders" parameterType="dto.UserOrder" resultType="dto.OrderItem">
@@ -163,25 +170,46 @@ WHERE basketNo IN
 		</foreach>
 	</if>
 	</where>
+	ORDER BY orderno DESC
 </select>
 
-<select id="selectItemByUserOrderItems" parameterType="dto.OrderItem" resultType="vo.ItemVO">
-    SELECT i.itemno itemNo, itemname itemName, price, itemcomm itemComm, remain, titleImg, fileno, stored_Name, origin_Name
-    FROM (
-        SELECT * FROM item
-        WHERE itemno IN
-        <foreach item="item" collection="orderitems" open="(" separator="," close=")">
-            #{item.itemNo}
+<select id="selectItemByUserOrderItems" parameterType="dto.OrderItem" resultType="dto.Item">
+   SELECT 
+        i.itemno as itemNo,
+        i.itemName,
+        i.price,
+        i.itemComm,
+        i.remain,
+        i.titleImg,
+        it.fileno,
+        it.stored_Name,
+        it.origin_Name
+    FROM 
+        item i 
+    LEFT JOIN 
+        itemfile it 
+    ON 
+        i.itemno = it.itemno
+    WHERE 
+        i.itemno IN 
+        <foreach item="orderItem" index="index" collection="orderitems" open="(" separator="," close=")">
+            #{orderItem.itemNo}
         </foreach>
-    ) i
-    JOIN (
-        SELECT * FROM itemfile
-        WHERE itemno IN
-        <foreach item="item" collection="orderitems" open="(" separator="," close=")">
-            #{item.itemNo}
-        </foreach>
-    ) it ON i.itemno = it.itemno
-    AND i.titleimg = it.fileno
+</select>
+
+<select id="selectCntAll" resultType="int" parameterType="map">
+	SELECT count(*) FROM (
+		SELECT u.orderno
+		FROM userorder u, orderitem o
+		<where>
+			AND o.orderno = u.orderno 
+		<if test="shopPaging.search != null">
+			AND itemname LIKE '%${shopPaging.search}%'
+		</if>
+			AND userno = #{userno}
+		</where>
+		GROUP BY u.orderno
+	)
 </select>
 
 </mapper>

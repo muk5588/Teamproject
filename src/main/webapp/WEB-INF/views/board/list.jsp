@@ -2,68 +2,244 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<title>전체 게시판</title>
 <style type="text/css">
+    /* General styles */
+    @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
 
-    .wrap {
-        width: 1100px;
+    * {
+        font-family: 'NexonMaplestory';
+        font-weight: 300;
+        font-style: normal;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
     }
 
-    table, th {
+    h1 {
+        color: #333;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #39a9db;
+    }
+
+    /* Container */
+    .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Search form */
+    #searchForm {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    #searchForm select,
+    #searchForm input[type="text"],
+    #searchForm button {
+        margin: 0 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #searchForm button {
+        background-color: #28a745;
+        color: white;
+    }
+
+    #searchForm button:hover {
+        background-color: #218838;
+    }
+
+    /* Table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #ddd;
+        padding: 10px;
         text-align: center;
     }
 
-    /* <!-- body { --> */
-    /* <!-- 	width: 1500px; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
+    table th {
+        background-color: #f2f2f2;
+    }
 
-    /* <!-- h1 { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 
-    /* <!-- table { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
 
-    /* <!-- tr, th, td { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- } --> */
+    .checkbox {
+        text-align: center;
+    }
 
-    /* <!-- th { --> */
-    /* <!-- 	background-color: #ccc; --> */
-    /* <!-- } --> */
+    .title a {
+        color: #007bff;
+        text-decoration: none;
+    }
 
-    /* <!-- td.no, .title, .id, .nick, .hit, .date { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
+    .title a:hover {
+        text-decoration: underline;
+    }
 
-    /* <!-- td.title { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
+    /* Checkbox styling */
+    #checkboxAllCheck {
+        margin: 0;
+        cursor: pointer;
+    }
 
-    /* <!-- td.content { --> */
-    /* <!-- 	width: 500px; --> */
-    /* <!-- } --> */
+    .delCheckBox {
+        cursor: pointer;
+    }
 
-    /* <!-- td.id, .nick { --> */
-    /* <!-- 	width: 150px; --> */
-    /* <!-- } --> */
+    /* Buttons */
+    #deleteBtn {
+        background-color: #dc3545;
+        color: white;
+    }
 
-    /* <!-- td.hit { --> */
-    /* <!-- 	width: 50px; --> */
-    /* <!-- } --> */
+    #deleteBtn:hover {
+        background-color: #c82333;
+    }
 
-    /* <!-- td.date { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
+    #btnWrite {
+        background-color: #007bff;
+        color: white;
+    }
+
+    #btnWrite:hover {
+        background-color: #0056b3;
+    }
+
+    /* Flex container for buttons */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        table,
+        table th,
+        table td {
+            font-size: 14px;
+        }
+
+        #searchForm {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        #searchForm select,
+        #searchForm input[type="text"],
+        #searchForm button {
+            margin: 5px 0;
+        }
+    }
+
+    /* Container for pagination */
+    div ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        justify-content: center;
+        gap: 10px; /* Adds consistent spacing between elements */
+    }
+
+    /* Individual page items */
+    div ul li.page-item {
+        display: inline-block;
+    }
+
+    /* Links within page items */
+    div ul li .page-link {
+        display: block;
+        padding: 8px 12px;
+        text-decoration: none;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 3px;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    /* Hover state for links */
+    div ul li .page-link:hover {
+        background-color: #f8f9fa;
+        color: #0056b3;
+        border-color: #ced4da;
+    }
+
+    /* Active page item */
+    div ul li .page-link.active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    /* Disabled page items */
+    div ul li .page-link.disabled {
+        color: #6c757d;
+        pointer-events: none;
+        background-color: #fff;
+        border-color: #dee2e6;
+    }
+
+    /* Custom styles for arrows */
+    div ul li .page-link:before {
+        font-family: FontAwesome;
+        margin-right: 5px;
+    }
+
+    div ul li .page-link[href*="&larr;"]:before { content: '\f060'; }
+    div ul li .page-link[href*="&laquo;"]:before { content: '\f100'; }
+    div ul li .page-link[href*="&gt;"]:before { content: '\f061'; }
+    div ul li .page-link[href*="&raquo;"]:before { content: '\f101'; }
+    div ul li .page-link[href*="끝"]:after { content: '\f061'; margin-left: 5px; }
+    div ul li .page-link[href*="처음"]:before { content: '\f060'; margin-right: 5px; }
 </style>
 <script type="text/javascript">
     $(function () {
@@ -132,7 +308,8 @@
 </script>
 </head>
 <body>
-
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 
@@ -140,8 +317,15 @@
     <div class="container">
         <h1>${name } 게시판</h1>
 		<a href="/">
-            <button>메인 페이지로</button>
+            <button class="go_main">Home</button>
         </a>
+        <c:if test="${isLogin != 0}">
+            <div class="write">
+                <form action="./write" method="get">
+                    <button id="btnWrite" me>글쓰기</button>
+                </form>
+            </div>
+        </c:if>
         <div>
             <form action="" method="get" id="searchForm">
                 <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
@@ -154,9 +338,11 @@
                 <button id="serchBtn">검색</button>
             </form>
         </div>
-        <hr>
 
-        <table class="table table-striped table-hover table-sm">
+        <hr>
+        <button id="deleteBtn">체크 삭제</button>
+
+        <table>
 
             <%-- <colgroup> --%>
             <%-- 	<col style="width: 10%;"> --%>
@@ -199,22 +385,12 @@
                     </c:forEach>
                 </tr>
             </c:forEach>
-            <tr>
-                <td>
-                    <button id="deleteBtn">체크 삭제</button>
-                </td>
-            </tr>
+
         </table>
 
     </div>
     <!-- .container End -->
-    <c:if test="${isLogin != 0}">
-    <div>
-        <form action="./write" method="get">
-            <button id="btnWrite" me>글쓰기</button>
-        </form>
-    </div>
-    </c:if>
+
 
     <c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
 

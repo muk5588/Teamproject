@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* Container for pagination */
+div ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: center;
+    gap: 10px; /* Adds consistent spacing between elements */
+}
+
+/* Individual page items */
+div ul li.page-item {
+    display: inline-block;
+}
+
+/* Links within page items */
+div ul li .page-link {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Hover state for links */
+div ul li .page-link:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+    border-color: #ced4da;
+}
+
+/* Active page item */
+div ul li .page-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Disabled page items */
+div ul li .page-link.disabled {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+/* Custom styles for arrows */
+div ul li .page-link:before {
+    font-family: FontAwesome;
+    margin-right: 5px;
+}
+
+div ul li .page-link[href*="&larr;"]:before { content: '\f060'; }
+div ul li .page-link[href*="&laquo;"]:before { content: '\f100'; }
+div ul li .page-link[href*="&gt;"]:before { content: '\f061'; }
+div ul li .page-link[href*="&raquo;"]:before { content: '\f101'; }
+div ul li .page-link[href*="끝"]:after { content: '\f061'; margin-left: 5px; }
+div ul li .page-link[href*="처음"]:before { content: '\f060'; margin-right: 5px; }

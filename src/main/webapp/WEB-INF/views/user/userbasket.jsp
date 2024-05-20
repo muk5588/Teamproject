@@ -122,8 +122,7 @@
                                             </c:when>
                                         </c:choose>
                                     </td>
-                                    <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency"
-                                                                                        value="${item.price * basket.quantity }"/></td>
+                                    <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}"/> * ${basket.quantity} = ${item.price * basket.quantity }</td>
                                     <td><fmt:formatDate value="${basket.additionalDate}" pattern="yy-MM-dd HH:mm"/></td>
                                     <td>
                                         <div class="form-check form-switch">

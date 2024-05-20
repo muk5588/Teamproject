@@ -21,7 +21,7 @@
 
             $(function () {
                 var request = $.ajax({
-                    url: "/calendar/calendarList", // 변경하기
+                    url: "/calendar/calendarList",
                     method: "GET",
                     dataType: "json"
                 });

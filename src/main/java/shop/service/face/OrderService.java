@@ -1,14 +1,16 @@
 package shop.service.face;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
+
+import org.json.simple.JSONObject;
 
 import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
 import dto.UserOrder;
 import user.dto.User;
-import util.Paging;
 import util.ShopPaging;
 
 public interface OrderService {
@@ -106,10 +108,23 @@ public interface OrderService {
 
 	/**
 	 * 주문 취소 (환불 처리)
-	 * @param orderNo - 취소할 주문 번호
+	 * @param userOrder - 취소할 주문 객체
+	 * @param token - 토큰
 	 * @return - 결과 0:실패 | 1:성공
 	 */
-	public int updateUserOrderPayCancle(int orderNo);
+	public int updateUserOrderPayCancle(UserOrder userOrder, String token);
+
+	/**
+	 * 포트원 토큰 가져오기
+	 * @return - 반환 받은 JSON 객체
+	 */
+	public String getToken();
+
+	/**
+	 * 포트원 결과에 따라 행 업데이트
+	 * @param userOrder
+	 */
+	public void updateUserOrderorderCancle(UserOrder userOrder);
 
 	
 

@@ -148,7 +148,7 @@ WHERE basketNo IN
 <select id="selectUserOrderByUser" parameterType="map" resultType="dto.UserOrder">
 	SELECT * FROM (
 	SELECT rownum rnum, B.* FROM
-	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
+	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impUid,merchantUid FROM userOrder
 	<where>
 		AND userno = #{user.userno}
 	</where>
@@ -217,7 +217,7 @@ WHERE basketNo IN
 <select id="selectUserOrderAll" parameterType="util.ShopPaging" resultType="dto.UserOrder">
 	SELECT * FROM (
 	SELECT rownum rnum, B.* FROM
-	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate FROM userOrder
+	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impUid,merchantUid  FROM userOrder
 	ORDER BY orderno DESC
 	) B
 	)
@@ -232,5 +232,15 @@ WHERE basketNo IN
 		AND orderNo = #{orderNo}
 	</where>
 </select>
+
+<update id="updateUserOrderorderCancle" parameterType="dto.UserOrder">
+	update userorder
+	<set>
+		pay = 'C'
+	</set>
+	<where>
+		orderno = #{orderNo}
+	</where>
+</update>
 
 </mapper>

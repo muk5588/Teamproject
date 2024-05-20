@@ -141,7 +141,7 @@ IMP.request_pay({
     	.attr({
     		type:"text"
     		, name:"method"
-    		, value: rsp.pay_method
+    		, value: 'card'
     	}) )
     .appendTo(form)
     

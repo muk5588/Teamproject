@@ -89,38 +89,78 @@
 
         })
     });
-$(function(){
-	$(".refundBtn").click(function() {
-		console.log("refundBtn click")
-		var data = $(this).val();
-		console.log("refundBtn click ", data)
-		
-	    $.ajax({
-	        type: "get",
-	        url: "../ordercancle",
-	        data: {
-	        	orderNo: data
-	        },
-	        dataType: "json",
-	        success: function (res) {
-	            console.log("AJAX 성공")
-	            console.log(res)
-	                        
-// 	            $(function () {
-// 	                window.location.href = "./order/ordersheet?" + urlQueryString;
-// 	            })
-	        },
-	        error: function () {
-	            console.log("AJAX 실패")
-	        }
-	    });
-		
-		
-		
-	})
-	
-	
-})
+
+// $(function(){
+// 	$(".refundBtn").click(function() {
+// 			var data = $(this).val()
+// 			console.log("환불버튼" , data)
+// 			console.log("환불버튼")
+//         	var userName = $(this).data("username");
+// 	        var impUid = $(this).data("imp-uid");
+// 	        var merchantUid = $(this).data("merchant-uid");
+// 	        var totalPrice = $(this).data("totalprice");
+// 	        var paraMount = $(this).data("para-mount");
+// 			console.log("환불버튼username" , userName)
+// 			console.log("환불버튼impUid" , impUid)
+// 			console.log("환불버튼merchantUid" , merchantUid)
+// 			console.log("환불버튼totalprice" , totalPrice)
+// 			console.log("환불버튼paraMount" , paraMount)
+// 		    jQuery.ajax({
+// 		    	async: true,
+// 		    	  crossDomain: true,
+// 		    	  url: 'https://api.iamport.kr/payments/cancel',
+// 		    	  method: 'post',
+// 		    	  headers: {
+// 		    	    'Content-Type': 'application/json'
+// 		    	  },
+// 		    	  processData: false,
+// 		    	  data: '{"merchant_uid": merchantUid,
+// 				        "imp_uid":impUid,
+// 				        "cancel_request_amount": paraMount, 
+// 				        "reason": "테스트 결제 환불" }'
+// 		    	}).done(function(result) { // 환불 성공시 로직
+// 		        alert("환불 성공");
+// 		      }).fail(function(error) { // 환불 실패시 로직
+// 				console.log(error)
+// 		        alert("환불 실패" ,error.message);
+// 		      });
+// 		    })
+// 	});
+
+
+$(function() {
+    $(".refundBtn").click(function () {
+        var data = $(this).val();
+        var userName = $(this).data("username");
+        var impUid = $(this).data("imp-uid");
+        var merchantUid = $(this).data("merchant-uid");
+        var totalPrice = $(this).data("totalprice");
+        var paraMount = $(this).data("para-mount");
+
+        $.ajax({
+            type: "get",
+            url: "./ordercancle",
+            data: {
+                userName: userName,
+                impUid: impUid,
+                merchantUid: merchantUid,
+                totalPrice: totalPrice,
+                paraMount: paraMount,
+                orderNo: data
+            },
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                
+            },
+            error: function () {
+                console.log("AJAX 실패");
+            }
+        });
+
+});
+});
+
 </script>
 </head>
 <body>
@@ -158,7 +198,12 @@ $(function(){
 <c:if test="${i eq 0}">
 <tr>
 	<th><h5>주문 번호 : ${userOrder.orderNo }</h5></th>
-	<th><button class="refundBtn" value="${userOrder.orderNo}">환불</button> </th>
+	<th><c:if test="${not empty userOrder.pay and userOrder.pay eq 'Y'}"><button class="refundBtn" value="${userOrder.orderNo}"  
+                    data-username="${userOrder.userName}"
+                    data-imp-uid="${userOrder.impUid}"
+                    data-merchant-uid="${userOrder.merchantUid}"
+                    data-totalprice="${userOrder.totalPrice}"
+                    data-para-mount="${userOrder.paraMount}">환불</button></c:if> </th>
 </tr>
 <tr>
 	<th>주문자 : ${userOrder.userName }</th>

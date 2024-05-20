@@ -1,5 +1,6 @@
 package shop.controller;
 
+import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ import dto.OrderItem;
 import dto.UserOrder;
 import shop.service.face.OrderService;
 import user.dto.User;
-import util.Paging;
 import util.ShopPaging;
 
 @Controller
@@ -237,18 +236,30 @@ public class OrderController {
 		return "/order/admin/list";
 	}
 	
-	@RequestMapping("/ordercancle")
-	public void ordercancle(@Param("orderNo")int orderNo) {
+	@RequestMapping("/admin/ordercancle")
+	public String ordercancle(UserOrder userOrder) {
 		logger.debug("주문 취소");
-		logger.debug("주문 취소 orderNo : {}",orderNo);
-		int res = orderService.updateUserOrderPayCancle(orderNo);
-//		logger.debug("주문 취소 : {} ",res);
+		logger.debug("주문 취소 orderNo : {}",userOrder);
+		String token = orderService.getToken();
+		logger.debug("token : {}", token);
+		int res = 0;
+		res = orderService.updateUserOrderPayCancle(userOrder,token);
+		logger.debug("주문 취소 : {} ",res);
+		logger.debug("주문 취소 orderNo : {}",userOrder);
+		if( res == 1 ) {
+			//성공
+			orderService.updateUserOrderorderCancle(userOrder);
+		}
 		
 		
-		
+		return "res:" +res;
 	}
 	
 	
+	@PostMapping("/admin/ordercancle")
+	public void ordercancleReturn() {
+		
+	}
 	
 	
 }

@@ -55,5 +55,7 @@ public interface OrderDao {
 
 	public UserOrder selectUserOrderByOrderNo(int orderNo);
 
+	public void updateUserOrderorderCancle(UserOrder userOrder);
+
 	
 }

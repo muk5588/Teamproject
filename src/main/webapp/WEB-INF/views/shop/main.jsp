@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<title>상품</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -8,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/common/header.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/list.css">
-
 <style type="text/css">
 </style>
 <script type="text/javascript">
@@ -40,6 +40,7 @@
 </script>
 </head>
 <body>
+
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
@@ -47,7 +48,7 @@
 
     <div class="container">
 
-        <h1 style="font-size: 50px;">쇼핑</h1>
+        <h1 style="font-size: 50px;">상품</h1>
         <a href="/">
             <button>메인 페이지로</button>
         </a>

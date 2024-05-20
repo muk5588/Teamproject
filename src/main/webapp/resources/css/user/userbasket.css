@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+@import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
+
+/* General styles */
+body {
+    font-family: 'NexonMaplestory';
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a button {
+    background-color: #28a745;
+}
+
+a button:hover {
+    background-color: #218838;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td img {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Quantity buttons */
+.decrement-button, .increment-button {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.decrement-button:hover, .increment-button:hover {
+    background-color: #e0a800;
+}
+
+.quantity {
+    padding: 0 10px;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+
+/* Form check styles */
+.form-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-check-input {
+    margin: 0 5px;
+}
+
+#deleteBtn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#deleteBtn:hover {
+    background-color: #c82333;
+}
+
+#buyBtn {
+    width: 20%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#buyBtn:hover {
+    background-color: #138496;
+}
+
+/* Additional styles */
+.max-quantity {
+    color: #6c757d;
+}
+
+#basketwrap {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

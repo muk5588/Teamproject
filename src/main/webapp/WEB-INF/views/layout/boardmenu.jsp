@@ -12,6 +12,7 @@
     <img src="/resources/img/mainPage/search.png" alt="검색" id="search-icon">
 </div>
 
+
 <ul class="nav">
     <li class="menu">
         <a href="/">여행지정보</a>

@@ -182,7 +182,7 @@
                                                 class="delCheckBox"></td>
                     <td class="no">${board.boardNo }</td>
                     <td class="title">
-                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&userno=${usrno}">${board.title }</a>
+                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&usrno=${board.userNo}">${board.title }</a>
                     </td>
                     <td class="nick">${board.nickName }</td>
                     <td class="hit">${board.boardView }</td>

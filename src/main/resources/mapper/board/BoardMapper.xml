@@ -354,11 +354,11 @@
 	</select>
 
 	<select id="getuserRecommendRes" resultType="HashMap" parameterType="util.Paging">
-		SELECT b.*, NVL(good, 0) good FROM 
-	(SELECT * FROM board 
-	<where> 
+		SELECT b.*, NVL(good, 0) good FROM
+	(SELECT * FROM board
+	<where>
 		and boardNo IN
-		<foreach collection="arr" item="data" open="(" close=")" separator=","> 
+		<foreach collection="arr" item="data" open="(" close=")" separator=",">
 		#{data.boardNo}
 		</foreach>
 	</where>
@@ -366,7 +366,7 @@
 	left OUTER join
 	(SELECT BOARDNO, COUNT(BOARDNO) as good
 	    FROM GOOD
-	    GROUP BY BOARDNO 
+	    GROUP BY BOARDNO
 	    ORDER BY boardno DESC) g
 	ON b.boardno = g.boardno
 	ORDER BY b. boardNo DESC

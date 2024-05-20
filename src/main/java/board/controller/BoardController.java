@@ -106,6 +106,7 @@ public class BoardController {
 			, HttpSession session
 			, @RequestParam(value="curPage", defaultValue="0") int curPage
 			, @RequestParam(value ="categoryNo", required = false, defaultValue = "0")int categoryNo 
+			, @RequestParam(value ="usrno", required = false, defaultValue = "0")int usrno
 			) {
 
 		board =  boardService.viewByBoardNo(boardno);
@@ -126,6 +127,7 @@ public class BoardController {
 		logger.info("recomm : {}", recomm);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("board", board);
+		model.addAttribute("usrno",usrno);
 	}
 	
 	@GetMapping("/write")

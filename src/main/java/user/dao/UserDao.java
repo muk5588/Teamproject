@@ -2,10 +2,10 @@ package user.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.ognl.BooleanExpression;
 import org.springframework.stereotype.Repository;
 
 import user.dto.User;
+import util.UserPaging;
 
 @Repository("UserDao")
 public interface UserDao {
@@ -42,6 +42,12 @@ public interface UserDao {
 	public void blackUser(Long no);
 
 	public void whiteUser(Long no);
+
+
+	public int getUserListPaging(UserPaging paging);
+
+
+	public List<User> userPagingList(UserPaging paging);
 	
 	
 

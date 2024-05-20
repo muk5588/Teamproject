@@ -6,7 +6,7 @@
 <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/common/header.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="/resources/js/header.js"></script>
+<script type="text/javascript" src="/resources/js/mainPage/header.js"></script>
 
 
 <!-- 어느 페이지에 가도 인클루드 되어있는 헤더에 jQuery 선언문을 넣는다. -->

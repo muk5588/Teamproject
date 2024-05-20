@@ -420,7 +420,7 @@
 		</where>
 	</select>
 	
-	
+
 <select id="selectCntByUserNo" resultType="int" parameterType="map">
     SELECT count(*) FROM (
         <include refid="selectBoard" />

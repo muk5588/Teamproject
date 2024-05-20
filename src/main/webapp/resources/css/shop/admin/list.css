@@ -90,6 +90,6 @@ body {
     text-align: center; /* 아이템 내의 텍스트를 가운데 정렬 */
 }
 
-.item img {
+.item-img {
     width: 100%; /* 이미지가 부모 요소의 100%를 차지하도록 설정 */
 }

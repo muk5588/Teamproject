@@ -31,8 +31,6 @@
         })
 
 
-
-
     })
 </script>
 </head>
@@ -60,43 +58,44 @@
             </form>
         </div>
         <hr>
-        
-    	<c:set var="imgFiles" property="${itemFiles }"/>
 
-    <div class="oneAll">
-    <c:forEach var="item" items="${items }">
-    <ul class="oneItem">
-    	<li style="list-style: none; border: 1px solid #ccc;">
-    	<div class="item Img">
-    	<a href="./detail?itemNo=${item.itemNo }">
-    	<c:choose>
-	    	<c:when test="${not empty imgFiles}">
-		    	<c:forEach items="${files}" var="files">
-		    	<c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
-		    		<img alt="ItemImg" src="/resources/img/shop/upload/${files.storedName }">
-		    	</c:if>
-		    	<c:if test="${empty files.itemNo}">
-		    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
-		    	</c:if>
-		   		</c:forEach>
-	   		</c:when>
-	   		<c:when test="${empty imgFiles }">
-	    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
-	   		</c:when>
-   		</c:choose>
-    	</a>
-    	</div>
-    	<div class="item Info">
-    	<a href="./detail?itemNo=${item.itemNo }">
-   		${item.itemName}<br>
-   		<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" />
-   		</div>
-    	</li>
-    </ul>
-    </c:forEach>
+        <c:set var="imgFiles" property="${itemFiles }"/>
+
+        <div class="itemAll">
+            <c:forEach var="item" items="${items }">
+                <ul class="oneItem">
+                    <li style="list-style: none; border: 1px solid #ccc;">
+                        <div class="item Img">
+                            <a href="./detail?itemNo=${item.itemNo }">
+                                <c:choose>
+                                    <c:when test="${not empty imgFiles}">
+                                        <c:forEach items="${files}" var="files">
+                                            <c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
+                                                <img alt="ItemImg"
+                                                     src="/resources/img/shop/upload/${files.storedName }">
+                                            </c:if>
+                                            <c:if test="${empty files.itemNo}">
+                                                <img src="/resources/img/shop/nullimg.jpg" alt="notready">
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:when test="${empty imgFiles }">
+                                        <img src="/resources/img/shop/nullimg.jpg" alt="notready">
+                                    </c:when>
+                                </c:choose>
+                            </a>
+                        </div>
+                        <div class="item Info">
+                            <a href="./detail?itemNo=${item.itemNo }">
+                                    ${item.itemName}<br>
+                                    <fmt:setLocale value="ko_KR"/>
+                                    <fmt:formatNumber type="currency" value="${item.price}"/>
+                        </div>
+                    </li>
+                </ul>
+            </c:forEach>
+        </div>
     </div>
-</div>
-       
 
 
     <!-- .container End -->

@@ -101,7 +101,7 @@
 
     </div>
     <!-- .container End -->
-
+</div>
     <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>
 
 

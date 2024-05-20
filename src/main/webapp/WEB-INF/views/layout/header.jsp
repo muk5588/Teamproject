@@ -31,7 +31,7 @@
 
     #menu {
         position: absolute;
-        top: 50px; /* 위치를 조정하세요 */
+        top: 80px; /* 위치를 조정하세요 */
         right: 10px; /* 위치를 조정하세요 */
         background-color: white;
         border: 1px solid #ccc;

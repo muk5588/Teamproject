@@ -38,6 +38,10 @@ form {
     margin-top:23px; /* 조정 가능 */
     margin-right: 20px; /* 조정 가능 */
     padding: 10px;
+    background-color: #87CEFA; /* 변경 */
+}
+#postcodebox input[type="button"]:hover{
+    background-color: #2980b9;
 }
 label {
     font-weight: bold;

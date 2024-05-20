@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <script src="/resources/js/report/commReport.js" charset="UTF-8"></script>
-
+    <link rel="stylesheet" type="text/css" href="/resources/css/report/report.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
@@ -19,6 +19,10 @@
     <div class="warp">
         <h3>댓글 신고</h3>
         <form id="reportform" method="post" action="./commentReport">
+            <div>
+                <label>신고하는 댓글 : </label>
+                <td class="title">${comment.commContent }</td>
+            </div>
             <div>
                 <label>신고 종류</label>
                 <select name="commReportTypeNo" id="commReportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
@@ -31,19 +35,11 @@
                 <label for="content">신고내용</label>
                 <textarea name="content" id="content" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
             </div>
-            <div>
+            <div hidden="hidden">
                 <label>신고하는 글번호 : </label>
                 <input type="text" name="boardNo" id="boardNo" class="boardNo" value="${comment.boardNo }" style="border: 1px white" readonly>
-            </div>
-            <div>
                 <label>신고하는 댓글번호 : </label>
                 <input type="text" name="commNo" id="commNo" class="boardNo" value="${comment.commNo }" style="border: 1px white" readonly>
-            </div>
-            <div>
-                <label>신고하는 댓글 : </label>
-                <td class="title">${comment.commContent }</td>
-            </div>
-            <div>
                 <label>작정자닉네임 : </label>
                 <td class="nick">${comment.nickName }</td>
             </div>

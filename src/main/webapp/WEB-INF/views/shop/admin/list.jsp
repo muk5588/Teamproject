@@ -3,67 +3,62 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/list.css">
 <style type="text/css">
+	.container {
+		text-align: center; /* 내용을 가운데 정렬 */
+		margin-top: 20px; /* 상단 여백 */
+	}
 
-    .wrap {
-        width: 1100px;
-    }
+	.container h1 {
+		font-size: 24px; /* 제목 크기 */
+		margin-bottom: 10px; /* 아래 여백 */
+	}
 
-    table, th {
-        text-align: center;
-    }
+	.container a {
+		text-decoration: none; /* 링크 밑줄 제거 */
+	}
 
-    /* <!-- body { --> */
-    /* <!-- 	width: 1500px; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
+	.container button {
+		padding: 8px 20px; /* 버튼 내용과 상하 좌우 패딩 */
+		margin: 0 5px; /* 버튼 사이 여백 */
+		border: none; /* 테두리 없음 */
+		background-color: #007bff; /* 배경색 */
+		color: #fff; /* 글자색 */
+		border-radius: 4px; /* 테두리 둥글게 */
+		cursor: pointer; /* 커서 모양 변경 */
+	}
 
-    /* <!-- h1 { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
+	.container button:hover {
+		background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
+	}
 
-    /* <!-- table { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
+	.container form {
+		display: flex; /* 폼 요소들을 가로로 나란히 배치 */
+		justify-content: center; /* 가운데 정렬 */
+		margin-top: 20px; /* 상단 여백 */
+	}
 
-    /* <!-- tr, th, td { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- } --> */
+	.container input[type="text"] {
+		padding: 8px; /* 입력 상자 패딩 */
+		border-radius: 4px; /* 입력 상자 테두리 둥글게 */
+		border: 1px solid #ccc; /* 입력 상자 테두리 스타일 */
+	}
 
-    /* <!-- th { --> */
-    /* <!-- 	background-color: #ccc; --> */
-    /* <!-- } --> */
+	.container button#searchBtn {
+		padding: 8px 20px; /* 버튼 내용과 상하 좌우 패딩 */
+		margin-left: 10px; /* 왼쪽 여백 */
+		border: none; /* 테두리 없음 */
+		background-color: #007bff; /* 배경색 */
+		color: #fff; /* 글자색 */
+		border-radius: 4px; /* 테두리 둥글게 */
+		cursor: pointer; /* 커서 모양 변경 */
+	}
 
-    /* <!-- td.no, .title, .id, .nick, .hit, .date { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.title { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.content { --> */
-    /* <!-- 	width: 500px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.id, .nick { --> */
-    /* <!-- 	width: 150px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.hit { --> */
-    /* <!-- 	width: 50px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.date { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
+	.management-container #searchBtn:hover {
+		background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
+	}
 </style>
 <script type="text/javascript">
     $(function () {
@@ -96,6 +91,7 @@
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
@@ -104,7 +100,7 @@
     <div class="container">
 
         <h1>상품 관리</h1>
-        <a href="/adminPage">
+        <a href="/user/adminPage">
             <button>관리자 메인페이지로</button>
         </a>
         <a href="./create">
@@ -120,10 +116,10 @@
         <hr>
         
     	<c:set var="imgFiles" property="${itemFiles }"/>
-<div id="itemwarp">
-    <ul>
+
+    <div class="oneAll">
     <c:forEach var="item" items="${items }">
-    <div class="oneItem">
+    <ul class="oneItem">
     	<li style="list-style: none; border: 1px solid #ccc;">
     	<div class="item Img">
     	<a href="./detail?itemNo=${item.itemNo }">
@@ -150,13 +146,13 @@
    		<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" />
    		</div>
     	</li>
+    </ul>
     </c:forEach>
     </div>
-    </ul>
 </div>
        
 
-    </div>
+
     <!-- .container End -->
 
     <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>

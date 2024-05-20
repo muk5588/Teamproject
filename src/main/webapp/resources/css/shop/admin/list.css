@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+.wrap {
+    margin: 0 auto;
+    max-width: 1200px; /* 컨테이너의 최대 너비 */
+    padding: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+/* 상품 목록 스타일 */
+.oneAll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* 요소들을 각 행에서 좌우 정렬 */
+}
+
+.oneItem {
+    flex: 0 0 calc(33.333% - 20px); /* 각 아이템이 화면 너비의 1/3을 차지하도록 설정 */
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* 각 아이템의 테두리 스타일 */
+}
+
+.item {
+    text-align: center; /* 아이템 내의 텍스트를 가운데 정렬 */
+}
+
+.item img {
+    width: 100%; /* 이미지가 부모 요소의 100%를 차지하도록 설정 */
+}

@@ -137,8 +137,11 @@ tbody tr.fold.open {
 }
 
 .fold-content {
+	max-height: 200px;
+	max-width: 630px;
     padding: .5em;
     background: #e6f2ff;
+    overflow-y: auto; 
 }
 
 .fold-content h3 {

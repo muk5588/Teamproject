@@ -146,6 +146,13 @@
 <tr>
 	<th>결제 가격 : ${userOrder.totalPrice }</th>
 </tr>
+<tr>
+		<th>결제 정보 : 
+		<c:if test="${userOrder.pay eq 'N' or empty userOrder.pay }">결제 대기</c:if>
+		<c:if test="${userOrder.pay eq 'Y' }">결제 완료</c:if>
+		<c:if test="${userOrder.pay eq 'C' }">환불 처리</c:if>
+	</th>
+</tr>
 <c:set var="i" value="${i + 1 }"/>
 </c:if>
 	<c:set var="sum" value="0"/>

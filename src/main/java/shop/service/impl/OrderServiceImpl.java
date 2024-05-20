@@ -1,5 +1,12 @@
 package shop.service.impl;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,10 +16,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dto.Basket;
 import dto.Item;
@@ -22,7 +35,6 @@ import dto.UserOrder;
 import shop.dao.OrderDao;
 import shop.service.face.OrderService;
 import user.dto.User;
-import util.Paging;
 import util.ShopPaging;
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -30,6 +42,10 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired private OrderDao orderDao;
 	@Autowired HttpSession session;
 	@Autowired HttpServletRequest req;
+	
+	private String imp_key = "1267261348683316";
+	private String imp_secret = "raGfKIOia3gSi4pnjct8TNHvFrsW6JOyc11ckSRfM87vhJI0EulIZ44aSSXnu6a042r9j70mFsNa6P9v";
+	
 	@Override
 	public int[] getItemNosByorderDatas(String[] orderDatas) {
 		int[] orderNumbers = new int[orderDatas.length];
@@ -250,19 +266,83 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateUserOrderPayCancle(int orderNo) {
-		UserOrder order = orderDao.selectUserOrderByOrderNo(orderNo);
+	public int updateUserOrderPayCancle(UserOrder userOrder, String token) {
+	    userOrder = orderDao.selectUserOrderByOrderNo(userOrder.getOrderNo());
+	    
+	    // IAMPORT API에 전달할 요청 본문 생성
+	    String requestBody = "{\"imp_uid\":\"" + userOrder.getImpUid() + "\",\"amount\":\"" + userOrder.getParaMount() + "\"}";
+	    
+	    // IAMPORT API에 전달할 URL 생성
+	    String url = "https://api.iamport.kr/payments/cancel";
+	    
+	    HttpRequest request = HttpRequest.newBuilder()
+	            .uri(URI.create(url))
+	            .header("Content-Type", "application/json")
+	            .header("Authorization", "Bearer " + token) // 헤더에 인증 토큰 포함
+	            .method("POST", HttpRequest.BodyPublishers.ofString(requestBody))
+	            .build();
+	    
+	    try {
+	        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+	        logger.debug("response : {}", response.body());
+	        Gson gson = new Gson();
+	        JsonObject jsonResponse = gson.fromJson(response.body(), JsonObject.class);
+	        int code = jsonResponse.get("code").getAsInt();
+	        logger.debug("code: {}", code); // 추출한 code 값을 디버그 메시지에 출력
+	        // 응답 코드에 따라 처리
+	        if (response.statusCode() == 200) {
+	        	
+	        	if( code == 0) {
+		            // 처리 성공
+		            return 1;
+	            }else {
+	            	return 0;
+	            }
+	        } else {
+	            // 처리 실패
+	            logger.error("Failed to cancel payment: {}", response.body());
+	            return 0;
+	        }
+	    } catch (Exception e) {
+	        logger.error("Exception occurred while cancelling payment: {}", e.getMessage());
+	        return 0;
+	    }
+	}
+
+
+	@Override
+	public String getToken() {
+		String param = "";
 		
-		String URL = "https://api.iamport.kr/payments/cancel";
-		URL += "?imp_uid:" + order.getImpUid();
-		URL += "&amount:" + order.getTotalPrice();
-		
-		
-		
-		
-		
-		
-		return 0;
+		param += "imp_key:" +imp_key;
+		param += ",imp_secret:" +imp_secret;
+		logger.debug("param : {}", param);
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.iamport.kr/users/getToken"))
+			    .header("Content-Type", "application/json")
+			    .method("POST", HttpRequest.BodyPublishers.ofString("{\"imp_key\":\"1267261348683316\",\"imp_secret\":\"raGfKIOia3gSi4pnjct8TNHvFrsW6JOyc11ckSRfM87vhJI0EulIZ44aSSXnu6a042r9j70mFsNa6P9v\"}"))			    .build();
+			HttpResponse<String> response = null;
+			try {
+				response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+				logger.debug("response.body()response.body():{}" ,response.body());
+
+		        // JSON 파싱
+		        JSONObject jsonResponse = (JSONObject) new JSONParser().parse(response.body());
+		        if ((long) jsonResponse.get("code") == 0) {
+		            JSONObject responseBody = (JSONObject) jsonResponse.get("response");
+		            return (String) responseBody.get("access_token");
+		        } else {
+		            logger.error("Failed to get access token: {}", jsonResponse.get("message"));
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return null;
+		}
+
+	@Override
+	public void updateUserOrderorderCancle(UserOrder userOrder) {
+		orderDao.updateUserOrderorderCancle(userOrder);
 	}
 
 

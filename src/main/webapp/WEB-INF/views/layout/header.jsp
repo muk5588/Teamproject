@@ -3,7 +3,7 @@
 <!-- 스프링은 따로 라이브러리를 설치하지 않아도 다운 받을 라이브러리를 설정할 수 있다. -->
 <!-- 그 중에 jstl 라이브러리도 있기 때문에 사용할 수 있는것 -->
 <!-- 라이브러리 목록은 iot/pom.xml, c:\사용자\.m2에서 확인가능 -->
-
+<link href="/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/header.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="/resources/js/header.js"></script>
@@ -50,7 +50,7 @@
             <c:if test="${not empty isLogin}">
                 <ul>
                     <li>${dto1.name } [${dto1.nickname } ]</li>
-                    <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
+                    <li><a href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
                     <c:choose>
                         <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
                             <br>

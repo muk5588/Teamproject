@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>권한설정</title>
-    	<link href="/resources/css/gradeInsert.css" rel="stylesheet" type="text/css">
-    
-    
-    
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/gradeInsert.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>

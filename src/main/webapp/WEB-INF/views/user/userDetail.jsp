@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="/resources/js/user/blackList.js" defer></script>
 
@@ -23,7 +24,6 @@
             font-style: normal;
         }
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;

@@ -1,11 +1,11 @@
 package user.controller;
 
-import board.dto.Board;
-import board.service.BoardService;
-import grade.dto.Grade;
-import grade.service.GradeService;
-import login.dto.AccessHistory;
-import login.service.LoginService;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +15,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import board.dto.Board;
+import board.service.BoardService;
+import grade.dto.Grade;
+import grade.service.GradeService;
+import login.dto.AccessHistory;
+import login.service.LoginService;
 import user.dto.EmailCheck;
 import user.dto.User;
 import user.service.UserService;
 import util.Paging;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.UUID;
+import util.UserPaging;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
     @Autowired
@@ -47,9 +50,13 @@ public class UserController {
     public String adminPage(Model model, @RequestParam(defaultValue ="0") int curPage){
         Paging paging = new Paging();
         paging = boardService.getAdminPaging(curPage, paging);
-
+        logger.debug("admin paging : {}", paging);
+        
         List<AccessHistory> list2  = loginService.loginHistory(paging);
+        logger.debug("AccessHistory : {}", list2);
         List<Grade> list3 = gradeService.gradeList();
+        logger.debug("Grade : {}", list3);
+        logger.debug("admin paging : {}", paging);
         model.addAttribute("list2", list2);
         model.addAttribute("list3", list3);
         model.addAttribute("paging", paging);
@@ -63,19 +70,29 @@ public class UserController {
 
     @RequestMapping("/userList")
     //유저전체리스트 페이지
-    public String userList( Model model) {
-        List<User> list = service.userList();
+    public String userList( Model model,@RequestParam(defaultValue ="0") int curPage) {
+    	String url = "/user/userList";
+    	UserPaging paging = new UserPaging();
+    	paging = service.getUserListPaging(paging,curPage);
+        List<User> list = service.userPagingList(paging);
         model.addAttribute("list", list);
-        return "user/userList";
+        model.addAttribute("paging", paging);
+        model.addAttribute("URL", url);
+        return url;
     }
 
     @RequestMapping("/userBlack")
     //유저블랙리스트 페이지
-    public String userBlack( Model model, String searchVal) {
-        List<User> list = service.userList();
+    public String userBlack( Model model, String searchVal,@RequestParam(defaultValue ="0") int curPage) {
+    	String URL = "/user/userBlack";
+    	UserPaging paging = new UserPaging();
+    	paging = service.getUserListPaging(paging,curPage);
+    	List<User> list = service.userPagingList(paging);
         model.addAttribute("list", list);
         model.addAttribute("searchVal", searchVal);
-        return "user/userBlack";
+        model.addAttribute("paging", paging);
+        model.addAttribute("URL", URL);
+        return URL;
     }
     
     //수정 페이지

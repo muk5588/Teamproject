@@ -21,7 +21,7 @@
 		<level value="debug" />
 	</logger>
 	<logger name="user">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="login">
 		<level value="debug" />

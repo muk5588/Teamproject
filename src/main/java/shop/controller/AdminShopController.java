@@ -33,11 +33,12 @@ public class AdminShopController {
 	
 	@RequestMapping("/list")
 	public void adminList(
-		    @RequestParam(defaultValue ="0") int curPage
+		    @RequestParam(defaultValue ="1") int curPage
 		    ,@RequestParam(value="search",required = false) String search
 			,Model model
 			) {
 	    Paging paging = new Paging();
+	    paging.setCurPage(curPage);
 	    if( null != search && !"".equals(search)) {
 	    	paging.setSearch(search);
 	    }

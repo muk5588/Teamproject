@@ -268,6 +268,7 @@
 	<select id="selectAdminCntAll" resultType="int" parameterType="util.Paging">
 		select count(*) from (
 								 select USERNO from USERTB
+								 where userno is not null
 							 )
 	</select>
 

@@ -1,7 +1,4 @@
-
-
 body {
-    font-family: 'Montserrat', sans-serif;
     background: white;
 }
 
@@ -84,7 +81,7 @@ input {
     color: rgba(15, 19, 42, 0.3);
     padding: 0 0 0 15px;
     font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
+    
     transition: .2s linear;
 }
 
@@ -112,7 +109,7 @@ input:active {
     border: none;
     cursor: pointer;
     font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
+    
     box-shadow: 0 15px 30px rgba(135, 206, 250, 0.36);
     transition: .2s linear;
 }
@@ -123,7 +120,7 @@ input:active {
 }
 
 .reset__btn {
-	background: #87CEFA;
+	background: #dc3545;
     color: white;
     display: block;
     width: 92.5%;
@@ -134,7 +131,7 @@ input:active {
     border: none;
     cursor: pointer;
     font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
+    
     box-shadow: 0 15px 30px rgba(135, 206, 250, 0.36);
     transition: .2s linear;
 }

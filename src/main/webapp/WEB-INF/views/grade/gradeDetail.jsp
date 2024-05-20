@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="/resources/css/grade/gradeDetail.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -33,7 +34,7 @@
         <div class='btnSet'>
             <a class='btn-fill' href="/grade/gradeList">등급 목록</a>
             <a class='btn-fill' href="/grade/gradeUpdate?gradeno=${grade.gradeno}">수정</a>
-            <a class='btn-fill' href="/grade/deleteGrade?gradeno=${grade.gradeno}">삭제</a>
+            <a class='btn-dtl' href="/grade/deleteGrade?gradeno=${grade.gradeno}">삭제</a>
         </div>
     </div>
 </div>

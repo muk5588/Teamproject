@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="/resources/css/grade/gradeUpdate.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -30,8 +31,8 @@
                 <input type="text" name="comm" id="comm" value="${grade.comm}"><br>
             </div>
             <br><br>
-            <input type="submit" id="submit" name="submit" value="추가"/>
-            <input type="reset" id="reset" name="reset" value="초기화"/>
+            <input type="submit" id="submit" name="submit" value="수정"/>
+            <a class='btn-dtl' href='/grade/gradeDetail?gradeno=${grade.gradeno}'>취소</a>
         </form>
     </div>
 </div>

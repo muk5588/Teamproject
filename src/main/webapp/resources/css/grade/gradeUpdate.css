@@ -1,0 +1,91 @@
+
+body {
+    background: white;
+    font-family: Arial, sans-serif;
+}
+
+.warpper {
+    display: block;
+    max-width: 800px;
+    width: 80%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+h3 {
+    color: #87CEFA;
+    font-size: 36px;
+    letter-spacing: -1px;
+    margin: 40px 0;
+    transition: .2s linear;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"], .btn-dtl {
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #87CEFA;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #6CBEEF;
+}
+
+.btn-dtl {
+    background-color: #dc3545;
+    display: inline-block;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-dtl:hover {
+    background-color: #bf2231;
+}

@@ -1,0 +1,73 @@
+/* userGrade.css */
+
+body {
+    background: white;
+}
+
+.warpper {
+    display: block;
+    max-width: 800px;
+    width: 80%;
+    margin: 120px auto;
+    text-align: center;
+}
+
+h3 {
+    color: #87CEFA;
+    font-size: 48px;
+    letter-spacing: -3px;
+    margin: 120px 0 80px 0;
+    transition: .2s linear;
+    text-decoration: none;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px auto 30px;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.btnSet {
+    margin-top: 20px;
+}
+
+.btn-fill {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #87CEFA;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-fill:hover {
+    background-color: #6CBEEF;
+}
+.btn-dtl {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+.btn-dtl:hover{
+    background-color: #bf2231;
+}

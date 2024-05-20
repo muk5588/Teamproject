@@ -17,7 +17,7 @@
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
-    	<link href="/resources/css/reportList.css" rel="stylesheet" type="text/css">
+    	<link href="/resources/css/report/reportList.css" rel="stylesheet" type="text/css">
     	
 <script>
   $(function(){

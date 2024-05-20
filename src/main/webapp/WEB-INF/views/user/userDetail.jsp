@@ -16,13 +16,6 @@
     <script src="/resources/js/user/blackList.js" defer></script>
 
     <style type="text/css">
-        @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
-
-        * {
-            font-family: 'NexonMaplestory';
-            font-weight: 300;
-            font-style: normal;
-        }
         body {
             margin: 0;
             padding: 0;

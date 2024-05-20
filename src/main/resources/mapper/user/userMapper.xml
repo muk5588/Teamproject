@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.dao.UserDao">
 	<select id="userDetail" parameterType="User" resultType="User">
-		SELECT userno, userid, name, NICKNAME, gender, email,LPAD(POSTCODE,5,'0'), ADDRESS, DETAILADDRESS, EXTRAADDRESS, phone, GRADENO, BLACK FROM usertb WHERE userno = #{userno}
+		SELECT userno, userid, name, NICKNAME, gender, email,POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, phone, GRADENO, BLACK FROM usertb WHERE userno = #{userno}
 	</select>
 
 	<select id="userList" resultType="User">

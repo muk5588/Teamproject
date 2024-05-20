@@ -3,68 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/list.css">
 
-    .wrap {
-        width: 1100px;
-    }
-
-    table, th {
-        text-align: center;
-    }
-
-    /* <!-- body { --> */
-    /* <!-- 	width: 1500px; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- h1 { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- table { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- tr, th, td { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- } --> */
-
-    /* <!-- th { --> */
-    /* <!-- 	background-color: #ccc; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.no, .title, .id, .nick, .hit, .date { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.title { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.content { --> */
-    /* <!-- 	width: 500px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.id, .nick { --> */
-    /* <!-- 	width: 150px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.hit { --> */
-    /* <!-- 	width: 50px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.date { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
-</style>
 <script type="text/javascript">
     $(function () {
 
@@ -96,6 +37,7 @@
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
@@ -104,7 +46,7 @@
     <div class="container">
 
         <h1>상품 관리</h1>
-        <a href="/adminPage">
+        <a href="/user/adminPage">
             <button>관리자 메인페이지로</button>
         </a>
         <a href="./create">
@@ -114,16 +56,16 @@
             <form action="" method="get" id="searchForm">
                 <input type="text" name="search" id="search" placeholder="검색하실 상품명을 작성해 주세요">
                 <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="serchBtn">검색</button>
+                <button id="searchBtn">검색</button>
             </form>
         </div>
         <hr>
         
     	<c:set var="imgFiles" property="${itemFiles }"/>
-<div id="itemwarp">
-    <ul>
+
+    <div class="oneAll">
     <c:forEach var="item" items="${items }">
-    <div class="oneItem">
+    <ul class="oneItem">
     	<li style="list-style: none; border: 1px solid #ccc;">
     	<div class="item Img">
     	<a href="./detail?itemNo=${item.itemNo }">
@@ -150,13 +92,13 @@
    		<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" />
    		</div>
     	</li>
+    </ul>
     </c:forEach>
     </div>
-    </ul>
 </div>
        
 
-    </div>
+
     <!-- .container End -->
 
     <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>

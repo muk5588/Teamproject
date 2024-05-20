@@ -1,0 +1,101 @@
+/* userUpdate.css */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+}
+
+.warpper {
+    display: block;
+    max-width: 680px;
+    width: 80%;
+    margin: 120px auto;
+}
+
+h3 {
+    color: #87CEFA; /* 변경 */
+    font-size: 48px;
+    letter-spacing: -3px;
+    text-align: center;
+    margin: 120px 0 80px 0;
+    transition: .2s linear;
+    text-decoration: none;
+}
+
+form {
+    width: 100%;
+    max-width: 680px;
+    margin: 40px auto 30px;
+}
+#postcodebox {
+    position: relative;
+}
+
+#postcodebox input[type="button"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top:23px; /* 조정 가능 */
+    margin-right: 20px; /* 조정 가능 */
+    padding: 10px;
+    background-color: #87CEFA; /* 변경 */
+}
+#postcodebox input[type="button"]:hover{
+    background-color: #2980b9;
+}
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"] {
+    display: block;
+    width: calc(100% - 20px);
+    height: 40px;
+    margin: 5px 0;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: #87CEFA; /* 변경 */
+}
+
+input[type="button"]{
+    display: inline-block;
+    width: 30%;
+    height: 40px;
+    margin: 10px 0;
+    background-color: #3498db; /* 변경 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+}
+input[type="reset"]{
+    display: inline-block;
+    width: 30%;
+    height: 40px;
+    margin: 10px 0;
+    background-color: #e74c3c; /* 변경 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    margin-left: 250px;
+}
+
+input[type="button"]:hover {
+    background-color: #2980b9; /* 변경 */
+}
+input[type="reset"]:hover{
+    background-color: #c0392b; /* 변경 */
+}

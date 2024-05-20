@@ -1,0 +1,251 @@
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+@import url('https://fonts.googleapis.com/css?family=Oswald:700');
+@import url('https://fonts.googleapis.com/css?family=Droid+Serif');
+
+/* Fonts */
+body {
+    font-family: 'Droid Serif', serif;
+    color: #555;
+}
+
+.scroll-wrapper {
+    max-height: 300px;
+    overflow-y: auto; 
+}
+
+h3 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333;
+}
+
+h3.boardReport {
+    justify-content: left;
+    display: flex;
+}
+
+h3.commReport {
+    justify-content: left;
+    display: flex;
+}
+
+.report-section {
+    margin-bottom: 20px;
+}
+
+/* Table */
+.table-container {
+    width: 115%; 
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.table-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: -100px; 
+    margin-right: -25px;
+    overflow-x: auto; 
+}
+
+.fold-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #b9dbff; /* 기본 테이블 색깔 */
+    color: #555;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #b9dbff; /* 기본 테이블 색깔 */
+    color: #555;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: .4em;
+    text-align: left;
+    border-bottom: 1px solid #abb6bc; 
+}
+
+th {
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    vertical-align: bottom;
+    height: 50px;
+    background: #e6f2ff; /* th 색깔 */
+}
+
+th.bold-text {
+    text-align: center; 
+    vertical-align: middle; 
+    height: 50px; 
+}
+
+tbody tr:nth-child(4n-1) {
+    background: #b9dbff; /* 짝수번째 색깔 */
+}
+
+tbody tr:hover {
+    background: #cce5ff; /* 테이블에 마우스를 올릴 시 변경되는 색깔 */ 
+}
+
+tbody tr.view td, tbody tr.view th {
+    cursor: pointer;
+}
+
+tbody tr.view td:first-child, tbody tr.view th:first-child {
+    position: relative;
+    padding-left: 20px;
+}
+
+tbody tr.view td:first-child:before, tbody tr.view th:first-child:before {
+    content: "\f0d7";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    width: 9px;
+    height: 16px;
+    margin-top: -8px;
+    transition: all .3s ease;
+}
+
+tbody tr.view.open {
+    background: #66b2ff; /* 해당 바디를 클릭 시 적용되는 색깔 */
+    color: black;
+}
+
+tbody tr.view.open td:first-child:before, tbody tr.view.open th:first-child:before {
+    transform: rotate(-180deg);
+    color: white;
+}
+
+tbody tr.fold {
+    display: none;
+}
+
+tbody tr.fold.open {
+    display: table-row;
+}
+
+.fold-content {
+    padding: .5em;
+    background: #e6f2ff;
+}
+
+.fold-content h3 {
+    margin-top: 0;
+}
+
+.fold-content table {
+    width: 100%;
+    background: white;
+    color: #555;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .2);
+}
+
+.fold-content table tbody tr {
+    cursor: pointer;
+}
+
+.fold-content table tbody tr:nth-child(even) {
+    background: #eee;
+}
+
+.visible-small {
+    display: none;
+}
+
+.visible-big {
+    display: block;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked+.fold-content {
+    display: block;
+}
+
+@media (max-width: 700px) {
+    body {
+        font-size: .8em;
+        padding: 0 10px;
+    }
+
+    table th, table td {
+        padding: 1em .2em;
+    }
+
+    table th {
+        vertical-align: bottom;
+        padding-bottom: 0;
+    }
+
+    .visible-small {
+        display: block;
+    }
+
+    .visible-big {
+        display: none;
+    }
+}
+
+.btn-fill {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn-fill button {
+    background-color: #007BFF; /* 버튼 색 */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-fill button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+a.btn-fill {
+    color: white;
+}
+
+a.btn-fill button {
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.bold-text {
+    font-weight: bold;
+    text-decoration: none;
+    font-family: '돋움';
+    font-size: 14px;
+    text-align: left;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333;
+}

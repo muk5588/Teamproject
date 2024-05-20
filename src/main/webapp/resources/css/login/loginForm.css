@@ -116,7 +116,6 @@ input:active {
 .social {
   display: flex;
   position: absolute;
-  bottom: 300px; 
   left: 48%;
   transform: translateX(-45%); 
 }

@@ -22,7 +22,6 @@ public interface BoardDao {
 	 * @return 게시글 전체 리스트
 	 */
 	public List<Board> selectAll(Paging paging);
-
 	/**
 	 * 전체 개수 조회
 	 * @param paging 

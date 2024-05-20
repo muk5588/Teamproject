@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="/resources/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="/resources/js/user/blackList.js" defer></script>
 

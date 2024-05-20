@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Title</title>
-	<link href="/resources/css/loginForm.css" rel="stylesheet" type="text/css">
+	<link href="/resources/css/login/loginForm.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
         $(function () {

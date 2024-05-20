@@ -15,7 +15,7 @@
 </footer> -->
 
 
-<link href="/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/common/footer.css" rel="stylesheet" type="text/css">
 
 <div class="Footer">
     <header class="Main-Footer">

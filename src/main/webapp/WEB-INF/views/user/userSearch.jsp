@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <script src="/resources/js/user/search.js" charset="UTF-8"></script>
-	<link href="/resources/css/userSearch.css" rel="stylesheet" type="text/css">
+	<link href="/resources/css/user/userSearch.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>

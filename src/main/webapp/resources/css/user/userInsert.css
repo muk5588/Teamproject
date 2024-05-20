@@ -1,0 +1,276 @@
+ /* userInsert.css */
+
+/*
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+}
+
+.warpper {
+    display: block;
+    max-width: 680px;
+    width: 80%;
+    margin: 120px auto;
+}
+
+h3 {
+    color: 	#87CEFA;
+    font-size: 48px;
+    letter-spacing: -3px;
+    text-align: center;
+    margin: 120px 0 80px 0;
+    transition: .2s linear;
+    text-decoration: none;
+}
+
+.register {
+    list-style-type: none;
+}
+
+.register li {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    transition: .2s linear;
+}
+.register li a {
+    text-decoration: none;
+    color: #0f132a;
+    font-weight: bolder;
+    text-align: center;
+    cursor: pointer;
+}
+
+form {
+    width: 100%;
+    max-width: 680px;
+    margin: 40px auto 30px; 
+}
+
+.input__block {
+    margin: 20px auto;
+    display: block;
+    position: relative;
+}
+
+.input__block.namebox-input__block::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50px;
+    display: block;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid rgba(15, 19, 42, 0.1);
+    transition: .2s linear;
+}
+
+
+
+input {
+    display: block;
+    width: 90%;
+    max-width: 680px;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: none;
+    background: rgba(15, 19, 42, 0.1);
+    color: rgba(15, 19, 42, 0.3);
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    transition: .2s linear;
+}
+
+
+input:focus,
+input:active {
+    outline: none;
+    border: none;
+    color: rgba(15, 19, 42, 1);
+}
+
+.signup__btn,
+.findAdd__btn,
+.reset__btn {
+    background: #87CEFA;
+    color: white;
+    display: block;
+    width: 90.5%;
+    max-width: 680px;
+    height: 50px;
+    border-radius: 8px;
+    margin: -30 auto 10px; 
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 15px 30px rgba(135, 206, 250, 0.36);
+    transition: .2s linear;
+}
+
+.send__btn{
+	 background: #87CEFA;
+    color: white;
+    display: block;
+    width: 90.5%;
+    max-width: 680px;
+    height: 50px;
+    border-radius: 8px;
+    margin: -30 auto 10px; 
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 15px 30px rgba(135, 206, 250, 0.36);
+    transition: .2s linear;
+}
+
+.signup__btn:hover,
+.findAdd__btn:hover,
+.reset__btn:hover,
+.send__btn:hover {
+    box-shadow: 0 0 0 rgba(135, 206, 250, 0);
+}
+
+ */
+ 
+/* *{
+    box-sizing: border-box;
+} */
+
+/* ---------------------------------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+}
+
+.total {
+    width: 670px;
+    height: auto; 
+    border: solid 1px #0068FF;
+    border-radius: 20px;
+    box-shadow: 7px 7px 39px 0px #0068FF40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0; 
+    margin: 50px auto 100px;
+}
+
+h2 {
+    width: 510px;
+    padding: 15px;
+    border: none;
+    color: #0068FF;
+}
+
+.memberinfo_box {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    justify-content: space-around;
+    width: 600px;
+    height: auto; 
+    border: none;
+}
+
+.memberinfo_box input {
+    border: none;
+    border-bottom: solid 1px #CFCFCF;
+    width: 500px;
+    height: 40px;
+    margin-left: 50px;
+}
+
+.memberinfo_radio {
+    width: 400px;
+    height: 30px;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    margin-left: 80px;
+    margin-bottom: 10px;
+}
+
+.agree_checkbox {
+    width: 640px;
+    border: none;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; 
+}
+
+.button {
+    width: 200px;
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+#emailbox {
+    position: relative; 
+}
+
+button#checkmail {
+    margin-left: 456px;
+    margin-top: -42px;
+    height: 41px;
+    border: solid 1px #0068FF;
+    border-radius: 20px;
+    color: #0068FF;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff ;
+}
+
+.button button {
+    width: 500px;
+    height: 50px;
+    border: solid 1px #0068FF;
+    background-color: white;
+    color: #0068FF;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+ 
+ input#email{
+ width: 400px;
+ }
+ 
+ input[type="button"]{
+ 	color: #0068FF;
+ 	border: solid 1px #0068FF;
+ 	background-color: #ffffff ;
+ }
+ 
+.scroll-box {
+            max-height: 180px; 
+            overflow-y: auto; 
+            border: 1px solid #ccc; 
+            padding: 30px; 
+            margin-bottom: 10px; 
+            max-width: 556px;
+}
+ 
+.bold-text{
+	font-weight: bold;
+}
+ 
+ 
+
+ 
+ 

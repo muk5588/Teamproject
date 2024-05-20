@@ -117,6 +117,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
+
 <div class="warpper">
     <div class="warp">
         <c:choose>

@@ -132,6 +132,8 @@
     </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+
 <div class="container">
     <div class="table-container">
         <div class="table-wrapper">

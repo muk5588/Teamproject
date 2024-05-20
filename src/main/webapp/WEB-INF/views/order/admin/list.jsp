@@ -10,6 +10,15 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <style type="text/css">
+	@import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
+
+	/* General styles */
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f4f4f4;
+		margin: 0;
+		padding: 0;
+	}
 
     .wrap {
         width: 1100px;
@@ -167,6 +176,7 @@ $(function() {
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 

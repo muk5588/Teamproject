@@ -10,11 +10,12 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="/resources/css/user/updatepw.css" rel="stylesheet" type="text/css">
     <script src="${pageContext.request.contextPath}/resources/js/user/password.js" charset="UTF-8"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
-<h3>${dto.nickname } 고객 정보</h3>
+
 <div class="warpper">
     <div class="warp">
         <div id="emailbox">
@@ -31,6 +32,7 @@
                 <input type="email" name="email" id="email2" value="${dto.email }" readonly>
                 <input type="text" name="name" id="name" value="${dto.name}">
             </div>
+            <div class="tab"></div>
             <div id="userinfo" hidden>
                 <div id="useridbox">
                     <label for="userid">아이디</label>

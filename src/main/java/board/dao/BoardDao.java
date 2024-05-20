@@ -1,6 +1,8 @@
 package board.dao;
 
 import board.dto.*;
+import user.dto.User;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import util.Paging;
@@ -95,4 +97,6 @@ public interface BoardDao {
     public List<Board> list();
 
 	public List<Board> userbyrecommList(Paging paging);
+
+	public int selectCntByUserNo(@Param("paging")Paging paging, @Param("user")User login);
 }

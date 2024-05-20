@@ -321,9 +321,9 @@ public class BoardController {
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
 		if(null !=  search && !"".equals(search)) {
-			paging = boardService.getPaging(curPage,paging);
+			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}else {
-			paging = boardService.getPaging(curPage,paging);
+			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
@@ -358,9 +358,9 @@ public class BoardController {
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
 		if(null !=  search && !"".equals(search)) {
-			paging = boardService.getPaging(curPage,paging);
+			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}else {
-			paging = boardService.getPaging(curPage,paging);
+			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);

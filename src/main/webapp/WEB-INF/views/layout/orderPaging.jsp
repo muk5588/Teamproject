@@ -4,7 +4,7 @@
     
 <div>
 	
-	<ul class="pagination pagination-sm justify-content-center ">
+	<ul>
 	
 	<c:choose>
 	<c:when test="${empty paging.search }">

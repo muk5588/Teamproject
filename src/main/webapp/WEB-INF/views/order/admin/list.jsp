@@ -3,72 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/order/admin/list.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 
 
 <style type="text/css">
-	@import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
 
-	/* General styles */
-	body {
-		font-family: 'NexonMaplestory';
-		background-color: #f4f4f4;
-		margin: 0;
-		padding: 0;
-	}
-
-    .wrap {
-        width: 1100px;
-    }
-
-    table, th {
-        text-align: center;
-    }
-
-    /* <!-- body { --> */
-    /* <!-- 	width: 1500px; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- h1 { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- table { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- tr, th, td { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- } --> */
-
-    /* <!-- th { --> */
-    /* <!-- 	background-color: #ccc; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.no, .title, .id, .nick, .hit, .date { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.title { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.content { --> */
-    /* <!-- 	width: 500px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.id, .nick { --> */
-    /* <!-- 	width: 150px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.hit { --> */
-    /* <!-- 	width: 50px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.date { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
 </style>
 <script type="text/javascript">
     $(function () {
@@ -171,7 +113,7 @@ $(function() {
 </script>
 </head>
 <body>
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
@@ -180,19 +122,20 @@ $(function() {
     <div class="container">
 
         <h1>주문 목록 확인</h1>
-        <a href="/">
-            <button>메인페이지로</button>
+		<div style="position: absolute">
+        <a href="/user/adminPage">
+            <button>관리자 메인페이지</button>
         </a>
+		</div>
 
-        <div>
-            <form action="" method="get" id="searchForm">
-                <input type="text" name="search" id="search" placeholder="검색하실 상품명을 작성해 주세요" value="${paging.search }">
-                <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="serchBtn">검색</button>
-            </form>
-        </div>
+		<form action="" method="get" id="searchForm">
+			<input type="text" name="search" id="search" placeholder="검색하실 상품명을 작성해 주세요" value="${paging.search }">
+			<input hidden="hidden" name="curPage" value="${curPage}">
+			<button id="serchBtn">검색</button>
+		</form>
+		<br>
         <hr>
-        
+
 <div id="orderwrap">
 <c:forEach var="userOrder" items="${userOrders }">
 <c:set var="i" value="0"/>
@@ -205,7 +148,7 @@ $(function() {
 <c:if test="${orderItem.itemNo eq item.itemNo }">
 <c:if test="${i eq 0}">
 <tr>
-	<th><h5>주문 번호 : ${userOrder.orderNo }</h5></th>
+	<th><h3>주문 번호 : ${userOrder.orderNo }</h3></th>
 	<th><c:if test="${not empty userOrder.pay and userOrder.pay eq 'Y'}"><button class="refundBtn" value="${userOrder.orderNo}"  
                     data-username="${userOrder.userName}"
                     data-imp-uid="${userOrder.impUid}"
@@ -215,6 +158,17 @@ $(function() {
 </tr>
 <tr>
 	<th>주문자 : ${userOrder.userName }</th>
+	<th rowspan="6" class = "img">
+		<c:choose>
+			<c:when test="${ item.titleImg ne 0}">
+				<img alt="ItemImg" src="/resources/img/shop/upload/${item.storedName }">
+			</c:when>
+			<c:when test="${item.titleImg eq 0}">
+				<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+			</c:when>
+		</c:choose>
+		</td>
+	</th>
 </tr>
 <tr>
 	<th>배송지 : ${userOrder.address }</th>
@@ -226,7 +180,7 @@ $(function() {
 	<th>배송지 세부 주소 추가 : ${userOrder.extraAddress }</th>
 </tr>
 <tr>
-	<th>결제 가격 : ${userOrder.totalPrice }</th>
+	<th>결제 가격 : <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/></th>
 </tr>
 <tr>
 	<th>결제 정보 : 
@@ -242,18 +196,7 @@ $(function() {
 	<c:if test="${not empty orderItem }">
    			<td>상품명 : ${orderItem.itemName }</td>
    			<td>구매수량 : ${orderItem.orderQuantity }</td>
-   			<td>
-   			<c:choose>
-	    	<c:when test="${ item.titleImg ne 0}">
-	    		<img alt="ItemImg" src="/resources/img/shop/upload/${item.storedName }">
-	   		</c:when>
-	   		<c:when test="${item.titleImg eq 0}">
-	    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
-	   		</c:when>
-   			</c:choose>
-   			</td>
-   			<td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/>
-   			</td>
+
 			<c:set var="i" value="${orderItem.price}"/>
 			<c:set var="sum" value="${sum + i}"/>
     </c:if>

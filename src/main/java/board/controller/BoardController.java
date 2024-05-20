@@ -33,7 +33,7 @@ public class BoardController {
 	@Autowired private ServletContext servletContext;
 	
 	@GetMapping("/list")
-	public void list(
+	public String list(
 	    Model model,
 	    @RequestParam(defaultValue ="0") int curPage,
 	    @RequestParam(value="search",required = false) String search,
@@ -44,7 +44,7 @@ public class BoardController {
 	    logger.info("/board/list search : {}", search);
 	    logger.info("/board/list searchKind : {}", searchKind);
 	    logger.info("/board/list categoryNo : {}", categoryNo);
-		
+		String URL = "/board/list";
 	    // 페이징 계산
 	    Paging paging = new Paging();
 	    paging.setSearch(search);
@@ -59,6 +59,21 @@ public class BoardController {
 	    } 
 	    else {
 	        paging = boardService.getPaging(curPage, paging);
+	    }
+	    logger.info("$$$%%%paging : {}",paging);
+	    
+	    //게시글 0개 조회 되면
+	    if( paging == null) {
+	    	paging = new Paging();
+	    	paging.setSearch(search);
+	    	paging.setSearchKind(searchKind);
+	    	if (categoryNo != null) {
+	    		paging.setCategoryNo(categoryNo);
+	    	}
+	    	model.addAttribute("curPage", curPage);
+	    	model.addAttribute("paging", paging);
+	    	return URL;
+	    	
 	    }
 	    paging.setSearch(search);
 	    paging.setSearchKind(searchKind);
@@ -87,11 +102,13 @@ public class BoardController {
 	    for(Map<String, Object> M : recommList) {
 //	        logger.debug("M : {}", M.toString());
 	    }
+	    model.addAttribute("URL", URL);
 	    model.addAttribute("totalrecomm", recommList);
 	    model.addAttribute("curPage", curPage);
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("list", list);
 		model.addAttribute("name", name);
+		return URL;
 	}
 	
 	@GetMapping("/category")
@@ -311,6 +328,8 @@ public class BoardController {
 			@RequestParam(value="searchKind", required = false) String searchKind
 			) {
 		// ����¡ ���
+		String URL = "/board/userbyboardlist";
+		model.addAttribute("URL", URL);
 		logger.debug("userbyboardlist ");
 		logger.debug("userbyboardlist ");
 		User login = (User) session.getAttribute("dto1");
@@ -325,12 +344,30 @@ public class BoardController {
 		}else {
 			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}
+		//페이징 결과 없을 경우 (cnt 0개 )
+		if( paging == null ) {
+			paging = new Paging();
+			paging.setSearch(search);
+			paging.setSearchKind(searchKind);
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("paging", paging);
+			model.addAttribute("param", login);
+			return "board/userbyboardlist";
+		}
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
 		paging.setUserno(login.getUserno());
 		logger.info("{}", paging);
 		List<Board> list = boardService.userByBoardList(paging);
 		logger.debug("list : {}", list);
+		//조회 결과 없을 경우
+		if( list == null ) {
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("paging", paging);
+			model.addAttribute("param", login);
+			logger.debug("paramparamparamparam: {}", login);
+			return "board/userbyboardlist";
+		}
 
 		List<Map<String, Object>> recommList = null;
 		recommList = boardService.getuserRecommendRes(list);
@@ -338,6 +375,7 @@ public class BoardController {
 		for(Map<String, Object> M : recommList) {
 			logger.debug("M : {}", M.toString());
 		}
+		logger.debug("paramparamparamparam: {}", login);
 
 		model.addAttribute("totalrecomm", recommList);
 		model.addAttribute("curPage", curPage);
@@ -353,7 +391,8 @@ public class BoardController {
 								,@RequestParam(value="search",required = false) String search
 								,@RequestParam(value="searchKind", required = false ) String searchKind){
 
-		
+		String URL = "/board/userbyrecommlist";
+		model.addAttribute("URL", URL);
 		Paging paging = new Paging();
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
@@ -361,6 +400,12 @@ public class BoardController {
 			paging = boardService.getPagingByUserNo(curPage,paging,login);
 		}else {
 			paging = boardService.getPagingByUserNo(curPage,paging,login);
+		}
+		//게시글 없는 경우
+		if( paging == null ) {
+			paging.setSearch(search);
+			paging.setSearchKind(searchKind);
+			paging.setUserno(login.getUserno());
 		}
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);

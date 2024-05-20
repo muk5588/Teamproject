@@ -119,9 +119,6 @@ public class LoginController {
         //추천한 게시물 조회
         List<Board> list2 = boardService.userrecommList(userno);
 
-        Paging paging = new Paging();
-        paging = boardService.getPaging(curPage,paging);
-        paging.setUserno(userno);
         model.addAttribute("dto1", login);
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
@@ -143,8 +140,6 @@ public class LoginController {
             logger.debug("M : {}", M.toString());
         }
         model.addAttribute("totalrecomm", recommList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("paging", paging);
 //        model.addAttribute("totalrecomm", recommList);
     }
 

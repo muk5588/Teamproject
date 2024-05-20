@@ -330,10 +330,10 @@
             <form action="" method="get" id="searchForm">
                 <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
                 <select name="searchKind" id="searchKind">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
+                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
                 </select>
-                <input type="text" name="search" id="search">
+                <input type="text" name="search" id="search" value="${paging.search }">
                 <input hidden="hidden" name="curPage" value="${curPage}">
                 <button id="serchBtn">검색</button>
             </form>
@@ -360,7 +360,9 @@
                 <th>최초작성일</th>
                 <th>추천수</th>
             </tr>
-            <c:forEach var="board" items="${list }">
+            <c:choose>
+	            <c:when test="${not empty list }">
+	            <c:forEach var="board" items="${list }">
                 <tr>
                     <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
                                                 class="delCheckBox"></td>
@@ -383,8 +385,16 @@
                             <td><a id="totalRecommend">${recommList.GOOD }</a></td>
                         </c:if>
                     </c:forEach>
-                </tr>
-            </c:forEach>
+	           	 	</tr>
+	            </c:forEach>
+	            </c:when>
+   	            <c:when test="${empty list }">
+	            	<tr>
+	                    <td class="title" colspan="7">게시글이 존재하지 않습니다
+	                    </td>
+	                </tr>
+	            </c:when>
+			</c:choose>
 
         </table>
 

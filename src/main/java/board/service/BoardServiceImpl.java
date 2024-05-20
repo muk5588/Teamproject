@@ -38,6 +38,9 @@ public class BoardServiceImpl implements BoardService {
 		
 		int totalCount = boardDao.selectCntAll(paging);
 		logger.info("totalCount : {}",totalCount);
+		if( totalCount <= 0) {
+			return null;
+		}
 		Paging pagingres = new Paging(totalCount, curPage);
 		
 		return pagingres;
@@ -246,6 +249,9 @@ public class BoardServiceImpl implements BoardService {
 		
 		int totalCount = boardDao.selectCntByUserNo(paging,login);
 		logger.info("totalCount : {}",totalCount);
+		if(totalCount <= 0) {
+			return null;
+		}
 		Paging pagingres = new Paging(totalCount, curPage);
 		
 		return pagingres;

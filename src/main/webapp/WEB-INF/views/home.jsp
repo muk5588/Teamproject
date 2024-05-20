@@ -97,7 +97,7 @@
             clear: both;
             float: right;
             width: 300px;
-            height: 463px;
+            height: 470px;
         }
 
         .logoutdiv {
@@ -209,23 +209,23 @@
 <a class="calendar_link">
     <div id="calendar_home"></div>
 </a>
-<P> The time on the server is ${serverTime}. </P>
-<div class="board-pre">
+<%--<P> The time on the server is ${serverTime}. </P>--%>
+<%--<div class="board-pre">--%>
 
-</div>
+<%--</div>--%>
 
-<%--<button><a href="login">로그인</a></button>--%>
-<%--<button><a href="/user/insertUser">가입</a></button>--%>
-<button><a href="/user/adminPage">가입</a></button>
-<button onclick="location.href = '/grade/gradeList'">권한조회</button>
-<button onclick="location.href = '/menu/menuList'">권한부여상황</button>
-<button onclick="location.href = '/user/userList'">유저조회</button>
-<button onclick="location.href = '/board/list'">게시물조회</button>
-<button onclick="location.href = '/message/'">메세지 테스트</button>
-<button onclick="location.href = '/basket/userbasket'">장바구니</button>
-<button onclick="location.href = '/calendar'">캘린더</button>
-<button onclick="location.href = '/shop/'">상품</button>
-<button onclick="location.href = '/order/history'">주문목록</button>
+<%--&lt;%&ndash;<button><a href="login">로그인</a></button>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<button><a href="/user/insertUser">가입</a></button>&ndash;%&gt;--%>
+<%--<button><a href="/user/adminPage">가입</a></button>--%>
+<%--<button onclick="location.href = '/grade/gradeList'">권한조회</button>--%>
+<%--<button onclick="location.href = '/menu/menuList'">권한부여상황</button>--%>
+<%--<button onclick="location.href = '/user/userList'">유저조회</button>--%>
+<%--<button onclick="location.href = '/board/list'">게시물조회</button>--%>
+<%--<button onclick="location.href = '/message/'">메세지 테스트</button>--%>
+<%--<button onclick="location.href = '/basket/userbasket'">장바구니</button>--%>
+<%--<button onclick="location.href = '/calendar'">캘린더</button>--%>
+<%--<button onclick="location.href = '/shop/'">상품</button>--%>
+<%--<button onclick="location.href = '/order/history'">주문목록</button>--%>
 
 
 <%--<c:if test="${empty isLogin}">--%>

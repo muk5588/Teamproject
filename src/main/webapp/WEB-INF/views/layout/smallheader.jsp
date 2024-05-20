@@ -48,7 +48,7 @@
             <!-- 로그인한 경우 -->
             <c:if test="${not empty isLogin}">
                 <ul>
-                    <li>${dto1.name } [${dto1.nickname } ]</li>
+                    <li>${dto1.name } <a href="/user/userDetail">[${dto1.nickname } ]</a></li>
                     <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
                     <c:choose>
                         <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">

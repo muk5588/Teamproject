@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
-    <link href="/resources/css/board/boardView.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/board/boardView.css" rel="stylesheet" type="text/css">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -75,10 +75,10 @@
             handleFileChk();
             $("#commentRefresh").click()
             if (${empty isRecomm or isRecomm eq 0}) {
-               $(".cancle").toggle()
+                $(".cancle").toggle()
             }
             if (${not empty isRecomm and isRecomm eq 1}) {
-               $(".do").toggle()
+                $(".do").toggle()
             }
 
         })
@@ -109,11 +109,11 @@
                     $(".do").toggle()
                     $(".cancle").toggle()
 
-//                     if (res) {
-//                         $(function () {
-//                             $(location).attr('href', './view?boardNo=${board.boardNo }')
-//                         })
-//                     }
+                    if (res) {
+                         $(function () {
+                             $(location).attr('href', './view?boardNo=${board.boardNo }')
+                        })
+                     }
                 }
                 , error: function () {
                     console.log("AJAX 실패")
@@ -194,36 +194,36 @@
 
             })
         }
-        
-        function handleFileChk() {
-                console.log("handleFileChk")
 
-                $.ajax({
-                    type: "get"
-                    , url: "./fileChk"
-                    , data: {
-                        boardno: ${board.boardNo}
-                    }
-                    , dataType: "json"
-                    , success: function (res) {
-                        console.log("AJAX 성공")
-                        console.log(res)
-                        console.log(res[0].fileNo)
-                        if( res.length > 0 ){
+        function handleFileChk() {
+            console.log("handleFileChk")
+
+            $.ajax({
+                type: "get"
+                , url: "./fileChk"
+                , data: {
+                    boardno: ${board.boardNo}
+                }
+                , dataType: "json"
+                , success: function (res) {
+                    console.log("AJAX 성공")
+                    console.log(res)
+                    console.log(res[0].fileNo)
+                    if (res.length > 0) {
                         var fileList = "";
                         fileList += '<p>첨부파일</p><br>'
-	                        for(var i=0;  res.length >i ; i++){
-								fileList += '<a href="./fileDown?fileNo=' + res[i].fileNo + '">' + res[i].originName + '<br>';
-	                        }
-	                        
-	        			    $("#fileDown").html(fileList);
+                        for (var i = 0; res.length > i; i++) {
+                            fileList += '<a href="./fileDown?fileNo=' + res[i].fileNo + '">' + res[i].originName + '<br>';
                         }
 
+                        $("#fileDown").html(fileList);
                     }
-                    , error: function () {
-                        console.log("AJAX 실패")
-                    }
-                })
+
+                }
+                , error: function () {
+                    console.log("AJAX 실패")
+                }
+            })
 
         }
 
@@ -263,9 +263,6 @@
     <div class="container">
 
         <h1>상세보기</h1>
-
-
-
         <c:choose>
             <c:when test="${usrno != 0 }">
                 <a href="./userbyboardlist?userno=${dto1.userno}">
@@ -278,7 +275,7 @@
                 </a>
             </c:otherwise>
         </c:choose>
-        <c:if test="${board.userNo == dto.userno }">
+        <c:if test="${board.userNo == dto1.userno }">
             <a href="./update?boardNo=${board.boardNo }">
                 <button id="btnUpdate">수정</button>
             </a>
@@ -302,9 +299,9 @@
             </tr>
 
             <tr>
-            	<td>
-            		<div id="fileDown"></div>
-            	</td>
+                <td>
+                    <div id="fileDown"></div>
+                </td>
             </tr>
             <tr>
                 <td class="no">${board.boardNo }</td>
@@ -321,19 +318,22 @@
         <c:if test="${isLogin > 0}">
             <div id="reBtn">
                 <div class="recommendBtn doRedomm">
-                <c:if test="${empty isRecomm or isRecomm eq 0 }">
-                    <a>
-                        <button class="doRecomm do">추천하기</button>
-                    </a>
-                </c:if>
-                <c:if test="${not empty isRecomm and isRecomm eq 1 }">
-                    <a>
-                        <button class="doRecomm cancel">추천취소하기</button>
-                    </a>
-                </c:if>
+                    <c:if test="${empty isRecomm or isRecomm eq 0 }">
+                        <a>
+                            <button class="doRecomm do">추천하기</button>
+                        </a>
+                    </c:if>
+                    <c:if test="${not empty isRecomm and isRecomm eq 1 }">
+                        <a>
+                            <button class="doRecomm cancel">추천취소하기</button>
+                        </a>
+                    </c:if>
+                    <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
+                        신고하기
+                    </button>
                 </div>
             </div>
-            <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'"> 신고하기</button>
+
         </c:if>
         <hr>
         <div class="comment">
@@ -346,7 +346,9 @@
                     <c:if test="${isLogin > 0}">
                         <th>신고하기</th>
                     </c:if>
-                    <th>삭제</th>
+                    <c:if test="${board.userNo == dto1.userno }">
+                        <th>삭제</th>
+                    </c:if>
                 </tr>
                 <c:forEach var="comment" items="${comment }">
                     <tr>
@@ -357,9 +359,13 @@
                             <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
                         </td>
                         <c:if test="${isLogin > 0}">
-                            <td><a href='../report/commentReport?commno=${comment.commNo}'><button> 댓글신고하기</button></a></td>
+                            <td class="rpt">
+                                <a href='../report/commentReport?commno=${comment.commNo}'>
+                                    <img src="/resources/img/board/신고.jpg" height="30" width="30">
+                                </a>
+                            </td>
                         </c:if>
-                        <c:if test="${userNo == comment.userNo }">
+                        <c:if test="${dto1.userno == comment.userNo }">
                             <td>
                                 <button class="commentDelete" value="${comment.commNo}">삭제</button>
                             </td>
@@ -385,11 +391,9 @@
                         <td>
                             <input name="commentContent" id="commentContent">
                         </td>
-                        <td>
-                            <button id="insertBtn"> 댓글 작성</button>
-                        </td>
                     </tr>
                 </table>
+                <button id="insertBtn"> 댓글 작성</button>
             </div>
         </c:if>
         <!-- 	  - 로그인아이디, 댓글 입력 창, 입력 버튼 생성 -->

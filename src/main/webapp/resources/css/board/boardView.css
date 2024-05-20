@@ -67,7 +67,10 @@ table, th, td {
 th, td {
     text-align: center;
 }
-
+#commentInput button {
+    width: 10%;
+    float: right;
+}
 th {
     background: #f4f4f4;
 }
@@ -106,9 +109,9 @@ th {
     margin-bottom: 1em;
 }
 
-.comment th, .comment td {
-    padding: 0.5em;
-}
+/*.comment th, .comment td {*/
+/*    padding: 0.5em;*/
+/*}*/
 
 .comment .commentDelete {
     background: #f44336;
@@ -116,6 +119,8 @@ th {
     padding: 0.5em 1em;
     color: white;
     cursor: pointer;
+    width: 100%;
+    height: 100%;
 }
 
 .comment .commentDelete:hover {

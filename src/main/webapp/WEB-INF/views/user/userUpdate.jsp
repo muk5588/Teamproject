@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: c
@@ -85,6 +86,7 @@
             }).open();
         }
     </script>
+    <link href="/resources/css/user/userUpdate.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
@@ -106,13 +108,21 @@
                 <input type="radio" name="gender" value="남" checked/>남
                 <input type="radio" name="gender" value="여"/>여<br>
             </div>
+            <br>
             <div id=emailbox">
                 <label for="email">이메일</label>
                 <input type="email" name="email" id="email"value="${dto.email}"/><br>
             </div>
             <div id="postcodebox">
                 <label for="postcode">우편번호</label>
-                <input type="text" name="postcode" id="postcode" readonly value="${dto.postcode}">
+                <c:choose>
+                    <c:when test="${dto.postcode <= 9999}">
+                        <input type="text" name="postcode" id="postcode" value="0${dto.postcode}" readonly />
+                    </c:when>
+                    <c:otherwise>
+                        <input type="text" name="postcode" id="postcode" value="${dto.postcode}" readonly />
+                    </c:otherwise>
+                </c:choose>
                 <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
             </div>
             <div id="addressbox">

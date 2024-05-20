@@ -100,7 +100,7 @@
 			<include refid="selectBoard" />
 			<where>
 				<include refid="searchAND"/>
-	           	<if test="categoryNo != null and !categoryNo.equals('')">
+	           	<if test="categoryNo != null and !categoryNo.equals('') and categoryNo != 0">
 	   				AND categoryNo = #{categoryNo}
 				</if>
 	        </where>

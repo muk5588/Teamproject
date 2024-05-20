@@ -4,6 +4,8 @@ import board.dao.BoardDao;
 import board.dto.*;
 import comment.dao.CommentDao;
 import comment.dto.Comment;
+import user.dto.User;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -237,6 +239,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> userbyrecommList(Paging paging) {
 		return boardDao.userbyrecommList(paging);
+	}
+
+	@Override
+	public Paging getPagingByUserNo(int curPage, Paging paging, User login) {
+		
+		int totalCount = boardDao.selectCntByUserNo(paging,login);
+		logger.info("totalCount : {}",totalCount);
+		Paging pagingres = new Paging(totalCount, curPage);
+		
+		return pagingres;
 	}
 
 

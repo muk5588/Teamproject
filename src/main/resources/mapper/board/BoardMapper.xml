@@ -88,7 +88,7 @@
 			<include refid="selectBoard" />
 			<include refid="search"/>
 			<where>
-	           	<if test="categoryNo != null and categoryNo.equals('')">
+	           	<if test="categoryNo != null and !categoryNo.equals('')">
 	   				AND categoryNo = #{categoryNo}
 				</if>
 	        </where>
@@ -406,4 +406,27 @@
 			and rnum between #{startNo} and #{endNo}
 		</where>
 	</select>
+	
+	
+<select id="selectCntByUserNo" resultType="int" parameterType="map">
+    SELECT count(*) FROM (
+        <include refid="selectBoard" />
+        <where>
+            <if test="user != null">
+                AND userno = #{user.userno}
+            </if>
+            <if test="paging.search != null and paging.searchKind != null">
+                <choose>
+                    <when test="paging.searchKind.equals('title')">
+                        AND title Like '%${paging.search}%'
+                    </when>
+                    <when test="paging.searchKind.equals('content')">
+                        AND content Like '%${paging.search}%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    )
+</select>
+	
 </mapper>

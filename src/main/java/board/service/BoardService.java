@@ -2,6 +2,7 @@ package board.service;
 
 import board.dto.*;
 import comment.dto.Comment;
+import user.dto.User;
 import util.Paging;
 import vo.GoodVO;
 
@@ -97,9 +98,9 @@ public interface BoardService {
 	public List<Board> listByCategory(Paging paging);
 
 	/**
-	 * 보드 리스트로 
-	 * @param list
-	 * @return
+	 * 보드 리스트로 좋아요 수 조회
+	 * @param list - 게시글 List
+	 * @return - ( 게시글번호, 게시글 제목, 좋아요 수 )
 	 */
 	public List<Map<String, Object>> getuserRecommendRes(List<Board> list);
 
@@ -113,4 +114,13 @@ public interface BoardService {
 	public List<Board> list();
 
 	public List<Board> userbyrecommList(Paging paging);
+
+	/**
+	 * 유저객체를 이용한 게시글 목록 페이징 
+	 * @param curPage - 현재 페이지 번호
+	 * @param paging - 페이징 객체
+	 * @param login - 유저 객체
+	 * @return - 페이징 객체
+	 */
+	public Paging getPagingByUserNo(int curPage, Paging paging, User login);
 }

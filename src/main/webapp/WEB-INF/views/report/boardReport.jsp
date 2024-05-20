@@ -33,18 +33,20 @@
                     <textarea name="reportContent" id="reportContent" placeholder="신고내용을 입력해 주세요" rows="10" cols="50" style="resize: none"></textarea>
                 </div>
                 <div>
-                    <label>신고하는 글번호</label>
+                    <label>신고하는 글번호 : </label>
                     <input type="text" name="boardNo" id="boardNo" class="boardNo" value="${board.boardNo }" style="border: 1px white" readonly>
                 </div>
                 <div>
-                    <label>신고하는 글 제목</label>
+                    <label>신고하는 글 제목 : </label>
                     <td class="title">${board.title }</td>
                 </div>
                 <div>
-                    <label>작정자닉네임</label>
+                    <label>작정자닉네임 : </label>
                     <td class="nick">${board.nickName }</td>
                 </div>
-            <button type="button" id="report" name="report">신고</button>
+                
+            <button type="button" id="report" name="report">신고
+            </button>
         </form>
     </div>
 </div>

@@ -1,9 +1,10 @@
 package user.service;
 
+import java.util.List;
+
 import user.dto.User;
 import util.Paging;
-
-import java.util.List;
+import util.UserPaging;
 
 public interface UserService {
 
@@ -39,5 +40,20 @@ public interface UserService {
 	public void blackUser(Long no);
 
 	public void whiteUser(Long no);
+
+	/**
+	 * 유저 전체(관리자용) 리스트 페이지 페이징
+	 * @param paging - 페이징 객체
+	 * @param curPage - 현재 페이지
+	 * @return - 페이징 객체
+	 */
+	public UserPaging getUserListPaging(UserPaging paging, int curPage);
+
+	/**
+	 * 유저 전체 조회(페이징 적용)
+	 * @param paging - 페이징 객체
+	 * @return - 조회된 유저 행
+	 */
+	public List<User> userPagingList(UserPaging paging);
 
 }

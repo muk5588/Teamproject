@@ -54,28 +54,38 @@
 	</select>
 
 	<select id="loginHistory" resultType="AccessHistory" parameterType="util.Paging">
-	select * from(
-	select rownum rnum, E.* from(
-
-		SELECT C.*, D.nickname, D.gender
-        FROM (SELECT A.*, LAST_ACCESSDATE
-              FROM (SELECT userno, Max(accessCount) AS accessCount
-                    FROM (SELECT userno,
-                                 TRUNC(ACCESSDATE)                                                  AS access_date,
-                                 COUNT(ACCESSDATE)                                                  AS access_count,
-                                 ROW_NUMBER() OVER (PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
-                          FROM ACCESSHISTORY
-                          GROUP BY userno, TRUNC(ACCESSDATE))
-                    GROUP BY userno
-                    ORDER BY userno) A,
-                   (SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
-                    FROM ACCESSHISTORY
-                    GROUP BY USERNO) B
-              WHERE A.userno = b.userno
-              ORDER BY A.userno) C,
-             (SELECT *
-              FROM usertb) D
-        WHERE C.userno = D.userno) E )
+		SELECT * 
+		FROM (
+		    SELECT rownum rnum, E.*
+		    FROM (
+		        SELECT D.userno,
+		               COALESCE(C.accessCount, 0) AS accessCount,
+		               C.LAST_ACCESSDATE,
+		               D.nickname,
+		               D.gender
+		        FROM usertb D
+		        LEFT JOIN (
+		            SELECT A.userno, 
+		                   MAX(A.accessCount) AS accessCount, 
+		                   B.LAST_ACCESSDATE
+		            FROM (
+		                SELECT userno,
+		                       TRUNC(ACCESSDATE) AS access_date,
+		                       COUNT(ACCESSDATE) AS access_count,
+		                       ROW_NUMBER() OVER (PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
+		                FROM ACCESSHISTORY
+		                GROUP BY userno, TRUNC(ACCESSDATE)
+		            ) A
+		            LEFT JOIN (
+		                SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
+		                FROM ACCESSHISTORY
+		                GROUP BY USERNO
+		            ) B ON A.userno = B.userno
+		            GROUP BY A.userno, B.LAST_ACCESSDATE
+		        ) C ON D.userno = C.userno
+		        ORDER BY C.LAST_ACCESSDATE DESC NULLS LAST
+		    ) E
+		  )
 		<where>
 			and rnum between #{startNo} and #{endNo}
 		</where>

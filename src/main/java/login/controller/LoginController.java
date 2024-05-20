@@ -25,7 +25,7 @@ import util.Paging;
 
 @Controller
 public class LoginController {
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private LoginService loginService;
     @Autowired

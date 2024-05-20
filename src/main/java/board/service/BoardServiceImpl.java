@@ -177,7 +177,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Paging getAdminPaging(int curPage, Paging paging) {
 		int totalCount = boardDao.selectAdminCntAll(paging);
-
+		
 		Paging pagingres = new Paging(totalCount, curPage);
 
 		return pagingres;

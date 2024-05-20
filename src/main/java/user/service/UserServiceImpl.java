@@ -1,15 +1,19 @@
 package user.service;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
 import user.dao.UserDao;
 import user.dto.User;
-
-import javax.mail.internet.MimeMessage;
-import java.util.List;
-import java.util.Random;
+import util.Paging;
+import util.UserPaging;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -120,6 +124,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void whiteUser(Long no) {
 		userDao.whiteUser(no);
+	}
+
+	@Override
+	public UserPaging getUserListPaging(UserPaging paging, int curPage) {
+		int totalCount = userDao.getUserListPaging(paging);
+		UserPaging pagingres = new UserPaging(totalCount, curPage);
+		return pagingres;
+	}
+
+	@Override
+	public List<User> userPagingList(UserPaging paging) {
+		return userDao.userPagingList(paging);
 	}
 
 

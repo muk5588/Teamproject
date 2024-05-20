@@ -78,7 +78,27 @@
 		WHERE userno = #{userno}
 	</update>
 	
+	<select id="getUserListPaging" parameterType="util.UserPaging" resultType="int">
+		select count(*) from (
+			SELECT userno, nickname FROM usertb
+		)
+	</select>
 	
-
+	<select id="userPagingList" parameterType="util.UserPaging" resultType="User">
+		SELECT * from
+		(	select rownum rnum, u.* FROM
+			(        SELECT userno,userid,name,NICKNAME,GENDER,gradeno,black FROM usertb
+	        <where>
+	            and gradeno <![CDATA[ < 5000 ]]>
+	        </where>
+			order by userno
+			)u
+		)
+		<where>
+			and rnum between #{startNo} and #{endNo}
+		</where>
+	</select>
+	
+	
 </mapper>
 

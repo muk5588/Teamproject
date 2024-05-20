@@ -18,10 +18,14 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dto.Basket;
 import dto.Item;
@@ -281,17 +285,25 @@ public class OrderServiceImpl implements OrderService {
 	    try {
 	        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 	        logger.debug("response : {}", response.body());
-	        
+	        Gson gson = new Gson();
+	        JsonObject jsonResponse = gson.fromJson(response.body(), JsonObject.class);
+	        int code = jsonResponse.get("code").getAsInt();
+	        logger.debug("code: {}", code); // 추출한 code 값을 디버그 메시지에 출력
 	        // 응답 코드에 따라 처리
 	        if (response.statusCode() == 200) {
-	            // 처리 성공
-	            return 1;
+	        	
+	        	if( code == 0) {
+		            // 처리 성공
+		            return 1;
+	            }else {
+	            	return 0;
+	            }
 	        } else {
 	            // 처리 실패
 	            logger.error("Failed to cancel payment: {}", response.body());
 	            return 0;
 	        }
-	    } catch (IOException | InterruptedException e) {
+	    } catch (Exception e) {
 	        logger.error("Exception occurred while cancelling payment: {}", e.getMessage());
 	        return 0;
 	    }

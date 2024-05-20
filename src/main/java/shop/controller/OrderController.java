@@ -237,7 +237,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/admin/ordercancle")
-	public String ordercancle(UserOrder userOrder) {
+	public void ordercancle(UserOrder userOrder) {
 		logger.debug("주문 취소");
 		logger.debug("주문 취소 orderNo : {}",userOrder);
 		String token = orderService.getToken();
@@ -252,14 +252,8 @@ public class OrderController {
 		}
 		
 		
-		return "res:" +res;
 	}
 	
-	
-	@PostMapping("/admin/ordercancle")
-	public void ordercancleReturn() {
-		
-	}
 	
 	
 }

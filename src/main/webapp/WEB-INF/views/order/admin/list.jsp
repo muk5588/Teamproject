@@ -136,7 +136,7 @@ $(function() {
         var merchantUid = $(this).data("merchant-uid");
         var totalPrice = $(this).data("totalprice");
         var paraMount = $(this).data("para-mount");
-
+		
         $.ajax({
             type: "get",
             url: "./ordercancle",
@@ -151,10 +151,12 @@ $(function() {
             dataType: "json",
             success: function (res) {
                 console.log(res);
+                location.reload();
                 
             },
             error: function () {
                 console.log("AJAX 실패");
+                location.reload();
             }
         });
 

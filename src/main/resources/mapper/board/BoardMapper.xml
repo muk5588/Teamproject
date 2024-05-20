@@ -21,6 +21,18 @@
 				</choose>
 				</if>
 	</sql>
+	<sql id="searchAND">
+				<if test="search != null and searchKind != null">
+				<choose>
+				 <when test="searchKind.equals('title')">
+					AND title Like '%${search}%'
+				 </when>
+				 <when test="searchKind.equals('content')">
+					AND content Like '%${search}%'
+				 </when>
+				</choose>
+				</if>
+	</sql>
 
 	<select id="boardList" parameterType="int" resultType="Board">
 		SELECT C.* FROM(
@@ -86,8 +98,8 @@
 	<select id="selectCntAll" resultType="int" parameterType="util.Paging">
 		SELECT count(*) FROM (
 			<include refid="selectBoard" />
-			<include refid="search"/>
 			<where>
+				<include refid="searchAND"/>
 	           	<if test="categoryNo != null and !categoryNo.equals('')">
 	   				AND categoryNo = #{categoryNo}
 				</if>
@@ -264,9 +276,10 @@
 		select rownum rnum, A.* from (
 		<include refid="selectBoard" />
 		<where>
+			<include refid="searchAND" />
 			and userno = #{userno}
 		</where>
-		order by boardno desc) A )
+			order by boardno desc) A )
 		<where>
 			and rnum between #{startNo} and #{endNo}
 		</where>

@@ -140,16 +140,16 @@
     <div class="container">
 
         <h1>내 작성글</h1>
-        <a href="../main">
+        <a href="/">
             <button>메인 페이지로</button>
         </a>
         <div>
             <form action="" method="get" id="searchForm">
                 <select name="searchKind" id="searchKind">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
+                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
                 </select>
-                <input type="text" name="search" id="search">
+                <input type="text" name="search" id="search" value="${paging.search }">
                 <input hidden="hidden" name="curPage" value="${curPage}">
                 <button id="serchBtn">검색</button>
             </form>
@@ -176,27 +176,36 @@
                 <th>최초작성일</th>
                 <th>추천수</th>
             </tr>
-            <c:forEach var="board" items="${list }">
-                <tr>
-                    <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-                                                class="delCheckBox"></td>
-                    <td class="no">${board.boardNo }</td>
-                    <td class="title">
-                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&usrno=${board.userNo}">${board.title }</a>
-                    </td>
-                    <td class="nick">${board.nickName }</td>
-                    <td class="hit">${board.boardView }</td>
-                    <td class="date">
-                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-                    </td>
-                    <c:forEach items="${totalrecomm }" var="recommList">
-                        <c:if test="${recommList.BOARDNO eq board.boardNo }">
-                            <td><a id="totalRecommend">${recommList.GOOD }</a></td>
-                        </c:if>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-
+            <c:choose>
+            	<c:when test="${not empty list }">
+	            <c:forEach var="board" items="${list }">
+	                <tr>
+	                    <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
+	                                                class="delCheckBox"></td>
+	                    <td class="no">${board.boardNo }</td>
+	                    <td class="title">
+	                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&usrno=${board.userNo}">${board.title }</a>
+	                    </td>
+	                    <td class="nick">${board.nickName }</td>
+	                    <td class="hit">${board.boardView }</td>
+	                    <td class="date">
+	                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+	                    </td>
+	                    <c:forEach items="${totalrecomm }" var="recommList">
+	                        <c:if test="${recommList.BOARDNO eq board.boardNo }">
+	                            <td><a id="totalRecommend">${recommList.GOOD }</a></td>
+	                        </c:if>
+	                    </c:forEach>
+	                </tr>
+	            </c:forEach>
+	            </c:when>
+	            <c:when test="${empty list }">
+	            	<tr>
+	                    <td class="title" colspan="7">게시글이 존재하지 않습니다
+	                    </td>
+	                </tr>
+	            </c:when>
+			</c:choose>
         </table>
 
     </div>

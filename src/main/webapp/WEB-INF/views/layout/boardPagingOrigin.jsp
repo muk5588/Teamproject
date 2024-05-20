@@ -12,8 +12,8 @@
 		<h1>1번</h1>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
-			<!-- <a class="page-link" href="${URL}">&larr; 처음</a> -->
-			<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=1">&larr; 처음</a>
+			<!-- <a class="page-link" href="/board/list">&larr; 처음</a> -->
+			<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=1">&larr; 처음</a>
 		</li>
 		</c:if>
 		
@@ -21,8 +21,8 @@
 		<c:choose>
 		<c:when test="${paging.startPage ne 1 }">
 			<li class="page-item">
-				<%-- <a class="page-link" href="${URL}?curPage=${paging.startPage - paging.pageCount }">&laquo;</a> --%>
-				<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=${paging.startPage - paging.pageCount }">&laquo;</a>
+				<%-- <a class="page-link" href="/board/list?curPage=${paging.startPage - paging.pageCount }">&laquo;</a> --%>
+				<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=${paging.startPage - paging.pageCount }">&laquo;</a>
 			</li>
 		</c:when>
 		<c:when test="${paging.startPage eq 1 }">
@@ -35,7 +35,7 @@
 		<%-- 이전 페이지로 이동 --%>
 		<c:if test="${paging.curPage > 1 }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?curPage=${paging.curPage - 1 }">&lt;</a>
+			<a class="page-link" href="/board/list?curPage=${paging.curPage - 1 }">&lt;</a>
 		</li>
 		</c:if>
 		
@@ -43,14 +43,14 @@
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 		<c:if test="${paging.curPage eq i }">
 		<li class="page-item">
-			<%-- <a class="page-link active" href="${URL}?curPage=${i }">${i }</a> --%>
-			<a class="page-link active" href="${URL}?categoryNo=${param.categoryNo}&curPage=${i }">${i }</a>
+			<%-- <a class="page-link active" href="/board/list?curPage=${i }">${i }</a> --%>
+			<a class="page-link active" href="/board/list?categoryNo=${param.categoryNo}&curPage=${i }">${i }</a>
 		</li>
 		</c:if>
 		<c:if test="${paging.curPage ne i }">
 		<li class="page-item">
-			<%-- <a class="page-link" href="${URL}?curPage=${i }">${i }</a> --%>
-			<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=${i }">${i }</a>
+			<%-- <a class="page-link" href="/board/list?curPage=${i }">${i }</a> --%>
+			<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=${i }">${i }</a>
 		</li>
 		</c:if>
 		</c:forEach>
@@ -58,8 +58,8 @@
 		<%-- 다음 페이지로 이동 --%>
 		<c:if test="${paging.curPage < paging.totalPage }">
 		<li class="page-item">
-			<%-- <a class="page-link" href="${URL}?curPage=${paging.curPage + 1 }">&gt;</a> --%>
-			<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=${paging.curPage + 1 }">&gt;</a>
+			<%-- <a class="page-link" href="/board/list?curPage=${paging.curPage + 1 }">&gt;</a> --%>
+			<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=${paging.curPage + 1 }">&gt;</a>
 		</li>
 		</c:if>
 		
@@ -67,8 +67,8 @@
 		<c:choose>
 		<c:when test="${paging.startPage ne paging.totalPage }">
 			<li class="page-item">
-				<%-- <a class="page-link" href="${URL}?curPage=${paging.startPage + paging.pageCount }">&raquo;</a> --%>
-				<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+				<%-- <a class="page-link" href="/board/list?curPage=${paging.startPage + paging.pageCount }">&raquo;</a> --%>
+				<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
 			</li>
 		</c:when>
 		<c:when test="${paging.startPage eq paging.totalPage }">
@@ -81,7 +81,7 @@
 		<%-- 마지막 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?categoryNo=${param.categoryNo}&curPage=${paging.totalPage }">끝 &rarr;</a>
+			<a class="page-link" href="/board/list?categoryNo=${param.categoryNo}&curPage=${paging.totalPage }">끝 &rarr;</a>
 		</li>
 		</c:if>
 	</ul>
@@ -94,7 +94,7 @@
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?search=${paging.search }&searchKind=${paging.searchKind}">&larr; 처음</a>
+			<a class="page-link" href="/board/list?search=${paging.search }&searchKind=${paging.searchKind}">&larr; 처음</a>
 		</li>
 		</c:if>
 		
@@ -102,7 +102,7 @@
 		<c:choose>
 		<c:when test="${paging.startPage ne 1 }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.startPage - paging.pageCount }&search=${paging.search }&searchKind=${paging.searchKind}">&laquo;</a>
+				<a class="page-link" href="/board/list?curPage=${paging.startPage - paging.pageCount }&search=${paging.search }&searchKind=${paging.searchKind}">&laquo;</a>
 			</li>
 		</c:when>
 		<c:when test="${paging.startPage eq 1 }">
@@ -115,7 +115,7 @@
 		<%-- 이전 페이지로 이동 --%>
 		<c:if test="${paging.curPage > 1 }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?curPage=${paging.curPage - 1 }&search=${paging.search }&searchKind=${paging.searchKind}">&lt;</a>
+			<a class="page-link" href="/board/list?curPage=${paging.curPage - 1 }&search=${paging.search }&searchKind=${paging.searchKind}">&lt;</a>
 		</li>
 		</c:if>
 		
@@ -123,12 +123,12 @@
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 		<c:if test="${paging.curPage eq i }">
 		<li class="page-item">
-			<a class="page-link active" href="${URL}?curPage=${i }&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
+			<a class="page-link active" href="/board/list?curPage=${i }&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
 		</li>
 		</c:if>
 		<c:if test="${paging.curPage ne i }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?curPage=${i }&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
+			<a class="page-link" href="/board/list?curPage=${i }&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
 		</li>
 		</c:if>
 		</c:forEach>
@@ -136,7 +136,7 @@
 		<%-- 다음 페이지로 이동 --%>
 		<c:if test="${paging.curPage < paging.totalPage }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?curPage=${paging.curPage + 1 }&search=${paging.search }&searchKind=${paging.searchKind}">&gt;</a>
+			<a class="page-link" href="/board/list?curPage=${paging.curPage + 1 }&search=${paging.search }&searchKind=${paging.searchKind}">&gt;</a>
 		</li>
 		</c:if>
 		
@@ -144,7 +144,7 @@
 		<c:choose>
 		<c:when test="${paging.startPage ne paging.totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.startPage + paging.pageCount }&search=${paging.search }&searchKind=${paging.searchKind}">&raquo;</a>
+				<a class="page-link" href="/board/list?curPage=${paging.startPage + paging.pageCount }&search=${paging.search }&searchKind=${paging.searchKind}">&raquo;</a>
 			</li>
 		</c:when>
 		<c:when test="${paging.startPage eq paging.totalPage }">
@@ -157,7 +157,7 @@
 		<%-- 마지막 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}?curPage=${paging.totalPage }&search=${paging.search }&searchKind=${paging.searchKind}">끝 &rarr;</a>
+			<a class="page-link" href="/board/list?curPage=${paging.totalPage }&search=${paging.search }&searchKind=${paging.searchKind}">끝 &rarr;</a>
 		</li>
 		</c:if>
 		</ul>
@@ -170,7 +170,7 @@
 		<%--&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne 1 }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?userno=${dto1.userno}">&larr; 처음</a>
+				<a class="page-link" href="/board/userbyboardlist?userno=${dto1.userno}">&larr; 처음</a>
 			</li>
 		</c:if>
 
@@ -178,7 +178,7 @@
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${paging.startPage - paging.pageCount }&userno=${dto1.userno}">&laquo;</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${paging.startPage - paging.pageCount }&userno=${dto1.userno}">&laquo;</a>
 				</li>
 			</c:when>
 			<c:when test="${paging.startPage eq 1 }">
@@ -191,7 +191,7 @@
 		<%--&lt;%&ndash; 이전 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage > 1 }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.curPage - 1 }&userno=${dto1.userno}">&lt;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage - 1 }&userno=${dto1.userno}">&lt;</a>
 			</li>
 		</c:if>
 
@@ -199,12 +199,12 @@
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 			<c:if test="${paging.curPage eq i }">
 				<li class="page-item">
-					<a class="page-link active" href="${URL}?curPage=${i }&userno=${dto1.userno}">${i }</a>
+					<a class="page-link active" href="/board/userbyboardlist?curPage=${i }&userno=${dto1.userno}">${i }</a>
 				</li>
 			</c:if>
 			<c:if test="${paging.curPage ne i }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${i }&userno=${dto1.userno}">${i }</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${i }&userno=${dto1.userno}">${i }</a>
 				</li>
 			</c:if>
 		</c:forEach>
@@ -212,7 +212,7 @@
 		<%--&lt;%&ndash; 다음 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage < paging.totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.curPage + 1 }&userno=${dto1.userno}">&gt;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage + 1 }&userno=${dto1.userno}">&gt;</a>
 			</li>
 		</c:if>
 
@@ -220,7 +220,7 @@
 		<c:choose>
 			<c:when test="${paging.startPage ne paging.totalPage }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${paging.startPage + paging.pageCount }&userno=${dto1.userno}">&raquo;</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${paging.startPage + paging.pageCount }&userno=${dto1.userno}">&raquo;</a>
 				</li>
 			</c:when>
 			<c:when test="${paging.startPage eq paging.totalPage }">
@@ -233,7 +233,7 @@
 		<%--&lt;%&ndash; 마지막 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.totalPage }&userno=${dto1.userno}">끝 &rarr;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.totalPage }&userno=${dto1.userno}">끝 &rarr;</a>
 			</li>
 		</c:if>
 		</ul>
@@ -246,7 +246,7 @@
 		<%--&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne 1 }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&larr; 처음</a>
+				<a class="page-link" href="/board/userbyboardlist?userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&larr; 처음</a>
 			</li>
 		</c:if>
 
@@ -254,7 +254,7 @@
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${paging.startPage - paging.pageCount }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&laquo;</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${paging.startPage - paging.pageCount }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&laquo;</a>
 				</li>
 			</c:when>
 			<c:when test="${paging.startPage eq 1 }">
@@ -267,7 +267,7 @@
 		<%--&lt;%&ndash; 이전 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage > 1 }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.curPage - 1 }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&lt;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage - 1 }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&lt;</a>
 			</li>
 		</c:if>
 
@@ -275,12 +275,12 @@
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 			<c:if test="${paging.curPage eq i }">
 				<li class="page-item">
-					<a class="page-link active" href="${URL}?curPage=${i }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
+					<a class="page-link active" href="/board/userbyboardlist?curPage=${i }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
 				</li>
 			</c:if>
 			<c:if test="${paging.curPage ne i }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${i }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${i }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">${i }</a>
 				</li>
 			</c:if>
 		</c:forEach>
@@ -288,7 +288,7 @@
 		<%--&lt;%&ndash; 다음 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage < paging.totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.curPage + 1 }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&gt;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.curPage + 1 }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&gt;</a>
 			</li>
 		</c:if>
 
@@ -296,7 +296,7 @@
 		<c:choose>
 			<c:when test="${paging.startPage ne paging.totalPage }">
 				<li class="page-item">
-					<a class="page-link" href="${URL}?curPage=${paging.startPage + paging.pageCount }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&raquo;</a>
+					<a class="page-link" href="/board/userbyboardlist?curPage=${paging.startPage + paging.pageCount }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">&raquo;</a>
 				</li>
 			</c:when>
 			<c:when test="${paging.startPage eq paging.totalPage }">
@@ -309,7 +309,7 @@
 		<%--&lt;%&ndash; 마지막 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="${URL}?curPage=${paging.totalPage }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">끝 &rarr;</a>
+				<a class="page-link" href="/board/userbyboardlist?curPage=${paging.totalPage }&userno=${dto1.userno}&search=${paging.search }&searchKind=${paging.searchKind}">끝 &rarr;</a>
 			</li>
 		</c:if>
 		</ul>

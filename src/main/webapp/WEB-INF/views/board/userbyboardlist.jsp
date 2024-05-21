@@ -6,10 +6,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/board/boardList.css">
-
+<link rel="stylesheet" type="text/css" href="/resources/css/board/userbyboardList.css">
+<title>내 작성글</title>
 <style type="text/css">
-
 
 </style>
 <script type="text/javascript">
@@ -80,17 +79,25 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
-
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp" />
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 
 
-    <div class="container">
-
+    <div class="container" >
         <h1>내 작성글</h1>
         <a href="/">
             <button>메인 페이지로</button>
         </a>
+        <div style="position: absolute">
+        <c:if test="${isLogin != 0}">
+            <div>
+                <form action="./write" method="get">
+                    <button id="btnWrite" me>글쓰기</button>
+                </form>
+            </div>
+        </c:if>
+        </div>
         <div>
             <form action="" method="get" id="searchForm">
                 <select name="searchKind" id="searchKind">
@@ -102,7 +109,8 @@
                 <button id="serchBtn">검색</button>
             </form>
         </div>
-        <hr>
+
+        <hr style="clear: both; margin-bottom: 10px;">
 
         <table>
 
@@ -156,17 +164,13 @@
 			</c:choose>
         </table>
 
+
+    <button id="deleteBtn">체크 삭제</button>
+
     </div>
     <!-- .container End -->
-    <c:if test="${isLogin != 0}">
-    <div>
-        <form action="./write" method="get">
-            <button id="btnWrite" me>글쓰기</button>
-        </form>
-    </div>
-    </c:if>
 </div>
-    <button id="deleteBtn">체크 삭제</button>
+
     <c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
 
 

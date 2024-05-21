@@ -33,6 +33,8 @@ public class ShopController {
 			, @RequestParam(value="curPage", required = false, defaultValue = "0") int curPage
 			, @RequestParam(required = false)String search
 	) {
+		String URL ="/shop";
+		model.addAttribute("URL", URL);
 		//페이징
 		shopPaging.setCurPage(curPage);
 		if( null == search || "".equals(search)) {

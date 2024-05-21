@@ -6,6 +6,7 @@ import user.dto.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import util.Paging;
+import util.UserPaging;
 import vo.GoodVO;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public interface BoardDao {
 
 	public List<Board> boardList(@Param("userNo")int userNo);
 
-	public int selectLogCntAll(Paging paging);
+	public int selectLogCntAll(UserPaging paging);
 
     public int selectAdminCntAll(Paging paging);
 

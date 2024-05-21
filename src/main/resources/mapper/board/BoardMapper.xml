@@ -256,10 +256,14 @@
 	</delete>
 
 	<select id="categoryList" resultType="Category">
-		select CATEGORYNAME, CATEGORYNO from CATEGORY order by CATEGORYNO
+		select CATEGORYNAME, CATEGORYNO from CATEGORY
+		<where>
+			AND CATEGORYNO <![CDATA[ <>  61 ]]>
+		</where>
+		order by CATEGORYNO
 	</select>
 
-	<select id="selectLogCntAll" resultType="int" parameterType="util.Paging">
+	<select id="selectLogCntAll" resultType="int" parameterType="util.UserPaging">
 		SELECT count(*) FROM (
 		    select ACCESSNO, USERNO, ACCESSDATE from ACCESSHISTORY
 		)

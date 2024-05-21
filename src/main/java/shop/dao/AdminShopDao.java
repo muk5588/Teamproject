@@ -7,12 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import dto.Item;
 import dto.ItemFile;
 import util.Paging;
+import util.ShopPaging;
 
 public interface AdminShopDao {
 
-	public int selectCnt(Paging paging);
+	public int selectCnt(ShopPaging paging);
 
-	public List<Item> selectItems(Paging paging);
+	public List<Item> selectItems(ShopPaging paging);
 
 	public List<ItemFile> selectTitleImgFile(@Param("items")List<Item> items);
 

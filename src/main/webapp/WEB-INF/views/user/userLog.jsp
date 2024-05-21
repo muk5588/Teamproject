@@ -158,7 +158,8 @@
                     </tr>
                 </c:forEach>
             </table>
-            <c:import url="/WEB-INF/views/layout/userLogPaging.jsp"/>
+<%--             <c:import url="/WEB-INF/views/layout/userLogPaging.jsp"/> --%>
+	           <c:import url="/WEB-INF/views/layout/adminPaging.jsp" />
         </div>
     </div>
 </div>

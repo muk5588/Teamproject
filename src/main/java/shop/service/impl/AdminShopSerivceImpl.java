@@ -22,12 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import board.dto.BoardFile;
 import dto.Item;
 import dto.ItemFile;
 import shop.dao.AdminShopDao;
 import shop.service.face.AdminShopService;
 import util.Paging;
+import util.ShopPaging;
 
 @Service
 public class AdminShopSerivceImpl implements AdminShopService{
@@ -38,17 +38,17 @@ public class AdminShopSerivceImpl implements AdminShopService{
 	@Autowired private ServletContext servletContext;
 	
 	@Override
-	public Paging getPaging(int curPage, Paging paging) {
+	public ShopPaging getPaging(int curPage, ShopPaging paging) {
 		
 		int totalCount = adminShopDao.selectCnt(paging);
 		logger.info("totalCount : {}",totalCount);
-		Paging pagingres = new Paging(totalCount, curPage);
+		ShopPaging pagingres = new ShopPaging(totalCount, curPage);
 		
 		return pagingres;
 	}//getPaging(int curPage, Paging paging)
 
 	@Override
-	public List<Item> selectItems(Paging paging) {
+	public List<Item> selectItems(ShopPaging paging) {
 		return adminShopDao.selectItems(paging);
 	}//selectItems(Paging paging)
 

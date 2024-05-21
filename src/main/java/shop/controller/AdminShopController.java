@@ -22,6 +22,7 @@ import dto.ItemFile;
 import shop.service.face.AdminShopService;
 import user.dto.User;
 import util.Paging;
+import util.ShopPaging;
 
 @Controller
 @RequestMapping("/shop/admin")
@@ -37,7 +38,8 @@ public class AdminShopController {
 		    ,@RequestParam(value="search",required = false) String search
 			,Model model
 			) {
-	    Paging paging = new Paging();
+		String URL = "/shop/admin/list";
+	    ShopPaging paging = new ShopPaging();
 	    paging.setCurPage(curPage);
 	    if( null != search && !"".equals(search)) {
 	    	paging.setSearch(search);
@@ -54,6 +56,7 @@ public class AdminShopController {
 		logger.debug("items : {}", items);
 		logger.debug("itemFiles : {}", itemFiles);
 	    model.addAttribute("curPage", curPage);
+	    model.addAttribute("URL", URL);
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("items", items);
 	    model.addAttribute("itemFiles", itemFiles);

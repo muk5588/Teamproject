@@ -164,6 +164,8 @@ public class OrderController {
 	public String history(Model model, ShopPaging shopPaging,
 			@RequestParam(defaultValue ="0") int curPage,
 			@RequestParam(value="search",required = false) String search) {
+		String URL = "/order/history";
+		model.addAttribute("URL", URL);
 		logger.debug("구매기록");
 		logger.debug("curPage : {}", curPage);
 		User user = (User) session.getAttribute("dto1");
@@ -207,6 +209,8 @@ public class OrderController {
 			@RequestParam(defaultValue ="0") int curPage,
 			@RequestParam(value="search",required = false) String search) {
 		logger.debug("관리자 주문 목록");
+		String URL = "/order/admin/list";
+		model.addAttribute("URL", URL);
 		shopPaging.setCurPage(curPage);
 		if( search != null) {
 			shopPaging.setSearch(search);

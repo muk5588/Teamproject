@@ -11,68 +11,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/paging.css">
+
+<link rel="stylesheet" type="text/css" href="/resources/css/board/userbyboardList.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <style type="text/css">
 
-    .wrap {
-        width: 1100px;
-    }
-
-    table, th {
-        text-align: center;
-    }
-
-    /* <!-- body { --> */
-    /* <!-- 	width: 1500px; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- h1 { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- table { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- 	margin: 0 auto; --> */
-    /* <!-- } --> */
-
-    /* <!-- tr, th, td { --> */
-    /* <!-- 	border: 1px solid black; --> */
-    /* <!-- } --> */
-
-    /* <!-- th { --> */
-    /* <!-- 	background-color: #ccc; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.no, .title, .id, .nick, .hit, .date { --> */
-    /* <!-- 	text-align: center; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.title { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.content { --> */
-    /* <!-- 	width: 500px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.id, .nick { --> */
-    /* <!-- 	width: 150px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.hit { --> */
-    /* <!-- 	width: 50px; --> */
-    /* <!-- } --> */
-
-    /* <!-- td.date { --> */
-    /* <!-- 	width: 200px; --> */
-    /* <!-- } --> */
 </style>
 <script type="text/javascript">
     $(function () {
@@ -141,6 +84,8 @@
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<c:import url="/WEB-INF/views/layout/boardmenu.jsp"/>
 
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
@@ -150,7 +95,7 @@
 
         <h1>내 추천글</h1>
         <a href="../main">
-            <button>메인 페이지로</button>
+            <button style="position: absolute;">메인 페이지로</button>
         </a>
         <div>
             <form action="" method="get" id="searchForm">
@@ -165,15 +110,16 @@
         </div>
         <hr>
 
-        <table class="table table-striped table-hover table-sm">
+        <table>
 
-            <%-- <colgroup> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 45%;"> --%>
-            <%-- 	<col style="width: 15%;"> --%>
-            <%-- 	<col style="width: 10%;"> --%>
-            <%-- 	<col style="width: 20%;"> --%>
-            <%-- </colgroup> --%>
+             <colgroup>
+             	<col style="width: 5%;">
+             	<col style="width: 7%;">
+             	<col style="width: 50%;">
+             	<col style="width: 15%;">
+             	<col style="width: 8%;">
+             	<col style="width: 15%;">
+             </colgroup>
             <tr>
                 <th><input type="checkbox" id="checkboxAllCheck"></th>
                 <th>글 번호</th>
@@ -198,19 +144,16 @@
                     </td>
                 </tr>
             </c:forEach>
-            <tr>
-                <td>
-                    <button id="deleteBtn">체크 삭제</button>
-                </td>
-            </tr>
+
         </table>
 
+        <button id="deleteBtn">체크 삭제</button>
     </div>
     <!-- .container End -->
-
+</div>
     <c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
-
-
+<br>
+<hr>
     <c:import url="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

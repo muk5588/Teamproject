@@ -7,55 +7,52 @@
     <title>Insert title here</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/message/send.css">
-    <script type="text/javascript">
-        $(function () {
-
-            $("#send").click(function () {
-// 		console.log("버튼 클릭 인식.")
-// 		console.log($("#content").val())
-// 		console.log($("#touser").val())
-
-                $.ajax({
-                    type: "get"
-                    , url: "./send"
-                    , data: {
-                    	inquiryDetail : $("#inquiryDetail").val()
-                        , touser: $("#touser").val()
-                    }
-                    , dataType: "json"
-                    , success: function (res) {
-                        console.log("AJAX 성공")
-                        console.log(res)
-
-                        if (res > 0) {
-                            $(function () {
-                                $(location).attr('href', '/')
-                            })
-                        }
-                        window.close();
-                    }
-                    , error: function () {
-                        console.log("AJAX 실패")
-                    }
-                })
-            })//$("#send").click
-            // 홈으로 버튼 클릭 시
-            $("#homeBtn").click(function() {
-                if (window.opener && !window.opener.closed) {
-                    window.opener.location.href = '/';
-                    window.close();
+<script type="text/javascript">
+$(function () {
+    $("#send").click(function () {
+        $.ajax({
+            type: "get",
+            url: "./send",
+            data: {
+                inquiryDetail : $("#inquiryDetail").val(),
+                touser: $("#touser").val()
+            },
+            dataType: "json",
+            success: function (res) {
+                console.log("AJAX 성공");
+                console.log(res);
+                if (res > 0) {
+                    window.opener.location.reload(); 
+                    window.close(); 
                 }
-            });
+            },
+            error: function () {
+                console.log("AJAX 실패");
+            }
+        });
+    });
 
-            // 메시지 함으로 버튼 클릭 시
-            $("#inquiryBtn").click(function() {
-                if (window.opener && !window.opener.closed) {
-                    window.opener.location.href = './list';
-                    window.close();
-                }
-            });
-        })
-    </script>
+    $("#homeBtn").click(function() {
+        if (window.opener && !window.opener.closed) {
+            window.opener.location.href = '/';
+            window.close();
+        }
+    });
+
+    $("#inquiryBtn").click(function() {
+        if (window.opener && !window.opener.closed) {
+            window.opener.location.href = './list';
+            window.close();
+        }
+    });
+});
+
+window.onunload = function() {
+    if (window.opener && !window.opener.closed) {
+        window.opener.location.reload();
+    }
+};
+</script>
 </head>
 <body>
 <div class="container">
@@ -66,10 +63,6 @@
     </div>
     <hr>
     <div id="inquiryContent">
-        <div class="form-group">
-            <label for="touser">받는사람</label>
-            <input type="text" id="touser" name="touser" value="admin" readonly>
-        </div>
         <div class="form-group">
             <label for="inquiryDetail">내용</label>
             <textarea id="inquiryDetail" name="inquiryDetail" placeholder="문의할 내용을 적어주세요"></textarea>

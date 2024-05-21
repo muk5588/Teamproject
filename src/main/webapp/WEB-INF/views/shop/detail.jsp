@@ -88,7 +88,7 @@ $(function(){
 	 $("#reportBtn").click(function(){
 		var itemNo = ${item.itemNo}
 		$(function(){
-			window.location.href = '../report/itemreport?itemNo='+itemNo;
+			window.location.href = '../report/itemReport?itemNo='+itemNo;
 		})
 	 })
 	 

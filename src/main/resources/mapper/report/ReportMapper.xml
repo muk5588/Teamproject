@@ -38,22 +38,38 @@
 		delete COMMREPORT where COMMREPORTNO = #{commReportNo}
 	</delete>
 	<select id="getItemReportType" resultType="dto.ItemReportType">
-		SELECT itemreportNo, itemReport FROM ItemReportType
+		SELECT ITEMREPORTNO, ITEMREPORT FROM ItemReportType
 	</select>
 	<select id="getItemByItemNo" parameterType="int" resultType="dto.Item">
-		  SELECT i.itemno as itemNo, i.itemName , i.price, i.itemComm,
-        i.remain,
-        i.titleImg,
-        it.fileno,
-        it.stored_Name,
-        it.origin_Name
-    FROM 
-        item i 
-    LEFT JOIN 
-        itemfile it 
-    ON 
-        i.itemno = it.itemno
-    WHERE 
-        i.itemno = #{itemNo}
+	  SELECT i.itemno as itemNo, i.itemName , i.price, i.itemComm,
+	    i.remain,
+	    i.titleImg,
+	    it.fileno,
+	    it.stored_Name,
+	    it.origin_Name
+	FROM 
+	    item i 
+	LEFT JOIN 
+	    itemfile it 
+	ON 
+	    i.itemno = it.itemno
+	WHERE 
+	    i.itemno = #{itemNo}
+	</select>
+	<insert id="insertItemReport" parameterType="dto.ItemReport">
+		<selectKey order="BEFORE" resultType="int" keyProperty="reportNo">
+			SELECT itemreport_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO ITEMREPORT(reportno, itemno, userno, itemReportNo, reportContent)
+		VALUES(#{reportNo}, #{itemNo}, #{userNo}, #{itemReportNo}, #{reportContent})
+	</insert>
+	<select id="itemlist" resultType="dto.ItemReport">
+		SELECT ir.reportno, ir.itemno, ir.userno, ir.reportDate
+		, irt.itemReportNo, ir.reportContent,
+		irt.ITEMREPORT , itemname, nickname
+		FROM item i, ITEMREPORT ir, ITEMREPORTTYPE irt, usertb u
+		WHERE i.ITEMNO = ir.ITEMNO 
+		AND irt.ITEMREPORTNO = ir.ITEMREPORTNO 
+		AND ir.USERNO  = u.USERNO 
 	</select>
 </mapper>

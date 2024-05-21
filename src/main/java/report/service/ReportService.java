@@ -7,6 +7,7 @@ import report.dto.CommReport;
 import java.util.List;
 
 import dto.Item;
+import dto.ItemReport;
 import dto.ItemReportType;
 
 public interface ReportService {
@@ -30,7 +31,7 @@ public interface ReportService {
      * 상품 신고 분류 전체 조회
      * @return - 조회된 전체 행
      */
-	public ItemReportType getItemReportType();
+	public List<ItemReportType> getItemReportType();
 
 	/**
 	 * 상품 번호로 상품 조회
@@ -38,4 +39,13 @@ public interface ReportService {
 	 * @return - 조회된 상품 행
 	 */
 	public Item getItemByItemNo(int itemNo);
+
+	/**
+	 * 상품 신고 .
+	 * @param itemReport - 상품 신고 객체
+	 * @return - INSERT 결과
+	 */
+	public int insertItemReport(ItemReport itemReport);
+
+	public List<ItemReport> itemlist();
 }

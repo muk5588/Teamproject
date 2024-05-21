@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dto.Item;
+import dto.ItemReport;
 import dto.ItemReportType;
 import report.dao.ReportDao;
 import report.dto.BoardReport;
@@ -56,12 +57,22 @@ ReportDao reportDao;
     }
 
 	@Override
-	public ItemReportType getItemReportType() {
+	public List<ItemReportType> getItemReportType() {
 		return reportDao.getItemReportType();
 	}
 
 	@Override
 	public Item getItemByItemNo(int itemNo) {
 		return reportDao.getItemByItemNo(itemNo);
+	}
+
+	@Override
+	public int insertItemReport(ItemReport itemReport) {
+		return reportDao.insertItemReport(itemReport);
+	}
+
+	@Override
+	public List<ItemReport> itemlist() {
+		return reportDao.itemlist();
 	}
 }

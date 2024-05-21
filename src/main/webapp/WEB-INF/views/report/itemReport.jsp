@@ -10,8 +10,6 @@
 
 <html>
 <head>
-    <title>Title</title>
-    <script src="/resources/js/report/boardReport.js" charset="UTF-8"></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/report/report.css">
 
 </head>
@@ -19,17 +17,17 @@
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <div class="warpper">
     <div class="warp">
-        <h3>게시물 신고</h3>
-        <form id="reportform" method="post" action="./boardReport">
+        <h3>상품 신고</h3>
+        <form id="reportform" method="post" action="./itemReport">
             <div>
-                <label>신고하는 글 제목 : </label>
-                <td class="title">${board.title }</td>
+                <label>신고하는 상품 : </label>
+                <td class="title">${item.itemName }</td>
             </div>
             <div>
                 <label>신고 종류</label>
-                <select name="reportTypeNo" id="reportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
-                    <c:forEach var="reportType" items="${list }">
-                        <option value="${reportType.reportTypeNo}">${reportType.reportType}</option>
+                <select name="itemReportNo" id="reportTypeNo" placeholder="종류를 선택해 주세요" class="form-option">
+                    <c:forEach var="reportType" items="${reportType }">
+                        <option value="${reportType.itemReportNo}">${reportType.itemReport}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -40,16 +38,12 @@
             </div>
             <div hidden="hidden">
                 <label>신고하는 상품 번호 : </label>
-                <input type="text" name="boardNo" id="boardNo" class="boardNo" value="${board.boardNo }"
+                <input type="text" name="itemNo" id="itemNo" class="boardNo" value="${item.itemNo}"
                        style="border: 1px white" readonly>
-                <label>작정자닉네임 : </label>
-                <td class="nick">${board.nickName }</td>
             </div>
 
-            <button type="button" id="report" name="report">신고</button>
+            <button  id="report" name="report">신고</button>
         </form>
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
-</body>
-</html>

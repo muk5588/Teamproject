@@ -180,6 +180,51 @@
     </table>
     </div>
     </div>
+<div class="report-section">
+    <h3 class="itemReport">상품 신고</h3>
+    <div class="table-container">
+    <table class="fold-table">
+        <thead>
+            <tr>
+                <th class="bold-text">신고번호</th>
+                <th class="bold-text">신고일자</th>
+                <th class="bold-text">신고종류</th>
+                <th class="bold-text">신고내용</th>
+                <th class="bold-text">작성된상품</th>
+                <th class="bold-text">닉네임</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${itemlist}" var="item">
+                <tr class="view">
+                    <td>
+                        <label for="item-${item.reportNo}">
+                            ${item.reportNo}
+                        </label>
+                    </td>
+                    <td><fmt:formatDate value="${item.reportDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                    <td>${item.reportType}</td>
+                    <td>${item.reportContent}</td>
+                    <td>${item.itemName}</td>
+                    <td>${item.nickName}</td>
+                    <td><a class='btn-fill' href="/report/deleteItemReport?reportno=${item.itemReportNo}"><button>삭제</button></a></td>
+                </tr>
+                <tr class="fold">
+                    <td colspan="7">
+                        <input type="checkbox" id="item-${item.itemReportNo}">
+                        <div class="fold-content">
+                            ${item.reportContent}
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+    </div>
+    </div>    
+    
+    
 </div>
 </div>
 <div class="btn-fill">

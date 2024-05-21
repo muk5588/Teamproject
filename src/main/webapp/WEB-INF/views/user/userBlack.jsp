@@ -17,8 +17,18 @@
 
 <div class="warpper">
     <div class="warp">
-        <div id="content">
+        <div class="container">
             <h3>회원 목록</h3>
+            
+           <form class="d-flex mb-3" action="${URL }" method="get">
+               <select class="form-select me-2" name="searchKind" aria-label="Search Type">
+                   <option value="nickName" <c:if test="${not empty paging.searchKind and paging.searchKind eq 'nickName'}">selected="selected"</c:if>>닉네임</option>
+                   <option value="userno" <c:if test="${not empty paging.searchKind and paging.searchKind eq 'userno'}">selected="selected"</c:if>>회원 번호</option>
+               </select>
+               <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="${paging.search }">
+               <button class="btn btn-outline-success" type="submit">Search</button>
+           </form>
+            
             <table class="table table-striped table-hover table-sm">
                 <tr>
                 	<th>
@@ -54,7 +64,7 @@
 	</div>
 </div>
 <br>
-	<div class="d-flex justify-content-end">
+	<div class="d-flex justify-content-end container">
       <!-- <a id="btnBlack" class="btn btn-danger">블랙</a> -->
       <a href='javascript:userBlack();' class="btn btn-danger">블랙</a>
       <a href='javascript:userWhite();' class="btn btn-warning">해제</a>

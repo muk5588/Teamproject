@@ -5,13 +5,18 @@ import grade.dto.Grade;
 import grade.service.GradeService;
 import menu.dto.Menu;
 import menu.service.MenuService;
+
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import user.dto.User;
+import util.UserPaging;
 
 import java.util.List;
 
@@ -27,11 +32,18 @@ public class MenuController {
 //    private
 
     @RequestMapping("/menuList")
-    public String menuList(Model model) {
-        List<Menu> list = menuService.menuList();
+    public String menuList(Model model,@RequestParam(defaultValue ="0") int curPage) {
+    	String URL = "/menu/menuList";
+    	UserPaging paging = new UserPaging();
+    	paging = menuService.getPagingMenuList(paging,curPage);
+    	logger.debug("paging : {}",paging);
+    	model.addAttribute("paging", paging);
+        List<Menu> list = menuService.menuListByPaging(paging);
+        logger.debug("list(menu) : {}",list);
         List<Category> list2 = menuService.categoryList();
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
+        model.addAttribute("URL", URL);
         return "menu/menuList";
     }
 

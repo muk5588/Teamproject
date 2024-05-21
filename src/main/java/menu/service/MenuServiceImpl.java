@@ -6,6 +6,7 @@ import menu.dao.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import user.dto.User;
+import util.UserPaging;
 
 import java.util.List;
 
@@ -43,6 +44,18 @@ public class MenuServiceImpl implements MenuService {
     public void categoryUpdate(Category category) {
         menuDao.categoryUpdate(category);
     }
+
+	@Override
+	public UserPaging getPagingMenuList(UserPaging paging, int curPage) {
+		int totalCount = menuDao.getPaging(paging);
+		UserPaging pagingres = new UserPaging(totalCount, curPage);
+		return pagingres;
+	}
+
+	@Override
+	public List<Menu> menuListByPaging(UserPaging paging) {
+		return menuDao.menuListByPaging(paging);
+	}
 
 
 }

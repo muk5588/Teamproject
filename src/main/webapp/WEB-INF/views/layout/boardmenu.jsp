@@ -45,7 +45,7 @@
             <li><a href="/board/list?categoryNo=52&curPage=${curPage}">이벤트</a></li>
         </ul>
     </li>
-    <li><a href="/board/list?categoryNo=61&curPage=${curPage}">여행관련 상품</a></li>
+    <li><a href="/shop/">여행관련 상품</a></li>
 </ul>
 
 <div style="clear: both; overflow: hidden;"></div>

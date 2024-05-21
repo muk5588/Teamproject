@@ -83,13 +83,30 @@ public class UserController {
 
     @RequestMapping("/userBlack")
     //유저블랙리스트 페이지
-    public String userBlack( Model model, String searchVal,@RequestParam(defaultValue ="0") int curPage) {
+    public String userBlack( Model model,@RequestParam(defaultValue ="0") int curPage
+    		,@RequestParam(required = false,name = "searchKind") String searchKind
+    		,@RequestParam(required = false, name = "search") String search) {
     	String URL = "/user/userBlack";
     	UserPaging paging = new UserPaging();
+    	logger.debug("@!#!@");
+    	if( search != null && searchKind != null ) {
+    		logger.debug("@!#!@@@@@@");
+    		paging.setSearch(search);
+    		paging.setSearchKind(searchKind);
+    		logger.debug("paging1 : {}", paging);
+    	}
+    	logger.debug("@!#!@@@@@@####");
     	paging = service.getUserListPaging(paging,curPage);
+    	logger.debug("paging2 : {}", paging);
+    	if( search != null && searchKind != null ) {
+    		paging.setSearch(search);
+    		paging.setSearchKind(searchKind);
+    		logger.debug("paging3 : {}", paging);
+    	}
     	List<User> list = service.userPagingList(paging);
+    	logger.debug("paging4 : {}", paging);
+    	logger.debug("list : {}", list);
         model.addAttribute("list", list);
-        model.addAttribute("searchVal", searchVal);
         model.addAttribute("paging", paging);
         model.addAttribute("URL", URL);
         return URL;

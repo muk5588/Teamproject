@@ -12,7 +12,7 @@ public class UserPaging {
 	private int startNo; // 화면의 보이는 게시글의 시작 번호
 	private int endNo; // 화면에 보이는 게시글의 끝 번호
 	private String search;	//검색어
-	private String searchKind; // 검색어 종류 ( 제목: title, 내용:content)
+	private String searchKind; // 검색어 종류 ( 닉네임: nickName, 유저 번호:userno)
 	private int categoryNo; // 카테고리 종류
 	
 	public int getCategoryNo() {

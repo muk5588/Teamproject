@@ -9,7 +9,7 @@ public class Inquiry {
 	private Date inquiryDate;
 	private int ManagerNo;
 	private String answer;
-	private String complete;
+	private String complete="N";
 	private Date answerDate;
 	
 	public Inquiry() {}

@@ -3,4 +3,53 @@
 
 <mapper namespace="inquiry.dao.InquiryDao">
 
+    <select id="userCntByNickName" resultType="int" parameterType="String">
+        SELECT count(*) FROM userTB
+        WHERE nickname = #{touser}
+    </select>
+
+    <select id="getUserByNickName" resultType="User" parameterType="String">
+        SELECT * FROM userTB
+        WHERE nickname = #{touser}
+    </select>
+
+    <insert id="insertInquiry" parameterType="dto.Inquiry">
+    <selectKey keyProperty="inquiryNo" order="BEFORE" resultType="int">
+        SELECT INQUIRY_SEQ.nextval FROM dual
+    </selectKey>
+    INSERT INTO inquiry(inquiryNo, userNo, inquiryDetail, managerNo, answer, complete, answerDate)
+    VALUES(#{inquiryNo}, #{userNo}, #{inquiryDetail}, #{managerNo}, #{answer}, #{complete}, #{answerDate})
+</insert>
+
+
+    <select id="getListByUserno" parameterType="int" resultType="dto.Inquiry">
+        SELECT * FROM inquiry
+        WHERE userNo = #{userNo}
+        ORDER BY inquiryDate DESC 
+    </select>
+
+    <delete id="deleteByInquiryNo" parameterType="java.util.ArrayList">
+        DELETE FROM inquiry
+        WHERE inquiryNo = #{inquiryNo}
+    </delete>
+
+    <update id="answerUpdateByAnswer" parameterType="dto.Inquiry">
+        UPDATE inquiry
+        <set>
+            answer = #{answer}
+        </set>
+        <where>
+            inquiryNo = #{inquiryNo}
+        </where>
+    </update>
+
+    <select id="getListBySendUser" parameterType="int" resultType="dto.Inquiry">
+  		SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
+FROM 
+    usertb u
+    INNER JOIN inquiry m ON u.USERNO = m.USERNO
+WHERE m.USERNO = #{userNo} 
+ORDER BY m.INQUIRYDATE DESC
+	</select>
+
 </mapper>

@@ -3,6 +3,11 @@ package report.controller;
 import board.dto.Board;
 import board.service.BoardService;
 import comment.dto.Comment;
+import dto.Item;
+import dto.ItemReportType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +25,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/report")
 public class ReportController {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     BoardService boardService;
     @Autowired
@@ -74,4 +80,17 @@ public class ReportController {
         reportService.deleteCommReport(reportno);
         return "redirect: ./list";
     }
+    
+    //상품 신고하기
+    @RequestMapping("/itemreport")
+    public void itemReport(int itemNo) {
+    	logger.debug("상품 신고하기");
+    	logger.debug("itemNo : {}", itemNo);
+    	ItemReportType reportType = reportService.getItemReportType();
+    	Item item = reportService.getItemByItemNo(itemNo);
+    	
+    }
+    
+    
+    
 }

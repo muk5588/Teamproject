@@ -6,6 +6,9 @@ import report.dto.CommReport;
 
 import java.util.List;
 
+import dto.Item;
+import dto.ItemReportType;
+
 public interface ReportService {
     public List<BoardReportType> reportType();
 
@@ -22,4 +25,17 @@ public interface ReportService {
     public void deleteReport(int reportno);
 
     public void deleteCommReport(int reportno);
+
+    /**
+     * 상품 신고 분류 전체 조회
+     * @return - 조회된 전체 행
+     */
+	public ItemReportType getItemReportType();
+
+	/**
+	 * 상품 번호로 상품 조회
+	 * @param itemNo - 상품 번호
+	 * @return - 조회된 상품 행
+	 */
+	public Item getItemByItemNo(int itemNo);
 }

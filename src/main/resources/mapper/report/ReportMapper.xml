@@ -37,4 +37,23 @@
 	<delete id="deleteCommReport" parameterType="int">
 		delete COMMREPORT where COMMREPORTNO = #{commReportNo}
 	</delete>
+	<select id="getItemReportType" resultType="dto.ItemReportType">
+		SELECT itemreportNo, itemReport FROM ItemReportType
+	</select>
+	<select id="getItemByItemNo" parameterType="int" resultType="dto.Item">
+		  SELECT i.itemno as itemNo, i.itemName , i.price, i.itemComm,
+        i.remain,
+        i.titleImg,
+        it.fileno,
+        it.stored_Name,
+        it.origin_Name
+    FROM 
+        item i 
+    LEFT JOIN 
+        itemfile it 
+    ON 
+        i.itemno = it.itemno
+    WHERE 
+        i.itemno = #{itemNo}
+	</select>
 </mapper>

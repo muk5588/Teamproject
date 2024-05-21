@@ -32,9 +32,8 @@
 <script type="text/javascript">
 $(function(){
 	
+	
     $(document).ready(function () {
-        //전체 로딩 끝난 후 리뷰 내용 AJAX 통신을 위해.
-		console.log("확인용")
 		handelGetReview()
     })
 	
@@ -85,6 +84,14 @@ $(function(){
        	})
      });
 	
+	 //신고하기 버튼 클릭
+	 $("#reportBtn").click(function(){
+		var itemNo = ${item.itemNo}
+		$(function(){
+			window.location.href = '../report/itemreport?itemNo='+itemNo;
+		})
+	 })
+	 
 	 //리뷰 AJAX 통신
 	function handelGetReview(){
 		console.log("getReview")
@@ -195,6 +202,8 @@ $(function(){
 				<button type="button" id="addToCartBtn">장바구니 담기</button>
 				<!-- 구매하기 버튼 -->
 				<button type="button" id="purchaseBtn">구매하기</button>
+				<!-- 신고하기 버튼 -->
+				<button type="button" id="reportBtn">신고하기</button>
             </td>
         </tr>
         <tr>

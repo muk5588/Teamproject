@@ -72,7 +72,7 @@ hr {
 div.boardPre{
     width: calc(45%); /* 2개의 열로 설정하고 간격을 제외한 폭 설정 */
     max-width: 680px;
-    height: 40%;
+    height: 45%;
     min-height: 320px;
     border-radius: 8px;
     background: rgba(15, 19, 42, 0.1);

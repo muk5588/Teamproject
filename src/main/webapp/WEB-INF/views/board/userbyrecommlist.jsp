@@ -94,7 +94,7 @@
     <div class="container">
 
         <h1>내 추천글</h1>
-        <a href="../main">
+        <a href="../">
             <button style="position: absolute;">메인 페이지로</button>
         </a>
         <div>

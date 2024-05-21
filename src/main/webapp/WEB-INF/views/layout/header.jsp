@@ -64,7 +64,7 @@
         <div class="Menu-List" id="menuList">
             <img id="list-icon" src="/resources/img/mainPage/list.png" alt="우측 상단 목록" onclick="toggleLoginMenu(event);"><br>
         </div>
-        <div id="menu" class="hidden">
+<div id="menu" class="hidden">
             <c:choose>
                 <c:when test="${empty isLogin}">
                     <a href="#" onclick="redirectToLogin(event);">쪽지</a>
@@ -72,9 +72,18 @@
                     <a href="#" onclick="redirectToLogin(event);">구매기록</a>
                 </c:when>
                 <c:otherwise>
-                    <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
-                    <a href='<%=request.getContextPath()%>/inquiry/'>문의하기</a>
-                    <a href='<%=request.getContextPath()%>/order/history'>구매기록</a>
+                    <c:choose>
+                        <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                            <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
+                            <a href="<%=request.getContextPath()%>/inquiry/adminList">문의보기</a>
+                            <a href='<%=request.getContextPath()%>/order/history'>구매기록</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
+                            <a href="<%=request.getContextPath()%>/inquiry/">문의하기</a>
+                            <a href='<%=request.getContextPath()%>/order/history'>구매기록</a>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </div>

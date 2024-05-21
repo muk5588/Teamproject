@@ -1,6 +1,6 @@
 package inquiry.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,110 +14,129 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import inquiry.dto.Inquiry;
+import dto.Inquiry;
 import inquiry.service.InquiryService;
 import user.dto.User;
 
 @Controller
 @RequestMapping("/inquiry")
-public class InquiryController {	
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired private InquiryService inquiryService;
-	
-	@RequestMapping("/")
-	public String message() {
-		return "redirect:/inquiry/list";
-	}
+public class InquiryController {    
     
-	@ResponseBody
-	@RequestMapping("/send")
-	public int sendMessage(String touser, String inquiryDetail, HttpSession session) {
-		logger.debug("/send ajax 들어옴");
-		logger.debug("touser : {}",touser);
-		logger.debug("content : {}",inquiryDetail);
-		//
-		int res = 0;
-		if( inquiryDetail == null || "".equals(inquiryDetail)) {
-//			return null;
-		}
-		if( touser != null && !"".equals(touser)) {
-			User toUser = inquiryService.getUserByNickName(touser);
-			User user = (User) session.getAttribute("dto1");
-			int sendUser = user.getUserno();
-			Inquiry inquiry = new Inquiry();
-			inquiry.setUserNo(sendUser);
-			inquiry.setManagerNo(toUser.getUserno());
-			inquiry.setInquiryDetail(inquiryDetail);
-			
-			res = inquiryService.insertInquiry(inquiry);
-		}
-		return res;
-	}
-	
-	
-	@RequestMapping("/list")
-	public void list(HttpSession session, HttpServletRequest res) {
-		int userNo = (int) session.getAttribute("isLogin");
-		List<Inquiry> list = inquiryService.getListByUserno(userNo);
-		for(Inquiry m : list) {
-			logger.debug("m : {}", m);
-		}
-		logger.debug("list : {} ", list);
-		
-		res.setAttribute("list", list);
-	}
-	@RequestMapping("/sendForm")
-	public void sendForm() {}
-	
-	@ResponseBody
-	@RequestMapping("/delete")
-	public int delete(
-			@RequestParam("inquiryNo") String[] param
-			) {
-		ArrayList<Integer> inquiryNo = new ArrayList<Integer>();
-		int temp = 0;
-		for(int i = 0; param.length >i; i++) {
-			temp = Integer.parseInt(param[i]);
-			inquiryNo.add(temp);
-		}
-		logger.debug("messageNo : {}", inquiryNo);
-		int res = inquiryService.deleteByInquiryNo(inquiryNo);
-		
-		return res;
-		
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping("/answerProc")
-	public int answerProc(@RequestParam("inquiryNo")int inquiryNo , @RequestParam("check")boolean check) {
-		logger.debug("inquiryNo : {}", inquiryNo);
-		logger.debug("check : {}", check);
-		String complete = "N";
-		if( check ) {
-			complete = "Y";
-		}else if( check ) {
-			complete = "N";
-		}
-		Inquiry answerInquiry= new Inquiry();
-		answerInquiry.setAnswer(complete);
-		answerInquiry.setInquiryNo(inquiryNo);
-		int res = inquiryService.answerUpdateByAnswer(answerInquiry);
-		return res;
-	}
-	
-	@RequestMapping("/inquirylist")
-	public void inquirylist(HttpSession session, HttpServletRequest res) {
-		User user = (User) session.getAttribute("dto1");
-		int sendUser = user.getUserno();
-		List<Inquiry> list = inquiryService.getListBySendUser(sendUser);
-		for(Inquiry m : list) {
-			logger.debug("m : {}", m);
-		}
-		logger.debug("list : {} ", list);
-		
-		res.setAttribute("list", list);
-	}
-	
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired 
+    private InquiryService inquiryService;
+    
+    @RequestMapping("/")
+    public String inquiry() {
+        return "redirect:/inquiry/list";
+    }
+    
+    @ResponseBody
+    @RequestMapping("/send")
+    public int sendInquiry(String touser, String inquiryDetail, HttpSession session) {
+        logger.debug("/send ajax 들어옴");
+        logger.debug("touser : {}",touser);
+        logger.debug("content : {}",inquiryDetail);
+        
+        int res = 0;
+        if (inquiryDetail != null && !"".equals(inquiryDetail)) {
+            User user = (User) session.getAttribute("dto1");
+            int sendUser = user.getUserno();
+            Inquiry inquiry = new Inquiry();
+            inquiry.setUserNo(sendUser);
+            inquiry.setInquiryDetail(inquiryDetail);
+            inquiry.setManagerNo(1); // 관리자 번호 1으로 설정
+            res = inquiryService.insertInquiry(inquiry);
+        }
+        
+        if (res > 0) {
+            list(session);
+        }
+        
+        return res;
+    }
+    
+    @RequestMapping("/list")
+    public void list(HttpSession session) {
+        User user = (User) session.getAttribute("dto1");
+        int sendUser = user.getUserno();
+        List<Inquiry> list = inquiryService.getListBySendUser(sendUser);
+        session.setAttribute("list", list);
+    }
+
+    @RequestMapping("/sendForm")
+    public void sendForm() {}
+
+    @ResponseBody
+    @RequestMapping("/delete")
+    public int delete(@RequestParam("inquiryNo") List<Integer> inquiryNo) {
+        logger.debug("inquiryNo : {}", inquiryNo);
+        int deleteCount = 0;
+        for (Integer no : inquiryNo) {
+            deleteCount += inquiryService.deleteByInquiryNo(no);
+        }
+        return deleteCount;
+    }
+    
+//    @ResponseBody
+//    @RequestMapping("/answerProc")
+//    public int answerProc(@RequestParam("inquiryNo") int inquiryNo, @RequestParam("check") boolean check) {
+//        logger.debug("inquiryNo : {}", inquiryNo);
+//        logger.debug("check : {}", check);
+//
+//        String complete = check ? "Y" : "N";
+//
+//        Inquiry answerInquiry = new Inquiry();
+//        answerInquiry.setAnswer(complete);
+//        answerInquiry.setInquiryNo(inquiryNo);
+//
+//        return inquiryService.answerUpdateByAnswer(answerInquiry);
+//    }
+    
+    @ResponseBody
+    @RequestMapping("/answerProc")
+    public int answerProc(@RequestParam("inquiryNo") int inquiryNo, @RequestParam("answer") String answer) {
+        logger.debug("inquiryNo : {}", inquiryNo);
+        logger.debug("answer : {}", answer);
+
+        // Complete 값을 'Y'로 설정하여 문의에 대한 답변이 완료되었음을 표시
+        String complete = "Y";
+        
+        // 답변 작성일을 현재 시간으로 설정
+        Date answerDate = new Date();
+
+        // Inquiry 객체 생성 및 값 설정
+        Inquiry inquiry = new Inquiry();
+        inquiry.setInquiryNo(inquiryNo);
+        inquiry.setAnswer(answer);
+        inquiry.setAnswerDate(answerDate);
+        inquiry.setComplete(complete);
+
+        // InquiryService를 통해 Complete 값을 업데이트
+        int result = inquiryService.updateInquiry(inquiry);
+
+        return result;
+    }
+    
+    @RequestMapping("/inquirylist")
+    public void inquirylist(HttpSession session, HttpServletRequest request) {
+        User user = (User) session.getAttribute("dto1");
+        int sendUser = user.getUserno();
+        List<Inquiry> list = inquiryService.getListBySendUser(sendUser);
+        for (Inquiry m : list) {
+            logger.debug("m : {}", m);
+        }
+        logger.debug("list : {} ", list);
+
+        request.setAttribute("list", list);
+    }
+
+    @RequestMapping("/adminList")
+    public String adminList(HttpSession session) {
+        List<Inquiry> list = inquiryService.getListByManagerNo(1); 
+        session.setAttribute("adminList", list);
+        return "/inquiry/adminList"; 
+    }
+
+    
 }

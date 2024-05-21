@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dto.Inquiry;
 import inquiry.dao.InquiryDao;
-import inquiry.dto.Inquiry;
 import user.dto.User;
 
 @Service
@@ -37,8 +37,8 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public int deleteByInquiryNo(ArrayList<Integer> inquiryNo) {
-		return inquiryDao.deleteByInquiryNo(inquiryNo);
+	public int deleteByInquiryNo(int inquiryNoList) {
+		return inquiryDao.deleteByInquiryNo(inquiryNoList);
 	}
 
 	@Override
@@ -50,5 +50,16 @@ public class InquiryServiceImpl implements InquiryService{
 	public List<Inquiry> getListBySendUser(int sendUser) {
 		return inquiryDao.getListBySendUser(sendUser);
 	}
+
+	@Override
+	public int updateInquiry(Inquiry inquiry) {
+		return inquiryDao.updateInquiry(inquiry);
+	}
+
+	@Override
+	public List<Inquiry> getListByManagerNo(int i) {
+		return inquiryDao.getListByManagerNo(i);
+	}
+
 
 }

@@ -3,7 +3,7 @@ package inquiry.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import inquiry.dto.Inquiry;
+import dto.Inquiry;
 import user.dto.User;
 
 public interface InquiryService {
@@ -14,12 +14,16 @@ public interface InquiryService {
 
 	public List<Inquiry> getListByUserno(int userNo);
 
-	public int deleteByInquiryNo(ArrayList<Integer> inquiryNo);
+	public int deleteByInquiryNo(int inquiryNo);
 
 	public int answerUpdateByAnswer(Inquiry answerInquiry);
-	
+
 	public List<Inquiry> getListBySendUser(int sendUser);
 
+	public int updateInquiry(Inquiry inquiry);
 
+	public List<Inquiry> getListByManagerNo(int i);
+
+	
 
 }

@@ -14,13 +14,12 @@
     </select>
 
     <insert id="insertInquiry" parameterType="dto.Inquiry">
-    <selectKey keyProperty="inquiryNo" order="BEFORE" resultType="int">
-        SELECT INQUIRY_SEQ.nextval FROM dual
-    </selectKey>
-    INSERT INTO inquiry(inquiryNo, userNo, inquiryDetail, managerNo, answer, complete, answerDate)
-    VALUES(#{inquiryNo}, #{userNo}, #{inquiryDetail}, #{managerNo}, #{answer}, #{complete}, #{answerDate})
-</insert>
-
+        <selectKey keyProperty="inquiryNo" order="BEFORE" resultType="int">
+            SELECT INQUIRY_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO inquiry(inquiryNo, userNo, inquiryDetail, managerNo, answer, complete, answerDate)
+        VALUES(#{inquiryNo}, #{userNo}, #{inquiryDetail}, #{managerNo}, #{answer}, #{complete}, #{answerDate})
+    </insert>
 
     <select id="getListByUserno" parameterType="int" resultType="dto.Inquiry">
         SELECT * FROM inquiry
@@ -28,28 +27,44 @@
         ORDER BY inquiryDate DESC 
     </select>
 
-    <delete id="deleteByInquiryNo" parameterType="java.util.ArrayList">
+    <delete id="deleteByInquiryNo" parameterType="int">
         DELETE FROM inquiry
         WHERE inquiryNo = #{inquiryNo}
     </delete>
 
     <update id="answerUpdateByAnswer" parameterType="dto.Inquiry">
         UPDATE inquiry
-        <set>
-            answer = #{answer}
-        </set>
-        <where>
-            inquiryNo = #{inquiryNo}
-        </where>
+        SET answer = #{answer}
+        WHERE inquiryNo = #{inquiryNo}
     </update>
 
     <select id="getListBySendUser" parameterType="int" resultType="dto.Inquiry">
-  		SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
-FROM 
-    usertb u
-    INNER JOIN inquiry m ON u.USERNO = m.USERNO
-WHERE m.USERNO = #{userNo} 
-ORDER BY m.INQUIRYDATE DESC
-	</select>
+        SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
+        FROM 
+            usertb u
+            INNER JOIN inquiry m ON u.USERNO = m.USERNO
+        WHERE m.USERNO = #{userNo} 
+        ORDER BY m.INQUIRYDATE DESC
+    </select>
+
+	<select id="getAllInquiries" resultType="dto.Inquiry">
+        SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
+        FROM 
+            usertb u
+            INNER JOIN inquiry m ON u.USERNO = m.USERNO
+        ORDER BY m.INQUIRYDATE DESC
+    </select>
+
+	<select id="getListByManagerNo" parameterType="int" resultType="dto.Inquiry">
+    	SELECT * FROM inquiry
+    	WHERE managerNo = #{managerNo}
+    	ORDER BY inquiryDate DESC
+</select>	
+
+	<update id="updateCompleteToY" parameterType="int">
+    	UPDATE inquiry
+    	SET complete = 'Y'
+    	WHERE inquiryNo = #{inquiryNo}
+	</update>
 
 </mapper>

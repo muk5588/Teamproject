@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+*{
+    font-family: 'NexonMaplestory';
+}
+body {
+
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h3 {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.warpper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.warp {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #f8f8f8;
+    color: #333;
+
+}
+
+td {
+    background-color: #fff;
+}
+
+.btnSet {
+    display: flex;
+    float: right;
+}
+
+.btn-fill {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-fill:hover {
+    background-color: #0056b3;
+}
+
+button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.colgroup col {
+    width: auto;
+}
+
+.date {
+    white-space: nowrap;
+}
+
+.no, .title, .nick, .hit, .date {
+    text-align: center;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+span {
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+}
+.allboard {
+    float: right;
+    color: #1abc9c; /* 네이버 쪽지함과 어울리는 민트 색상 */
+    text-decoration: none;
+    font-size: 1.3em;
+}
+
+.allboard:hover {
+    color: #16a085; /* 민트 색상의 어두운 버전 */
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .btnSet {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-fill {
+        margin: 10px 0;
+    }
+
+    table, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: right;
+    }
+
+    th::before, td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #333;
+    }
+
+    th {
+        background-color: transparent;
+        color: #333;
+    }
+}

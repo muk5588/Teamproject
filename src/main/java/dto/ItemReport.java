@@ -7,6 +7,7 @@ public class ItemReport {
 	private int itemNo;
 	private int userNo;
 	private int itemReportNo;
+	private int managerNo;
 	private Date reportDate;
 	private String reportContent;
 	private Date resultDate;
@@ -14,14 +15,17 @@ public class ItemReport {
 	private String reportType;
 	private String itemName;
 	private String nickName;
+	private String itemReport;
 	public ItemReport() {}
-	public ItemReport(int reportNo, int itemNo, int userNo, int itemReportNo, Date reportDate, String reportContent,
-			Date resultDate, String result, String reportType, String itemName, String nickName) {
+	public ItemReport(int reportNo, int itemNo, int userNo, int itemReportNo, int managerNo, Date reportDate,
+			String reportContent, Date resultDate, String result, String reportType, String itemName, String nickName,
+			String itemReport) {
 		super();
 		this.reportNo = reportNo;
 		this.itemNo = itemNo;
 		this.userNo = userNo;
 		this.itemReportNo = itemReportNo;
+		this.managerNo = managerNo;
 		this.reportDate = reportDate;
 		this.reportContent = reportContent;
 		this.resultDate = resultDate;
@@ -29,13 +33,14 @@ public class ItemReport {
 		this.reportType = reportType;
 		this.itemName = itemName;
 		this.nickName = nickName;
+		this.itemReport = itemReport;
 	}
 	@Override
 	public String toString() {
 		return "ItemReport [reportNo=" + reportNo + ", itemNo=" + itemNo + ", userNo=" + userNo + ", itemReportNo="
-				+ itemReportNo + ", reportDate=" + reportDate + ", reportContent=" + reportContent + ", resultDate="
-				+ resultDate + ", result=" + result + ", reportType=" + reportType + ", itemName=" + itemName
-				+ ", nickName=" + nickName + "]";
+				+ itemReportNo + ", managerNo=" + managerNo + ", reportDate=" + reportDate + ", reportContent="
+				+ reportContent + ", resultDate=" + resultDate + ", result=" + result + ", reportType=" + reportType
+				+ ", itemName=" + itemName + ", nickName=" + nickName + ", itemReport=" + itemReport + "]";
 	}
 	public int getReportNo() {
 		return reportNo;
@@ -60,6 +65,12 @@ public class ItemReport {
 	}
 	public void setItemReportNo(int itemReportNo) {
 		this.itemReportNo = itemReportNo;
+	}
+	public int getManagerNo() {
+		return managerNo;
+	}
+	public void setManagerNo(int managerNo) {
+		this.managerNo = managerNo;
 	}
 	public Date getReportDate() {
 		return reportDate;
@@ -102,6 +113,12 @@ public class ItemReport {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getItemReport() {
+		return itemReport;
+	}
+	public void setItemReport(String itemReport) {
+		this.itemReport = itemReport;
 	}
 	
 	

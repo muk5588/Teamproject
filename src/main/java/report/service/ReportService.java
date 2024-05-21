@@ -48,4 +48,6 @@ public interface ReportService {
 	public int insertItemReport(ItemReport itemReport);
 
 	public List<ItemReport> itemlist();
+
+	public void deleteItemReport(int reportno);
 }

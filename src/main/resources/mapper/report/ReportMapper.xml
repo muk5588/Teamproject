@@ -72,4 +72,7 @@
 		AND irt.ITEMREPORTNO = ir.ITEMREPORTNO 
 		AND ir.USERNO  = u.USERNO 
 	</select>
+	<delete id="deleteItemReport" parameterType="int">
+		delete itemreport where reportno = #{reportno}
+	</delete>
 </mapper>

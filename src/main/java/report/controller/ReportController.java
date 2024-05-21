@@ -85,6 +85,14 @@ public class ReportController {
         return "redirect: ./list";
     }
     
+    @RequestMapping("deleteItemReport")
+    public String deleteItemReport(int reportno) {
+    	logger.debug("~~~~~~~~~~~~~~~~~~~~~");
+    	logger.debug("~~~~~~~~~~~~~~~~~~~~~reportno: {}",reportno);
+    	reportService.deleteItemReport(reportno);
+    	return "redirect: ./list";
+    }
+    
     //상품 신고하기
     @GetMapping("/itemReport")
     public String itemReport(int itemNo, Model model) {

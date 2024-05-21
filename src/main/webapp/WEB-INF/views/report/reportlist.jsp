@@ -189,7 +189,6 @@
                 <th class="bold-text">신고번호</th>
                 <th class="bold-text">신고일자</th>
                 <th class="bold-text">신고종류</th>
-                <th class="bold-text">신고내용</th>
                 <th class="bold-text">작성된상품</th>
                 <th class="bold-text">닉네임</th>
                 <th></th>
@@ -204,11 +203,10 @@
                         </label>
                     </td>
                     <td><fmt:formatDate value="${item.reportDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                    <td>${item.reportType}</td>
-                    <td>${item.reportContent}</td>
+                    <td>${item.itemReport}</td>
                     <td>${item.itemName}</td>
                     <td>${item.nickName}</td>
-                    <td><a class='btn-fill' href="/report/deleteItemReport?reportno=${item.itemReportNo}"><button>삭제</button></a></td>
+                    <td><a class='btn-fill' href="/report/deleteItemReport?reportno=${item.reportNo}"><button>삭제</button></a></td>
                 </tr>
                 <tr class="fold">
                     <td colspan="7">

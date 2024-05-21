@@ -75,4 +75,9 @@ ReportDao reportDao;
 	public List<ItemReport> itemlist() {
 		return reportDao.itemlist();
 	}
+
+	@Override
+	public void deleteItemReport(int reportno) {
+		reportDao.deleteItemReport(reportno);
+	}
 }

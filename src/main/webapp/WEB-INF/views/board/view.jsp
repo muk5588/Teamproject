@@ -333,7 +333,6 @@
                     </button>
                 </div>
             </div>
-
         </c:if>
         <hr>
         <div class="comment">

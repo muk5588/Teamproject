@@ -70,10 +70,23 @@ public class UserController {
 
     @RequestMapping("/userList")
     //유저전체리스트 페이지
-    public String userList( Model model,@RequestParam(defaultValue ="0") int curPage) {
+    public String userList( Model model,@RequestParam(defaultValue ="0") int curPage
+    		,@RequestParam(required = false,name = "searchKind") String searchKind
+    		,@RequestParam(required = false, name = "search") String search) {
     	String url = "/user/userList";
     	UserPaging paging = new UserPaging();
+    	if( search != null && searchKind != null ) {
+    		logger.debug("@!#!@@@@@@");
+    		paging.setSearch(search);
+    		paging.setSearchKind(searchKind);
+    		logger.debug("paging1 : {}", paging);
+    	}
     	paging = service.getUserListPaging(paging,curPage);
+    	if( search != null && searchKind != null ) {
+    		paging.setSearch(search);
+    		paging.setSearchKind(searchKind);
+    		logger.debug("paging3 : {}", paging);
+    	}
         List<User> list = service.userPagingList(paging);
         model.addAttribute("list", list);
         model.addAttribute("paging", paging);

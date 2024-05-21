@@ -21,6 +21,16 @@
     <div class="warp">
         <div id="content">
             <h3>회원 목록</h3>
+            <div>
+           <form class="d-flex mb-3" action="${URL }" method="get">
+               <select class="form-select me-2" name="searchKind" aria-label="Search Type">
+                   <option value="nickName" <c:if test="${not empty paging.searchKind and paging.searchKind eq 'nickName'}">selected="selected"</c:if>>닉네임</option>
+                   <option value="userno" <c:if test="${not empty paging.searchKind and paging.searchKind eq 'userno'}">selected="selected"</c:if>>회원 번호</option>
+               </select>
+               <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="${paging.search }">
+               <button class="btn btn-outline-success" type="submit">Search</button>
+           </form>
+        	</div>
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>

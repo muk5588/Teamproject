@@ -386,7 +386,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/userbyrecommlist")
-	public void userbyRecommList(@SessionAttribute(value = "dto1", required = false) User login,
+	public String userbyRecommList(@SessionAttribute(value = "dto1", required = false) User login,
 								 @RequestParam(defaultValue ="0") int curPage, Model model
 								,@RequestParam(value="search",required = false) String search
 								,@RequestParam(value="searchKind", required = false ) String searchKind){
@@ -414,7 +414,8 @@ public class BoardController {
 
 		model.addAttribute("list2", list2);
 		model.addAttribute("paging", paging);
-
+		model.addAttribute("curPage", curPage);
+	return "board/userbyrecommlist";
 	}
 	
 	@RequestMapping("/fileDown")

@@ -10,6 +10,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 
 <link rel="stylesheet" type="text/css" href="/resources/css/board/userbyboardList.css">

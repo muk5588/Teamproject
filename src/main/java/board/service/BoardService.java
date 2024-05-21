@@ -124,4 +124,5 @@ public interface BoardService {
 	 * @return - 페이징 객체
 	 */
 	public Paging getPagingByUserNo(int curPage, Paging paging, User login);
+
 }

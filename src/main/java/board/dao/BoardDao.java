@@ -99,4 +99,5 @@ public interface BoardDao {
 	public List<Board> userbyrecommList(Paging paging);
 
 	public int selectCntByUserNo(@Param("paging")Paging paging, @Param("user")User login);
+
 }

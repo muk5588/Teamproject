@@ -45,13 +45,16 @@
     <div class="container">
 
         <h1>상품 관리</h1>
+        <div class="title">
+            <div>
         <a href="/user/adminPage">
             <button>관리자 메인페이지로</button>
         </a>
         <a href="./create">
             <button>상품 추가하기</button>
         </a>
-        <div>
+            </div>
+
             <form action="" method="get" id="searchForm">
                 <input type="text" name="search" id="search" placeholder="검색하실 상품명을 작성해 주세요">
                 <input hidden="hidden" name="curPage" value="${curPage}">

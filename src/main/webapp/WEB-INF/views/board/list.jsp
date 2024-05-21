@@ -81,17 +81,19 @@
 
 
     <div class="container">
-        <h1>${name } 게시판</h1>
-        <a href="/">
-            <button class="go_main">Home</button>
-        </a>
+        <div class="title">
+            <h1>${name } 게시판</h1>
+            <a href="/">
+                <button class="go_main">Home</button>
+            </a>
+        </div>
         <div class="write">
             <c:if test="${isLogin != 0}">
             <form action="./write" method="get">
                 <button id="btnWrite" me>글쓰기</button>
             </form>
+            </c:if>
         </div>
-        </c:if>
         <div>
             <form action="" method="get" id="searchForm">
                 <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
@@ -155,14 +157,14 @@
                     </c:forEach>
                 </c:when>
                 <c:when test="${empty list }">
-                    <tr>
-                        <td class="title" colspan="7">게시글이 존재하지 않습니다
-                        </td>
-                    </tr>
+                    <td colspan="7">
+                       게시글이 존재하지 않습니다
+                    </td>
                 </c:when>
             </c:choose>
 
         </table>
+
         <button id="deleteBtn">체크 삭제</button>
     </div>
     <!-- .container End -->

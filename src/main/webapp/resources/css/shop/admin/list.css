@@ -11,7 +11,11 @@ body {
     max-width: 1200px; /* 컨테이너의 최대 너비 */
     padding: 20px;
 }
-
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .container {
     /*margin-top: 20px;*/
     text-align: center;

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
 <link href="/resources/css/board/boardView.css" rel="stylesheet" type="text/css">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -253,6 +252,8 @@
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
 

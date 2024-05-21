@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Seungjin
@@ -240,6 +241,7 @@
     </style>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <th:block layout:fragment="ground-wrap">
     <div class="ground">

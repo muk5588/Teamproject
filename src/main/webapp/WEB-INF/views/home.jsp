@@ -118,10 +118,7 @@
             margin: 10px;
             text-align: center;
         }
-        .blank{
-            width: 100%;
-            height: 10%;
-        }
+
 
     </style>
 </head>
@@ -202,7 +199,7 @@
         </ul>
     </c:if>
 </div>
-<div>
+<div class="weather">
     <jsp:include page="layout/weather.jsp"></jsp:include>
 </div>
 
@@ -234,7 +231,7 @@
 <%--</c:if>--%>
 
 <jsp:include page="/WEB-INF/views/layout/boardPreview.jsp"/>
-<div class="blank"></div>
+<%--<div class="blank"></div>--%>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

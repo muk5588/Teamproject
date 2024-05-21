@@ -49,11 +49,6 @@
 	<delete id="userDelete" parameterType="User">
 		DELETE FROM usertb WHERE userno=#{userno }
 	</delete>
-	<select id="passChk" resultType="int">
-		select count(*) from usertb
-		where userid = #{userid}
-		and userpw = #{userpw}
-	</select>
 
 	<select id="idChk" resultType="int">
 		select count(*) from usertb

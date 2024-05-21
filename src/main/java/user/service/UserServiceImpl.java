@@ -1,19 +1,16 @@
 package user.service;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 import user.dao.UserDao;
 import user.dto.User;
-import util.Paging;
 import util.UserPaging;
+
+import javax.mail.internet.MimeMessage;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,12 +42,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void userDelete(User dto) {
         userDao.userDelete(dto);
-    }
-
-    @Override
-    public int passChk(User dto) {
-        int result = userDao.passChk(dto);
-        return result;
     }
 
     @Override

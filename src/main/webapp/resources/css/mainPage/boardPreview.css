@@ -1,8 +1,9 @@
 .boardContainer {
+    padding: 50px;
     display: flex;
     flex-wrap: wrap; /* 넘칠 경우 자동으로 줄바꿈 */
     gap: 80px; /* 각 요소 사이의 간격 설정 */
-    height: 90%;
+    height: 97%;
     text-align: center;
     justify-content: center;
     background-color: #f3f3f3;

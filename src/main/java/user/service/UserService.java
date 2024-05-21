@@ -1,10 +1,9 @@
 package user.service;
 
-import java.util.List;
-
 import user.dto.User;
-import util.Paging;
 import util.UserPaging;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -18,7 +17,7 @@ public interface UserService {
 
     public void userDelete(User dto);
 
-    public int passChk(User dto);
+
 
     public int idChk(User dto);
     

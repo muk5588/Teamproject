@@ -1,11 +1,11 @@
 package user.controller;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import board.dto.Board;
+import board.service.BoardService;
+import grade.dto.Grade;
+import grade.service.GradeService;
+import login.dto.AccessHistory;
+import login.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import board.dto.Board;
-import board.service.BoardService;
-import grade.dto.Grade;
-import grade.service.GradeService;
-import login.dto.AccessHistory;
-import login.service.LoginService;
 import user.dto.EmailCheck;
 import user.dto.User;
 import user.service.UserService;
 import util.Paging;
 import util.UserPaging;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -198,19 +196,14 @@ public class UserController {
         service.userDelete(dto);
         return "redirect: /";
     }
-    
-    @ResponseBody
-    @RequestMapping("/passChk")
-    public int passChk(User dto) throws Exception {
-        int res = service.passChk(dto);
-        return res;
-    }
+
     @ResponseBody
     @RequestMapping("/idChk")
     public int idChk(User dto) throws Exception {
         int res = service.idChk(dto);
         return res;
     }
+
     @RequestMapping("/idckeck")
     public String idckeck(User dto) throws Exception {
         int res = service.idChk(dto);

@@ -48,6 +48,7 @@ public class UserController {
     //관리자페이지
     @RequestMapping("/adminPage")
     public String adminPage(Model model, @RequestParam(defaultValue ="0") int curPage){
+    	String URL = "/user/adminPage";
         Paging paging = new Paging();
         paging = boardService.getAdminPaging(curPage, paging);
         logger.debug("admin paging : {}", paging);
@@ -57,6 +58,7 @@ public class UserController {
         List<Grade> list3 = gradeService.gradeList();
         logger.debug("Grade : {}", list3);
         logger.debug("admin paging : {}", paging);
+        model.addAttribute("URL", URL);
         model.addAttribute("list2", list2);
         model.addAttribute("list3", list3);
         model.addAttribute("paging", paging);
@@ -293,7 +295,8 @@ public class UserController {
     }
     @RequestMapping("/userLog")
     public String userLog(Model model,@RequestParam(defaultValue ="0") int curPage){
-        Paging paging = new Paging();
+        UserPaging paging = new UserPaging();
+        String URL = "/user/userLog";
 
         paging = boardService.getLogPaging(curPage,paging);
 
@@ -301,6 +304,7 @@ public class UserController {
         List<AccessHistory> list = loginService.history(paging);
         model.addAttribute("list",list);
         model.addAttribute("paging", paging);
+        model.addAttribute("URL", URL);
         return "user/userLog";
     }
     

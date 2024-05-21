@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.Paging;
+import util.UserPaging;
 import vo.GoodVO;
 
 import javax.servlet.http.HttpSession;
@@ -165,11 +166,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Paging getLogPaging(int curPage, Paging paging) {
+	public UserPaging getLogPaging(int curPage, UserPaging paging) {
 
 		int totalCount = boardDao.selectLogCntAll(paging);
 
-		Paging pagingres = new Paging(totalCount, curPage);
+		UserPaging pagingres = new UserPaging(totalCount, curPage);
 
 		return pagingres;
 	}

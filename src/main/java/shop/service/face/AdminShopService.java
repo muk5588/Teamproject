@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import dto.Item;
 import dto.ItemFile;
 import util.Paging;
+import util.ShopPaging;
 
 public interface AdminShopService {
 
@@ -16,14 +17,14 @@ public interface AdminShopService {
 	 * @param paging - 페이징 객체 
 	 * @return
 	 */
-	public Paging getPaging(int curPage, Paging paging);
+	public ShopPaging getPaging(int curPage, ShopPaging paging);
 	
 	/**
 	 * 상품 조회 ( 페이징 처리)
 	 * @param paging
 	 * @return
 	 */
-	public List<Item> selectItems(Paging paging);
+	public List<Item> selectItems(ShopPaging paging);
 
 	/**
 	 * List<Item> 의 대표 이미지 파일 조회

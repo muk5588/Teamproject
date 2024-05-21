@@ -4,6 +4,7 @@ import login.dto.AccessHistory;
 import org.springframework.stereotype.Repository;
 import user.dto.User;
 import util.Paging;
+import util.UserPaging;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface LoginDao {
 
     public List<AccessHistory> loginHistory(Paging paging);
 
-    public List<AccessHistory> history(Paging paging);
+    public List<AccessHistory> history(UserPaging paging);
     
     public String getUserBlack(String userId);
 }

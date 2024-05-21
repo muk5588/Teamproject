@@ -82,21 +82,21 @@
 
     <div class="container">
         <h1>${name } 게시판</h1>
-		<a href="/">
+        <a href="/">
             <button class="go_main">Home</button>
         </a>
-        <c:if test="${isLogin != 0}">
-            <div class="write">
-                <form action="./write" method="get">
-                    <button id="btnWrite" me>글쓰기</button>
-                </form>
-            </div>
+        <div class="write">
+            <c:if test="${isLogin != 0}">
+            <form action="./write" method="get">
+                <button id="btnWrite" me>글쓰기</button>
+            </form>
+        </div>
         </c:if>
         <div>
             <form action="" method="get" id="searchForm">
                 <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
                 <select name="searchKind" id="searchKind">
-                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                    <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
                     <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
                 </select>
                 <input type="text" name="search" id="search" value="${paging.search }">
@@ -105,8 +105,8 @@
             </form>
         </div>
 
-        <hr>
-        <button id="deleteBtn">체크 삭제</button>
+        <hr style="clear:both; margin-bottom: 10px">
+
 
         <table>
 
@@ -127,43 +127,43 @@
                 <th>추천수</th>
             </tr>
             <c:choose>
-	            <c:when test="${not empty list }">
-	            <c:forEach var="board" items="${list }">
-                <tr>
-                    <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-                                                class="delCheckBox"></td>
-                    <td class="no">${board.boardNo }</td>
-                    <td class="title">
-                    <c:if test="${not empty param.categoryNo }">
-						<a href="./view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
-					</c:if>
-                    <c:if test="${empty param.categoryNo }">
-						<a href="./view?&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
-					</c:if>
-                    </td>
-                    <td class="nick">${board.nickName }</td>
-                    <td class="hit">${board.boardView }</td>
-                    <td class="date">
-                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-                    </td>
-                    <c:forEach items="${totalrecomm }" var="recommList">
-                        <c:if test="${recommList.BOARDNO eq board.boardNo }">
-                            <td><a id="totalRecommend">${recommList.GOOD }</a></td>
-                        </c:if>
+                <c:when test="${not empty list }">
+                    <c:forEach var="board" items="${list }">
+                        <tr>
+                            <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
+                                                        class="delCheckBox"></td>
+                            <td class="no">${board.boardNo }</td>
+                            <td class="title">
+                                <c:if test="${not empty param.categoryNo }">
+                                    <a href="./view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
+                                </c:if>
+                                <c:if test="${empty param.categoryNo }">
+                                    <a href="./view?&boardNo=${board.boardNo}&curPage=${curPage}">${board.title}</a>
+                                </c:if>
+                            </td>
+                            <td class="nick">${board.nickName }</td>
+                            <td class="hit">${board.boardView }</td>
+                            <td class="date">
+                                <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+                            </td>
+                            <c:forEach items="${totalrecomm }" var="recommList">
+                                <c:if test="${recommList.BOARDNO eq board.boardNo }">
+                                    <td><a id="totalRecommend">${recommList.GOOD }</a></td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
                     </c:forEach>
-	           	 	</tr>
-	            </c:forEach>
-	            </c:when>
-   	            <c:when test="${empty list }">
-	            	<tr>
-	                    <td class="title" colspan="7">게시글이 존재하지 않습니다
-	                    </td>
-	                </tr>
-	            </c:when>
-			</c:choose>
+                </c:when>
+                <c:when test="${empty list }">
+                    <tr>
+                        <td class="title" colspan="7">게시글이 존재하지 않습니다
+                        </td>
+                    </tr>
+                </c:when>
+            </c:choose>
 
         </table>
-
+        <button id="deleteBtn">체크 삭제</button>
     </div>
     <!-- .container End -->
 

@@ -414,6 +414,7 @@ public class BoardController {
 
 		model.addAttribute("list2", list2);
 		model.addAttribute("paging", paging);
+
 	}
 	
 	@RequestMapping("/fileDown")

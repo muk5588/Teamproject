@@ -81,13 +81,13 @@
 
 
     <div class="container">
-        <div class="title">
+
             <h1>${name } 게시판</h1>
+        <div class="title">
+        <div class="write">
             <a href="/">
                 <button class="go_main">Home</button>
             </a>
-        </div>
-        <div class="write">
             <c:if test="${isLogin != 0}">
             <form action="./write" method="get">
                 <button id="btnWrite" me>글쓰기</button>
@@ -106,7 +106,7 @@
                 <button id="searchBtn">검색</button>
             </form>
         </div>
-
+        </div>
         <hr style="clear:both; margin-bottom: 10px">
 
 

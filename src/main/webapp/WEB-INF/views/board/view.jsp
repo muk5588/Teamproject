@@ -264,6 +264,8 @@
     <div class="container">
 
         <h1>상세보기</h1>
+        <div class="tit">
+        <div>
         <c:choose>
             <c:when test="${usrno != 0 }">
                 <a href="./userbyboardlist?userno=${dto1.userno}">
@@ -284,7 +286,29 @@
                 <button id="btnDelete">삭제</button>
             </a>
         </c:if>
-
+        </div>
+        <div>
+            <c:if test="${isLogin > 0}">
+                <div id="reBtn">
+                    <div class="recommendBtn doRedomm">
+                        <c:if test="${empty isRecomm or isRecomm eq 0 }">
+                            <a>
+                                <button class="doRecomm do">추천하기</button>
+                            </a>
+                        </c:if>
+                        <c:if test="${not empty isRecomm and isRecomm eq 1 }">
+                            <a>
+                                <button class="doRecomm cancel">추천취소하기</button>
+                            </a>
+                        </c:if>
+                        <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
+                            신고하기
+                        </button>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+        </div>
         <hr>
 
         <div id="file"></div>
@@ -316,25 +340,7 @@
                 <td><a id="totalRecommend">${recomm }</a></td>
             </tr>
         </table>
-        <c:if test="${isLogin > 0}">
-            <div id="reBtn">
-                <div class="recommendBtn doRedomm">
-                    <c:if test="${empty isRecomm or isRecomm eq 0 }">
-                        <a>
-                            <button class="doRecomm do">추천하기</button>
-                        </a>
-                    </c:if>
-                    <c:if test="${not empty isRecomm and isRecomm eq 1 }">
-                        <a>
-                            <button class="doRecomm cancel">추천취소하기</button>
-                        </a>
-                    </c:if>
-                    <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
-                        신고하기
-                    </button>
-                </div>
-            </div>
-        </c:if>
+
         <hr>
         <div class="comment">
             <table border="1px" style="width: 80%; text-align: center;">

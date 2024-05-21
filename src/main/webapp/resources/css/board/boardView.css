@@ -12,6 +12,13 @@ body {
     line-height: 1.6;
 }
 
+.tit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
 .header {
     background: #87cefa;
     color: white;

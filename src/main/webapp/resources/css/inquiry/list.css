@@ -1,0 +1,91 @@
+/* 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f9f9f9;
+}
+
+tr:hover {
+    background: #f1f1f1;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+button#deleteBtn {
+    background: #dc3545;
+}
+
+button#deleteBtn:hover {
+    background: #c82333;
+}
+
+a button {
+    margin-top: 10px;
+    background: #28a745;
+}
+
+a button:hover {
+    background: #218838;
+}
+
+.checkbox, .sender, .inquiryDetail, .date, .answer, .save {
+    text-align: center;
+}
+
+.asnwer input[type="checkbox"] {
+    margin-left: 15px;
+}
+.deletebutton{
+    float: right;
+}

@@ -73,7 +73,7 @@
                 </c:when>
                 <c:otherwise>
                     <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
-                    <a href='<%=request.getContextPath()%>/message/'>문의하기</a>
+                    <a href='<%=request.getContextPath()%>/inquiry/'>문의하기</a>
                     <a href='<%=request.getContextPath()%>/order/history'>구매기록</a>
                 </c:otherwise>
             </c:choose>

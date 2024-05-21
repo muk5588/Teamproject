@@ -7,6 +7,7 @@
   Time: 오후 12:47
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" type="text/css" href="/resources/css/user/userDetail.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

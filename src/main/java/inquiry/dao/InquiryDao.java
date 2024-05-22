@@ -2,6 +2,7 @@ package inquiry.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -44,5 +45,6 @@ public interface InquiryDao {
 
 	//페이징 위해 개수 확인
 	public int getCount(Paging paging);
+
 	
 }

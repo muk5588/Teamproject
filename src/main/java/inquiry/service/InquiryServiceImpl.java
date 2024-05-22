@@ -1,6 +1,8 @@
 package inquiry.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,13 +78,13 @@ public class InquiryServiceImpl implements InquiryService {
     public List<Inquiry> getAllInquiries(Paging paging) {
         return inquiryDao.getAllInquiries(paging);
     }
-
+    
+    // 문의 목록을 페이징하는 메서드
 	@Override
 	public Paging getPaging(int curPage, Paging paging) {
 		int totalCount = inquiryDao.getCount(paging);
 		Paging pagingres = new Paging(totalCount, curPage);
 		return pagingres;
 	}
-
 
 }

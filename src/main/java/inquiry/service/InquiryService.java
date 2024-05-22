@@ -42,5 +42,6 @@ public interface InquiryService {
 	 * @return - 페이징 객체
 	 */
 	public Paging getPaging(int curPage, Paging paging);
+	
 
 }

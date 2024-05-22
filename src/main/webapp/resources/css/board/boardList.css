@@ -30,6 +30,7 @@ button {
     transition: background 0.3s ease;
 }
 
+
 button:hover {
     background: #39a9db;
 }
@@ -43,12 +44,15 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1em;
+
 }
 
 table, th, td {
     border: 1px solid #ddd;
 }
-
+td{
+    height: 20%;
+}
 th, td {
     text-align: center;
     padding: 0.3em;

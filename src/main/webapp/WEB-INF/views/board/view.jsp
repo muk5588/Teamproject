@@ -314,28 +314,31 @@
             <tr>
                 <th>글 번호</th>
                 <th>제목</th>
-                <th>본문</th>
-                <th>작정자닉네임</th>
+                <th>작성자</th>
                 <th>조회수</th>
-                <th>최초작성일</th>
+                <th>작성일</th>
                 <th>추천수</th>
             </tr>
-
             <tr>
                 <td>
                     <div id="fileDown"></div>
                 </td>
             </tr>
-            <tr>
+            <tr class="con">
                 <td class="no">${board.boardNo }</td>
                 <td class="title">${board.title }</td>
-                <td class="content">${board.content }</td>
                 <td class="nick">${board.nickName }</td>
                 <td class="hit">${board.boardView }</td>
                 <td class="date">
                     <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
                 </td>
                 <td><a id="totalRecommend">${recomm }</a></td>
+            </tr>
+            <tr>
+                <th colspan="6">본문</th>
+            </tr>
+            <tr class="con">
+                <td class="content" colspan="6">${board.content }</td>
             </tr>
         </table>
 

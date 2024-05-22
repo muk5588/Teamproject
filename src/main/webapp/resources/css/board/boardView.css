@@ -66,7 +66,9 @@ table {
     margin-bottom: 1em;
     height: 10%
 }
-
+.table{
+    height: 20%;
+}
 table, th, td {
     border: 1px solid #ddd;
 }
@@ -89,11 +91,16 @@ th {
 #commentInput table {
     width: 100%;
     border: none;
+    text-align: center;
 }
 
-#commentInput th, #commentInput td {
+#commentInput th {
+    padding: 0.5em;
+}
+#commentInput td{
     border: none;
     padding: 0.5em;
+
 }
 
 #commentInput input[type="text"], #commentInput input[name="commentContent"] {

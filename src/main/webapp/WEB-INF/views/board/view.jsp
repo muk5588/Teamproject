@@ -107,10 +107,10 @@
                     $(".cancle").toggle()
 
                     if (res) {
-                         $(function () {
-                             $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
+                        $(function () {
+                            $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
                         })
-                     }
+                    }
                 }
                 , error: function () {
                     console.log("AJAX 실패")
@@ -169,7 +169,7 @@
 
                 $.ajax({
                     type: "get"
-                    , url: "../comment/delete"
+                    , url: "/comment/delete"
                     , data: {
                         boardno: ${board.boardNo}
                         , commentno: value
@@ -263,54 +263,54 @@
 
         <h1>상세보기</h1>
         <div class="tit">
-        <div>
-        <c:choose>
-            <c:when test="${usrno != 0 }">
-                <a href="./userbyboardlist?userno=${dto1.userno}">
-                    <button>목록으로</button>
-                </a>
-            </c:when>
-            <c:otherwise>
-                <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}">
-                    <button>목록으로</button>
-                </a>
-            </c:otherwise>
-        </c:choose>
-        <c:if test="${board.userNo == dto1.userno }">
-            <a href="./update?boardNo=${board.boardNo }">
-                <button id="btnUpdate">수정</button>
-            </a>
-            <a href="./delete?boardNo=${board.boardNo }">
-                <button id="btnDelete">삭제</button>
-            </a>
-        </c:if>
-        </div>
-        <div>
-            <c:if test="${isLogin > 0}">
-                <div id="reBtn">
-                    <div class="recommendBtn doRedomm">
-                        <c:if test="${empty isRecomm or isRecomm eq 0 }">
-                            <a>
-                                <button class="doRecomm do">추천하기</button>
-                            </a>
-                        </c:if>
-                        <c:if test="${not empty isRecomm and isRecomm eq 1 }">
-                            <a>
-                                <button class="doRecomm cancel">추천취소하기</button>
-                            </a>
-                        </c:if>
-                        <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
-                            신고하기
-                        </button>
+            <div>
+                <c:choose>
+                    <c:when test="${usrno != 0 }">
+                        <a href="./userbyboardlist?userno=${dto1.userno}">
+                            <button>목록으로</button>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="./list?categoryNo=${param.categoryNo}&curPage=${curPage}">
+                            <button>목록으로</button>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+                <c:if test="${board.userNo == dto1.userno }">
+                    <a href="./update?boardNo=${board.boardNo }">
+                        <button id="btnUpdate">수정</button>
+                    </a>
+                    <a href="./delete?boardNo=${board.boardNo }">
+                        <button id="btnDelete">삭제</button>
+                    </a>
+                </c:if>
+            </div>
+            <div>
+                <c:if test="${isLogin > 0}">
+                    <div id="reBtn">
+                        <div class="recommendBtn doRedomm">
+                            <c:if test="${empty isRecomm or isRecomm eq 0 }">
+                                <a>
+                                    <button class="doRecomm do">추천하기</button>
+                                </a>
+                            </c:if>
+                            <c:if test="${not empty isRecomm and isRecomm eq 1 }">
+                                <a>
+                                    <button class="doRecomm cancel">추천취소하기</button>
+                                </a>
+                            </c:if>
+                            <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
+                                신고하기
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </c:if>
-        </div>
+                </c:if>
+            </div>
         </div>
         <hr>
 
         <div id="file"></div>
-        <table class="table table-striped table-hover table-sm">
+        <table class="table">
             <tr>
                 <th>글 번호</th>
                 <th>제목</th>
@@ -344,7 +344,7 @@
 
         <hr>
         <div class="comment">
-            <table border="1px" style="width: 80%; text-align: center;">
+            <table>
                 <tr>
                     <th>댓글 순번</th>
                     <th>작성자</th>
@@ -357,6 +357,8 @@
                         <th>삭제</th>
                     </c:if>
                 </tr>
+                <c:choose>
+                <c:when test="${not empty comment }">
                 <c:forEach var="comment" items="${comment }">
                     <tr>
                         <td class="no">${comment.commNo}</td>
@@ -379,20 +381,29 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+
+            </c:when>
+            <c:when test="${empty comment }">
+                <td colspan="7">
+                    댓글이 존재하지 않습니다
+                </td>
+            </c:when>
+            </c:choose>
             </table>
         </div>
+        <hr>
+        <br>
         <c:if test="${isLogin > 0}">
             <div id="commentInput">
-                <hr>
-                <br>
                 <table>
+                    <tr hidden="hidden">
+                        <td><input type="text" value="${dto1.userno }" id="userid" name="userid"></td>
+                    </tr>
                     <tr>
-                        <th></th>
                         <th>닉네임</th>
                         <th>댓글내용</th>
                     </tr>
                     <tr>
-                        <td><input type="hidden" value="${dto1.userno }" id="userid" name="userid"></td>
                         <td><input class="form-control" type="text" value="${dto1.nickname }" id="commentWriter"
                                    aria-label="Disabled input example" disabled style="text-align: center;"></td>
                         <td>

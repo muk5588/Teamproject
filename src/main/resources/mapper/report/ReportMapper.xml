@@ -4,7 +4,12 @@
 	<select id="reportType" resultType="BoardReportType">
 		select REPORTTYPENO, REPORTTYPE from BOARDREPORTTYPE order by REPORTTYPENO
 	</select>
-
+	<select id="reportboardlist" resultType="BoardReport">
+		select BOARDNO from BOARDREPORT
+	</select>
+	<select id="reportcommlist" resultType="CommReport">
+		select COMMNO from COMMREPORT
+	</select>
 	<insert id="reportBoard" parameterType="BoardReport">
 		insert into BOARDREPORT(boardreportno, boardno, userno, reporttypeno, reportcontent, reportdate)
 		values (BOARDREPORT_SEQ.nextval,#{boardNo},#{userNo},#{reportTypeNo},#{reportContent},sysdate + 9/24)

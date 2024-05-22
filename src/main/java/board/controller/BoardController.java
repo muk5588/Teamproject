@@ -11,6 +11,9 @@
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
  import org.springframework.web.multipart.MultipartFile;
+ import report.dto.BoardReport;
+ import report.dto.CommReport;
+ import report.service.ReportService;
  import user.dto.User;
  import util.Paging;
  import vo.GoodVO;
@@ -20,10 +23,11 @@
  import javax.servlet.http.HttpServletResponse;
  import javax.servlet.http.HttpSession;
  import java.util.ArrayList;
+ import java.util.Iterator;
  import java.util.List;
  import java.util.Map;
 
-@Controller
+ @Controller
 @RequestMapping("/board")
 public class BoardController {
 	
@@ -31,6 +35,7 @@ public class BoardController {
 	@Autowired private BoardService boardService;
 	@Autowired private FileService fileService;
 	@Autowired private ServletContext servletContext;
+	@Autowired private ReportService reportService;
 	
 	@GetMapping("/list")
 	public String list(
@@ -93,7 +98,18 @@ public class BoardController {
 	        recommList = boardService.getuserRecommendRes(list);
 			name = "전체";
 	    }
+		List<BoardReport> reportlist = reportService.reportboardlist();
+		Iterator<Board> iterator = list.iterator();
 
+		while (iterator.hasNext()) {
+			Board board = iterator.next();
+			for (BoardReport report : reportlist) {
+				if (report.getBoardNo() == board.getBoardNo()) {
+					iterator.remove();
+					break; // 현재 보드가 삭제되었으므로 내부 루프 종료
+				}
+			}
+		}
 //	    logger.debug("list : {}", list);
 //	    logger.debug("recommList : {}", recommList);
 	    for(Board M : list) {
@@ -139,6 +155,18 @@ public class BoardController {
 			recomm = good.getTotalRecomm();
 		}
 		List<Comment> comment = boardService.commentList(board);
+//		신고된 댓글 블러 처리
+		List<CommReport> reportlist = reportService.reportcommlist();
+		Iterator<Comment> iterator = comment.iterator();
+		while (iterator.hasNext()) {
+			Comment comment2 = iterator.next();
+			for (CommReport report : reportlist) {
+				if (report.getCommNo() == comment2.getCommNo()) {
+					iterator.remove();
+					break;
+				}
+			}
+		}
 		model.addAttribute("comment", comment);
 		model.addAttribute("recomm", recomm);
 		logger.info("recomm : {}", recomm);

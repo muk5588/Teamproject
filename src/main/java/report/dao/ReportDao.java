@@ -37,4 +37,8 @@ public interface ReportDao {
 	public List<ItemReport> itemlist();
 
 	public void deleteItemReport(int reportno);
+
+    public List<BoardReport> reportboardlist();
+
+    public List<CommReport> reportcommlist();
 }

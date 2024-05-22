@@ -80,4 +80,14 @@ ReportDao reportDao;
 	public void deleteItemReport(int reportno) {
 		reportDao.deleteItemReport(reportno);
 	}
+
+    @Override
+    public List<BoardReport> reportboardlist() {
+        return reportDao.reportboardlist();
+    }
+
+    @Override
+    public List<CommReport> reportcommlist() {
+        return reportDao.reportcommlist();
+    }
 }

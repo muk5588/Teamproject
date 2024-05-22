@@ -1,14 +1,13 @@
 package report.service;
 
+import dto.Item;
+import dto.ItemReport;
+import dto.ItemReportType;
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
 import report.dto.CommReport;
 
 import java.util.List;
-
-import dto.Item;
-import dto.ItemReport;
-import dto.ItemReportType;
 
 public interface ReportService {
     public List<BoardReportType> reportType();
@@ -50,4 +49,10 @@ public interface ReportService {
 	public List<ItemReport> itemlist();
 
 	public void deleteItemReport(int reportno);
+	/**
+	 * 신고된글 안보이게 처리*/
+
+	public List<BoardReport> reportboardlist();
+
+	List<CommReport> reportcommlist();
 }

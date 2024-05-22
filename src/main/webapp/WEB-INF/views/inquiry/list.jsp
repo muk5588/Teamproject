@@ -78,7 +78,7 @@ $(function(){
 </script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/layout/smallheader.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <h1>고객문의함</h1>
 <hr>
 <div id="content">

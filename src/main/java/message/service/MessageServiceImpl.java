@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import dto.Message;
 import message.dao.MessageDao;
 import user.dto.User;
+import util.Paging;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -50,6 +51,12 @@ public class MessageServiceImpl implements MessageService {
 	public List<Message> getListBySendUser(int sendUser) {
 		return messageDao.getListBySendUser(sendUser);
 	}//getListBySendUser(int sendUser)
+
+	@Override
+	public Paging messagePaging(Paging paging, int curPage, int userNo) {
+		int totalCount = messageDao.getPaging(paging,userNo);
+		return null;
+	}
 
 	
 }

@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message.dao.MessageDao">
 
+<sql id="">
+	<if test="search != null">
+		AND content LIKE '%' || #{search} || '%'
+	</if>
+</sql>
+
+
 <select id="userCntByNickName" resultType="int" parameterType="String">
 	SELECT count(*) FROM userTB
 	WHERE nickname = #{touser}
@@ -60,5 +67,16 @@
 	WHERE d.SENDUSERNO = #{userNo}
 	ORDER BY d.SENDDATE DESC 
 </select>
+
+<select id="getPaging" parameterType="map" resultType="int">
+	SELECT count(*) FROM (
+		SELECT * FROM message
+		<where>
+			AND toUserNo = #{userNo}
+			<include refid="search"/>
+		</where>
+	)
+</select>
+
 
 </mapper>

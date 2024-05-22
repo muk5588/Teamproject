@@ -1,7 +1,11 @@
 package message.controller;
 
-import dto.Message;
-import message.service.MessageService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import user.dto.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import dto.Message;
+import message.service.MessageService;
+import user.dto.User;
+import util.Paging;
 
 @Controller
 @RequestMapping("/message")
@@ -53,8 +56,18 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/list")
-	public void list(HttpSession session, HttpServletRequest res) {
+	public void list(HttpSession session, HttpServletRequest res,
+			@RequestParam(name="curPage", defaultValue = "0")int curPage
+			,@RequestParam(name = "search", required = false)String search) {
 		int userNo = (int) session.getAttribute("isLogin");
+		Paging paging = new Paging();
+		if( search != null) {
+			paging.setSearch(search);
+		}
+		paging = messageService.messagePaging(paging,curPage,userNo);
+		if( search != null) {
+			paging.setSearch(search);
+		}
 		List<Message> list = messageService.getListByUserno(userNo);
 		for(Message m : list) {
 			logger.debug("m : {}", m);

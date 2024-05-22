@@ -87,34 +87,6 @@
             <a href="#" id="login-button">로그인</a>
             </div>
         </div> -->
-        <div style="position: absolute; right: 0; top: 35px; margin-right: 100px;">
-            <!-- 로그인한 경우 -->
-            <c:if test="${not empty isLogin}">
-                <ul>
-                    <li>${dto1.name } <a href="/user/userDetail">[${dto1.nickname } ]</a></li>
-                    <li><a class="btn-fill" href="<%=request.getContextPath()%>/login/logout">로그아웃</a></li>
-                    <c:choose>
-                        <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                            <br>
-                            <a href="/user/adminPage" style="margin-left: 90px">관리자페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                            <br>
-                            <a href="/user/userDetail">마이페이지</a>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </c:if>
-
-            <!-- 로그인하지 않은 경우 -->
-            <c:if test="${empty isLogin }">
-                <ul>
-                    <li><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></li>
-                    <li><a class="btn-fill" href="/user/insertUser">회원가입</a></li>
-                </ul>
-            </c:if>
-        </div>
-
     </header>
 </div>
 

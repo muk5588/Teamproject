@@ -135,25 +135,44 @@ public class InquiryController {
     }
 
     // 관리자용 문의 목록을 요청하는 메서드
+//    @RequestMapping("/adminList")
+//    public String adminList(HttpSession session, Model model,@RequestParam(defaultValue ="0") int curPage
+//    		,@RequestParam(name="search", required = false)String search
+//    		) {
+//    	String URL = "/inquiry/adminList";
+//    	Paging paging = new Paging();
+//    	if( search != null && !"".equals(search)) {
+//    		paging.setSearch(search);
+//    	}
+//    	paging = inquiryService.getPaging(curPage,paging);
+//    	if( search != null && !"".equals(search)) {
+//    		paging.setSearch(search);
+//    	}
+//        List<Inquiry> inquiries = inquiryService.getAllInquiries(paging);
+//        model.addAttribute("paging", paging);
+//        model.addAttribute("URL", URL);
+//        session.setAttribute("adminList", inquiries);
+//        model.addAttribute("list", inquiries);
+//        return "/inquiry/adminList"; 
+//    }
+    
     @RequestMapping("/adminList")
-    public String adminList(HttpSession session, Model model,@RequestParam(defaultValue ="0") int curPage
-    		,@RequestParam(name="search", required = false)String search
-    		) {
-    	String URL = "/inquiry/adminList";
-    	Paging paging = new Paging();
-    	if( search != null && !"".equals(search)) {
-    		paging.setSearch(search);
-    	}
-    	paging = inquiryService.getPaging(curPage,paging);
-    	if( search != null && !"".equals(search)) {
-    		paging.setSearch(search);
-    	}
+    public String adminList(HttpSession session, Model model, @RequestParam(defaultValue = "0") int curPage,
+            @RequestParam(name = "search", required = false) String search) {
+        String URL = "/inquiry/adminList";
+        Paging paging = new Paging();
+        if (search != null && !"".equals(search)) {
+            paging.setSearch(search);
+        }
+        paging = inquiryService.getPaging(curPage, paging);
+        if (search != null && !"".equals(search)) {
+            paging.setSearch(search);
+        }
         List<Inquiry> inquiries = inquiryService.getAllInquiries(paging);
         model.addAttribute("paging", paging);
         model.addAttribute("URL", URL);
         session.setAttribute("adminList", inquiries);
         model.addAttribute("list", inquiries);
-        return "/inquiry/adminList"; 
+        return "/inquiry/adminList";
     }
-    
 }

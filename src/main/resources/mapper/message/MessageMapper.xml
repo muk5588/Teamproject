@@ -68,7 +68,7 @@
 	ORDER BY d.SENDDATE DESC 
 </select>
 
-<select id="getPaging" parameterType="map" resultType="int">
+<!-- <select id="getPaging" parameterType="map" resultType="int">
 	SELECT count(*) FROM (
 		SELECT * FROM message
 		<where>
@@ -76,7 +76,7 @@
 			<include refid="search"/>
 		</where>
 	)
-</select>
+</select> -->
 
 
 </mapper>

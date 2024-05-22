@@ -1,3 +1,4 @@
+<!-- adminList.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의함</title>
+<title>관리자 문의함</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/inquiry/list.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
@@ -43,7 +44,7 @@ $(function(){
             dataType:"json",
             success: function(res){
                 console.log("AJAX 성공");
-                $(location).attr('href', './list');
+                $(location).attr('href', './adminList');
             },
             error: function(){
                 console.log("AJAX 실패");
@@ -51,21 +52,35 @@ $(function(){
         });
     });
 
-    $("#popupsendForm").click(function() {
-        var popOption = "width=500px, height=500px, top=300px, left=300px";
-        var openUrl = './sendForm';
-        window.open(openUrl, 'popup', popOption);
+    $(".inquiryTitle").click(function() {
+        var complete = $(this).closest("tr").find(".read").text().trim();
+        var inquiryNo = $(this).closest("tr").find(".inquiryNo").text().trim();
+        if (complete === 'N') {
+            var inquiryDetail = $(this).text();
+            var popOption = "width=500px, height=500px, top=300px, left=300px";
+            var openUrl = './sendForm?mode=answer&inquiryNo=' + inquiryNo + '&inquiryDetail=' + encodeURIComponent(inquiryDetail);
+            window.open(openUrl, 'popup', popOption);
+        } else if (complete === 'Y') {
+            var content = $(this).text();
+            var answer = $(this).closest("tr").find(".answer").text();
+            var answerDate = $(this).closest("tr").find(".answerDate").text();
+            var slideContent = "<tr class='answerSlide'><td colspan='6'>" + answer + answerDate + "</td></tr>";
+            if ($(this).closest("tr").next(".answerSlide").length) {
+                $(this).closest("tr").next(".answerSlide").remove();
+            } else {
+                $(this).closest("tr").after(slideContent);
+            }
+        }
     });
-
+    
 });
 </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/smallheader.jsp" />
-<h1>고객문의함</h1>
+<h1>관리자 문의함</h1>
 <hr>
 <div id="content">
-    <button id="popupsendForm">문의하기</button>
     <a href="/"><button>홈으로</button></a>
     <button id="deleteBtn" class="deletebutton">삭제하기</button>
     <table>
@@ -84,11 +99,19 @@ $(function(){
                 </td>
                 <td class="inquiryNo">${inquiry.inquiryNo}</td>
                 <td class="sender">${inquiry.userNo}</td>
-                <td class="content">${inquiry.inquiryDetail}</td>
+                <td class="content inquiryTitle" data-inquiryNo="${inquiry.inquiryNo}" data-inquiryDetail="${inquiry.inquiryDetail}">
+                    ${inquiry.inquiryDetail}
+                </td>
                 <td class="date">
                     <fmt:formatDate value="${inquiry.inquiryDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
-                <td class="read">${inquiry.complete}</td>
+                <td class="read">
+                    <c:choose>
+                        <c:when test="${inquiry.complete == 'Y'}">Y</c:when>
+                        <c:otherwise>N</c:otherwise>
+                    </c:choose>
+                </td>
+                
             </tr>
         </c:forEach>
     </table>

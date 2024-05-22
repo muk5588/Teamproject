@@ -1,6 +1,5 @@
 package inquiry.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import user.dto.User;
 @Service
 public class InquiryServiceImpl implements InquiryService{
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired InquiryDao inquiryDao;
 	
 
@@ -59,6 +59,11 @@ public class InquiryServiceImpl implements InquiryService{
 	@Override
 	public List<Inquiry> getListByManagerNo(int i) {
 		return inquiryDao.getListByManagerNo(i);
+	}
+
+	@Override
+	public List<Inquiry> getAllInquiries() {
+		return inquiryDao.getAllInquiries();
 	}
 
 

@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,41 +80,22 @@ public class InquiryController {
         return deleteCount;
     }
     
-//    @ResponseBody
-//    @RequestMapping("/answerProc")
-//    public int answerProc(@RequestParam("inquiryNo") int inquiryNo, @RequestParam("check") boolean check) {
-//        logger.debug("inquiryNo : {}", inquiryNo);
-//        logger.debug("check : {}", check);
-//
-//        String complete = check ? "Y" : "N";
-//
-//        Inquiry answerInquiry = new Inquiry();
-//        answerInquiry.setAnswer(complete);
-//        answerInquiry.setInquiryNo(inquiryNo);
-//
-//        return inquiryService.answerUpdateByAnswer(answerInquiry);
-//    }
-    
     @ResponseBody
     @RequestMapping("/answerProc")
-    public int answerProc(@RequestParam("inquiryNo") int inquiryNo, @RequestParam("answer") String answer) {
+    public int answerProc(@RequestParam("inquiryNo") int inquiryNo, 
+                          @RequestParam("answer") String answer) {
         logger.debug("inquiryNo : {}", inquiryNo);
         logger.debug("answer : {}", answer);
 
-        // Complete 값을 'Y'로 설정하여 문의에 대한 답변이 완료되었음을 표시
-        String complete = "Y";
-        
-        // 답변 작성일을 현재 시간으로 설정
-        Date answerDate = new Date();
+        String complete = "Y"; // Complete 값을 'Y'로 설정하여 문의에 대한 답변이 완료되었음을 표시
+        Date answerDate = new Date(); // 현재 시간을 답변 일자로 설정
 
-        // Inquiry 객체 생성 및 값 설정
         Inquiry inquiry = new Inquiry();
         inquiry.setInquiryNo(inquiryNo);
         inquiry.setAnswer(answer);
-        inquiry.setAnswerDate(answerDate);
         inquiry.setComplete(complete);
+        inquiry.setAnswerDate(answerDate); // 답변일자 설정
 
-        // InquiryService를 통해 Complete 값을 업데이트
         int result = inquiryService.updateInquiry(inquiry);
 
         return result;
@@ -138,5 +121,11 @@ public class InquiryController {
         return "/inquiry/adminList"; 
     }
 
+    @GetMapping("/adminList")
+    public String adminList(Model model) {
+        List<Inquiry> inquiries = inquiryService.getAllInquiries();
+        model.addAttribute("list", inquiries);
+        return "inquiry/adminList";
+    }
     
 }

@@ -1,6 +1,4 @@
-<!-- adminList.jsp -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -61,10 +59,9 @@ $(function(){
             var openUrl = './sendForm?mode=answer&inquiryNo=' + inquiryNo + '&inquiryDetail=' + encodeURIComponent(inquiryDetail);
             window.open(openUrl, 'popup', popOption);
         } else if (complete === 'Y') {
-            var content = $(this).text();
-            var answer = $(this).closest("tr").find(".answer").text();
-            var answerDate = $(this).closest("tr").find(".answerDate").text();
-            var slideContent = "<tr class='answerSlide'><td colspan='6'>" + answer + answerDate + "</td></tr>";
+            var answer = $(this).closest("tr").find(".answer").text().trim();
+            var answerDate = $(this).closest("tr").find(".answerDate").text().trim();
+            var slideContent = "<tr class='answerSlide'><td colspan='6'><b>답변 내용:</b> " + answer + "<br><b>답변 날짜:</b> " + answerDate + "</td></tr>";
             if ($(this).closest("tr").next(".answerSlide").length) {
                 $(this).closest("tr").next(".answerSlide").remove();
             } else {
@@ -72,7 +69,6 @@ $(function(){
             }
         }
     });
-    
 });
 </script>
 </head>
@@ -93,27 +89,29 @@ $(function(){
             <th>답변 여부</th>
         </tr>
         <c:forEach items="${list}" var="inquiry">
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" value="${inquiry.inquiryNo}" name="deleteNum" class="delCheckBox">
-                </td>
-                <td class="inquiryNo">${inquiry.inquiryNo}</td>
-                <td class="sender">${inquiry.userNo}</td>
-                <td class="content inquiryTitle" data-inquiryNo="${inquiry.inquiryNo}" data-inquiryDetail="${inquiry.inquiryDetail}">
-                    ${inquiry.inquiryDetail}
-                </td>
-                <td class="date">
-                    <fmt:formatDate value="${inquiry.inquiryDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                </td>
-                <td class="read">
-                    <c:choose>
-                        <c:when test="${inquiry.complete == 'Y'}">Y</c:when>
-                        <c:otherwise>N</c:otherwise>
-                    </c:choose>
-                </td>
-                
-            </tr>
-        </c:forEach>
+    <tr>
+        <td class="checkbox">
+            <input type="checkbox" value="${inquiry.inquiryNo}" name="deleteNum" class="delCheckBox">
+        </td>
+        <td class="inquiryNo">${inquiry.inquiryNo}</td>
+        <td class="sender">${inquiry.userNo}</td>
+        <td class="content inquiryTitle" data-inquiryNo="${inquiry.inquiryNo}" data-inquiryDetail="${inquiry.inquiryDetail}">
+            ${inquiry.inquiryDetail}
+        </td>
+        <td class="date">
+            <fmt:formatDate value="${inquiry.inquiryDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+        </td>
+        <td class="read">
+            <c:choose>
+                <c:when test="${inquiry.complete == 'Y'}">Y</c:when>
+                <c:otherwise>N</c:otherwise>
+            </c:choose>
+        </td>
+        <!-- 아래 부분을 수정 -->
+        <td class="answer" style="display: none;">${inquiry.answer}</td>
+        <td class="answerDate" style="display: none;">${inquiry.answerDate}</td>
+    </tr>
+</c:forEach>
     </table>
     <br><br><br><br>
 </div>

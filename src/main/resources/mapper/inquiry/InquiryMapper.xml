@@ -3,41 +3,48 @@
 
 <mapper namespace="inquiry.dao.InquiryDao">
 
+    <!-- 특정 닉네임을 가진 사용자 수를 반환하는 쿼리 -->
     <select id="userCntByNickName" resultType="int" parameterType="String">
         SELECT count(*) FROM userTB
         WHERE nickname = #{touser}
     </select>
 
+    <!-- 특정 닉네임을 가진 사용자 정보를 반환하는 쿼리 -->
     <select id="getUserByNickName" resultType="User" parameterType="String">
         SELECT * FROM userTB
         WHERE nickname = #{touser}
     </select>
 
-    <insert id="insertInquiry" parameterType="dto.Inquiry">
-        <selectKey keyProperty="inquiryNo" order="BEFORE" resultType="int">
-            SELECT INQUIRY_SEQ.nextval FROM dual
-        </selectKey>
-        INSERT INTO inquiry(inquiryNo, userNo, inquiryDetail, managerNo, answer, complete, answerDate)
-        VALUES(#{inquiryNo}, #{userNo}, #{inquiryDetail}, #{managerNo}, #{answer}, #{complete}, #{answerDate})
-    </insert>
+    <!-- 문의를 삽입하는 쿼리 -->
+   <insert id="insertInquiry" parameterType="dto.Inquiry">
+    <selectKey keyProperty="inquiryNo" order="BEFORE" resultType="int">
+        SELECT INQUIRY_SEQ.nextval FROM dual
+    </selectKey>
+    	INSERT INTO inquiry(inquiryNo, userNo, inquiryDetail, managerNo, complete, inquiryDate)
+    	VALUES(#{inquiryNo}, #{userNo}, #{inquiryDetail}, #{managerNo}, 'N', SYSDATE)
+	</insert>
 
+    <!-- 특정 사용자 번호에 해당하는 문의 목록을 반환하는 쿼리 -->
     <select id="getListByUserno" parameterType="int" resultType="dto.Inquiry">
         SELECT * FROM inquiry
         WHERE userNo = #{userNo}
         ORDER BY inquiryDate DESC 
     </select>
 
+    <!-- 문의 번호에 해당하는 문의를 삭제하는 쿼리 -->
     <delete id="deleteByInquiryNo" parameterType="int">
         DELETE FROM inquiry
         WHERE inquiryNo = #{inquiryNo}
     </delete>
 
+    <!-- 문의 답변을 업데이트하는 쿼리 -->
     <update id="answerUpdateByAnswer" parameterType="dto.Inquiry">
         UPDATE inquiry
         SET answer = #{answer}
         WHERE inquiryNo = #{inquiryNo}
     </update>
 
+    <!-- 특정 보낸 사용자 번호에 해당하는 문의 목록을 반환하는 쿼리 -->
     <select id="getListBySendUser" parameterType="int" resultType="dto.Inquiry">
         SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
         FROM 
@@ -47,7 +54,8 @@
         ORDER BY m.INQUIRYDATE DESC
     </select>
 
-	<select id="getAllInquiries" resultType="dto.Inquiry">
+    <!-- 모든 문의 목록을 반환하는 쿼리 -->
+    <select id="getAllInquiries" resultType="dto.Inquiry">
         SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
         FROM 
             usertb u
@@ -55,19 +63,22 @@
         ORDER BY m.INQUIRYDATE DESC
     </select>
 
-	<select id="getListByManagerNo" parameterType="int" resultType="dto.Inquiry">
-    	SELECT * FROM inquiry
-    	WHERE managerNo = #{managerNo}
-    	ORDER BY inquiryDate DESC
-</select>	
+    <!-- 특정 매니저 번호에 해당하는 문의 목록을 반환하는 쿼리 -->
+    <select id="getListByManagerNo" parameterType="int" resultType="dto.Inquiry">
+        SELECT * FROM inquiry
+        WHERE managerNo = #{managerNo}
+        ORDER BY inquiryDate DESC
+    </select>
 
-	<update id="updateCompleteToY" parameterType="int">
-    	UPDATE inquiry
-    	SET complete = 'Y'
-    	WHERE inquiryNo = #{inquiryNo}
-	</update>
+    <!-- 문의 상태를 'Y'로 업데이트하는 쿼리 -->
+    <update id="updateCompleteToY" parameterType="int">
+        UPDATE inquiry
+        SET complete = 'Y'
+        WHERE inquiryNo = #{inquiryNo}
+    </update>
 
-	<update id="updateInquiry" parameterType="dto.Inquiry">
+    <!-- 문의 정보를 업데이트하는 쿼리 -->
+    <update id="updateInquiry" parameterType="dto.Inquiry">
     	UPDATE inquiry
     	SET
         	answer = #{answer},
@@ -75,6 +86,5 @@
         	answerDate = #{answerDate}
     	WHERE inquiryNo = #{inquiryNo}
 	</update>
-
 
 </mapper>

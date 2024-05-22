@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,34 +22,43 @@ import user.dto.User;
 @Controller
 @RequestMapping("/inquiry")
 public class InquiryController {    
-    
+
+    // Logger 선언
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    // InquiryService 의존성 주입
     @Autowired 
     private InquiryService inquiryService;
     
-    @RequestMapping("/")
-    public String inquiry() {
-        return "redirect:/inquiry/list";
-    }
-    
+    // Ajax로 문의를 보내는 메서드
     @ResponseBody
     @RequestMapping("/send")
     public int sendInquiry(String touser, String inquiryDetail, HttpSession session) {
+        // 로그 출력
         logger.debug("/send ajax 들어옴");
         logger.debug("touser : {}",touser);
         logger.debug("content : {}",inquiryDetail);
         
+        // 초기값 설정
         int res = 0;
+        
+        // 문의 내용이 비어있지 않은 경우
         if (inquiryDetail != null && !"".equals(inquiryDetail)) {
+            // 세션에서 사용자 정보 가져오기
             User user = (User) session.getAttribute("dto1");
             int sendUser = user.getUserno();
+            
+            // Inquiry 객체 생성 및 정보 설정
             Inquiry inquiry = new Inquiry();
             inquiry.setUserNo(sendUser);
             inquiry.setInquiryDetail(inquiryDetail);
             inquiry.setManagerNo(1); // 관리자 번호 1으로 설정
+            
+            // InquiryService를 통해 문의 등록
             res = inquiryService.insertInquiry(inquiry);
         }
         
+        // 문의 등록 성공시 세션에 문의 목록 갱신
         if (res > 0) {
             list(session);
         }
@@ -58,6 +66,7 @@ public class InquiryController {
         return res;
     }
     
+    // 문의 목록을 세션에 저장하는 메서드
     @RequestMapping("/list")
     public void list(HttpSession session) {
         User user = (User) session.getAttribute("dto1");
@@ -66,9 +75,11 @@ public class InquiryController {
         session.setAttribute("list", list);
     }
 
+    // 문의 보내기 페이지로 이동하는 메서드
     @RequestMapping("/sendForm")
     public void sendForm() {}
 
+    // 문의 삭제하는 메서드
     @ResponseBody
     @RequestMapping("/delete")
     public int delete(@RequestParam("inquiryNo") List<Integer> inquiryNo) {
@@ -80,6 +91,7 @@ public class InquiryController {
         return deleteCount;
     }
     
+    // 답변 처리하는 메서드
     @ResponseBody
     @RequestMapping("/answerProc")
     public int answerProc(@RequestParam("inquiryNo") int inquiryNo, 
@@ -87,20 +99,26 @@ public class InquiryController {
         logger.debug("inquiryNo : {}", inquiryNo);
         logger.debug("answer : {}", answer);
 
-        String complete = "Y"; // Complete 값을 'Y'로 설정하여 문의에 대한 답변이 완료되었음을 표시
-        Date answerDate = new Date(); // 현재 시간을 답변 일자로 설정
+        // 답변 처리를 완료했음을 표시하는 값 설정
+        String complete = "Y"; 
+        
+        // 현재 시간을 답변 일자로 설정
+        Date answerDate = new Date(); 
 
+        // Inquiry 객체 생성 및 정보 설정
         Inquiry inquiry = new Inquiry();
         inquiry.setInquiryNo(inquiryNo);
         inquiry.setAnswer(answer);
         inquiry.setComplete(complete);
         inquiry.setAnswerDate(answerDate); // 답변일자 설정
 
+        // 답변 처리 결과 반환
         int result = inquiryService.updateInquiry(inquiry);
 
         return result;
     }
     
+    // 사용자의 문의 목록을 요청하는 메서드
     @RequestMapping("/inquirylist")
     public void inquirylist(HttpSession session, HttpServletRequest request) {
         User user = (User) session.getAttribute("dto1");
@@ -114,18 +132,13 @@ public class InquiryController {
         request.setAttribute("list", list);
     }
 
+    // 관리자용 문의 목록을 요청하는 메서드
     @RequestMapping("/adminList")
-    public String adminList(HttpSession session) {
-        List<Inquiry> list = inquiryService.getListByManagerNo(1); 
-        session.setAttribute("adminList", list);
-        return "/inquiry/adminList"; 
-    }
-
-    @GetMapping("/adminList")
-    public String adminList(Model model) {
-        List<Inquiry> inquiries = inquiryService.getAllInquiries();
+    public String adminList(HttpSession session, Model model) {
+        List<Inquiry> inquiries = inquiryService.getAllInquiries(); 
+        session.setAttribute("adminList", inquiries);
         model.addAttribute("list", inquiries);
-        return "inquiry/adminList";
+        return "/inquiry/adminList"; 
     }
     
 }

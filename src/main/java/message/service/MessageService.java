@@ -6,6 +6,7 @@ import java.util.List;
 
 import dto.Message;
 import user.dto.User;
+import util.Paging;
 
 public interface MessageService {
 
@@ -50,6 +51,15 @@ public interface MessageService {
 	 * @return 조회된 전체 행
 	 */
 	public List<Message> getListBySendUser(int sendUser);
+
+	/**
+	 * 메세지 페이징
+	 * @param paging - 페이징 객체
+	 * @param curPage - 현재 페이지
+	 * @param userNo - 유저 번호 
+	 * @return - 페이징 객체
+	 */
+	public Paging messagePaging(Paging paging, int curPage, int userNo);
 
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import dto.Message;
 import user.dto.User;
+import util.Paging;
 
 @Repository("MessageDao")
 public interface MessageDao {
@@ -26,6 +27,8 @@ public interface MessageDao {
 	public int saveUpdateBySave(Message saveMessage);
 
 	public List<Message> getListBySendUser(int sendUser);
+
+	public int getPaging(@Param("paging")Paging paging, @Param("userNo")int userNo);
 
 	
 }

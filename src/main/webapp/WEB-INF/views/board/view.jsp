@@ -4,10 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link href="/resources/css/board/boardView.css" rel="stylesheet" type="text/css">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <style type="text/css">
 
     /* .wrap {
@@ -66,6 +63,7 @@
 
 </style>
 <script type="text/javascript">
+
     $(function () {
 
         $(document).ready(function () {
@@ -110,7 +108,7 @@
 
                     if (res) {
                          $(function () {
-                             $(location).attr('href', './view?boardNo=${board.boardNo }')
+                             $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
                         })
                      }
                 }

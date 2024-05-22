@@ -5,11 +5,42 @@
     <meta charset="UTF-8">
     <title>네이버 쪽지함 스타일 메뉴</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/boardMenu.css">
+    
+    <script>
+    // 검색을 수행하는 함수
+    function performSearch() {
+        var searchText = document.getElementById('search-input').value;
+        var searchKind = "title"; 
+        
+        // 검색어와 검색 조건을 사용하여 전체 게시물 페이지 URL을 생성합니다.
+        var searchUrl = "/board/list?searchKind=" + searchKind + "&search=" + encodeURIComponent(searchText);
+        
+        // 생성된 URL로 이동합니다.
+        window.location.href = searchUrl;
+    }
+
+    // 엔터키를 눌렀을 때 검색을 수행하는 함수
+    function handleKeyPress(event) {
+        // 엔터키의 keyCode는 13입니다.
+        if (event.keyCode === 13) {
+            performSearch(); // 검색을 수행합니다.
+        }
+    }
+
+    // 페이지 로드 시 실행될 초기화 함수
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('search-input');
+
+        // 검색 입력 필드에 이벤트 리스너를 추가합니다.
+        searchInput.addEventListener('keypress', handleKeyPress);
+    });
+	</script>
+    
 </head>
 <body>
 <div class="Header-Search">
-    <input type="text" placeholder="검색어를 입력하세요">
-    <img src="/resources/img/mainPage/search.png" alt="검색" id="search-icon">
+    <input type="text" placeholder="검색어를 입력하세요" id="search-input">
+    <img src="/resources/img/mainPage/search.png" alt="검색" id="search-icon" onclick="performSearch()">
 </div>
 
 <ul class="nav">

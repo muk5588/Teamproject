@@ -38,9 +38,9 @@ public class FileServiceImpl implements FileService {
 	public void filesave(Board board, MultipartFile file) {
 		//파일 업로드 경로 지정
 //		String storedPath = "/resources/boardupload";
-//		String storedPath = servletContext.getRealPath("/resources/boardUpload");
-		String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
-		String storedPath = documentsPath + File.separator + "boardUpload" + File.separator;
+		String storedPath = servletContext.getRealPath("/resources/boardUpload");
+//		String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
+//		String storedPath = documentsPath + File.separator + "boardUpload" + File.separator;
 		logger.info("storedPath : {}", storedPath);
 		
 		File storedFolder = new File(storedPath);
@@ -132,8 +132,9 @@ public class FileServiceImpl implements FileService {
 				//디렉토리 설정 및 업로드	
 				
 				//파일경로
-				String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
-				String filePath = documentsPath + File.separator + "boardUpload" + File.separator;
+				String filePath = servletContext.getRealPath("/resources/boardUpload/");
+//				String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
+//				String filePath = documentsPath + File.separator + "boardUpload" + File.separator;
 				logger.debug("filePath : {}", filePath);
 				File file = new File(filePath);
 				
@@ -165,7 +166,7 @@ public class FileServiceImpl implements FileService {
 				sFileInfo += "&bNewLine=true";
 				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 				sFileInfo += "&sFileName="+ sFilename;
-				sFileInfo += "&sFileURL="+filePath+sRealFileNm;
+				sFileInfo += "&sFileURL="+"\\resources\\boardUpload\\"+sRealFileNm;
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print(sFileInfo);
 				printWriter.flush();

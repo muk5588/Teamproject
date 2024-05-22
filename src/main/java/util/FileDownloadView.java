@@ -41,8 +41,9 @@ public class FileDownloadView extends AbstractView {
 		
 		//저장된 파일의 폴더 (upload)
 //		String path = servletContext.getRealPath("/resources/boardUpload");
-		String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
-		String path = documentsPath + File.separator + "boardUpload" + File.separator;
+		String path = servletContext.getRealPath("/resources/boardUpload");
+//		String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
+//		String path = documentsPath + File.separator + "boardUpload" + File.separator;
 		logger.info("path : {}",path);
 		
 		//실제 업로드된 파일의 이름

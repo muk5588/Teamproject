@@ -122,20 +122,16 @@
 
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+// 스마트 에디터 (사진파일 업로드 URL)
+var sUploadURL = '/board/fileupload';
+</script>
 <script type="text/javascript" src="/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var oEditors = [];
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: oEditors,
-        elPlaceHolder: "ir1",
-        sSkinURI: "/resources/editor/SmartEditor2Skin.html",
-        fCreator: "createSEditor2"
-    });
-
     //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
     function submitContents(elClickedObj) {
         // 에디터의 내용이 textarea에 적용된다.
-        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
 
         // 에디터의 내용에 대한 값 검증은 이곳에서
         // document.getElementById("ir1").value를 이용해서 처리한다.
@@ -147,19 +143,20 @@
     }
 
     function save() {
-        oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
-        //스마트 에디터 값을 텍스트컨텐츠로 전달
-        var content = document.getElementById("smartEditor").value;
-        //확인용. alert로 띄우기
-// 	alert(document.getElementById("txtContent").value); 
-        document.getElementById("content").value = document.getElementById("txtContent").value;
-        // 값을 불러올 땐 document.get으로 받아오기
+        // 에디터의 내용을 textarea에 업데이트합니다.
+        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        // 업데이트된 에디터 내용 가져오기
+        var content = document.getElementById("ir1").value;
+        // 확인용으로 alert에 내용 출력
+        alert(content);
+        // 숨겨진 input 요소에 내용 설정
+        document.getElementById("content").value = content;
+        // form 제출
         document.getElementById('btnWrite').click();
-        return;
     }
 
-    // 스마트 에디터 (사진파일 업로드 URL)
-    var sUploadURL = '/board/fileupload';
+
+
 </script>
 <script type="text/javascript">
     $(function () {
@@ -232,11 +229,11 @@
             <label for="content" class="form-label" >내용</label>
             <input type="text" class="form-control" id="content" hidden="hidden" name="content">
         </div>
-        <textarea rows="20" cols="10" id="txtContent" style="width: 100%;"></textarea>
         <div class="mb-3">
             <label for="file" class="form-label">첨부파일</label>
             <input type="file" id="file" name="file">
         </div>
+        <textarea rows="20" cols="10" id="ir1" name="ir1" class="ir1" style="width: 100%;"></textarea>
         <div id="se2_sample" style="margin: 10px 0;">
             <input type="button" onclick="save();" value="작성하기" class="btn">
         </div>
@@ -244,11 +241,11 @@
         <button hidden="hidden" id="btnWrite">작성하기</button>
     </form>
 </div>
-<script id="smartEditor" type="text/javascript">
+<script type="text/javascript">
     var oEditors = [];
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
-        elPlaceHolder: "txtContent",  //textarea ID 입력
+        elPlaceHolder: "ir1",  //textarea ID 입력
         sSkinURI: "/resources/editor/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
         fCreator: "createSEditor2",
         htParams: {
@@ -263,7 +260,6 @@
 </script>
 
 
-<%-- <jsp:include page="/resources/editor/SmartEditor2.html"/> --%>
 
 </body>
 </html>

@@ -17,7 +17,8 @@
                     inquiryDetail : $("#inquiryDetail").val(),
                     touser: $("#touser").val(),
                     inquiryNo: $("#inquiryNo").val(),
-                    answer: $("#answer").val()
+                    answer: $("#answer").val(),
+                    answerDate: $("#answerDate").val()
                 },
                 dataType: "json",
                 success: function (res) {
@@ -40,7 +41,9 @@
                 url: "./answerProc",
                 data: {
                     inquiryNo: $("#inquiryNo").val(),
-                    answer: $("#answer").val()
+                    answer: $("#answer").val(),
+                    answerDate: $("#answerDate").val()
+
                 },
                 dataType: "json",
                 success: function (res) {

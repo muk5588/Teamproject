@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-    $("#checkboxAllCheck").change(function(){
+    /* $("#checkboxAllCheck").change(function(){
         $(".delCheckBox").prop("checked", $(this).prop("checked"));
     });
 
@@ -49,7 +49,7 @@ $(function(){
                 console.log("AJAX 실패");
             }
         });
-    });
+    }); */
 
     $("#popupsendForm").click(function() {
         var popOption = "width=500px, height=500px, top=300px, left=300px";
@@ -65,7 +65,7 @@ $(function(){
             var content = $(this).text();
             var answer = $(this).closest("tr").find(".answer").text();
             var answerDate = $(this).closest("tr").find(".answerDate").text();
-            var slideContent = "<tr class='answerSlide'><td colspan='6'>" + answer + answerDate + "</td></tr>";
+            var slideContent = "<tr class='answerSlide'><td colspan='6'><b>답변 내용:</b> " + answer + "<br><b>답변 날짜:</b> " + answerDate + "</td></tr>";
             if ($(this).closest("tr").next(".answerSlide").length) {
                 $(this).closest("tr").next(".answerSlide").remove();
             } else {
@@ -84,10 +84,10 @@ $(function(){
 <div id="content">
     <button id="popupsendForm">문의하기</button>
     <a href="/"><button>홈으로</button></a>
-    <button id="deleteBtn" class="deletebutton">삭제하기</button>
+    <!-- <button id="deleteBtn" class="deletebutton">삭제하기</button> -->
     <table>
         <tr>
-            <th><input type="checkbox" id="checkboxAllCheck"></th>
+            <!-- <th><input type="checkbox" id="checkboxAllCheck"></th> -->
             <th>문의번호</th>
             <th>회원번호</th>
             <th>내용</th>
@@ -96,9 +96,9 @@ $(function(){
         </tr>
         <c:forEach items="${list}" var="inquiry">
             <tr>
-                <td class="checkbox">
+                <%-- <td class="checkbox">
                     <input type="checkbox" value="${inquiry.inquiryNo}" name="deleteNum" class="delCheckBox">
-                </td>
+                </td> --%>
                 <td class="inquiryNo">${inquiry.inquiryNo}</td>
                 <td class="sender">${inquiry.userNo}</td>
                 <td class="content">${inquiry.inquiryDetail}</td>
@@ -112,6 +112,7 @@ $(function(){
                     </c:choose>
                 </td>
                 <td class="answer" style="display: none;">${inquiry.answer}</td>
+        		<td class="answerDate" style="display: none;">${inquiry.answerDate}</td>
             </tr>
         </c:forEach>
     </table>

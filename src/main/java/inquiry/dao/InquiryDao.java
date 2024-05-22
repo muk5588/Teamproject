@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import dto.Inquiry;
 import user.dto.User;
+import util.Paging;
 
 @Repository("InquiryDao")
 public interface InquiryDao {
@@ -38,7 +39,10 @@ public interface InquiryDao {
 	// 특정 매니저 번호에 해당하는 문의 목록을 반환하는 메서드
 	public List<Inquiry> getListByManagerNo(int i);
 
-	// 모든 문의 목록을 반환하는 메서드
-	public List<Inquiry> getAllInquiries();
+	// 모든 문의 목록을 반환하는 메서드(+페이징)
+	public List<Inquiry> getAllInquiries(Paging paging);
+
+	//페이징 위해 개수 확인
+	public int getCount(Paging paging);
 	
 }

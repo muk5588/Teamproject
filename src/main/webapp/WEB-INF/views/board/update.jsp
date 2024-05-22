@@ -99,6 +99,9 @@
 		</div>
 		<hr>
 		<form action="./update" method="post" id="updateForm" enctype="multipart/form-data">
+			<div hidden="hidden">
+				<input type="text" class="form-control" id="boardNo" hidden="hidden" name="boardNo" value="${board.boardNo }">
+			</div>
 			<div class="mb-3">
 				<label for="categoryNo" class="form-label" style="margin-right: 30px">게시물 종류: </label>
 				<select name="categoryNo" id="categoryNo" placeholder="종류를 선택해 주세요" class="form-option">
@@ -113,7 +116,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="content" class="form-label" >내용</label>
-				<input type="text" class="form-control" id="content" hidden="hidden" name="content" value="${board.content }" >
+				<input type="text" class="form-control" id="content" hidden="hidden" name="content">
 			</div>
 			<div class="mb-3">
 				<label for="file" class="form-label">첨부파일</label>

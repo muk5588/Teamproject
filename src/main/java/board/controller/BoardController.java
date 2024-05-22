@@ -240,9 +240,9 @@ public class BoardController {
 			, Model model
 			) {
 		logger.info("{}",boardNo);
-		
+		List<Category> categorylist = boardService.categoryList();
 		Board board = boardService.boardView(boardNo);
-		
+		model.addAttribute("categorylist", categorylist);
 		model.addAttribute("board", board);
 	}
 	
@@ -255,7 +255,7 @@ public class BoardController {
 		int res = boardService.boardUpdate(board);
 		
 		if ( res > 0) {
-			return "redirect:./list";
+			return "redirect:/board/list";
 		}
 		return "./list";
 	}

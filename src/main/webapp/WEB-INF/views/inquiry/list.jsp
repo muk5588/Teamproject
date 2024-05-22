@@ -53,8 +53,25 @@ $(function(){
 
     $("#popupsendForm").click(function() {
         var popOption = "width=500px, height=500px, top=300px, left=300px";
-        var openUrl = './sendForm';
+        var openUrl = './sendForm?mode=inquiry';
         window.open(openUrl, 'popup', popOption);
+    });
+
+    // 답변을 보여주는 함수
+    $(".content").click(function() {
+        var complete = $(this).closest("tr").find(".read").text().trim();
+        var inquiryNo = $(this).closest("tr").find(".inquiryNo").text().trim();
+        if (complete === 'Y') {
+            var content = $(this).text();
+            var answer = $(this).closest("tr").find(".answer").text();
+            var answerDate = $(this).closest("tr").find(".answerDate").text();
+            var slideContent = "<tr class='answerSlide'><td colspan='6'>" + answer + answerDate + "</td></tr>";
+            if ($(this).closest("tr").next(".answerSlide").length) {
+                $(this).closest("tr").next(".answerSlide").remove();
+            } else {
+                $(this).closest("tr").after(slideContent);
+            }
+        }
     });
 
 });
@@ -88,7 +105,13 @@ $(function(){
                 <td class="date">
                     <fmt:formatDate value="${inquiry.inquiryDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
-                <td class="read">${inquiry.complete}</td>
+                <td class="read">
+                    <c:choose>
+                        <c:when test="${inquiry.complete == 'Y'}">Y</c:when>
+                        <c:otherwise>N</c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="answer" style="display: none;">${inquiry.answer}</td>
             </tr>
         </c:forEach>
     </table>

@@ -67,4 +67,14 @@
     	WHERE inquiryNo = #{inquiryNo}
 	</update>
 
+	<update id="updateInquiry" parameterType="dto.Inquiry">
+    	UPDATE inquiry
+    	SET
+        	answer = #{answer},
+        	complete = #{complete},
+        	answerDate = #{answerDate}
+    	WHERE inquiryNo = #{inquiryNo}
+	</update>
+
+
 </mapper>

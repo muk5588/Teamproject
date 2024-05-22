@@ -24,6 +24,7 @@ public interface InquiryService {
 
 	public List<Inquiry> getListByManagerNo(int i);
 
-	
+	public List<Inquiry> getAllInquiries();
+
 
 }

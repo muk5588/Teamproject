@@ -1,0 +1,113 @@
+.container {
+    width: 70%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    height: 70%;
+}
+
+/* 제목과 버튼 컨테이너 */
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 버튼 스타일 */
+.btn {
+    background: #87cefa;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    float: right;
+}
+
+button:hover, .btn:hover {
+    background: #39a9db;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: center;
+    padding: 0.3em;
+}
+
+th {
+    background: #f4f4f4;
+}
+
+/* 작성 버튼 섹션 스타일 */
+#btnWrite {
+    margin-top: 5px;
+}
+
+#btnWrite table {
+    width: 100%;
+    border: none;
+}
+
+#btnWrite th, #btnWrite td {
+    border: none;
+    padding: 0.5em;
+}
+
+#btnWrite input[type="text"], #btnWrite input[name="commentContent"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#btnWrite button {
+    margin-left: 1em;
+}
+
+/* 랩 스타일 */
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 2em;
+}
+
+#searchForm select, #searchForm input[type="text"] {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#searchForm button {
+    padding: 0.5em 1em;
+}
+
+/* 테이블 내 링크 스타일 */
+td a {
+    color: #333;
+}
+
+td a:hover {
+    text-decoration: underline;
+}

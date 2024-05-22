@@ -70,6 +70,7 @@
             //HTML전체 로딩이 끝나면 댓글을 비동기통신으로 가져오기 위해.
 //             handleGetFile();
             handleFileChk();
+            handleCommentDelete();
             $("#commentRefresh").click()
             if (${empty isRecomm or isRecomm eq 0}) {
                 $(".cancle").toggle()
@@ -171,8 +172,8 @@
                     type: "get"
                     , url: "/comment/delete"
                     , data: {
-                        boardno: ${board.boardNo}
-                        , commentno: value
+                    	boardNo: ${board.boardNo}
+                        , commNo: value
                     }
                     , dataType: "json"
                     , success: function (res) {
@@ -205,7 +206,7 @@
                 , success: function (res) {
                     console.log("AJAX 성공")
                     console.log(res)
-                    console.log(res[0].fileNo)
+//                     console.log(res[0].fileNo)
                     if (res.length > 0) {
                         var fileList = "";
                         fileList += '<p>첨부파일</p><br>'

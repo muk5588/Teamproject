@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import dto.Inquiry;
 import inquiry.service.InquiryService;
 import user.dto.User;
+import util.Paging;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -134,8 +136,21 @@ public class InquiryController {
 
     // 관리자용 문의 목록을 요청하는 메서드
     @RequestMapping("/adminList")
-    public String adminList(HttpSession session, Model model) {
-        List<Inquiry> inquiries = inquiryService.getAllInquiries(); 
+    public String adminList(HttpSession session, Model model,@RequestParam(defaultValue ="0") int curPage
+    		,@RequestParam(name="search", required = false)String search
+    		) {
+    	String URL = "/inquiry/adminList";
+    	Paging paging = new Paging();
+    	if( search != null && !"".equals(search)) {
+    		paging.setSearch(search);
+    	}
+    	paging = inquiryService.getPaging(curPage,paging);
+    	if( search != null && !"".equals(search)) {
+    		paging.setSearch(search);
+    	}
+        List<Inquiry> inquiries = inquiryService.getAllInquiries(paging);
+        model.addAttribute("paging", paging);
+        model.addAttribute("URL", URL);
         session.setAttribute("adminList", inquiries);
         model.addAttribute("list", inquiries);
         return "/inquiry/adminList"; 

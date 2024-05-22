@@ -3,6 +3,12 @@
 
 <mapper namespace="inquiry.dao.InquiryDao">
 
+<sql id="search">
+	<if test="search != null">
+		AND search Like #{search}
+	</if>
+</sql>
+
     <!-- 특정 닉네임을 가진 사용자 수를 반환하는 쿼리 -->
     <select id="userCntByNickName" resultType="int" parameterType="String">
         SELECT count(*) FROM userTB
@@ -55,12 +61,20 @@
     </select>
 
     <!-- 모든 문의 목록을 반환하는 쿼리 -->
-    <select id="getAllInquiries" resultType="dto.Inquiry">
-        SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
-        FROM 
-            usertb u
-            INNER JOIN inquiry m ON u.USERNO = m.USERNO
-        ORDER BY m.INQUIRYDATE DESC
+    <select id="getAllInquiries" resultType="dto.Inquiry" parameterType="util.Paging">
+        select * from (
+        	select rownum rnum, i.* from(
+		       SELECT u.nickname AS sender, m.INQUIRYNO, m.USERNO, m.MANAGERNO, m.INQUIRYDETAIL, m.INQUIRYDATE, m.ANSWER, m.COMPLETE, m.ANSWERDATE  	
+		       FROM 
+		           usertb u
+		           INNER JOIN inquiry m ON u.USERNO = m.USERNO
+		       ORDER BY m.INQUIRYDATE DESC
+		   ) i
+        )
+        <where>
+			 <include refid="search"/>
+			 AND rnum BETWEEN #{startNo } AND #{endNo}
+        </where>
     </select>
 
     <!-- 특정 매니저 번호에 해당하는 문의 목록을 반환하는 쿼리 -->
@@ -86,5 +100,15 @@
         	answerDate = #{answerDate}
     	WHERE inquiryNo = #{inquiryNo}
 	</update>
-
+	
+	<select id="getCount" resultType="int" parameterType="util.Paging">
+		select count(*) from(
+			SELECT inquiryNo, userNo FROM Inquiry
+			<where>
+				<include refid="search"/>
+			</where>
+		)
+	</select>
+	
+	
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dto.Inquiry;
 import user.dto.User;
+import util.Paging;
 
 public interface InquiryService {
 
@@ -31,7 +32,15 @@ public interface InquiryService {
 	// 특정 매니저 번호에 해당하는 문의 목록을 반환하는 메서드
 	public List<Inquiry> getListByManagerNo(int i);
 
-	// 모든 문의 목록을 반환하는 메서드
-	public List<Inquiry> getAllInquiries();
+	// 모든 문의 목록을 반환하는 메서드(+페이징)
+	public List<Inquiry> getAllInquiries(Paging paging);
+
+	/**
+	 * 페이징 처리
+	 * @param curPage - 현재 페이지
+	 * @param paging - 페이징 객체
+	 * @return - 페이징 객체
+	 */
+	public Paging getPaging(int curPage, Paging paging);
 
 }

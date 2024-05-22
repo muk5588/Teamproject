@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자 문의함</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/inquiry/list.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -113,6 +114,8 @@ $(function(){
     </tr>
 </c:forEach>
     </table>
+    <c:import url="/WEB-INF/views/layout/adminPaging.jsp" />
+    
     <br><br><br><br>
 </div>
 </body>

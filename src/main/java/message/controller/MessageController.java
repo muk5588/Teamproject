@@ -60,7 +60,11 @@ public class MessageController {
 	public void list(HttpSession session, HttpServletRequest res,
 			@RequestParam(name="curPage", defaultValue = "0")int curPage
 			,@RequestParam(name = "search", required = false)String search) {
-		int userNo = (int) session.getAttribute("isLogin");
+		User user = (User) session.getAttribute("dto1");
+		if( user == null) {
+			logger.debug("로그인 상태가 아님!");
+		}
+		int userNo = user.getUserno();
 		String URL = "/message/list";
 		res.setAttribute("URL", URL);
 		Paging paging = new Paging();
@@ -128,7 +132,10 @@ public class MessageController {
 		res.setAttribute("URL", URL);
 		Paging paging = new Paging();
 		User user = (User) session.getAttribute("dto1");
-		int userNo = (int) session.getAttribute("isLogin");
+		if( user == null) {
+			logger.debug("로그인 상태가 아님!");
+		}
+		int userNo = user.getUserno();
 		if( search != null) {
 			paging.setSearch(search);
 		}

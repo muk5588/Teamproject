@@ -11,7 +11,13 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
         $(function(){
-
+            $(".fold").hide(); // 페이지 로드시 fold 클래스 숨기기
+            
+            $(".view").click(function(){
+                // clickedView.next(".fold").toggle(); // 오류를 일으키는 원래 코드
+                $(this).next(".fold").toggle(); // 정정된 코드
+            });
+                
             $("#checkboxAllCheck").click(function(){
                 //attr => 속성값, prop해서 변경해야함
                 $(".delCheckBox").prop("checked", $(this).prop("checked"));
@@ -129,7 +135,7 @@
             <th>읽음</th>
         </tr>
         <c:forEach items="${list}" var="list">
-            <tr>
+            <tr class="view">
                 <td class="checkbox"><input type="checkbox" value="${list.messageNo }" name="deleteNum"
                                             class="delCheckBox"></td>
                 <td class="sender">${list.sender}</td>
@@ -138,6 +144,11 @@
                     <fmt:formatDate value="${list.sendDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
                 <td class="read">${list.read}</td>
+            </tr>
+            <tr class="fold">
+                <td colspan="5">
+                    <div class="fold-content">${list.content}</div>
+                </td>
             </tr>
         </c:forEach>
     </table>

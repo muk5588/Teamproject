@@ -73,7 +73,7 @@
 			SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
 			FROM 
 				(SELECT u.*, m.* FROM usertb u, message m
-				WHERE u.USERNO = m.SENDUSERNO 
+				WHERE u.USERNO = m.toUserNo 
 			) d
 			WHERE d.SENDUSERNO = #{userNo}
 			<if test="paging.search != null and !''.equals(paging.search)">

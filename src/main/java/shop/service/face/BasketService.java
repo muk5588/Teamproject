@@ -44,4 +44,11 @@ public interface BasketService {
 	 */
 	public Map<String, Object> userorderProc(int[] no);
 
+	/**
+	 * basketNo 를 이용해 장바구니 삭제
+	 * @param basketNo - 장바구니 번호
+	 * @return - delete 결과 0 실패 | 1 성공
+	 */
+	public int deleteBybasketNo(int basketNo);
+
 }

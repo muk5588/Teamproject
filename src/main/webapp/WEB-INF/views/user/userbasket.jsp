@@ -69,6 +69,34 @@
                 }
             });
         });
+        
+        $(".deleteBtn").click(function(e){
+        	console.log("deleteBtn")
+        	var basketNo = $(e.target).val();
+        	console.log(basketNo)
+        	
+            $.ajax({
+                type: "get",
+                url: "./deleteBasket",
+                data: {
+                    basketNo: basketNo
+                },
+                dataType: "json",
+                success: function (res) {
+                    console.log("AJAX 성공")
+                    console.log(res)
+					if( res > 0 ){
+	                   $(function () {
+	                   	 window.location.reload();                    
+	                   })
+					}
+                },
+                error: function () {
+                    console.log("AJAX 실패")
+                }
+            });
+        	
+        })
 
     })
 </script>
@@ -126,7 +154,7 @@
                                     <td><fmt:formatDate value="${basket.additionalDate}" pattern="yy-MM-dd HH:mm"/></td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <button id="deleteBtn">삭제</button>
+                                            <button class="deleteBtn" value="${basket.basketNo }">삭제</button>
                                         </div>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input buy-checkbox" name="deleteNo" type="checkbox"

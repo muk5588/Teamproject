@@ -29,6 +29,70 @@
     <delete id="gradeDelete" parameterType="Grade">
         delete from grade where GRADENO = #{gradeno}
     </delete>
+    
+    <select id="getUserWriteCountAndaccessCount" resultType="map">
+    	SELECT *
+		FROM (
+		    SELECT rownum rnum, E.*, COALESCE(F.writecount, 0) AS writecount
+		    FROM (
+		        SELECT D.userno,
+		               COALESCE(C.accessCount, 0) AS accessCount,
+		               D.nickname,
+		               D.gradeno
+		        FROM usertb D
+		        LEFT JOIN (
+		            SELECT A.userno, 
+		                   MAX(A.accessCount) AS accessCount, 
+		                   B.LAST_ACCESSDATE
+		            FROM (
+		                SELECT userno,
+		                       TRUNC(ACCESSDATE) AS access_date,
+		                       COUNT(ACCESSDATE) AS access_count,
+		                       ROW_NUMBER() OVER (PARTITION BY userno ORDER BY TRUNC(ACCESSDATE)) AS accessCount
+		                FROM ACCESSHISTORY
+		                GROUP BY userno, TRUNC(ACCESSDATE)
+		            ) A
+		            LEFT JOIN (
+		                SELECT USERNO, MAX(ACCESSDATE) AS LAST_ACCESSDATE
+		                FROM ACCESSHISTORY
+		                GROUP BY USERNO
+		            ) B ON A.userno = B.userno
+		            GROUP BY A.userno, B.LAST_ACCESSDATE
+		        ) C ON D.userno = C.userno
+		        ORDER BY C.LAST_ACCESSDATE DESC NULLS LAST
+		    ) E
+		    LEFT JOIN (
+		        SELECT userno, COUNT(userno) AS writecount
+		        FROM board
+		        GROUP BY userno
+		    ) F ON E.userno = F.userno
+		)
+		<where> <![CDATA[
+			AND gradeno <> 5000
+		    AND gradeno <> 0
+		    ]]>
+		</where>
+    </select>
+    
+	<update id="autoGradeUpdater2" parameterType="user.dto.User">
+	        update usertb
+	        set gradeno = 2
+	        where userno in
+	    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+	         #{item.userno}
+	    </foreach>
+	</update>
+    
+	<update id="autoGradeUpdater3" parameterType="user.dto.User">
+	        update usertb
+	        set gradeno = 3
+	        where userno in
+	    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+	         #{item.userno}
+	    </foreach>
+	</update>
+    
+    
 </mapper>
 
 

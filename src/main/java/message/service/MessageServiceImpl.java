@@ -70,5 +70,10 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.readChk(messageNo);
 	}
 
+	@Override
+	public int cleanupExpiredMessages() {
+		return messageDao.cleanupExpiredMessages();
+	}
+
 	
 }

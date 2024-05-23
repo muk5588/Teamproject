@@ -34,5 +34,7 @@ public interface MessageDao {
 
 	public int readChk(int messageNo);
 
+	public int cleanupExpiredMessages();
+
 	
 }

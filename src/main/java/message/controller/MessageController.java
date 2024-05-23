@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,8 @@ public class MessageController {
 			@RequestParam(name="curPage", defaultValue = "0")int curPage
 			,@RequestParam(name = "search", required = false)String search) {
 		int userNo = (int) session.getAttribute("isLogin");
+		String URL = "/message/list";
+		res.setAttribute("URL", URL);
 		Paging paging = new Paging();
 		if( search != null) {
 			paging.setSearch(search);
@@ -68,12 +71,14 @@ public class MessageController {
 		if( search != null) {
 			paging.setSearch(search);
 		}
-		List<Message> list = messageService.getListByUserno(userNo);
+		List<Message> list = messageService.getListByUserno(userNo,paging);
 		for(Message m : list) {
 			logger.debug("m : {}", m);
 		}
 		logger.debug("list : {} ", list);
+		logger.debug("paging : {}", paging);
 		
+		res.setAttribute("paging", paging);
 		res.setAttribute("list", list);
 	}
 	@RequestMapping("/sendForm")
@@ -116,16 +121,40 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/sendlist")
-	public void sendlist(HttpSession session, HttpServletRequest res) {
+	public void sendlist(HttpSession session, HttpServletRequest res
+			,@RequestParam(name="curPage", defaultValue = "0")int curPage
+			,@RequestParam(name = "search", required = false)String search) {
+		String URL = "/message/sendlist";
+		res.setAttribute("URL", URL);
+		Paging paging = new Paging();
 		User user = (User) session.getAttribute("dto1");
+		int userNo = (int) session.getAttribute("isLogin");
+		if( search != null) {
+			paging.setSearch(search);
+		}
+		paging = messageService.messageSendUserPaging(paging,curPage,userNo);
+		if( search != null) {
+			paging.setSearch(search);
+		}
 		int sendUser = user.getUserno();
-		List<Message> list = messageService.getListBySendUser(sendUser);
+		List<Message> list = messageService.getListBySendUser(sendUser,paging);
 		for(Message m : list) {
 			logger.debug("m : {}", m);
 		}
 		logger.debug("list : {} ", list);
-		
+		logger.debug("paging : {} ", paging);
+		res.setAttribute("paging", paging);
 		res.setAttribute("list", list);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/readProc")
+	public int readProc(@Param("messageNo")int messageNo) {
+		logger.debug("읽음 체크");
+		logger.debug("읽음 체크 : messageNo : {}", messageNo);
+		int res = 0; 
+		res = messageService.readChk(messageNo);
+		return res;
 	}
 	
 }

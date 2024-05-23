@@ -79,5 +79,11 @@ public interface MessageService {
 	 */
 	public int readChk(int messageNo);
 
+	/**
+	 * 메시지 1달 이후 자동 삭제
+	 * @return - 삭제된 메시지 개수
+	 */
+	public int cleanupExpiredMessages();
+
 
 }

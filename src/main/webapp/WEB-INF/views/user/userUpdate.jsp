@@ -105,8 +105,8 @@
             </div>
             <div id="genderbox">
                 <label>성별</label>
-                <input type="radio" name="gender" value="남" checked/>남
-                <input type="radio" name="gender" value="여"/>여<br>
+                <input type="radio" name="gender" value="M" checked/>남
+                <input type="radio" name="gender" value="F"/>여<br>
             </div>
             <br>
             <div id=emailbox">

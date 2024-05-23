@@ -151,7 +151,7 @@
                             <tr>
                                 <td class="no">${board.boardNo }</td>
                                 <td class="title">
-                                    <a href="../board/view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                                    <a href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
                                 </td>
                                 <td class="nick">${board.nickName }</td>
                                 <td class="hit">${board.boardView }</td>
@@ -196,7 +196,7 @@
                             <tr>
                                 <td class="no">${board2.boardNo }</td>
                                 <td class="title">
-                                    <a href="../board/view?boardNo=${board2.boardNo }&curPage=${curPage}">${board2.title }</a>
+                                    <a href="../board/view?categoryNo=${board2.categoryNo}&boardNo=${board2.boardNo }&curPage=${curPage}">${board2.title }</a>
                                 </td>
                                 <td class="nick">${board2.nickName }</td>
                                 <td class="hit">${board2.boardView }</td>

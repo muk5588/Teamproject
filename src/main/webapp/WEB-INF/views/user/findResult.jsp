@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/resources/css/user/findResult.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <c:if test="${value =='id'}">
     <div class="result-box">
         <c:choose>
@@ -20,7 +22,7 @@
             </c:when>
             <c:otherwise>
                 <p class="title">회원님의 아이디 입니다</p>
-                <p>${finduserid.userid}</p>
+                <h2><p>${finduserid.userid}</p></h2>
 
             </c:otherwise>
         </c:choose>
@@ -29,10 +31,11 @@
 <c:if test="${value =='pw'}">
 <p class="title">회원님의 임시 비밀번호 입니다</p>
 <div class="result-box">
-    <p>${newPwd}</p>
+    <h2><p>${newPwd}</p></h2>
 </c:if>
-<br>
-<button><a class="btn-fill" href="<%=request.getContextPath()%>/login">로그인</a></button>
-<button><a class="btn-fill" href="<%=request.getContextPath()%>/">홈으로</a></button>
+    <div>
+        <a class="btn" href="<%=request.getContextPath()%>/login">로그인</a>
+        <a class="btn" href="<%=request.getContextPath()%>/">홈으로</a>
+    </div>
 </body>
 </html>

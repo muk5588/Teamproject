@@ -49,6 +49,7 @@
 	
 	<!-- 파일업로더 관련 설정 BoardFile을 FileDownloadView 빈 객체 등록 --> 
 	<beans:bean id="downView" class="util.FileDownloadView" />
+	<beans:bean id="inquiryFiledownView" class="util.InquiryFileDownloadView" />
 		<!--  파일업로드(multipart/form-data)를 처리하는 스프링 빈 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 	<!-- 메모리에서 임시 파일을 처리할 수 있는 최대 크기 :1MB  -->

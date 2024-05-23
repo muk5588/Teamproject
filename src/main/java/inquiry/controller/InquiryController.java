@@ -12,12 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import board.dto.BoardFile;
 import dto.Inquiry;
+import dto.InquiryFile;
 import inquiry.service.InquiryService;
+import inquiry.service.inquiryFileService;
 import user.dto.User;
 import util.Paging;
 
@@ -31,16 +36,21 @@ public class InquiryController {
     // InquiryService 의존성 주입
     @Autowired 
     private InquiryService inquiryService;
+    @Autowired private inquiryFileService inquiryFileService;
     
     // Ajax로 문의를 보내는 메서드
     @ResponseBody
-    @RequestMapping("/send")
-    public int sendInquiry(String touser, String inquiryDetail, HttpSession session) {
+    @PostMapping("/send")
+    public int sendInquiry(
+            @RequestParam("inquiryDetail") String inquiryDetail,
+            @RequestParam(name="files", required = false) MultipartFile[] files
+    		, HttpSession session) {
         // 로그 출력
         logger.debug("/send ajax 들어옴");
-        logger.debug("touser : {}",touser);
         logger.debug("content : {}",inquiryDetail);
-        
+        if( files != null) {
+        	logger.debug("files : {}",files);
+        }
         // 초기값 설정
         int res = 0;
         
@@ -58,6 +68,14 @@ public class InquiryController {
             
             // InquiryService를 통해 문의 등록
             res = inquiryService.insertInquiry(inquiry);
+            
+            if( files != null) {
+            	logger.debug("files 문의 생성 이후 처리부분 : {}",files);
+            	int inquiryNo = inquiry.getInquiryNo();
+            	List<InquiryFile> inquiryFiles = inquiryFileService.extractInquiryFiles(files,inquiryNo);
+            	logger.debug("files 문의 생성 이후 처리부분 inquiryFiles: {}",inquiryFiles);
+            	int fileRes = inquiryFileService.insertInquiryFiles(inquiryFiles);
+            }
         }
         
         // 문의 등록 성공시 세션에 문의 목록 갱신
@@ -156,5 +174,25 @@ public class InquiryController {
         return "/inquiry/adminList"; 
     }
     
+    @ResponseBody
+    @RequestMapping("/getfiles")
+    public List<InquiryFile> getfiles(@RequestParam("inquiryNo")int inquiryNo) {
+    	logger.debug("getfiles");
+    	
+    	List<InquiryFile> files = inquiryFileService.getFilesByinquiryNo(inquiryNo);
+    	if(files != null) {
+    		return files;
+    	}
+    	return null;
+    }
+    
+	@RequestMapping("/fileDown")
+	public String fileDown(int fileNo, Model model) {
+		InquiryFile file = inquiryFileService.getFileByFileNo(fileNo);
+		
+		model.addAttribute("downFile", file);
+		
+		return "inquiryFiledownView";
+	}
     
 }

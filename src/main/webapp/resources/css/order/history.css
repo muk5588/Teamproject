@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.wrap {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    padding: 20px;
+
+}
+
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+#searchForm {
+    align-items: center;
+    margin-bottom: 10px;
+    float: right;
+
+}
+
+#searchForm input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 250px;
+}
+hr{
+    clear: both;
+}
+#searchForm button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#orderwrap {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.oneOrder {
+    width: calc(45%);
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.oneOrder table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.oneOrder th,
+.oneOrder td {
+    padding: 10px;
+    text-align: left;
+}
+
+.oneOrder th {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+}
+
+.oneOrder td {
+    border-bottom: 1px solid #eee;
+}
+
+
+@media (max-width: 768px) {
+    .wrap {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    #searchForm {
+        flex-direction: column;
+
+    }
+
+    #searchForm input[type="text"] {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    #searchForm button {
+        width: 100%;
+    }
+
+    .oneOrder th,
+    .oneOrder td {
+        font-size: 12px;
+    }
+
+    .img {
+        width: 300px;
+        height: 200px;
+        border-radius: 5px;
+
+    }
+}

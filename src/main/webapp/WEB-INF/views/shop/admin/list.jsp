@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/list.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/shoplist.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 <script type="text/javascript">

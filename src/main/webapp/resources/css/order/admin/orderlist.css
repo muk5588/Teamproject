@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-@import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
-*{
-    font-family: 'NexonMaplestory';
-}
 body {
 
     background-color: #f4f4f4;

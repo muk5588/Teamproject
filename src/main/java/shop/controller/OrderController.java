@@ -185,9 +185,14 @@ public class OrderController {
 			shopPaging.setSearch(search);
 		}
 		logger.debug("Paging : {}", shopPaging);
+		if (shopPaging.getTotalCount() == 0){
 		model.addAttribute("paging", shopPaging);
 		model.addAttribute("curPage", curPage);
-		
+		return "order/history";
+		}
+		model.addAttribute("paging", shopPaging);
+		model.addAttribute("curPage", curPage);
+
 		logger.debug("구매기록 user : {}",user);
 		List<UserOrder> orders = orderService.selectUserOrderByUser(user,shopPaging);
 		logger.debug("구매기록 orders : {}",orders);

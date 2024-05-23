@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/common/header.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/list.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/shop/admin/shoplist.css">
 <style type="text/css">
 </style>
 <script type="text/javascript">

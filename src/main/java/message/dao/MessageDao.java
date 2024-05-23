@@ -20,15 +20,19 @@ public interface MessageDao {
 
 	public int insertMessage(Message message);
 
-	public List<Message> getListByUserno(int userNo);
+	public List<Message> getListByUserno(@Param("paging")Paging paging, @Param("userNo")int userNo);
 
 	public int deleteByMessageNo(@Param("arr")ArrayList<Integer> messageNo);
 
 	public int saveUpdateBySave(Message saveMessage);
 
-	public List<Message> getListBySendUser(int sendUser);
+	public List<Message> getListBySendUser(@Param("paging")Paging paging, @Param("userNo")int userNo);
 
 	public int getPaging(@Param("paging")Paging paging, @Param("userNo")int userNo);
+
+	public int messageSendUserPaging(@Param("paging")Paging paging, @Param("userNo")int userNo);
+
+	public int readChk(int messageNo);
 
 	
 }

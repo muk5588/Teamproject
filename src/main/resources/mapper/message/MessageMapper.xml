@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message.dao.MessageDao">
 
-<sql id="">
+<sql id="search">
 	<if test="search != null">
 		AND content LIKE '%' || #{search} || '%'
 	</if>
@@ -28,14 +28,23 @@
 </insert>
 
 <select id="getListByUserno" parameterType="int" resultType="dto.Message">
-	SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
-	FROM 
-		(SELECT u.*, m.* FROM usertb u, message m
-		WHERE u.USERNO = m.SENDUSERNO 
-	) d
-	WHERE d.TOUSERNO = #{userNo}
-	ORDER BY d.SENDDATE DESC 
-
+	SELECT * FROM 
+	(	select rownum rnum , m.* FROM (
+			SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
+			FROM 
+				(SELECT u.*, m.* FROM usertb u, message m
+				WHERE u.USERNO = m.SENDUSERNO 
+			) d
+			WHERE d.TOUSERNO = #{userNo}
+			<if test="paging.search != null and !''.equals(paging.search)">
+				AND content LIKE '%' || #{paging.search} || '%'
+			</if>
+			ORDER BY d.SENDDATE DESC
+		) m 
+	)
+	<where>
+		AND rnum between #{paging.startNo} AND #{paging.endNo}
+	</where>
 </select>
 
 <delete id="deleteByMessageNo" parameterType="java.util.ArrayList">
@@ -58,25 +67,55 @@
 	</where>
 </update>
 
-<select id="getListBySendUser" parameterType="java.util.ArrayList" resultType="dto.Message">
-	SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
-	FROM 
-		(SELECT u.*, m.* FROM usertb u, message m
-		WHERE u.USERNO = m.SENDUSERNO 
-	) d
-	WHERE d.SENDUSERNO = #{userNo}
-	ORDER BY d.SENDDATE DESC 
+<select id="getListBySendUser" parameterType="map" resultType="dto.Message">
+	SELECT * FROM 
+	(	select rownum rnum , i.* FROM (
+			SELECT nickname sender,MESSAGENO, SENDUSERNO ,TOUSERNO ,CONTENT ,SENDDATE ,READ ,save  
+			FROM 
+				(SELECT u.*, m.* FROM usertb u, message m
+				WHERE u.USERNO = m.SENDUSERNO 
+			) d
+			WHERE d.SENDUSERNO = #{userNo}
+			<if test="paging.search != null and !''.equals(paging.search)">
+				AND content LIKE '%' || #{paging.search} || '%'
+			</if>
+			ORDER BY d.SENDDATE DESC
+		) i 
+	)
+	<where>
+		AND rnum between #{paging.startNo} AND #{paging.endNo}
+	</where>
+	
 </select>
 
-<!-- <select id="getPaging" parameterType="map" resultType="int">
+<select id="getPaging" parameterType="map" resultType="int">
 	SELECT count(*) FROM (
 		SELECT * FROM message
 		<where>
 			AND toUserNo = #{userNo}
-			<include refid="search"/>
+			<if test="paging.search != null and !''.equals(paging.search)">
+				AND content LIKE '%' || #{paging.search} || '%'
+			</if>
 		</where>
 	)
-</select> -->
+</select>
 
+<select id="messageSendUserPaging" parameterType="map" resultType="int">
+	SELECT count(*) FROM (
+		SELECT * FROM message
+		<where>
+			AND SENDUSERNO = #{userNo}
+			<if test="paging.search != null and !''.equals(paging.search)">
+				AND content LIKE '%' || #{paging.search} || '%'
+			</if>
+		</where>
+	)
+</select>
+
+<update id="readChk" parameterType="int">
+	update message
+	set read = 'Y'
+	where messageNo = #{messageNo}
+</update>
 
 </mapper>

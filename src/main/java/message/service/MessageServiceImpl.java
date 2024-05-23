@@ -1,7 +1,6 @@
 package message.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -33,8 +32,8 @@ public class MessageServiceImpl implements MessageService {
 	}//insertMessage(message)
 
 	@Override
-	public List<Message> getListByUserno(int userNo) {
-		return messageDao.getListByUserno(userNo);
+	public List<Message> getListByUserno(int userNo, Paging paging) {
+		return messageDao.getListByUserno(paging,userNo);
 	}//getListByUserno(userNo)
  
 	@Override
@@ -48,14 +47,27 @@ public class MessageServiceImpl implements MessageService {
 	}//saveUpdateBySave(saveMessage)
 
 	@Override
-	public List<Message> getListBySendUser(int sendUser) {
-		return messageDao.getListBySendUser(sendUser);
+	public List<Message> getListBySendUser(int sendUser, Paging paging) {
+		return messageDao.getListBySendUser(paging,sendUser);
 	}//getListBySendUser(int sendUser)
 
 	@Override
 	public Paging messagePaging(Paging paging, int curPage, int userNo) {
 		int totalCount = messageDao.getPaging(paging,userNo);
-		return null;
+		Paging pagingres = new Paging(totalCount, curPage);
+		return pagingres;
+	}
+
+	@Override
+	public Paging messageSendUserPaging(Paging paging, int curPage, int userNo) {
+		int totalCount = messageDao.messageSendUserPaging(paging,userNo);
+		Paging pagingres = new Paging(totalCount, curPage);
+		return pagingres;
+	}
+
+	@Override
+	public int readChk(int messageNo) {
+		return messageDao.readChk(messageNo);
 	}
 
 	

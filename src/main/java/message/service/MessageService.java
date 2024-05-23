@@ -27,9 +27,10 @@ public interface MessageService {
 	/**
 	 * 유저 번호로 메세지 조회
 	 * @param userNo - 유저 번호
+	 * @param paging 
 	 * @return - 조회된 전체 행
 	 */
-	public List<Message> getListByUserno(int userNo);
+	public List<Message> getListByUserno(int userNo, Paging paging);
 
 	/**
 	 * 전달받은 messageNo로 메세지 삭제
@@ -48,9 +49,10 @@ public interface MessageService {
 	/**
 	 * 전달받은 Sender의 번호를 전체 조회
 	 * @param sendUser - 현재 로그인한 사람의 userNo
+	 * @param paging 
 	 * @return 조회된 전체 행
 	 */
-	public List<Message> getListBySendUser(int sendUser);
+	public List<Message> getListBySendUser(int sendUser, Paging paging);
 
 	/**
 	 * 메세지 페이징
@@ -60,6 +62,22 @@ public interface MessageService {
 	 * @return - 페이징 객체
 	 */
 	public Paging messagePaging(Paging paging, int curPage, int userNo);
+
+	/**
+	 * 보낸 메세지 페이징
+	 * @param paging - 페이징 객체
+	 * @param curPage - 현재 페이지
+	 * @param userNo - 메세지 보낸 유저 번호 
+	 * @return - 페이징 객체
+	 */
+	public Paging messageSendUserPaging(Paging paging, int curPage, int userNo);
+
+	/**
+	 * 메세지 읽음
+	 * @param messageNo
+	 * @return
+	 */
+	public int readChk(int messageNo);
 
 
 }

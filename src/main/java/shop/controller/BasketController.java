@@ -105,5 +105,14 @@ public class BasketController {
 		return no;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/deleteBasket")
+	public int deleteBasket(int basketNo) {
+		logger.debug("basketNo : {}",basketNo);
+		int res = 0;
+		res = basketService.deleteBybasketNo(basketNo);
+		return res;
+	}
+	
 	
 }

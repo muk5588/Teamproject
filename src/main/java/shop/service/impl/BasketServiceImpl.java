@@ -148,6 +148,11 @@ public class BasketServiceImpl implements BasketService {
 		
 		
 	}//userorderProc(int[] )
+
+	@Override
+	public int deleteBybasketNo(int basketNo) {
+		return basketDao.deleteBybasketNo(basketNo);
+	}
 	
 	
 	

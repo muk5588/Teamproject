@@ -62,5 +62,10 @@
 		</where>
 	</select>
 	
+	<delete id="deleteBybasketNo" parameterType="int">
+		delete basket
+		where basketNo = #{basketNo}
+	</delete>
+	
 	
 </mapper>

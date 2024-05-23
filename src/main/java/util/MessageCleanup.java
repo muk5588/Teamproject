@@ -14,10 +14,10 @@ public class MessageCleanup {
     @Autowired
     private MessageService messageService;
 
-    // 매 자정에 실행되도록 설정
-    @Scheduled(cron = "0 0 0 * * *")
-//    @Scheduled(cron = "0 0 12 * * *") 정오 실행.
-//    @Scheduled(cron = "0 * * * *") 매 시각 0분 마다 실행
+    // 매 자정에 실행
+//    @Scheduled(cron = "0 0 0 * * *")
+//    @Scheduled(cron = "0 0 12 * * *") //정오 실행.
+    @Scheduled(cron = "0 0 * * * *") //매 시각 0분 마다 실행
     public void cleanupExpiredMessages() {
     	//전송한지 1달 지난 저장하지 않은 메시지 삭제
     	int res = messageService.cleanupExpiredMessages();

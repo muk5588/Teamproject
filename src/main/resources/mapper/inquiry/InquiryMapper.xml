@@ -122,7 +122,7 @@
     	WHERE inquiryNo = #{inquiryNo}
 	</update>
 	
-	<!-- 관리자 문의 페이지를 페이징하는 쿼리 -->
+	<!-- 관리자 문의 목록 개수를 페이징하는 쿼리 -->
 	<select id="getCount" resultType="int" parameterType="util.Paging">
 		select count(*) from(
 			SELECT inquiryNo, userNo FROM Inquiry

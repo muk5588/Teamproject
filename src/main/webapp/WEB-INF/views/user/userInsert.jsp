@@ -60,27 +60,24 @@
         window.onload = function() {
             var checkbox = document.getElementById('checkbox');
             var joinButton = document.getElementById('join');
+            var sendButton = document.getElementById('checkmail');
 
             // 이용약관 체크박스가 변경될 때마다 호출되는 함수
             checkbox.addEventListener('change', function() {
                 joinButton.disabled = !checkbox.checked; // 체크 여부에 따라 버튼 활성화 상태 변경
-                if(checkbox.checked){
-                	alert('이용약관에 동의하셨습니다.')
+                if (!checkbox.checked) {
+                    alert('이용약관에 동의해야 회원가입이 가능합니다.');
                 }
             });
 
             // 초기 상태에서 버튼 비활성화
             joinButton.disabled = true;
 
-        };
-        
-        window.onload = function() {
-            var sendButton = document.getElementById('checkmail');
-
-            // 인증번호 발송 버튼 클릭 시 이벤트 생성
+            // 인증번호 발송 버튼 클릭 시 이벤트
             sendButton.addEventListener('click', function(event) {
                 alert('발송 중이니 기다려 주세요.');
             });
+            
         };
         
     </script>

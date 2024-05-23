@@ -19,7 +19,6 @@
     <style type="text/css">
         /* 전체 페이지 스타일 */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;

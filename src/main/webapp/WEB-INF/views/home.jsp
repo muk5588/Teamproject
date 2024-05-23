@@ -63,64 +63,7 @@
         });
 
     </script>
-    <style type="text/css">
-        @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
-
-        * {
-            font-family: 'NexonMaplestory';
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        a {
-            color: black;
-            text-decoration-line: none;
-        }
-
-        .logout {
-            border-radius: 15px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding-top: 4px;
-        }
-
-        .logout img {
-            vertical-align: middle;
-        }
-
-        .usernick {
-            font-size: 24px;
-            margin-right: 1rem;
-        }
-
-        #calendar_home {
-            clear: both;
-            float: right;
-            width: 300px;
-            height: 470px;
-        }
-
-        .logoutdiv {
-            width: auto;
-            height: 60%;
-        }
-
-        .email {
-            height: 20%;
-            margin-bottom: 10%;
-        }
-        .mypage{
-            width: 100%;
-            height: 30%;
-            margin: 0 auto;
-        }
-        .mypage a{
-            margin: 10px;
-            text-align: center;
-        }
-
-
-    </style>
+    <link href="/resources/css/mainPage/home.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

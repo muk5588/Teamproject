@@ -4,8 +4,8 @@ import board.dto.Board;
 import board.service.BoardService;
 import comment.dto.Comment;
 import dto.Item;
-import dto.ItemReport;
-import dto.ItemReportType;
+import report.dto.ItemReport;
+import report.dto.ItemReportType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

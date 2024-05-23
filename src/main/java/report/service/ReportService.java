@@ -1,8 +1,8 @@
 package report.service;
 
 import dto.Item;
-import dto.ItemReport;
-import dto.ItemReportType;
+import report.dto.ItemReport;
+import report.dto.ItemReportType;
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
 import report.dto.CommReport;
@@ -54,5 +54,7 @@ public interface ReportService {
 
 	public List<BoardReport> reportboardlist();
 
-	List<CommReport> reportcommlist();
+	public List<CommReport> reportcommlist();
+
+	public List<ItemReport> reportitemlist();
 }

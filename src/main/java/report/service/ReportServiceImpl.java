@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dto.Item;
-import dto.ItemReport;
-import dto.ItemReportType;
+import report.dto.ItemReport;
+import report.dto.ItemReportType;
 import report.dao.ReportDao;
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
@@ -89,5 +89,10 @@ ReportDao reportDao;
     @Override
     public List<CommReport> reportcommlist() {
         return reportDao.reportcommlist();
+    }
+
+    @Override
+    public List<ItemReport> reportitemlist() {
+        return reportDao.reportitemlist();
     }
 }

@@ -1,7 +1,8 @@
 package shop.controller;
 
-import java.util.List;
-
+import dto.Item;
+import dto.ItemFile;
+import report.dto.ItemReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import dto.Item;
-import dto.ItemFile;
+import report.service.ReportService;
 import shop.service.face.ShopFileService;
 import shop.service.face.ShopService;
 import util.Paging;
+
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/shop")
@@ -24,6 +26,7 @@ public class ShopController {
 	
 	@Autowired private ShopService shopService;
 	@Autowired private ShopFileService shopFileService;
+	@Autowired private ReportService reportService;
 	
 	@RequestMapping("/main")
 	public String shopMain() { return "redirect:/shop/"; }
@@ -51,6 +54,31 @@ public class ShopController {
 		//ITEM 객체 List + 대표 이미지 파일 정보 조회 및 view로 전달
 		List<Item> item = shopService.list();
 		List<ItemFile> files = shopFileService.getTitleImgs();
+		List<ItemReport> reportlist = reportService.reportitemlist();
+		Iterator<Item> itemIterator = item.iterator();
+
+		while (itemIterator.hasNext()) {
+			Item item1 = itemIterator.next();
+			boolean itemRemoved = false; // Item이 제거되었는지 추적
+
+			for (ItemReport report : reportlist) {
+				if (report.getItemNo() == item1.getItemNo()) {
+					itemIterator.remove();
+					itemRemoved = true;
+					break;
+				}
+			}
+			if (itemRemoved) {
+				Iterator<ItemFile> fileIterator = files.iterator();
+				while (fileIterator.hasNext()) {
+					ItemFile file = fileIterator.next();
+					if (file.getItemNo() == item1.getItemNo()) {
+						fileIterator.remove();
+						break; // 해당 itemNo와 일치하는 첫 번째 파일을 제거하고 루프 종료
+					}
+				}
+			}
+		}
 		logger.debug("title IMG files : {}", files);
 		logger.debug("item Chk: {}", item);
 		model.addAttribute("files", files);

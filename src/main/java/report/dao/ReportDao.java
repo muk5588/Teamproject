@@ -3,8 +3,8 @@ package report.dao;
 import org.springframework.stereotype.Repository;
 
 import dto.Item;
-import dto.ItemReport;
-import dto.ItemReportType;
+import report.dto.ItemReport;
+import report.dto.ItemReportType;
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
 import report.dto.CommReport;
@@ -41,4 +41,6 @@ public interface ReportDao {
     public List<BoardReport> reportboardlist();
 
     public List<CommReport> reportcommlist();
+
+    public List<ItemReport> reportitemlist();
 }

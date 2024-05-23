@@ -1,4 +1,4 @@
-package dto;
+package report.dto;
 
 public class ItemReportType {
 	private int itemReportNo;

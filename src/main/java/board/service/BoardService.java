@@ -125,4 +125,5 @@ public interface BoardService {
 	 */
 	public Paging getPagingByUserNo(int curPage, Paging paging, User login);
 
+	public Paging getPagingByUserNoGood(int curPage, Paging paging, User login);
 }

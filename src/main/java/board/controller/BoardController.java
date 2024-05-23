@@ -425,9 +425,9 @@ public class BoardController {
 		paging.setSearch(search);
 		paging.setSearchKind(searchKind);
 		if(null !=  search && !"".equals(search)) {
-			paging = boardService.getPagingByUserNo(curPage,paging,login);
+			paging = boardService.getPagingByUserNoGood(curPage,paging,login);
 		}else {
-			paging = boardService.getPagingByUserNo(curPage,paging,login);
+			paging = boardService.getPagingByUserNoGood(curPage,paging,login);
 		}
 		//게시글 없는 경우
 		if( paging == null ) {

@@ -100,4 +100,5 @@ public interface BoardDao {
 
 	public int selectCntByUserNo(@Param("paging")Paging paging, @Param("user")User login);
 
+	public int selectCntByUserNoGood(@Param("paging")Paging paging, @Param("user")User login);
 }

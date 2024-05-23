@@ -101,10 +101,10 @@
         <div>
             <form action="" method="get" id="searchForm">
                 <select name="searchKind" id="searchKind">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
+                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
                 </select>
-                <input type="text" name="search" id="search">
+                <input type="text" name="search" id="search" value="${paging.search }">
                 <input hidden="hidden" name="curPage" value="${curPage}">
                 <button id="serchBtn">검색</button>
             </form>

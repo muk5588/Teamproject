@@ -418,6 +418,16 @@
 		<where>
 			and g.boardno = b.boardno
 			and g.userno = #{userno}
+			<if test="search != null and searchKind != null">
+				<choose>
+					<when test="searchKind.equals('title')">
+						AND title Like '%${search}%'
+					</when>
+					<when test="searchKind.equals('content')">
+						AND content Like '%${search}%'
+					</when>
+				</choose>
+			</if>
 		</where>
 		order by createdate desc) A )
 		<where>
@@ -446,5 +456,29 @@
         </where>
     )
 </select>
+
+	<select id="selectCntByUserNoGood" resultType="int" parameterType="map">
+		select count(*) from (
+        select g.USERNO, g.BOARDNO, b.TITLE, b.BOARDVIEW, b.NICKNAME, b.CREATEDATE
+        from good g
+        left outer join BOARD B on B.BOARDNO = g.BOARDNO
+		<where>
+			<if test="user != null">
+				g.userno = #{user.userno}
+			</if>
+			<if test="paging.search != null and paging.searchKind != null">
+				<choose>
+					<when test="paging.searchKind.equals('title')">
+						AND title Like '%${paging.search}%'
+					</when>
+					<when test="paging.searchKind.equals('content')">
+						AND content Like '%${paging.search}%'
+					</when>
+				</choose>
+			</if>
+		</where>
+		)
+	</select>
+
 
 </mapper>

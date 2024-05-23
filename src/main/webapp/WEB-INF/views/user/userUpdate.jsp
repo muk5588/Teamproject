@@ -129,7 +129,7 @@
                 <label for="detailAddress">주소</label>
                 <input type="text" name="address" id="address"  readonly value="${dto.address}" ><br>
                 <input type="text" name="detailAddress" id="detailAddress" value="${dto.detailAddress}">
-                <input type="text" name="extralAddress" id="extraAddress" value="${dto.extraAddress}"><br>
+                <input type="text" name="extraAddress" id="extraAddress" value="${dto.extraAddress}"><br>
             </div>
             <div id="phonebox">
                 <label for="phone">전화번호</label>

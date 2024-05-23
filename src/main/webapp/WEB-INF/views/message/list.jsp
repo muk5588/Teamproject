@@ -112,10 +112,23 @@ $(function(){
 <h1>받은 쪽지함</h1>
 <hr>
 <div id="content">
-    <a href="./sendlist"><button>보낸 쪽지함</button></a>
-    <button id="popupsendForm">쪽지쓰기</button>
-    <a href="/"><button>홈으로</button></a>
-    <button id="deleteBtn" class="deletebutton">삭제하기</button>
+    <div class="tit">
+        <div>
+            <a href="./sendlist"><button>보낸 쪽지함</button></a>
+            <button id="popupsendForm">쪽지쓰기</button>
+            <a href="/"><button>홈으로</button></a>
+        </div>
+        <div>
+            <form action="" method="get" id="searchForm">
+                <input type="text" name="search" id="search" placeholder="검색하실 내용을 작성해 주세요" value="${paging.search }">
+                <input hidden="hidden" name="curPage" value="${curPage}">
+                <button id="serchBtn">검색</button>
+            </form>
+        </div>
+    </div>
+
+
+
     <table>
         <tr>
             <th><input type="checkbox" id="checkboxAllCheck"></th>
@@ -150,7 +163,7 @@ $(function(){
             </tr>
         </c:forEach>
     </table>
-
+    <button id="deleteBtn">삭제하기</button>
     <c:import url="/WEB-INF/views/layout/adminPaging.jsp" />
 
     <br><br><br><br>

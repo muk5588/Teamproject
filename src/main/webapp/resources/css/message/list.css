@@ -22,6 +22,21 @@ hr {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+#searchForm{
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+#search{
+    height: 30px;
+    width: 200px;
+}
+.tit{
+    justify-content: space-between;
+    text-align: center;
+    display: flex;
+}
+
 
 table {
     width: 100%;
@@ -34,6 +49,7 @@ th, td {
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
+
 
 th {
     background: #f9f9f9;
@@ -64,6 +80,7 @@ button:hover {
 
 button#deleteBtn {
     background: #dc3545;
+
 }
 
 button#deleteBtn:hover {
@@ -85,7 +102,4 @@ a button:hover {
 
 .save input[type="checkbox"] {
     margin-left: 15px;
-}
-.deletebutton{
-    float: right;
 }

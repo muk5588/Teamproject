@@ -50,8 +50,18 @@
                     </tr>
                 </table>
                 <div class='btnSet'>
-                    <a class='btn-fill' href="/user/userList">고객 목록</a>
-                    <a class='btn-fill' href='javascript:userBlack();' class="btn btn-danger">사용자 정지</a>
+                	<c:choose>
+                		<c:when test="${dto.black == 'Y'}">
+                    		<a class='btn-fill' href="/user/userList">고객 목록</a>
+                    		<a class='btn-fill' href='javascript:userWhite();' class="btn btn-danger">사용자 해제</a>
+                    		<input type="checkbox" name="chk" class="chk"onclick="chkClicked()" value="${dto.userno }">
+                    	</c:when>
+                		<c:when test="${dto.black == 'N'}">
+                    		<a class='btn-fill' href="/user/userList">고객 목록</a>
+                    		<a class='btn-fill' href='javascript:userBlack();' class="btn btn-danger">사용자 정지</a>
+                    		<input type="checkbox" name="chk" class="chk"onclick="chkClicked()" value="${dto.userno }">
+                    	</c:when>
+                    </c:choose>
                 </div>
             </c:when>
             <c:otherwise>

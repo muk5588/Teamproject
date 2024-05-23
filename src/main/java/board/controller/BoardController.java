@@ -22,10 +22,7 @@
  import javax.servlet.http.HttpServletRequest;
  import javax.servlet.http.HttpServletResponse;
  import javax.servlet.http.HttpSession;
- import java.util.ArrayList;
- import java.util.Iterator;
- import java.util.List;
- import java.util.Map;
+ import java.util.*;
 
  @Controller
 @RequestMapping("/board")
@@ -279,7 +276,7 @@ public class BoardController {
 			Board board
 			) {
 		logger.info("{}", board);
-		
+		board.setUpdateDate(new Date());
 		int res = boardService.boardUpdate(board);
 		
 		if ( res > 0) {

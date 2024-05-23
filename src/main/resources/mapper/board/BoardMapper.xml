@@ -173,12 +173,12 @@
 			<if test="content != null and !content.equals('')">
 				content = #{content},
 			</if>
+			updatedate = #{updateDate}
 		</set>
 		<where>
-			AND boardno = #{boardNo}
+			boardno = #{boardNo} <!-- AND는 제거하고 바로 조건 설정 -->
 		</where>
 	</update>
-
 	<delete id="deleteBoard" parameterType="Board">
 		DELETE BOARD
 		WHERE BOARDNO = #{boardNo}

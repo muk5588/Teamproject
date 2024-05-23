@@ -205,8 +205,9 @@ public class UserController {
 	}
 	
     @RequestMapping("/deleteUser")
-    public String deleteUser(User dto) {
+    public String deleteUser(User dto, HttpSession session) {
         service.userDelete(dto);
+        session.invalidate();
         return "redirect: /";
     }
 

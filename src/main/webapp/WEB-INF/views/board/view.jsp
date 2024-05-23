@@ -109,7 +109,7 @@
 
                     if (res) {
                         $(function () {
-                            $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
+                            $(location).attr('href', './view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }')
                         })
                     }
                 }
@@ -150,7 +150,7 @@
 
                     if (res) {
                         $(function () {
-                            $(location).attr('href', './view?categoryNo=${param.categoryNo}&boardNo=${board.boardNo }')
+                            $(location).attr('href', './view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }')
                         })
                     }
 

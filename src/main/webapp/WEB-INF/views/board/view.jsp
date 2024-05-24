@@ -172,7 +172,7 @@
                     type: "get"
                     , url: "/comment/delete"
                     , data: {
-                    	boardNo: ${board.boardNo}
+                        boardNo: ${board.boardNo}
                         , commNo: value
                     }
                     , dataType: "json"
@@ -291,14 +291,10 @@
                     <div id="reBtn">
                         <div class="recommendBtn doRedomm">
                             <c:if test="${empty isRecomm or isRecomm eq 0 }">
-                                <a>
-                                    <button class="doRecomm do">추천하기</button>
-                                </a>
+                                    <a class="doRecomm do"><img src="/resources/img/board/개추.png" height="13" width="15">${recomm }</a>
                             </c:if>
                             <c:if test="${not empty isRecomm and isRecomm eq 1 }">
-                                <a>
-                                    <button class="doRecomm cancel">추천취소하기</button>
-                                </a>
+                                    <a class="doRecomm cancel" style="background: #1e73be; color: white; border: none; padding: 0.5em 1em; text-align: center"><img src="/resources/img/board/개추.png" height="15" width="15">${recomm }</a>
                             </c:if>
                             <button onclick="location.href='../report/boardReport?categoryNo=${param.categoryNo}&boardno=${board.boardNo}'">
                                 신고하기
@@ -359,37 +355,37 @@
                     </c:if>
                 </tr>
                 <c:choose>
-                <c:when test="${not empty comment }">
-                <c:forEach var="comment" items="${comment }">
-                    <tr>
-                        <td class="no">${comment.commNo}</td>
-                        <td>${comment.nickName }</td>
-                        <td>${comment.commContent }</td>
-                        <td>
-                            <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
-                        </td>
-                        <c:if test="${isLogin > 0}">
-                            <td class="rpt">
-                                <a href='../report/commentReport?commno=${comment.commNo}'>
-                                    <img src="/resources/img/board/신고.jpg" height="30" width="30">
-                                </a>
-                            </td>
-                        </c:if>
-                        <c:if test="${dto1.userno == comment.userNo }">
-                            <td>
-                                <button class="commentDelete" value="${comment.commNo}">삭제</button>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:forEach>
+                    <c:when test="${not empty comment }">
+                        <c:forEach var="comment" items="${comment }">
+                            <tr>
+                                <td class="no">${comment.commNo}</td>
+                                <td>${comment.nickName }</td>
+                                <td>${comment.commContent }</td>
+                                <td>
+                                    <fmt:formatDate value="${comment.commDate }" pattern="yyyy-MM-dd"/>
+                                </td>
+                                <c:if test="${isLogin > 0}">
+                                    <td class="rpt">
+                                        <a href='../report/commentReport?commno=${comment.commNo}'>
+                                            <img src="/resources/img/board/신고.jpg" height="30" width="30">
+                                        </a>
+                                    </td>
+                                </c:if>
+                                <c:if test="${dto1.userno == comment.userNo }">
+                                    <td>
+                                        <button class="commentDelete" value="${comment.commNo}">삭제</button>
+                                    </td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
 
-            </c:when>
-            <c:when test="${empty comment }">
-                <td colspan="7">
-                    댓글이 존재하지 않습니다
-                </td>
-            </c:when>
-            </c:choose>
+                    </c:when>
+                    <c:when test="${empty comment }">
+                        <td colspan="7">
+                            댓글이 존재하지 않습니다
+                        </td>
+                    </c:when>
+                </c:choose>
             </table>
         </div>
         <hr>

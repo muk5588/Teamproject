@@ -116,8 +116,12 @@ input:active {
 .social {
   display: flex;
   position: absolute;
-  left: 48%;
+  left: 47.7%;
   transform: translateX(-45%); 
+}
+
+.kakao img{
+	margin-left: 9%;
 }
 
 .social .kakao,

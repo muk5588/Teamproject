@@ -91,7 +91,7 @@
             <a href="/" class="Site-Name"><img src="/resources/img/title/18px.png" class="site-Img" ></a>
         </div>
 
-        <div style="position: absolute; right: 0; top: 35px; margin-right: 100px;">
+        <div style="position: absolute; right: 0; top: 55px; margin-right: 100px;">
             <!-- 로그인한 경우 -->
             <c:if test="${not empty isLogin}">
                 <ul>

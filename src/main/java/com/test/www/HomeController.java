@@ -9,15 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import report.dto.BoardReport;
+import report.service.ReportService;
 import user.dto.User;
 import util.service.GeoCoding;
 
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Handles requests for the application home page.
@@ -30,6 +29,8 @@ public class HomeController {
 	GeoCoding geoCoding;
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	ReportService reportService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -63,6 +64,17 @@ public class HomeController {
 			model.addAttribute("x",x);
 			model.addAttribute("y",y);
 			model.addAttribute("address",address);
+		}
+		List<BoardReport> reportlist = reportService.reportboardlist();
+		Iterator<Board> iterator = list.iterator();
+		while (iterator.hasNext()) {
+			Board board = iterator.next();
+			for (BoardReport report : reportlist) {
+				if (report.getBoardNo() == board.getBoardNo()) {
+					iterator.remove();
+					break; // 현재 보드가 삭제되었으므로 내부 루프 종료
+				}
+			}
 		}
 		model.addAttribute("list",list);
 		model.addAttribute("serverTime", formattedDate );

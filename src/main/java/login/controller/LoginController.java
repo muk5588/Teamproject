@@ -1,11 +1,10 @@
 package login.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
+import board.dto.Board;
+import board.service.BoardService;
+import login.service.KakaoService;
+import login.service.LoginService;
+import login.service.SocialService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
-import board.dto.Board;
-import board.service.BoardService;
-import login.service.KakaoService;
-import login.service.LoginService;
-import login.service.SocialService;
 import user.dto.User;
-import util.Paging;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -48,6 +44,7 @@ public class LoginController {
             //유저 정보
 //            dto.setUserno(isLogin);
             User login = loginService.info(dto);
+            isLogin = login.getUserno();
             logger.info("login : {}", login);
 
             loginService.insertAccessHistory(login);

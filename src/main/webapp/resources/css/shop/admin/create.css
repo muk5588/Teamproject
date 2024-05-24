@@ -1,0 +1,92 @@
+/* Style for the body */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the h1 */
+h1 {
+    text-align: center;
+}
+
+/* Style for the form */
+form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    height: 80%;
+}
+
+/* Style for the form inputs */
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style for the file input */
+#file {
+    margin-top: 5px;
+}
+
+/* Style for the save button */
+#se2_sample input[type="button"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
+#se2_sample input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Style for the anchor tag */
+a {
+    text-decoration: none;
+}
+.tit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Style for the button inside anchor tag */
+a button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Style for the hr */
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ccc;
+}

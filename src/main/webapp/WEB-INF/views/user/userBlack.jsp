@@ -40,7 +40,7 @@
                     <th class='w-px200'>이름</th>
                     <th>닉네임</th>
                     <th>성별</th>
-                    <th>블랙여부</th>
+                    <th>정지여부</th>
                 </tr>
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
@@ -66,7 +66,7 @@
 <br>
 	<div class="d-flex justify-content-end container">
       <!-- <a id="btnBlack" class="btn btn-danger">블랙</a> -->
-      <a href='javascript:userBlack();' class="btn btn-danger">블랙</a>
+      <a href='javascript:userBlack();' class="btn btn-danger">정지</a>
       <a href='javascript:userWhite();' class="btn btn-warning">해제</a>
     </div>
 

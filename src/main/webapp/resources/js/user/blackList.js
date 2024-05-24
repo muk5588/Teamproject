@@ -64,12 +64,12 @@ function userBlack(){
         const selectedElementsCnt = selectedElements.length;
 
         if(selectedElementsCnt == 0){
-            alert("블랙할 항목을 선택해주세요.");
+            alert("정지할 항목을 선택해주세요.");
             return false;
         }
 
         else{
-            if (confirm("정말로 블랙하시겠습니까?")) {
+            if (confirm("정말로 정지시키겠습니까?")) {
                 //배열생성
                 const arr = new Array(selectedElementsCnt);
 

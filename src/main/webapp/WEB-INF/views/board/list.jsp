@@ -82,30 +82,31 @@
 
     <div class="container">
 
-            <h1>${name } 게시판</h1>
+        <h1>${name } 게시판</h1>
         <div class="title">
-        <div class="write">
-            <a href="/">
-                <button class="go_main">Home</button>
-            </a>
-            <c:if test="${isLogin > 0}">
-            <form action="./write" method="get">
-                <button id="btnWrite" me>글쓰기</button>
-            </form>
-            </c:if>
-        </div>
-        <div>
-            <form action="" method="get" id="searchForm">
-                <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
-                <select name="searchKind" id="searchKind">
-                    <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
-                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
-                </select>
-                <input type="text" name="search" id="search" value="${paging.search }">
-                <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="searchBtn">검색</button>
-            </form>
-        </div>
+            <div class="write">
+                <a href="/">
+                    <button class="go_main">Home</button>
+                </a>
+                <c:if test="${isLogin > 0}">
+                    <form action="./write" method="get">
+                        <button id="btnWrite" me>글쓰기</button>
+                    </form>
+                </c:if>
+            </div>
+            <div>
+                <form action="" method="get" id="searchForm">
+                    <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
+                    <select name="searchKind" id="searchKind">
+                        <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                        <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용
+                        </option>
+                    </select>
+                    <input type="text" name="search" id="search" value="${paging.search }">
+                    <input hidden="hidden" name="curPage" value="${curPage}">
+                    <button id="searchBtn">검색</button>
+                </form>
+            </div>
         </div>
         <hr style="clear:both; margin-bottom: 10px">
 
@@ -120,7 +121,9 @@
             <%-- 	<col style="width: 20%;"> --%>
             <%-- </colgroup> --%>
             <tr>
-                <th><input type="checkbox" id="checkboxAllCheck"></th>
+                <c:if test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                    <th><input type="checkbox" id="checkboxAllCheck"></th>
+                </c:if>
                 <th>글 번호</th>
                 <th>제목</th>
                 <th>작성자 닉네임</th>
@@ -132,8 +135,10 @@
                 <c:when test="${not empty list }">
                     <c:forEach var="board" items="${list }">
                         <tr>
-                            <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-                                                        class="delCheckBox"></td>
+                            <c:if test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+                                <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
+                                                            class="delCheckBox"></td>
+                            </c:if>
                             <td class="no">${board.boardNo }</td>
                             <td class="title">
                                 <c:if test="${not empty param.categoryNo }">
@@ -158,14 +163,15 @@
                 </c:when>
                 <c:when test="${empty list }">
                     <td colspan="7">
-                       게시글이 존재하지 않습니다
+                        게시글이 존재하지 않습니다
                     </td>
                 </c:when>
             </c:choose>
 
         </table>
-
-        <button id="deleteBtn">체크 삭제</button>
+        <c:if test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
+            <button id="deleteBtn">체크 삭제</button>
+        </c:if>
     </div>
     <!-- .container End -->
 

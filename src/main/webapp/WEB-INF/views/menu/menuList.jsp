@@ -56,13 +56,13 @@
                 <!-- for(꺼낸 배열 변수를 담을 새로운 변수 (String x) : 배열 변수(list)) -->
                 <!-- items : 배열 변수 -->
                 <!-- var : 꺼낸 배열 변수를 담을 새로운 변수 -->
-                <c:forEach var="Menu" items="${list}">
+                <c:forEach var="Menu2" items="${list}">
                     <tr>
-                        <td>${Menu.userno }</td>
-                        <td>${Menu.nickname }</td>
-                        <td>${Menu.gradename }</td>
-                        <td>${Menu.comm}</td>
-                        <td><button onclick="location.href='/menu/update?userno=${Menu.userno}'" >수정</button></td>
+                        <td>${Menu2.userno }</td>
+                        <td>${Menu2.nickname }</td>
+                        <td>${Menu2.gradename }</td>
+                        <td>${Menu2.comm}</td>
+                        <td><button onclick="location.href='/menu/update?userno=${Menu2.userno}'" >수정</button></td>
                     </tr>
                 </c:forEach>
             </table>

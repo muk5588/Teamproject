@@ -69,9 +69,20 @@
     </select>
     
    	<select id="menuListByPaging" parameterType="util.UserPaging" resultType="menu.dto.Menu">
-		SELECT * from
-		(	select rownum rnum, u.* FROM
-			(        SELECT userno,userid,name,NICKNAME,GENDER,gradeno,black FROM usertb
+        SELECT *
+        FROM (
+        SELECT rownum AS rnum, u.*
+        FROM (
+        SELECT userno,
+        userid,
+        name,
+        NICKNAME,
+        GENDER,
+        gradeno,
+        black,
+        (SELECT GRADENAME FROM GRADE g WHERE u.gradeno = g.GRADENO) AS GRADENAME,
+        (SELECT COMM FROM GRADE g WHERE u.gradeno = g.GRADENO) AS COMM
+        FROM usertb u
 	        <where>
 	            and gradeno <![CDATA[ < 5000 ]]>
 				<include refid="search" />

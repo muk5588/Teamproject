@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
+<link rel="stylesheet" href="/resources/css/shop/detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -139,16 +139,19 @@ $(function(){
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
    <div class="container">
-
+<div class="tit">
         <h1>상품 정보</h1>
-        <a href="/">
-            <button>메인 페이지로</button>
-        </a>
-       
+        <div>
+            <a href="/">
+                <button>메인 페이지로</button>
+            </a>
+        </div>
+</div>
         
-<div id="itemwarp" style="border: 1px solid #ccc; padding: 20px; margin-top: 20px;">
+<div id="itemwarp">
     <table>
         <tr>
             <td>
@@ -170,10 +173,7 @@ $(function(){
             </td>
         </tr>
         <tr>
-            <td>${item.itemName}</td>
-        </tr>
-        <tr>
-            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" /></td>
+            <td>${item.itemName}: <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${item.price}" /></td>
         </tr>
         <tr>
             <td>재고 : ${item.remain}</td>
@@ -188,8 +188,9 @@ $(function(){
 		<tr>
 		    <td>
 		        <!-- 수량 선택기에 증가 및 감소 버튼 추가 -->
-		        <label for="quantity">수량:</label>
+
 		        <div class="quantity-selector">
+                    <label for="quantity">수량: </label>
 		            <input type="text" id="quantity" name="quantity" value="1" readonly="readonly">
 		            <button type="button" onclick="incrementQuantity()">+</button>
 		            <button type="button" onclick="decrementQuantity()">-</button>

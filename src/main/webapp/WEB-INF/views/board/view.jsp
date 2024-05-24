@@ -209,11 +209,11 @@
 //                     console.log(res[0].fileNo)
                     if (res.length > 0) {
                         var fileList = "";
-                        fileList += '<p>첨부파일</p><br>'
+                        fileList += '<p>첨부파일: '
                         for (var i = 0; res.length > i; i++) {
                             fileList += '<a href="./fileDown?fileNo=' + res[i].fileNo + '">' + res[i].originName + '<br>';
                         }
-
+                        fileList += '</p>'
                         $("#fileDown").html(fileList);
                     }
 
@@ -309,17 +309,17 @@
         <div id="file"></div>
         <table class="table">
             <tr>
+                <td colspan="6">
+                    <div id="fileDown"></div>
+                </td>
+            </tr>
+            <tr>
                 <th>글 번호</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>조회수</th>
                 <th>작성일</th>
                 <th>추천수</th>
-            </tr>
-            <tr>
-                <td>
-                    <div id="fileDown"></div>
-                </td>
             </tr>
             <tr class="con">
                 <td class="no">${board.boardNo }</td>

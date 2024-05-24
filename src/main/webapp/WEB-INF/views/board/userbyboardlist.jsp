@@ -6,7 +6,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/board/userbyboardList.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/board/boardList.css">
 <title>내 작성글</title>
 <style type="text/css">
 
@@ -79,97 +79,95 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
-<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp" />
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">
-
-
-    <div class="container" >
+    <div class="container">
         <h1>내 작성글</h1>
-        <a href="/">
-            <button>메인 페이지로</button>
-        </a>
-        <div style="position: absolute">
-        <c:if test="${isLogin != 0}">
+        <div class="title">
+            <div class="write">
+                <a href="/">
+                    <button class="go_main">Home</button>
+                </a>
+                <c:if test="${isLogin != 0}">
+                        <form action="./write" method="get">
+                            <button id="btnWrite" me>글쓰기</button>
+                        </form>
+                </c:if>
+            </div>
             <div>
-                <form action="./write" method="get">
-                    <button id="btnWrite" me>글쓰기</button>
+                <form action="" method="get" id="searchForm">
+                    <select name="searchKind" id="searchKind">
+                        <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                        <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용
+                        </option>
+                    </select>
+                    <input type="text" name="search" id="search" value="${paging.search }">
+                    <input hidden="hidden" name="curPage" value="${curPage}">
+                    <button id="serchBtn">검색</button>
                 </form>
             </div>
-        </c:if>
         </div>
-        <div>
-            <form action="" method="get" id="searchForm">
-                <select name="searchKind" id="searchKind">
-                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
-                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
-                </select>
-                <input type="text" name="search" id="search" value="${paging.search }">
-                <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="serchBtn">검색</button>
-            </form>
+            <hr style="clear: both; margin-bottom: 10px;">
+
+            <table>
+
+                <%--             <colgroup>--%>
+                <%--             	 <col style="width: 5%;">--%>
+                <%--             	 <col style="width: 8%;">--%>
+                <%--             	 <col style="width: 45%;">--%>
+                <%--             	 <col style="width: 15%;">--%>
+                <%--             	 <col style="width: 8%;">--%>
+                <%--                 <col style="width: 10%;">--%>
+                <%--                 <col style="width: 10%;">--%>
+                <%--             </colgroup>--%>
+                <tr>
+                    <th><input type="checkbox" id="checkboxAllCheck"></th>
+                    <th>글 번호</th>
+                    <th>제목</th>
+                    <th>작성자 닉네임</th>
+                    <th>조회수</th>
+                    <th>최초작성일</th>
+                    <th>추천수</th>
+                </tr>
+                <c:choose>
+                    <c:when test="${not empty list }">
+                        <c:forEach var="board" items="${list }">
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
+                                                            class="delCheckBox"></td>
+                                <td class="no">${board.boardNo }</td>
+                                <td class="title">
+                                    <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&usrno=${board.userNo}">${board.title }</a>
+                                </td>
+                                <td class="nick">${board.nickName }</td>
+                                <td class="hit">${board.boardView }</td>
+                                <td class="date">
+                                    <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+                                </td>
+                                <c:forEach items="${totalrecomm }" var="recommList">
+                                    <c:if test="${recommList.BOARDNO eq board.boardNo }">
+                                        <td><a id="totalRecommend">${recommList.GOOD }</a></td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:when test="${empty list }">
+                        <tr>
+                            <td class="title" colspan="7">게시글이 존재하지 않습니다
+                            </td>
+                        </tr>
+                    </c:when>
+                </c:choose>
+            </table>
+
+
+            <button id="deleteBtn">체크 삭제</button>
+
         </div>
-
-        <hr style="clear: both; margin-bottom: 10px;">
-
-        <table>
-
-<%--             <colgroup>--%>
-<%--             	 <col style="width: 5%;">--%>
-<%--             	 <col style="width: 8%;">--%>
-<%--             	 <col style="width: 45%;">--%>
-<%--             	 <col style="width: 15%;">--%>
-<%--             	 <col style="width: 8%;">--%>
-<%--                 <col style="width: 10%;">--%>
-<%--                 <col style="width: 10%;">--%>
-<%--             </colgroup>--%>
-            <tr>
-                <th><input type="checkbox" id="checkboxAllCheck"></th>
-                <th>글 번호</th>
-                <th>제목</th>
-                <th>작성자 닉네임</th>
-                <th>조회수</th>
-                <th>최초작성일</th>
-                <th>추천수</th>
-            </tr>
-            <c:choose>
-            	<c:when test="${not empty list }">
-	            <c:forEach var="board" items="${list }">
-	                <tr>
-	                    <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-	                                                class="delCheckBox"></td>
-	                    <td class="no">${board.boardNo }</td>
-	                    <td class="title">
-	                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}&usrno=${board.userNo}">${board.title }</a>
-	                    </td>
-	                    <td class="nick">${board.nickName }</td>
-	                    <td class="hit">${board.boardView }</td>
-	                    <td class="date">
-	                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-	                    </td>
-	                    <c:forEach items="${totalrecomm }" var="recommList">
-	                        <c:if test="${recommList.BOARDNO eq board.boardNo }">
-	                            <td><a id="totalRecommend">${recommList.GOOD }</a></td>
-	                        </c:if>
-	                    </c:forEach>
-	                </tr>
-	            </c:forEach>
-	            </c:when>
-	            <c:when test="${empty list }">
-	            	<tr>
-	                    <td class="title" colspan="7">게시글이 존재하지 않습니다
-	                    </td>
-	                </tr>
-	            </c:when>
-			</c:choose>
-        </table>
-
-
-    <button id="deleteBtn">체크 삭제</button>
-
+        <!-- .container End -->
     </div>
-    <!-- .container End -->
-</div>
 
     <c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
 

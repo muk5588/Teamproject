@@ -13,7 +13,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="/resources/css/board/userbyboardList.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/board/boardList.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <style type="text/css">
 
@@ -95,20 +95,31 @@
     <div class="container">
 
         <h1>내 추천글</h1>
-        <a href="../">
-            <button style="position: absolute;">메인 페이지로</button>
-        </a>
+        <div class="title">
+        <div class="write">
+            <a href="/">
+                <button class="go_main">Home</button>
+            </a>
+            <c:if test="${isLogin > 0}">
+                <form action="./write" method="get">
+                    <button id="btnWrite" me>글쓰기</button>
+                </form>
+            </c:if>
+        </div>
         <div>
             <form action="" method="get" id="searchForm">
+                <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
                 <select name="searchKind" id="searchKind">
-                    <option value="title"  <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
-                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용</option>
+                    <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용
+                    </option>
                 </select>
                 <input type="text" name="search" id="search" value="${paging.search }">
                 <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="serchBtn">검색</button>
+                <button id="searchBtn">검색</button>
             </form>
         </div>
+    </div>
         <hr>
 
         <table>

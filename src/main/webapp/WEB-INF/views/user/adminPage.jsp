@@ -131,17 +131,6 @@
     <div class="table-container">
         <div class="table-wrapper">
             <h3>전체 회원 목록</h3>
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>

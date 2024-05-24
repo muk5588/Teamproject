@@ -120,52 +120,20 @@
                     <a class='btn-fill' href="/user/updatePass?userno=${dto1.userno}">비밀번호번경</a>
                     <a class='btn-fill' href="/user/deleteUser?userno=${dto1.userno}">탈퇴</a>
                 </div>
+                <a href="/basket/userbasket">
+                    <button>장바구니</button>
+                </a>
             </c:otherwise>
         </c:choose>
-        <a href="/basket/userbasket">
-            <button>장바구니</button>
-        </a>
+
         <div>
             <h3>작성한 게시물</h3>
             <c:choose>
-                <c:when test="${not empty list and (userno == dto1.userno)}">
-                    <a class = "allboard" onclick="location.href='../board/userbyboardlist?userno=${dto1.userno}'">+더보기</a>
-                    <table>
-                             <colgroup>
-                             	 <col style="width: 7%;">
-                             	 <col style="width: 54%;">
-                             	 <col style="width: 15%;">
-                             	 <col style="width: 7%;">
-                             	 <col style="width: 10%;">
-                                 <col style="width: 7%;">
-                             </colgroup>
-                        <tr>
-                            <th>글 번호</th>
-                            <th>제목</th>
-                            <th>작성자 닉네임</th>
-                            <th>조회수</th>
-                            <th>최초작성일</th>
-                            <th>추천수</th>
-                        </tr>
-                        <c:forEach var="board" items="${list }" begin="0" end="4">
-                            <tr>
-                                <td class="no">${board.boardNo }</td>
-                                <td class="title">
-                                    <a href="../board/view?categoryNo=${board.categoryNo}&boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
-                                </td>
-                                <td class="nick">${board.nickName }</td>
-                                <td class="hit">${board.boardView }</td>
-                                <td class="date">
-                                    <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-                                </td>
-                                <c:forEach items="${totalrecomm }" var="recommList">
-                                    <c:if test="${recommList.BOARDNO eq board.boardNo }">
-                                        <td><a id="totalRecommend2">${recommList.GOOD }</a></td>
-                                    </c:if>
-                                </c:forEach>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                <c:when test="${not empty list and (userno == dto1.userno) }">
+                    <jsp:include page="/WEB-INF/views/user/uwb.jsp"/>
+                </c:when>
+                <c:when test="${not empty list and(dto1.gradeno == 0 || dto1.gradeno == 5000) and (dto1.userno != userno)}">
+                    <jsp:include page="/WEB-INF/views/user/uwb.jsp"/>
                 </c:when>
                 <c:otherwise>
                     <span>작성한 게시글이 없습니다.</span>
@@ -175,40 +143,14 @@
         <div>
             <h3>추천한 게시물</h3>
             <c:choose>
-                <c:when test="${not empty list2 and (userno == dto1.userno)}">
-                    <a class = "allboard" onclick="location.href='../board/userbyrecommlist?userno=${dto1.userno}'">+더보기</a>
-                    <table>
-                             <colgroup>
-                             	<col style="width: 7%;">
-                             	<col style="width: 60%;">
-                             	<col style="width: 15% ;">
-                             	<col style="width: 7%;">
-                             	<col style="width: 10%;">
-                             </colgroup>
-                        <tr>
-                            <th>글 번호</th>
-                            <th>제목</th>
-                            <th>작성자 닉네임</th>
-                            <th>조회수</th>
-                            <th>최초작성일</th>
-                        </tr>
-                        <c:forEach var="board2" items="${list2 }" begin="0" end="4">
-                            <tr>
-                                <td class="no">${board2.boardNo }</td>
-                                <td class="title">
-                                    <a href="../board/view?categoryNo=${board2.categoryNo}&boardNo=${board2.boardNo }&curPage=${curPage}">${board2.title }</a>
-                                </td>
-                                <td class="nick">${board2.nickName }</td>
-                                <td class="hit">${board2.boardView }</td>
-                                <td class="date">
-                                    <fmt:formatDate value="${board2.createDate }" pattern="yyyy-MM-dd"/>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                <c:when test="${not empty list and (userno == dto1.userno) }">
+                    <jsp:include page="/WEB-INF/views/user/urb.jsp"/>
+                </c:when>
+                <c:when test="${not empty list and(dto1.gradeno == 0 || dto1.gradeno == 5000) and (dto1.userno != userno)}">
+                    <span>관리자는 보실수 없습니다.</span>
                 </c:when>
                 <c:otherwise>
-                    <span>추천한 글이 없습니다.</span>
+                    <span>작성한 게시글이 없습니다.</span>
                 </c:otherwise>
             </c:choose>
         </div>

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Seungjin
@@ -10,176 +9,354 @@
 
 <html>
 <head>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script type="text/javascript">
 
-        var calendar = null;
-        var initialLocaleCode = 'ko';
-        var localeSelectorEl = document.getElementById('locale-selector');
+        var diaLogOpt={
+            modal:true
+            ,resizable:false
+            ,width:"570"
+            ,height:"470"
+        };
+        var calFunc={
+            calcDate: function(arg,calendar){
+                var rObj = new Object();
+                var start = null;
+                var end= null;
+                var allDay = arg.allDay;
+                var startDisp =null;
+                var endDisp = null;
+                // var id = null;
+                var xcontent = null;
+                var title = null;
 
-        $(document).ready(function (){
 
-            $(function () {
-                var request = $.ajax({
-                    url: "/calendar/calendarList",
-                    method: "GET",
-                    dataType: "json"
+                // if(arg.id!=""&& arg.id!=null&&arg.id!=undefined) id=arg.id;
+                if(arg.title!=""&& arg.title!=null&&arg.title!=undefined)title=arg.title;
+                if(arg.extendedProps!=undefined){
+                    if(arg._def.extendedProps.xcontent!=""&&arg._def.extendedProps.xcontent!=null&&arg._def.extendedProps.xcontent!=undefined){
+                        xcontent=arg._def.extendedProps.xcontent;
+                    }
+                }
+
+
+                    start = arg.start.toISOString();
+                    if(arg.end!=""&& arg.end!=null && arg.end!=undefined){
+                        end= arg.end.toISOString();
+                    }
+                    startDisp = returnCdate(calendar,arg.start);
+                    if(end!=null) endDisp = returnCdate(calendar,arg.end);
+
+                rObj.start=start;
+                rObj.end=end;
+                rObj.start=start;
+                rObj.startDisp=startDisp;
+                rObj.endDisp=endDisp;
+                // rObj.id=id;
+                rObj.xcontent=xcontent;
+                rObj.title=title;
+
+                console.log(rObj);
+                return rObj;
+            },
+
+
+//등록초기
+            setDateRangeView :function(xobj){
+                var dispStr = xobj.startDisp;
+                if(xobj.endDisp!=null) dispStr+="~"+xobj.endDisp;
+
+                $("form#diaForm").find("input[name='xdate']").val(dispStr);
+                $("form#diaForm").find("input[name='start']").val(xobj.start);
+                $("form#diaForm").find("input[name='end']").val(xobj.end);
+                $("form#diaForm").find("input[name='actType']").val("C");
+            },
+
+
+            getFormValue :function(){
+                var $dForm =$("form#diaForm");
+                var $obj = new Object();
+                $("form#diaForm").find("input,textarea").each(function(){
+                    var xval = $(this).val();
+                    $obj[$(this).attr("name")]=xval;
                 });
-                request.done(function (data) {
-                    console.log(data); // log 로 데이터 찍어주기.
-                    var calendarEl = document.getElementById('calendar');
-                    calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        headerToolbar: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,listWeek'
-                        },
-                        allDaySlot:false,
-                        navLinks: true,
-                        editable: true,
-                        selectable: true,
-                        droppable: true, // this allows things to be dropped onto the calendar
+                console.log($obj);
+                return $obj;
+            },
 
-
-                        /**
-                         * 드래그로 이벤트 수정하기
-                         */
-                        eventDrop: function (info){
-
-                            if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
-
-                                var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                                var obj = new Object();
-
-                                obj.title = info.event._def.title;
-                                obj.start = info.event._instance.range.start;
-                                obj.end = info.event._instance.range.end;
-
-                                obj.oldTitle = info.oldEvent._def.title;
-                                obj.oldStart = info.oldEvent._instance.range.start;
-                                obj.oldEnd = info.oldEvent._instance.range.end;
-
-                                events.push(obj);
-
-                                console.log(events);
-                            }else{
-                                location.reload();
-                            }
-                            $(function modifyData() {
-                                $.ajax({
-                                    url: "/calendar/calendarUpdate",
-                                    method: "POST",
-                                    dataType: "json",
-                                    data: JSON.stringify(events),
-                                    contentType: 'application/json',
-                                })
-                            })
-
-
-                        },
-
-
-                        /**
-                         * 드래그로 이벤트 추가하기
-                         */
-                        select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
-
-                            var title = prompt('일정 이름을 입력해주세요.');
-                            if (title) {
-                                var content = prompt('일정 내용을 입력하세요');
-                                if(content){
-                                    calendar.addEvent({
-                                        title: title,
-                                        content : content,
-                                        start: arg.start,
-                                        end: arg.end,
-                                        allDay: arg.allDay
-
-                                    })
-                                }else {
-                                    alert("일정 내용을 입력하세요");
-                                    return false;
-                                }
-                            }else {
-                                alert("일정 이름을 입력하세요");
-                                return false;
-                            }
-
-                            console.log(arg);
-
-                            var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                            var obj = new Object();     // Json 을 담기 위해 Object 선언
-
-                            obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
-                            obj.content = content;
-                            obj.start = arg.start; // 시작
-                            obj.end = arg.end; // 끝
-                            events.push(obj);
-                            var jsondata = JSON.stringify(events);
-                            console.log("jsondata" + jsondata);
-
-
-                            $(function saveData(jsondata) {
-                                $.ajax({
-                                    url: "/calendar/calendarInsert",
-                                    method: "POST",
-                                    dataType: "json",
-                                    data: JSON.stringify(events),
-                                    contentType: 'application/json',
-                                })
-                                calendar.unselect()
-                            });
-                        },
-
-                        /**
-                         * 이벤트 선택해서 삭제하기
-                         */
-                        eventClick: function (info){
-                            if(confirm("'"+ info.event.title +"' 일정을 삭제하시겠습니까 ?")){
-                                // 확인 클릭 시
-                                info.event.remove();
-
-
-                                console.log(info.event);
-                                var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                                var obj = new Object();
-                                obj.title = info.event._def.title;
-                                obj.start = info.event._instance.range.start;
-                                obj.end = info.event._instance.range.end;
-                                events.push(obj);
-
-                                console.log(events);
-                            }
-                            $(function deleteData(){
-                                $.ajax({
-                                    url: "/calendar/calendarDelete",
-                                    method: "POST",
-                                    dataType: "json",
-                                    data: JSON.stringify(events),
-                                    contentType: 'application/json',
-                                })
-                            })
-                        },
-                        locale: 'ko',
-                        // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
-                        //
-                        // },
-                        events: data
-                    });
-                    calendar.render();
+            //모든 태그 비활성화
+            formDsbTrue :function(){
+                $("form#diaForm").find("input,textarea").each(function(){
+                    $(this).attr("disabled",true);
                 });
+            },
+
+
+            //모든 태그 활성화
+            formDsbFalse :function(){
+                $("form#diaForm").find("input,textarea").each(function(){
+                    $(this).attr("disabled",false);
+                });
+            },
+
+            //데이터 조회
+            setDataForm:function(xobj){
+                var dispStr = xobj.startDisp;
+                if(xobj.endDisp!=null) dispStr+="~"+xobj.endDisp;
+
+                $("form#diaForm").find("input[name='xdate']").val(dispStr);
+                $("form#diaForm").find("input[name='start']").val(xobj.start);
+                $("form#diaForm").find("input[name='end']").val(xobj.end);
+                $("form#diaForm").find("input[name='actType']").val("U");
+
+
+                // $("form#diaForm").find("input[name='id']").val(xobj.id);
+                $("form#diaForm").find("input[name='title']").val(xobj.title);
+                $("form#diaForm").find("textarea[name='xcontent']").val(xobj.xcontent);
+            }
+        };
+        //calFunc[e]
+
+
+
+
+        //등록 액션
+        function createClnd(cal,xobj){
+            if(!confirm("일정을 등록 하시겠습니까?")) return false;
+            var $obj = calFunc.getFormValue();
+
+            $.ajax({
+                url:"/calendar/calendarInsert",
+                type: "POST",
+                dataType:"json",
+                data: JSON.stringify($obj),
+                contentType : 'application/json; charset=utf-8'
+            }).done(function(data) {
+                var result = JSON.stringify(data);
+                cal.refetchEvents();
+            }).fail(function() {
+                cal.refetchEvents();
 
             });
 
+
+        }
+
+
+        //수정액션
+        function updateClnd(cal,xobj,event){
+            if(!confirm("해당일정을 정말로 수정 하시겠습니까?")){
+                if(event!=undefined)event.revert();
+                return false;
+            }
+            var $obj = calFunc.getFormValue();
+
+            $.ajax({
+                url:"/calendar/calendarUpdate",
+                type:"POST",
+                dataType:"json",
+                data:JSON.stringify($obj),
+                contentType : 'application/json; charset=utf-8'
+            }).done(function(data) {
+                var result = JSON.stringify(data);
+                cal.refetchEvents();
+            }).fail(function() {
+
+                cal.refetchEvents();
+
+            });
+        }
+
+        //삭제액션
+        function deleteClnd(cal,xobj){
+            if(!confirm("해당일정을 정말로 삭제 하시겠습니까?")) return false;
+
+            var $obj = calFunc.getFormValue();
+            console.log(JSON.stringify($obj));
+            $.ajax({
+                url:"/calendar/calendarDelete",
+                type: "POST",
+                dataType:"json",
+                data:JSON.stringify($obj),
+                contentType : 'application/json; charset=utf-8'
+            }).done(function(data) {
+                var result =JSON.stringify(data);
+                cal.refetchEvents();
+            }).fail(function(){
+                cal.refetchEvents();
+            });
+        }
+
+
+
+
+        //달력 생성
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl,{
+                headerToolbar: {
+                    left: 'prev next today',
+                    center:'title',
+                    right:'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                // allDay:false,
+                // theme: true,
+                themeSystem:'bootstrap',
+                locale:'ko',
+                timeZone:'Asia/Seoul',
+                navLinks: true,
+                selectable:true,
+                selectMirror:true,
+                allDaySlot:false,
+
+                select: function(arg){
+
+
+                    var xObj = calFunc.calcDate(arg,calendar);
+
+                    var btnOpt ={
+                        "저장":function(){
+                            createClnd(calendar,xObj);
+                            $(this).dialog("close");
+                        },"취소":function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                    var dOpt = diaLogOpt;
+                    dOpt.buttons = btnOpt;
+                    $("#name").val("");
+                    $("#comment").val("");
+
+                    //================dialog 옵션 추가===================
+                    calFunc.formDsbFalse();
+                    $('#dialog').dialog(dOpt);
+                    calFunc.setDateRangeView(xObj);
+
+                    calendar.unselect();
+                },
+
+
+                //클릭 함수
+                eventClick: function(calEvent, jsEvent){
+
+                    var xObj= calFunc.calcDate(calEvent.event,calendar);
+                    var btnOpt ={
+                        "삭제":function(){
+                            deleteClnd(calendar,xObj);
+                            $(this).dialog("close");
+                        },"수정":function(){
+                            updateClnd(calendar,xObj);
+                            $(this).dialog("close");
+                        },"닫기":function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                    //================dialog 옵션 추가===================
+                    //======================관리자=======================
+                    calFunc.formDsbFalse();
+
+
+                    var dOpt=diaLogOpt;
+                    dOpt.buttons = btnOpt;
+
+                    $('#dialog').dialog(dOpt);
+                    calFunc.setDataForm(xObj);
+
+
+                },
+
+                //클릭 함수[e]
+
+
+
+                dayMaxEvents:true,
+
+
+                events: function(fetchInfo, successCallback, failureCallback){
+                    var start=fetchInfo.start.toISOString().slice(0,10);
+                    var end =fetchInfo.end.toISOString().slice(0,10);
+                    var param ="";
+                    param+="start="+start;
+                    param+="&end="+end;
+                    console.log(param);
+                    $.ajax({
+                        url:"/calendar/calendarList",
+                        type:"GET",
+                        dataType:"json",
+                        data:param
+                    }).done(function(data){
+
+                        console.log(data);
+                        successCallback(data);
+                    }).fail(function(){
+                        alert("실패하였습니다.");
+                    }).always(function(){
+
+                    });
+
+                },
+
+                eventDrop:function(info){
+                    var xObj=calFunc.calcDate(info.event,calendar);
+                    calFunc.setDataForm(xObj);
+                    updateClnd(calendar,xObj,info);
+                },
+                eventResize: function(info){
+                    var xObj=calFunc.calcDate(info.event,calendar);
+                    calFunc.setDataForm(xObj);
+                    updateClnd(calendar,xObj,info);
+                },
+                eventTimeFormat:{
+                    hour:'2-digit',
+                    minute:'2-digit',
+                    hour12:false
+                },
+
+            });
+
+            calendar.render();
+
+
+            $("span.fa-chevron-left").html("이전달");
+            $("span.fa-chevron-right").html("다음달");
         });
+        //달력생성[e]
+
+
+        //특정일자하루전
+        function dateRel(date){
+            var selectDate =date.split("-");
+            var changeDate = new Date();
+            changeDate.setFullYear(selectDate[0], selectDate[1]-1, selectDate[2]-1);
+
+            var y = changeDate.getFullYear();
+            var m = changeDate.getMonth() +1;
+            var d=changeDate.getDate();
+
+            if(m < 10){
+                m = "0" + m;
+            }
+
+            if(d < 10){
+                d = "0" + d;
+            }
+            var resultDate = y + "-" + m +"-" +d;
+            return resultDate;
+        }
+
+        function returnCdate(cal,time){
+            return cal.formatDate(time,{month: 'long',year:'numeric',day:'numeric',hour:'numeric',minute:'numeric',timeZone:'Asia/Seoul',locale:'ko'});
+        }
 
 
     </script>
     <style>
         body {
-            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
             font-size: 14px;
             margin:0 auto;
         }
@@ -189,71 +366,105 @@
         }
 
 
-        .access_user {
-            width: 300px;
-            height: 100px;
-            float: right;
-            margin-right: 100px;
-            padding-top: 50px;
-        }
-
-        #external-events {
-            position: absolute;
-            /*left: 100 px;*/
-            /*top: 100px;*/
-            width: 150px;
-            overflow: hidden;
-            padding: 0 10px;
-            margin-top: 80px;
-            border: 1px solid #ccc;
-            background: #eee;
-            text-align: left;
-        }
-
-        #external-events h4 {
-            font-size: 16px;
-            margin-top: 0;
-            padding-top: 1em;
-        }
-
-        #external-events .fc-event {
-            margin: 3px 0;
-            cursor: move;
-        }
-
-        #external-events p {
-            margin: 1.5em 0;
-            font-size: 11px;
-            color: #666;
-        }
-
-        #external-events p input {
-            margin: 0;
-            vertical-align: middle;
-        }
-
-
         #calendar {
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 10px;
         }
+
+        #dialog {
+            font-size: 14px;
+        }
+
+        /* 폼 컨테이너 스타일 */
+        #form-div {
+            padding: 20px;
+        }
+
+        /* 입력 필드 및 텍스트 영역 스타일 */
+        input[type="text"],
+        input[type="hidden"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* 필드의 placeholder 스타일 */
+        input::placeholder,
+        textarea::placeholder {
+            color: #aaa;
+        }
+
+        /* 텍스트 영역 스타일 */
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* 폼 필드 그룹 스타일 */
+        p {
+            margin: 0 0 15px 0;
+        }
+
+        /* 필드 컨테이너 클래스 스타일 */
+        .name, .email, .text {
+            margin-bottom: 15px;
+        }
+
+        /* 입력 필드에 포커스가 갔을 때 스타일 */
+        input:focus,
+        textarea:focus {
+            border-color: #66afe9;
+            outline: none;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+
+        /* 버튼 스타일 */
+        .ui-dialog-buttonpane .ui-dialog-buttonset button {
+            padding: 6px 12px;
+            font-size: 14px;
+            margin: 5px;
+        }
+
     </style>
 </head>
 <body>
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <th:block layout:fragment="ground-wrap">
-    <div class="ground">
-        <div class="main">
-            <div id='calendar-wrap'>
-                <div id='calendar'></div>
-            </div>
+<div id="contents">
+    <div id="dialog" title="일정 관리" style="display:none;">
+        <div id="form-div">
+            <form class="diaForm" id="diaForm">
+                <input type="hidden" name="actType" value="C"/>
+<%--                <input type="hidden" name="id" value=""/>--%>
+                <input type="hidden" name="start" value=""/>
+                <input type="hidden" name="end" value=""/>
+
+                <p class="name">
+                    <input name="title" type="text"
+                           class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+                           placeholder="일정타이틀" id="name"/>
+                </p>
+
+                <p class="email">
+                    <input name="xdate" type="text" readonly="readonly"
+                           class="validate[required,custom[email]] feedback-input" placeholder="선택된날짜 및 시간"/>
+                </p>
+
+                <p class="text">
+                    <textarea name="xcontent" class="validate[required,length[6,300]] feedback-input" id="comment"
+                              placeholder="일정내용"></textarea>
+                </p>
+            </form>
         </div>
     </div>
-    </div>
-
-
+    <div id="calendar"></div>
+</div>
 
     <script>
         // 기본 위치(top)값

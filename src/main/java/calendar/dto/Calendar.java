@@ -16,10 +16,6 @@ public class Calendar {
     private Date end1;
     private int allDay;
 
-    private Date oldStart;
-
-
-    private Date oldEnd;
 
 
 
@@ -28,8 +24,7 @@ public class Calendar {
     public Calendar() {}
 
 
-
-    public Calendar(int calendarNo, int userno, String calendarTitle, String content, Date start1, Date end1, int allDay, Date oldStart, Date oldEnd) {
+    public Calendar(int calendarNo, int userno, String calendarTitle, String content, Date start1, Date end1, int allDay) {
         this.calendarNo = calendarNo;
         this.userno = userno;
         this.calendarTitle = calendarTitle;
@@ -37,10 +32,7 @@ public class Calendar {
         this.start1 = start1;
         this.end1 = end1;
         this.allDay = allDay;
-        this.oldStart = oldStart;
-        this.oldEnd = oldEnd;
     }
-
 
     @Override
     public String toString() {
@@ -52,8 +44,6 @@ public class Calendar {
                 ", start1=" + start1 +
                 ", end1=" + end1 +
                 ", allDay=" + allDay +
-                ", oldStart=" + oldStart +
-                ", oldEnd=" + oldEnd +
                 '}';
     }
 
@@ -111,21 +101,5 @@ public class Calendar {
 
     public void setAllDay(int allDay) {
         this.allDay = allDay;
-    }
-
-    public Date getOldStart() {
-        return oldStart;
-    }
-
-    public void setOldStart(Date oldStart) {
-        this.oldStart = oldStart;
-    }
-
-    public Date getOldEnd() {
-        return oldEnd;
-    }
-
-    public void setOldEnd(Date oldEnd) {
-        this.oldEnd = oldEnd;
     }
 }

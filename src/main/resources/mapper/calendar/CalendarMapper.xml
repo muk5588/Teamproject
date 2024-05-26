@@ -3,7 +3,7 @@
 <mapper namespace="calendar.dao.CalendarDao">
 
     <select id="getCalData" resultType="Calendar" parameterType="int">
-        select calendar_no,userno, calendar_title, content, start1, end1 from calendar
+        select calendar_no,userno, calendar_title, content, start1, end1 from CALENDAR
         <where>
             and userno = #{userno}
         </where>
@@ -13,25 +13,27 @@
         <selectKey resultType="int" order="BEFORE" keyProperty="calendarNo" >
             select CAL_SEQ.nextval from dual
         </selectKey>
-        insert into calendar (calendar_no, userno, calendar_title, content, start1, end1)
-        VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1}, #{end1})
+        insert into CALENDAR (calendar_no, userno, calendar_title, content, start1, end1)
+        VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1} - INTERVAL '9' HOUR , #{end1}- INTERVAL '9' HOUR )
     </insert>
 
     <update id="updateCalendar" parameterType="Calendar">
         update CALENDAR
-        set START1 = #{start1}
-        , END1 = #{end1}
+        set calendar_title = #{calendarTitle}
+        , content = #{content}
         <where>
             AND userno = #{userno}
-            AND calendar_title = #{calendarTitle}
+            AND start1 = #{start1}
+            AND end1 = #{end1}
         </where>
     </update>
 
     <delete id="deleteCalendar" parameterType="Calendar">
         delete CALENDAR
         <where>
-            and userno = #{userno}
-            and calendar_title = #{calendarTitle}
+            AND userno = #{userno}
+            AND calendar_title = #{calendarTitle}
+            and content = #{content}
             and start1 = #{start1}
             and end1 = #{end1}
         </where>

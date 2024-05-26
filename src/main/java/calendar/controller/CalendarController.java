@@ -3,6 +3,8 @@ package calendar.controller;
 import calendar.dto.Calendar;
 import calendar.service.CalendarService;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import user.dto.User;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -25,9 +29,6 @@ public class CalendarController {
    //캘린더 화면 출력
    @GetMapping("/calendar")
    public String calendarHome(){
-
-
-
 
        return "calendar/calendar";
    }
@@ -45,59 +46,55 @@ public class CalendarController {
        for (int i = 0; i < listAll.size(); i++) {
            HashMap<String, Object> hash = new HashMap<>();
            hash.put("title", listAll.get(i).getCalendarTitle());
-           hash.put("content", listAll.get(i).getContent());
+           hash.put("xcontent", listAll.get(i).getContent());
            hash.put("start", listAll.get(i).getStart1());
            hash.put("end", listAll.get(i).getEnd1());
 
            jsonArr.add(hash);
        }
+       System.out.println(jsonArr);
        return jsonArr;
    }
 
     //Insert
-   @PostMapping(value = "/calendar/calendarInsert")
+   @RequestMapping( "/calendar/calendarInsert")
    @ResponseBody
-   public String calendarInsert(@SessionAttribute(value = "dto1", required = false) User login
-           ,@RequestBody List<Map<String, Object>> param) throws IOException {
+   public void calendarInsert(@SessionAttribute(value = "dto1", required = false) User login
+           ,@RequestBody HashMap<String, Object> param) {
        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
 
-       for (Map<String, Object> list : param) {
-
-           String title = (String) list.get("title");
-           String content = (String) list.get("content");
-           String startDateString = (String) list.get("start");
-           String endDateString = (String) list.get("end");
-
-           LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
-           LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
 
 
-           LocalDateTime startDate = startDateUTC.plusHours(9);
-           LocalDateTime endDate = endDateUTC.plusHours(9);
+       String title = (String) param.get("title");
+       String content = (String) param.get("xcontent");
+       String startDateString = (String) param.get("start");
+       String endDateString = (String) param.get("end");
+
+       LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
+       LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
+
+       LocalDateTime startDate = startDateUTC.plusHours(9);
+       LocalDateTime endDate = endDateUTC.plusHours(9);
+
+
+       Date start = java.sql.Timestamp.valueOf(startDate);
+       Date end = java.sql.Timestamp.valueOf(endDate);
+
+       Calendar calendar = new Calendar();
+       calendar.setUserno(login.getUserno());
+       calendar.setCalendarTitle(title);
+       calendar.setContent(content);
+       calendar.setStart1(start);
+       calendar.setEnd1(end);
+       System.out.println("calendar : " + calendar);
+
+       calendarService.insertCalendar(calendar);
 
 
 
-           int userno = login.getUserno();
-            Date start = java.sql.Timestamp.valueOf(startDate);
-            Date end = java.sql.Timestamp.valueOf(endDate);
-
-            if(title != null && content != null){
-                Calendar calendar = new Calendar();
-                calendar.setUserno(userno);
-                calendar.setCalendarTitle(title);
-                calendar.setContent(content);
-                calendar.setStart1(start);
-                calendar.setEnd1(end);
-
-                calendarService.insertCalendar(calendar);
-            }else{
-                return "/calendar/calendar";
-            }
-
-       }
 
 
-       return "/calendar/calendar";
+//       return "/calendar/calendar";
    }
 
 
@@ -105,75 +102,77 @@ public class CalendarController {
     //Update
     @RequestMapping("/calendar/calendarUpdate")
     @ResponseBody
-    public String calendarUpdate(@RequestBody List<Map<String, Object>> param
-        ,@SessionAttribute(value = "dto1", required = false) User login){
+    public void calendarUpdate(@RequestBody HashMap<String, Object> param
+        ,@SessionAttribute(value = "dto1", required = false) User login)  {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
-        for (Map<String, Object> list : param) {
+        String title = (String) param.get("title");
+        String content = (String) param.get("xcontent");
+        String startDateString = (String) param.get("start");
+        String endDateString = (String) param.get("end");
 
-            String title = (String) list.get("title");
-            String startDateString = (String) list.get("start");
-            String endDateString = (String) list.get("end");
+        LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
+        LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
 
-
-
-
-            LocalDateTime modifiedStartDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
-            LocalDateTime modifiedEndDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
-
+        LocalDateTime startDate = startDateUTC.plusHours(9);
+        LocalDateTime endDate = endDateUTC.plusHours(9);
 
 
-            Date start = java.sql.Timestamp.valueOf(modifiedStartDate);
-            Date end = java.sql.Timestamp.valueOf(modifiedEndDate);
+        Date start = java.sql.Timestamp.valueOf(startDate);
+        Date end = java.sql.Timestamp.valueOf(endDate);
+
+        Calendar calendar = new Calendar();
+        calendar.setUserno(login.getUserno());
+        calendar.setCalendarTitle(title);
+        calendar.setContent(content);
+        calendar.setStart1(start);
+        calendar.setEnd1(end);
+        System.out.println("calendar : " + calendar);
 
 
-            Calendar calendar = new Calendar();
-            calendar.setUserno(login.getUserno());
-            calendar.setCalendarTitle(title);
-            calendar.setStart1(start);
-            calendar.setEnd1(end);
-
-
-            calendarService.updateCalendar(calendar);
-        }
+        calendarService.updateCalendar(calendar);
 
 
 
-        return "/calendar/calendar";
+
+//        return "/calendar/calendar";
     }
 
     //Delete
     @RequestMapping("/calendar/calendarDelete")
     @ResponseBody
-    public String calendarDelete(@RequestBody List<Map<String, Object>> param
-        ,@SessionAttribute(value = "dto1", required = false) User login){
+    public void calendarDelete(@RequestBody HashMap<String, Object> param
+        ,@SessionAttribute(value = "dto1", required = false) User login) throws ParseException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
-        for (Map<String, Object> list : param) {
 
-            String title = (String) list.get("title");
-            String startDateString = (String) list.get("start");
-            String endDateString = (String) list.get("end");
 
+            String title = (String) param.get("title");
+            String content = (String) param.get("xcontent");
+            String startDateString = (String) param.get("start");
+            String endDateString = (String) param.get("end");
 
             LocalDateTime startDateUTC = LocalDateTime.parse(startDateString, dateTimeFormatter);
             LocalDateTime endDateUTC = LocalDateTime.parse(endDateString, dateTimeFormatter);
 
+            LocalDateTime startDate = startDateUTC.plusHours(9);
+             LocalDateTime endDate = endDateUTC.plusHours(9);
 
 
-            int userno = login.getUserno();
-            Date start = java.sql.Timestamp.valueOf(startDateUTC);
-            Date end = java.sql.Timestamp.valueOf(endDateUTC);
 
-
+            Date start = java.sql.Timestamp.valueOf(startDate);
+            Date end = java.sql.Timestamp.valueOf(endDate);
+            System.out.println("start : " + start + "end : " + end);
             Calendar calendar = new Calendar();
-            calendar.setUserno(userno);
+            calendar.setUserno(login.getUserno());
             calendar.setCalendarTitle(title);
+            calendar.setContent(content);
             calendar.setStart1(start);
             calendar.setEnd1(end);
+            System.out.println("calendar : " + calendar);
+
 
             calendarService.deleteCalendar(calendar);
-        }
 
-       return "/calendar/calendar";
+//       return "/calendar/calendar";
     }
 }

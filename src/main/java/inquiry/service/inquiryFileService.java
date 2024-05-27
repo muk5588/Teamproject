@@ -37,6 +37,8 @@ public interface inquiryFileService {
 	 */
 	public InquiryFile getFileByFileNo(int fileNo);
 
+	public int deleteByFileNo(int no);
+
 	
 
 

@@ -37,6 +37,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 10px;
         display: none; /* 기본적으로 메뉴를 숨깁니다 */
+        z-index: 1;
     }
 
     #menu.show {

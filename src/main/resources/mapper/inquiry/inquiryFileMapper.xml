@@ -31,4 +31,10 @@
 	</where>
 </select>
 
+<delete id="deleteByFileNo" parameterType="int">
+        DELETE FROM inquiryFile
+        WHERE inquiryNo = #{inquiryNo}
+    </delete>
+
+
 </mapper>

@@ -110,6 +110,11 @@ public class inquiryFileServiceImpl implements inquiryFileService {
 		public InquiryFile getFileByFileNo(int fileNo) {
 			return inquiryFileDao.getFileByFileNo(fileNo);
 		}
+
+		@Override
+		public int deleteByFileNo(int no) {
+			return inquiryFileDao.deleteByFileNo(no);
+		}
 	
 	
 }

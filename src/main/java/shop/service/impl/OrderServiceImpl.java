@@ -47,80 +47,91 @@ public class OrderServiceImpl implements OrderService {
 	private String imp_secret = "raGfKIOia3gSi4pnjct8TNHvFrsW6JOyc11ckSRfM87vhJI0EulIZ44aSSXnu6a042r9j70mFsNa6P9v";
 	
 	@Override
-	public int[] getItemNosByorderDatas(String[] orderDatas) {
-		int[] orderNumbers = new int[orderDatas.length];
-		for (int i = 0; i < orderDatas.length; i++) {
-	        orderNumbers[i] = Integer.parseInt(orderDatas[i]);
+	public List<Basket> getItemNosByorderDatas(String[] orderDatas, String[] quantities) {
+        List<Basket> basketList = new ArrayList<>();
+        if (orderDatas != null && quantities != null) {
+            for (int i = 0; i < Math.min(orderDatas.length, quantities.length); i++) {
+            	Basket tempBasket = new Basket();
+                int basketNo = Integer.parseInt(orderDatas[i]);
+                logger.debug("basketNo : {}",basketNo);
+                int quantity = Integer.parseInt(quantities[i]);
+                logger.debug("quantity : {}",quantity);
+                tempBasket.setBasketNo(basketNo);
+                tempBasket.setQuantity(quantity);
+                basketList.add(tempBasket);
+            }
+        }
+        List<Basket> tempList = orderDao.selectBasketByBaskets(basketList);
+	    logger.debug("서비스 basketList : {}", basketList);
+	    for (int i = 0; i < basketList.size(); i++) {
+	        for (Basket basket : tempList) {
+	            if (basket.getBasketNo() == tempList.get(i).getBasketNo()) {
+	                basket.setQuantity(basketList.get(i).getQuantity());
+	             // basketNo가 같으면 quantity 덮어씌우고 break
+	                break;
+	            }
+	        }
 	    }
-	    logger.debug("서비스 orderNumbers : {}", Arrays.toString(orderNumbers));
-		return orderNumbers;
+		return tempList;
 	}
 	
 	@Override
-	public Map<String, Object> userorderProc(int[] orderNumbers) {
-		logger.debug("Proc : {} ", orderNumbers);
-		User user = (User) session.getAttribute("dto1");
-		if(null == user) {
-			return null;
-		}
-		if(user.getUserno() <=0 ) {
-			return null;
-		}
-		List<Basket> basketsTemp = orderDao.basketListBybasketNos(orderNumbers);
-		logger.debug("basketsTemp : {}", basketsTemp);
-		
-		//없을 경우 null
-		if(basketsTemp == null) {
-			return null;
-		}
-		
-		List<Basket> baskets = new ArrayList<Basket>();
-		
-		//상품의 수량 합산을 위한 Map 객체 생성
-		Map<Integer, Integer> itemQuantityMap = new HashMap<>();
-		
-		//같은 물건의 경우 합산 처리
-		for(Basket b : basketsTemp) {
-			int itemNo = b.getItemNo();
-			int quantity = b.getQuantity();
-			
-		    // 이미 해당 ITEMNO가 맵에 있는 경우 기존 값과 더함
-		    if (itemQuantityMap.containsKey(itemNo)) {
-		        int currentQuantity = itemQuantityMap.get(itemNo);
-		        itemQuantityMap.put(itemNo, currentQuantity + quantity);
-		    } else {
-		        // 해당 ITEMNO가 맵에 없는 경우 새로운 키로 추가
-		        itemQuantityMap.put(itemNo, quantity);
-		    }			
-		}
-		//결과 Map itemno : quantity 쌍을  List<Basket>에 담기
-		for (Map.Entry<Integer, Integer> entry : itemQuantityMap.entrySet()) {
-		    int itemNo = entry.getKey();
-		    int totalQuantity = entry.getValue();
-		    
-		    Basket basket = new Basket();
-		    basket.setItemNo(itemNo);
-		    basket.setQuantity(totalQuantity);
-		    
-		    baskets.add(basket);
-		}
-		//장바구니에 담긴 상품 정보 조회
-		logger.debug("baskets : {}", baskets);
-		List<Item> items = orderDao.getItemByItemNos(baskets);
-		logger.debug("items : {}", items);
+//	public Map<String, Object> userorderProc(int[] orderNumbers) {
+	public Map<String, Object> userorderProc(List<Basket> baskets) {
+	    logger.debug("Proc baskets : {}", baskets);
+	    User user = (User) session.getAttribute("dto1");
+	    if (null == user || user.getUserno() <= 0) {
+	        return null;
+	    }
+	    
+	    // 수량 합산을 위한 Map 객체 생성
+	    Map<Integer, Integer> itemQuantityMap = new HashMap<>();
+	    // 같은 물건의 경우 수량 합산 처리
+	    for (Basket basket : baskets) {
+	        int itemNo = basket.getItemNo();
+	        int quantity = basket.getQuantity();
+	        
+	        // 이미 해당 ITEMNO가 맵에 있는 경우 기존 값과 더함
+	        if (itemQuantityMap.containsKey(itemNo)) {
+	            int currentQuantity = itemQuantityMap.get(itemNo);
+	            itemQuantityMap.put(itemNo, currentQuantity + quantity);
+	        } else {
+	            // 해당 ITEMNO가 맵에 없는 경우 새로운 키로 추가
+	            itemQuantityMap.put(itemNo, quantity);
+	        }			
+	    }
+	    logger.debug("itemQuantityMap : {}",itemQuantityMap);
+	    List<Basket> mergedBaskets = new ArrayList<>();
+	    
+	    // 결과 Map itemno : quantity 쌍을 List<Basket>에 담기
+	    for (Map.Entry<Integer, Integer> entry : itemQuantityMap.entrySet()) {
+	        int itemNo = entry.getKey();
+	        int totalQuantity = entry.getValue();
+	        
+	        Basket basket = new Basket();
+	        basket.setItemNo(itemNo);
+	        basket.setQuantity(totalQuantity);
+	        
+	        mergedBaskets.add(basket);
+	    }
+	    
+	    // 장바구니에 담긴 상품 정보 조회
+	    logger.debug("mergedBaskets : {}", mergedBaskets);
+	    List<Item> items = orderDao.getItemByItemNos(mergedBaskets);
+	    logger.debug("items : {}", items);
 
-		//상품의 대표 이미지 조회
+	    // 상품의 대표 이미지 조회
 	    List<ItemFile> imgFiles = orderDao.getTitleImgs(items);
-
-		
-		Map<String, Object>  returnMap = new HashMap<>();
-		
-		returnMap.put("baskets", baskets);
-		returnMap.put("items", items);
-		returnMap.put("imgFiles", imgFiles);
-		
-		return returnMap;
+	    
+	    Map<String, Object> returnMap = new HashMap<>();
+	    
+	    returnMap.put("baskets", mergedBaskets);
+	    returnMap.put("items", items);
+	    returnMap.put("imgFiles", imgFiles);
+	    
+	    return returnMap;
 	}
+
 
 	@Override
 	public UserOrder makeUserOrder() {

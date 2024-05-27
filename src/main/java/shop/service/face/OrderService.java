@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 
+import dto.Basket;
 import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
@@ -15,14 +16,14 @@ import util.ShopPaging;
 
 public interface OrderService {
 
-	public int[] getItemNosByorderDatas(String[] orderDatas);
+	public List<Basket> getItemNosByorderDatas(String[] orderDatas, String[] quantities);
 
 	/**
 	 * 장바구니에서 결제 선택한 상품의 데이터 가공
-	 * @param orderNumbers - 장바구니 번호 배열
+	 * @param baskets - 장바구니 번호 배열
 	 * @return
 	 */
-	public Map<String, Object> userorderProc(int[] orderNumbers);
+	public Map<String, Object> userorderProc(List<Basket> baskets);
 
 	/**
 	 * UserOrder 객체 생성 ( 기본값 현재 로그인한 회원 정보)

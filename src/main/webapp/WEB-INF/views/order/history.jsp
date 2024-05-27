@@ -80,15 +80,21 @@
                                             <tr>
                                                 <th>주문자 : ${userOrder.userName }</th>
                                                 <th rowspan="7" class="img">
-                                                    <c:choose>
-                                                        <c:when test="${ item.titleImg ne 0}">
-                                                            <img alt="ItemImg"
-                                                                 src="/resources/img/shop/upload/${item.storedName }">
-                                                        </c:when>
-                                                        <c:when test="${item.titleImg eq 0}">
-                                                            <img src="/resources/img/shop/nullimg.jpg" alt="notready">
-                                                        </c:when>
-                                                    </c:choose>
+                                                <c:choose>
+											    	<c:when test="${not empty imgFiles}">
+												    	<c:forEach items="${imgFiles}" var="files">
+												    	<c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
+												    		<img alt="" src="/resources/img/shop/upload/${files.storedName }">
+												    	</c:if>
+												    	<c:if test="${empty files.itemNo}">
+												    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+												    	</c:if>
+												   		</c:forEach>
+											   		</c:when>
+											   		<c:when test="${empty imgFiles }">
+											    		<img src="/resources/img/shop/nullimg.jpg" alt="notready">
+											   		</c:when>
+									   			</c:choose>
                                                 </th>
                                             </tr>
                                             <tr>

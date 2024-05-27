@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import dto.Item;
-import util.Paging;
+import util.ShopPaging;
 
 @Repository("ShopDao")
 public interface ShopDao {
 
-	public List<Item> getList();
+	public List<Item> getList(ShopPaging shopPaging);
 
-	public int selectCntAll(Paging shopPaging);
+	public int selectCntAll(ShopPaging shopPaging);
 
 	public Item getItemByItemNo(int itemNo);
 

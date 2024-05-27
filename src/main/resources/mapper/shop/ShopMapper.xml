@@ -2,21 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.dao.ShopDao">
 
-<select id="getList" resultType="dto.Item">
-	SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
-	FROM ITEM
-	ORDER BY itemno DESC
+<select id="getList" resultType="dto.Item" parameterType="util.ShopPaging">
+	select * FROM (
+		select rownum rnum , i.* from(
+		SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
+		FROM ITEM a
+		<where>
+			AND  a.itemNo NOT IN (SELECT itemno FROM itemreport)
+		</where>
+		ORDER BY itemno DESC
+		) i
+	)
+	<where>
+		AND rnum between #{startNo} AND #{endNo}
+	</where>
 </select>
 
-<select id="selectCntAll" resultType="int" parameterType="util.Paging">
+<select id="selectCntAll" resultType="int" parameterType="util.ShopPaging">
 	SELECT count(*) FROM (
 		SELECT itemno,userno,itemname,createdate,price,itemcomm,remain,titleImg
-		FROM ITEM
-		<if test="search != null">
+		FROM ITEM a
 		<where>
+			AND  a.itemNo NOT IN (SELECT itemno FROM itemreport)
+		<if test="search != null">
 			AND itemname LIKE '%${search}%'
-		</where>
 		</if>
+		</where>
 	)
 </select>
 

@@ -11,6 +11,7 @@ import dto.Item;
 import shop.dao.ShopDao;
 import shop.service.face.ShopService;
 import util.Paging;
+import util.ShopPaging;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -19,17 +20,17 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired ShopDao shopDao;
 	
 	@Override
-	public Paging getPagging(Paging shopPaging) {
+	public ShopPaging getPagging(ShopPaging shopPaging) {
 		
 		int totalCount = shopDao.selectCntAll(shopPaging);
 		
-		Paging pagingres = new Paging(totalCount, shopPaging.getCurPage());
+		ShopPaging pagingres = new ShopPaging(totalCount, shopPaging.getCurPage());
 		return pagingres;
 	}
 	
 	@Override
-	public List<Item> list() {
-		return shopDao.getList();
+	public List<Item> list(ShopPaging shopPaging) {
+		return shopDao.getList(shopPaging);
 	}
 
 	@Override

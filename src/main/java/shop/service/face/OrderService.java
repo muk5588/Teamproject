@@ -142,7 +142,7 @@ public interface OrderService {
 	 * @param orderItems - 결제한 주문목록 객체 List
 	 * @return - 0 : 없음 | 1이상 : 삭제된 장바구니 데이터 행 
 	 */
-	public int isHaveItemInBasket(List<OrderItem> orderItems);
+	public int deleteOverlappingBaskets(List<OrderItem> orderItems);
 
 	/**
 	 * List<OrderItem> INSERT
@@ -164,6 +164,8 @@ public interface OrderService {
 	 * @return - 조회된 전체 행
 	 */
 	public List<ItemFile> getItemFilesByItemNos(List<Item> items);
+
+	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder);
 
 	
 

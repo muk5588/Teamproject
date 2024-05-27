@@ -3,7 +3,7 @@ package shop.service.face;
 import java.util.List;
 
 import dto.Item;
-import util.Paging;
+import util.ShopPaging;
 
 public interface ShopService {
 
@@ -12,9 +12,9 @@ public interface ShopService {
 	 * @param shopPaging - 페이징 객체
 	 * @return - 페이징 객체
 	 */
-	public Paging getPagging(Paging shopPaging);
+	public ShopPaging getPagging(ShopPaging shopPaging);
 
-	public List<Item> list();
+	public List<Item> list(ShopPaging shopPaging);
 
 	/**
 	 * 상품 번호로 상품 정보 조회

@@ -361,9 +361,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderItem> getOrderItemsByItemNosQuantitys(String[] sTitemNo, String[] sTquantity, int orderNo) {
 		List<OrderItem> orderItems = new ArrayList<>();
 		List<Item> items = orderDao.getItemsBySTitemNo(sTitemNo);
+		logger.debug("getOrderItemsByItemNosQuantitys : items :{} ",items);
+		int itemNo = 0;
         if (sTitemNo != null && sTquantity != null) {
             for (int i = 0; i < Math.min(sTitemNo.length, sTquantity.length); i++) {
-            	int itemNo = Integer.parseInt(sTitemNo[i]);
+            	itemNo = Integer.parseInt(sTitemNo[i]);
             	for(Item it : items) {
             		if(itemNo == it.getItemNo()) {
 		            	OrderItem orderItem = new OrderItem();
@@ -371,6 +373,7 @@ public class OrderServiceImpl implements OrderService {
 		                int orderQuantity = Integer.parseInt(sTquantity[i]);
 		                logger.debug("quantity : {}",orderQuantity);
 		                orderItem.setItemNo(itemNo);
+		                orderItem.setItemName(it.getItemName());
 		                orderItem.setOrderQuantity(orderQuantity);
 		                orderItem.setOrderNo(orderNo);
 		                orderItem.setPrice(it.getPrice());
@@ -383,8 +386,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int isHaveItemInBasket(List<OrderItem> orderItems) {
+	public int deleteOverlappingBaskets(List<OrderItem> orderItems) {
 	    User user = (User) session.getAttribute("dto1");
+	    int res=0;
 	    int userNo = user.getUserno();
 	    List<Basket> baskets = orderDao.getBasketsByUserNo(userNo);
 	    List<Basket> overlappingBaskets = new ArrayList<>();
@@ -399,14 +403,15 @@ public class OrderServiceImpl implements OrderService {
 	        }
 	    }
 	    logger.debug("Overlapping baskets: {}", overlappingBaskets);
-	    int res = orderDao.deleteOverlappingBaskets(overlappingBaskets);
+	    if( !overlappingBaskets.isEmpty() ) {
+	    	res = orderDao.deleteOverlappingBaskets(overlappingBaskets);
+	    }
 	    return res;
 	}
 
 	@Override
 	public int insertOrderItemByListOrderItem(List<OrderItem> orderItems) {
-		// TODO Auto-generated method stub
-		return 0;
+		return orderDao.insertOrderItemByListOrderItem(orderItems);
 	}
 
 	@Override
@@ -417,6 +422,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<ItemFile> getItemFilesByItemNos(List<Item> items) {
 		return orderDao.getItemFilesByItemNos(items);
+	}
+
+	@Override
+	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder) {
+		return orderDao.getOrderItemsByUserOrder(userOrder);
 	}
 
 

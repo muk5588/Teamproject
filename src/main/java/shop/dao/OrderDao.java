@@ -71,5 +71,9 @@ public interface OrderDao {
 
 	public List<ItemFile> getItemFilesByItemNos(@Param("items")List<Item> items);
 
+	public int insertOrderItemByListOrderItem(@Param("orderItems")List<OrderItem> orderItems);
+
+	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder);
+
 	
 }

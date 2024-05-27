@@ -317,4 +317,28 @@ WHERE basketNo IN
 	</where>
 </select>
 
+<insert id="insertOrderItemByListOrderItem" parameterType="dto.OrderItem">
+	INSERT INTO orderITEM(orderitemno,orderno,itemno, itemname, order_quantity,price)
+	SELECT ORDERITEM_SEQ.nextval,orderNo,B.itemNo,B.itemName,order_Quantity, price
+	FROM (
+    <foreach collection="orderItems" item="data" separator="UNION ALL ">
+   <![CDATA[
+           SELECT
+            #{data.orderNo} AS orderNo
+            ,#{data.itemNo} AS itemNo
+            ,#{data.itemName} AS itemName
+            ,#{data.orderQuantity} AS order_Quantity
+            ,#{data.price} AS price
+    FROM DUAL]]>
+    </foreach>
+    )B
+</insert>
+
+<select id="getOrderItemsByUserOrder" parameterType="dto.UserOrder" resultType="dto.OrderItem">
+	SELECT * FROM orderitem
+	<where>
+		AND orderno = #{orderNo}
+	</where>
+</select>
+
 </mapper>

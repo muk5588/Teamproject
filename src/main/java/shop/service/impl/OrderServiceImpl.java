@@ -10,6 +10,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -355,6 +356,70 @@ public class OrderServiceImpl implements OrderService {
 	public void updateUserOrderorderCancle(UserOrder userOrder) {
 		orderDao.updateUserOrderorderCancle(userOrder);
 	}
+
+	@Override
+	public List<OrderItem> getOrderItemsByItemNosQuantitys(String[] sTitemNo, String[] sTquantity, int orderNo) {
+		List<OrderItem> orderItems = new ArrayList<>();
+		List<Item> items = orderDao.getItemsBySTitemNo(sTitemNo);
+        if (sTitemNo != null && sTquantity != null) {
+            for (int i = 0; i < Math.min(sTitemNo.length, sTquantity.length); i++) {
+            	int itemNo = Integer.parseInt(sTitemNo[i]);
+            	for(Item it : items) {
+            		if(itemNo == it.getItemNo()) {
+		            	OrderItem orderItem = new OrderItem();
+		                logger.debug("basketNo : {}",itemNo);
+		                int orderQuantity = Integer.parseInt(sTquantity[i]);
+		                logger.debug("quantity : {}",orderQuantity);
+		                orderItem.setItemNo(itemNo);
+		                orderItem.setOrderQuantity(orderQuantity);
+		                orderItem.setOrderNo(orderNo);
+		                orderItem.setPrice(it.getPrice());
+		                orderItems.add(orderItem);
+            		}
+            	}
+            }
+        }
+		return orderItems;
+	}
+
+	@Override
+	public int isHaveItemInBasket(List<OrderItem> orderItems) {
+	    User user = (User) session.getAttribute("dto1");
+	    int userNo = user.getUserno();
+	    List<Basket> baskets = orderDao.getBasketsByUserNo(userNo);
+	    List<Basket> overlappingBaskets = new ArrayList<>();
+	    if (orderItems != null && baskets != null) {
+	        for (OrderItem orderItem : orderItems) {
+	            for (Basket basket : baskets) {
+	                if (orderItem.getItemNo() == basket.getItemNo()) {
+	                    overlappingBaskets.add(basket);
+	                    break; 
+	                }
+	            }
+	        }
+	    }
+	    logger.debug("Overlapping baskets: {}", overlappingBaskets);
+	    int res = orderDao.deleteOverlappingBaskets(overlappingBaskets);
+	    return res;
+	}
+
+	@Override
+	public int insertOrderItemByListOrderItem(List<OrderItem> orderItems) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Item> getItemsByOrderItems(List<OrderItem> orderItems) {
+		return orderDao.getItemsByOrderItems(orderItems);
+	}
+
+	@Override
+	public List<ItemFile> getItemFilesByItemNos(List<Item> items) {
+		return orderDao.getItemFilesByItemNos(items);
+	}
+
+
 
 
 	

@@ -220,8 +220,8 @@ $(function(){
         </a>
         
 <div id="orderwrap">
-<table>
 <form method="post" action="./completed" id="orderForm">
+<table>
 	<tr><td>주문자명<input type="text" name="userName" id="userName" value="${userOrder.userName }"></td></tr>
 	<tr><td>핸드폰번호<input type="text" name="phone" id="phone" value="${userOrder.phone }"></td></tr>
 	<tr><td>배송지 우편주소<input type="text" name="postCode" id="postCode" value="${userOrder.postCode }" readonly="readonly">
@@ -231,7 +231,6 @@ $(function(){
 	<tr><td><input type="text" name="detailAddress" id="detailAddress" value="${userOrder.detailAddress }">	
 		<input type="text" name="extraAddress" id="extraAddress"  value="${userOrder.extraAddress}" readonly="readonly">
 	</td></tr>
-</form>
 </table>
 <table>
 	<tr>

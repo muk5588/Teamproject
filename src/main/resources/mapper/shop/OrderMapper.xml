@@ -10,13 +10,13 @@
 	VALUES(#{orderNo},#{userNo},#{userName},#{phone},'N',#{totalPrice},#{postCode},#{address},#{detailAddress},#{extraAddress},#{paraMount},SYSDATE)
 </insert>
 
-<insert id="insertOrderItem" parameterType="dto.OrderItem">
-	<selectKey order="BEFORE" resultType="int" keyProperty="orderItemNo">
-		SELECT ORDERITEM_SEQ.nextval FROM dual
-	</selectKey>
-	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price)
-	VALUES(#{orderItemNo},#{orderNo},#{itemNo},#{itemName},#{orderQuantity},#{price})
-</insert>
+<!-- <insert id="insertOrderItem" parameterType="dto.OrderItem"> -->
+<!-- 	<selectKey order="BEFORE" resultType="int" keyProperty="orderItemNo"> -->
+<!-- 		SELECT ORDERITEM_SEQ.nextval FROM dual -->
+<!-- 	</selectKey> -->
+<!-- 	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price) -->
+<!-- 	VALUES(#{orderItemNo},#{orderNo},#{itemNo},#{itemName},#{orderQuantity},#{price}) -->
+<!-- </insert> -->
 
 <select id="basketListBybasketNos" parameterType="int" resultType="dto.Basket">
 	SELECT basketno,userno,itemno,quantity,additionalDATE+ INTERVAL '9' HOUR AS additionalDATE FROM BASKET
@@ -59,16 +59,16 @@
 </insert>
 
 <insert id="insertOrderItems" parameterType="int">
-	INSERT INTO OrderItem(orderitemno,orderno,itemno,itemname,order_quantity,price)
+	INSERT INTO OrderItem(orderitemno, orderno, itemno, itemname, order_quantity, price)
 	SELECT ORDERITEM_SEQ.nextval, D.* FROM (
 	<foreach collection="orderItems" item="items" separator="UNION ALL">
 	<![CDATA[
 		SELECT 
 		#{items.orderNo} AS orderNo 
 		, #{items.itemNo} AS itemNo 
-		, #{items.itemName} AS itemName 
+		, (SELECT itemName FROM Item WHERE itemNo = #{items.itemNo}) AS itemName 
 		, #{items.orderQuantity} AS orderQuantity 
-		, #{items.price} AS price
+		,(SELECT price FROM Item WHERE itemNo = #{items.itemNo}) AS price
 		FROM DUAL]]> 
 	</foreach>
 	)D 
@@ -260,5 +260,61 @@ WHERE basketNo IN
 	</where>
 </select>
 
+<select id="getItemsBySTitemNo" resultType="dto.Item" parameterType="String">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+	<where>
+		itemNo in
+			<foreach collection="itemNos" item="data" open="(" close=")" separator=",">
+				#{data}
+			</foreach>
+	</where>
+</select>
+
+<select id="selectItemByOrderItems" parameterType="dto.OrderItem" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+	<where>
+		AND itemNo IN
+		<foreach collection="orderItems" item="data" open="(" close=")" separator=",">
+			#{data.itemNo}
+		</foreach>
+	</where>
+</select>
+
+<select id="getBasketsByUserNo" parameterType="int" resultType="dto.Basket">
+	select * FROM basket
+	<where>
+		userNo = #{userNo}
+	</where>
+</select>
+
+<delete id="deleteOverlappingBaskets" parameterType="dto.Basket">
+	delete basket
+	<where>
+		basketNo In
+		<foreach collection="baskets" item="data" open="(" close=")" separator=",">
+			#{data.basketNo}
+		</foreach>
+	</where>
+</delete>
+
+<select id="getItemsByOrderItems" parameterType="dto.OrderItem" resultType="dto.Item">
+	SELECT itemno,userno,itemname,createdate+ INTERVAL '9' HOUR AS createdate,price,itemcomm,remain,titleImg FROM item
+	<where>
+		itemNo In
+		<foreach collection="orderItems" item="data" open="(" close=")" separator=",">
+			#{data.itemNo}
+		</foreach>
+	</where>
+</select>
+
+<select id="getItemFilesByItemNos" parameterType="dto.Item" resultType="dto.ItemFile">
+	SELECT fileno, itemno, stored_Name storedName, origin_Name originName from itemfile
+	<where>
+		AND fileNo IN
+		<foreach collection="items" item="data" open="(" close=")" separator=",">
+			#{data.titleImg}
+		</foreach>
+	</where>
+</select>
 
 </mapper>

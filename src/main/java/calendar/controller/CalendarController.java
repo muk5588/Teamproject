@@ -24,7 +24,6 @@ import java.util.*;
 public class CalendarController {
    @Autowired
    private CalendarService calendarService;
-   private Logger logger = LoggerFactory.getLogger(getClass());
 
    //캘린더 화면 출력
    @GetMapping("/calendar")
@@ -52,7 +51,6 @@ public class CalendarController {
 
            jsonArr.add(hash);
        }
-       System.out.println(jsonArr);
        return jsonArr;
    }
 
@@ -86,7 +84,6 @@ public class CalendarController {
        calendar.setContent(content);
        calendar.setStart1(start);
        calendar.setEnd1(end);
-       System.out.println("calendar : " + calendar);
 
        calendarService.insertCalendar(calendar);
 
@@ -94,7 +91,6 @@ public class CalendarController {
 
 
 
-//       return "/calendar/calendar";
    }
 
 
@@ -127,7 +123,6 @@ public class CalendarController {
         calendar.setContent(content);
         calendar.setStart1(start);
         calendar.setEnd1(end);
-        System.out.println("calendar : " + calendar);
 
 
         calendarService.updateCalendar(calendar);
@@ -135,7 +130,6 @@ public class CalendarController {
 
 
 
-//        return "/calendar/calendar";
     }
 
     //Delete
@@ -168,11 +162,9 @@ public class CalendarController {
             calendar.setContent(content);
             calendar.setStart1(start);
             calendar.setEnd1(end);
-            System.out.println("calendar : " + calendar);
 
 
             calendarService.deleteCalendar(calendar);
 
-//       return "/calendar/calendar";
     }
 }

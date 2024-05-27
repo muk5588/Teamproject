@@ -6,10 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <html>
 <head>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <title>캘린더</title>
+<%--    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>--%>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
@@ -59,7 +62,6 @@
                 rObj.xcontent=xcontent;
                 rObj.title=title;
 
-                console.log(rObj);
                 return rObj;
             },
 
@@ -83,7 +85,6 @@
                     var xval = $(this).val();
                     $obj[$(this).attr("name")]=xval;
                 });
-                console.log($obj);
                 return $obj;
             },
 
@@ -175,7 +176,6 @@
             if(!confirm("해당일정을 정말로 삭제 하시겠습니까?")) return false;
 
             var $obj = calFunc.getFormValue();
-            console.log(JSON.stringify($obj));
             $.ajax({
                 url:"/calendar/calendarDelete",
                 type: "POST",
@@ -202,7 +202,7 @@
                 headerToolbar: {
                     left: 'prev next today',
                     center:'title',
-                    right:'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right:'dayGridMonth,timeGridWeek,listWeek'
                 },
                 // allDay:false,
                 // theme: true,
@@ -256,8 +256,7 @@
                             $(this).dialog("close");
                         }
                     }
-                    //================dialog 옵션 추가===================
-                    //======================관리자=======================
+
                     calFunc.formDsbFalse();
 
 
@@ -283,7 +282,6 @@
                     var param ="";
                     param+="start="+start;
                     param+="&end="+end;
-                    console.log(param);
                     $.ajax({
                         url:"/calendar/calendarList",
                         type:"GET",
@@ -291,10 +289,9 @@
                         data:param
                     }).done(function(data){
 
-                        console.log(data);
                         successCallback(data);
                     }).fail(function(){
-                        alert("실패하였습니다.");
+                        alert("로그인 후 이용해주세요");
                     }).always(function(){
 
                     });
@@ -435,10 +432,8 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 
-<th:block layout:fragment="ground-wrap">
     <div id="contents">
         <div id="dialog" title="일정 관리" style="display:none;">
             <div id="form-div">
@@ -471,7 +466,7 @@
 
     <script>
         // 기본 위치(top)값
-        var floatPosition = parseInt($("#external-events").css('top'))
+        var floatPosition = parseInt($("#external-events2").css('top'))
 
         // scroll 인식
         $(window).scroll(function () {
@@ -480,11 +475,10 @@
             var bannerTop = currentTop + floatPosition + "px";
 
             //이동 애니메이션
-            $("#external-events").stop().animate({
+            $("#external-events2").stop().animate({
                 "top": bannerTop
             }, 500);
         }).scroll();
     </script>
-</th:block>
 </body>
 </html>

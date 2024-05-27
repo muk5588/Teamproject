@@ -14,7 +14,7 @@
             select CAL_SEQ.nextval from dual
         </selectKey>
         insert into CALENDAR (calendar_no, userno, calendar_title, content, start1, end1)
-        VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1} - INTERVAL '9' HOUR , #{end1}- INTERVAL '9' HOUR )
+        VALUES (#{calendarNo}, #{userno}, #{calendarTitle}, #{content}, #{start1} , #{end1} )
     </insert>
 
     <update id="updateCalendar" parameterType="Calendar">

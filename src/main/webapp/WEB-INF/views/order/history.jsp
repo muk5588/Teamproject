@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="/resources/css/order/history.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
+<link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <style type="text/css">
 
 </style>

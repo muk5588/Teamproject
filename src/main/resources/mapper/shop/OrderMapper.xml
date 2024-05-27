@@ -203,11 +203,11 @@ WHERE basketNo IN
 		FROM userorder u, orderitem o
 		<where>
 			AND o.orderno = u.orderno 
-		<if test="shopPaging.search != null">
-			AND itemname LIKE '%${shopPaging.search}%'
-		</if>
 		<if test="userno > 0">
 			AND userno = #{userno}
+		</if>
+		<if test="shopPaging.search != null">
+			AND itemname LIKE '%${shopPaging.search}%'
 		</if>
 		</where>
 		GROUP BY u.orderno

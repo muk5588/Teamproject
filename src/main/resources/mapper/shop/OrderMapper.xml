@@ -23,7 +23,7 @@
 	<where>
 	basketNo in 
 	<foreach collection="basketNos" item="data" open="(" close=")" separator="," >
-		#{data}
+		#{data.basketNo}
 	</foreach>
 	</where>
 </select>
@@ -242,5 +242,17 @@ WHERE basketNo IN
 		orderno = #{orderNo}
 	</where>
 </update>
+
+<select id="selectBasketByBaskets" parameterType="dto.Basket" resultType="dto.Basket">
+	SELECT basketNo, userNo,itemNo FROM 
+	Basket
+	<where>
+	AND basketNo IN
+		<foreach collection="baskets" item="data" open="(" close=")" separator=",">
+			#{data.basketNo}
+		</foreach>
+	</where>
+</select>
+
 
 </mapper>

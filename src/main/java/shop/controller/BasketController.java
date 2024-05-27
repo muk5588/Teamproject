@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -94,15 +96,18 @@ public class BasketController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/buyBasket")
-	public int[] buyBasket(@RequestParam("basketNo[]")int[] no
+	@PostMapping("/buyBasket")
+	public List<Basket> buyBasket(@RequestBody(required = false) List<Basket> baskets
 			, Model model) {
-		logger.debug("Ajax buyBasket : {}", no);
+		if( baskets == null || baskets.isEmpty()) {
+			return null;
+		}
+		logger.debug("Ajax buyBasket : {}", baskets);
 //		Map<String, Object> orderMap = basketService.userorderProc(no);
 //		orderMap.put("basketNos", no);
 //		logger.debug("orderMap : {}",orderMap);
 //		model.addAttribute("orderMap", orderMap);
-		return no;
+        return baskets;
 	}
 	
 	@ResponseBody

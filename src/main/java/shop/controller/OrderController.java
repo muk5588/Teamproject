@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dto.Basket;
 import dto.Item;
 import dto.ItemFile;
 import dto.OrderItem;
@@ -33,18 +34,23 @@ public class OrderController {
 	@Autowired HttpSession session;
 	
 	@RequestMapping("/ordersheet")
-	public void ordersheet(@RequestParam(value="res", required = false)String[] orderDatas
+	public void ordersheet(@RequestParam(value="basketNo", required = false)String[] orderDatas
+			, @RequestParam(value = "quantity", required = false) String[] quantities
 			, Model model
 			, HttpSession session
 			, @RequestParam(value="itemNo", required = false)String STitemNo
 			, @RequestParam(value="quantity", required = false)String STquantity) {
-		logger.debug("컨트롤러 itemNo : {}", STitemNo);
-		logger.debug("컨트롤러 quantity : {}", STquantity);
-		logger.debug("컨트롤러 orderDatas : {}", Arrays.toString(orderDatas));
-		if(orderDatas != null && STitemNo == null && STquantity == null) {
-		    int[] orderNumbers = orderService.getItemNosByorderDatas(orderDatas);
-			Map<String, Object> orderMap = orderService.userorderProc(orderNumbers);
-		    
+		logger.debug("컨트롤러 STitemNo : {}", STitemNo);
+		logger.debug("컨트롤러 STquantity : {}", STquantity);
+		if(orderDatas != null ) {
+			logger.debug("컨트롤러 orderDatas : {}", orderDatas);
+			logger.debug("컨트롤러 quantities : {}", quantities);
+			logger.debug("컨트롤러 orderDatas : {}", Arrays.toString(orderDatas));
+		    List<Basket> baskets = orderService.getItemNosByorderDatas(orderDatas,quantities);
+		    logger.debug("baskets : {}",baskets);
+			Map<String, Object> orderMap = orderService.userorderProc(baskets);
+		    logger.debug("baskets : {}",baskets);
+		    logger.debug("orderMap : {}",orderMap);
 		    model.addAttribute("baskets", orderMap.get("baskets"));
 		    model.addAttribute("items",orderMap.get("items"));
 		    model.addAttribute("imgFiles",orderMap.get("imgFiles"));

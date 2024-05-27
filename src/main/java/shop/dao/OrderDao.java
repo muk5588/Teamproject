@@ -19,7 +19,7 @@ public interface OrderDao {
 
 	public int insertOrderItem(OrderItem order);
 
-	public List<Basket> basketListBybasketNos(@Param("basketNos")int[] orderNumbers);
+	public List<Basket> basketListBybasketNos(@Param("basketNos")List<Basket> baskets);
 
 	public List<Item> getItemByItemNos(@Param("baskets")List<Basket> baskets);
 
@@ -56,6 +56,8 @@ public interface OrderDao {
 	public UserOrder selectUserOrderByOrderNo(int orderNo);
 
 	public void updateUserOrderorderCancle(UserOrder userOrder);
+
+	public List<Basket> selectBasketByBaskets(@Param("baskets")List<Basket> basketList);
 
 	
 }

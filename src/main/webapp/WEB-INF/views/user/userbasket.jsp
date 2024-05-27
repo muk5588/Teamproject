@@ -36,36 +36,43 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        $("#buyBtn").click(function () {
-            var datas = [];
-            var urlData = [];
-            $("input[name=deleteNo]:checked").each(function () {
-                var no = $(this).val();
-                datas.push(no);
-                var param = 'res=' + $(this).val();
-                urlData.push(param);
+    	$("#buyBtn").click(function () {
+   		 var basketList = [];
+   	        $("input[name=deleteNo]:checked").each(function () {
+   	            var basketRow = $(this).closest("tr");
+   	            var quantity = basketRow.find(".quantity").text().trim();
+   	            var basket = {
+   	                basketNo: $(this).val(),
+   	                quantity: quantity
+   	            };
+   	                console.log(basket)
+   	            basketList.push(basket);
             });
-            var urlQueryString = urlData.join('&');
-            console.log(datas); // 체크된 상품들의 값 확인용
-
-            $.ajaxSettings, traditional = true
+			console.log(basketList)
             $.ajax({
-                type: "get",
+                type: "POST",
                 url: "./buyBasket",
-                data: {
-                    basketNo: datas
-                },
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(basketList),
                 dataType: "json",
                 success: function (res) {
-                    console.log("AJAX 성공")
-                    console.log(res)
-
-                    $(function () {
-                        window.location.href = "../order/ordersheet?" + urlQueryString;
-                    })
+                    console.log("AJAX 성공");
+                    console.log(res);
+                    
+                    if(res && res.length){
+                    // 응답받은 데이터로 URL 파라미터 생성
+                    var urlQueryString = res.map(function (basket) {
+                        return 'basketNo=' + basket.basketNo + '&quantity=' + basket.quantity;
+                    }).join('&');
+	                    
+	                    window.location.href = "../order/ordersheet?" + urlQueryString;
+	                }else{
+	                	alert("처리과정에 에러가 발생하였습니다")
+	                	window.location.href = '/basket/userbasket'
+	                }
                 },
                 error: function () {
-                    console.log("AJAX 실패")
+                    console.log("AJAX 실패");
                 }
             });
         });

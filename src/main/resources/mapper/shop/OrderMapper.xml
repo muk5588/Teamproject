@@ -151,6 +151,12 @@ WHERE basketNo IN
 	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impUid,merchantUid FROM userOrder
 	<where>
 		AND userno = #{user.userno}
+		<if test="shopPaging.search != null">
+		AND orderno IN 
+			( SELECT orderno FROM orderITEM
+			WHERE itemname LIKE '%${shopPaging.search}%'
+			)
+		</if>
 	</where>
 	ORDER BY orderno DESC
 	) B

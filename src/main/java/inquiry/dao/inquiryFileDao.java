@@ -16,5 +16,7 @@ public interface inquiryFileDao {
 
 	public InquiryFile getFileByFileNo(int fileNo);
 
+	public int deleteByFileNo(int no);
+
 
 }

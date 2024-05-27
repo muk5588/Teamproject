@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import board.dto.BoardFile;
 import dto.Inquiry;
 import dto.InquiryFile;
 import inquiry.service.InquiryService;
@@ -102,9 +100,19 @@ public class InquiryController {
     // 문의 삭제하는 메서드
     @ResponseBody
     @RequestMapping("/delete")
-    public int delete(@RequestParam("inquiryNo") List<Integer> inquiryNo) {
+    public int delete(@RequestParam("inquiryNo") List<Integer> inquiryNo,
+    		@RequestParam(value = "fileNo", required = false, defaultValue = "") List<Integer> fileNo) {
         logger.debug("inquiryNo : {}", inquiryNo);
+        logger.debug("fileNo : {}", fileNo);
+        
         int deleteCount = 0;
+        
+        // 먼저 자식 레코드를 삭제합니다.
+        for (Integer no : inquiryNo) {
+            deleteCount += inquiryFileService.deleteByFileNo(no);
+        }
+
+        // 그런 다음 부모 레코드를 삭제합니다.
         for (Integer no : inquiryNo) {
             deleteCount += inquiryService.deleteByInquiryNo(no);
         }

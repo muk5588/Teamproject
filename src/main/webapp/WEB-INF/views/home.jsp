@@ -54,7 +54,7 @@
                 if (!isLogin) {
                     event.preventDefault(); // 기본 동작 중지 (페이지 이동 취소)
                     alert('로그인이 필요합니다.'); // 사용자에게 알림 표시
-                    return false;
+                    location.href= '/login';
                 } else {
                     // 로그인된 경우에만 페이지 이동
                     location.href = '/calendar';

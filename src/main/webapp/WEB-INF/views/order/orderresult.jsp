@@ -104,7 +104,6 @@
 </div>
     <!-- .container End -->
 
-    <c:import url="/WEB-INF/views/layout/shopPaging.jsp"/>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
 

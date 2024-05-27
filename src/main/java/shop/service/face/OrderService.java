@@ -127,6 +127,44 @@ public interface OrderService {
 	 */
 	public void updateUserOrderorderCancle(UserOrder userOrder);
 
+
+	/**
+	 * 
+	 * @param sTitemNo
+	 * @param sTquantity
+	 * @param orderNo
+	 * @return
+	 */
+	public List<OrderItem> getOrderItemsByItemNosQuantitys(String[] sTitemNo, String[] sTquantity, int orderNo);
+
+	/**
+	 * 결제하는 상품이 장바구니에 존재하는 경우 체크 후 존재할 경우 삭제
+	 * @param orderItems - 결제한 주문목록 객체 List
+	 * @return - 0 : 없음 | 1이상 : 삭제된 장바구니 데이터 행 
+	 */
+	public int isHaveItemInBasket(List<OrderItem> orderItems);
+
+	/**
+	 * List<OrderItem> INSERT
+	 * @param orderItems - 주문상품 리스트
+	 * @return - 삽입된 데이터 행
+	 */
+	public int insertOrderItemByListOrderItem(List<OrderItem> orderItems);
+
+	/**
+	 * 주문목록으로 상품 리스트 조회
+	 * @param orderItems - 주문목록 리스트
+	 * @return - 조회된 전체 행
+	 */
+	public List<Item> getItemsByOrderItems(List<OrderItem> orderItems);
+
+	/**
+	 * 상품 리스트 로 대표이미지파일 조회
+	 * @param items - 상품 리스트
+	 * @return - 조회된 전체 행
+	 */
+	public List<ItemFile> getItemFilesByItemNos(List<Item> items);
+
 	
 
 	

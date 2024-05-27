@@ -96,42 +96,42 @@
 
         <h1>내 추천글</h1>
         <div class="title">
-        <div class="write">
-            <a href="/">
-                <button class="go_main">Home</button>
-            </a>
-            <c:if test="${isLogin > 0}">
-                <form action="./write" method="get">
-                    <button id="btnWrite" me>글쓰기</button>
+            <div class="write">
+                <a href="/">
+                    <button class="go_main">Home</button>
+                </a>
+                <c:if test="${isLogin > 0}">
+                    <form action="./write" method="get">
+                        <button id="btnWrite" me>글쓰기</button>
+                    </form>
+                </c:if>
+            </div>
+            <div>
+                <form action="" method="get" id="searchForm">
+                    <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
+                    <select name="searchKind" id="searchKind">
+                        <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
+                        <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용
+                        </option>
+                    </select>
+                    <input type="text" name="search" id="search" value="${paging.search }">
+                    <input hidden="hidden" name="curPage" value="${curPage}">
+                    <button id="searchBtn">검색</button>
                 </form>
-            </c:if>
+            </div>
         </div>
-        <div>
-            <form action="" method="get" id="searchForm">
-                <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
-                <select name="searchKind" id="searchKind">
-                    <option value="title" <c:if test="${paging.searchKind == 'title'}">selected</c:if>>제목</option>
-                    <option value="content" <c:if test="${paging.searchKind == 'content'}">selected</c:if>>내용
-                    </option>
-                </select>
-                <input type="text" name="search" id="search" value="${paging.search }">
-                <input hidden="hidden" name="curPage" value="${curPage}">
-                <button id="searchBtn">검색</button>
-            </form>
-        </div>
-    </div>
         <hr>
 
         <table>
 
-             <colgroup>
-             	<col style="width: 5%;">
-             	<col style="width: 7%;">
-             	<col style="width: 50%;">
-             	<col style="width: 15%;">
-             	<col style="width: 8%;">
-             	<col style="width: 15%;">
-             </colgroup>
+            <%--<colgroup>
+                <col style="width: 5%;">
+                <col style="width: 7%;">
+                <col style="width: 50%;">
+                <col style="width: 15%;">
+                <col style="width: 8%;">
+                <col style="width: 15%;">
+            </colgroup>--%>
             <tr>
                 <th><input type="checkbox" id="checkboxAllCheck"></th>
                 <th>글 번호</th>
@@ -141,31 +141,40 @@
                 <th>최초작성일</th>
 
             </tr>
-            <c:forEach var="board" items="${list2 }">
-                <tr>
-                    <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
-                                                class="delCheckBox"></td>
-                    <td class="no">${board.boardNo }</td>
-                    <td class="title">
-                        <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
-                    </td>
-                    <td class="nick">${board.nickName }</td>
-                    <td class="hit">${board.boardView }</td>
-                    <td class="date">
-                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-                    </td>
-                </tr>
-            </c:forEach>
-
+            <c:choose>
+                <c:when test="${not empty list2 }">
+                    <c:forEach var="board" items="${list2 }">
+                        <tr>
+                            <td class="checkbox"><input type="checkbox" value="${board.boardNo }" name="deleteNum"
+                                                        class="delCheckBox"></td>
+                            <td class="no">${board.boardNo }</td>
+                            <td class="title">
+                                <a href="./view?boardNo=${board.boardNo }&curPage=${curPage}">${board.title }</a>
+                            </td>
+                            <td class="nick">${board.nickName }</td>
+                            <td class="hit">${board.boardView }</td>
+                            <td class="date">
+                                <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:when>
+                <c:when test="${empty list2}">
+                    <tr>
+                        <td class="title" rowspan="6">게시글이 존재하지 않습니다
+                        </td>
+                    </tr>
+                </c:when>
+            </c:choose>
         </table>
 
         <button id="deleteBtn">체크 삭제</button>
     </div>
     <!-- .container End -->
 </div>
-    <c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
+<c:import url="/WEB-INF/views/layout/boardPaging.jsp"/>
 <br>
 <hr>
-    <c:import url="/WEB-INF/views/layout/footer.jsp"/>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>

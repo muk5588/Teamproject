@@ -428,6 +428,7 @@ public class BoardController {
 		}
 		//게시글 없는 경우
 		if( paging == null ) {
+			paging = new Paging();
 			paging.setSearch(search);
 			paging.setSearchKind(searchKind);
 			paging.setUserno(login.getUserno());
@@ -436,7 +437,13 @@ public class BoardController {
 		paging.setSearchKind(searchKind);
 		paging.setUserno(login.getUserno());
 		List<Board> list2 = boardService.userbyrecommList(paging);
-
+		if( list2 == null ) {
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("paging", paging);
+			model.addAttribute("param", login);
+			logger.debug("paramparamparamparam: {}", login);
+			return "board/userbyboardlist";
+		}
 		model.addAttribute("list2", list2);
 		model.addAttribute("paging", paging);
 		model.addAttribute("curPage", curPage);

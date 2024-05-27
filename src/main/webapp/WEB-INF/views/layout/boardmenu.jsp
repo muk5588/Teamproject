@@ -45,7 +45,7 @@
 
 <ul class="nav">
     <li class="menu">
-        <a href="/">
+        <a href="/board/list?categoryNo=11&curPage=${curPage}">
     		<img src="/resources/img/mainPage/information.png" class="menu-icon"/>
         	여행지정보
         </a>
@@ -72,18 +72,18 @@
         </ul>
     </li>
     <li class="menu">
-        <a href="/">
+        <a href="/board/list?categoryNo=43&curPage=${curPage}">
         	<img src="/resources/img/mainPage/qa.png" class="menu-icon"/>
         	여행 Q&A
         </a>
         <ul>
-            <li><a href="/board/list?categoryNo=41&curPage=${curPage}">꿀팁게시판</a></li>
-            <li><a href="/board/list?categoryNo=42&curPage=${curPage}">자유게시판</a></li>
             <li><a href="/board/list?categoryNo=43&curPage=${curPage}">공지사항</a></li>
+            <li><a href="/board/list?categoryNo=42&curPage=${curPage}">자유게시판</a></li>
+            <li><a href="/board/list?categoryNo=41&curPage=${curPage}">꿀팁게시판</a></li>
         </ul>
     </li>
     <li class="menu">
-        <a href="/">
+        <a href="/board/list?categoryNo=51&curPage=${curPage}">
         	<img src="/resources/img/mainPage/party.png" class="menu-icon"/>
         	이벤트
         </a>

@@ -38,7 +38,7 @@ ul.nav > li > ul {
     top: 100%; /* 부모 요소의 아래쪽에 위치 */
     left: 0;
     display: none;
-    background-color: #caf0f8; /* 서브 메뉴 배경색 */
+    background-color: rgba(202, 240, 248, 0.7); /* 서브 메뉴 배경색 (투명도 조정) */
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -58,6 +58,7 @@ ul.nav > li > ul > li > a {
     color: #2c3e50; /* 서브 메뉴 텍스트 색상 */
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s; /* 호버 효과에 대한 전환 효과 추가 */
+    border-radius: 20px;
 }
 
 ul.nav > li > ul > li > a:hover {

@@ -43,12 +43,12 @@
                 }
 
 
-                    start = arg.start.toISOString();
-                    if(arg.end!=""&& arg.end!=null && arg.end!=undefined){
-                        end= arg.end.toISOString();
-                    }
-                    startDisp = returnCdate(calendar,arg.start);
-                    if(end!=null) endDisp = returnCdate(calendar,arg.end);
+                start = arg.start.toISOString();
+                if(arg.end!=""&& arg.end!=null && arg.end!=undefined){
+                    end= arg.end.toISOString();
+                }
+                startDisp = returnCdate(calendar,arg.start);
+                if(end!=null) endDisp = returnCdate(calendar,arg.end);
 
                 rObj.start=start;
                 rObj.end=end;
@@ -439,35 +439,35 @@
 <jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 
 <th:block layout:fragment="ground-wrap">
-<div id="contents">
-    <div id="dialog" title="일정 관리" style="display:none;">
-        <div id="form-div">
-            <form class="diaForm" id="diaForm">
-                <input type="hidden" name="actType" value="C"/>
-<%--                <input type="hidden" name="id" value=""/>--%>
-                <input type="hidden" name="start" value=""/>
-                <input type="hidden" name="end" value=""/>
+    <div id="contents">
+        <div id="dialog" title="일정 관리" style="display:none;">
+            <div id="form-div">
+                <form class="diaForm" id="diaForm">
+                    <input type="hidden" name="actType" value="C"/>
+                        <%--                <input type="hidden" name="id" value=""/>--%>
+                    <input type="hidden" name="start" value=""/>
+                    <input type="hidden" name="end" value=""/>
 
-                <p class="name">
-                    <input name="title" type="text"
-                           class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
-                           placeholder="일정타이틀" id="name"/>
-                </p>
+                    <p class="name">
+                        <input name="title" type="text"
+                               class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+                               placeholder="일정타이틀" id="name"/>
+                    </p>
 
-                <p class="email">
-                    <input name="xdate" type="text" readonly="readonly"
-                           class="validate[required,custom[email]] feedback-input" placeholder="선택된날짜 및 시간"/>
-                </p>
+                    <p class="email">
+                        <input name="xdate" type="text" readonly="readonly"
+                               class="validate[required,custom[email]] feedback-input" placeholder="선택된날짜 및 시간"/>
+                    </p>
 
-                <p class="text">
+                    <p class="text">
                     <textarea name="xcontent" class="validate[required,length[6,300]] feedback-input" id="comment"
                               placeholder="일정내용"></textarea>
-                </p>
-            </form>
+                    </p>
+                </form>
+            </div>
         </div>
+        <div id="calendar"></div>
     </div>
-    <div id="calendar"></div>
-</div>
 
     <script>
         // 기본 위치(top)값

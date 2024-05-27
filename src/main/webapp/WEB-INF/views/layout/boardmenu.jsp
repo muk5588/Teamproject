@@ -77,7 +77,7 @@
         	여행 Q&A
         </a>
         <ul>
-            <li><a href="/board/list?categoryNo=43&curPage=${curPage}">공지사항</a></li>
+            <li><a href="/board/list?categoryNo=43&curPage=${curPage}">Q&A 공지사항</a></li>
             <li><a href="/board/list?categoryNo=42&curPage=${curPage}">자유게시판</a></li>
             <li><a href="/board/list?categoryNo=41&curPage=${curPage}">꿀팁게시판</a></li>
         </ul>

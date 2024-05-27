@@ -9,9 +9,10 @@ public interface ShopFileService {
 	
 	/**
 	 * 상품 대표 이미지 파일 정보 조회
-	 * @return - 전체 상품 대표 이미지 파일 정보 
+	 * @param item - List<Item> 객체
+	 * @return - 상품 대표 이미지 파일 정보 
 	 */
-	public List<ItemFile> getTitleImgs();
+	public List<ItemFile> getTitleImgs(List<Item> item);
 
 	/**
 	 * 상품 번호로 상품 파일 조회

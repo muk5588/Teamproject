@@ -111,18 +111,20 @@ public class OrderController {
 				List<OrderItem> orderItems = orderService.getOrderItemsByItemNosQuantitys(STitemNo,STquantity,orderNo);
 				List<Item> items= orderService.getItemsByOrderItems(orderItems);
 				List<ItemFile> files = orderService.getItemFilesByItemNos(items);
+				logger.debug("orderItemsorderItems: {}",orderItems);
 				int insertRes = orderService.insertOrderItemByListOrderItem(orderItems);
+				orderItems = orderService.getOrderItemsByUserOrder(userOrder);
 				if( insertRes > 0) {
-					int resa= orderService.isHaveItemInBasket(orderItems);
+					int resa= orderService.deleteOverlappingBaskets(orderItems);
 				}
 				logger.debug("orderItems : {}",orderItems);
 				logger.debug("userOrder : {}",userOrder);
 				logger.debug("items : {}",items);
 				logger.debug("imgFiles : {}",files);
-				model.addAttribute("userOrder", userOrder);
-				model.addAttribute("imgFiles", files);
 				model.addAttribute("orderItems", orderItems);
+				model.addAttribute("userOrder", userOrder);
 				model.addAttribute("items", items);
+				model.addAttribute("imgFiles", files);
 				return "/order/orderresult";
 				
 			}else {
@@ -201,21 +203,24 @@ public class OrderController {
 		model.addAttribute("paging", shopPaging);
 		model.addAttribute("curPage", curPage);
 
-		logger.debug("구매기록 user : {}",user);
 		List<UserOrder> orders = orderService.selectUserOrderByUser(user,shopPaging);
-		logger.debug("구매기록 orders : {}",orders);
 		List<OrderItem> orderitems = orderService.selectOrderItemsByUserOrders(orders);
-		logger.debug("구매기록 orderitems : {}",orderitems);
 		List<Item> items = orderService.selectItemByUserOrderItems(orderitems);
+		List<ItemFile> imgFiles = orderService.gettitleImg(orderitems);
+		logger.debug("구매기록 user : {}",user);
+		logger.debug("구매기록 orders : {}",orders);
+		logger.debug("구매기록 orderitems : {}",orderitems);
 		logger.debug("구매기록 items : {}",items);
+		logger.debug("imgFiles : {}", imgFiles);
 		
 		model.addAttribute("orders", orders);
 		model.addAttribute("orderitems", orderitems);
 		model.addAttribute("items", items);
+		model.addAttribute("imgFiles", imgFiles);
 //		
 		
 		return null;
-	}
+	}//history
 	
 	@RequestMapping("/admin/list")
 	public String adminlist(Model model, ShopPaging shopPaging,

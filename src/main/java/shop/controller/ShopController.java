@@ -14,6 +14,7 @@ import report.service.ReportService;
 import shop.service.face.ShopFileService;
 import shop.service.face.ShopService;
 import util.Paging;
+import util.ShopPaging;
 
 import java.util.Iterator;
 import java.util.List;
@@ -28,11 +29,11 @@ public class ShopController {
 	@Autowired private ShopFileService shopFileService;
 	@Autowired private ReportService reportService;
 	
-	@RequestMapping("/main")
+	@RequestMapping("")
 	public String shopMain() { return "redirect:/shop/"; }
 	
 	@RequestMapping("/")
-	public String list(Model model , Paging shopPaging
+	public String list(Model model , ShopPaging shopPaging
 			, @RequestParam(value="curPage", required = false, defaultValue = "0") int curPage
 			, @RequestParam(required = false)String search
 	) {
@@ -52,33 +53,33 @@ public class ShopController {
 		model.addAttribute("curPage", curPage);
 		
 		//ITEM 객체 List + 대표 이미지 파일 정보 조회 및 view로 전달
-		List<Item> item = shopService.list();
-		List<ItemFile> files = shopFileService.getTitleImgs();
-		List<ItemReport> reportlist = reportService.reportitemlist();
-		Iterator<Item> itemIterator = item.iterator();
+		List<Item> item = shopService.list(shopPaging);
+		List<ItemFile> files = shopFileService.getTitleImgs(item);
+//		List<ItemReport> reportlist = reportService.reportitemlist();
+//		Iterator<Item> itemIterator = item.iterator();
 
-		while (itemIterator.hasNext()) {
-			Item item1 = itemIterator.next();
-			boolean itemRemoved = false; // Item이 제거되었는지 추적
-
-			for (ItemReport report : reportlist) {
-				if (report.getItemNo() == item1.getItemNo()) {
-					itemIterator.remove();
-					itemRemoved = true;
-					break;
-				}
-			}
-			if (itemRemoved) {
-				Iterator<ItemFile> fileIterator = files.iterator();
-				while (fileIterator.hasNext()) {
-					ItemFile file = fileIterator.next();
-					if (file.getItemNo() == item1.getItemNo()) {
-						fileIterator.remove();
-						break; // 해당 itemNo와 일치하는 첫 번째 파일을 제거하고 루프 종료
-					}
-				}
-			}
-		}
+//		while (itemIterator.hasNext()) {
+//			Item item1 = itemIterator.next();
+//			boolean itemRemoved = false; // Item이 제거되었는지 추적
+//
+//			for (ItemReport report : reportlist) {
+//				if (report.getItemNo() == item1.getItemNo()) {
+//					itemIterator.remove();
+//					itemRemoved = true;
+//					break;
+//				}
+//			}
+//			if (itemRemoved) {
+//				Iterator<ItemFile> fileIterator = files.iterator();
+//				while (fileIterator.hasNext()) {
+//					ItemFile file = fileIterator.next();
+//					if (file.getItemNo() == item1.getItemNo()) {
+//						fileIterator.remove();
+//						break; // 해당 itemNo와 일치하는 첫 번째 파일을 제거하고 루프 종료
+//					}
+//				}
+//			}
+//		}
 		logger.debug("title IMG files : {}", files);
 		logger.debug("item Chk: {}", item);
 		model.addAttribute("files", files);

@@ -7,28 +7,36 @@
 </sql>
 <sql id="search">
 	<if test="search != null">
-	<where>
-		itemName Like '%${search}%'
-	</where>
+		AND itemName Like '%${search}%'
 	</if>
 </sql>
 
 
 <select id="selectCnt" parameterType="util.ShopPaging" resultType="int">
-	SELECT count(*) FROM ITEM
-	<include refid="search"/>
+	SELECT count(*) FROM (
+	<include refid="defaultSelect" />
+	<if test="search != null">
+		<where>
+			<include refid="search"/>
+		</where>
+	</if>
+	)
 </select>
 
 <select id="selectItems" parameterType="util.ShopPaging" resultType="dto.Item">
 	SELECT * FROM (
 		SELECT rownum rnum, B.* FROM (
 			<include refid="defaultSelect" />
-			<include refid="search"/>
+			<if test="search != null">
+				<where>
+					<include refid="search"/>
+				</where>
+			</if>
 			ORDER BY ItemNo DESC
 			) B
 		)
 	<where>
-		AND rnum BETWEEN #{startNo } AND #{endNo}
+		AND rnum BETWEEN #{startNo} AND #{endNo}
 	</where>
 		
 </select>
@@ -68,11 +76,11 @@
 </insert>
 
 <insert id="inserttitleImgFile" parameterType="dto.ItemFile">
-	<selectKey keyProperty="">
+	<selectKey keyProperty="fileNo" order="BEFORE" resultType="int">
 	SELECT itemfile_seq.nextval FROM dual
 	</selectKey>
-	INSERT into itemfile(fileNo,itemNo,originName,storedName)
-    VALUES(#{fileNo},#{itemNo},#{originName},#{storedName}})
+	INSERT into itemfile(fileNo,itemNo,origin_Name,stored_Name)
+    VALUES(#{fileNo},#{itemNo},#{originName},#{storedName})
 </insert>
 
 <update id="updatetitleImgFile" parameterType="dto.ItemFile">

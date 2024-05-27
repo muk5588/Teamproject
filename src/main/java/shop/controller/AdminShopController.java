@@ -36,6 +36,7 @@ public class AdminShopController {
 	public void adminList(
 		    @RequestParam(defaultValue ="1") int curPage
 		    ,@RequestParam(value="search",required = false) String search
+		    ,@RequestParam(value="searchKind",required = false) String searchKind
 			,Model model
 			) {
 		String URL = "/shop/admin/list";

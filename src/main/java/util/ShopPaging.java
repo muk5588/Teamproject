@@ -12,6 +12,7 @@ public class ShopPaging {
 	private int startNo; // 화면의 보이는 게시글의 시작 번호
 	private int endNo; // 화면에 보이는 게시글의 끝 번호
 	private String search;	//검색어
+	private String searchKind;	//검색어종류 (사용x)
 	private int categoryNo;
 	
 	public int getCategoryNo() {
@@ -46,6 +47,14 @@ public class ShopPaging {
 		
 		// 페이징 처리 정보 생성
 		makePaging();
+	}
+
+	public String getSearchKind() {
+		return searchKind;
+	}
+
+	public void setSearchKind(String searchKind) {
+		this.searchKind = searchKind;
 	}
 
 	// 페이징 처리 정보를 생성하는 메소드

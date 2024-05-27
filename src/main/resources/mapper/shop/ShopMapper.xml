@@ -9,6 +9,9 @@
 		FROM ITEM a
 		<where>
 			AND  a.itemNo NOT IN (SELECT itemno FROM itemreport)
+		<if test="search != null">
+			AND itemname LIKE '%${search}%'
+		</if>
 		</where>
 		ORDER BY itemno DESC
 		) i

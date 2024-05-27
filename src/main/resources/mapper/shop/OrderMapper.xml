@@ -217,12 +217,18 @@ WHERE basketNo IN
 <select id="selectUserOrderAll" parameterType="util.ShopPaging" resultType="dto.UserOrder">
 	SELECT * FROM (
 	SELECT rownum rnum, B.* FROM
-	(SELECT orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impUid,merchantUid  FROM userOrder
+	(SELECT u.orderno,userno,username,phone,pay,totalprice,post_code,address,detailaddress,extraaddress,paramount,orderDate,impUid,merchantUid  FROM userorder u, ORDERITEM o 
+	<where>
+	AND u.ORDERNO =o.ORDERNO 
+	<if test="search != null">
+	AND o.ITEMNAME LIKE '%${search}%'
+	</if>
+	</where>
 	ORDER BY orderno DESC
 	) B
 	)
 	    <where>
-        AND rnum BETWEEN #{startNo } AND #{endNo}
+        AND rnum BETWEEN #{startNo} AND #{endNo}
     </where>
 </select>
 

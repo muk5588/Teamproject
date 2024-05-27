@@ -45,23 +45,37 @@
 
 <ul class="nav">
     <li class="menu">
-        <a href="/">여행지정보</a>
+        <a href="/">
+    		<img src="/resources/img/mainPage/information.png" class="menu-icon"/>
+        	여행지정보
+        </a>
         <ul>
             <li><a href="/board/list?categoryNo=11&curPage=${curPage}">여행 이야기 공유</a></li>
             <li><a href="/board/list?categoryNo=12&curPage=${curPage}">여행 팁 및 권고사항</a></li>
             <li><a href="/board/list?categoryNo=13&curPage=${curPage}">다양한 여행 목적지 추천</a></li>
         </ul>
     </li>
-    <li><a href="/board/list?categoryNo=21&curPage=${curPage}">사진 갤러리 - 여행지 사진</a></li>
+    <li>
+    	<a href="/board/list?categoryNo=21&curPage=${curPage}">
+    		<img src="/resources/img/mainPage/gallery.png" class="menu-icon"/>
+    		사진 갤러리 - 여행지 사진
+    	</a>
+    </li>
     <li class="menu">
-        <a href="/board/list?categoryNo=31&curPage=${curPage}">지역별 여행</a>
+        <a href="/board/list?categoryNo=31&curPage=${curPage}">
+        	<img src="/resources/img/mainPage/airplane.png" class="menu-icon"/>
+        	지역별 여행
+        </a>
         <ul>
             <li><a href="/board/list?categoryNo=31&curPage=${curPage}">지역 리스트</a></li>
             <li><a href="/board/list?categoryNo=32&curPage=${curPage}">여행지 선택 페이지</a></li>
         </ul>
     </li>
     <li class="menu">
-        <a href="/">여행 Q&A</a>
+        <a href="/">
+        	<img src="/resources/img/mainPage/qa.png" class="menu-icon"/>
+        	여행 Q&A
+        </a>
         <ul>
             <li><a href="/board/list?categoryNo=41&curPage=${curPage}">꿀팁게시판</a></li>
             <li><a href="/board/list?categoryNo=42&curPage=${curPage}">자유게시판</a></li>
@@ -69,13 +83,21 @@
         </ul>
     </li>
     <li class="menu">
-        <a href="/">이벤트</a>
+        <a href="/">
+        	<img src="/resources/img/mainPage/party.png" class="menu-icon"/>
+        	이벤트
+        </a>
         <ul>
             <li><a href="/board/list?categoryNo=51&curPage=${curPage}">이벤트 공지사항</a></li>
             <li><a href="/board/list?categoryNo=52&curPage=${curPage}">이벤트</a></li>
         </ul>
     </li>
-    <li><a href="/shop/">여행관련 상품</a></li>
+    <li>
+    	<a href="/shop/">
+    	    <img src="/resources/img/mainPage/box.png" class="menu-icon"/>
+    		여행관련 상품
+    	</a>
+    </li>
 </ul>
 
 <div style="clear: both; overflow: hidden;"></div>

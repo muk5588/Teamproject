@@ -10,28 +10,22 @@ ul.nav {
 
 /* 메인 메뉴의 항목 */
 ul.nav > li {
-    float: left;
-    border-radius: 45px;
-    background-color: #87CEFA;
-    line-height: 2em;
-    border-right: 1px solid #fff;
     position: relative;
 }
 
 ul.nav > li > a {
-    color: #ecf0f1; /* 밝은 색 텍스트 */
-    border-radius: 45px;
+    color: #48cae4; /* 밝은 색 텍스트 */
     text-decoration: none;
-    font-size: 100%;
+    font-size: 16px;
     font-weight: bold;
     padding: 16px 24px;
-    margin: 0 5px;
+    margin: 0 10px;
     display: block;
+    transition: color 0.3s; /* 호버 효과에 대한 전환 효과 추가 */
 }
 
 ul.nav > li > a:hover {
-    color: #1abc9c; /* 네이버 쪽지함의 민트 색상 */
-    transition: color 200ms;
+    color: #0077b6; /* 호버시 색상 변경 */
 }
 
 /* 서브 메뉴 */
@@ -41,34 +35,36 @@ ul.nav > li > ul {
     margin: 0;
     width: 200px;
     position: absolute;
+    top: 100%; /* 부모 요소의 아래쪽에 위치 */
+    left: 0;
+    display: none;
+    background-color: #caf0f8; /* 서브 메뉴 배경색 */
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
+ul.nav > li:hover > ul {
+    display: block; /* 부모 요소에 호버시 서브 메뉴 표시 */
+}
+
 ul.nav > li > ul > li {
-    background-color: #95a5a6; /* 서브 메뉴 배경색 */
-    border-radius: 45px;
-    display: none;
     margin-top: 10px;
 }
 
-ul.nav > li:hover > ul > li {
-    display: list-item;
-    text-align: center;
-}
-
 ul.nav > li > ul > li > a {
-    background-color: #bdc3c7; /* 서브 메뉴 항목 배경색 */
-    border-radius: 45px;
     display: block;
+    padding: 10px;
     color: #2c3e50; /* 서브 메뉴 텍스트 색상 */
     text-decoration: none;
+    transition: background-color 0.3s, color 0.3s; /* 호버 효과에 대한 전환 효과 추가 */
 }
 
 ul.nav > li > ul > li > a:hover {
-    background-color: #1abc9c; /* 서브 메뉴 항목 호버 색상 */
-    color: #ecf0f1; /* 서브 메뉴 항목 호버 시 텍스트 색상 */
-    transition: background 200ms, color 200ms;
+    background-color: #1abc9c; /* 호버시 배경색 변경 */
+    color: #ecf0f1; /* 호버시 텍스트 색상 변경 */
 }
+
 
 .Header-Search {
     margin-bottom: 20px;
@@ -88,3 +84,11 @@ ul.nav > li > ul > li > a:hover {
     margin-left: 10px;
     vertical-align: middle;
 }
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+

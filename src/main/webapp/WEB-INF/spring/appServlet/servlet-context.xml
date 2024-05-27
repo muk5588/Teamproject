@@ -63,13 +63,25 @@
 		<beans:property name="maxUploadSizePerFile" value="5242880"/>
 	</beans:bean>
 	
-	<!-- 인터셉터 설정 기본 -->
-		<!-- 인터셉터 설정 -->
-<!-- 	<interceptors> -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/board/writer/**"/> -->
-<!-- 			<beans:bean class="web.interceptor.BoardInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 	</interceptors> -->
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+<!-- 		로그인 -->
+		<interceptor>
+			<mapping path="/board/writer/**"/>
+			<beans:bean class="interceptor.LoginInterceptor"/>
+		</interceptor>
+<!-- 		등급 확인 -->
+		<interceptor>
+			<mapping path="/user/**"/>
+			<beans:bean class="interceptor.RoleInterceptor"/>
+		</interceptor>
+<!-- 		어드민 확인 -->
+		<interceptor>
+			<mapping path="/shop/admin/**"/>
+			<beans:bean class="interceptor.AdminInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+<!--     <import resource="classpath:../interceptor-path.xml" />	 -->
 	
 </beans:beans>

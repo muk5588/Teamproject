@@ -2,6 +2,7 @@ package shop.service.impl;
 
 import java.util.List;
 
+import dto.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,7 @@ public class ShopServiceImpl implements ShopService {
 	public Item getItemByItemNo(int itemNo) {
 		return shopDao.getItemByItemNo(itemNo);
 	}
-	
+
+
+
 }

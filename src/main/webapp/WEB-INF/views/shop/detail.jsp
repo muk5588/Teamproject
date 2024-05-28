@@ -105,7 +105,7 @@ $(function(){
 		var itemNo = '${item.itemNo}'
 		 $.ajax({
              type: "get"
-             , url: "../review/loadreview"
+             , url: "./review/loadreview"
              , data: {
                  itemNo: itemNo
              }
@@ -120,13 +120,13 @@ $(function(){
                  console.log("AJAX 실패")
              }
          })
-    	 
-	};
-	
+
+    };
+
     function renderReviews(reviews) {
         var reviewHtml = '';
         if (reviews.length > 0) {
-            reviews.forEach(function(review) {
+            reviews.forEach(function (review) {
                 reviewHtml += '<div class="review">';
                 reviewHtml += '<h5>' + review.reviewTitle + '</h5>';
                 reviewHtml += '<h6>' + review.nickname + '</h6>';
@@ -137,10 +137,13 @@ $(function(){
         } else {
             reviewHtml = '<p>리뷰가 아직 작성되지 않았습니다</p>';
         }
-
         $("#reviewWrap").html(reviewHtml);
     }
-	
+    popupsendForm.onclick = function (){
+        let popOption = "width = 500px, height=500px, top=300px, left=300px"
+        let openUrl = '/shop/review/writeReviewForm?itemNo=${item.itemNo}'
+        window.open(openUrl, 'popup', popOption);
+    }
 })
 </script>
 </head>
@@ -220,14 +223,23 @@ $(function(){
     </table>
     
 </div>
+       <button id="popupsendForm">리뷰 쓰기</button>
+       <button id="deleteReview">리뷰 삭제</button>
 <form id="" action="" hidden="hidden" method="post"></form>
        
 <div id="reviewWrap">
-	
+
+
+
 </div>
 
     </div>
     <!-- .container End -->
+<%--    <c:if test="${item.userNo eq dto1.userno}">--%>
+
+
+<%--    </c:if>--%>
+
 
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

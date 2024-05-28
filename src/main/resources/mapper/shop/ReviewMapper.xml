@@ -11,4 +11,14 @@
 	ORDER BY reviewNo DESC
 </select>
 
+	<insert id="writeReview" parameterType="dto.Review">
+		<selectKey resultType="int" order="BEFORE" keyProperty="reviewNo" >
+			select REVIEW_SEQ.nextval from dual
+		</selectKey>
+		insert into REVIEW (REVIEWNO, USERNO, ITEMNO, REVIEWTITLE, REVIEWCONTENT, CREATEREVIEWDATE)
+		values (#{reviewNo}, #{userNo}, #{itemNo}, #{reviewTitle}, #{reviewContent}, sysdate + INTERVAL '9' HOUR)
+
+	</insert>
+
+
 </mapper>

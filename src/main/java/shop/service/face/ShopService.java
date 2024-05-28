@@ -3,6 +3,7 @@ package shop.service.face;
 import java.util.List;
 
 import dto.Item;
+import dto.Review;
 import util.ShopPaging;
 
 public interface ShopService {

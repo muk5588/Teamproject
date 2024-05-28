@@ -2,6 +2,7 @@ package shop.dao;
 
 import java.util.List;
 
+import dto.Review;
 import org.springframework.stereotype.Repository;
 
 import dto.Item;

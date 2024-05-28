@@ -2,6 +2,9 @@ package shop.controller;
 
 import dto.Item;
 import dto.ItemFile;
+import dto.Review;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import report.dto.ItemReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import report.service.ReportService;
 import shop.service.face.ShopFileService;
 import shop.service.face.ShopService;
+import user.dto.User;
 import util.Paging;
 import util.ShopPaging;
 
@@ -104,9 +108,9 @@ public class ShopController {
 		model.addAttribute("item", item);
 		model.addAttribute("files", files);
 	}
-	
-	
-	
+
+
+
 	
 	
 	

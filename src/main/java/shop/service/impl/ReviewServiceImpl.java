@@ -2,6 +2,7 @@ package shop.service.impl;
 
 import java.util.List;
 
+import dto.UserOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,14 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Review> selectByItemNo(int itemNo) {
 		return reviewDao.selectByItemNo(itemNo);
 	}
-	
-	
-	
+
+	@Override
+	public int writeReview(Review review) {
+
+		return reviewDao.writeReview(review);
+	}
+
+
+
+
 }

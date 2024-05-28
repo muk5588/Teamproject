@@ -8,7 +8,6 @@
 	
 	<c:choose>
 	<c:when test="${empty paging.search and empty param.userno }">
-		<h3>1번</h3>
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
@@ -90,7 +89,6 @@
 	 
 	<%-- 검색어가 존재하는 경우 --%>
 	<c:when test="${not empty paging.search and empty param.userno}">
-		<h3>2번</h3>
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
@@ -166,7 +164,6 @@
 
 
 	<c:when test="${not empty param.userno and empty paging.search}">
-		<h3>3번</h3>
 		<%--&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne 1 }">
 			<li class="page-item">
@@ -242,7 +239,6 @@
 
 
 	<c:when test="${not empty param.userno and not empty paging.search}">
-		<h3>4번</h3>
 		<%--&lt;%&ndash; 첫 페이지로 이동 &ndash;%&gt;--%>
 		<c:if test="${paging.curPage ne 1 }">
 			<li class="page-item">

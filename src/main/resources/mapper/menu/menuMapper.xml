@@ -34,7 +34,7 @@
     <update id="menuUpdate" parameterType="User">
         UPDATE usertb
         SET GRADENO = #{gradeno}
-        WHERE userno = #{userno }
+        WHERE userno = #{userno}
     </update>
     <select id="categoryList" resultType="Menu">
         select CATEGORYNO, CATEGORYNAME, g.gradename, g.comm

@@ -90,6 +90,8 @@ public class BoardController {
 	        list = boardService.listByCategory(paging);
 	        recommList = boardService.getuserRecommendRes(list);
 			name = boardService.getCategoryName(categoryNo);
+			int categoryno = boardService.category(categoryNo);
+			model.addAttribute("categoryNo", categoryno);
 	    } else {
 	        list = boardService.list(paging);
 	        recommList = boardService.getuserRecommendRes(list);
@@ -107,7 +109,7 @@ public class BoardController {
 				}
 			}
 		}
-		int categoryno = boardService.category(categoryNo);
+
 
 //	    logger.debug("list : {}", list);
 //	    logger.debug("recommList : {}", recommList);
@@ -123,7 +125,7 @@ public class BoardController {
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("list", list);
 		model.addAttribute("name", name);
-		model.addAttribute("categoryNo", categoryno);
+
 		return URL;
 	}
 	

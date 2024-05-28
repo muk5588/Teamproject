@@ -41,7 +41,7 @@
                 </select>
             </td>
             <td>
-                <button onclick="location.href='/menu/menuUpdate?userno=${dto.userno}'">수정</button>
+                <button onclick="location.href='/menu/menuUpdate'">수정</button>
             </td>
         </tr>
     </form>

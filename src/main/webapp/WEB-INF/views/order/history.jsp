@@ -125,7 +125,7 @@
                                         <c:set var="sum" value="0"/>
                                         <tr>
                                             <c:if test="${not empty orderItem }">
-                                                <th>상품명 : ${orderItem.itemName }</th>
+                                                <th>상품명 : <a href="http://localhost:8088/shop/detail?itemNo=${orderItem.itemNo}">${orderItem.itemName }</a></th>
                                                 <th>구매수량 : ${orderItem.orderQuantity }</th>
                                                 <c:set var="i" value="${orderItem.price}"/>
                                                 <c:set var="sum" value="${sum + i}"/>

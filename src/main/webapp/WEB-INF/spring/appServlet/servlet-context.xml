@@ -64,24 +64,23 @@
 	</beans:bean>
 	
 	<!-- 인터셉터 설정 -->
-	<interceptors>
+<!-- 	<interceptors> -->
 <!-- 		로그인 -->
-		<interceptor>
-			<mapping path="/board/writer/**"/>
-			<beans:bean class="interceptor.LoginInterceptor"/>
-		</interceptor>
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/board/writer/**"/> -->
+<!-- 			<beans:bean class="interceptor.LoginInterceptor"/> -->
+<!-- 		</interceptor> -->
 <!-- 		등급 확인 -->
-		<interceptor>
-			<mapping path="/user/**"/>
-			<beans:bean class="interceptor.RoleInterceptor"/>
-		</interceptor>
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/user/**"/> -->
+<!-- 			<beans:bean class="interceptor.RoleInterceptor"/> -->
+<!-- 		</interceptor> -->
 <!-- 		어드민 확인 -->
-		<interceptor>
-			<mapping path="/shop/admin/**"/>
-			<beans:bean class="interceptor.AdminInterceptor"/>
-		</interceptor>
-	</interceptors>
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/shop/admin/**"/> -->
+<!-- 			<beans:bean class="interceptor.AdminInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
 	
-<!--     <import resource="classpath:../interceptor-path.xml" />	 -->
 	
 </beans:beans>

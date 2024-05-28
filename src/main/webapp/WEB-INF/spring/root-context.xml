@@ -68,6 +68,7 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
+	<import resource="classpath:interceptor-path.xml" />	
 	
     
 </beans>

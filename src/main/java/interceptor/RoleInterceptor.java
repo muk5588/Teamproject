@@ -31,8 +31,47 @@ public class RoleInterceptor implements HandlerInterceptor {
 //            response.setCharacterEncoding("UTF-8");
 //	        out.println("<script>alert('로그인이 필요합니다.'); location.href='/login';</script>");
 //		out.flush();
-		
-		return true;
+		int grade = user.getgradeno();
+		String URI = request.getRequestURI();
+		String categoryNoStr = request.getParameter("categoryNo");
+		//없을경우
+		if( categoryNoStr == null) {
+			if(grade != 5000 || grade != 0 || grade != 3 ) {
+				//전체 조회 가능한 사용자가 아닌경우..
+				response.sendRedirect("/");
+				return false;
+			}else {
+				return true;
+			}
+		}
+		 try {
+             int categoryNo = Integer.parseInt(categoryNoStr);
+             if( grade == 5000 || grade == 0 || grade == 3) {
+        		 return true;
+             }else if (grade == 2) {
+				if(categoryNo == 52) {
+					//이벤트 글쓰기, 수정 막기
+					response.sendRedirect("/");
+					return false;
+				}else {
+					return true;
+				}
+			}else if( grade == 1) {
+				if( categoryNo == 52 || categoryNo == 51) {
+					response.sendRedirect("/");
+					return false;
+				}else {
+					return true;
+				}
+			}
+             
+         } catch (NumberFormatException e) {
+        	 //String -> int 형변환 fail
+        	 response.sendRedirect("/");
+        	 return false;
+         }
+		response.sendRedirect("/");
+		return false;
 	}
 	
 	

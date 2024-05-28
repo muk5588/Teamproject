@@ -36,8 +36,8 @@
         </table>
     </div>
     <div class="boardPre">
-        <span class="category">여행지 정보 - 여행 팁 및 권고사항</span><a class="allboard"
-                                                             href="/board/list?categoryNo=12&curPage=${curPage}">+더보기</a>
+        <span class="category">이벤트 - 이벤트 공지사항</span><a class="allboard"
+                                                             href="/board/list?categoryNo=51&curPage=${curPage}">+더보기</a>
         <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
@@ -52,7 +52,7 @@
                 <th class="nick">작성자</th>
             </tr>
             <c:forEach var="board" items="${list }">
-                <c:if test="${board.categoryNo == 12}">
+                <c:if test="${board.categoryNo == 51}">
 
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
                     <tr class="boardcontent">
@@ -68,7 +68,7 @@
         </table>
     </div>
     <div class="boardPre">
-        <span class="category">여행관련 상품</span><a class="allboard" href="/board/list?categoryNo=61&curPage=${curPage}">+더보기</a>
+        <span class="category">여행 Q&A - 꿀팁게시판</span><a class="allboard" href="/board/list?categoryNo=41&curPage=${curPage}">+더보기</a>
         <hr>
         <table class="table table-striped table-hover table-sm">
             <%-- <colgroup> --%>
@@ -83,7 +83,7 @@
                 <th class="nick">작성자</th>
             </tr>
             <c:forEach var="board" items="${list }">
-                <c:if test="${board.categoryNo == 61}">
+                <c:if test="${board.categoryNo == 41}">
 
                     <%--        <c:if test="${board.categoryNo eq 31}">--%>
                     <tr class="boardcontent">

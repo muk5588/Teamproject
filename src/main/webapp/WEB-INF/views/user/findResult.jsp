@@ -22,7 +22,7 @@
             </c:when>
             <c:otherwise>
                 <p class="title">회원님의 아이디 입니다</p>
-                <h2><p>${finduserid.userid}</p></h2>
+                <h2 style="color: blue"><p>${finduserid.userid}</p></h2>
 
             </c:otherwise>
         </c:choose>
@@ -31,7 +31,7 @@
 <c:if test="${value =='pw'}">
 <p class="title">회원님의 임시 비밀번호 입니다</p>
 <div class="result-box">
-    <h2><p>${newPwd}</p></h2>
+    <h2 style="color: blue"><p>${newPwd}</p></h2>
 </c:if>
     <div>
         <a class="btn" href="<%=request.getContextPath()%>/login">로그인</a>

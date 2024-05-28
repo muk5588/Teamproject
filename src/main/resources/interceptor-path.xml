@@ -9,23 +9,51 @@
     <mvc:interceptors>
         <!-- 로그인 -->
         <mvc:interceptor>
-            <mvc:mapping path="/inquiry/**"/>
-            <mvc:mapping path="/board/write/**"/>
-            <mvc:mapping path="/board/update/**"/>
             <mvc:mapping path="/board/delete/**"/>
             <mvc:mapping path="/board/userbyboardlist/**"/>
             <mvc:mapping path="/board/userbyrecommlist/**"/>
+            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/shop/**"/>
+            <mvc:mapping path="/basket/**"/>
+            <mvc:mapping path="/calendar/**"/>
+            <mvc:mapping path="/message/**"/>
+            <mvc:mapping path="/report/**"/>
+            <mvc:mapping path="/order/**"/>
+            <mvc:mapping path="/user/userPass"/>
+            <mvc:mapping path="/user/userLog"/>
+            <mvc:mapping path="/inquiry/list"/>
+            <mvc:mapping path="/inquiry/inquirylist"/>
+            <mvc:exclude-mapping path="/inquiry/adminList"/>
+            <mvc:exclude-mapping path="/shop/admin/**"/>
+            <mvc:exclude-mapping path="/report/list"/>
+            <mvc:exclude-mapping path="/report/deleteReport"/>
+            <mvc:exclude-mapping path="/report/deleteCommReport"/>
+            <mvc:exclude-mapping path="/order/admin/**"/>
             <bean class="interceptor.LoginInterceptor"/>
         </mvc:interceptor>
         <!-- 등급 확인 -->
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/board/write/**"/>
+            <mvc:mapping path="/board/update/**"/>
             <bean class="interceptor.RoleInterceptor"/>
         </mvc:interceptor>
         <!-- 어드민 확인 -->
         <mvc:interceptor>
+            <mvc:mapping path="/inquiry/adminList"/>
             <mvc:mapping path="/shop/admin/**"/>
             <mvc:mapping path="/grade/**"/>
+            <mvc:mapping path="/menu/**"/>
+            <mvc:mapping path="/report/list"/>
+            <mvc:mapping path="/report/deleteReport"/>
+            <mvc:mapping path="/report/deleteCommReport"/>
+            <mvc:mapping path="/order/admin/**"/>
+            <mvc:mapping path="/user/adminPage"/>
+            <mvc:mapping path="/user/userList"/>
+            <mvc:mapping path="/user/deleteUser"/>
+            <mvc:mapping path="/user/userBlack"/>
+            <mvc:mapping path="/user/userWhite"/>
+            <mvc:mapping path="/inquiry/adminList"/>
             <bean class="interceptor.AdminInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

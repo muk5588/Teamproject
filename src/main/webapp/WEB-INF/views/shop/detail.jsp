@@ -76,18 +76,19 @@ $(function(){
          }
      });
 
-	 //구매하기 버튼 클릭
-     $("#purchaseBtn").click(function() {
-		var itemNo = ${item.itemNo}
-		var quantity = $("#quantity").val()
-		if (${empty isLogin or isLogin < 1}) {
-			//로그인 페이지로 이동
-			alert("로그인 이후 이용이 가능합니다")
-			window.location.href = "/login";
-		$(function () {
-           	window.location.href = '../order/ordersheet?itemNo='+itemNo+'&quantity=' +quantity;
-       	})
-     });
+ // 구매하기 버튼 클릭
+    $("#purchaseBtn").click(function() {
+        var itemNo = ${item.itemNo};
+        var quantity = $("#quantity").val();
+        if (${empty isLogin or isLogin < 1}) {
+            // 로그인 페이지로 이동
+            alert("로그인 이후 이용이 가능합니다");
+            window.location.href = "/login";
+        } else {
+            // 로그인 상태일 때 주문서 페이지로 이동
+            window.location.href = '../order/ordersheet?itemNo=' + itemNo + '&quantity=' + quantity;
+        }
+    });
 	
 	 //신고하기 버튼 클릭
 	 $("#reportBtn").click(function(){

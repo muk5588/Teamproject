@@ -480,6 +480,13 @@
 		</where>
 		)
 	</select>
-
+	<select id="category" parameterType="Integer" resultType="int">
+		select GRADENO from CATEGORY
+		<where>
+		    and CATEGORYNO = #{categoryNo}
+			AND CATEGORYNO <![CDATA[ <>  61 ]]>
+		</where>
+		order by CATEGORYNO
+	</select>
 
 </mapper>

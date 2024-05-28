@@ -107,6 +107,8 @@ public class BoardController {
 				}
 			}
 		}
+		int categoryno = boardService.category(categoryNo);
+
 //	    logger.debug("list : {}", list);
 //	    logger.debug("recommList : {}", recommList);
 	    for(Board M : list) {
@@ -121,6 +123,7 @@ public class BoardController {
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("list", list);
 		model.addAttribute("name", name);
+		model.addAttribute("categoryNo", categoryno);
 		return URL;
 	}
 	

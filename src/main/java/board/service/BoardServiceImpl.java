@@ -268,4 +268,9 @@ public class BoardServiceImpl implements BoardService {
 		Paging pagingres = new Paging(totalCount, curPage);
 		return pagingres;
 	}
+
+	@Override
+	public int category(Integer categoryNo) {
+		return boardDao.category(categoryNo);
+	}
 }

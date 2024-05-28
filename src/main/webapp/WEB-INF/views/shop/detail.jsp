@@ -105,7 +105,7 @@ $(function(){
 		var itemNo = '${item.itemNo}'
 		 $.ajax({
              type: "get"
-             , url: "./review/loadreview"
+             , url: "../review/loadreview"
              , data: {
                  itemNo: itemNo
              }
@@ -122,6 +122,7 @@ $(function(){
          })
 
     };
+
 
     function renderReviews(reviews) {
         var reviewHtml = '';

@@ -42,7 +42,7 @@
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 	
-	<context:component-scan base-package="com.test.www, *.controller,util" />
+	<context:component-scan base-package="com.test.www, *.controller,util,interceptor" />
 	
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 	
@@ -62,25 +62,6 @@
 		<!-- 업로드된 파일 하나 당 사이즈 제한 : 5MB -->
 		<beans:property name="maxUploadSizePerFile" value="5242880"/>
 	</beans:bean>
-	
-	<!-- 인터셉터 설정 -->
-<!-- 	<interceptors> -->
-<!-- 		로그인 -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/board/writer/**"/> -->
-<!-- 			<beans:bean class="interceptor.LoginInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 		등급 확인 -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/user/**"/> -->
-<!-- 			<beans:bean class="interceptor.RoleInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 		어드민 확인 -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/shop/admin/**"/> -->
-<!-- 			<beans:bean class="interceptor.AdminInterceptor"/> -->
-<!-- 		</interceptor> -->
-<!-- 	</interceptors> -->
 	
 	
 </beans:beans>

@@ -75,13 +75,13 @@
                 <c:otherwise>
                     <c:choose>
                         <c:when test="${dto1.gradeno == 0 || dto1.gradeno == 5000}">
-                            <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
+                            <a href='<%=request.getContextPath()%>/message/list'>쪽지</a>
                             <a href='<%=request.getContextPath()%>/inquiry/adminList'>문의보기</a>
                             <a href='<%=request.getContextPath()%>/order/history'>주문내역</a>
                             <a href='<%=request.getContextPath()%>/basket/userbasket'>장바구니</a>
                         </c:when>
                         <c:otherwise>
-                            <a href='<%=request.getContextPath()%>/message/'>쪽지</a>
+                            <a href='<%=request.getContextPath()%>/message/list'>쪽지</a>
                             <a href='<%=request.getContextPath()%>/inquiry/list'>문의하기</a>
                             <a href='<%=request.getContextPath()%>/order/history'>주문내역</a>
                             <a href='<%=request.getContextPath()%>/basket/userbasket'>장바구니</a>

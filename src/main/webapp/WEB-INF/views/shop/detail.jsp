@@ -49,7 +49,7 @@ $(function(){
              //로그인 페이지로 이동
              alert("로그인 이후 이용이 가능합니다")
 //              $(location).attr('href', './login')
-             window.location.href = "/login"; // 로그인 페이지의 URL로 변경해주세요.
+             window.location.href = "/login";
          } else {
         	 $.ajax({
                  type: "get"
@@ -80,6 +80,10 @@ $(function(){
      $("#purchaseBtn").click(function() {
 		var itemNo = ${item.itemNo}
 		var quantity = $("#quantity").val()
+		if (${empty isLogin or isLogin < 1}) {
+			//로그인 페이지로 이동
+			alert("로그인 이후 이용이 가능합니다")
+			window.location.href = "/login";
 		$(function () {
            	window.location.href = '../order/ordersheet?itemNo='+itemNo+'&quantity=' +quantity;
        	})

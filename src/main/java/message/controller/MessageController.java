@@ -57,7 +57,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/list")
-	public void list(HttpSession session, HttpServletRequest res,
+	public String list(HttpSession session, HttpServletRequest res,
 			@RequestParam(name="curPage", defaultValue = "0")int curPage
 			,@RequestParam(name = "search", required = false)String search) {
 		User user = (User) session.getAttribute("dto1");
@@ -84,6 +84,7 @@ public class MessageController {
 		
 		res.setAttribute("paging", paging);
 		res.setAttribute("list", list);
+		return "/message/list";
 	}
 	@RequestMapping("/sendForm")
 	public void sendForm() {}

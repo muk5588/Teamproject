@@ -29,7 +29,10 @@
 
                         if (res > 0) {
                             $(function () {
-                                $(location).attr('href', '/')
+                                if (window.opener && !window.opener.closed) {
+                                    window.opener.location.href = './sendlist';
+                                    window.close();
+                                }
                             })
                         }
                         window.close();

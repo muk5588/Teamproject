@@ -14,3 +14,7 @@ ul{
 li{
     text-decoration-line: none;
 }
+hr{
+    clear: both;
+    margin-bottom: 10px;
+}

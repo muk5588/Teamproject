@@ -23,6 +23,8 @@ window.addEventListener("DOMContentLoaded",function () {
             $("#alertid").css({
                 "color": "red",
                 "font-size": "15px",
+                "text-align": "center"
+
             });
             $("#alertid").text("아이디는 영어+숫자로 이루어저야 합니다.")
         }
@@ -36,12 +38,15 @@ window.addEventListener("DOMContentLoaded",function () {
                     if (data == 1) {
                         $("#alertid").css({
                             "color": "red",
-                            "font-size": "15px"
+                            "font-size": "15px",
+                            "text-align": "center"
+
                         });
                         $("#alertid").text("중복된 아이디입니다.");
                     } else if (data == 0) {
                         $("#alertid").css({
                             "color": "black",
+                            "text-align": "center"
                         });
                         $("#alertid").text("사용가능한 아이디입니다.");
                     }

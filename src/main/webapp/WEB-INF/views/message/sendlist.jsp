@@ -105,7 +105,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 
-<h1>보낸 메일함</h1>
+<h1>보낸 쪽지함</h1>
 <hr>
 <div id="content">
     <div class="tit">

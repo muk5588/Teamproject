@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 인터셉터 설정 -->
+    <mvc:interceptors>
+        <!-- 로그인 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/inquiry/**"/>
+            <mvc:mapping path="/board/write/**"/>
+            <mvc:mapping path="/board/update/**"/>
+            <mvc:mapping path="/board/delete/**"/>
+            <mvc:mapping path="/board/userbyboardlist/**"/>
+            <mvc:mapping path="/board/userbyrecommlist/**"/>
+            <bean class="interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <!-- 등급 확인 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <bean class="interceptor.RoleInterceptor"/>
+        </mvc:interceptor>
+        <!-- 어드민 확인 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/shop/admin/**"/>
+            <mvc:mapping path="/grade/**"/>
+            <bean class="interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

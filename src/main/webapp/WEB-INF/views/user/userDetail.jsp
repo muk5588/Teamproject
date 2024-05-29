@@ -16,11 +16,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="/resources/js/user/blackList.js" defer></script>
 
-    <style type="text/css">
-        @import url('https://webfontworld.github.io/NexonMaplestory/NexonMaplestory.css');
-
-
-    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>

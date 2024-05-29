@@ -71,6 +71,7 @@
             <mapping path="/board/userbyrecommlist/**"/>
             <mapping path="/user/**"/>
             <mapping path="/shop/**"/>
+            <mapping path="/shop/**"/>
             <mapping path="/basket/**"/>
             <mapping path="/calendar/**"/>
             <mapping path="/message/list"/>
@@ -81,6 +82,10 @@
             <mapping path="/user/userLog"/>
             <mapping path="/inquiry/list"/>
             <mapping path="/inquiry/inquirylist"/>
+            <exclude-mapping path="/shop/"/>
+            <exclude-mapping path="/shop/list"/>
+            <exclude-mapping path="/user/insertUser"/>
+            <exclude-mapping path="/user/searchUser"/>
             <exclude-mapping path="/inquiry/adminList"/>
             <exclude-mapping path="/shop/admin/**"/>
             <exclude-mapping path="/report/list"/>

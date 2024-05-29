@@ -20,5 +20,11 @@
 
 	</insert>
 
-
+<update id="updateReview" parameterType="dto.Review">
+        update REVIEW
+        set REVIEWTITLE = #{reviewTitle},
+            REVIEWCONTENT = #{reviewContent},
+            UPDATEREVIEWDATE = sysdate + INTERVAL '9' HOUR
+        where REVIEWNO = #{reviewNo}
+    </update>
 </mapper>

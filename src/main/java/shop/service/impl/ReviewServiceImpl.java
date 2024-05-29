@@ -28,6 +28,11 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDao.writeReview(review);
 	}
 
+	@Override
+	public int updateReview(Review review) {
+		return  reviewDao.updateReview(review);
+	}
+
 
 
 

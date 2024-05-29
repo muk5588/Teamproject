@@ -11,4 +11,6 @@ public interface ReviewDao {
 
     public int writeReview(Review review);
 
+	public int updateReview(Review review);
+
 }

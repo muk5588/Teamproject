@@ -105,7 +105,7 @@ $(function(){
 		var itemNo = '${item.itemNo}'
 		 $.ajax({
              type: "get"
-             , url: "../review/loadreview"
+             , url: "./review/loadreview"
              , data: {
                  itemNo: itemNo
              }
@@ -133,6 +133,10 @@ $(function(){
                 reviewHtml += '<h6>' + review.nickname + '</h6>';
                 reviewHtml += '<p>' + review.reviewContent + '</p>';
                 reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString() + '</small>';
+                
+                // 수정 버튼 추가
+                reviewHtml += '<button class="editReviewBtn" data-review-No="' + review.reviewNo + '" data-review-title="' + review.reviewTitle + '" data-review-content="' + review.reviewContent + '">수정</button>';
+                
                 reviewHtml += '</div><hr>';
             });
         } else {
@@ -140,6 +144,25 @@ $(function(){
         }
         $("#reviewWrap").html(reviewHtml);
     }
+    
+    $(document).ready(function() {
+        // 리뷰 수정 버튼 클릭 이벤트
+        $(document).on('click', '.editReviewBtn', function() {
+            // 해당 리뷰의 정보 가져오기
+            var reviewNo = $(this).data('review-no'); // 변수명을 수정하였습니다.
+            var reviewTitle = $(this).data('review-title');
+            var reviewContent = $(this).data('review-content');
+
+            // 팝업 창 옵션 설정
+            var popOption = "width=500,height=500,top=300,left=300";
+
+            // 수정 팝업 창 열기
+            var openUrl = '/shop/review/updateReviewForm?reviewNo=' + reviewNo + '&reviewTitle=' + encodeURIComponent(reviewTitle) + '&reviewContent=' + encodeURIComponent(reviewContent);
+            window.open(openUrl, 'popup', popOption);
+        });
+    });
+    
+    
     popupsendForm.onclick = function (){
         let popOption = "width = 500px, height=500px, top=300px, left=300px"
         let openUrl = '/shop/review/writeReviewForm?itemNo=${item.itemNo}'

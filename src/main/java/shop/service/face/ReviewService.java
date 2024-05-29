@@ -17,4 +17,7 @@ public interface ReviewService {
 
 	public int writeReview(Review review);
 
+
+	public int updateReview(Review review);
+
 }

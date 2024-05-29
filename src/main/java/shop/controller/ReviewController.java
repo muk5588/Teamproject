@@ -2,19 +2,18 @@ package shop.controller;
 
 import java.util.List;
 
-import dto.OrderItem;
-import dto.UserOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import dto.Review;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import shop.service.face.ReviewService;
 import user.dto.User;
 
@@ -78,6 +77,27 @@ public class ReviewController {
 		,@SessionAttribute(value = "dto1", required = false) User login){
 
 
+	}
+
+	@RequestMapping("/updateReviewForm")
+	public void updateReviewForm(@RequestParam("reviewNo") int reviewNo,
+	                             @RequestParam("reviewTitle") String reviewTitle,
+	                             @RequestParam("reviewContent") String reviewContent,
+	                             Model model) {
+	    // 리뷰 번호, 제목, 내용을 모델에 추가하여 수정 페이지에 전달합니다.
+	    model.addAttribute("reviewNo", reviewNo);
+	    model.addAttribute("reviewTitle", reviewTitle);
+	    model.addAttribute("reviewContent", reviewContent);
+	}
+
+	@RequestMapping("/updatereview")
+	@ResponseBody
+	public int updateReview(Review review, String title, String content) {
+	    // 리뷰를 업데이트합니다. 리뷰의 내용을 변경하고 DB에 업데이트된 내용을 반영합니다.
+		review.setReviewTitle(title);
+		review.setReviewContent(content);
+	    int res = reviewService.updateReview(review);
+	    return res;
 	}
 	
 }

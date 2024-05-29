@@ -41,4 +41,12 @@
 		AND itemno = #{itemNo}
 	</where>
 </select>
+<select id="countMyOrderByItemNo">
+	select count(*) from (
+    select oi.itemno, oi.orderno,uo.userno from ORDERITEM oi join USERORDER uo on oi.ORDERNO = uo.ORDERNO
+	<where>
+        and oi.itemno = #{itemNo}
+	</where>
+	)
+</select>
 </mapper>

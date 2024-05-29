@@ -4,6 +4,8 @@ import java.util.List;
 
 import dto.Item;
 import dto.Review;
+import dto.UserOrder;
+import user.dto.User;
 import util.ShopPaging;
 
 public interface ShopService {
@@ -24,4 +26,5 @@ public interface ShopService {
 	 */
 	public Item getItemByItemNo(int itemNo);
 
+	public int countMyOrderByItemNo(int itemNo);
 }

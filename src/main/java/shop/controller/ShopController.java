@@ -3,6 +3,7 @@ package shop.controller;
 import dto.Item;
 import dto.ItemFile;
 import dto.Review;
+import dto.UserOrder;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import report.dto.ItemReport;
@@ -95,7 +96,8 @@ public class ShopController {
 	@RequestMapping("/detail")
 	public void detail(
 			@RequestParam("itemNo") int itemNo
-			, Model model
+			, Model model, UserOrder userOrder
+			, @SessionAttribute(value = "dto1", required = false) User login
 			) {
 		logger.debug("detail itemNo : {}", itemNo);
 		//상품 정보
@@ -104,9 +106,16 @@ public class ShopController {
 		//상품 정보 파일
 		List<ItemFile> files = shopFileService.getItemFilesByItemNo(itemNo);
 		logger.debug("detail item files : {}", files);
-		
+
 		model.addAttribute("item", item);
 		model.addAttribute("files", files);
+
+		//상품 구매 내역
+		int countMyOrder = shopService.countMyOrderByItemNo(itemNo);
+
+
+		System.out.println("countMyOrder" + countMyOrder);
+		model.addAttribute("countMyOrder", countMyOrder);
 	}
 
 

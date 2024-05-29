@@ -3,6 +3,7 @@ package shop.service.impl;
 import java.util.List;
 
 import dto.Review;
+import dto.UserOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import dto.Item;
 import shop.dao.ShopDao;
 import shop.service.face.ShopService;
+import user.dto.User;
 import util.Paging;
 import util.ShopPaging;
 
@@ -39,6 +41,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.getItemByItemNo(itemNo);
 	}
 
+	@Override
+	public int countMyOrderByItemNo(int itemNo) {
+		return shopDao.countMyOrderByItemNo(itemNo);
+	}
 
 
 }

@@ -126,6 +126,7 @@ $(function(){
 
     function renderReviews(reviews) {
         var reviewHtml = '';
+        var userno_d = ${dto1.userno};
         if (reviews.length > 0) {
             reviews.forEach(function (review) {
                 reviewHtml += '<div class="review">';
@@ -133,18 +134,23 @@ $(function(){
                 reviewHtml += '<h6>' + review.nickname + '</h6>';
                 reviewHtml += '<p>' + review.reviewContent + '</p>';
                 reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString() + '</small>';
-                
+
                 // 수정 버튼 추가
+
+                if( userno_d === review.userNo){
                 reviewHtml += '<button class="editReviewBtn" data-review-No="' + review.reviewNo + '" data-review-title="' + review.reviewTitle + '" data-review-content="' + review.reviewContent + '">수정</button>';
-                
+                reviewHtml += '<button id="deleteReview">리뷰 삭제</button>';
                 reviewHtml += '</div><hr>';
+                }
+
+
             });
         } else {
             reviewHtml = '<p>리뷰가 아직 작성되지 않았습니다</p>';
         }
         $("#reviewWrap").html(reviewHtml);
     }
-    
+
     $(document).ready(function() {
         // 리뷰 수정 버튼 클릭 이벤트
         $(document).on('click', '.editReviewBtn', function() {
@@ -161,8 +167,8 @@ $(function(){
             window.open(openUrl, 'popup', popOption);
         });
     });
-    
-    
+
+
     popupsendForm.onclick = function (){
         let popOption = "width = 500px, height=500px, top=300px, left=300px"
         let openUrl = '/shop/review/writeReviewForm?itemNo=${item.itemNo}'
@@ -247,15 +253,19 @@ $(function(){
     </table>
     
 </div>
-       <button id="popupsendForm">리뷰 쓰기</button>
-       <button id="deleteReview">리뷰 삭제</button>
+
 <form id="" action="" hidden="hidden" method="post"></form>
-       
+
 <div id="reviewWrap">
 
 
 
 </div>
+<br>
+       <c:if test="${countMyOrder > 0}">
+       <button id="popupsendForm">리뷰 쓰기</button>
+       </c:if>
+
 
     </div>
     <!-- .container End -->

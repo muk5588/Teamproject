@@ -74,7 +74,13 @@ public class ReviewController {
 
 	@RequestMapping("/deletereview")
 	public void deleteReview(@RequestParam("itemNo")int itemNo
-		,@SessionAttribute(value = "dto1", required = false) User login){
+		,@SessionAttribute(value = "dto1", required = false) User login
+		, Review review){
+
+
+		review.setItemNo(itemNo);
+		review.setUserNo(login.getUserno());
+
 
 
 	}

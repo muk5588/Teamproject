@@ -204,8 +204,11 @@ public class UserController {
 		return "redirect: /user/userBlack";
 	}
 	
+	//회원탈퇴
     @RequestMapping("/deleteUser")
     public String deleteUser(User dto, HttpSession session) {
+    	logger.debug("회원탈퇴 ....");
+    	logger.debug("user : {}", dto);
         service.userDelete(dto);
         session.invalidate();
         return "redirect: /";

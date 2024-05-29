@@ -32,7 +32,7 @@ var sUploadURL = '/board/fileupload';
         // 업데이트된 에디터 내용 가져오기
         var content = document.getElementById("ir1").value;
         // 확인용으로 alert에 내용 출력
-        alert(content);
+//         alert(content);
         // 숨겨진 input 요소에 내용 설정
         document.getElementById("content").value = content;
         // form 제출

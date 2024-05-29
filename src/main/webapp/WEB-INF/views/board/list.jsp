@@ -91,6 +91,7 @@
                 <c:if test="${(isLogin > 0 && (gradeNo <= dto1.gradeno ))||(dto1.gradeno == 0 || dto1.gradeno == 5000)}">
                     <form action="./write" method="get">
                         <button id="btnWrite" me>글쓰기</button>
+                        <input hidden="hidden" name="categoryNo" value="${param.categoryNo}">
                     </form>
                 </c:if>
             </div>

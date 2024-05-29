@@ -1,5 +1,7 @@
 package user.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,7 +18,7 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-    
+    private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private JavaMailSender mailSender;	//메일
     
@@ -77,7 +79,7 @@ public class UserServiceImpl implements UserService {
 			mailHelper.setSubject(subject);
 
 			mailHelper.setText(content,true);
-
+			logger.info("content : {}",content);
 			//첨부파일 있을경우 추가
 //         FileSystemResource file = new FileSystemResource(new File("경로"));
 //         mailHelper.addAttachment("경로", file);
@@ -128,6 +130,7 @@ public class UserServiceImpl implements UserService {
 	public List<User> userPagingList(UserPaging paging) {
 		return userDao.userPagingList(paging);
 	}
+
 
 
 

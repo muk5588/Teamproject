@@ -33,7 +33,10 @@ public class ReviewServiceImpl implements ReviewService{
 		return  reviewDao.updateReview(review);
 	}
 
-
+	@Override
+	public int deleteReview(Review review) {
+		return reviewDao.deleteReview(review);
+	}
 
 
 }

@@ -72,17 +72,20 @@ public class ReviewController {
 		return res;
 	}
 
-	@RequestMapping("/deletereview")
-	public void deleteReview(@RequestParam("itemNo")int itemNo
+	@PostMapping("/deletereview")
+	public int deleteReview(@RequestParam("reviewNo")int reviewNo
 		,@SessionAttribute(value = "dto1", required = false) User login
 		, Review review){
+		int res = 0;
 
 
-		review.setItemNo(itemNo);
+		review.setReviewNo(reviewNo);
 		review.setUserNo(login.getUserno());
 
+		res = reviewService.deleteReview(review);
 
 
+		return res;
 	}
 
 	@RequestMapping("/updateReviewForm")

@@ -139,7 +139,7 @@ $(function(){
 
                 if( userno_d === review.userNo){
                 reviewHtml += '<button class="editReviewBtn" data-review-No="' + review.reviewNo + '" data-review-title="' + review.reviewTitle + '" data-review-content="' + review.reviewContent + '">수정</button>';
-                reviewHtml += '<button id="deleteReview">리뷰 삭제</button>';
+                reviewHtml += '<button class="deleteReviewBtn" data-review-No="' + review.reviewNo + '">리뷰 삭제</button>';
                 reviewHtml += '</div><hr>';
                 }
 
@@ -150,6 +150,28 @@ $(function(){
         }
         $("#reviewWrap").html(reviewHtml);
     }
+    $('#reviewWrap').on('click', '.deleteReviewBtn', function () {
+        var reviewNo = $(this).data('review-no');
+        if (confirm('정말 이 리뷰를 삭제하시겠습니까?')) {
+            $.ajax({
+                url: '/shop/review/deletereview',
+                type: 'POST',
+                data: {
+                    reviewNo: reviewNo
+                },
+                dataType: "JSON",
+                success: function (res) {
+
+                    // 페이지를 새로고침하거나, 삭제된 리뷰를 제거하는 등의 후속 작업을 여기에 추가
+                    location.reload();
+                },
+                error: function () {
+                    location.reload();
+
+                }
+            });
+        }
+    });
 
     $(document).ready(function() {
         // 리뷰 수정 버튼 클릭 이벤트

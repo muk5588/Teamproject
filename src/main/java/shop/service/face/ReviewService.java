@@ -20,4 +20,5 @@ public interface ReviewService {
 
 	public int updateReview(Review review);
 
+	public int deleteReview(Review review);
 }

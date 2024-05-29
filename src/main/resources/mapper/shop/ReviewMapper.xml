@@ -27,4 +27,11 @@
             UPDATEREVIEWDATE = sysdate + INTERVAL '9' HOUR
         where REVIEWNO = #{reviewNo}
     </update>
+	<delete id="deleteReview" parameterType="dto.Review">
+		delete REVIEW
+		<where>
+			AND reviewNo = #{reviewNo}
+			AND userno = #{userNo}
+		</where>
+	</delete>
 </mapper>

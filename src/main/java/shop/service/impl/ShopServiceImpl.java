@@ -1,20 +1,16 @@
 package shop.service.impl;
 
-import java.util.List;
-
-import dto.Review;
-import dto.UserOrder;
+import dto.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import dto.Item;
 import shop.dao.ShopDao;
 import shop.service.face.ShopService;
-import user.dto.User;
-import util.Paging;
 import util.ShopPaging;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -42,8 +38,8 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public int countMyOrderByItemNo(int itemNo) {
-		return shopDao.countMyOrderByItemNo(itemNo);
+	public int countMyOrderByItemNo(Map<Object, String> map) {
+		return shopDao.countMyOrderByItemNo(map);
 	}
 
 

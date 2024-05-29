@@ -1,15 +1,11 @@
 package shop.dao;
 
-import java.util.List;
-
-import dto.Review;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import dto.Item;
-import user.dto.User;
-import util.Paging;
+import org.springframework.stereotype.Repository;
 import util.ShopPaging;
+
+import java.util.List;
+import java.util.Map;
 
 @Repository("ShopDao")
 public interface ShopDao {
@@ -20,6 +16,5 @@ public interface ShopDao {
 
 	public Item getItemByItemNo(int itemNo);
 
-
-	public int countMyOrderByItemNo(int itemNo);
+	public int countMyOrderByItemNo(Map<Object, String> map);
 }

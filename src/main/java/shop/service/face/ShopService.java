@@ -1,12 +1,10 @@
 package shop.service.face;
 
-import java.util.List;
-
 import dto.Item;
-import dto.Review;
-import dto.UserOrder;
-import user.dto.User;
 import util.ShopPaging;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ShopService {
 
@@ -26,5 +24,5 @@ public interface ShopService {
 	 */
 	public Item getItemByItemNo(int itemNo);
 
-	public int countMyOrderByItemNo(int itemNo);
+	public int countMyOrderByItemNo(Map<Object, String> map);
 }

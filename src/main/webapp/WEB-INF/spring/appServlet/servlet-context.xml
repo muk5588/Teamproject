@@ -122,7 +122,6 @@
             <mapping path="/order/admin/**"/>
             <mapping path="/user/adminPage"/>
             <mapping path="/user/userList"/>
-            <mapping path="/user/deleteUser"/>
             <mapping path="/user/userBlack"/>
             <mapping path="/user/userWhite"/>
             <mapping path="/inquiry/adminList"/>

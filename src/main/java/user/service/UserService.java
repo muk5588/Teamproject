@@ -55,4 +55,5 @@ public interface UserService {
 	 */
 	public List<User> userPagingList(UserPaging paging);
 
+
 }

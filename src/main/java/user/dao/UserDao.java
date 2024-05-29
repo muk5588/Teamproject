@@ -46,7 +46,7 @@ public interface UserDao {
 
 
 	public List<User> userPagingList(UserPaging paging);
-	
+
 	
 
 }

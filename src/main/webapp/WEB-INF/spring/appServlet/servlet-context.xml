@@ -69,8 +69,6 @@
             <mapping path="/board/delete"/>
             <mapping path="/board/userbyboardlist/**"/>
             <mapping path="/board/userbyrecommlist/**"/>
-            <mapping path="/user/**"/>
-            <mapping path="/shop/**"/>
             <mapping path="/shop/**"/>
             <mapping path="/basket/**"/>
             <mapping path="/calendar/**"/>
@@ -94,6 +92,7 @@
             <exclude-mapping path="/user/deleteUser"/>
             <exclude-mapping path="/user/userBlack"/>
             <exclude-mapping path="/user/userWhite"/>
+            <exclude-mapping path="/user/checkEmail"/>
             <exclude-mapping path="/report/deleteReport"/>
             <exclude-mapping path="/report/deleteCommReport"/>
             <exclude-mapping path="/order/admin/**"/>

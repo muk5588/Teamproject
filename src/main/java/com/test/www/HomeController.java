@@ -111,5 +111,9 @@ public class HomeController {
 	public void customerService() {
 		
 	}
+	@RequestMapping("/info/grade")
+	public void grade() {
+		
+	}
 	
 }

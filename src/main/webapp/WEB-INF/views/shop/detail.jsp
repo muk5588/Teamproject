@@ -133,7 +133,7 @@ $(function(){
                 reviewHtml += '<h5>' + review.reviewTitle + '</h5>';
                 reviewHtml += '<h6>' + review.nickname + '</h6>';
                 reviewHtml += '<p>' + review.reviewContent + '</p>';
-                reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString() + '</small>';
+                reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString().replace(/\.$/, '') + '</small>';
 
                 // 수정 버튼 추가
 

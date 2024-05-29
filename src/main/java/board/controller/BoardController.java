@@ -91,7 +91,7 @@ public class BoardController {
 	        recommList = boardService.getuserRecommendRes(list);
 			name = boardService.getCategoryName(categoryNo);
 			int categoryno = boardService.category(categoryNo);
-			model.addAttribute("categoryNo", categoryno);
+			model.addAttribute("gradeNo", categoryno);
 	    } else {
 	        list = boardService.list(paging);
 	        recommList = boardService.getuserRecommendRes(list);

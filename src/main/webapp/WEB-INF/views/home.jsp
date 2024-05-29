@@ -4,7 +4,7 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<link rel="icon" type="image/x-icon" href="/resources/img/favicon.ico">
 <%--<%@ page session="false" %>--%>
 <html>
 <head>

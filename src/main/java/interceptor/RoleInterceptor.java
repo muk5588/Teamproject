@@ -34,9 +34,11 @@ public class RoleInterceptor implements HandlerInterceptor {
 		int grade = user.getgradeno();
 		String URI = request.getRequestURI();
 		String categoryNoStr = request.getParameter("categoryNo");
+		logger.debug("categoryNoStr : {}",categoryNoStr);
+		logger.debug("URI : {}",URI);
 		//없을경우
 		if( categoryNoStr == null) {
-			if(grade != 5000 || grade != 0 || grade != 3 ) {
+			if(grade != 5000 && grade != 0 && grade != 3 ) {
 				//전체 조회 가능한 사용자가 아닌경우..
 				response.sendRedirect("/");
 				return false;

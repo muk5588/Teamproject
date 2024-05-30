@@ -43,4 +43,10 @@ public interface ReportDao {
     public List<CommReport> reportcommlist();
 
     public List<ItemReport> reportitemlist();
+
+    public List<BoardReport> userbyboardlist(int userNo);
+
+    public List<CommReport> userbycommlist(int userNo);
+
+    public List<ItemReport> userbyitemlist(int userNo);
 }

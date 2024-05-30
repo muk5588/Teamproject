@@ -4,10 +4,6 @@ import board.dto.Board;
 import board.service.BoardService;
 import comment.dto.Comment;
 import dto.Item;
-import report.dto.ItemReport;
-import report.dto.ItemReportType;
-
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import report.dto.BoardReport;
-import report.dto.BoardReportType;
-import report.dto.CommReport;
+import report.dto.*;
 import report.service.ReportService;
 import user.dto.User;
 
@@ -140,7 +133,18 @@ public class ReportController {
     	
     	return "redirect:../shop/"; //자신의 신고내역으로 변경
     }
-    
+    @RequestMapping("/userByReportList")
+    public String userByReportList(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("dto1");
+        int userNo = user.getUserno();
+        List<BoardReport> boardlist = reportService.userbyboardlist(userNo);
+        List<CommReport> commlist = reportService.userbycommlist(userNo);
+        List<ItemReport> itemlist = reportService.userbyitemlist(userNo);
+        model.addAttribute("boardlist", boardlist);
+        model.addAttribute("commlist", commlist);
+        model.addAttribute("itemlist", itemlist);
+        return "report/reportlist";
+    }
     
     
 }

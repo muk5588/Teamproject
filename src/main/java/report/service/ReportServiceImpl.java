@@ -1,15 +1,10 @@
 package report.service;
 
+import dto.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import dto.Item;
-import report.dto.ItemReport;
-import report.dto.ItemReportType;
 import report.dao.ReportDao;
-import report.dto.BoardReport;
-import report.dto.BoardReportType;
-import report.dto.CommReport;
+import report.dto.*;
 
 import java.util.List;
 @Service
@@ -95,4 +90,20 @@ ReportDao reportDao;
     public List<ItemReport> reportitemlist() {
         return reportDao.reportitemlist();
     }
+
+    @Override
+    public List<BoardReport> userbyboardlist(int userNo) {
+        return reportDao.userbyboardlist(userNo);
+    }
+
+    @Override
+    public List<CommReport> userbycommlist(int userNo) {
+        return reportDao.userbycommlist(userNo);    }
+
+    @Override
+    public List<ItemReport> userbyitemlist(int userNo) {
+        return reportDao.userbyitemlist(userNo);
+    }
+
+
 }

@@ -83,4 +83,48 @@
 	<delete id="deleteItemReport" parameterType="int">
 		delete itemreport where reportno = #{reportno}
 	</delete>
+	<select id="userbyboardlist" resultType="BoardReport">
+		SELECT r.BOARDREPORTNO,r.BOARDNO, r.REPORTTYPENO, r.REPORTCONTENT, r.REPORTDATE, br.REPORTTYPE, b.CONTENT,b.NICKNAME,u.userno
+		FROM BOARDREPORT r,usertb u
+				 LEFT OUTER JOIN BOARDREPORTTYPE br ON r.REPORTTYPENO = br.REPORTTYPENO
+				 LEFT OUTER JOIN BOARD b ON r.BOARDNO = b.BOARDNO
+		where u.USERNO = #{userNo}
+	</select>
+	<select id="userbycommlist" resultType="CommReport">
+
+        SELECT r.COMMREPORTNO,
+               r.COMMNO,
+               r.COMMREPORTNO,
+               r.CONTENT,
+               r.COMMREPORTDATE,
+               br.COMMREPORT,
+               b.COMMCONTENT,
+               b.USERNO,
+               u.nickname
+        FROM COMMREPORT r
+                 LEFT OUTER JOIN COMMREPORTTYPE br ON r.COMMREPORTTYPENO = br.COMMREPORTTYPENO
+                 LEFT OUTER JOIN COMMENTTB b ON r.COMMNO = b.COMMNO
+                 left outer join USERTB u on b.USERNO = u.USERNO
+		where u.USERNO = #{userNo}
+	</select>
+	<select id="userbyitemlist" resultType="ItemReport">
+        SELECT ir.reportno,
+               ir.itemno,
+               ir.userno,
+               ir.reportDate
+                ,
+               irt.itemReportNo,
+               ir.reportContent,
+               irt.ITEMREPORT,
+               itemname,
+               nickname
+        FROM item i,
+             ITEMREPORT ir,
+             ITEMREPORTTYPE irt,
+             usertb u
+        WHERE i.ITEMNO = ir.ITEMNO
+          AND irt.ITEMREPORTNO = ir.ITEMREPORTNO
+          AND ir.USERNO = u.USERNO
+        and u.USERNO = #{userNo}
+    </select>
 </mapper>

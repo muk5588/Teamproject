@@ -116,8 +116,8 @@
                     <a class='btn-fill' href="/user/updatePass?userno=${dto1.userno}">비밀번호번경</a>
                     <a class='btn-fill' href="/user/deleteUser?userno=${dto1.userno}">탈퇴</a>
                 </div>
-                <a href="/basket/userbasket">
-                    <button>장바구니</button>
+                <a href="/report/userByReportList">
+                    <button>나의 신고 내역</button>
                 </a>
             </c:otherwise>
         </c:choose>

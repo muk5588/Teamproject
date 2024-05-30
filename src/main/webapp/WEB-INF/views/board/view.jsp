@@ -367,7 +367,7 @@
                                 </td>
                                 <c:if test="${isLogin > 0}">
                                     <td class="rpt">
-                                        <a href='../report/commentReport?commno=${comment.commNo}&boardNo=${board.boardNo }'>
+                                        <a href='../report/commentReport?commno=${comment.commNo}&boardNo=${board.boardNo }&categoryNo=${param.categoryNo}'>
                                             <img src="/resources/img/board/신고.jpg" height="30" width="30">
                                         </a>
                                     </td>

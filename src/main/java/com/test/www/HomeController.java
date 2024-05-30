@@ -65,17 +65,17 @@ public class HomeController {
 			model.addAttribute("y",y);
 			model.addAttribute("address",address);
 		}
-		List<BoardReport> reportlist = reportService.reportboardlist();
-		Iterator<Board> iterator = list.iterator();
-		while (iterator.hasNext()) {
-			Board board = iterator.next();
-			for (BoardReport report : reportlist) {
-				if (report.getBoardNo() == board.getBoardNo()) {
-					iterator.remove();
-					break; // 현재 보드가 삭제되었으므로 내부 루프 종료
-				}
-			}
-		}
+//		List<BoardReport> reportlist = reportService.reportboardlist();
+//		Iterator<Board> iterator = list.iterator();
+//		while (iterator.hasNext()) {
+//			Board board = iterator.next();
+//			for (BoardReport report : reportlist) {
+//				if (report.getBoardNo() == board.getBoardNo()) {
+//					iterator.remove();
+//					break; // 현재 보드가 삭제되었으므로 내부 루프 종료
+//				}
+//			}
+//		}
 		model.addAttribute("list",list);
 		model.addAttribute("serverTime", formattedDate );
 		

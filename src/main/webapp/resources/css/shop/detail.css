@@ -87,6 +87,9 @@ input[type="text"] {
     border-radius: 5px;
     background-color: #f9f9f9;
 }
+.editReviewBtn{
+    margin-right: 10px;
+}
 
 .review {
     margin-bottom: 20px;

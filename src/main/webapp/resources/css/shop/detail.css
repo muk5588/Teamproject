@@ -126,11 +126,11 @@ input[type="text"] {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    margin-right: 10px; /* 추가된 코드 */
+    margin-right: 10px; 
 }
 
 .review button:last-child {
-    margin-right: 0; /* 마지막 버튼은 오른쪽 여백을 없앱니다 */
+    margin-right: 0; 
 }
 
 .review button:hover {

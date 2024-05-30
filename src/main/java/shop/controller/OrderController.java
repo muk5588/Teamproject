@@ -102,6 +102,7 @@ public class OrderController {
 		logger.debug("userOrder 확인1 : {}", userOrder);
 		
 		if(orderDatas == null) {
+			logger.debug("!@#@!#!@!orderDatas = null ");
 			int resUserOr = orderService.insertUserOrder(userOrder);
 			logger.debug("userOrder 확인2 : {}", userOrder);
 			
@@ -115,7 +116,10 @@ public class OrderController {
 				int insertRes = orderService.insertOrderItemByListOrderItem(orderItems);
 				orderItems = orderService.getOrderItemsByUserOrder(userOrder);
 				if( insertRes > 0) {
+					int itemres = orderService.itemReaminReduction(orderItems);
+					logger.debug("itemresitemresitemres : {}",itemres);
 					int resa= orderService.deleteOverlappingBaskets(orderItems);
+					logger.debug("resa : {}",resa);
 				}
 				logger.debug("orderItems : {}",orderItems);
 				logger.debug("userOrder : {}",userOrder);
@@ -132,6 +136,7 @@ public class OrderController {
 			}
 			
 		}
+		logger.debug("!@#@!#!@!orderDatas != null ");
 		
 		logger.debug("orderDatas 확인 toString: {}", orderDatas.toString());
 		logger.debug("orderDatas 확인 : {}", orderDatas);
@@ -158,7 +163,6 @@ public class OrderController {
 		logger.debug("userOrder : {}", userOrder);
 		model.addAttribute("orderItems", resOrderItems);
 		logger.debug("orderItems : {}", resOrderItems);
-		
 		List<ItemFile> imgFiles = orderService.gettitleImg(resOrderItems);
 		logger.debug("imgFiles : {}", imgFiles);
 		model.addAttribute("imgFiles", imgFiles);

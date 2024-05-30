@@ -347,4 +347,10 @@ WHERE basketNo IN
 	</where>
 </select>
 
+<update id="itemReaminReduction" parameterType="dto.OrderItem">
+	UPDATE Item
+	SET remain = remain - #{orderQuantity}
+	WHERE itemNo = #{itemNo}
+</update>
+
 </mapper>

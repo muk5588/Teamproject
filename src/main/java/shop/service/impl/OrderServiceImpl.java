@@ -190,7 +190,6 @@ public class OrderServiceImpl implements OrderService {
 	                break;
 	            }
 	        }
-	        
 	        // 이미 추가된 상품이 아니라면 OrderItem 객체 생성
 	        if (!alreadyAdded) {
 	        	for(Item i : items) {
@@ -202,6 +201,7 @@ public class OrderServiceImpl implements OrderService {
 			            orderItem.setOrderQuantity(basket.getQuantity());
 			            orderItem.setPrice(i.getPrice()); 
 			            logger.debug("for 내부 orderItem : {}",orderItem);
+			            orderDao.itemReaminReduction(orderItem);
 			            orderItems.add(orderItem);
 	        		}
 	        	}
@@ -214,7 +214,7 @@ public class OrderServiceImpl implements OrderService {
 	    
 	    //주문 항목 추가 성공 시 장바구니 목록 삭제
 	    int deleteBaskets = orderDao.deleteBasketsByBasketNos(basketNumbers);
-	    logger.debug("장바구니 목록 삭제 : {}", deleteBaskets);
+	    
 	    
 	    return orderItems;
 	}
@@ -428,6 +428,18 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder) {
 		return orderDao.getOrderItemsByUserOrder(userOrder);
 	}
+
+	@Override
+	public int itemReaminReduction(List<OrderItem> orderItems) {
+		int res = 0;
+		for(OrderItem o : orderItems) {
+			orderDao.itemReaminReduction(o);
+			res++;
+		}
+		return res;
+	}
+
+
 
 
 

@@ -44,6 +44,7 @@
                 <td class="nick">${comment.nickName }</td>
             </div>
             <button type="button" id="report" name="report">신고</button>
+            <input hidden="hidden" name="categoryNo" value="${categoryNo}">
         </form>
     </div>
 </div>

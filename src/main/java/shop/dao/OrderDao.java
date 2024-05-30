@@ -75,5 +75,7 @@ public interface OrderDao {
 
 	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder);
 
+	public int itemReaminReduction(OrderItem orderItem);
+
 	
 }

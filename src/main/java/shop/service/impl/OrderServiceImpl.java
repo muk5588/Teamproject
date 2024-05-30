@@ -55,24 +55,28 @@ public class OrderServiceImpl implements OrderService {
             	Basket tempBasket = new Basket();
                 int basketNo = Integer.parseInt(orderDatas[i]);
                 logger.debug("basketNo : {}",basketNo);
+                tempBasket.setBasketNo(basketNo);
                 int quantity = Integer.parseInt(quantities[i]);
                 logger.debug("quantity : {}",quantity);
-                tempBasket.setBasketNo(basketNo);
                 tempBasket.setQuantity(quantity);
                 basketList.add(tempBasket);
             }
         }
+        logger.debug("basketList확인 before : {} ",basketList);
         List<Basket> tempList = orderDao.selectBasketByBaskets(basketList);
 	    logger.debug("서비스 basketList : {}", basketList);
 	    for (int i = 0; i < basketList.size(); i++) {
 	        for (Basket basket : tempList) {
 	            if (basket.getBasketNo() == tempList.get(i).getBasketNo()) {
-	                basket.setQuantity(basketList.get(i).getQuantity());
+	            	int quantity = Integer.parseInt(quantities[i]);
+	                basket.setQuantity(quantity);
 	             // basketNo가 같으면 quantity 덮어씌우고 break
 	                break;
 	            }
 	        }
 	    }
+	    logger.debug("basketList확인 after : {} ",basketList);
+	    logger.debug("tempList확인  : {} ",tempList);
 		return tempList;
 	}
 	
@@ -157,67 +161,77 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderItem> insertOrderItems(String orderDatas, UserOrder userOrder) {
-		  // 장바구니 번호 배열로 변환
+	public List<OrderItem> insertOrderItems(String quantities, String orderDatas, UserOrder userOrder) {
+	    // 장바구니 상품 수량 파싱
+	    String[] quantityArr = quantities.split(",");
+	    int[] quantityNumbers = Arrays.stream(quantityArr).mapToInt(Integer::parseInt).toArray();
+
+	    // 장바구니 번호 파싱
 	    String[] basketNos = orderDatas.split(",");
-	    int[] basketNumbers = new int[basketNos.length];
-	    for (int i = 0; i < basketNos.length; i++) {
-	        basketNumbers[i] = Integer.parseInt(basketNos[i].trim());
-	    }
-	    logger.debug("basketNumbers : {}", basketNumbers);
-	    
-	    // 장바구니 번호로 장바구니 목록 조회
+	    int[] basketNumbers = Arrays.stream(basketNos).mapToInt(Integer::parseInt).toArray();
+
+	    // 장바구니 상품 조회
 	    List<Basket> baskets = orderDao.getBasketsByBasketNos(basketNumbers);
-	    logger.debug("baskets : getBasketsByBasketNos: {}", baskets);
-	    
-	    //장바구니 목록의 상품 번호 목록 조회
 	    List<Item> items = orderDao.getItemByItemNos(baskets);
-	    
+
 	    // 주문 항목 목록
 	    List<OrderItem> orderItems = new ArrayList<>();
-	    
-	    // 장바구니 목록을 돌면서 주문 항목 생성
-	    for (Basket basket : baskets) {
-	        // 이미 추가된 상품인지 확인하기 위한 플래그
+
+	    // 장바구니 항목 처리 및 주문 항목 생성
+	    for (int i = 0; i < baskets.size(); i++) {
+	        Basket basket = baskets.get(i);
+	        int quantity = quantityNumbers[i];
+
+	        // 이미 추가된 상품인지 확인
 	        boolean alreadyAdded = false;
-	        
-	        // 이미 추가된 주문 항목인지 확인하고, 있을 경우 수량을 증가시킴
 	        for (OrderItem orderItem : orderItems) {
 	            if (orderItem.getItemNo() == basket.getItemNo()) {
-	                orderItem.setOrderQuantity(orderItem.getOrderQuantity() + basket.getQuantity());
+	                // 이미 주문된 상품인 경우 수량을 증가
+	                orderItem.setOrderQuantity(orderItem.getOrderQuantity() + quantity);
 	                alreadyAdded = true;
-	                logger.debug("orderItem 검사 : {}",orderItem);
 	                break;
 	            }
 	        }
-	        // 이미 추가된 상품이 아니라면 OrderItem 객체 생성
+
+	        // 이미 추가된 상품이 아니면 주문 항목 생성
 	        if (!alreadyAdded) {
-	        	for(Item i : items) {
-	        		if( basket.getItemNo() == i.getItemNo()) {
-			            OrderItem orderItem = new OrderItem();
-			            orderItem.setOrderNo(userOrder.getOrderNo());
-			            orderItem.setItemNo(basket.getItemNo());
-			            orderItem.setItemName(i.getItemName());
-			            orderItem.setOrderQuantity(basket.getQuantity());
-			            orderItem.setPrice(i.getPrice()); 
-			            logger.debug("for 내부 orderItem : {}",orderItem);
-			            orderDao.itemReaminReduction(orderItem);
-			            orderItems.add(orderItem);
-	        		}
-	        	}
+	            for (Item item : items) {
+	                if (basket.getItemNo() == item.getItemNo()) {
+	                    OrderItem orderItem = new OrderItem();
+	                    orderItem.setOrderNo(userOrder.getOrderNo());
+	                    orderItem.setItemNo(item.getItemNo());
+	                    orderItem.setItemName(item.getItemName());
+	                    orderItem.setOrderQuantity(quantity);
+	                    orderItem.setPrice(item.getPrice());
+	                    orderItems.add(orderItem);
+	                    break;
+	                }
+	            }
 	        }
 	    }
-	    logger.debug("orderItems : {}",orderItems);
-	    int res = 0;
-	    // 주문 항목을 데이터베이스에 삽입
-	    res = orderDao.insertOrderItems(orderItems);
-	    
-	    //주문 항목 추가 성공 시 장바구니 목록 삭제
-	    int deleteBaskets = orderDao.deleteBasketsByBasketNos(basketNumbers);
-	    
-	    
+
+	    // 주문 항목을 데이터베이스에 저장
+	    int res = orderDao.insertOrderItems(orderItems);
+	    int rrrr=0;
+	    if (res > 0) {
+	        // 주문 항목 추가 성공 시 장바구니 항목 삭제
+	        int deleteBaskets = orderDao.deleteBasketsByBasketNos(basketNumbers);
+	        logger.debug("###deleteBaskets: {}",deleteBaskets);
+
+	        // 주문 항목 추가 및 장바구니 삭제가 모두 성공한 경우에만 재고 감소 처리
+	        if (deleteBaskets > 0) {
+	            for (OrderItem orderItem : orderItems) {
+	                orderDao.itemReaminReduction(orderItem);
+	                rrrr++;
+	                logger.debug("###rrrr: {}",rrrr);
+	            }
+	        }
+	    }
+	    logger.debug("###랏rrrr: {}",rrrr);
+
 	    return orderItems;
 	}
+
 
 	@Override
 	public List<ItemFile> gettitleImg(List<OrderItem> resOrderItems) {

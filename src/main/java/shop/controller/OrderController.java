@@ -40,6 +40,8 @@ public class OrderController {
 			, HttpSession session
 			, @RequestParam(value="itemNo", required = false)String STitemNo
 			, @RequestParam(value="quantity", required = false)String STquantity) {
+		logger.debug("컨트롤러 basketNo : {}", Arrays.toString(orderDatas));
+		logger.debug("컨트롤러 quantities : {}",  Arrays.toString(quantities));
 		logger.debug("컨트롤러 STitemNo : {}", STitemNo);
 		logger.debug("컨트롤러 STquantity : {}", STquantity);
 		if(orderDatas != null ) {
@@ -58,6 +60,7 @@ public class OrderController {
 		    logger.debug("userOrder check : {}", userOrder);
 		    model.addAttribute("userOrder", userOrder);
 		    model.addAttribute("orderDatas", orderDatas);
+		    model.addAttribute("quantities",quantities);
 		}else if(orderDatas == null && STquantity != null && STitemNo != null) {
 			int itemNo , quantity;
 			itemNo = Integer.parseInt(STitemNo);
@@ -84,6 +87,7 @@ public class OrderController {
 	public String orderCompleted(
 		HttpServletRequest req
 		,@RequestParam(value="orderDatas", required = false)String orderDatas
+		,@RequestParam(value="quantities", required = false)String quantities
 		,UserOrder userOrder
 		, Model model
 		, @RequestParam(value="itemNo", required = false)String[] STitemNo
@@ -92,6 +96,7 @@ public class OrderController {
 		logger.debug("결제 완료 페이지");
 		logger.debug("결제 완료 페이지 userOrder:{}",userOrder);
 		logger.debug("결제 완료 페이지 orderDatas:{}",orderDatas);
+		logger.debug("결제 완료 페이지 quantities:{}",quantities);
 		logger.debug("결제 완료 페이지 STitemNo:{}",STitemNo);
 		logger.debug("결제 완료 페이지 STquantity:{}",STquantity);
 		User user = (User) session.getAttribute("dto1");
@@ -150,7 +155,7 @@ public class OrderController {
 		}
 		
 		logger.debug("userOrder 확인2 : {}", userOrder);
-		List<OrderItem> resOrderItems = orderService.insertOrderItems(orderDatas,userOrder );
+		List<OrderItem> resOrderItems = orderService.insertOrderItems(quantities,orderDatas,userOrder );
 		logger.debug("resOrderItems : {}", resOrderItems);
 		
 		if( null == resOrderItems ) {

@@ -277,6 +277,9 @@ $(function(){
 		<c:forEach items="${orderDatas}" var="orderData">
 		    <input type="hidden" name="orderDatas" value="${orderData}" />
 		</c:forEach>
+		<c:forEach items="${quantities}" var="quantitie">
+		    <input type="hidden" name="quantities" value="${quantitie}" />
+		</c:forEach>
     </c:when>
     <c:when test="${empty baskets }">
    	<c:set var="sum" value="0"/>

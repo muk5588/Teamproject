@@ -41,10 +41,11 @@ public interface OrderService {
 	/**
 	 * 결제한 목록을 장바구니 -> 주문 상세로 인서트(장바구니 삭제 처리)
 	 * @param orderDatas
+	 * @param orderDatas2 
 	 * @param userOrder 
 	 * @return
 	 */
-	public List<OrderItem> insertOrderItems(String orderDatas, UserOrder userOrder);
+	public List<OrderItem> insertOrderItems(String quantities, String orderDatas, UserOrder userOrder);
 
 	/**
 	 * 상품 번호로 대표 이미지 조회

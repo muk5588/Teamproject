@@ -167,7 +167,8 @@ public interface OrderService {
 
 	public List<OrderItem> getOrderItemsByUserOrder(UserOrder userOrder);
 
-	
+	public int itemReaminReduction(List<OrderItem> orderItems);
+
 
 	
 	

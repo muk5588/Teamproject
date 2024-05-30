@@ -281,7 +281,7 @@
                     <a href="./update?boardNo=${board.boardNo }">
                         <button id="btnUpdate">수정</button>
                     </a>
-                    <a href="./delete?boardNo=${board.boardNo }">
+                    <a href="./delete?boardNo=${board.boardNo }&categoryNo=${param.categoryNo}">
                         <button id="btnDelete">삭제</button>
                     </a>
                 </c:if>

@@ -17,7 +17,6 @@
 <div style="display: flex; justify-content: space-around;">
 <div class="BoardGradeSection">
     <h2>게시판별 등급조건</h2>
-    
     <p>여행지정보 - 여행이야기</p>
     <p> 신입회원 </p>
     <p>여행지 정보 - 여행 팁 및 권고사항</p>

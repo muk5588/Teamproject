@@ -140,11 +140,11 @@
                     if (userno_d === review.userNo) {
                         reviewHtml += '<div class="btn">';
                         reviewHtml += '<a class="editReviewBtn" data-review-No="' + review.reviewNo + '" data-review-title="' + review.reviewTitle + '" data-review-content="' + review.reviewContent + '">수정</a>';
-                        reviewHtml += '<a class="deleteReviewBtn" data-review-No="' + review.reviewNo + '">리뷰 삭제</a>';
+                        reviewHtml += '<a class="deleteReviewBtn" data-review-No="' + review.reviewNo + '"> 삭제</a>';
                         reviewHtml += '</div>';
                     } else if (${dto1.gradeno == 0 || dto1.gradeno == 5000}) {
                         reviewHtml += '<div class="btn">';
-                        reviewHtml += '<a class="deleteReviewBtn" data-review-No="' + review.reviewNo + '">리뷰 삭제</a>';
+                        reviewHtml += '<a class="deleteReviewBtn" data-review-No="' + review.reviewNo + '"> 삭제</a>';
                         reviewHtml += '</div>';
                     }
                     reviewHtml += '</div>';

@@ -14,6 +14,87 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+<style type="text/css">
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f8f9fa;
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		margin-top: 30px;
+	}
+
+	h1 {
+		text-align: center;
+		margin-bottom: 20px;
+		color: #343a40;
+	}
+
+	button {
+		background-color: #007bff;
+		border: none;
+		color: white;
+		padding: 10px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 4px;
+	}
+
+	button:hover {
+		background-color: #0056b3;
+	}
+
+	#orderwrap {
+		background-color: #ffffff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+
+	th, td {
+		border: 1px solid #dee2e6;
+		padding: 10px;
+		text-align: left;
+	}
+
+	th {
+		background-color: #f8f9fa;
+		font-weight: bold;
+	}
+
+
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 24px;
+		}
+
+		button {
+			font-size: 14px;
+			padding: 8px 16px;
+		}
+
+		th, td {
+			font-size: 14px;
+			padding: 8px;
+		}
+
+
+	}
+</style>
 </head>
 <body>
 
@@ -29,16 +110,16 @@
 <div id="orderwrap">
 <table>
 <tr>
-	<th>주문자 : ${userOrder.userName }</th>
+	<th colspan="4">주문자 : ${userOrder.userName }</th>
 </tr>
 <tr>
-	<th>배송지 : ${userOrder.address }</th>
+	<th colspan="4">배송지 : ${userOrder.address }</th>
 </tr>
 <tr>
-	<th>배송지 세부 주소 : ${userOrder.detailAddress }</th>
+	<th colspan="4">배송지 세부 주소 : ${userOrder.detailAddress }</th>
 </tr>
 <tr>
-	<th>배송지 세부 주소 추가 : ${userOrder.extraAddress }</th>
+	<th colspan="4">배송지 세부 주소 추가 : ${userOrder.extraAddress }</th>
 </tr>
 	<c:set var="sum" value="0"/>
 	<c:choose>
@@ -64,7 +145,7 @@
 	   		</c:when>
    			</c:choose>
    			</td>
-   			<td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/>
+   			<td>결제금액 : <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/>
    			</td>
 			<c:set var="i" value="${orderItem.price}"/>
 			<c:set var="sum" value="${sum + i}"/>
@@ -90,7 +171,7 @@
 	   		</c:when>
    			</c:choose>
    			</td>
-   			<td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/>
+   			<td>결제금액 :<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${orderItem.price }"/>
    			</td>
 			<c:set var="i" value="${orderItem.price}"/>
 			<c:set var="sum" value="${sum + i}"/>

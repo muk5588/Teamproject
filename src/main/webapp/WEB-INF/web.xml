@@ -34,7 +34,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	<mine-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mine-mapping>
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>

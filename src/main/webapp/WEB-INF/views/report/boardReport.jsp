@@ -45,7 +45,7 @@
                 <label>작정자닉네임 : </label>
                 <td class="nick">${board.nickName }</td>
             </div>
-
+			<input hidden="hidden" value="${categoryNo}" name="categoryNo">
             <button type="button" id="report" name="report">신고</button>
         </form>
     </div>

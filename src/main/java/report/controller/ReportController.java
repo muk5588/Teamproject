@@ -7,6 +7,7 @@ import dto.Item;
 import report.dto.ItemReport;
 import report.dto.ItemReportType;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import report.dto.BoardReport;
 import report.dto.BoardReportType;
 import report.dto.CommReport;
@@ -35,34 +38,52 @@ public class ReportController {
 
 
     @GetMapping("/boardReport")
-    public String boardReport(Model model, int boardno) {
+    public String boardReport(Model model, int boardno,@RequestParam(value ="categoryNo",required = false)String categoryNo) {
         List<BoardReportType> reportTypeList = reportService.reportType();
         Board board = boardService.viewByBoardNo(boardno);
+        if( categoryNo != null ) {
+        	model.addAttribute("categoryNo", categoryNo);
+        }
         model.addAttribute("board", board);
         model.addAttribute("list", reportTypeList);
         return "report/boardReport";
     }
     @PostMapping("/boardReport")
-    public String boardReport(BoardReport boardReport, HttpSession session){
+    public String boardReport(BoardReport boardReport, HttpSession session
+    		,@RequestParam(value ="categoryNo",required = false)String categoryNo){
+    	String URL = "redirect:/";
+    	if(categoryNo == null) {
+    	}else {
+    		URL = "redirect:/board/list?categoryNo="+categoryNo;
+    	}
         int userNo = (int)session.getAttribute("isLogin");
         boardReport.setUserNo(userNo);
         reportService.reportBoard(boardReport);
-        return "redirect:../board/list";//추후에 자신의 신고내역으로 변경
+        return URL;
     }
     @GetMapping("/commentReport")
-    public String commentReport(Model model, int commno) {
+    public String commentReport(Model model, int commno,@RequestParam(value ="boardNo",required = false)String boardNo) {
         List<BoardReportType> commReportTypeList = reportService.commReportType();
         Comment comment = boardService.commentByBoardNo(commno);
+        if( boardNo != null) {
+        	logger.debug("boardNo : {}",boardNo);
+        	model.addAttribute("boardNo", boardNo);
+        }
+        model.addAttribute("comment", comment);
         model.addAttribute("comment", comment);
         model.addAttribute("list", commReportTypeList);
         return "report/commentReport";
     }
     @PostMapping("/commentReport")
-    public String commentReport(CommReport commReport, HttpSession session){
+    public String commentReport(CommReport commReport, HttpSession session,@RequestParam(value ="boardNo",required = false)String boardNo){
+    	String URL = "/";
+    	if( boardNo != null) {
+    		URL = "redirect:/board/view?boardNo=" + boardNo;
+    	}
         int userNo = (int)session.getAttribute("isLogin");
         commReport.setUserNo(userNo);
         reportService.reportComm(commReport);
-        return "redirect:../board/list";//추후에 자신의 신고내역으로 변경
+        return URL;
     }
     @RequestMapping("/list")
     public String list(Model model) {

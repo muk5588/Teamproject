@@ -6,7 +6,7 @@
 	<sql id="selectBoard">
 		SELECT 
 			boardno, userno,  title, content, nickname, createdate, boardview, CATEGORYNO
-		FROM board
+		FROM board 
 	</sql>
 	
 	<sql id="search">
@@ -97,8 +97,12 @@
 
 	<select id="selectCntAll" resultType="int" parameterType="util.Paging">
 		SELECT count(*) FROM (
-			<include refid="selectBoard" />
-			<where>
+   		SELECT 
+		b.boardno, b.userno,  title, content, nickname, createdate, boardview, CATEGORYNO
+		FROM board b
+    	LEFT JOIN boardreport br ON b.boardno = br.boardno
+   		 <where>
+    		AND br.boardno IS NULL
 				<include refid="searchAND"/>
 	           	<if test="categoryNo != null and !categoryNo.equals('') and categoryNo != 0">
 	   				AND categoryNo = #{categoryNo}
@@ -345,9 +349,13 @@
 
 <select id="listByCategory" parameterType="util.Paging" resultType="board.dto.Board">
     SELECT * FROM (
-    SELECT rownum rnum, B.* FROM (
-    <include refid="selectBoard"/>
+    SELECT rownum rnum, a.* FROM (
+   		SELECT 
+		b.boardno, b.userno,  title, content, nickname, createdate, boardview, CATEGORYNO
+		FROM board b
+    	LEFT JOIN boardreport br ON b.boardno = br.boardno
     <where>
+    	AND br.boardno IS NULL
         AND categoryno = #{categoryNo}
         <choose>
             <when test="searchKind != null and searchKind.equals('title')">
@@ -358,8 +366,8 @@
             </when>
         </choose>
     </where>
-    ORDER BY boardno DESC
-    ) B
+    ORDER BY b.boardno DESC
+    ) a
     )
     <where>
         AND rnum BETWEEN #{startNo } AND #{endNo}

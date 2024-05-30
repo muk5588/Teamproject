@@ -82,6 +82,7 @@
             <mapping path="/inquiry/inquirylist"/>
             <exclude-mapping path="/shop/"/>
             <exclude-mapping path="/shop/list"/>
+            <exclude-mapping path="/shop/detail"/>
             <exclude-mapping path="/user/insertUser"/>
             <exclude-mapping path="/user/searchUser"/>
             <exclude-mapping path="/inquiry/adminList"/>

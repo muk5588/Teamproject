@@ -84,22 +84,21 @@ var sUploadURL = '/board/fileupload';
 
     })
 </script>
-</script>
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <div class="container">
     <div class="title">
     <h1>글쓰기 페이지</h1>
-    <a href="./list" class="btn">
-        게시판으로
+    <a href="#" class="btn" onclick="window.history.back(); return false;">
+        이전페이지로
     </a>
     </div>
     <hr>
     <form action="./write" method="post" id="writeForm" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="categoryNo" class="form-label" style="margin-right: 30px">게시물 종류: </label>
-            <select name="categoryNo" id="categoryNo" placeholder="종류를 선택해 주세요" class="form-option">
+            <select name="categoryNo" id="categoryNo" class="form-option">
                 <c:forEach var="category" items="${categorylist}">
                     <option value="${category.categoryNo}">${category.categoryName}</option>
                 </c:forEach>

@@ -18,3 +18,7 @@ hr{
     clear: both;
     margin-bottom: 10px;
 }
+a:hover{
+    text-decoration-line: none;
+    color: #87cefa;
+}

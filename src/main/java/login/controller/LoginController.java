@@ -46,6 +46,7 @@ public class LoginController {
             User login = loginService.info(dto);
             isLogin = login.getUserno();
             logger.info("login : {}", login);
+            logger.info("islogin : {}", isLogin);
 
             loginService.insertAccessHistory(login);
             

@@ -27,10 +27,11 @@
 		values (COMMREPORT_SEQ.nextval,#{commNo},#{userNo},#{commReportTypeNo},#{content},sysdate + 9/24)
 	</insert>
 	<select id="boardlist" resultType="BoardReport">
-		SELECT r.BOARDREPORTNO,r.BOARDNO, r.REPORTTYPENO, r.REPORTCONTENT, r.REPORTDATE, br.REPORTTYPE, b.CONTENT,b.NICKNAME
+		SELECT r.BOARDREPORTNO,r.BOARDNO, r.REPORTTYPENO, r.REPORTCONTENT, r.REPORTDATE, br.REPORTTYPE, b.CONTENT,u.NICKNAME
 		FROM BOARDREPORT r
 				 LEFT OUTER JOIN BOARDREPORTTYPE br ON r.REPORTTYPENO = br.REPORTTYPENO
 				 LEFT OUTER JOIN BOARD b ON r.BOARDNO = b.BOARDNO
+		join USERTB u on r.USERNO = u.userno
 	</select>
 	<select id="commlist" resultType="CommReport">
 		SELECT r.COMMREPORTNO,r.COMMNO, r.COMMREPORTNO, r.CONTENT, r.COMMREPORTDATE, br.COMMREPORT, b.COMMCONTENT, b.USERNO, u.nickname
@@ -92,18 +93,18 @@
 			r.REPORTDATE,
 			br.REPORTTYPE,
 			b.CONTENT,
-			b.NICKNAME,
-			u.USERNO
+			r.USERNO,
+			u.NICKNAME
 		FROM
 			BOARDREPORT r
 				LEFT OUTER JOIN
 			BOARDREPORTTYPE br ON r.REPORTTYPENO = br.REPORTTYPENO
 				LEFT OUTER JOIN
 			BOARD b ON r.BOARDNO = b.BOARDNO
-				LEFT OUTER JOIN
-			USERTB u ON u.USERNO = b.USERNO
+				JOIN
+			USERTB u ON r.USERNO = u.USERNO
 		WHERE
-			u.USERNO = #{userNo}
+			r.USERNO = #{userNo}
 	</select>
 	<select id="userbycommlist" resultType="CommReport">
 		SELECT
@@ -122,10 +123,10 @@
 			COMMREPORTTYPE br ON r.COMMREPORTTYPENO = br.COMMREPORTTYPENO
 				LEFT OUTER JOIN
 			COMMENTTB b ON r.COMMNO = b.COMMNO
-				LEFT OUTER JOIN
-			USERTB u ON b.USERNO = u.USERNO
+			 JOIN
+			USERTB u ON r.USERNO = u.USERNO
 		WHERE
-			u.USERNO = #{userNo}
+			r.USERNO = #{userNo}
 	</select>
 	<select id="userbyitemlist" resultType="ItemReport">
 		SELECT
@@ -143,10 +144,10 @@
 			ITEM i ON i.ITEMNO = ir.ITEMNO
 				LEFT OUTER JOIN
 			ITEMREPORTTYPE irt ON irt.ITEMREPORTNO = ir.ITEMREPORTNO
-				LEFT OUTER JOIN
+			 JOIN
 			USERTB u ON ir.USERNO = u.USERNO
 		WHERE
-			u.USERNO = #{userNo}
+			ir.USERNO = #{userNo}
 	</select>
 
 </mapper>

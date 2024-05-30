@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>리뷰 수정</title>
+<link href="/resources/css/shop/admin/update.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
         $(function(){

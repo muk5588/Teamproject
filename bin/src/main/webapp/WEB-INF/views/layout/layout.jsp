@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>${category eq 'cu' ? '고객 관리' : (category eq 'no' ? '공지사항' : (category eq 'bo' ? '방명록' : (category eq 'da' ? '공공 데이터' : (category eq 'join' ? '회원가입' : '') ) ) ) } : IoT</title>
     <!-- 브라우저 탭의 작은 아이콘 설정 -->
-    <link rel="icon" type="image/x-icon" href="img/icon.ico" />
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <tiles:insertAttribute name="header" />

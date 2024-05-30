@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", function () {

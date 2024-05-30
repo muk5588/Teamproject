@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>권한설정</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
     <link href="/resources/css/grade/gradeInsert.css" rel="stylesheet" type="text/css">
 </head>

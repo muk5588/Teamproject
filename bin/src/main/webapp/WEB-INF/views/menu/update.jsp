@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <table class='w-pct60'>

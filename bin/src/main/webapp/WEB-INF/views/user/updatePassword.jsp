@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="resources/img/favicon.ico">
     <script src="/resources/js/user/password.js" charset="UTF-8"></script>
 </head>
 <body>

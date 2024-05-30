@@ -8,6 +8,7 @@
 <html>
   <head>
     <title>네이버로그인</title>
+    <link rel="icon" href="resources/img/favicon.ico">
   </head>
   <body>
  

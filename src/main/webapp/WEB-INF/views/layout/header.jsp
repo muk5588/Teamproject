@@ -5,7 +5,8 @@
 <!-- 라이브러리 목록은 iot/pom.xml, c:\사용자\.m2에서 확인가능 -->
 <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/common/header.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico">
+
+
 
 <script type="text/javascript" src="/resources/js/mainPage/header.js"></script>
 <script type="text/javascript" src="/resources/js/mainPage/mainToggle.js"></script>
@@ -59,7 +60,10 @@
         display: block;
     }
 </style>
-
+<head>
+    <title>헤더</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
+</head>
 <div class="Head">
     <header class="Main-Header">
         <div class="Menu-List" id="menuList">

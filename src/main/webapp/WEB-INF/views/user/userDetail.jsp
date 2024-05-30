@@ -10,9 +10,11 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/user/userDetail.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <title>마이 페이지</title>
+<link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="/resources/js/user/blackList.js" defer></script>

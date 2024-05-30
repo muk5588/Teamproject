@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="resources/img/favicon.ico">
     <script src="/resources/js/user/search.js" charset="UTF-8"></script>
 
 </head>

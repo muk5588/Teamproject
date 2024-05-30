@@ -19,6 +19,7 @@ $(function(){
 <html>
   <head>
     <title>네이버로그인</title>
+    <link rel="icon" href="resources/img/favicon.ico">
   </head>
   <body>
 <h1>로그인 테스트</h1>

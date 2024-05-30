@@ -6,6 +6,7 @@
 <link href="/resources/css/common/common.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/common/header.css" rel="stylesheet" type="text/css">
 
+
 <script type="text/javascript" src="/resources/js/mainPage/header.js"></script>
 <script type="text/javascript" src="/resources/js/mainPage/mainToggle.js"></script>
 
@@ -58,7 +59,9 @@
         display: block;
     }
 </style>
-
+<head>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
+</head>
 <div class="container">
     <header class="Main-Header">
         <div class="Menu-List" id="menuList">

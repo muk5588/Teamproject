@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Q&A Detail</title>
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <h1>Q&A 상세 정보</h1>

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Edit Q&A</title>
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <h1>글 수정</h1>

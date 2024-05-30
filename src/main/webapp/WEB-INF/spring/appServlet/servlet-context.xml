@@ -26,6 +26,7 @@
     <!-- resources를 따로 지정하지 않아도 바로 css폴더로 연결되게끔 지정 -->
     <!-- 경로지정만 해도 css폴더의 하위 파일들을 모두 적용되게끔 지정 -->
     <resources location="/resources/css/" mapping="/css/**"/>
+    <resources location="/resources/img/" mapping="/img/**"/>
 
     <!-- 만들어둔 layout과 tiles를 쓰기 위해 선언하는 부분 -->
     <beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

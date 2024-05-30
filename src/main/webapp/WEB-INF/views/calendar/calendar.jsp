@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>캘린더</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <%--    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>--%>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

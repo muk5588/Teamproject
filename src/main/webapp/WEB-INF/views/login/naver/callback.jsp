@@ -8,6 +8,7 @@
 <html>
   <head>
     <title>네이버로그인</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
   </head>
   <body>
  

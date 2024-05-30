@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="resources/img/favicon.ico">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
         $(function () {

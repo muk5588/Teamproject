@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
     <c:if test="${userId eq null}">

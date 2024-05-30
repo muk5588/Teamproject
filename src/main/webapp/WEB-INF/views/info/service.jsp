@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 운영정책</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <link href="/resources/css/info/service.css" rel="stylesheet" type="text/css">
 

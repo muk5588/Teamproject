@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이용약관</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 <link href="/resources/css/info/policy.css" rel="stylesheet" type="text/css">
 

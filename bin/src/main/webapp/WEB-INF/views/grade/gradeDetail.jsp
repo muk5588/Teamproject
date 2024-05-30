@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>

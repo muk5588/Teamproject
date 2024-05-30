@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/board/boardList.css">
 <title>내 작성글</title>
+<link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <style type="text/css">
 
 </style>

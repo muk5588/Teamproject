@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Add New Q&A</title>
+    <link rel="icon" href="resources/img/favicon.ico">
     <style>
         body {
             font-family: Arial, sans-serif;

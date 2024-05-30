@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 문의함</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 <link rel="stylesheet" type="text/css" href="/resources/css/inquiry/list.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">

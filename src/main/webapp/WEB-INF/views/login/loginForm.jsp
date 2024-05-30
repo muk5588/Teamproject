@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
 	<link href="/resources/css/login/loginForm.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">

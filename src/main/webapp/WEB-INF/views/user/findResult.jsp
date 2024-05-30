@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <link rel="stylesheet" type="text/css" href="/resources/css/user/findResult.css">
 </head>
 <body>

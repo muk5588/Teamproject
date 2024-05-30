@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="resources/img/favicon.ico">
 </head>
 <body>
 <h1>로그인 성공</h1>

@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <title>네이버 쪽지함 스타일 메뉴</title>
+        <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
         <link rel="stylesheet" type="text/css" href="/resources/css/mainPage/boardMenu.css">
 
         <script>

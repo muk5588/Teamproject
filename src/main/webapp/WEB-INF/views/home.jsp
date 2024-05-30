@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Travel Square</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <script src="/resources/js/mainPage/mainSlide.js" defer></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>

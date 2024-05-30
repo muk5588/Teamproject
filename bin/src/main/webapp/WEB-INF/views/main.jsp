@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+  <link rel="icon" href="resources/img/favicon.ico">
 <script src="/resources/js/mainPage/mainSlide.js" defer></script>
 <link  rel="stylesheet" type="text/css" href="/resources/css/mainPage/mainSlide.css">
 </head>

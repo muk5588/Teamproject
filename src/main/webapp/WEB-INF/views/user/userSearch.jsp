@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+  <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <script src="/resources/js/user/search.js" charset="UTF-8"></script>
 	<link href="/resources/css/user/userSearch.css" rel="stylesheet" type="text/css">
 

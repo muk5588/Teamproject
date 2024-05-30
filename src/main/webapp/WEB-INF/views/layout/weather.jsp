@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/20191208094528217881320965.png">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         var x =

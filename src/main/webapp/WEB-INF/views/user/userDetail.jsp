@@ -9,6 +9,7 @@
 --%>
 <link rel="stylesheet" type="text/css" href="/resources/css/user/userDetail.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<title>마이 페이지</title>
 <html>
 <head>
     <title>Title</title>

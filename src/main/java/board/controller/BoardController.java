@@ -178,8 +178,15 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public void write(Model model, HttpSession session) {
+	public void write(Model model, HttpSession session,@RequestParam(value = "categoryNo")String categoryNo) {
 		List<Category> categorylist = boardService.categoryList();
+		if( categoryNo != null) {
+			int categoryNoInt = Integer.parseInt(categoryNo);
+			model.addAttribute("categoryNoInt", categoryNoInt);
+			logger.debug("categoryNo : {}",categoryNo);
+			logger.debug("categoryNoInt : {}",categoryNoInt);
+		}
+		logger.debug("categorylist : {}",categorylist);
 		model.addAttribute("categorylist", categorylist);
 	}
 	
@@ -187,9 +194,11 @@ public class BoardController {
 	public String writeProc(
 			HttpSession session
 			, Board board
-			, @RequestParam("categoryNo") int categoryNo
+			, @RequestParam(value="categoryNo")int categoryNo
 			, @RequestAttribute(required = false)MultipartFile file
 			) {
+		String URL = "redirect:/board/list";
+		String category = String.valueOf(categoryNo);
 		logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		User user = (User) session.getAttribute("dto1");
 		logger.info("board : {}", board);
@@ -237,8 +246,8 @@ public class BoardController {
 //			for( )
 			fileService.filesave(board,file);
 		}
-		
-		return "redirect:/board/list";
+		URL += "?categoryNo=" +category;
+		return URL;
 	}
 	
 	@ResponseBody
@@ -272,6 +281,7 @@ public class BoardController {
 		logger.info("{}",boardNo);
 		List<Category> categorylist = boardService.categoryList();
 		Board board = boardService.boardView(boardNo);
+		model.addAttribute("categoryNoInt", board.getCategoryNo());
 		model.addAttribute("categorylist", categorylist);
 		model.addAttribute("board", board);
 	}
@@ -281,17 +291,19 @@ public class BoardController {
 			Board board
 			) {
 		logger.info("{}", board);
+		String URL = "";
 		board.setUpdateDate(new Date());
 		int res = boardService.boardUpdate(board);
 		
 		if ( res > 0) {
-			return "redirect:/board/list";
+			URL ="redirect:/board/view?categoryNo="+ board.getCategoryNo()+"&boardNo="+ board.getBoardNo()+"&curPage=0";
+			return URL;
 		}
 		return "./list";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam("boardNo") int boardno) {
+	public String delete(@RequestParam("boardNo") int boardno,@RequestParam(value = "categoryNo")String categoryNo) {
 		logger.debug("delete ���� : {}",boardno);
 		
 		Board deleteBoard = new Board();
@@ -301,7 +313,7 @@ public class BoardController {
 		boardService.commentDeleteAll(comment);
 		boardService.boardDelete(deleteBoard);
 		
-		return "redirect:./list";
+		return "redirect:./list?categoryNo=" +categoryNo;
 	}
 	
 	@RequestMapping("/recommend")

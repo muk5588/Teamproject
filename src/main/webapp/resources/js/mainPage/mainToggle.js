@@ -19,5 +19,5 @@ document.addEventListener('click', function(event) {
 function redirectToLogin(event) {
     event.preventDefault();
     alert('로그인이 필요합니다.');
-    window.location.href = 'login'; // 로그인 페이지로 리디렉트
+    window.location.href = '/login'; // 로그인 페이지로 리디렉트
 }

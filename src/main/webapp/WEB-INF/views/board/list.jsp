@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/common/paging.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/board/boardList.css">
-<title>전체 게시판</title>
+<title>${name }</title>
 
 <script type="text/javascript">
     $(function () {

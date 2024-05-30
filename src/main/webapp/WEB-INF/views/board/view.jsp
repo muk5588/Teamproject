@@ -252,6 +252,7 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 
 <!-- wrap 때문에 container가 반응형 X로 바뀜 -->
 <div class="wrap mx-auto">

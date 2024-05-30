@@ -51,3 +51,13 @@ nhn.husky.SE2M_Configuration.Quote = {
 nhn.husky.SE2M_Configuration.SE2M_ColorPalette = {
 	bUseRecentColor : false
 };
+
+nhn.husky.SE2M_Configuration.QuickEditor = {
+    common : {
+        bUseConfig : false
+    },
+    Image : {
+        nImageMaxWidthSize : 9999,
+        nImageMaxHeightSize : 9999
+    }
+};

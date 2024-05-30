@@ -19,3 +19,4 @@ body,.se2_inputarea{margin:0;padding:0;font-family:'돋움',Dotum,Helvetica,Sans
 .se2_quote8{margin:0 0 30px;padding:12px 10px 11px;border:1px solid #e5e5e5;background:#fafafa;color:#888}
 .se2_quote9{margin:0 0 30px;padding:12px 10px 11px;border:2px solid #e5e5e5;color:#888}
 .se2_quote10{margin:0 0 30px;padding:12px 10px 11px;border:2px solid #e5e5e5;background:#fafafa;color:#888}
+.se2_inputarea img { max-width:85%; }

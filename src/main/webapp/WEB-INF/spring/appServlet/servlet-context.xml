@@ -78,6 +78,8 @@
             <mapping path="/order/**"/>
             <mapping path="/user/userPass"/>
             <mapping path="/user/userLog"/>
+            <mapping path="/report/boardReport"/>
+            <mapping path="/report/commentReport"/>
             <mapping path="/inquiry/list"/>
             <mapping path="/inquiry/inquirylist"/>
             <exclude-mapping path="/shop/"/>

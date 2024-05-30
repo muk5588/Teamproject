@@ -55,12 +55,14 @@ public class ReportController {
         return URL;
     }
     @GetMapping("/commentReport")
-    public String commentReport(Model model, int commno,@RequestParam(value ="boardNo",required = false)String boardNo) {
+    public String commentReport(Model model, int commno,@RequestParam(value ="boardNo",required = false)String boardNo
+    		,@RequestParam(value ="categoryNo",required = false)String categoryNo) {
         List<BoardReportType> commReportTypeList = reportService.commReportType();
         Comment comment = boardService.commentByBoardNo(commno);
-        if( boardNo != null) {
+        if( boardNo != null && categoryNo != null ) {
         	logger.debug("boardNo : {}",boardNo);
         	model.addAttribute("boardNo", boardNo);
+        	model.addAttribute("categoryNo", categoryNo);
         }
         model.addAttribute("comment", comment);
         model.addAttribute("comment", comment);
@@ -68,10 +70,12 @@ public class ReportController {
         return "report/commentReport";
     }
     @PostMapping("/commentReport")
-    public String commentReport(CommReport commReport, HttpSession session,@RequestParam(value ="boardNo",required = false)String boardNo){
+    public String commentReport(CommReport commReport, HttpSession session,@RequestParam(value ="boardNo",required = false)String boardNo
+    		,@RequestParam(value ="categoryNo",required = false)String categoryNo){
     	String URL = "/";
-    	if( boardNo != null) {
+    	if( boardNo != null && categoryNo != null) {
     		URL = "redirect:/board/view?boardNo=" + boardNo;
+    		URL += "&categoryNo=" + categoryNo;
     	}
         int userNo = (int)session.getAttribute("isLogin");
         commReport.setUserNo(userNo);

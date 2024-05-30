@@ -99,6 +99,7 @@ var sUploadURL = '/board/fileupload';
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/boardmenu.jsp"/>
 <div class="container">
     <div class="title">
     <h1>글쓰기 페이지</h1>

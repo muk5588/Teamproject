@@ -135,11 +135,9 @@ $(function(){
                 reviewHtml += '<p>' + review.reviewContent + '</p>';
                 reviewHtml += '<small>작성일: ' + new Date(review.createReviewDate).toLocaleDateString().replace(/\.$/, '') + '</small>';
 
-                // 수정 버튼 추가
-
                 if( userno_d === review.userNo){
                 reviewHtml += '<button class="editReviewBtn" data-review-No="' + review.reviewNo + '" data-review-title="' + review.reviewTitle + '" data-review-content="' + review.reviewContent + '">수정</button>';
-                reviewHtml += '<button class="deleteReviewBtn" data-review-No="' + review.reviewNo + '">리뷰 삭제</button>';
+                reviewHtml += '<button class="deleteReviewBtn" data-review-No="' + review.reviewNo + '">삭제</button>';
                 reviewHtml += '</div><hr>';
                 }
 
@@ -189,7 +187,6 @@ $(function(){
             window.open(openUrl, 'popup', popOption);
         });
     });
-
 
     popupsendForm.onclick = function (){
         let popOption = "width = 500px, height=500px, top=300px, left=300px"

@@ -11,7 +11,6 @@
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.*;
  import org.springframework.web.multipart.MultipartFile;
- import report.dto.BoardReport;
  import report.dto.CommReport;
  import report.service.ReportService;
  import user.dto.User;
@@ -180,7 +179,7 @@ public class BoardController {
 	@GetMapping("/write")
 	public void write(Model model, HttpSession session,@RequestParam(value = "categoryNo")String categoryNo) {
 		List<Category> categorylist = boardService.categoryList();
-		if( categoryNo != null) {
+		if( categoryNo != null && !categoryNo.trim().isEmpty()) {
 			int categoryNoInt = Integer.parseInt(categoryNo);
 			model.addAttribute("categoryNoInt", categoryNoInt);
 			logger.debug("categoryNo : {}",categoryNo);

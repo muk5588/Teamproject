@@ -1,15 +1,14 @@
 package interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import user.dto.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Component
 public class RoleInterceptor implements HandlerInterceptor {
@@ -36,10 +35,12 @@ public class RoleInterceptor implements HandlerInterceptor {
 		String categoryNoStr = request.getParameter("categoryNo");
 		logger.debug("categoryNoStr : {}",categoryNoStr);
 		logger.debug("URI : {}",URI);
+		logger.debug("grade: {}" ,grade);
 		//없을경우
-		if( categoryNoStr == null) {
-			if(grade != 5000 && grade != 0 && grade != 3 ) {
+		if( categoryNoStr == null || categoryNoStr.isEmpty()) {
+			if(grade != 5000 && grade != 0 && grade != 3) {
 				//전체 조회 가능한 사용자가 아닌경우..
+				logger.debug("전체 조회 권한이 없는 사용자입니다. grade: {}", grade);
 				response.sendRedirect("/");
 				return false;
 			}else {

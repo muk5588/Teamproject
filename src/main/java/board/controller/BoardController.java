@@ -51,7 +51,7 @@ public class BoardController {
 	    paging.setSearch(search);
 	    paging.setSearchKind(searchKind);
 	    
-	    if (categoryNo != null) {
+	    if (categoryNo != null && categoryNo != 0) {
 	        paging.setCategoryNo(categoryNo);
 	    }
 	    
@@ -68,7 +68,7 @@ public class BoardController {
 	    	paging = new Paging();
 	    	paging.setSearch(search);
 	    	paging.setSearchKind(searchKind);
-	    	if (categoryNo != null) {
+	    	if (categoryNo != null && categoryNo != 0) {
 	    		paging.setCategoryNo(categoryNo);
 	    	}
 	    	model.addAttribute("curPage", curPage);
@@ -84,7 +84,7 @@ public class BoardController {
 		String name = null;
 	    logger.info("paging : {}",paging);
 	    
-	    if (categoryNo != null) {
+	    if (categoryNo != null && categoryNo !=0) {
 	    	paging.setCategoryNo(categoryNo);
 	        list = boardService.listByCategory(paging);
 	        recommList = boardService.getuserRecommendRes(list);
@@ -93,7 +93,9 @@ public class BoardController {
 			model.addAttribute("gradeNo", categoryno);
 	    } else {
 	        list = boardService.list(paging);
+	        logger.debug("list categoryNo = 0: ",list);
 	        recommList = boardService.getuserRecommendRes(list);
+	        logger.debug("recommList categoryNo = 0: ",recommList);
 			name = "전체";
 	    }
 //		List<BoardReport> reportlist = reportService.reportboardlist();

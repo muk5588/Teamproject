@@ -83,6 +83,9 @@
             <mapping path="/report/commentReport"/>
             <mapping path="/inquiry/list"/>
             <mapping path="/inquiry/inquirylist"/>
+            <mapping path="/report/deleteUserbyboard"/>
+            <mapping path="/report/deleteUserbycomm"/>
+            <mapping path="/report/deleteUserbyitem"/>
             <exclude-mapping path="/shop/"/>
             <exclude-mapping path="/shop/list"/>
             <exclude-mapping path="/shop/detail"/>
@@ -97,9 +100,6 @@
             <exclude-mapping path="/user/userBlack"/>
             <exclude-mapping path="/user/userWhite"/>
             <exclude-mapping path="/user/checkEmail"/>
-            <exclude-mapping path="/report/deleteUserbyboard"/>
-            <exclude-mapping path="/report/deleteUserbycomm"/>
-            <exclude-mapping path="/report/deleteUserbyitem"/>
             <exclude-mapping path="/order/admin/**"/>
             <beans:ref bean="loginInterceptor"/>
         </interceptor>

@@ -149,6 +149,23 @@ public class ReportController {
         model.addAttribute("itemlist", itemlist);
         return "report/reportlist";
     }
-    
+    @RequestMapping("deleteUserbyboard")
+    public String deleteUserbyboard(int reportno) {
+        reportService.deleteReport(reportno);
+        return "redirect: ./userByReportList";
+    }
+    @RequestMapping("deleteUserbycomm")
+    public String deleteUserbycomm(int reportno) {
+        reportService.deleteCommReport(reportno);
+        return "redirect: ./userByReportList";
+    }
+
+    @RequestMapping("deleteUserbyitem")
+    public String deleteUserbyitem(int reportno) {
+        logger.debug("~~~~~~~~~~~~~~~~~~~~~");
+        logger.debug("~~~~~~~~~~~~~~~~~~~~~reportno: {}",reportno);
+        reportService.deleteItemReport(reportno);
+        return "redirect: ./userByReportList";
+    }
     
 }

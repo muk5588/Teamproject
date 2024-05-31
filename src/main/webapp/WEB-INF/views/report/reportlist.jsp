@@ -127,9 +127,20 @@
                                     <td class="report">${list.reportType}</td>
                                     <td class="report">${list.content}</td>
                                     <td class="report">${list.nickname}</td>
-                                    <td><a class='btn-fill' href="/report/deleteReport?reportno=${list.boardReportNo}">
-                                        <button>삭제</button>
-                                    </a></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000)}">
+                                                <a class='btn-fill' href="/report/deleteReport?reportno=${list.boardReportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class='btn-fill' href="/report/deleteUserbyboard?reportno=${list.boardReportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                 </tr>
                                 <tr class="fold">
                                     <td colspan="7">
@@ -181,10 +192,22 @@
                                     <td>${commlist.commReport}</td>
                                     <td>${commlist.commContent}</td>
                                     <td>${commlist.nickname}</td>
-                                    <td><a class='btn-fill'
-                                           href="/report/deleteCommReport?reportno=${commlist.commReportNo}">
-                                        <button>삭제</button>
-                                    </a></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000)}">
+                                                <a class='btn-fill'
+                                                   href="/report/deleteCommReport?reportno=${commlist.commReportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class='btn-fill'
+                                                   href="/report/deleteUserbycomm?reportno=${item.reportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                 </tr>
                                 <tr class="fold">
                                     <td colspan="7">
@@ -234,9 +257,22 @@
                                     <td>${item.itemReport}</td>
                                     <td>${item.itemName}</td>
                                     <td>${item.nickName}</td>
-                                    <td><a class='btn-fill' href="/report/deleteItemReport?reportno=${item.reportNo}">
-                                        <button>삭제</button>
-                                    </a></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000)}">
+                                                <a class='btn-fill'
+                                                   href="/report/deleteItemReport?reportno=${item.reportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class='btn-fill'
+                                                   href="/report/deleteUserbyitem?reportno=${item.reportNo}">
+                                                    <button>삭제</button>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                 </tr>
                                 <tr class="fold">
                                     <td colspan="7">
@@ -265,16 +301,16 @@
 
 <div class="btn-fill">
     <c:choose>
-    <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != userno)}">
-    <a href="/user/adminPage">
-        <button>돌아가기</button>
-    </a>
-    </c:when>
-    <c:otherwise>
-        <a href="/user/userDetail">
-            <button>돌아가기</button>
-        </a>
-    </c:otherwise>
+        <c:when test="${(dto1.gradeno == 0 || dto1.gradeno == 5000) && (dto1.userno != userno)}">
+            <a href="/user/adminPage">
+                <button>돌아가기</button>
+            </a>
+        </c:when>
+        <c:otherwise>
+            <a href="/user/userDetail">
+                <button>돌아가기</button>
+            </a>
+        </c:otherwise>
     </c:choose>
 </div>
 </body>

@@ -11,7 +11,7 @@
 		<%-- 첫 페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
-			<a class="page-link" href="${URL}">&larr; 처음</a>
+			<a class="page-link" href="${URL}?curPage=1">&larr; 처음</a>
 		</li>
 		</c:if>
 		

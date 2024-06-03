@@ -62,7 +62,7 @@
 </insert>
 
 <insert id="fileSave" parameterType="dto.ItemFile">
-	INSERT into itemfile(fileNo,itemNo,originName,storedName)
+	INSERT into itemfile(fileNo,itemNo,origin_Name,stored_Name)
     SELECT itemfile_seq.nextval, D.* FROM ( 
         <foreach collection="itemFiles" item="file" separator="UNION ALL ">
         <![CDATA[
@@ -110,7 +110,6 @@
 <update id="updateIByItem" parameterType="dto.Item">
 	UPDATE item
 	<set> 
-		titleImg = #{titleImg}
 		,itemName = #{itemName}
 		,itemComm = #{itemComm}
 		,price = #{price}

@@ -45,7 +45,7 @@
     <div class="tit">
         <h1>상품 관리 상세 정보</h1>
         <div>
-            <a href="/adminPage">
+            <a href="/user/adminPage">
                 <button>관리자 메인페이지로</button>
             </a>
             <button type="button" id="updateBtn">수정하기</button>
@@ -58,20 +58,22 @@
             <tr>
                 <td>
                     <c:choose>
-                        <c:when test="${not empty files}">
-                            <c:forEach items="${files}" var="files">
-                                <c:if test="${not empty file}">
-                                    <img alt="ItemImg" src="/resources/img/shop/upload/${file.storedName}">
-                                </c:if>
-                                <c:if test="${empty files.itemNo}">
-                                    <img src="/resources/img/shop/nullimg.jpg" alt="notready">
-                                </c:if>
-                            </c:forEach>
-                        </c:when>
-                        <c:when test="${empty imgFiles}">
-                            <img src="/resources/img/shop/nullimg.jpg" alt="notready">
-                        </c:when>
-                    </c:choose>
+	                    <c:when test="${not empty itemFiles}">
+	                        <c:set var="found" value="false"/>
+	                        <c:forEach items="${itemFiles}" var="files">
+	                            <c:if test="${item.itemNo eq files.itemNo and item.titleImg eq files.fileNo}">
+	                                <img alt="ItemImg" src="/resources/itemUpload/${files.storedName}" style="width: 300px; height: 200px;">
+	                                <c:set var="found" value="true"/>
+	                            </c:if>
+	                        </c:forEach>
+	                        <c:if test="${not found}">
+	                            <img src="/resources/img/shop/nullimg.jpg" alt="notready" style="width: 300px; height: 200px;">
+	                        </c:if>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <img src="/resources/img/shop/nullimg.jpg" alt="notready" style="width: 300px; height: 200px;">
+	                    </c:otherwise>
+	                </c:choose>
                 </td>
             </tr>
             <tr>

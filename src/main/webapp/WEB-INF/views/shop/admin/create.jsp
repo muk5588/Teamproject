@@ -171,7 +171,6 @@ function validateFileUpload(input) {
 </a>
 <div style="width: 90%;">
 </div>
-<%-- <jsp:include page="/resources/editor/SmartEditor2.html"/> --%>
 
 </body>
 </html>

@@ -14,7 +14,7 @@ body {
 .tit {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 5px;
 }
 
@@ -24,7 +24,16 @@ body {
     padding: 1em 0;
     margin-bottom: 2em;
 }
-
+.recommendBtn .share{
+    background-color: #1e73be;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.recommendBtn .share:hover{
+    background-color: #185e9c;
+    color: white;
+}
 .header h1 {
     margin: 0;
     font-size: 2.5em;

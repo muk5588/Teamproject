@@ -69,23 +69,24 @@
             <c:forEach var="item" items="${items }">
                 <ul class="oneItem">
                     <li style="list-style: none; border: 1px solid #ccc;">
-                        <div class="item Img">
+                        <div class="item Img" style="width: 300px; height: 250px;">
                             <a href="./detail?itemNo=${item.itemNo }">
-                                <c:choose>
-                                    <c:when test="${not empty imgFiles}">
-                                        <c:forEach items="${files}" var="files">
-                                            <c:if test="${not empty files.itemNo and item.itemNo eq  files.itemNo}">
-                                                <img alt="ItemImg"
-                                                     src="/resources/img/shop/upload/${files.storedName }">
-                                            </c:if>
-                                            <c:if test="${empty files.itemNo}">
-                                                <img src="/resources/img/shop/nullimg.jpg" alt="notready">
+                               <c:choose>
+                                    <c:when test="${not empty itemFiles}">
+                                        <c:set var="found" value="false"/>
+                                        <c:forEach items="${itemFiles}" var="files">
+                                            <c:if test="${item.itemNo eq files.itemNo and item.titleImg eq files.fileNo}">
+                                                <img alt="ItemImg" src="/resources/itemUpload/${files.storedName}" style="width: 300px; height: 200px;">
+                                                <c:set var="found" value="true"/>
                                             </c:if>
                                         </c:forEach>
+                                        <c:if test="${not found}">
+                                            <img src="/resources/img/shop/nullimg.jpg" alt="notready" style="width: 300px; height: 200px;">
+                                        </c:if>
                                     </c:when>
-                                    <c:when test="${empty imgFiles }">
-                                        <img src="/resources/img/shop/nullimg.jpg" alt="notready">
-                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="/resources/img/shop/nullimg.jpg" alt="notready" style="width: 300px; height: 200px;">
+                                    </c:otherwise>
                                 </c:choose>
                             </a>
                         </div>

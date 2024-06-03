@@ -1,17 +1,16 @@
 package interceptor;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import user.dto.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component
 public class AdminInterceptor implements HandlerInterceptor {
@@ -25,8 +24,7 @@ public class AdminInterceptor implements HandlerInterceptor {
        PrintWriter out = response.getWriter();
        if(user == null ) {
     	   session.invalidate();
-//           out.println("<script>alert('로그인상태가 아닙니다');</script>");
-//    	   out.println("<script>window.location.href='/';</script>");
+           sendRedirectWithAlert(response, "로그인이 필요합니다.");
     	   response.sendRedirect("/");
            out.flush();
            return false;
@@ -34,7 +32,8 @@ public class AdminInterceptor implements HandlerInterceptor {
        
        int userGrade = user.getgradeno();
        if( userGrade != 5000 && userGrade != 0) {
-    	   response.sendRedirect("/");
+           sendRedirectWithAlert(response, "관리자 권한이 필요합니다.");
+           response.sendRedirect("/");
     	   return false;
        }
        
@@ -42,12 +41,18 @@ public class AdminInterceptor implements HandlerInterceptor {
        if (URI.startsWith("/grade/") || URI.contains("/grade/") || URI.startsWith("/shop/admin/") || URI.contains("/shop/admin/") || URI.startsWith("/order/admin/") || URI.contains("/order/admin/")) {
     	   if( userGrade != 5000) {
     		   logger.debug("requestURI :{}",URI);
-    		   response.sendRedirect("/user/adminPage");
+               sendRedirectWithAlert(response, "관리자 페이지에 접근할 권한이 없습니다.");
+               response.sendRedirect("/user/adminPage");
     		   return false;
     	   }
     	}
        logger.debug("requestURI :{}",URI);
-    	
         return true;
+    }
+    private void sendRedirectWithAlert(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('" + message + "'); window.location.href='/';</script>");
+        out.flush();
     }
 }

@@ -9,6 +9,8 @@ import user.dto.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -22,6 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (user == null) {
 			logger.debug("로그인되지 않은 사용자입니다. 세션을 무효화하고 루트 페이지로 리디렉션합니다.");
 			session.invalidate();
+			sendRedirectWithAlert(response, "로그인이 필요합니다.");
 			response.sendRedirect("/");
 			return false;
 		}
@@ -29,5 +32,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 		logger.debug("로그인된 사용자: {}", user.getNickname()); // 사용자 이름이 있다고 가정한 예
 
 		return true;
+	}
+	private void sendRedirectWithAlert(HttpServletResponse response, String message) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('" + message + "'); location.href='/';</script>");
+		out.flush();
 	}
 }

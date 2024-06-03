@@ -134,7 +134,7 @@
         </c:choose>
     </h1>
     <div class="btndiv">
-        <button id="homeBtn" class="button">메인 화면으로</button>
+        <!-- <button id="homeBtn" class="button">메인 화면으로</button> -->
         <button id="inquiryBtn" class="button">문의함으로</button>
     </div>
     <hr>

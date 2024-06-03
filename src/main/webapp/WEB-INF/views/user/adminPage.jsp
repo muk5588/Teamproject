@@ -135,8 +135,8 @@
             <table class="table table-striped table-hover table-sm">
                 <tr>
                     <th class='w-px60'>회원번호</th>
-                    <th class='w-px200'>이름</th>
-                    <th>닉네임</th>
+                    <th class='w-px200'>닉네임</th>
+                    <th></th>
                     <th>성별</th>
                     <th>최근 접속 시간</th>
                     <th>누적 접속일</th>

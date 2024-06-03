@@ -212,13 +212,14 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+<c:import url="/WEB-INF/views/layout/boardmenu.jsp"/>
 
 <div class="container">
     <div class="tit">
         <h1>상품 정보</h1>
         <div>
-            <a href="/">
-                <button>메인 페이지로</button>
+            <a href="./">
+                <button>목록 페이지로</button>
             </a>
         </div>
     </div>

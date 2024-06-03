@@ -335,8 +335,8 @@
     	var tempFile;
     	var	sUploadURL;
     	
-    	sUploadURL= '/board/fileupload'; 	//upload URL
-//    	sUploadURL= './fileupload'; 	//upload URL
+//    	sUploadURL= '/board/fileupload'; 	//upload URL
+    	sUploadURL= '/shop/admin/fileupload'; 	//upload URL
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
     		tempFile = htImageInfo['img'+j];

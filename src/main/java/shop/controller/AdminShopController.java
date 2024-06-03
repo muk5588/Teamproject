@@ -96,7 +96,7 @@ public class AdminShopController {
 		return "redirect:/shop/admin/list";
 	}
 
-	@RequestMapping("/uploaditemfile")
+	@RequestMapping("/fileupload")
 	public void uploadItemFile() {
 		logger.debug("파일 업로드 처리");
 		ItemFile file = adminShopService.fileTempSave();

@@ -9,6 +9,8 @@ import user.dto.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component
 public class RoleInterceptor implements HandlerInterceptor {
@@ -41,6 +43,7 @@ public class RoleInterceptor implements HandlerInterceptor {
 			if(grade != 5000 && grade != 0 && grade != 3) {
 				//전체 조회 가능한 사용자가 아닌경우..
 				logger.debug("전체 조회 권한이 없는 사용자입니다. grade: {}", grade);
+				sendRedirectWithAlert(response, "전체 조회 권한이 없습니다.");
 				response.sendRedirect("/");
 				return false;
 			}else {
@@ -54,6 +57,7 @@ public class RoleInterceptor implements HandlerInterceptor {
              }else if (grade == 2) {
 				if(categoryNo == 52) {
 					//이벤트 글쓰기, 수정 막기
+					sendRedirectWithAlert(response, "이벤트 글쓰기에 대한 권한이 없습니다.");
 					response.sendRedirect("/");
 					return false;
 				}else {
@@ -61,6 +65,7 @@ public class RoleInterceptor implements HandlerInterceptor {
 				}
 			}else if( grade == 1) {
 				if( categoryNo == 52 || categoryNo == 51) {
+					sendRedirectWithAlert(response, "해당 카테고리에 대한 권한이 없습니다.");
 					response.sendRedirect("/");
 					return false;
 				}else {
@@ -70,12 +75,20 @@ public class RoleInterceptor implements HandlerInterceptor {
              
          } catch (NumberFormatException e) {
         	 //String -> int 형변환 fail
+			 logger.error("잘못된 카테고리 번호 형식", e);
+			 sendRedirectWithAlert(response, "잘못된 요청입니다.");
         	 response.sendRedirect("/");
         	 return false;
          }
+		sendRedirectWithAlert(response, "권한이 없습니다.");
 		response.sendRedirect("/");
 		return false;
 	}
-	
+	private void sendRedirectWithAlert(HttpServletResponse response, String message) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('" + message + "'); location.href='/';</script>");
+		out.flush();
+	}
 	
 }

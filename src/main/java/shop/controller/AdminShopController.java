@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import dto.Item;
@@ -34,14 +35,11 @@ public class AdminShopController {
 	
 	@RequestMapping("/list")
 	public void adminList(
-		    @RequestParam(defaultValue ="1") int curPage
+		    @RequestParam(defaultValue ="0") int curPage
 		    ,@RequestParam(value="search",required = false) String search
-		    ,@RequestParam(value="searchKind",required = false) String searchKind
 			,Model model
 			) {
-		String URL = "/shop/admin/list";
 	    ShopPaging paging = new ShopPaging();
-	    paging.setCurPage(curPage);
 	    if( null != search && !"".equals(search)) {
 	    	paging.setSearch(search);
 	    }
@@ -57,7 +55,6 @@ public class AdminShopController {
 		logger.debug("items : {}", items);
 		logger.debug("itemFiles : {}", itemFiles);
 	    model.addAttribute("curPage", curPage);
-	    model.addAttribute("URL", URL);
 	    model.addAttribute("paging", paging);
 	    model.addAttribute("items", items);
 	    model.addAttribute("itemFiles", itemFiles);
@@ -82,21 +79,26 @@ public class AdminShopController {
 		logger.debug("post create adminShopService : {}", res);
 		//상품 설명 IMG파일 DB에 insert
 		if( res > 0  ) {
-			int fileSave = adminShopService.fileSave(item);
-			logger.debug("post create fileSave res : {}", fileSave);
+			if(!file.isEmpty()) {
+				int fileSave = adminShopService.fileSave(item);
+				logger.debug("post create fileSave res : {}", fileSave);
+			}
 		}//if( res > 0  )
 		
 		//상품 대표 이미지 파일 update
 		if( res > 0  && null != file && file.getSize() > 0) {
-			int titleImgRes = adminShopService.updatetitleImg(item,file);
-			logger.debug("post create fileSave titleImgRes : {}", titleImgRes);
+			if(!file.isEmpty()) {
+				int titleImgRes = adminShopService.updatetitleImg(item,file);
+				logger.debug("post create fileSave titleImgRes : {}", titleImgRes);
+			}
 		}else {
 			logger.debug("post create file  : {}", file);
 		}
 		return "redirect:/shop/admin/list";
 	}
 
-	@RequestMapping("/uploaditemfile")
+	@ResponseBody
+	@RequestMapping("/fileupload")
 	public void uploadItemFile() {
 		logger.debug("파일 업로드 처리");
 		ItemFile file = adminShopService.fileTempSave();
@@ -110,7 +112,7 @@ public class AdminShopController {
 		logger.debug("item : {}", item);
 		logger.debug("files : {}", files);
 		model.addAttribute("item", item);
-		model.addAttribute("files", files);
+		model.addAttribute("itemFiles", files);
 	}
 	
 	@GetMapping("/update")
@@ -131,7 +133,8 @@ public class AdminShopController {
 			,Item item) {
 		logger.debug("post update");
 		logger.debug("post update item : {}", item);
-		if(  null != file && file.getSize() > 0) {
+		logger.debug("post update file : {}", file);
+		if(  null != file && file.getSize() > 0 && !file.isEmpty()) {
 			int titleImgFileNo = adminShopService.updatetitleImg(item,file);
 			item.setTitleImg(titleImgFileNo);
 			logger.debug("post create fileSave titleImgFileNo : {}", titleImgFileNo);

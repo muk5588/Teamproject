@@ -16,7 +16,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "ir1",
- sSkinURI: "/resources/editor/SmartEditor2Skin.html",
+ sSkinURI: "/resources/editor/shopSmartEditor2Skin.html",
  fCreator: "createSEditor2"
 });
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
@@ -96,10 +96,9 @@ function validateFileUpload(input) {
 
     })
 </script>
-</script>
 </head>
 <body>
-<h1>상품 정보 등록</h1>
+<h1>상품 정보 수정</h1>
 <hr>
 
 
@@ -128,7 +127,15 @@ function validateFileUpload(input) {
 
     <div class="mb-3">
         <label for="file" class="form-label">상품 대표이미지파일</label>
-        <input type="file" id="file" name="file"   onchange="validateFileUpload(this)">
+        <input type="file" id="file" name="file" onchange="validateFileUpload(this)">
+        <c:if test="${not empty files}">
+        <c:forEach var="file" items="${files }">
+        <c:if test="${file.fileNo eq item.titleImg }">
+            <img src="/resources/itemUpload/${file.storedName}" alt="${file.originName}" style="width: 300px; height: 200px;">
+			<a>${file.originName}</a>
+        </c:if>
+        </c:forEach>
+        </c:if>
     </div>
 <textarea rows="10" cols="100" id="txtContent" style="width: 100%;">${item.itemComm }</textarea>
 <div id="se2_sample" style="margin:10px 0;">
@@ -145,7 +152,7 @@ function validateFileUpload(input) {
 	nhn.husky.EZCreator.createInIFrame({
 	    oAppRef: oEditors,
 	    elPlaceHolder: "txtContent",  //textarea ID 입력
-	    sSkinURI: "/resources/editor/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
+	    sSkinURI: "/resources/editor/shopSmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
 	    fCreator: "createSEditor2",
 	    htParams : { 
 	    	// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
@@ -164,7 +171,6 @@ function validateFileUpload(input) {
 </a>
 <div style="width: 90%;">
 </div>
-<%-- <jsp:include page="/resources/editor/SmartEditor2.html"/> --%>
 
 </body>
 </html>

@@ -106,16 +106,18 @@ public class ShopController {
 
 		model.addAttribute("item", item);
 		model.addAttribute("files", files);
-		int userno = login.getUserno();
-		Map<Object,String> map = new HashMap<Object,String>();
-		map.put("itemNo", String.valueOf(itemNo));
-		map.put("userno", String.valueOf(userno));
-		//상품 구매 내역
-		int countMyOrder = shopService.countMyOrderByItemNo(map);
-
-
-		System.out.println("countMyOrder" + countMyOrder);
-		model.addAttribute("countMyOrder", countMyOrder);
+		if( login != null) {
+			int userno = login.getUserno();
+			Map<Object,String> map = new HashMap<Object,String>();
+			map.put("itemNo", String.valueOf(itemNo));
+			map.put("userno", String.valueOf(userno));
+			//상품 구매 내역
+			int countMyOrder = shopService.countMyOrderByItemNo(map);
+	
+	
+			System.out.println("countMyOrder" + countMyOrder);
+			model.addAttribute("countMyOrder", countMyOrder);
+		}
 	}
 
 

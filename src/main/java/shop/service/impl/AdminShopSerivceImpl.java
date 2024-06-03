@@ -166,16 +166,16 @@ public class AdminShopSerivceImpl implements AdminShopService{
         for (String originName : originNames) {
         	Pattern pattern1 = Pattern.compile("img src=\"\\\\resources\\\\itemUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
         	logger.info("pattern : {}",pattern);
-            Matcher matcherStored = pattern.matcher(itemComm);
-            logger.info("matcher : {}",matcherStored);
-            logger.info("matcher.find() : {}",matcherStored.find());
-            if (matcher.find()) {
+            Matcher matcherStored = pattern1.matcher(itemComm);
+            logger.info("matcherStored : {}",matcherStored);
+            if (matcherStored.find()) {
             	temp = "";
-            	temp += matcher.group(1);
+            	temp += matcherStored.group(1);
             	temp += ".";
-            	temp += matcher.group(2);
+            	temp += matcherStored.group(2);
                 storedNames.add(temp);
-                logger.info("matcher.group(1) : {}",matcher.group(1));
+                logger.info("matcher.group(1) : {}",matcherStored.group(1));
+                logger.info("matcher.group(2) : {}",matcherStored.group(2));
             }
             logger.debug("storedNames : {} ",storedNames);
         }
@@ -208,11 +208,11 @@ public class AdminShopSerivceImpl implements AdminShopService{
 		File dest = null;
 		
 		do {
-			storedName = file.getOriginalFilename(); //원본파일 명
+			storedName = UUID.randomUUID().toString().split("-")[4]; //UUID 추가 
 			logger.debug("originName : {} ", storedName);
-			storedName += UUID.randomUUID().toString().split("-")[4]; //UUID 추가
+			logger.debug("UUID.randomUUID().toString().split(\"-\")[4] : {} ", storedName);
+			storedName += file.getOriginalFilename(); //원본파일 명 
 			logger.debug("storedName : {} ", storedName);
-			logger.debug("UUID.randomUUID().toString().split(\"-\")[4] : {} ", UUID.randomUUID().toString().split("-")[4]);
 			
 			dest = new File(storedFolder, storedName);
 		}while( dest.exists() );
@@ -275,17 +275,17 @@ public class AdminShopSerivceImpl implements AdminShopService{
 		// storedName 추출을 위한 정규식 패턴
 		for (String originName : originNames) {
 			Pattern pattern1 = Pattern.compile("img src=\"\\\\resources\\\\itemUpload\\\\([^\"\\\\]+)\\.(png|jpg|gif|PNG|JPG|GIF)\"");
-			logger.info("pattern : {}",pattern);
-			Matcher matcherStored = pattern.matcher(itemComm);
-			logger.info("matcher : {}",matcherStored);
-			logger.info("matcher.find() : {}",matcherStored.find());
-			if (matcher.find()) {
+			logger.info("pattern : {}",pattern1);
+			Matcher matcherStored = pattern1.matcher(itemComm);
+			logger.info("matcherStored : {}",matcherStored);
+			if (matcherStored.find()) {
 				temp = "";
-				temp += matcher.group(1);
+				temp += matcherStored.group(1);
 				temp += ".";
-				temp += matcher.group(2);
+				temp += matcherStored.group(2);
 				storedNames.add(temp);
-				logger.info("matcher.group(1) : {}",matcher.group(1));
+				logger.info("matcher.group(1) : {}",matcherStored.group(1));
+				logger.info("matcher.group(2) : {}",matcherStored.group(2));
 			}
 			logger.debug("storedNames : {} ",storedNames);
 		}

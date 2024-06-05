@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public int login(User dto) {
 
-        int result = loginDao.selectNoByIdPw(dto);
+        int result = loginDao.selectCntByIdPw(dto);
 
         return result;
 

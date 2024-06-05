@@ -15,7 +15,7 @@ public interface LoginDao {
 
 
 
-	public int selectNoByIdPw(User dto);
+	public int selectCntByIdPw(User dto);
 
 	public User selectByNo(User dto);
 

@@ -83,6 +83,7 @@ public class LoginController {
         if (session.getAttribute("token") != null) {
         	logger.info("네이버 로그아웃쪽 컨트롤러");
         	res = socialService.naverLogout(session);
+        	session.invalidate();
         }else if(session.getAttribute("token1") != null){
         	logger.info("카카오 로그아웃쪽 컨트롤러");
         	res = kakaoService.kakaoLogout(session);

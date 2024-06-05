@@ -24,10 +24,6 @@
                     alert("닉네임을 입력해 주세요")
                     return;
                 }
-                if ($("#email").val() == null || val.replace(/\s| /gi,"").length == 0) {
-                    alert("이메일을 입력해 주세요")
-                    return;
-                }
                 if ($("#address").val() == null|| val.replace(/\s| /gi,"").length == 0) {
                     alert("주소를 검색해 주세요")
                     return;
@@ -112,7 +108,7 @@
             <br>
             <div id=emailbox">
                 <label for="email">이메일</label>
-                <input type="email" name="email" id="email"value="${dto.email}"/><br>
+                <input type="email" name="email" id="email"value="${dto.email}" readonly/><br>
             </div>
             <div id="postcodebox">
                 <label for="postcode">우편번호</label>

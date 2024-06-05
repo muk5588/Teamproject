@@ -300,7 +300,7 @@
 		SELECT c.* FROM
 			(SELECT rownum rnum, b.* FROM 
 			(SELECT
-				g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+				g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview,b.CATEGORYNO
 			FROM good g, board b
 			where
 				 g.boardno = b.boardno 
@@ -424,7 +424,7 @@
 		select * from (
 		    select rownum rnum, A.* from
 		(SELECT
-		g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview
+		g.boardno, b.title, b.content, b.nickname, b.createdate, b.boardview, b.CATEGORYNO
 		FROM good g, board b
 		<where>
 			and g.boardno = b.boardno

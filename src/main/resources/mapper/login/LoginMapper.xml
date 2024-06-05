@@ -7,7 +7,7 @@
 	
 
 
-	<select id="selectNoByIdPw" resultType="int" parameterType="User">
+	<select id="selectCntByIdPw" resultType="int" parameterType="User">
 		select count(*) from usertb
 		<where>
 			and userid = #{userid }

@@ -211,7 +211,7 @@ public class OrderController {
 		}
 		model.addAttribute("paging", shopPaging);
 		model.addAttribute("curPage", curPage);
-
+		
 		List<UserOrder> orders = orderService.selectUserOrderByUser(user,shopPaging);
 		List<OrderItem> orderitems = orderService.selectOrderItemsByUserOrders(orders);
 		List<Item> items = orderService.selectItemByUserOrderItems(orderitems);

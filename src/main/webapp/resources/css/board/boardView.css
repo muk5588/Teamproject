@@ -42,7 +42,6 @@ body {
 
 .container {
     width: 80%;
-    height: 100%;
     margin: 0 auto 50px;
     background: white;
     padding: 29px 29px 0;
@@ -201,4 +200,12 @@ button[onclick*="신고하기"] {
 
 button[onclick*="신고하기"]:hover {
     background: #e53935;
+}
+
+.container {
+	height: auto;
+}
+
+.content p {
+	min-height: 500px;
 }

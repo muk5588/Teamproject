@@ -82,7 +82,7 @@
 
     <div class="container">
 
-        <h1>${name } 게시판</h1>
+        <h1>${name }</h1>
         <div class="title">
             <div class="write">
                 <a href="/">

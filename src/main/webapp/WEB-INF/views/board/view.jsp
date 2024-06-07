@@ -37,6 +37,18 @@
 //             handleGetFile();
             handleFileChk();
             handleCommentDelete();
+            
+            $('.content p img').each(function() {
+                // 이미지 태그의 부모 p 태그 가져오기
+                var parentParagraph = $(this).closest('p');
+
+                // 이미지 태그의 최대 높이와 너비를 부모 p 태그의 크기에 맞게 설정
+                $(this).css({
+                    'max-height': parentParagraph.height(),
+                    'max-width': parentParagraph.width()*0.75
+                });
+            });
+            
             $("#commentRefresh").click()
             if (${empty isRecomm or isRecomm eq 0}) {
                 $(".cancle").toggle()
@@ -307,7 +319,8 @@
                 <th colspan="6">본문</th>
             </tr>
             <tr class="con">
-                <td class="content" colspan="6">${board.content }
+                <td class="content" colspan="6">
+                	<div id="contentBox">${board.content }</div>
                 </td>
             </tr>
         </table>
